@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>restroomESB1</title>
+    <link rel="shortcut icon" href="../static/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/layui/css/modules/layer/default/layer.css">
+    <link rel="stylesheet" href="../static/css/admin.css">
+    <link rel="stylesheet" href="../static/layui/myicon/iconfont.css">
+    <link rel="stylesheet" href="../static/tost/src/jquery.toast.css">
+    <!--<link rel="stylesheet" href="../static/css/indexCss/INDEXdark-blue.css">-->
+    <meta name="keywords" content="精讯云,精讯畅通,精讯畅通电子科技,威海精讯畅通,jxct,jxctdzkj,sensor">
+    <meta name="description" content="您可以在精讯云,查看搜索管理物联网设备。">
+</head>
+<style id="themeStyle">
+
+</style>
+<style>
+    .layui-body {
+        overflow: hidden;
+    }
+    @font-face {
+        font-family: 'iconfont';  /* project id 1213048 */
+        src: url('//at.alicdn.com/t/font_1213048_a8ixar8zpqr.eot');
+        src: url('//at.alicdn.com/t/font_1213048_a8ixar8zpqr.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_1213048_a8ixar8zpqr.woff2') format('woff2'),
+        url('//at.alicdn.com/t/font_1213048_a8ixar8zpqr.woff') format('woff'),
+        url('//at.alicdn.com/t/font_1213048_a8ixar8zpqr.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_1213048_a8ixar8zpqr.svg#iconfont') format('svg');
+    }
+
+    .iconfont {
+        font-family: "iconfont" !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #fff;
+        margin-left: -9px;
+        margin-right: 5px;
+    }
+    .layui-side-menu .layui-nav .layui-nav-itemed>.layui-nav-child{
+        padding: 0!important;
+    }
+    .layui-layout-admin .layui-logo{
+        box-shadow: none!important;
+    }
+    .layui-side-menu .layui-nav{
+        margin-top: 75px!important;
+    }
+    .layui-layout-admin .layui-logo{
+        height: 75px!important;
+        padding-top: 15px!important;
+        box-sizing: border-box;
+    }
+    .layadmin-setTheme-side, .layui-side-menu{
+        background: #393b6e;
+    }
+    .layui-layout-admin .layui-logo{
+        background: #393b6e!important;
+    }
+    .layui-header{
+        background: #393b6e!important;
+    }
+    .layui-header a{
+        color: #fff!important;
+    }
+    .layui-header dd a:hover{
+        color: #393b6e!important;
+    }
+    #choseLanguage a{color: #000!important;}
+    .layui-layout-admin .layui-body{
+        background: url("/static/img/monitor/restroomESB/ESBbody-bg.png")no-repeat!important;
+        background-size:100% 100%!important;
+    }
+</style>
+<body class="layui-layout-body">
+<h1 class="iconfont">&#xe678;</h1>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" th:if="${map.index} == 'index_farm'">
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left" id="lay-left">
+            <li class="layui-nav-item layui-hide-xs" lay-unselect="" style="margin-left: 20px;">
+                <a href="/monitor" target="_blank">
+                    监控大屏
+                </a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect="" style="margin-left: 20px;">
+                <a href="tencent://message/?uin=1156183505&Site=Sambow&Menu=yes" target="_blank">
+                    <i class="layui-icon iconfont icon-liaotian"></i> 售前服务
+
+                </a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect="" style="margin-left: 20px;">
+                <a href="http://p.qiao.baidu.com/cps/chat?siteId=13221390&userId=20515774&cp=&cr=&cw=%E4%BA%91%E5%B9%B3%E5%8F%B0"
+                   target="_blank">
+                    <i class="layui-icon iconfont icon-zaixiankefu1"></i> 售后服务
+                </a>
+            </li>
+
+        </ul>
+
+        <ul class="layui-nav layui-layout-right">
+
+            <li class="layui-nav-item" style="margin-right: 5px;">
+                <!--<a href="javascript:;" th:text="${session.basic.realName}"></a>-->
+                <a id="choseLanguage" href="javascript:;">语言选择</a>
+                <span class="layui-nav-more"></span>
+                <dl class="layui-nav-child " style="background-color:white;!important">
+                    <dd style="text-align: center;"><a id="chinese" href="javascript:;"
+                                                       onclick="setLanguage('zh')">中文</a></dd>
+                    <!--<dd ><a href="set/user/password.html">修改密码</a></dd>-->
+                    <hr>
+                    <dd style="text-align: center;"><a id="english" href="javascript:;"
+                                                       onclick="setLanguage('en')">English</a></dd>
+                </dl>
+            </li>
+
+            <!--<li class="layui-nav-item layui-hide-xs" lay-unselect="" onclick="showShade()">
+                <a href="javascript:;">
+                    <i class="layui-icon layui-icon-theme"></i>
+                </a>
+            </li>-->
+
+            <li class="layui-nav-item">
+                <!--<a href="javascript:;" th:text="${session.basic.realName}"></a>-->
+                <a href="javascript:;" id="realName"></a>
+                <span class="layui-nav-more"></span>
+                <dl class="layui-nav-child " style="background-color:white;!important">
+                    <dd style="text-align: center;"><a id="info" href="javascript:;"
+                                                       onclick="myInfo()">基本资料</a></dd>
+                    <hr>
+                    <dd style="text-align: center;"><a id="agreement" href="agreement"
+                                                       target="_Blank">用户协议</a></dd>
+                    <hr>
+                    <dd style="text-align: center;"><a id="out" href="logout">退出</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect="" style="margin-left: 10px;">
+                <a href="javascript:;">
+                    <i class="layui-icon iconfont icon-xiaoxi" style="font-size: 20px;"></i>
+                    <div class="nav-counter nav-counter-red">21</div>
+                    消息
+                </a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                <a href="javascript:;">
+                    <i class="layui-icon iconfont icon-bangzhu"></i> 帮助
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-header" th:if="${map.index} != 'index_farm' ">
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left" id="lay-left">
+            <li class="layui-nav-item layadmin-flexible" lay-unselect="">
+                <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩" id="flexible">
+                    <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                </a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                <a id="monitor" href="/monitor" target="_blank">
+
+                </a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                <a id="consolePanel" th:href="${map.helpUrl}" target="_blank">帮助
+                </a>
+            </li>
+            <!--<li class="layui-nav-item layui-hide-xs" lay-unselect="">-->
+            <!--<a href="tencent://message/?uin=1156183505&Site=Sambow&Menu=yes">在线咨询</a>-->
+            <!--&lt;!&ndash;<a href="http://wpa.qq.com/msgrd?V=1&Uin=519395650&Site=Sambow&Menu=yes" target="_blank"><font class="style2">广告合作: 504316594</font> <img border="0" SRC="http://wpa.qq.com/pa?p=1:519395650:4" alt="点击即使聊天"></a>&ndash;&gt;-->
+            <!--</li>-->
+            <!--<li class="layui-nav-item layui-hide-xs" lay-unselect="">-->
+            <!--<a id="aquaculture" href="/aquaculture" target="_blank">水产养殖</a>-->
+            <!--</li>-->
+            <!--<li class="layui-nav-item" lay-unselect="">-->
+            <!--<a href="javascript:;" title="刷新">-->
+            <!--<i class="layui-icon layui-icon-refresh-3"></i>-->
+            <!--</a>-->
+            <!--</li>-->
+        </ul>
+
+        <ul class="layui-nav layui-layout-right">
+
+            <!-- <li class="layui-nav-item">
+                 &lt;!&ndash;app/message/index.html&ndash;&gt;
+                 <a href="#" lay-text="通知">
+                     <i class="layui-icon layui-icon-notice"></i>
+
+                     &lt;!&ndash; 如果有新消息，则显示小圆点 &ndash;&gt;
+                     <span class="layui-badge-dot"></span>
+                 </a>
+             </li>-->
+            <li class="layui-nav-item" style="margin-right: 20px;">
+                <!--<a href="javascript:;" th:text="${session.basic.realName}"></a>-->
+                <a id="choseLanguage" href="javascript:;">语言选择</a>
+                <span class="layui-nav-more"></span>
+                <dl class="layui-nav-child " style="background-color:#393b6e;!important">
+                    <dd style="text-align: center;"><a id="chinese" href="javascript:;"
+                                                       onclick="setLanguage('zh')">中文</a></dd>
+                    <hr>
+                    <dd style="text-align: center;"><a id="english" href="javascript:;"
+                                                       onclick="setLanguage('en')">English</a></dd>
+                </dl>
+            </li>
+
+            <!--<li class="layui-nav-item layui-hide-xs" lay-unselect="" onclick="showShade()">-->
+                <!--<a href="javascript:;">-->
+                    <!--<i class="layui-icon layui-icon-theme"></i>-->
+                <!--</a>-->
+            <!--</li>-->
+
+            <li class="layui-nav-item" style="margin-left: 20px">
+                <!--<a href="javascript:;" th:text="${session.basic.realName}"></a>-->
+                <a href="javascript:;" id="realName"></a>
+                <span class="layui-nav-more"></span>
+                <dl class="layui-nav-child " style="background-color:#393b6e;!important">
+                    <dd style="text-align: center;"><a id="info" href="javascript:;"
+                                                       onclick="myInfo()">基本资料</a></dd>
+                    <hr>
+                    <dd style="text-align: center;"><a id="agreement" href="agreement"
+                                                       target="_Blank">用户协议</a></dd>
+                    <!--<dd ><a href="set/user/password.html">修改密码1</a></dd>-->
+                    <hr>
+                    <dd style="text-align: center;"><a id="out" href="logout">退出</a></dd>
+                </dl>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <!--侧边菜单-->
+    <div class="layui-side layui-side-menu">
+        <div class="layui-side-scroll">
+            <div class="layui-logo" id="layui-logo">
+                <!--<span id="span_company"></span>-->
+                <img id="logo" style="width:100%;" />
+            </div>
+            <ul class="layui-nav layui-nav-tree" id="LAY-system-side-menu"
+                lay-filter="layadmin-system-side-menu"><!--lay-shrink="all"-->
+                <li style="text-align: center">
+
+                </li>
+                <li class="layui-nav-item layui-nav-itemed" th:each="menu,iterStat : ${map.menus}"
+                    th:if="${menu.id} == 1">
+                    <!--英文-->
+                    <a th:attr="href='javascript:;',lay-tips=${menu.enName},lay-direction=${menu.id},data-url=${menu.url},data-title=${menu.enName},data-id=${menu.id}"
+                       class="site-menu-active" th:if="${map.lang} == 'en'">
+                        <i class="iconfont" th:utext="${menu.icon}"></i>
+                        <cite th:text="${menu.enName}"></cite>
+                    </a>
+                    <!--中文-->
+                    <a th:attr="href='javascript:;',lay-tips=${menu.name},lay-direction=${menu.id},data-url=${menu.url},data-title=${menu.name},data-id=${menu.id}"
+                       class="site-menu-active" th:if="${map.lang} != 'en'">
+                        <i class="iconfont" th:utext="${menu.icon}"></i>
+                        <cite th:text="${menu.name}"></cite>
+                    </a>
+                </li>
+                <li class="layui-nav-item" th:each="menu,iterStat : ${map.menus}"
+                    th:if="${menu.id} != 1">
+                    <!--英文-->
+                    <a th:attr="href='javascript:;',lay-tips=${menu.enName},lay-direction=${menu.id}"
+                       th:if="${map.lang} == 'en'">
+                        <i class="iconfont" th:utext="${menu.icon}"></i>
+                        <cite th:text="${menu.enName}"></cite>
+                        <span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child" th:if="${map.lang} == 'en'">
+                        <dd th:each="secMenu,iterStat : ${menu.sonMenus}">
+                            <a th:attr="data-url=${secMenu.url},data-title=${secMenu.enName},data-id=${secMenu.id}"
+                               class="site-menu-active"><span th:text="${secMenu.enName}"></span>
+                            </a>
+                        </dd>
+                    </dl>
+                    <!--中文 -->
+                    <a th:attr="href='javascript:;',lay-tips=${menu.name},lay-direction=${menu.id}"
+                       th:if="${map.lang} != 'en'">
+                        <i class="iconfont" th:utext="${menu.icon}"></i>
+                        <cite th:text="${menu.name}"></cite>
+                        <span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child" th:if="${map.lang} != 'en'">
+                        <dd th:each="secMenu,iterStat : ${menu.sonMenus}">
+                            <a th:attr="data-url=${secMenu.url},data-title=${secMenu.name},data-id=${secMenu.id}"
+                               class="site-menu-active"><span th:text="${secMenu.name}"></span>
+                            </a>
+                        </dd>
+                    </dl>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!--标签-->
+        <div class="layui-tab layui-tab-brief" lay-allowClose="true" lay-filter="tabs"
+             style="height:100%;width: 100%;">
+            <ul class="layui-tab-title">
+                <li lay-id="1">
+                    <i class="layui-icon layui-icon-home"></i>
+                    <i class="layui-icon layui-unselect layui-tab-close"
+                       style="display: none;">ဆ</i>
+                </li>
+            </ul>
+            <div class="layui-tab-content" style="height:100%;width: 100%;" th:else>
+                <div class="layui-tab-item layui-show" style="height:100%;width: 99%;">
+                    <iframe style="height:100%;width: 100%;" th:src="@{/home/restroomHomePage}" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-layer-shade" id="layui-layer-shade8" times="8" onclick="hiddenShade()"
+     style="z-index: 19891021; background-color: rgb(0, 0, 0); opacity: 0.1;">
+</div>
+<div class="layui-layer layui-layer-page layui-anim layui-anim-rl layui-layer-adminRight"
+     id="layui-layer1" type="page"
+     times="1" showtime="0" contype="string" style="z-index: 19891030; width: 300px; top: 25px;position: fixed;left: auto;bottom: auto;
+     right: 0!important;display: none;">
+    <div id="LAY_adminPopupTheme" class="layui-layer-content">
+        <div id="themeScheme" class="layui-card-header">
+        </div>
+        <div class="layui-card-body layadmin-setTheme">
+            <ul class="layadmin-setTheme-color">
+                <li layadmin-event="setTheme" data-index="0" data-alias="default" class=""
+                    title="default">
+                    <div class="layadmin-setTheme-header" style="background-color: undefined;">
+                    </div>
+                    <div class="layadmin-setTheme-side" style="background-color: #20222A;">
+                        <div class="layadmin-setTheme-logo" style="background-color: undefined;">
+                        </div>
+                        <div class="theme-dd" style="background-color: #009688;">
+                        </div>
+                    </div>
+                    <div class="theme-img" style="background-image:url(img/index_bg.jpg); "></div>
+                </li>
+                <li layadmin-event="setTheme" data-index="1" data-alias="dark-blue"
+                    title="dark-blue">
+                    <img style="width: 100%" src="/static/img/indexcss/index2-icon.gif" alt="">
+                </li>
+                <li layadmin-event="setTheme" data-index="2" data-alias="coffee" title="coffee">
+                    <img style="width: 100%" src="/static/img/indexcss/index3-icon.gif" alt="">
+                </li>
+                <li layadmin-event="setTheme" data-index="3" data-alias="purple-red"
+                    title="purple-red" class="">
+                    <img style="width: 100%" src="/static/img/indexcss/index4-icon.gif" alt="">
+                </li>
+                <li layadmin-event="setTheme" data-index="4" data-alias="ocean" title="ocean"
+                    onclick="choseTheme()"
+                    class="">
+                    <img style="width: 100%" src="/static/img/indexcss/index5-icon.gif" alt="">
+                </li>
+                <li layadmin-event="setTheme" data-index="5" data-alias="green" title="green">
+                    <img style="width: 100%" src="/static/img/indexcss/index6-icon.gif" alt="">
+                </li>
+                <li layadmin-event="setTheme" data-index="6" data-alias="red" title="red">
+                    <img style="width: 100%" src="/static/img/indexcss/index7-icon.gif" alt="">
+                </li>
+                <li layadmin-event="setTheme" data-index="7" data-alias="fashion-red"
+                    title="fashion-red">
+                    <img style="width: 100%" src="/static/img/indexcss/index8-icon.gif" alt="">
+                </li>
+                <li layadmin-event="setTheme" data-index="8" data-alias="classic-black"
+                    title="classic-black">
+                    <img style="width: 100%" src="/static/img/indexcss/index9-icon.gif" alt="">
+                </li>
+                <li layadmin-event="setTheme" data-index="9" data-alias="green-header"
+                    title="green-header">
+                    <img style="width: 100%" src="/static/img/indexcss/index10-icon.gif" alt="">
+                </li>
+                <li layadmin-event="setTheme" data-index="10" data-alias="ocean-header"
+                    title="ocean-header">
+                    <img style="width: 100%" src="/static/img/indexcss/index11-icon.gif" alt="">
+                </li>
+                <li layadmin-event="setTheme" data-index="11" data-alias="classic-black-header"
+                    title="classic-black-header">
+                    <img style="width: 100%" src="/static/img/indexcss/index12-icon.gif" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<audio src="sound/alarm.mp3" id="alarm" loop="loop"></audio>
+
+<div class="dialog-bg" id="agreementDialog" th:if="${map.agreement} == true">
+    <div class="dialog-body">
+        <div class="dialog-title">温馨提示</div>
+        <div class="dialog-content">
+            <pre>
+   感谢您的信任并使用！依据最新法律法规及监管政策要求，我们更新了<a href="agreement"
+                                     class="dialog-text-point" target="_Blank">《用户服务协议》</a>，特向您推送本提示。
+<br>   请您务必仔细阅读并透彻理解相关条款内容，点击同意即代表您已阅读并同意，如果您不同意，将可能会无法使用。
+</pre>
+        </div>
+        <div class="dialog-bottom">
+            <div class="dialog-btn-text" onclick="onCancel()"><span>不同意</span></div>
+            <span class="dialog-vertical-line"></span>
+            <div class="dialog-agree-text" onclick="onAgree()"><span>同意</span></div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/layui/layui.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script type="text/javascript" src="../tost/src/jquery.toast.js"></script>
+<script th:src="@{/static/js/socket.js?v=1}" charset="utf-8"></script>
+<script th:src="@{/static/js/index.js?v=2}" charset="utf-8"></script>
+<style>
+    .dialog-bg {
+        width: 100%;
+        height: 100vh;
+        background: rgba(9, 9, 9, .6);
+        position: absolute;
+        z-index: 10000;
+    }
+
+    .dialog-body {
+        width: 30rem;
+        min-height: 20rem;
+        background: #FFF;
+        border-radius: 0.5rem;
+        margin: 0 auto;
+        margin-top: 10%;
+    }
+
+    .dialog-content {
+        padding: 1rem;
+        line-height: 1.5rem;
+        overflow: auto;
+        height: 10rem;
+    }
+
+    .dialog-title {
+        text-align: center;
+        font-weight: revert;
+        font-size: 1.5rem;
+        color: black;
+        padding: 1rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .dialog-bottom {
+        height: 4rem;
+        border-radius: 0 0 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px solid #ddd;
+    }
+
+    .dialog-vertical-line {
+        height: 100%;
+        background: #ddd;
+        width: 2px;
+    }
+
+    .dialog-btn-text, .dialog-agree-text {
+        width: 100%;
+        display: block;
+        text-align: center;
+        cursor: pointer;
+        font-size: 1rem;
+        font-family: '黑体';
+    }
+
+    .dialog-text-point, .dialog-text-point:hover, .dialog-agree-text {
+        color: #00b5ff;
+    }
+
+    .dialog-text-space {
+        display: block;
+        width: 1rem;
+    }
+
+    .layui-layout-admin .layui-body {
+        top: 45px;
+        background-image: url(img/index_bg.jpg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    body {
+        overflow-y: hidden;
+    }
+
+    .layui-tab-title {
+        color: #F6F6F6;
+    }
+
+    .nav-counter {
+        position: absolute;
+        top: 10px;
+        left: 30px;
+        width: 15px;
+        height: 15px;
+        line-height: 15px;
+        font-weight: normal;
+        color: white;
+        text-align: center;
+        text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+        border: 1px solid red;
+        border-radius: 20px;
+
+    }
+
+    .nav-counter-red {
+        background: red;
+        border: 1px solid red;
+        background-image: linear-gradient(to bottom, red, red);
+    }
+
+    .layui-tab-item {
+        height: 90%;
+    }
+</style>
+</html>
+<script>
+</script>
+

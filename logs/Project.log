@@ -1,0 +1,7 @@
+2021-11-04 08:58:35,666 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /system/socketAddress
+2021-11-04 08:58:35,675 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.SystemController
+2021-11-04 08:58:35,676 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-04 08:58:35,676 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/system/socketAddress?1&
+2021-11-04 08:58:35,677 INFO (ControllerHelper.java:74)- userName =
+2021-11-04 08:58:35,680 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@58db79aa
+2021-11-04 08:58:35,681 INFO (MyInterceptor.java:88)- [SystemController.socketAddress] 执行耗时 : 15ms

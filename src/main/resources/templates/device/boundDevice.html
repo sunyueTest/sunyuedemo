@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="css/tree.css" type="text/css">
+    <link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="css/groupDevice.css" media="all">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/base.css" media="all">
+    <link rel="stylesheet" href="css/versionLayer.css" media="all">
+    <style>
+        body {
+            font-weight: normal;
+        }
+
+        .base-item {
+            display: flex;
+            text-align: center;
+            margin-top: 20px;
+            margin-left: 45px;
+        }
+
+        .container {
+            width: 450px;
+            margin: 0 auto;
+            /*}*/
+            /*.container-body {*/
+            background-image: url(../../img/bound_device_bg.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            /*width: 100%;*/
+            height: 350px;
+            padding: 50px;
+            padding-top: 80px;
+        }
+
+        .base-item span {
+            width: 100px;
+            color: #FFFFFF;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .base-item input {
+            width: 200px;
+            height: 40px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            background-image: url(../../img/commend_btn.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 120px;
+            height: 35px;
+            border: 0px;
+            margin-left: 130px;
+            color: #5f4d6f;
+            margin-top: 10px;
+        }
+
+        .base-item img {
+            border: none;
+            width: 50px;
+            height: 50px;
+            margin-top: -4px;
+            text-align: right;
+            margin-left: 10px;
+        }
+
+        .ztree {
+            margin-top: 0;
+            width: 190px;
+            height: 220px;
+        }
+
+        .ztree li a {
+            color: #fff;
+        }
+
+        ul.ztree {
+            background-color: #5FB878 !important;
+            margin-top: 0px !important;
+            background-image: none !important;
+            width: 197px !important;
+            height: 220px !important;
+            margin-left: -7px !important;
+        }
+
+        .ztree li a.curSelectedNode {
+            background-color: #5F9878;
+            margin-left: -5px;
+        }
+
+        .ztree li a {
+            margin-left: -5px;
+        }
+
+        .menuContent {
+            display: none;
+            position: absolute;
+            overflow: hidden;
+            height: 230px;
+        }
+
+        #groupSel {
+            text-align: left;
+            color: #666;
+            width: 190px;
+            display: block;
+            padding-left: 10px;
+            height: 38px;
+            line-height: 38px;
+            border-width: 1px;
+            border-style: solid;
+            background-color: #fff;
+            margin: 0;
+            border: 0;
+            outline: 0;
+            font-weight: inherit;
+            font-style: inherit;
+            font-size: 100%;
+            font-family: inherit;
+            vertical-align: baseline;
+            border-radius: 2px;
+            border-color: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="base-item">
+        <span id="namespan">名&nbsp;称</span>
+        <input type="text" id="name" lay-verify="required"
+               autocomplete="off" maxlength="16"
+               class="layui-input" placeholder="请输入设备名称">
+    </div>
+    <div class="base-item">
+        <span id="deviceNumberspan">设备号</span>
+        <input type="text" id="deviceNumber"
+               autocomplete="off" maxlength="12"
+               class="layui-input" placeholder="12位设备编号">
+    </div>
+    <div class="base-item">
+        <span id="passwordspan">初始密码</span>
+        <input type="text" id="devicePassword" lay-verify="required"
+               autocomplete="off" maxlength="12"
+               class="layui-input" placeholder="任意字符没有可不填">
+    </div>
+    <div class="base-item">
+        <span id="groupSelspan">设备分组</span>
+        <span type="text" id="groupSel"
+              onclick="selectGroup()" placeholder="请输入设备名称">点击选择设备分组</span>
+    </div>
+    <div class="base-item">
+        <span id="input_positionspan">设备地址</span>
+        <input type="text" lay-verify="required"
+               autocomplete="off" maxlength="12"
+               disabled="disabled" id="input_position"
+               class="layui-input" placeholder="点击右侧按钮选取设备地址">
+        <img src="../img/location_icon.png" style="width: 35px; height: 35px; margin-top:0px;"
+             onclick="selectPoint()">
+    </div>
+    <div class="base-item">
+        <button class="btn-primary" lay-submit="" id="save"
+                lay-filter="submit">添&nbsp;加
+        </button>
+    </div>
+    <div id="menuContent" class="menuContent">
+        <ul id="groupTree" class="ztree showIcon"></ul>
+    </div>
+</div>
+<script src="layui/layui.js" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script src="jQuery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/zTreejs/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="js/zTreejs/jquery.ztree.core.js"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/versionLayer.js}" charset="utf-8"></script>
+<script>
+    //设置语言
+    $('#namespan').text($.i18n.prop('name'));
+    $('#name').attr('placeholder', $.i18n.prop('deviceDescription'));
+    $('#deviceNumberspan').text($.i18n.prop('deviceNo'));
+    $('#deviceNumber').attr('placeholder', $.i18n.prop('deviceNoDescription'));
+    $('#passwordspan').text($.i18n.prop('initPassword'));
+    $('#devicePassword').attr('placeholder', $.i18n.prop('devicePasswordDescription'));
+    $('#groupSelspan').text($.i18n.prop('groupSelspan'));
+    $('#groupSel').attr('placeholder', $.i18n.prop('groupSelDescription'));
+    $('#groupSel').text($.i18n.prop('groupSeltext'));
+    $('#input_positionspan').text($.i18n.prop('input_positionspan'));
+    $('#input_position').attr('placeholder', $.i18n.prop('input_positionDescription'));
+    $('#save').text($.i18n.prop('boundsave'));
+
+    var position, isShowMenu = false, sNodeId, isLoading = false, zNodes;
+    var dNodes = {id: 0, pId: -1, groupName: $.i18n.prop('rootDirectory')};
+    var setting = {
+        view: {
+            showLine: false,
+            // dblClickExpand: dblClickExpand
+            // selectedMulti: false
+            fontCss: getFont,
+            showIcon: false,
+            selectedMulti: false,
+            dblClickExpand: false,
+            addDiyDom: addDiyDom,
+        },
+        data: {
+            key: {
+                title: "groupName",
+                name: "groupName"
+            },
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            onClick: onClick
+        }
+    };
+
+
+    function onClick(e, treeId, treeNode) {
+        var zTree = $.fn.zTree.getZTreeObj("groupTree");
+        var cityObj = document.getElementById('groupSel');
+        if (zTree.expandNode(treeNode) == null || treeNode.open == false) {
+            sNodeId = treeNode.id;
+            console.log(sNodeId);
+            hideMenu();
+            cityObj.innerText = treeNode.groupName;
+            cityObj.style.color = "#000"
+        }
+    }
+
+    function selGroupList() {
+        if (isLoading) {
+            return
+        }
+        zNodes = [];
+        zNodes.push(dNodes);
+        isLoading = true;
+        layui.use('layer', function () {
+            layer.load(1)
+            $.ajax({
+                url: "group/selGroupList",
+                data: {},
+                dataType: "json",
+                type: "get",
+                timeout: 30000,
+                error: function (data, type, err) {
+                    layer.msg($.i18n.prop('warn0'));
+                    isLoading = false;
+                },
+                success: function (data) {
+                    isLoading = false;
+                    layer.closeAll('loading');
+                    if (data.state == 'success') {
+                        for (var i = 0; i < data.datas.length; i++) {
+                            zNodes.push(data.datas[i])
+                        }
+                        $.fn.zTree.init($("#groupTree"), setting, zNodes);
+                    } else {
+                        layer.msg($.i18n.prop(data.msg))
+                    }
+                }
+            });
+        });
+    }
+
+    function hideMenu() {
+        $("#menuContent").fadeOut("fast");
+        $("body").unbind("mousedown", onBodyDown);
+        isShowMenu = false;
+    }
+
+    function onBodyDown(event) {
+        if (!(event.target.id == "groupSel" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length > 0)) {
+            hideMenu();
+        }
+    }
+
+    function addDiyDom(treeId, treeNode) {
+        var spaceWidth = 10;
+        var switchObj = $("#" + treeNode.tId + "_switch"),
+            icoObj = $("#" + treeNode.tId + "_ico");
+        switchObj.remove();
+        icoObj.before(switchObj);
+        // if (treeNode.level > 1) {
+        var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level) + "px'></span>";
+        switchObj.before(spaceStr);
+        // }
+    }
+
+    function getFont(treeId, node) {
+        // return {'color': '#000'};
+        return node.font ? node.font : {};
+    }
+
+    //选择设备分组
+    function selectGroup() {
+        if (isShowMenu) {
+            hideMenu();
+        } else {
+            var cityObj = $("#groupSel");
+            var cityOffset = $("#groupSel").offset();
+            $("#menuContent").css({
+                left: cityOffset.left + "px",
+                top: cityOffset.top + cityObj.outerHeight() + "px"
+            }).slideDown("fast");
+            isShowMenu = true;
+            $("body").bind("mousedown", onBodyDown);
+            selGroupList()
+        }
+    }
+
+    function selectPoint() {
+        layer.open({
+            type: 2,
+            title: false //不显示标题栏
+            ,
+            closeBtn: false,
+            area: ['600px', '400px'],
+            shade: 0.2,
+            id: 'LAY_layuipro' //设定一个id，防止重复弹出
+            ,
+            btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+            btnAlign: 'c',
+            moveType: 1 //拖拽模式，0或者1
+            ,
+            content: 'selectPoint',
+            yes: function () {
+                var iframeWin = $("div.layui-layer-content > iframe")[0].contentWindow; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                position = iframeWin.getPoint(); //调用子页面的form_submit函数
+                $('#input_position').val(position);
+                layer.closeAll();
+            }
+
+        });
+    }
+
+    layui.use(['form', 'layedit', 'laydate'], function () {
+
+        var form = layui.form
+            , layer = layui.layer;
+
+        //监听提交
+        form.on('submit(submit)', function (data) {
+            $("#save").attr("disabled", true);
+            var name = $('#name').val();
+            var deviceNumber = $('#deviceNumber').val();
+
+            if (name == null || name == '') {
+                layer.msg($.i18n.prop('warn6'));
+                $("#save").removeAttr("disabled", true);
+                return;
+            }
+            if (deviceNumber == null || deviceNumber == '') {
+                layer.msg($.i18n.prop('warn7'));
+                $("#save").removeAttr("disabled", true);
+                return;
+            }
+            if (deviceNumber.length != 12) {
+                layer.msg($.i18n.prop('warn8'));
+                $("#save").removeAttr("disabled", true);
+                return;
+            }
+            if (sNodeId == null) {
+                layer.msg($.i18n.prop('warn9'));
+                $("#save").removeAttr("disabled", true);
+                return;
+            }
+            if (position == null) {
+                layer.msg($.i18n.prop('warn10'));
+                $("#save").removeAttr("disabled", true);
+                return;
+            }
+            console.log(sNodeId);
+            //加载层-风格3
+            layer.load(2);
+            $.ajax({
+                url: "device/addDevice",
+                data: {
+                    deviceNumber: deviceNumber,
+                    deviceName: name,
+                    groupId: sNodeId,
+                    devicePassword: $('#devicePassword').val(),
+                    latitude: position.lat,
+                    longitude: position.lng
+                },
+                dataType: "json",
+                type: "post",
+                timeout: 30000,
+                error: function (data, type, err) {
+                    layer.closeAll('loading');
+                    layer.msg($.i18n.prop('fail'), {
+                        offset: '6px'
+                    });
+                },
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if (data.state == 'success') {
+
+                        var msg = '';
+                        try {
+                            msg = $.i18n.prop(data.msg);
+                        } catch (e) {
+                            msg = data.msg;
+                        }
+                        layer.alert(msg, function () {
+                            parent.sendBroadcast("bundDeviceSuccess", null)
+                        });
+                    } else {
+                        let msg = data.msg;
+                        //特殊弹窗，提示权限受限，鼓励缴费升级
+                        if (msg.indexOf("err106/") == 0) {
+                            let strs = msg.split("/");
+                            let num = strs.length == 2 ? strs[1] : 10;
+                            feeEscalation($.i18n.prop("deviceNum"), num);
+                        } else if (msg == 'err108') {
+                            renewal();
+                        } else {
+                            layer.msg($.i18n.prop(data.msg), {icon: 2})
+                        }
+                    }
+                }
+            });
+            $("#save").removeAttr("disabled", true);
+            return false;
+        });
+    });
+
+</script>
+</body>
+</html>

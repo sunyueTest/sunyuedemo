@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh_CN"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns="http://java.sun.com/jsf/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>智慧农业首页</title>
+    <link rel="shortcut icon" href="../../static/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/layui/css/modules/layer/default/layer.css">
+    <link rel="stylesheet" href="../../static/css/admin.css">
+    <link rel="stylesheet" href="../../static/layui/myicon/iconfont.css">
+    <link rel="stylesheet" href="../../static/tost/src/jquery.toast.css">
+    <link rel="stylesheet" href="/static/css/agriculture/swiper.min.css">
+</head>
+<style id="themeStyle">
+    .layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a {
+        background-color: #009688;
+    !important;
+    }
+    .layui-layout-admin .layui-header .layui-nav .layui-nav-item, .layui-layout-admin .layui-logo{
+        height: auto;
+    }
+    .swiper-button-next{
+        background:url("/static/img/agriculture/next.png") no-repeat!important;
+        border: none!important;
+        background-position: center;
+        background-size: 100% 100%!important;
+        transform: scale(0.7);
+    }
+    .swiper-button-prev{
+        background:url("/static/img/agriculture/prev.png") no-repeat!important;
+        border: none!important;
+        background-position: center;
+        background-size: 100% 100%!important;
+        transform: scale(0.7);
+    }
+    .layui-nav .layui-nav-item a {
+        padding: 0 15px;
+    !important;
+    }
+
+    .headerDiv {
+        text-align: center;
+        height: 30px;
+    }
+
+    .layui-nav .layui-this:after {
+        position: absolute;
+        margin-top: 60px !important;
+        background-color: #fff !important;
+    }
+
+    .layui-layout-admin .layui-header {
+        height: 4rem;
+        background-image: linear-gradient(160deg, #0B4068 20%, #046E90 80%) !important;
+    }
+
+    .layui-layout-admin .layui-header a:hover {
+        color: #0B4068 !important;
+    }
+
+    .layui-layout-admin .layui-header a {
+        color: #fff !important;
+    }
+
+    #ulqiehuan {
+        height: 4rem;
+    }
+
+    #qiehuan {
+        border-radius: 5px;
+        background: -webkit-linear-gradient(top, #054b7f, #027288);
+        background: -o-linear-gradient(top, #054b7f, #027288);
+        background: -moz-linear-gradient(top, #054b7f, #027288);
+        background: -mos-linear-gradient(top, #054b7f, #027288);
+        background: linear-gradient(top, #054b7f, #027288);
+        display: block;
+        width: 5vw;
+        height: 4vh;
+        line-height: 4vh;
+        color: #fff !important;
+        text-align: center;
+        transform: translateY(-50%);
+    }
+
+    .headerDiv img {
+        width: 20px !important;
+    }
+
+    .layui-layout-admin .layui-header .layui-nav  {
+        margin-top: 0px !important;
+    }
+
+    .layui-tab-content {
+        padding: 0px;
+    }
+
+    .my-p {
+        line-height: 4rem;
+        color: #f8f8f8 !important;
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+
+    }
+
+    .layui-header a {
+        line-height: 4rem;
+    }
+
+    body {
+        background: #0B4068;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #swiper ul li p {
+    }
+
+    /*.layui-this .myUrlClick{*/
+    /*background: #0e4279!important;*/
+    /*}*/
+    .oli {
+        transition: 0.5s all;
+        box-sizing: border-box;
+    }
+
+    .oli:hover {
+        background: #0a325c !important;
+        border-bottom: 3px solid #fff
+    }
+
+    .oliac {
+        background: #0a325c !important;
+        border-bottom: 3px solid #fff
+    }
+
+    .layui-layout-admin .layui-header .layui-nav-child {
+        top: 4rem !important;
+    }
+
+    .layui-nav-child {
+        padding: none !important;
+    }
+
+    /*.layui-layer{*/
+    /*background: url(/static/img/agriculture/specialistManagement/tcbj.png) no-repeat!important;*/
+    /*background-size:100% 100%!important;*/
+    /*border: none!important;*/
+    /*}*/
+    /*.layui-layer-title{*/
+    /*background: transparent!important;*/
+    /*}*/
+    /*.layui-layer-title{*/
+    /*border: none!important;*/
+    /*opacity: 0;*/
+    /*}*/
+    /*.layui-layer-setwin .layui-layer-close1 {*/
+    /*background-position: 1px -40px;*/
+    /*cursor: pointer;*/
+    /*position: relative;*/
+    /*right: -0.8vw;*/
+    /*top: 4.1vh;*/
+    /*}*/
+</style>
+<body class="layui-layout-body">
+<audio src="../sound/alarm.mp3" id="alarm" loop="loop"></audio>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" style="display: flex">
+        <div style="width:6vw">
+            <!--            <a href="../monitor" style="margin-left: 2rem;" target="_blank">-->
+            <!--                LOGO-->
+            <!--            </a>-->
+        </div>
+
+        <ul class="layui-nav" style="position: absolute; display: none">
+            <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                <a href="../monitor"
+                   target="_blank">
+                    GIS监控大屏
+                </a>
+            </li>
+        </ul>
+        <div style="width: 3.5vw;position: relative">
+            <div class="swiper-button-prev swiper_btn" style="width: 2.5vw"></div>
+        </div>
+        <div>
+            <ul class="oul" id="swiper" style=" height: 4rem; top:0px;white-space: nowrap;overflow: hidden;position: relative;">
+                <div class="swiper-wrapper" style="width: 75vw">
+                    <li class="oli  swiper-slide" th:each="menu,iterStat : ${map.menus}" style="height: 4rem;">
+                        <a th:attr="href='javascript:;',lay-tips=${menu.name},lay-direction=${menu.id}, data-myUrl=${menu.url}"
+                           class="myUrlClick" style="position: relative;display: block">
+                            <p th:text="${menu.name}" class="my-p"></p>
+                        </a>
+
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <div style="width: 3.5vw;position: relative">
+            <div class="swiper-button-next swiper_btn" style="width: 2.5vw"></div>
+        </div>
+        <div>
+            <ul id="ulqiehuan" class="" style="width: 5vw;box-sizing: border-box;padding-top: 2rem">
+                <a id="qiehuan" class="main-page-a" href="/index?from=admin" style="color: #f2f2f2;">切换后台</a>
+            </ul>
+        </div>
+        <div>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item" style="margin-right: 1rem;">
+                    <a href="javascript:;" id="realName"></a>
+                    <dl class="layui-nav-child " style=" background-color:rgba(0,0,0,0.5);!important;color: #fff!important;">
+                        <dd style="text-align: center;"><a onclick="information()" target="_Blank" style="color: black;cursor: pointer">个人信息</a></dd>
+                        <dd hidden="hidden" class="seethemessage" style="text-align: center;"><a
+                                onclick="findSeethemessage()" target="_Blank"
+                                style="color: black;cursor: pointer">查看留言</a></dd>
+                        <dd style="text-align: center;"><a id="out" href="logout">退出</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body" style=" top: 50px; left: 0; overflow-y: hidden">
+        <div class="layui-tab layui-tab-brief" lay-allowClose="true" lay-filter="tabs" style="height:100%;width: 100%;">
+            <div class="layui-tab-content" style="height:100%;width: 100%;">
+                <div class="layui-tab-item layui-show" style="height:100%;width: 100%;background: #0a4168">
+                    <iframe id="homeIframe" style="height:100%;width: 100%;" allowtransparency="true"
+                            src="/agriculture/agricultureIndex" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/layui/layui.js}"></script>
+<script th:src="@{/static/js/topic.js?v=1}"></script>
+<script th:src="@{/static/js/socket.js?v=1.0.2}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/agriculture/swiper.min.js}"></script>
+<script type="text/javascript" src="../tost/src/jquery.toast.js"></script>
+<script>
+    var swiper = new Swiper('#swiper', {
+        slidesPerView: 6,
+        spaceBetween: 0,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+    /**
+     * 导航点击事件
+     *
+     */
+    $('.oli').eq(0).addClass('oliac');
+    $(document).on('click', '.oli', function () {
+        $('.oli').removeClass('oliac');
+        $(this).addClass('oliac');
+    });
+    /**
+     * 在线咨询提示消息数量
+     * onlinehintsum 诊断消息提示数字
+     */
+    var onlinehintsum = 0;
+    function onlinehint() {
+        let onlineh = $("a[lay-direction='2010531']");
+        let html = '<span class="onlinespan" style="width: 1vw;height: 1vw;background: red;color: #fff;border-radius: 50%;position: absolute;top: 0;right: 0;text-align: center;line-height: 1vw">' + onlinehintsum + '</span>\n';
+        if (onlinehintsum == 0) {
+            $('.onlinespan').remove();
+            return;
+        }
+        onlineh.append(html);
+    }
+    onlinehint();
+    /**
+     * 远程诊断点击清空
+     */
+    var direction = $("a[lay-direction='2010531']");
+    $(document).on('click', direction, function () {
+        onlinehintsum = 0;
+        onlinehint();
+    });
+    // $('#ulqiehuan').right;
+    getUserInfo();
+    layui.use(['element', 'layer'], function () {
+        $(".layui-nav-bar").css("margin-top", 60 + "px").css("background-color", "#fff");
+        // $(".layui-nav-more").css("margin-top", '10px');
+        $(".my-li-menu:first").addClass("layui-this").click();
+    });
+    $(document).on('click', '.myUrlClick', function () {
+        let url = $(this).attr('data-myUrl');
+        var iframe = document.getElementById("homeIframe");
+        iframe.src = url;
+    });
+    $(".my-li-menu").click(function () {
+        $('.my-img').each(function () {
+            let this_src = $(this).attr("src");
+            if (this_src.indexOf("-3.png") != -1) {
+                this_src = this_src.replace("-3.png", ".png");
+                $(this).attr("src", this_src);
+            }
+        });
+        $(".my-p").css("color", "#9c989a");
+        // let my_src = $(this).children().find("img").attr("src");
+        // if (my_src.indexOf("-3.png") == -1) {
+        //     my_src = my_src.replace(".png", "-3.png");
+        //     $(this).children().find("img").attr("src", my_src);
+        //     $(this).children().find("p").css("color", "#fff");
+        // }
+    });
+    // window.onload = function () {
+    //     $(".layui-nav-bar").css("margin-top", 70 + "px")
+    //         .css("background-color", "#fff");
+    //     $(".layui-nav-more").css("margin-top", '10px');
+    //     $(".my-li-menu:first").addClass("layui-this").click();
+    // };
+    /**
+     * 判断是否是专家登录
+     */
+    function getUserInfo() {
+        $.ajax({
+            url: "user/selUserDetails",
+            data: {},
+            dataType: "json",
+            type: "post",
+            timeout: 30000,
+            error: function (data, type, err) {
+            },
+            success: function (data) {
+                userData = data.data;
+                if (userData.user.realName == null || userData.user.realName == '') {
+                    $("#realName").text(userData.user.userName);
+                } else {
+                    $("#realName").text(userData.user.realName);
+                }
+                if (userData.user.level == 2) {
+                    $.ajax({
+                        url: "../expertManage/findExpertExamineVal_Two",
+                        type: "POST",
+                        data: {},
+                        success: function (res) {
+                            console.log('是否是专家');
+                            console.log(res);
+                            if (res.data == null) {
+                                $('.seethemessage').show();
+                            }
+                            if (res.data != null) {
+                                $('.seethemessage').hide();
+                            }
+                        }
+                    })
+                }
+            }
+        });
+    }
+    function information() {
+        //页面层
+        layer.open({
+            type: 2,
+            skin: 'layui-layer-rim', //加上边框
+            area: ['600px', '400px'], //宽高
+            content: '../userManage/myInfofarming'
+        });
+    }
+    function findSeethemessage() {
+        //页面层
+        layer.open({
+            type: 2,
+            skin: 'layui-layer-rim', //加上边框
+            area: ['70vw', '70vh'], //宽高
+            content: '../agriculture/seethemessage'
+        });
+    }
+    function sendBroadcast(type, data) {
+        for (let i = 0; i < frames.length; i++) {
+            var iframe = frames[i];
+            try {
+                iframe.onReceive(type, data);
+            } catch (e) {
+                // console.log(e)
+            }
+        }
+    }
+    //报警
+    initSocket(function (data) {
+        console.log(data);
+    });
+    //专家即时聊天
+    var username = new Array;
+    var list = [];
+    var id = '';
+    var userbnt = '';//点击获取用户名称
+    initTopicSocket(function (msg) {
+        if ('用户在其他地方登陆，已下线' == msg) {
+            layer.msg('重复登陆，专家在线咨询功能禁用');
+        } else {
+            layer.msg(msg);
+        }
+    }, function (msg) {
+        console.log('接收:' + msg);
+        sendBroadcast('topic', msg);
+        layer.msg('您收到了新的咨询消息！')
+        onlinehintsum += 1;
+        onlinehint();
+        let arry = msg.split('#::');
+        let user = arry[0];
+        let teacher = arry[1];
+        username.push(user);
+        username = removeDuplicates(username)
+        console.log(username);
+        var teacherint = new Array;
+        var val = {
+            type: 1,
+            val: teacher
+        }
+        teacherint.push(val);
+        var isTrue = false;
+        var valTwo = new Array();
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].username == user) {
+                // var teacherintTwo=new Array;
+                valTwo = list[i].teacherint;
+                valTwo.push(val);
+                // teacherintTwo.push(valTwo);
+                list[i].teacherint = valTwo;
+                isTrue = true;
+            }
+        }
+        if (!isTrue) {
+            valTwo.push(val);
+            var liaotian = {
+                username: user,
+                teacherint: valTwo
+            };
+            list.push(liaotian);
+        }
+        console.log(list[0].username);
+        console.log(list);
+        var str = JSON.stringify(list);
+        setCookie("chattinglist", str);
+    });
+    /**
+     * 删除数组中重复元素
+     */
+    function removeDuplicates(arr) {
+        var temp = {};
+        for (var i = 0; i < arr.length; i++)
+            temp[arr[i]] = true;
+        var r = [];
+        for (var k in temp)
+            r.push(k);
+        return r;
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
