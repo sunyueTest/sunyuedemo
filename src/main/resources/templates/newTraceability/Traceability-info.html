@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加溯源阶段信息TAB</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <style type="text/css">
+        ::-webkit-scrollbar {display:none}
+    </style>
+</head>
+
+<body>
+<input type="hidden" id="nn" th:value="${data}" />
+<div style="margin: 40px">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>
+            <div class="site-demo-button" lay-filter="docDemoTabBrief" style="margin-bottom: 0;">
+                <button class="layui-btn site-demo-active" data-type="tabAdd">新增阶段</button>
+            </div>
+        </legend>
+    </fieldset>
+    <div class="layui-tab" lay-filter="demo" lay-allowclose="true">
+        <ul class="layui-tab-title" style="margin-top: 33px;">
+        </ul>
+        <div class="layui-tab-content">
+        </div>
+    </div>
+</div>
+</body>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/layui/layui.js" charset="UTF-8"></script>
+<script>
+    function as(){
+        return $("#nn").val();
+    }
+    layui.use('element', function () {
+        var $ = layui.jquery, element = layui.element;
+        var active = {//触发事件
+            tabAdd: function () {//新增选块
+                element.tabAdd('demo', {
+                    id: new Date().getTime(),
+                    title: '新增阶段',
+                    content: '<iframe src="/templates/newTraceability/newFileInfo.html" width="1000" height="700" id="sendd" frameborder="0" ></iframe>',
+                })
+            },
+        };
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+    });
+</script>
+</html>

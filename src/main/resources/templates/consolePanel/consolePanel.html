@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>在线帮助文档</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/css/global.css}" media="all">
+    <style>
+        table {
+            width : 500px;
+            border : #0A0E11 1px;
+            text-align: center;
+        }
+
+        th {
+            padding-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-main markdown-body" style="width: 100%">
+    <div class="layui-main site-inline" style="width: 20%; height: 100%; float:left; position: fixed">
+        <div class="site-tree">
+            <ul class="layui-tree">
+                <li>
+                    <h2>
+                        平台设备上传协议
+                    </h2>
+                </li>
+                <li class="site-tree-noicon" style="padding-left:20px">
+                    <a href="#" onclick="TCPUploadProtocolClick()">
+                        <cite>TCP上报</cite>
+                    </a>
+                </li>
+                <li class="site-tree-noicon" style="padding-left:20px">
+                    <a href="#" onclick="HTTPUploadProtocolClick()">
+                        <cite>HTTP上报</cite>
+                    </a>
+                </li>
+                <li>
+                    <h2>
+                        平台数据获取协议
+                    </h2>
+                </li>
+                <li class="site-tree-noicon" style="padding-left:20px">
+                    <a href="#" onclick="HTTPDataAcquisitionProtocolClick()">
+                        <cite>HTTP数据获取</cite>
+                    </a>
+                </li>
+                <li>
+                    <h2>
+                        摄像头使用帮助
+                    </h2>
+                </li>
+                <li class="site-tree-noicon" style="padding-left:20px">
+                    <a href="#" onclick="cameraHelpDocumentClick()">
+                        <cite>萤石云账号申请</cite>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="site-content layui-hide" style="width: 70%; float: left; margin-left: 20%;" id="TCPUploadProtocol">
+        <h1 class="site-h1">设备上传协议</h1>
+        <div class="site-title">
+            <fieldset><legend><a name="config">1.1主动上报方式</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>设备可以采用TCP或者UDP方式主动上报，上报均采用Client方式，其中TCP采用长连接上传16进制数据形式，设备具有KeepAlive机制，
+                会主动保持和服务区的连接并且进行无限次的断线重连。</p>
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">1.2协议基本组成</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>协议的基本组成如下：</p>
+            <p>帧头(2)+版本 (1)+设备ID(6)+传输Session(4)+命令字节(1)+传输秘钥(8)+长度(2)+内容(n)+校验和(2)</p>
+            <br>
+            <p> 其中帧头2字节，固定为0xfe 0xdc。
+                设备版本号1字节，在本协议中为0x02。
+                设备ID为6字节，每一个设备均有一个唯一的设备ID，设备号错误不保存上传数据。
+                传输Session为4字节，由设备指定，每次发送自增1，用来标识设备的传输顺序。
+                命令字节，长度1字节，内容见下文。
+                传输秘钥为平台发放，对接时索取。
+                校验和为2字节，本协议中校验采用crc16位校验，算法见下文。</p>
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">1.3主动上报协议</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>主动上报的命令字节，长度，内容如下文所示：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>命令字节</td>
+                    <td>长度</td>
+                    <td>内容</td>
+                </tr>
+                <tr>
+                    <td>0xC3</td>
+                    <td>0x08（08）</td>
+                    <td>见下文数据上报内容</td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td colspan="4">数据上报内容:</td>
+                </tr>
+                <tr>
+                    <td>数据1内容(4字节)</td>
+                    <td>数据2内容(4字节)</td>
+                    <td>......</td>
+                    <td>数据12内容(4字节</td>
+                </tr>
+                </tbody>
+            </table>
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">1.4主动上报协议实例</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>如下文是一个设备主动上传的数据：</p>
+            <span style="color: #00b5ff">FE DC </span>
+            <span style="color: #00B83F">02 </span>
+            <span style="color: #1618d9">16 35 61 84 52 32 </span>
+            <span style="color: #8a6d3b">00 00 00 05 </span>
+            <span style="color: #ff0015">C3 </span>
+            <span style="color: #330b85">33 72 51 01 00 09 C0 01 </span>
+            <span style="color: #dfb81c">00 08 </span>
+            <span style="color: #2446AB">00 00 02 92 </span>
+            <span style="color: #761c19">00 00 FF 9B </span>
+            <span style="color: #01AAED">35 C0 </span>
+            <p>其中<span style="color: #00b5ff">fe dc</span>为固定帧头，<span style="color: #00B83F">02</span>为版本号，设备唯一id为<span style="color: #1618d9">163561845232</span>
+                ,本条指令的session为<span style="color: #8a6d3b">00000005</span>，<span style="color: #ff0015">C3</span>是命令字节，<span style="color: #330b85">337251010009C001</span> 是秘钥，
+                本条数据长度为<span style="color: #dfb81c">0008</span>也就是8个字节。
+                上传的第一个数为湿度 <span style="color: #2446AB">00000292</span>代表65.8%RH。第二个数据位温度<span style="color: #761c19">0000ff9b</span>代表-10.1℃（使用补码的形式标示负数），
+                最后两位<span style="color: #01AAED">35C0</span>为校验和。</p>
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">1.5循环冗余校验（crc）算法</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>CRC 校验（Cyclic Redundancy Check）是一种数据传输错误检查方法。本标准采用 ANSI CRC16，简称 CRC16。</p>
+            <p>CRC16 码由传输设备计算后加入到数据包中。接收设备重新计算接收数据包的 CRC16 码，并与接收到的 CRC16 码比较，如果两值不同，则有误。</p>
+            <p>CRC16 校验字节的生成步骤如下：</p>
+            <p>1) CRC16 校验寄存器赋值为 0xFFFF；</p>
+            <p>2) 取被校验串的第一个字节赋值给临时寄存器；</p>
+            <p>3) 临时寄存器与 CRC16 校验寄存器的高位字节进行“异或”运算，赋值给 CRC16 校验寄存器；</p>
+            <p>4) 取 CRC16 校验寄存器最后一位赋值给检测寄存器；</p>
+            <p>5) 把 CRC16 校验寄存器右移一位；</p>
+            <p>6) 若检测寄存器值为 1，CRC16 校验寄存器与多项式 0xA001 进行“异或”运算，赋值给 CRC16校验寄存器；</p>
+            <p>7) 重复步骤 4~6，直至移出 8 位；</p>
+            <p>8) 取被校验串的下一个字节赋值给临时寄存器；</p>
+            <p>9) 重复步骤 3~8，直至被校验串的所有字节均被校验；</p>
+            <p>10) 返回 CRC16 校验寄存器的值。</p>
+            <br>
+            <p>示例：</p>
+            <p><span style="color: #00b5ff">FEDC </span>
+                <span style="color: #00B83F">02</span>
+                <span style="color: #1618d9">163561845232</span>
+                <span style="color: #8a6d3b">00000005</span>
+                <span style="color: #ff0015">C3</span>
+                <span style="color: #330b85">337251010009C001</span>
+                <span style="color: #dfb81c">0008</span>
+                <span style="color: #2446AB">00000292</span>
+                <span style="color: #761c19">0000FF9B</span>
+                <span style="color: #01AAED">35C0</span></p>
+            <p>其中 <span style="color: #01AAED">35C0</span> 为 CRC16 校验码，是对数据段</p>
+            <p><span style="color: #00b5ff">FEDC </span>
+                <span style="color: #00B83F">02</span>
+                <span style="color: #1618d9">163561845232</span>
+                <span style="color: #8a6d3b">00000005</span>
+                <span style="color: #ff0015">C3</span>
+                <span style="color: #330b85">337251010009C001</span>
+                <span style="color: #dfb81c">0008</span>
+                <span style="color: #2446AB">00000292</span>
+                <span style="color: #761c19">0000FF9B</span></p>
+            <p>进 行CRC16 校验所得的校验码。</p>
+        </blockquote>
+
+        <div class="site-title">
+            <fieldset><legend><a name="config">1.6 CRC校验示例</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>CRC校验算法示例：</p>
+            <p>/**************************************************************************************** </p>
+            <p>函    数：CRC16_Checkout </p>
+            <p>描    述：CRC16 循环冗余校验算法</p>
+            <p>参 数 一：*puchMsg：需要校验的字符串指针 </p>
+            <p>参 数 二：usDataLen：要校验的字符串长度</p>
+            <p>返 回 值：返回 CRC16 校验码</p>
+            <p>****************************************************************************************/</p>
+            <pre class="layui-code">
+    unsigned int CRC16_Checkout(unsigned char * puchMsg, unsigned int usDataLen) {
+      unsigned int i,  j,crc_reg,check;
+      crc_reg = 0xFFFF;
+      for (i = 0; i < usDataLen; i++) {
+        crc_reg = (crc_reg >> 8) ^ puchMsg[i];
+        for (j = 0; j < 8; j++) {
+          check = crc_reg & 0x0001;
+          crc_reg >>= 1;
+          if (check == 0x0001)
+          {
+            crc_reg ^= 0xA001;
+          }
+        }
+      }
+      return crc_reg;
+    }</pre>
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">1.6 CRC校验测试</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote" style="margin-bottom: 300px">
+            <p>校验测试</p>
+            <input id="text" style="width: 500px;" />
+            <button onclick="check()">校验</button>
+            <div id="message"></div>
+        </blockquote>
+    </div>
+    <div class="site-content layui-hide" style="width: 70%; float: left; margin-left: 20%;" id="HTTPUploadProtocol"></div>
+    <div class="site-content layui-hide" style="width: 70%; float: left; margin-left: 20%;" id="HTTPDataAcquisitionProtocol">
+        <h1 class="site-h1">平台数据获取协议</h1>
+        <div class="site-title">
+            <fieldset><legend><a name="config">1、设备接口：</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>接口描述：从平台获取设备列表</p>
+            <p>请求方式：get</p>
+            <p>接口地址：<span style="color: #0000FF">/device/getDeviceList</span></p>
+            <p>参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>secretKey</td>
+                    <td>秘钥（16位字符串）</td>
+                    <td>是</td>
+                    <td>联系工作人员获取</td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <p>请求实例：<span style="color: #0000FF">/device/getDeviceList?secretKey=**************</span></p>
+            <p>接口返回：</p>
+            <p>格式: Json格式</p>
+            <p>返回中至少包含以下内容：</p>
+            <p>成功Json返回参数说明：</p>
+
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>请求状态</td>
+                    <td>是</td>
+                    <td>success成功failed失败</td>
+                </tr>
+                <tr>
+                    <td>datas</td>
+                    <td>Json数租</td>
+                    <td>是</td>
+                    <td>设备信息</td>
+                </tr>
+                <tr>
+                    <td>msg</td>
+                    <td>返回结果</td>
+                    <td>否</td>
+                    <td>返回结果提示（失败返回）</td>
+                </tr>
+                <tr>
+                    <td>page</td>
+                    <td>页码数</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>size</td>
+                    <td>数组大小</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>isLast</td>
+                    <td>是否是最后一页</td>
+                    <td>是</td>
+                    <td>没有更多数据的时候返回true</td>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>设备id</td>
+                    <td>否</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>deviceNumber</td>
+                    <td>设备编码</td>
+                    <td>否</td>
+                    <td>6A523E6D727F</td>
+                </tr>
+                <tr>
+                    <td>createTime</td>
+                    <td>设备创建时间</td>
+                    <td>否</td>
+                    <td>2018-12-08 02:41:23</td>
+                </tr>
+                <tr>
+                    <td>connectType</td>
+                    <td>设备链接类型</td>
+                    <td>否</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            <p>返回实例：</p>
+            <pre class="layui-code">
+    （成功）：
+    {
+        "size": 1,
+        "isLast": true,
+        "datas": [{
+            "id": 1,
+            "device_number": "6A523E6D727F",
+            "creatTime": "2018-12-08 02:41:23",
+            "connectType": "tcp"
+        }],
+        "state": "success",
+        "page": 1
+    }
+    （失败）：
+    {
+        "msg": "秘钥未认证",
+        "data": {},
+        "state": "failed"
+    }</pre>
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">2、获取设备信息接口：</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>接口描述：获取设备信息</p>
+            <p>请求方式：get</p>
+            <p>接口地址：<span style="color: #0000FF">/device/getDeviceInfo</span></p>
+            <p>参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>secretKey</td>
+                    <td>秘钥（16位字符串）</td>
+                    <td>是</td>
+                    <td>联系工作人员获取</td>
+                </tr>
+                <tr>
+                    <td>deviceNumber</td>
+                    <td>设备号</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <p>请求实例：<span style="color: #0000FF">/device/getDeviceInfo?secretKey=****&deviceNumber=****</span></p>
+            <p>接口返回：</p>
+            <p>格式: Json格式</p>
+            <p>返回中至少包含以下内容：</p>
+            <p>成功Json返回参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>请求状态</td>
+                    <td>是</td>
+                    <td>success成功failed失败</td>
+                </tr>
+                <tr>
+                    <td>datas</td>
+                    <td>Json数租</td>
+                    <td>是</td>
+                    <td>设备信息</td>
+                </tr>
+                <tr>
+                    <td>msg</td>
+                    <td>返回结果</td>
+                    <td>是</td>
+                    <td>返回结果提示（失败返回）</td>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>设备id</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>deviceNumber</td>
+                    <td>设备编码</td>
+                    <td>是</td>
+                    <td>6A523E6D727F</td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>设备名称</td>
+                    <td>是</td>
+                    <td>未命名设备</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>传感器类型</td>
+                    <td>是</td>
+                    <td>温度 / 湿度</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>传感器数据</td>
+                    <td>是</td>
+                    <td>11.7  ℃ | 47.2 %RH</td>
+                </tr>
+                <tr>
+                    <td>time</td>
+                    <td>数据更新时间</td>
+                    <td>是</td>
+                    <td>2018-08-21 09:40:53</td>
+                </tr>
+                <tr>
+                    <td>onLineState</td>
+                    <td>设备在线状态</td>
+                    <td>是</td>
+                    <td>1在线0离线</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>返回实例：</p>
+            <pre class="layui-code">
+    （成功）：
+    {
+        "msg": "查询成功",
+        "data": {
+            "id": 363,
+            "deviceNumber": "6A523E6D727F",
+            "name": "未命名设备",
+            "type": "温度 / 湿度",
+            "data": "11.7  ℃ | 47.2 %RH",
+            "time": "2018-08-07 09:28:32",
+            "onLineState": "0"
+        },
+        "state": "success"
+    }（失败）：
+    {
+        "msg": "设备不存在",
+        "data": {},
+        "state": "failed"
+    }       </pre>
+        </blockquote>
+
+        <div class="site-title">
+            <fieldset><legend><a name="config">3、修改设备名称接口：</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>接口描述：修改设备名称</p>
+            <p>请求方式：get</p>
+            <p>接口地址：<span style="color: #0000FF">/device/upDeviceInfo</span></p>
+            <p>参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>secretKey</td>
+                    <td>秘钥（16位字符串）</td>
+                    <td>是</td>
+                    <td>联系工作人员获取</td>
+                </tr>
+                <tr>
+                    <td>deviceNumber</td>
+                    <td>设备号</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>deviceName</td>
+                    <td>设备名称</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <p>请求实例：<span style="color: #0000FF">/device/upDeviceInfo?secretKey=****&deviceNumber=**&deviceName=**</span></p>
+            <p>接口返回：</p>
+            <p>格式: Json格式</p>
+            <p>返回中至少包含以下内容：</p>
+            <p>成功Json返回参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>请求状态</td>
+                    <td>是</td>
+                    <td>success成功failed失败</td>
+                </tr>
+                <tr>
+                    <td>datas</td>
+                    <td>Json数租</td>
+                    <td>是</td>
+                    <td>设备信息</td>
+                </tr>
+                <tr>
+                    <td>msg</td>
+                    <td>返回结果</td>
+                    <td>是</td>
+                    <td>返回结果提示</td>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>设备id</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>deviceNumber</td>
+                    <td>设备编码</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>creatTime</td>
+                    <td>创建时间</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>connectType</td>
+                    <td>设备链接类型</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>修改后的设备名称</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            <p>返回实例：</p>
+            <pre class="layui-code">
+    （成功）：
+    {
+        "msg": "修改成功",
+        "data": {
+            "id": 1,
+            "device_number": "6A523E6D727F",
+            "creatTime": "2018-12-08 02:41:23",
+            "connectType": "tcp",
+            "name": "123"
+        },
+        "state": "success"
+    }
+
+
+    （失败）：
+    {
+        "msg": "设备不存在",
+        "data": {},
+        "state": "failed"
+    }       </pre>
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">4、历史记录接口：</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>接口描述：查询设备最近上传的历史数据</p>
+            <p>请求方式：get</p>
+            <p>接口地址：<span style="color: #0000FF">/device/selLatelyHistory</span></p>
+            <p>参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>secretKey</td>
+                    <td>秘钥（16位字符串）</td>
+                    <td>是</td>
+                    <td>联系工作人员获取</td>
+                </tr>
+                <tr>
+                    <td>deviceNumber</td>
+                    <td>设备号</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>page</td>
+                    <td>页码</td>
+                    <td>否</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>size</td>
+                    <td>大小</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <p>请求实例：<span style="color: #0000FF">/device/selLatelyHistory?secretKey=****&deviceNumber=***&size=2</span></p>
+            <p>接口返回：</p>
+            <p>格式: Json格式</p>
+            <p>返回中至少包含以下内容：</p>
+            <p>成功Json返回参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>请求状态</td>
+                    <td>是</td>
+                    <td>success成功failed失败</td>
+                </tr>
+                <tr>
+                    <td>datas</td>
+                    <td>Json数租</td>
+                    <td>是</td>
+                    <td>设备信息</td>
+                </tr>
+                <tr>
+                    <td>msg</td>
+                    <td>返回结果</td>
+                    <td>是</td>
+                    <td>返回结果提示</td>
+                </tr>
+                <tr>
+                    <td>page</td>
+                    <td>页码数</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>size</td>
+                    <td>数组大小</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>isLast</td>
+                    <td>是否是最后一页</td>
+                    <td>是</td>
+                    <td>没有更多数据的时候返回true</td>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>设备id</td>
+                    <td>否</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>deviceNumber</td>
+                    <td>设备号</td>
+                    <td>否</td>
+                    <td>6A523E6D727F</td>
+                </tr>
+                <tr>
+                    <td>sensorData</td>
+                    <td>传感器数据</td>
+                    <td>否</td>
+                    <td>12.2  ℃ | 45.1 %RH</td>
+                </tr>
+                <tr>
+                    <td>drecordTime</td>
+                    <td>上传时间</td>
+                    <td>否</td>
+                    <td>2018-08-07 08:45:21</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>返回实例：</p>
+            <pre class="layui-code">
+    （成功）：
+    {
+        "size": 2,
+        "isLast": false,
+        "datas": [{
+            "id": 67166097,
+            "deviceNumber": "6A523E6D727F",
+            "sensorData": "12.2  ℃ | 45.1 %RH",
+            "drecordTime": "2018-08-07 08:45:21"
+        }, {
+            "id": 67166008,
+            "deviceNumber": "6A523E6D727F",
+            "sensorData": "12.2  ℃ | 45.1 %RH",
+            "drecordTime": "2018-08-07 08:45:10"
+        }],
+        "state": "success",
+        "page": 1
+    }（失败）：
+    {
+        "msg": "单次最多获取500条",
+        "data": {},
+        "state": "failed"
+    }       </pre>
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">5、根据日期查询设备历史记录接口：</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>接口描述：最早能查询三个月之前的数据</p>
+            <p>请求方式：get</p>
+            <p>接口地址：<span style="color: #0000FF">/device/selHistoryForDate</span></p>
+            <p>参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>secretKey</td>
+                    <td>秘钥（16位字符串）</td>
+                    <td>是</td>
+                    <td>联系工作人员获取</td>
+                </tr>
+                <tr>
+                    <td>deviceNumber</td>
+                    <td>设备号</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>page</td>
+                    <td>页码</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>size</td>
+                    <td>大小</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>start</td>
+                    <td>开始时间</td>
+                    <td>是</td>
+                    <td>yyyy-MM-dd HH:mm:ss</td>
+                </tr>
+                <tr>
+                    <td>end</td>
+                    <td>结束时间</td>
+                    <td>是</td>
+                    <td>yyyy-MM-dd HH:mm:ss</td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <p>请求实例：<span style="color: #0000FF">/device/selHistoryForData?secretKey=***&deviceNumber=***&start=2018-08-23 00:00:00&end=2018-10-07 00:00:00&page=1&size=2</span></p>
+            <p>接口返回：</p>
+            <p>格式: Json格式</p>
+            <p>返回中至少包含以下内容：</p>
+            <p>成功Json返回参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>请求状态</td>
+                    <td>是</td>
+                    <td>success成功failed失败</td>
+                </tr>
+                <tr>
+                    <td>datas</td>
+                    <td>Json数租</td>
+                    <td>是</td>
+                    <td>设备信息</td>
+                </tr>
+                <tr>
+                    <td>msg</td>
+                    <td>返回结果</td>
+                    <td>是</td>
+                    <td>返回结果提示</td>
+                </tr>
+                <tr>
+                    <td>page</td>
+                    <td>页码数</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>size</td>
+                    <td>数组大小</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>isLast</td>
+                    <td>是否是最后一页</td>
+                    <td>是</td>
+                    <td>没有更多数据的时候返回true</td>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>设备id</td>
+                    <td>否</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>deviceNumber</td>
+                    <td>设备号</td>
+                    <td>否</td>
+                    <td>6A523E6D727F</td>
+                </tr>
+                <tr>
+                    <td>sensorData</td>
+                    <td>传感器数据</td>
+                    <td>否</td>
+                    <td>12.2  ℃ | 45.1 %RH</td>
+                </tr>
+                <tr>
+                    <td>drecordTime</td>
+                    <td>上传时间</td>
+                    <td>否</td>
+                    <td>2018-08-07 08:45:21</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>返回实例：</p>
+            <pre class="layui-code">
+    （成功）：
+    {
+        "size": 2,
+        "isLast": false,
+        "datas": [{
+            "id": 66751994,
+            "deviceNumber": "6A523E6D727F",
+            "sensorData": "11.0  ℃ | 60.9 %RH",
+            "drecordTime": "2018-08-23 08:45:51"
+        }, {
+            "id": 66751923,
+            "deviceNumber": "6A523E6D727F",
+            "sensorData": "11.0  ℃ | 60.9 %RH",
+            "drecordTime": "2018-08-23 08:55:52"
+        }],
+        "state": "success",
+        "page": 1
+    }
+    （失败）：
+    {
+        "msg": "只能查询三个月以内的数据",
+        "data": {},
+        "state": "failed"
+    }       </pre>
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">6、查询设备节点数据接口：</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>接口描述：最早能查询三个月之前的数据</p>
+            <p>请求方式：get</p>
+            <p>接口地址：<span style="color: #0000FF">/device/selSensorData</span></p>
+            <p>参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>secretKey</td>
+                    <td>秘钥（16位字符串）</td>
+                    <td>是</td>
+                    <td>联系工作人员获取</td>
+                </tr>
+                <tr>
+                    <td>deviceNumber</td>
+                    <td>设备号</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <p>请求实例：<span style="color: #0000FF">/device/selSensorData?secretKey=***&deviceNumber=***</p></p>
+            <p>接口返回：</p>
+            <p>格式: Json格式</p>
+            <p>返回中至少包含以下内容：</p>
+            <p>成功Json返回参数说明：</p>
+            <table style="width: 500px;" border="1px">
+                <tbody>
+                <tr>
+                    <td>参数名称</td>
+                    <td>参数含义</td>
+                    <td>是否必填</td>
+                    <td>参数说明</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>请求状态</td>
+                    <td>是</td>
+                    <td>success成功failed失败</td>
+                </tr>
+                <tr>
+                    <td>datas</td>
+                    <td>Json数租</td>
+                    <td>是</td>
+                    <td>设备信息</td>
+                </tr>
+                <tr>
+                    <td>msg</td>
+                    <td>返回结果</td>
+                    <td>是</td>
+                    <td>返回结果提示</td>
+                </tr>
+                <tr>
+                    <td>page</td>
+                    <td>页码数</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>size</td>
+                    <td>数组大小</td>
+                    <td>是</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>isLast</td>
+                    <td>是否是最后一页</td>
+                    <td>是</td>
+                    <td>没有更多数据的时候返回true</td>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>设备id</td>
+                    <td>否</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>templateId</td>
+                    <td>数据节点id</td>
+                    <td>否</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>unit</td>
+                    <td>单位</td>
+                    <td>否</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>value</td>
+                    <td>数值</td>
+                    <td>否</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>dataTime</td>
+                    <td>上报时间</td>
+                    <td>否</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            <p>返回实例：</p>
+            <pre class="layui-code">
+        成功）：
+        {
+            "size": 2,
+            "isLast": true,
+            "datas": [{
+                "id": 0,
+                "unit": " ℃",
+                "name": "温度",
+                "templateId": "6A523E6D727F1",
+                "value": 9.6,
+                "dataTime": "2018-08-23 10:18:42"
+            }, {
+                "id": 1,
+                "unit": "%RH",
+                "name": "湿度",
+                "templateId": "6A523E6D727F2",
+                "value": 60.3,
+                "dataTime": "2018-08-23 10:18:42"
+            }],
+            "state": "success",
+            "page": 1
+        }
+        （失败）：
+        {
+            "msg": "设备不存在",
+            "data": {},
+            "state": "failed"
+        }       </pre>
+        </blockquote>
+    </div>
+    <div class="site-content layui-hide" style="width: 70%; float: left; margin-left: 20%;" id="cameraHelpDocument">
+        <h1 class="site-h1">萤石云账号申请</h1>
+        <div class="site-title">
+            <fieldset><legend><a name="config">1、注册账号</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>根据系统提示完成账号的注册。注册地址：<a target="_blank" style="color: blue" href="https://open.ys7.com/view/register/register.html">https://open.ys7.com/view/register/register.html</a></p>
+            <img th:src="@{/static/img/ys7Register01.png}" style="width: 800px; height: 500px">
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">2、登陆系统添加我的应用。</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <p>登录系统后，选择左侧菜单 我的应用。根据系统提示添加应用。访问地址：<a target="_blank" style="color: blue" href="https://open.ys7.com/console/application.html">https://open.ys7.com/console/application.html</a></p>
+
+            <img th:src="@{/static/img/ys7Register02.png}">
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">3、添加应用后，获取应用的appkey和secret。如图所示。</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <img th:src="@{/static/img/ys7Register03.png}">
+        </blockquote>
+        <div class="site-title">
+            <fieldset><legend><a name="config">4、绑定萤石云提供的appkey、secret到云平台系统。如下图所示</a></legend></fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <img th:src="@{/static/img/ys7Register05.png}">
+        </blockquote>
+    </div>
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/highlight.jquery.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.scrollTo.min.js}" charset="utf-8"></script>
+
+<script>
+    // 页面初始化remove上传协议的隐藏属性
+    $("#TCPUploadProtocol").removeClass("layui-hide");
+
+    // tcp上传协议点击事件
+    function TCPUploadProtocolClick(){
+        $("#TCPUploadProtocol").removeClass("layui-hide");
+        $("#HTTPUploadProtocol").addClass("layui-hide");
+        $("#HTTPDataAcquisitionProtocol").addClass("layui-hide");
+        $("#cameraHelpDocument").addClass("layui-hide");
+    }
+
+    // http上传协议点击事件
+    function HTTPUploadProtocolClick(){
+        $("#HTTPUploadProtocol").removeClass("layui-hide");
+        $("#TCPUploadProtocol").addClass("layui-hide");
+        $("#HTTPDataAcquisitionProtocol").addClass("layui-hide");
+        $("#cameraHelpDocument").addClass("layui-hide");
+    }
+
+    // http数据获取协议点击事件
+    function HTTPDataAcquisitionProtocolClick(){
+        $("#HTTPDataAcquisitionProtocol").removeClass("layui-hide");
+        $("#TCPUploadProtocol").addClass("layui-hide");
+        $("#HTTPUploadProtocol").addClass("layui-hide");
+        $("#cameraHelpDocument").addClass("layui-hide");
+    }
+
+    // 摄像头使用帮助点击事件
+    function cameraHelpDocumentClick(){
+        $("#HTTPDataAcquisitionProtocol").addClass("layui-hide");
+        $("#TCPUploadProtocol").addClass("layui-hide");
+        $("#HTTPUploadProtocol").addClass("layui-hide");
+        $("#cameraHelpDocument").removeClass("layui-hide");
+    }
+
+    //校验
+    function check() {
+        let message = document.getElementById('text').value;
+        //去除空格
+        message = message.replace(/\s*/g, "");
+        //获取校验数组
+        let data = stringToBytes(message);
+        let crc = 0xffff;
+        let dxs = 0xa001;
+        let hibyte = 0;
+        let sbit = 0;
+        //开始校验
+        for (let i = 0; i < data.length; i++) {
+            hibyte = crc >> 8;
+            crc = hibyte ^ data[i];
+            for (let j = 0; j < 8; j++) {
+                sbit = crc & 0x0001;
+                crc = crc >> 1;
+                if (sbit == 1)
+                    crc ^= dxs;
+            }
+        }
+        //输出结果
+        console.log((crc & 0xffff));
+        setMessageInnerHTML((crc & 0xffff).toString(16).toUpperCase());
+    }
+
+    //字符串转字节序列
+    function stringToBytes(str) {
+        let ch, st, re = [];
+        for (let i = 0; i < str.length; i++) {
+            ch = str.charCodeAt(i);
+            st = [];
+            do {
+                st.push(ch & 0xFF);
+                ch = ch >> 8;
+            }
+            while (ch);
+            re = re.concat(st.reverse());
+        }
+        return re;
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        document.getElementById('message').innerHTML = innerHTML + '<br/>';
+    }
+
+</script>

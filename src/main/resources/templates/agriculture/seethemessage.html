@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>seethemessage-查看留言</title>
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/seethemessage.css}">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+
+</head>
+<body>
+
+<div class="main">
+    <!--<div class="left-nav">-->
+        <!--<ul class="test test-1">-->
+            <!--<li><P>专家A</P><span>2</span></li>-->
+            <!--<li><P>专家A</P></li>-->
+            <!--<li><P>专家A</P></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <div class="conter">
+        <div class="conter-header">
+            <div class="int-title">
+                <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a1.png" ></div>
+                <div class="title-text">查看留言<span class="title-text-top"></span><span class="title-text-bottom"></span></div>
+                <div class="title-icon"></div>
+            </div>
+        </div>
+        <div class="table-title">
+            <div class="table-id">ID</div>
+            <div class="table-name">专家名称</div>
+            <div class="table-leave">留言信息</div>
+            <div class="table-tiem">留言时间</div>
+            <div class="table-evaluate">留言评价</div>
+            <div class="table-operation">操作</div>
+        </div>
+        <div id="list">
+            <div class="table-title-tr">
+                <div class="table-id">1</div>
+                <div class="table-leave" style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">需要重新准备绿色视频拉山口即拉开降低瓦林卡大家爱我来的离岸价打完我飞洒凤凰卡时刻骄傲很舒服空间安康角度看</div>
+                <div class="table-tiem">2019-02-05 12:21:12</div>
+                <div class="table-evaluate">
+                    <div><div id="test4" style="transform: scale(0.7);margin-top: -1.5vh"></div></div>
+                </div>
+                <div class="table-operation">
+                    <div class="table-operation-icon"><img src="/static/img/agriculture/specialistManagement/chankanlist.png" alt=""></div>
+                    <div class="table-operation-icon"><img src="/static/img/agriculture/specialistManagement/delelist.png" alt=""></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="tc">
+    <h3 class="tc-title">留言详情</h3>
+    <div class="tc-int">
+        <div class="tc-int-l">
+            <p>我的留言</p>
+            <div class="tcintl-top text test-1">
+                <div class="" id="myliu">
+                </div>
+            </div>
+            <p>专家回复</p>
+            <div class="tcintl-top text test-1">
+                <div class="" id="myhufu">
+                </div>
+            </div>
+        </div>
+        <div class="tc-int-r" id="pingfen" style="position: relative">
+            <div style="line-height: 8vh;margin-left: 1vw">留言评分：</div>
+            <div class="table-evaluate"  style="margin-left: 2vw;width: 20vw">
+                <div id="test5" style="margin-left: 1vw;transform: scale(0.7)"></div>
+            </div>
+            <div style="margin-top: 16vh">
+                <p style="margin-left: 1vw;line-height: 4vh">回复评价</p>
+                <textarea id="tcintl-top" class="tcintl-top text test-1" style="width: 25vw;background: transparent;margin-left: 1vw;resize: none;color: #fff"></textarea>
+                <div id="pingfenbnt">
+                    评分
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dele"></div>
+</div>
+</body>
+</html>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script>
+    let layer;
+    layui.use(['form', 'layer', 'layedit', 'laydate'], function () {
+        layer = layui.layer;
+    });
+
+
+    var pingfen='';//评分
+    var expertsId='';//专家id
+    var id='';//留言id
+    layui.use(['rate'], function(){
+        var rate = layui.rate;
+        //基础效果
+        rate.render({
+            elem: '.test4'
+            ,value: 3.5
+            ,half: true
+            ,text: false
+            ,readonly: true
+        })
+        rate.render({
+            elem: '#test5'
+            ,value: 4.5
+            ,half: false
+            ,text: true
+            ,setText: function(value){
+                // this.span.text(value+'星');
+                pingfen=value
+                console.log(pingfen)
+                var arrs = {
+                    '1': '极差'
+                    ,'2': '差'
+                    ,'3': '中等'
+                    ,'4': '好'
+                    ,'5': '极好'
+                };
+                this.span.text(arrs[value] || ( value + "星"));
+            }
+        })
+    });
+    $(document).on('click','#pingfenbnt',function(){
+        var comment=$('#tcintl-top').val()
+        $.ajax({
+            type: "POST",
+            url: "/expertManage/updateScore",
+            dataType: "json",
+            data:{
+                id:id,
+                expertsId:expertsId,
+                totalScore:pingfen,
+                comment:comment
+            },
+            success: function (res) {
+                console.log(res)
+                if(res.state=="success"){
+                    layer.msg('感谢您的评价！');
+                    $('#tc').hide()//评分窗口
+                }
+            }
+        })
+    })
+    $.ajax({
+        type: "POST",
+        url: "/expertManage/getExpertsDiagnosisList",//a连接接口
+        dataType: "json",
+        success: function (res) {
+            console.log(res)
+            var trs = ""; //标题
+            $.each(res.datas, function (i,item) {
+                trs +='            <div class="table-title-tr">\n' +
+                    '                <div class="table-id">'+item.id+'</div>\n' +
+                    '                <div class="table-name">'+item.expertsName+'</div>\n' +
+                    '                <div class="table-leave" style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">'+item.species+'</div>\n' +
+                    '                <div class="table-tiem">'+item.createTime+'</div>\n' +
+                    '                <div class="table-evaluate">'
+                        if(item.totalScore==0){
+                            trs +=  '                    <div>未评价</div>\n'
+                        }else if(item.totalScore==1){
+                            trs +=  '                    <div>极差</div>\n'
+                        }else if(item.totalScore==2){
+                            trs +=  '                    <div>差</div>\n'
+                        }else if(item.totalScore==3){
+                            trs +=  '                    <div>中等</div>\n'
+                        }else if(item.totalScore==4){
+                            trs +=  '                    <div>好</div>\n'
+                        }else if(item.totalScore==5){
+                            trs +=  '                    <div>极好</div>\n'
+                        }
+                trs +='                </div>\n' +
+                    '                <div class="table-operation">\n' +
+                    '                    <div class="table-operation-icon" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/chankanlist.png" alt=""></div>\n' +
+                    // '                    <div class="table-operation-icon"><img src="/static/img/agriculture/specialistManagement/delelist.png" alt=""></div>\n' +
+                    '                </div>\n' +
+                    '            </div>'
+            });
+            $('#list').html(trs);
+        }
+    })
+    var xiugai=document.getElementsByClassName('xiugai');
+    var chaxun=document.getElementsByClassName('bz-chaxun');
+    var tc=document.getElementById('tc');
+    var dele=document.getElementById('dele');
+    $(document).on('click','.table-operation-icon',function(){
+        id=$(this).data("id")
+        console.log(id)
+        tc.style.display='block'
+        $.ajax({
+            type: "POST",
+            url: "/productService/fishermanQuestionsDetails?id="+id,//查看留言接口
+            dataType: "json",
+            success: function (res) {
+                expertsId=res.data.expertsId
+                console.log(res)
+                $('#myliu').html(res.data.species)
+                if(res.data.answerFlag==0){
+                    $('#myhufu').html('专家还未回复，请耐心等待')
+                    $('#pingfen').hide()//评分窗口
+                }else if(res.data.answerFlag==1){
+                    $('#myhufu').html(res.data.answer)
+                    $('#pingfen').show()
+                }
+                if(res.data.totalScore>0){
+                    $('#pingfen').html('感谢您的评价')
+                }
+            }
+        })
+    })
+    dele.onclick=function(){
+        tc.style.display='none'
+    }
+
+</script>

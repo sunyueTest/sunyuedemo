@@ -1,0 +1,85 @@
+.formDiv{
+    color:#fff;
+    margin-top:0;
+    margin-left:0;
+}
+body{
+    color:#fff;
+}
+.layui-input, .layui-select, .layui-textarea{
+
+    background: none;
+    border-left: 1px solid #89f3ff;
+    box-shadow: inset 0px 0px 6px #0080ca;
+    color: #fff;
+    text-indent: .5rem;
+    font-size: .7rem;
+    border-right: 1px solid #89f3ff;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0.15rem;
+    display: inline-block;
+
+}
+.layui-input-inline{
+    width: 200px !important;
+}
+.layui-btn{
+  /*  height: 5vh;*/
+    width: 10%;
+    background: none;
+    border-left: 1px solid #89f3ff;
+    box-shadow: inset 0px 0px 6px #0080ca;
+    color: #fff;
+    font-size: .7rem;
+    border-right: 1px solid #89f3ff;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0.15rem;
+    margin-left: 45%;
+    margin-top: 4vh;
+}
+.layui-inline img{
+    position:relative;
+    left:0;
+    top:0;
+}
+.add-uploading{
+    float:left;
+}
+.layui-input-block{
+    margin-left:0;
+}
+.formTitle{
+    height: 55px;
+    line-height: 55px;
+    margin-left: 28px;
+    font-size: 16px;
+}
+.layui-form{
+    margin-top: 30px !important;
+    margin-left:30px !important;
+}
+.layui-form-select dl {
+    background: #195884;
+    border-left: 1px solid #89f3ff;
+    box-shadow: inset 0px 0px 6px #0080ca;
+    color: #fff;
+    text-indent: .5rem;
+    font-size: .7rem;
+    border-right: 1px solid #89f3ff;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0.15rem;
+}
+
+.layui-form-select dl dd.layui-this{
+    background-color: #29bbd0;
+    color: #fff;
+}
+.layui-form-select dl dd:hover{
+    background:none;
+}
+.layui-form-select .layui-edge{
+    border-top-color: #89f3ff;
+}

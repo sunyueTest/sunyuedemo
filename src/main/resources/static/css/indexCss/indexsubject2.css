@@ -1,0 +1,201 @@
+
+/*logo字体颜色*/
+#span_company{color: #fff}
+.layui-layout-admin .layui-logo{
+    background:#ffc78a;
+    background-size:100% 100%;
+    background-size: 78% 76%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #ffc78a;
+}
+.layui-layout-admin .layui-header{background: #ffc78a}
+.layui-layout-admin .layui-side{background: #ffc78a;color: #000}
+.layui-layout-admin .layui-side a{color: #000}
+a cite{color: #000}
+.layui-side-menu .layui-nav .layui-nav-item .layui-icon{color: #000}
+body .layui-layout-admin .layui-body{background-image: none;background: #b79661}
+body .layui-card{background: #b79661;color: #fff}
+body .layui-card a{color: #000}
+
+element.style {
+}
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
+    background: #ffb866;
+}
+.layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a {
+    background: #ffb866;
+}
+.layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a {
+    background: #ffb866;!important;
+}
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
+    background: #ffb866;
+}
+body .layui-this{
+}
+.layui-nav-tree .layui-nav-bar {
+    background: #ffb866;
+}
+.layui-tab-brief>.layui-tab-title .layui-this{
+    color: #fff;
+}
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after{
+    border-bottom: 2px solid #ffc78a!important;
+}
+.ztree li a{color: #000;!important;}
+.layui-nav .layui-nav-more{border-top-color: rgba(0,0,0,.7);}
+.layui-nav .layui-nav-mored, .layui-nav-itemed>a .layui-nav-more{border-color: transparent transparent #000;}
+.layui-card-body{color: #fff}
+/*语言选择、管理员三角号*/
+.layui-layout-admin .layui-header .layui-nav .layui-nav-more{
+    border-top-color: #fff!important;
+}
+.layui-layout-admin .layui-header .layui-layout-right .layui-nav-child{
+    background:#ffc78a!important;
+}
+.layui-header .layui-nav-child a{
+    color: #000!important;
+    background: #ffc78a;!important
+}
+.layui-header .layui-nav-child a:hover{
+    color: #fff!important;
+    background: #ffc78a;!important
+}
+.ztree li a.curSelectedNode{
+    background: #ffb866!important;
+}
+/*第二套主题————————————————————————————————————————————————————————————————css*/
+/*列表显示*/
+#span_company{color: #fff}
+
+.ztree li a {color: #ffc78a!important;}
+
+body .flysand-container-horizontal{background-image: none;background: rgba(255,255,255,.5)}
+body .flysand-div-inline2{background: #ffd887;!important;border-radius: 15px;!important; box-sizing: border-box;border: 1px solid #a08162;
+padding: 2px 5px;
+}
+.flysand-div-inline2{line-height: 27px!important;}
+.flysand-green-vertical-line{background: #ffc270!important;}
+.flysand-div-inline2-img{margin-top: 3px!important;}
+.input-device{margin-top: 2px!important;}
+/*图形化显示*/
+body .input-device{background: #ffd887!important;color: #fff!important;border: none!important;}
+/*历史数据*/
+body .layui-btn{background: #ffc270!important;}
+.ztree li{background: #ffd887!important;}
+.ztree li a{color: #000!important;background: none!important;}
+.layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even){
+background: #a08162!important;
+}
+.fa{
+    color: #ffc270!important;
+}
+.layui-table tbody{background: #aa8e72!important;}
+.layui-laypage .layui-laypage-curr .layui-laypage-em{background-color: #ffc270!important}
+.layui-laypage a:hover{color: #ffc270!important;}
+/*设备中心*/
+.layui-btn-primary:hover{border-color: #a08162!important;}
+.layui-btn .layui-icon{color: #fff!important;}
+/*input:focus{border: 2px solid #ffc270!important;}*/
+/*摄像头管理*/
+.layui-btn{background: #ffc270!important;}
+/*组态应用*/
+.layui-form-onswitch{background: #ffc270!important;border-color:#ffc270!important; }
+.layui-table-cell{color: #ffff!important;}
+.layui-form-select dl dd.layui-this{background: #ffc270!important;}
+.layui-inline .layui-icon{
+color: red!important;
+}
+/*触发器管理*/
+.btn-primary{background-image: none!important;background: #ffc270!important;color: #fff!important;border-radius: 10px;cursor: pointer}
+/*系统管理*/
+.layui-layer-btn .layui-layer-btn0{background: #ffc270!important;border-color: #ffc270!important;}
+button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active{
+border-color: #ffc270!important;
+}
+.btn-primary{border-color: #ffc78a!important;}
+/*全选按钮*/
+.layui-form-checked[lay-skin=primary] i{
+    background: #ffc78a!important;
+    border: 1px solid #ffc78a!important;
+}
+.layui-btn-primary:hover{
+    border: 1px solid #ffc78a!important;
+}
+/*分页*/
+.layui-laypage{
+    color: red!important;
+}
+.layui-laypage a:hover{
+    color: red!important;
+}
+/*首页css修改*/
+.layui-card-header{
+    background: #ffc78a!important;
+}
+.layui-card-header span{
+    color: #fff!important;
+}
+/*导航下拉样式修改*/
+.layui-nav-itemed>.layui-nav-child{
+    background:#dcb488!important;
+}
+.container{
+    background: rgba(255,255,255,.3)!important;
+    border-radius: 10px!important;
+
+}
+/*修改首页下拉icon颜色*/
+.iconfont {
+    color: #000!important;
+}
+html body .layui-side-scroll .layui-nav-item dd a{
+    padding-left: 44px!important;
+}
+
+.layui-side-menu .layui-nav .layui-nav-item a {
+    padding-left: 25px;
+}
+
+
+.flysand-table-cell-1, .flysand-table-cell-2, .flysand-table-cell-3, .flysand-table-cell-4, .flysand-table-cell-5, .flysand-table-cell-6 {
+    color: #000!important;
+}
+.flysand-container{
+    height: 45px;
+    background: rgba(255,255,255,.5);
+}
+/*首页背景颜色修改，字体颜色修改*/
+#help{
+    background: rgba(255,255,255,.3)!important;
+    color: #000!important;
+}
+.layui-col-md4 .layui-card-body{
+    background: rgba(255,255,255,.3)!important;
+    color: #000!important;
+}
+.layui-col-md4 .layui-table td{
+    color: #000!important;
+}
+.layui-table tr{
+    width: 100%!important;
+}
+.layui-table-view .layui-table{
+    width: 100%!important;
+}
+.layui-table-box .layui-table-header {
+    margin-right: 0!important;
+}
+
+/*列表显示*/
+#deviceName{
+    line-height: 46px!important;
+    color: #000!important;
+}
+#deviceNumber{
+    line-height: 49px!important;
+    background: transparent!important;
+    color: #000!important;
+    border: none!important;
+}

@@ -1,0 +1,39 @@
+背景百叶窗，背景会形成一个水波状每隔几秒移动一次，不可以有body背景，并且百叶的htmleaf-container应该层级低于body，负责会遮盖或无法显示
+body:
+<div class="htmleaf-container">
+    <div id="sections-wrapper">
+        <section class="show" data-img="/img/monitor/aquaculture/body.jpg"><!--初始加载页面背景-->
+        </section>
+        <section class="hide-bottom" data-img="/img/monitor/aquaculture/body.jpg"></section><!--水波第一次时替换的页面背景，图片可改-->
+        <!--可以有多个不同的图片加载，添加多个  class="hide-bottom" 的section即可，同时下面添加对应个数的-->
+        <!--<div class="section-thumbnail"></div>-->
+    </div>
+
+    <div class="sections-control">
+        <div class="section-thumbnail active"></div>
+        <div class="section-thumbnail"></div>
+    </div>
+</div>
+
+///////////////////////////////////////////////////////////////////////////////
+
+下面的两个js要放在body的下面优先加载
+    interaction.js
+    anime.min.js
+
+///////////////////////////////////////////////////////////////////////////////
+
+interaction.js：
+第六行 segmentLength 为设置将图片分为多少个百叶
+
+///////////////////////////////////////////////////////////////////////////////
+
+自己的js中添加如下方法即可
+var j=0;
+setInterval(function () {
+        $(".section-thumbnail:eq(" + j + ")").click();
+        j++;
+        if (j == $(".section-thumbnail").length) {
+            j = 0;
+        }
+    }, 15000);

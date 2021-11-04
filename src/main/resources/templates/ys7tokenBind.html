@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>精讯云-摄像头秘钥管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+
+</head>
+<style>
+
+</style>
+<body>
+
+
+<form class="layui-form">
+    <input type="text" name="hkTokenId" id="hkTokenId" th:value="*{data.hkToken.id}" style="display: none">
+    <input type="text" name="dhTokenId" id="dhTokenId" th:value="*{data.dhToken.id}" style="display: none">
+
+    <div class="layui-row">
+        <div class="layui-col-md12" style="text-align: center">
+            <div class="layui-form-item">
+                <div class="layui-inline" style="margin-top: 60px;">
+                    <label class="layui-form-label"><span class="camera" style="color: white">摄像头厂家:</span></label>
+                    <div class="layui-input-inline" style="width: 290px">
+                        <select name="cameraType" id="cameraType" lay-filter="cameraType">
+                            <option class="hk" value="1">海康</option>
+                            <option class="dh" value="2">大华</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline" style="">
+                    <label class="layui-form-label"><span style="color: white">appkey:</span></label>
+                    <div class="layui-input-inline" style="width: 290px">
+                        <input type="text" name="appkey" id="appkey" autocomplete="off"
+                               th:value="*{data.hkToken.appkey}"
+                               lay-verify="userName" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline" style="">
+                    <label class="layui-form-label"><span style="color: white">secret:</span></label>
+                    <div class="layui-input-inline" style="width: 290px">
+                        <input type="text" name="secret" id="secret" autocomplete="off" lay-verify="secret"
+                               th:value="*{data.hkToken.secret}"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="text-align:center;">
+        <input type="button" class="layui-btn" id="submit" onclick="bind()"
+               style="margin-top: 10px;">
+    </div>
+</form>
+
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script th:inline="javascript">
+
+    // let cameraType = $("#cameraTypeStr").val();
+    // if (cameraType) {
+    //     $("#cameraType").val(cameraType);
+    // }
+
+    $(".camera").text($.i18n.prop('camera'));
+    $(".dh").text($.i18n.prop('dh'));
+    $(".hk").text($.i18n.prop('hk'));
+    $("#submit").val($.i18n.prop('binding'));
+    let hkToken = [[${data.hkToken}]];
+    let dhToken = [[${data.dhToken}]];
+    console.log(hkToken);
+    console.log(dhToken);
+
+    var layer;
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form;
+        let cameraType = 0;
+        layer = layui.layer;
+        form.on('select(cameraType)', function () {
+            cameraType = $("#cameraType").val();
+            if (cameraType == 1) {
+                $("#appkey").val(hkToken.appkey);
+                $("#secret").val(hkToken.secret);
+            } else if (cameraType == 2) {
+                $("#appkey").val(dhToken.appkey);
+                $("#secret").val(dhToken.secret);
+            }
+        });
+    });
+
+    function bind() {
+        var cameraType = $("#cameraType").val();
+        var appkey = $("#appkey").val();
+        var secret = $("#secret").val();
+
+        console.log("cameraType: " + cameraType);
+        console.log("appkey: " + appkey);
+        console.log("secret: " + secret);
+        $.ajax({
+            type: "post",
+            url: "../cameraManage/bindToken",
+            data: {
+                cameraType: cameraType,
+                appkey: appkey,
+                secret: secret,
+            },
+            success: function (result) {
+                if (result.success) {
+                    layer.msg($.i18n.prop('success'));
+                    let cameraType = $("#cameraType").val();
+                    if (cameraType == 1) {
+                        hkToken.appkey = $("#appkey").val();
+                        hkToken.secret = $("#secret").val();
+                    } else if (cameraType == 2) {
+                        dhToken.appkey = $("#appkey").val();
+                        dhToken.secret = $("#secret").val();
+                    }
+                } else {
+                    layer.msg($.i18n.prop(result.msg));
+                }
+            },
+        });
+    }
+</script>
+</html>

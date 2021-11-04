@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+    <style>
+        body {
+            font-weight: normal;
+            height: 100%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .base-item {
+            display: flex;
+            text-align: center;
+            margin-top: 14px;
+            /*margin-left: 45px;*/
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            height: 100%;
+        }
+
+        .base-item span {
+            width: 140px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .base-item input {
+            width: 170px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            background-image: url(../../img/commend_btn.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 120px;
+            height: 35px;
+            border: 0px;
+            margin-left: 130px;
+            color: #5f4d6f;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<input id="type" th:value="${type}" hidden="hidden"/>
+<input type="text" style="display: none" id="lot_name" th:value="${bean.lotName}">
+<div class="container">
+    <input type="text" style="display: none" id="id" th:value="${bean.id}">
+    <input type="text" style="display: none" id="imgUrl_str" th:value="${bean.imgUrl}">
+    <div style="margin-left: 15px;">
+        <div class="base-item">
+            <span id="farmNameSpan">名称 : </span>
+            <input type="text" id="farmName" lay-verify="required" maxlength="16" th:value="${bean.farmName}"
+                   style="width: 170px"
+                   class="layui-input" placeholder="请输入基地名称">
+        </div>
+        <div class="base-item">
+            <span id="telSpan">联系方式 : </span>
+            <input type="text" id="tel" lay-verify="required" maxlength="16" th:value="${bean.tel}" style="width: 170px"
+                   class="layui-input" placeholder="请输入联系方式">
+        </div>
+
+        <div class="base-item">
+            <span id="farmAddressSpan">基地地址 : </span>
+            <input type="text" id="farmAddress" lay-verify="required" maxlength="16" th:value="${bean.farmAddress}"
+                   style="width: 170px"
+                   class="layui-input" placeholder="请输入基地地址">
+        </div>
+
+        <div class="base-item positionSpan" style="display: none">
+            <span id="input_positionSpan">经纬度 : </span>
+            <input type="text" lay-verify="required"
+                   autocomplete="off" th:value="*{bean.longitude}+','+*{bean.latitude}"
+                   disabled="disabled" id="input_position"
+                   class="layui-input" placeholder="点击右侧按钮选取地址">
+            <img src="../img/location_icon.png" onclick="selectPoint()" style="height: 33px">
+        </div>
+        <div class="base-item">
+            <span id="imgUrlSpan">基地图片 : </span>
+            <div class="add-uploading" id="imgUrl">
+                <img src="../static/img/aquaculture/add-pic_08.jpg" alt="" id="imgUrl_img"
+                     style="max-height: 127px; max-width: 200px">
+            </div>
+        </div>
+        <div class="base-item">
+            <button class="btn-primary" lay-submit="" id="save" style="margin-left: 40%"
+                    lay-filter="submit">保&nbsp;存
+            </button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/validation.js}" charset="utf-8"></script>
+</body>
+</html>
+<script>
+    let selectTemplateState = false;
+    if ($("#type").val() != "4" ) {
+        $(".typeCropsSpan").show();
+        selectTemplateState = false;
+        $(".positionSpan").show();
+    } else {
+        $(".typeLot").show();
+        selectTemplateState = true;
+        $(".typeCrop").show();
+
+    }
+
+
+
+    let selectName = $("#lot_name").val();
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    let layer, form, position = {lat: "0.0", lng: "0.0"};
+    let uploadUrl = '../demoAddress/uploadImg/';
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        layer = layui.layer;
+        form = layui.form;
+        form.on('submit(submit)', function (data) {
+            let id = $("#id").val(),
+                farmName = $("#farmName").val(),
+                farmAddress = $("#farmAddress").val(),
+                tel = $("#tel").val(),
+                irrigationDuration = $("#irrigationDuration").val(),
+                imgUrl_str = $("#imgUrl_str").val(),
+                type = $("#type").val(),
+                lot_id = $("#select_lot").val(),
+                lot_name = $('#select_lot option:selected').text(),
+                crops = $("#crops").val(),
+                farmUserName = $("#farmUserName").val();
+
+            if (farmName.length < 1) {
+                return layer.msg('名称不能为空');
+            }
+
+
+            if (farmAddress.length < 1) {
+                return layer.msg('地址不能为空');
+            }
+
+            if (tel.length < 1) {
+                return layer.msg('联系方式不能为空');
+            }
+            if (!checkTel(tel)) {
+                return layer.msg('请检查手机号码格式');
+            }
+
+            if (imgUrl_str.length < 1) {
+                return layer.msg('基地图片不能为空');
+            }
+            $.post("../newFarmInfo/save",
+                {
+                    "id": id,
+                    "farmName": farmName,
+                    "farmAddress": farmAddress,
+                    "tel": tel,
+                    "lotId": lot_id,
+                    "lotName": lot_name,
+                    "irrigationDuration": irrigationDuration,
+                    "imgUrl": imgUrl_str,
+                    "longitude": position.lng,
+                    "latitude": position.lat,
+                    "crops": crops,
+                    "farmUserName":farmUserName
+                },
+                function (res) {
+                    if (res.state == 'success') {
+                        parent.layer.msg($.i18n.prop(res.state));
+                        parent.$('.layui-laypage-btn').click();
+                        parent.layer.close(myIframe);
+                    } else {
+                        layer.msg($.i18n.prop(res.state), {icon: 2})
+                    }
+                });
+
+            // myIframe.render({
+            //     elem: '#table'
+            //     , url: '../newFarmInfo/getList'
+            //     , toolbar: '#toolbar1'
+            //     , title: ''
+            //     , cols: [tableData]
+            //     , page: true,
+            //     request: {limitName: 'size'},
+            //     response: {
+            //         statusCode: 'success'
+            //     },
+            //     parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+            //         return {
+            //             "code": res.state, //解析接口状态
+            //             "msg": res.msg, //解析提示文本
+            //             "count": res.count, //解析数据长度
+            //             "data": res.datas,//解析数据列表
+            //         };
+            //     }
+            // });
+        });
+    });
+    layui.use('upload', function () {
+        let upload = layui.upload;
+        //执行实例
+        let uploadInst = upload.render({
+            elem: '#imgUrl'
+            , url: uploadUrl
+            , done: function (res) {
+                if (res.state == 'success') {
+                    $("#imgUrl_str").val(res.msg);
+                    $('#imgUrl_img').attr('src', res.msg);
+                } else {
+                    layer.msg('上传失败');
+                }
+            }
+        });
+        if (selectTemplateState) {
+            findLotList(selectName);
+        }
+    });
+
+    let imgStr = $("#imgUrl_str").val();
+    if (imgStr != null && imgStr.length > 0) {
+        $('#imgUrl_img').attr('src', imgStr);
+    }
+
+    function selectPoint() {
+        var content = "../selectPoint"
+        var positionValue = $('#input_position').val();
+        if (positionValue != '' && positionValue != null && positionValue != "0.0,0.0") {
+            let location = positionValue.split(',');
+            content += "?longitude=" + location[0] + "&latitude=" + location[1];
+        }
+        layer.open({
+            type: 2,
+            title: false,
+            closeBtn: false,
+            area: ['600px', '400px'],
+            shade: 0.2,
+            id: 'LAY_layuipro',
+            btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+            btnAlign: 'c',
+            moveType: 1,
+            content: content,
+            yes: function () {
+                var iframeWin = $("div.layui-layer-content > iframe")[0].contentWindow; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                position = iframeWin.getPoint(); //调用子页面的form_submit函数
+                $('#input_position').val(position);
+                layer.closeAll();
+            }
+        });
+    }
+
+    /**
+     * 获取农场地块点击事件
+     * @param selectName
+     */
+    function findLotList(selectName) {
+
+        selectTemplateState = false;
+        $.ajax({
+            url: "../lot/in_getLotList",
+            dataType: "json",
+            type: "post",
+            timeout: 30000,
+            error: function (data, type, err) {
+                layer.closeAll('loading');
+                layer.msg($.i18n.prop('fail'), {
+                    offset: '6px'
+                });
+            },
+            success: function (data) {
+                // layer.closeAll('loading');
+                var html = '', form = layui.form;
+                if (data.datas != null) {
+                    $.each(data.datas, function (index, lot) {
+                        if (lot.lotName == selectName) {
+                            html += "<option value='" + lot.id + "' selected = 'selected' >" + lot.lotName + "</option>";
+                        } else {
+                            html += "<option value='" + lot.id + "'>" + lot.lotName + "</option>";
+                        }
+                    });
+                    $("select[name='quiz']").append(html);
+                    //append后必须从新渲染
+                    layui.form.render('select');
+                    console.log(form);
+                }
+
+            }
+        });
+    }
+</script>

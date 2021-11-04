@@ -1,0 +1,1287 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+#conter {
+    width: 100vw;
+    height: 100vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/conterbg.jpg") no-repeat;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+#header {
+    width: 100vw;
+    height: 9.16666667vh;
+    position: relative;
+    box-sizing: border-box;
+    padding-top: 0.52083333vw;
+}
+#header .header-logo {
+    width: 7.03125vw;
+    height: 3.98148148vh;
+    position: absolute;
+    left: 1.5625vw;
+    top: 3.24074074vh;
+}
+#header .header-change {
+    width: 5.41666667vw;
+    height: 3.33333333vh;
+    position: absolute;
+    right: 1.82291667vw;
+    top: 3.24074074vh;
+    cursor: pointer;
+}
+#header img {
+    float: left;
+    width: 100%;
+}
+#header .header-title {
+    width: 29.6875vw;
+    margin: 0 auto;
+}
+#title {
+    width: 100vw;
+    height: 6.38888889vh;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 1.97916667vw;
+}
+#title .title-list {
+    width: 31.19791667vw;
+    height: 6.38888889vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    line-height: 6.38888889vh;
+    font-size: 1.30208333vw;
+    color: #fff;
+}
+#title .title-list .title-list-span {
+    color: #01faff;
+    font-size: 1.45833333vw;
+    margin: 0 0.26041667vw;
+}
+#title .title-list .title-list-yeas {
+    margin: 0 0.26041667vw;
+}
+#title .title-list .title-list-spanred {
+    color: red;
+    font-size: 1.45833333vw;
+    margin: 0 0.26041667vw;
+}
+#main {
+    width: 96.30208333vw;
+    height: 74.25925926vh;
+    margin: 0 auto;
+    margin-top: 2.77777778vh;
+    display: flex;
+    justify-content: space-between;
+}
+#main .main-map {
+    width: 48.07291667vw;
+    height: 74.25925926vh;
+    box-sizing: border-box;
+    position: relative;
+}
+#main .main-map .main-map-bnt-list {
+    position: absolute;
+    z-index: 999;
+    bottom: 0;
+    left: 0;
+    width: 25vw;
+    height: 3.24074074vh;
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 0.625vw;
+    background: -webkit-linear-gradient(top, rgba(10, 35, 75, 0.8), rgba(32, 71, 136, 0.5));
+    background: -o-linear-gradient(top, rgba(10, 35, 75, 0.8), rgba(32, 71, 136, 0.5));
+    background: -moz-linear-gradient(top, rgba(10, 35, 75, 0.8), rgba(32, 71, 136, 0.5));
+    background: -mos-linear-gradient(top, rgba(10, 35, 75, 0.8), rgba(32, 71, 136, 0.5));
+    background: linear-gradient(top, rgba(10, 35, 75, 0.8), rgba(32, 71, 136, 0.5));
+}
+#main .main-map .main-map-bnt-list .mainMapBnt {
+    width: 3.64583333vw;
+    height: 3.24074074vh;
+    line-height: 3.24074074vh;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+#main .main-map .main-map-bnt-list .mainMapBnt p {
+    display: block;
+}
+#main .main-map .main-map-bnt-list .mainMapBntbig {
+    width: 4.6875vw;
+    height: 3.24074074vh;
+    line-height: 3.24074074vh;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+#main .main-map .main-map-bnt-list .mainMapBnt-icon {
+    width: 1.04166667vw;
+    height: 1.85185185vh;
+    margin-right: 0.26041667vw;
+}
+#main .main-map .main-map-bnt-list .mainMapBnt-icon img {
+    width: 100%;
+    float: left;
+    margin-top: -0.27777778vh;
+}
+#main .main-map #map {
+    width: 48.07291667vw;
+    height: 74.25925926vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+#main .main-int {
+    width: 47.13541667vw;
+    height: 75.92592593vh;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+#main .main-int .main-int-list {
+    width: 14.84375vw;
+    height: 36.57407407vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/main-int-list.png") no-repeat;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+    padding: 0.88541667vw;
+    position: relative;
+}
+#main .main-int .main-int-list .main-int-publi-title {
+    width: 13.17708333vw;
+    height: 4.16666667vh;
+    position: relative;
+}
+#main .main-int .main-int-list .main-int-publi-title h4 {
+    font-weight: normal;
+}
+#main .main-int .main-int-list .main-int-publi-title .title-top {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+#main .main-int .main-int-list .main-int-publi-title .title-top h4 {
+    font-size: 0.83333333vw;
+    white-space: nowrap;
+    color: #84b5ff;
+}
+#main .main-int .main-int-list .main-int-publi-title .title-top p {
+    font-size: 0.625vw;
+    transform: scale(0.6);
+    white-space: nowrap;
+    position: absolute;
+    top: 0.46296296vh;
+    right: -1.35416667vw;
+}
+#main .main-int .main-int-list .main-int-publi-title .title-botton {
+    width: 13.17708333vw;
+    font-size: 0.52083333vw;
+    color: #ffffff;
+    text-align: left;
+    transform: scale(0.8);
+    margin-left: -1.30208333vw;
+}
+#main .main-int .main-int-list .main-int-publi-title .change-bnt-list {
+    position: absolute;
+    top: 0.46296296vh;
+    right: -1.45833333vw;
+    transform: scale(0.8);
+    display: flex;
+    font-size: 0.625vw;
+    cursor: pointer;
+}
+#main .main-int .main-int-list .main-int-publi-title .change-bnt-list .change-bnt {
+    margin-left: 0.3125vw;
+    padding: 0.18518519vh 0.26041667vw;
+    border-radius: 0.26041667vw;
+    color: #00a0ea;
+    border-color: #00a0ea;
+}
+#main .main-int .main-int-list .main-int-publi-title .change-bnt-list .change-bnt-color {
+    color: #fff;
+    border: 1px solid #fff;
+}
+#main .main-int .main-int-list .mint-content {
+    width: 13.17708333vw;
+}
+#main .main-int .main-int-list .mint-content .main-content-list {
+    margin-top: 0.92592593vh;
+    width: 13.17708333vw;
+    height: 3.51851852vh;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.625vw;
+    position: relative;
+    color: #fff;
+}
+#main .main-int .main-int-list .mint-content .main-content-list .main-content-list-name {
+    width: 3.125vw;
+    text-align: left;
+}
+#main .main-int .main-int-list .mint-content .main-content-list .main-content-list-schedule {
+    width: 6.25vw;
+    height: 1.38888889vh;
+    background: rgba(255, 255, 255, 0.31);
+    position: relative;
+}
+#main .main-int .main-int-list .mint-content .main-content-list .main-content-list-schedule .main-content-list-schedule-colorRed {
+    width: 3.125vw;
+    height: 1.38888889vh;
+    background: red;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+#main .main-int .main-int-list .mint-content .main-content-list .main-content-list-schedule .main-content-list-schedule-colorBlud {
+    width: 3.64583333vw;
+    height: 1.38888889vh;
+    top: 0;
+    left: 0;
+    background: linear-gradient(-45deg, #00fcff, #3965ff, #00ffc6, #00ff84);
+    background-size: 400% 400%;
+    animation: gradientBG 5s ease infinite;
+}
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
+
+#main .main-int .main-int-list .mint-content .main-content-list .main-content-list-unit {
+    width: 3.125vw;
+    transform: scale(0.8);
+    text-align: left;
+}
+#main .main-int .main-int-list .mint-weather {
+    width: 13.17708333vw;
+    margin-top: 2.46296296vh;
+}
+#main .main-int .main-int-list .mint-weather .mint-weather-top {
+    width: 9.16666667vw;
+    height: 14.24074074vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/tianqi.png") no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-top: 5.61111111vh;
+    color: #fff;
+}
+#main .main-int .main-int-list .mint-weather .mint-weather-top .mint-weather-top-num {
+    font-size: 1.30208333vw;
+    text-align: center;
+    line-height: 5.09259259vh;
+}
+#main .main-int .main-int-list .mint-weather .mint-weather-top .mint-weather-top-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.64583333vw;
+    height: 1.85185185vh;
+    margin: 0 auto;
+    margin-bottom: 0.46296296vh;
+}
+#main .main-int .main-int-list .mint-weather .mint-weather-top .mint-weather-top-type-icon {
+    margin-right: 3px;
+}
+#main .main-int .main-int-list .mint-weather .mint-weather-top .mint-weather-top-iconfooter {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    transform: scale(0.8);
+}
+#main .main-int .main-int-list .mint-weather .mint-weather-top .mint-weather-top-type-text {
+    white-space: nowrap;
+}
+#main .main-int .main-int-list .mint-weather .main-content-list {
+    width: 13.17708333vw;
+    height: 3.24074074vh;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.625vw;
+    position: relative;
+    color: #fff;
+}
+#main .main-int .main-int-list .mint-weather .main-content-list .main-content-list-name {
+    width: 3.125vw;
+    transform: scale(0.8);
+    text-align: left;
+}
+#main .main-int .main-int-list .mint-weather .main-content-list .main-content-list-schedule {
+    width: 6.25vw;
+    height: 0.92592593vh;
+    background: rgba(255, 255, 255, 0.31);
+    position: relative;
+}
+#main .main-int .main-int-list .mint-weather .main-content-list .main-content-list-schedule .main-content-list-schedule-colorRed {
+    width: 3.125vw;
+    height: 0.92592593vh;
+    background: red;
+    top: 0;
+    left: 0;
+}
+#main .main-int .main-int-list .mint-weather .main-content-list .main-content-list-schedule .main-content-list-schedule-colorBlud {
+    width: 3.64583333vw;
+    height: 0.92592593vh;
+    background: linear-gradient(90deg, #00b4ff, #00fcff);
+    top: 0;
+    left: 0;
+}
+#main .main-int .main-int-list .mint-weather .main-content-list .main-content-list-unit {
+    width: 3.125vw;
+    transform: scale(0.8);
+    text-align: left;
+}
+#main .main-int .main-int-list .mint-weather .mint-weather-list {
+    width: 13.07291667vw;
+    height: 7.68518519vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+    margin-top: 3vh;
+}
+#main .main-int .main-int-list .mint-weather .mint-weather-list .mint-weather-list-conter-icon {
+    width: 0.78125vw;
+    height: 1.2962963vh;
+    margin: 0.46296296vh auto;
+}
+#main .main-int .main-int-list .mint-weather .mint-weather-list .mint-weather-list-conter-text {
+    line-height: 3.24074074vh;
+    transform: scale(0.8);
+    margin-top: 1.6296296vh;
+}
+#main .main-int .main-int-list .mint-weather .mint-weather-list .mint-weather-list-conter-date {
+    line-height: 1.38888889vh;
+    transform: scale(0.8);
+}
+#main .main-int .main-int-list .mint-ranking {
+    margin-top: 1.38888889vh;
+    width: 13.07291667vw;
+}
+#main .main-int .main-int-list .mint-ranking .mint-ranking-list {
+    width: 13.07291667vw;
+    height: 3.24074074vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#main .main-int .main-int-list .mint-ranking .mint-ranking-list .mint-ranking-list-icon {
+    width: 0.98958333vw;
+}
+#main .main-int .main-int-list .mint-ranking .mint-ranking-list .mint-ranking-list-num {
+    width: 0.98958333vw;
+    height: 1.75925926vh;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    line-height: 1.75925926vh;
+    border-radius: 50%;
+    font-size: 0.625vw;
+}
+#main .main-int .main-int-list .mint-ranking .mint-ranking-list .mint-ranking-list-text {
+    width: 9.89583333vw;
+    transform: scale(0.8);
+    color: #7eaef8;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#main .main-int .main-int-list .mint-ranking .mint-ranking-list .mint-ranking-list-int {
+    width: 10vw;
+    transform: scale(0.8);
+    color: #02c6dc;
+}
+#main .main-int .main-int-list .mint-progresChart {
+    height: 28.7037037vh;
+    width: 13.07291667vw;
+}
+#main .main-int .main-int-list .mint-progresChart #progresChart-date {
+    width: 8.64583333vw;
+    height: 2.77777778vh;
+    margin: 0 auto;
+    margin-top: 1.11111111vh;
+}
+#main .main-int .main-int-list .mint-progresChart #progresChart-date input {
+    width: 8.64583333vw;
+    height: 2.77777778vh;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 2.77777778vh;
+    display: inline-block;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    font-size: 0.625vw;
+}
+#main .main-int .main-int-list .mint-progresChart #progresChart {
+    width: 11.89583333vw;
+    height: 21.59259259vh;
+    margin: 0 auto;
+}
+#main .main-int .main-int-list .mint-progresChart #progresChartBnt {
+    width: 13.07291667vw;
+    height: 7.40740741vh;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+#main .main-int .main-int-list .mint-progresChart #progresChartBnt .progresChartBnt {
+    color: #709be0;
+    border-radius: 0.26041667vw;
+    border: 1px solid #709be0;
+    height: 2.31481481vh;
+    line-height: 2.31481481vh;
+    padding: 0 0.26041667vw;
+    margin: 0 0.26041667vw;
+    cursor: pointer;
+    font-size: 0.625vw;
+}
+#main .main-int .main-int-list .mint-progresChart #progresChartBnt .progresChartBnt:hover {
+    color: #fff;
+    background: #01bafd;
+}
+#main .main-int .main-int-list .mint-progresChart #progresChartBnt .progresChartBntac {
+    color: #fff;
+    background: #01bafd;
+}
+#main .main-int .main-int-list .mint-curveGraph {
+    height: 28.7037037vh;
+    width: 13.07291667vw;
+}
+#main .main-int .main-int-list .mint-curveGraph .progresChart-date {
+    width: 8.64583333vw;
+    height: 2.77777778vh;
+    margin: 0 auto;
+    margin-top: 1.11111111vh;
+}
+#main .main-int .main-int-list .mint-curveGraph .progresChart-date input {
+    width: 8.64583333vw;
+    height: 2.77777778vh;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 2.77777778vh;
+    display: inline-block;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    font-size: 0.625vw;
+}
+#main .main-int .main-int-list .mint-curveGraph #curveGraph {
+    width: 14.84375vw;
+    height: 30.57407407vh;
+    position: absolute;
+    top: 6vh;
+    left: 0;
+}
+#main .main-int .main-int-list .mint-curveGraph .curveGraphBnt {
+    width: 13.07291667vw;
+    height: 7.40740741vh;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+#main .main-int .main-int-list .mint-curveGraph .curveGraphBnt .progresChartBnt {
+    color: #709be0;
+    border-radius: 0.26041667vw;
+    border: 1px solid #709be0;
+    height: 2.31481481vh;
+    line-height: 2.31481481vh;
+    padding: 0 0.26041667vw;
+    margin: 0 0.26041667vw;
+    cursor: pointer;
+    font-size: 0.625vw;
+}
+#main .main-int .main-int-list .mint-curveGraph .curveGraphBnt .progresChartBnt:hover {
+    color: #fff;
+    background: #01bafd;
+}
+#main .main-int .main-int-list .mint-curveGraph .curveGraphBnt .progresChartBntac {
+    color: #fff;
+    background: #01bafd;
+}
+#footer {
+    width: 92.58333333vw;
+    height: 3.7037037vh;
+    position: fixed;
+    bottom: 0;
+    left: 1.5625vw;
+    color: #fff;
+}
+#footer ul {
+    width: 92.70833333vw;
+    height: 3.7037037vh;
+    display: flex;
+}
+#footer ul li {
+    width: 10.57291667vw;
+    height: 3.7037037vh;
+    line-height: 4.44444444vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/libg.png") no-repeat;
+    background-size: 100% 100%;
+    font-size: 0.78125vw;
+    cursor: pointer;
+    margin-left: -0.15625vw;
+}
+#footer ul li p {
+    margin-left: -0.78125vw;
+    display: inline-block;
+}
+#footer ul li:hover {
+    background: url("/static/img/monitor/atmosphereReseauSystem/lihoverbg.png") no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+#rankingSystem {
+    width: 82.44791667vw;
+    height: 75.55555556vh;
+    box-sizing: border-box;
+    padding: 0.92592593vh 1.45833333vw;
+    position: fixed;
+    left: 7.96875vw;
+    top: 17.59259259vh;
+    display: none;
+    z-index: 9999;
+    background: -webkit-linear-gradient(top, #061d47, #264e94);
+    background: -o-linear-gradient(top, #061d47, #264e94);
+    background: -moz-linear-gradient(top, #061d47, #264e94);
+    background: -mos-linear-gradient(top, #061d47, #264e94);
+    background: linear-gradient(top, #061d47, #264e94);
+}
+.selectMapclass{
+    position: fixed!important;
+    top: 1vh!important;
+    right: 2vw!important;
+}
+#rankingSystem #rankingSystemDELE {
+    width: 1.19791667vw;
+    height: 0.46296296vh;
+    position: absolute;
+    top: 1.38888889vh;
+    right: 1.04166667vw;
+    background: #70e3ff;
+    cursor: pointer;
+}
+#rankingSystem .rankingSystem-header {
+    width: 38.54166667vw;
+    height: 6.11111111vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+#rankingSystem .rankingSystem-header .rankingSystem-header-startTime,
+#rankingSystem .rankingSystem-header .rankingSystem-header-endTime {
+    width: 9.375vw;
+    height: 3.51851852vh;
+    margin-right: 1.04166667vw;
+}
+#rankingSystem .rankingSystem-header .rankingSystem-header-startTime input,
+#rankingSystem .rankingSystem-header .rankingSystem-header-endTime input {
+    width: 9.375vw;
+    height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    font-size: 0.625vw;
+}
+#rankingSystem .rankingSystem-header .rankingSystem-header-ComboBox {
+    width: 8.33333333vw;
+    height: 3.51851852vh;
+}
+#rankingSystem .rankingSystem-header .rankingSystem-header-ComboBox select {
+    width: 8.33333333vw;
+    height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    border: none;
+    font-size: 0.625vw;
+}
+#selectMap{
+    width: 8.33333333vw;
+    height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    border: none;
+    font-size: 0.625vw;
+}
+#selectMap option{
+    color: #000;
+}
+#rankingSystem .rankingSystem-header .rankingSystem-header-ComboBox select option {
+    color: #000;
+}
+#rankingSystem .rankingSystem-header .rankingSystem-header-Bnt {
+    width: 1.97916667vw;
+    height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/switchBnt.png") no-repeat;
+    background-size: 100% 100%;
+    margin-left: 1.5625vw;
+    cursor: pointer;
+}
+#rankingSystem .rankingSystem-header .rankingSystem-header-Bnt img {
+    width: 100%;
+    transform: scale(0.5);
+    margin-top: -0.27777778vh;
+}
+#rankingSystem .main-int-publi-title {
+    width: 13.17708333vw;
+    height: 4.16666667vh;
+}
+#rankingSystem .main-int-publi-title h4 {
+    font-weight: normal;
+}
+#rankingSystem .main-int-publi-title .title-top {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+#rankingSystem .main-int-publi-title .title-top h4 {
+    font-size: 1.04166667vw;
+    white-space: nowrap;
+    color: #84b5ff;
+}
+#rankingSystem .main-int-publi-title .title-top p {
+    font-size: 0.625vw;
+    transform: scale(0.6);
+    white-space: nowrap;
+    position: absolute;
+    top: 0.46296296vh;
+    right: -1.35416667vw;
+}
+#rankingSystem .main-int-publi-title .title-botton {
+    width: 13.17708333vw;
+    font-size: 0.52083333vw;
+    color: #ffffff;
+    text-align: left;
+    transform: scale(0.8);
+    margin-left: -1.30208333vw;
+}
+#rankingSystem .rankingSystem-mint {
+    display: flex;
+    justify-content: space-between;
+}
+#rankingSystem .rankingSystem-mint .mint-ranking {
+    width: 80.07291667vw;
+    height: 62vh;
+    display: flex;
+    flex-direction:column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+#rankingSystem .rankingSystem-mint .mint-ranking .mint-ranking-list {
+    width: 10.07291667vw;
+    height: 3.24074074vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 1vw;
+}
+#rankingSystem .rankingSystem-mint .mint-ranking .mint-ranking-list .mint-ranking-list-icon {
+    width: 0.98958333vw;
+}
+#rankingSystem .rankingSystem-mint .mint-ranking .mint-ranking-list .mint-ranking-list-num {
+    width: 0.98958333vw;
+    height: 1.75925926vh;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    line-height: 1.75925926vh;
+    border-radius: 50%;
+    font-size: 0.625vw;
+}
+#rankingSystem .rankingSystem-mint .mint-ranking .mint-ranking-list .mint-ranking-list-text {
+    width: 8.33333333vw;
+    transform: scale(0.8);
+    color: #7eaef8;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#rankingSystem .rankingSystem-mint .mint-ranking .mint-ranking-list .mint-ranking-list-int {
+    width: 3.125vw;
+    transform: scale(0.8);
+    color: #02c6dc;
+}
+#monitorDivisorSystem {
+    width: 82.44791667vw;
+    height: 75.55555556vh;
+    box-sizing: border-box;
+    padding: 0.92592593vh 1.45833333vw;
+    position: fixed;
+    left: 7.96875vw;
+    top: 17.59259259vh;
+    display: none;
+    z-index: 9999;
+    background: -webkit-linear-gradient(top, #061d47, #264e94);
+    background: -o-linear-gradient(top, #061d47, #264e94);
+    background: -moz-linear-gradient(top, #061d47, #264e94);
+    background: -mos-linear-gradient(top, #061d47, #264e94);
+    background: linear-gradient(top, #061d47, #264e94);
+}
+#monitorDivisorSystem #monitorDivisorSystemDELE,#weatherSystemDELE {
+    width: 1.19791667vw;
+    height: 0.46296296vh;
+    position: absolute;
+    top: 1.38888889vh;
+    right: 1.04166667vw;
+    background: #70e3ff;
+    cursor: pointer;
+}
+#monitorDivisorSystem .rankingSystem-header {
+    width: 33.33333333vw;
+    height: 6.11111111vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+#monitorDivisorSystem .rankingSystem-header .rankingSystem-header-startTime,
+#monitorDivisorSystem .rankingSystem-header .rankingSystem-header-endTime {
+    width: 9.375vw;
+    height: 3.51851852vh;
+    margin-right: 1.04166667vw;
+}
+#monitorDivisorSystem .rankingSystem-header .rankingSystem-header-startTime input,
+#monitorDivisorSystem .rankingSystem-header .rankingSystem-header-endTime input {
+    width: 9.375vw;
+    height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    font-size: 0.625vw;
+}
+#monitorDivisorSystem .rankingSystem-header .rankingSystem-header-ComboBox {
+    width: 8.33333333vw;
+    height: 3.51851852vh;
+}
+#monitorDivisorSystem .rankingSystem-header .rankingSystem-header-ComboBox select {
+    width: 8.33333333vw;
+    height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    border: none;
+    font-size: 0.625vw;
+}
+#monitorDivisorSystem .rankingSystem-header .rankingSystem-header-ComboBox select option {
+    color: #000;
+}
+#monitorDivisorSystem .rankingSystem-header .rankingSystem-header-Bnt {
+    width: 1.97916667vw;
+    height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/switchBnt.png") no-repeat;
+    background-size: 100% 100%;
+    margin-left: 1.5625vw;
+    cursor: pointer;
+}
+#monitorDivisorSystem .rankingSystem-header .rankingSystem-header-Bnt img {
+    width: 100%;
+    transform: scale(0.5);
+    margin-top: -0.27777778vh;
+}
+#monitorDivisorSystem .monitorDivisorSystem-chart {
+    width: 80.20833333vw;
+    height: 62.96296296vh;
+    display: flex;
+    flex-wrap: wrap;
+    color: #fff;
+}
+#monitorDivisorSystem .monitorDivisorSystem-chart .monitorDivisorSystem-chart-list-name {
+    text-align: center;
+    font-size: 0.625vw;
+    height: 2.31481481vh;
+    line-height: 2.31481481vh;
+}
+#monitorDivisorSystem .monitorDivisorSystem-chart .monitorDivisorSystem-chart-list {
+    width: 26.5625vw;
+    height: 30.55555556vh;
+    margin-bottom: 1.38888889vh;
+}
+#monitorDivisorSystem .monitorDivisorSystem-chart .monitorDivisorSystem-chart-list-main {
+    width: 26.5625vw;
+    height: 28.24074074vh;
+}
+
+
+#weatherSystem{
+    width: 82.44791667vw;
+    height: 75.55555556vh;
+    position: fixed;
+    left: 7.96875vw;
+    top: 17.59259259vh;
+    display: none;
+    z-index: 999;
+}
+
+#atmosphereSystem {
+    width: 82.44791667vw;
+    height: 75.55555556vh;
+    box-sizing: border-box;
+    padding: 0.92592593vh 1.45833333vw;
+    position: fixed;
+    left: 7.96875vw;
+    top: 17.59259259vh;
+    display: none;
+    z-index: 9999;
+    background: -webkit-linear-gradient(top, #061d47, #264e94);
+    background: -o-linear-gradient(top, #061d47, #264e94);
+    background: -moz-linear-gradient(top, #061d47, #264e94);
+    background: -mos-linear-gradient(top, #061d47, #264e94);
+    background: linear-gradient(top, #061d47, #264e94);
+}
+#atmosphereSystem #atmosphereSystemDELE {
+    width: 1.19791667vw;
+    height: 0.46296296vh;
+    position: absolute;
+    top: 1.38888889vh;
+    right: 1.04166667vw;
+    background: #70e3ff;
+    cursor: pointer;
+}
+#atmosphereSystem .rankingSystem-header {
+    width: 48.95833333vw;
+    height: 6.11111111vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-startTime,
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-endTime {
+    width: 9.375vw;
+    height: 3.51851852vh;
+    margin-right: 1.04166667vw;
+}
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-startTime input,
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-endTime input {
+    width: 9.375vw;
+    height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    font-size: 0.625vw;
+}
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-ComboBox {
+    width: 8.33333333vw;
+    height: 3.51851852vh;
+}
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-ComboBox select {
+    width: 8.33333333vw;
+    height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    border: none;
+    font-size: 0.625vw;
+}
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-ComboBox select option {
+    color: #000;
+}
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-Bnt,
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-Bntweek,
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-Bntbmonth,
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-Bntyeasr {
+    width: 1.97916667vw;
+    height: 3.51851852vh;
+    line-height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/switchBnt.png") no-repeat;
+    background-size: 100% 100%;
+    margin-left: 1.5625vw;
+    cursor: pointer;
+    color: #5ec1e0;
+}
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-Bnt img,
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-Bntweek img,
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-Bntbmonth img,
+#atmosphereSystem .rankingSystem-header .rankingSystem-header-Bntyeasr img {
+    width: 100%;
+    transform: scale(0.5);
+    margin-top: -0.27777778vh;
+}
+#atmosphereSystem #atmosphereSystemChart {
+    width: 79.6875vw;
+    height: 28.7037037vh;
+}
+#atmosphereSystem .atmosphereSystem-mint {
+    width: 79.16666667vw;
+    height: 34.25925926vh;
+    display: flex;
+    position: relative;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-l {
+    width: 27.08333333vw;
+    height: 34.25925926vh;
+    display: flex;
+    justify-content: space-between;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-l .mint-ranking {
+    margin-top: 1.38888889vh;
+    width: 13.07291667vw;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-l .mint-ranking .mint-ranking-list {
+    width: 13.07291667vw;
+    height: 3.24074074vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 0.78125vw;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-l .mint-ranking .mint-ranking-list .mint-ranking-list-icon {
+    width: 0.98958333vw;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-l .mint-ranking .mint-ranking-list .mint-ranking-list-num {
+    width: 0.98958333vw;
+    height: 1.75925926vh;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    line-height: 1.75925926vh;
+    border-radius: 50%;
+    font-size: 0.625vw;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-l .mint-ranking .mint-ranking-list .mint-ranking-list-text {
+    width: 9.89583333vw;
+    transform: scale(0.8);
+    color: #7eaef8;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-l .mint-ranking .mint-ranking-list .mint-ranking-list-int {
+    width: 3.125vw;
+    transform: scale(0.8);
+    color: #02c6dc;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-r {
+    position: absolute;
+    top: 1.38888889vh;
+    right: 22.39583333vw;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-r .atmosphereSystem-mint-r-list {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.625vw;
+    width: 31.25vw;
+    line-height: 3.33333333vh;
+    transform: scale(0.8);
+    color: #fff;
+}
+.atmosphereSystem-mint-r-list:hover{
+    cursor: pointer;
+    background: #0C9082;
+}
+.atmosphereSystem-mint-r-list:hover p{
+    color: #fff!important;
+}
+.mint-ranking-list:hover{
+    cursor: pointer;
+    background: #0C9082;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-r .atmosphereSystem-mint-r-list .color {
+    color: #0a79ff;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-ra {
+    position: absolute;
+    top: 1.38888889vh;
+    right: -3.125vw;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-ra .atmosphereSystem-mint-r-list {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.625vw;
+    width: 31.25vw;
+    line-height: 3.33333333vh;
+    transform: scale(0.8);
+    color: #fff;
+}
+#atmosphereSystem .atmosphereSystem-mint .atmosphereSystem-mint-ra .atmosphereSystem-mint-r-list .color {
+    color: #0a79ff;
+}
+#equipmentSystem {
+    width: 29.16666667vw;
+    height: 74.07407407vh;
+    box-sizing: border-box;
+    padding: 1.2037037vh 1.51041667vw;
+    position: fixed;
+    left: 0;
+    top: 18.42592593vh;
+    display: none;
+    z-index: 9999;
+    background: -webkit-linear-gradient(top, #061d47, #264e94);
+    background: -o-linear-gradient(top, #061d47, #264e94);
+    background: -moz-linear-gradient(top, #061d47, #264e94);
+    background: -mos-linear-gradient(top, #061d47, #264e94);
+    background: linear-gradient(top, #061d47, #264e94);
+    color: #fff;
+}
+#equipmentSystem #equipmentSystemDELE {
+    width: 1.19791667vw;
+    height: 0.46296296vh;
+    position: absolute;
+    top: 1.38888889vh;
+    right: 1.04166667vw;
+    background: #70e3ff;
+    cursor: pointer;
+}
+#equipmentSystem .rankingSystem-header-ComboBox {
+    width: 8.33333333vw;
+    height: 3.51851852vh;
+}
+#equipmentSystem .rankingSystem-header-ComboBox select {
+    width: 8.33333333vw;
+    height: 3.51851852vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    border: none;
+    font-size: 0.625vw;
+}
+#equipmentSystem .rankingSystem-header-ComboBox select option {
+    color: #000;
+}
+#equipmentSystem .equipmentSystem-title {
+    font-size: 0.625vw;
+    line-height: 2.77777778vh;
+}
+#equipmentSystem #equipmentSystemChart {
+    width: 26.82291667vw;
+    height: 27.77777778vh;
+    margin: 0 auto;
+}
+.equipmentSystemLIST{
+    margin-top: 1vh;
+}
+#equipmentSystem .equipmentSystem-list-title {
+    width: 25.52083333vw;
+    height: 4.16666667vh;
+    background: url("/static/img/monitor/atmosphereReseauSystem/title-list-bg.png") no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    font-size: 0.625vw;
+    justify-content: space-around;
+}
+#equipmentSystem .equipmentSystem-list-title p:nth-child(2) {
+    width: 13.02083333vw;
+}
+#equipmentSystem .equipmentSystem-list-title p:nth-child(1) {
+    width: 28.77083333vw;
+}
+#equipmentSystem .equipmentSystem-list-title p:nth-child(3) {
+    width: 4.16666667vw;
+}
+#equipmentSystem .equipmentSystem-list-title p {
+    text-align: center;
+    font-size: 12px;
+}
+#equipmentSystem .equipmentSystem-list-main-li {
+    width: 25.52083333vw;
+    height: 10.7037037vh;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    font-size: 0.625vw;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.equipmentSystem-list-main-li-list{
+    width: 12vw;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.equipmentSystem-list-main-li-icon{
+    width: 1vw;
+    height: 1vw;
+    margin-right: 0.5vw;
+}
+.equipmentSystem-list-main-li-icon img{
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+.equipmentSystem-list-main-li-text{
+    text-align: left;
+}
+
+
+
+#equipmentSystem .equipmentSystem-list-main-li p {
+    text-align: center;
+}
+#equipmentSystem .equipmentSystem-list-main-li p:nth-child(2) {
+    width: 18.02083333vw;
+}
+#equipmentSystem .equipmentSystem-list-main-li p:nth-child(1) {
+    width: 6.77083333vw;
+}
+#equipmentSystem .equipmentSystem-list-main-li p:nth-child(3) {
+    width: 4.16666667vw;
+}
+.footer-bntac {
+    background: url("/static/img/monitor/atmosphereReseauSystem/lihoverbg.png") no-repeat !important;
+    background-size: 100% 100%!important;
+}
+.mint-calendar .layui-laydate,
+.mint-calendar .layui-laydate-hint {
+    background: transparent!important;
+}
+.mint-calendar .layui-laydate-main {
+    width: 14.5vw;
+    margin-left: -0.6vw;
+}
+.mint-calendar .layui-laydate-header {
+    line-height: normal;
+    display: none;
+}
+.mint-calendar .layui-laydate-content th {
+    color: #fff!important;
+}
+.mint-calendar .layui-laydate-content td,
+.mint-calendar .layui-laydate-content th {
+    width: 4vw!important;
+    height: 4vh!important;
+}
+.mint-calendar .layui-laydate-footer {
+    display: none;
+}
+.mint-calendar .layui-laydate,
+.mint-calendar .layui-laydate-hint {
+    border: none!important;
+}
+.mint-calendar .layui-laydate-content td {
+    color: #fff;
+}
+.mint-calendar .laydate-day-prev {
+    color: #b4b0b0 !important;
+}
+.mint-calendar .laydate-day-next {
+    color: #b4b0b0!important;
+}
+.mint-calendar .layui-laydate .layui-this {
+    background: #dc5758!important;
+}
+.mint-calendar .layui-laydate-content table {
+    width: 100%;
+    height: 100%;
+}
+.leaflet-control{
+    display: none!important;
+}
+@media screen and (max-width: 1500px) {
+    #main .main-int .main-int-list .main-int-publi-title .change-bnt-list {
+        transform: scale(0.6);
+        top: 0.05208333vw;
+        right: -2.34375vw;
+        color: #fff;
+    }
+}
+.amap-logo{
+    display: none!important;
+}
+.bigmap{
+    width: 100vw!important;
+    height: 100vh!important;
+    position: fixed!important;
+    top: 0;
+    left: 0;
+}
+#mapSearvh{
+    position: absolute;
+    top: 1vh;
+    right: 1.5vw;
+    z-index: 999;
+}
+.monitorDivisorSystemTitle{
+    color:#fff8f8;
+    font-size: 1.2vw;
+    line-height: 6vh;
+}
+
+
+
+.atmosphereSystemTITLE{
+    color: #fff8f8;
+    font-size: 1.2vw;
+    line-height: 6vh;
+    margin-left: 3vw;
+}
+.weatherwarning{
+    width: 13vw;
+    height: 20vh;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    background: rgba(0,122,255,0.3);
+}
+.weatherwarning-title{
+    width: 13vw;
+    height: 4vh;
+    line-height: 4vh;
+    background: rgba(0,122,255,0.5);
+}
+.weatherwarning-title-text{
+    color: #fff!important;
+}
+.weatherwarning p{
+    color: #fff;
+    font-size: 12px;
+}
+.weatherwarning-int-top{
+    display: flex;
+    justify-content: space-around;
+    box-sizing: border-box;
+    padding: 0.5vh 0.5vw;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,637 @@
+html {
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 625%;
+    color: #ffffff;
+}
+
+
+.content{
+    width:100%;
+}
+
+.bottomBox{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 78vw;
+    height: 9vh;
+    font-size: 1.5vh;
+    background: rgba(1,12,38,0.6);
+}
+.bottomTitle{
+    width: 7vw;
+    display: inline-block;
+    text-align: center;
+    color: #4386a8;
+    line-height: 8.4vh;
+    height: 9vh;
+    float: left;
+}
+.warningItem{
+    width: 4vw;
+    display: inline-block;
+    height: 7.4vh;
+    padding-top: 1vh;
+}
+.warningItemIcon{
+    display: block;
+    margin: 0 auto;
+    height: 4.4vh;
+}
+.waringItemName{
+    display: block;
+    text-align: center;
+    font-size: 1.3vh;
+    height: 3vh;
+    line-height: 3vh;
+    color:gray;
+}
+
+.warningStandardBox{
+    position: absolute;
+    display: inline-block;
+    height: 9vh;
+    width: 18vw;
+    margin-left: 2vw;
+}
+.closeBtn{
+    position: absolute;
+    cursor: pointer;
+    right: 22px;
+    top: 2.5vh;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 20px;
+    margin-left: 8px;
+    text-align: center;
+    color: #c2c2c2;
+    -webkit-transition: all .2s;
+    font-family: layui-icon!important;
+    font-size: 2vh;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+}
+.newsDetailsContent{
+    height: 62vh;
+    border-top: 1px solid #545252;
+    font-size: 1.8vh;
+    color: #fff;
+    padding: 2vh 2vw;
+    overflow-y: auto;
+}
+.newsDetailsContent p {
+    margin-top:1vh;
+}
+.newsDetailsTitleText{
+    overflow: hidden;
+    height: 7vh;
+    line-height: 7vh;
+    font-size: 3vh;
+    color: #fff;
+    text-align: center;
+    width: 56vw;
+    margin: 0 auto;
+}
+.newsDetailsTitle{
+    height: 7vh;
+    background: rgba(53,97,139,0.6);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.newsDetails{
+    display: none;
+    position: absolute;
+    top: 10vh;
+    left: 20vw;
+    width: 60vw;
+    height: 76vh;
+    z-index: 999;
+    background: rgba(1,12,38,0.8);
+    border-radius: 10px;
+    color: #fff;
+}
+
+.warningStandardItem{
+    display: inline-block;
+    position: absolute;
+    top:1vh;
+}
+.warningStandardItemName{
+font-size:1.3vh;
+}
+.warningStandardIcon{
+    display: block;
+    margin: .5vh auto;
+    width: 1.6vh;
+}
+.warningStandard{
+    width: 18vw;
+    height: 1.8vh;
+    position: absolute;
+    bottom: 1vh;
+    left: 0;
+}
+
+
+
+.rightBox{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.5vh;
+    width: 22vw;
+    height: 100%;
+    background: rgba(1,12,38,0.8);
+}
+.rightBoxTitle{
+    text-align: center;
+    margin:2vh 0;
+}
+.dateBox{
+    font-size: 3vh;
+    display: inline-block;
+    margin-left: -1vw;
+}
+
+.logo{
+    display: block;
+    width: 14vw;
+    margin: 0 auto;
+}
+
+.rightItemBox{
+
+}
+.rightItemTitleBox{
+    background: rgba(53,97,139,0.6);
+    height: 4vh;
+    border-left: 6px solid rgba(107,208,255,0.6);
+    display:relative;
+}
+.rightItemIcon{
+    width: 2vh;
+    vertical-align: middle;
+    display: inline-block;
+    margin: -.5vh .5vh 0 1vw;
+}
+.rightItemTitleName{
+    height: 4vh;
+    line-height: 4vh;
+    font-weight: 700;
+    color: #fefefe;
+    display: inline-block;
+    font-size: 1.8vh;
+}
+.realTimeDataBox{
+    padding: 1vh 0 2vh 0;
+    height: 24vh;
+    overflow-y: scroll;
+}
+.realTimeItem{
+    display: inline-block;
+    width: 9vw;
+    height: 4vh;
+    line-height: 4vh;
+    text-align: center;
+    background: #35618b;
+    border-radius: .5vh;
+    margin: 1vh 0 0 1.3vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.newsItemBox{
+    height: 30vh;
+    overflow-y: auto;
+}
+.yearBox{
+    position: absolute;
+    top: .5vh;
+    right: 6vw;
+    width: 4vw;
+    text-align: center;
+    background: #000;
+    line-height: 3vh;
+    border-radius: 10px;
+   cursor: pointer;
+}
+.selectYear{
+
+}
+.selectYearBox{
+
+}
+.warningTypeItem{
+    display: block;
+    cursor: pointer;
+}
+.warningTypeItem:hover{
+    background: rgba(255,255,255,0.3);
+}
+.yearItemBox{
+    height: 18vh;
+    overflow-y: auto;
+    display:none;
+}
+.selectYearText{
+    display: inline-block;
+    margin-right: 0.5vw;
+}
+.selectYearIcon{
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid dashed dashed;
+    border-color: #fff transparent transparent;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    position: absolute;
+    top: 1.5vh;
+    right: .5vw;
+    margin-top: -3px;
+    border-width: 6px;
+    border-top-color: rgba(255,255,255,.7);
+}
+.yearItem{
+    display:block;
+    cursor: pointer;
+}
+.yearItem:hover{
+    background:rgba(255,255,255,0.3);
+}
+.newsTitle{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 12vw;
+    margin-top:1vh;
+}
+.newContentTime{
+    text-align: right;
+    margin-top: 3vh;
+    margin-right: 2vw;
+}
+.timeText{
+    margin-top: 2vh;
+}
+.newsItem{
+    margin-top: 1.5vh;
+    clear: both;
+    height: 8vh;
+    cursor: pointer;
+}
+
+.newsImg{
+    width: 7vw;
+    height: 8vh;
+    display: inline-block;
+    margin-left: 1.5vw;
+    float: left;
+}
+
+.newsContentBox{
+    display: inline-block!important;
+    margin-left: 1vw!important;
+
+
+
+}
+.more{
+    margin: 1vh 0;
+    position: absolute;
+    right: .5vw;
+    bottom:0;
+}
+
+.prov{
+width:.6vw;
+    cursor: pointer;
+}
+.next{
+    width:.6vw;
+    cursor: pointer;
+}
+.pageBox{
+    display: inline-block;
+}
+.pageItem{
+    display: inline-block;
+    background: #4f98c1;
+    padding: .2vh .5vh;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.b{
+    margin: 0 .2vw;
+}
+.yesterdayNews{
+    position: absolute;
+    right: 2.5vw;
+    top: 1.5vh;
+    font-size: 1.3vh;
+    color: #fff;
+    text-decoration: underline!important;
+}
+a:hover {
+   color:#fff;
+}
+/*.statisticsTitle{*/
+    /*text-align: center;*/
+    /*display: inline-block;*/
+    /*width: 5vw;*/
+    /*height:2vh;*/
+    /*line-height:2vh;*/
+/*}*/
+
+
+.time{
+    text-align: center;
+    display: inline-block;
+    width: 7vw;
+    height:2.5vh;
+    line-height:2.5vh;
+}
+.address{
+    text-align: center;
+    display: inline-block;
+    width: 5vw;
+    height:2.5vh;
+    line-height:2.5vh;
+}
+.type{
+    text-align: center;
+    display: inline-block;
+    width: 4vw;
+    height:2.5vh;
+    line-height:2.5vh;
+}
+.level{
+    text-align: center;
+    display: inline-block;
+    width: 4vw;
+    height:2.5vh;
+    line-height:2.5vh;
+}
+.warningBox{
+    position: absolute;
+    top: .5vh;
+    right: 1vw;
+    width: 4vw;
+    text-align: center;
+    background: #000;
+    line-height: 3vh;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.selectWarningTypeText{
+    display: inline-block;
+    margin-right: 0.5vw;
+}
+.statisticsTitleBox{
+    font-size: 1.6vh;
+    margin-top: .5vh;
+    float:left;
+}
+.selectWarningTypeBox{
+    height: 18vh;
+    overflow-y: auto;
+    display:none;
+}
+
+.statisticsTitle{
+    float: left;
+}
+.statisticsItem{
+    margin-top:.5vh;
+}
+.statisticsItemBox{
+    font-size: 1.3vh;
+    height: 18vh;
+    overflow-y: auto;
+    clear:both;
+}
+.rightItemBox{
+    position:relative;
+}
+
+.weatherTitleBox{
+    position: absolute;
+    top: 2vh;
+    left: 50%;
+    margin-left: -17vw;
+    width: 20vw;
+    height: 9vh;
+    background: url(../../static/img/meteorologicalWarning/weatherTitleBg.png) no-repeat;
+    background-size: 100%;
+}
+.weatherTitleIcon{
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+    height: 4.5vh;
+    margin: 1.2vh 1vw 0 2vw;
+}
+.weatherTitleName{
+    font-size: 3.4vh;
+    float: left;
+    color: #284088;
+    text-shadow: -1px 3px 4px #0A0E17;
+    height: 7vh;
+    line-height: 7vh;
+}
+
+
+.lineEcharts{
+    position: absolute;
+    right: 24vw;
+    bottom: 12vh;
+    font-size: 1.3vh;
+    width: 18vw;
+    height: 25vh;
+}
+.lineEchartsSelect{
+    display: inline-block;
+    float: right;
+    width: 2vw;
+    height: 2vh;
+    text-align: center;
+    margin-top: .8vh;
+    margin-right: .7vw;
+    background: #000;
+    padding: .3vh .3vw;
+    border-radius: 4px;
+}
+.lineEchartsDateBox{
+    height: 3vh;
+    text-align: right;
+    line-height: 3vh;
+    background: rgba(0,0,0,0.3);
+    padding-top: 0.3vh;
+}
+.dateActive{
+    color: #fff!important;
+    background: #4386A7!important;
+}
+
+.dateItem{
+    margin-right: .5vw;
+    border: 1px solid #4386A7;
+    padding: .2vh .5vw;
+    border-radius: 3px;
+    color: #4386A7;
+    cursor: pointer;
+}
+#weatherLine{
+    width: 18vw;
+    height: 18vh;
+    background: rgba(0,0,0,0.3);
+}
+
+.planTypeImg{
+    display: inline-block;
+    width: 3vw;
+    margin-left: 5vw;
+    float: left;
+    margin-top: 1vh;
+}
+
+.planMsgBox{
+    position: absolute;
+    left: 1vw;
+    top: 6vh;
+    font-size: 1.3vh;
+    z-index: 999;
+    height: 80vh;
+    overflow-y: auto;
+}
+.planMsgItem{
+width:18vw;
+    margin-top:2vh;
+}
+
+.planMsgTitleBox{
+    background: rgba(53,97,139,0.6);
+    height: 4vh;
+    border-left: 6px solid rgba(107,208,255,0.6);
+}
+
+.planMsgTitleIcon{
+    width: 2vh;
+    vertical-align: middle;
+    display: inline-block;
+    margin: -.5vh .8vh 0 .5vw;
+}
+.planMsgTitleText{
+    height: 4vh;
+    line-height: 4vh;
+    font-weight: 700;
+    color: #fefefe;
+    display: inline-block;
+    font-size: 1.8vh;
+}
+.planMsgItemContent{
+    background: rgba(0,0,0,0.3);
+    padding: 1vh .5vw 1vh 1vw;
+}
+.planMsgItemContentTop{
+marbin-bottom:1vh;
+}
+.planMsgItemContentLeft{
+    padding-top: 1vh;
+    display: inline-block;
+    float: left;
+}
+.pTitle{
+    height: 2.5vh;
+    line-height: 2.5vh;
+}
+.planMsgItemContentBottom{
+clear:both;
+}
+
+.planImg{
+    width: 6vw;
+    height: 9vh;
+    float: left;
+    display: inline-block;
+}
+.planText{
+    display: inline-block;
+    width: 9.8vw;
+    height: 9vh;
+    overflow-y: auto;
+    margin-left: .6vw;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*滚动条*/
+::-webkit-scrollbar { /*滚动条整体部分，其中的属性有width,height,background,border等（就和一个块级元素一样）（位置1）*/
+    width: 6px;
+    border-radius: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-button { /*滚动条两端的按钮，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置2）*/
+    height: 0;
+    background: #ffffff;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track { /*外层轨道，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置3）*/
+
+}
+
+::-webkit-scrollbar-track-piece { /*内层轨道，滚动条中间部分（位置4）*/
+    width: 2px;
+    background: #081e40;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb { /*滚动条里面可以拖动的那部分（位置5）*/
+    background: rgb(49, 83, 121);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-corner { /*边角（位置6）*/
+    background: #82AFFF;
+}
+
+::-webkit-scrollbar-resizer { /*定义右下角拖动块的样式（位置7）*/
+    background: #FF0BEE;
+}
+
+.amap-logo, .amap-copyright {
+    display: none !important;
+}

@@ -1,0 +1,189 @@
+html {
+}
+
+.anchorBL {
+    display: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    color: #ffffff;
+    background-color: rgb(8, 30, 64);
+    font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial;
+}
+
+#fullScreen {
+
+}
+
+.bgBox {
+    background-color: #a8d3e4;
+}
+
+.bannerImg {
+    text-align: center;
+    width: 100%;
+    background-color: #5365FF;
+    background-size: 100%;
+    font-size: 1.6rem;
+    color: #ffffff;
+    height: 3rem;
+    line-height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.content {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.top-left-content {
+    width: 20%;
+    height: 100%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: aliceblue;
+}
+
+.top-content {
+    width: 90%;
+    height: 57%;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-content {
+    width: 90%;
+    height: 36%;
+    /*border: 1px solid black;*/
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-right-content {
+    width: 40%;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    justify-content: space-between;
+}
+
+.top-right-item {
+    /*width: 44%;*/
+    height: 45%;
+    /* border: 1px solid; */
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: aliceblue;
+}
+
+.arg-chart-div {
+    display: flex;
+}
+
+.chart-div {
+    width: 70%;
+    height: 98%;
+}
+
+.bottom-content-item1 {
+    width: 38%;
+    height: 100%;
+    /* border: 1px solid green; */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: aliceblue;
+}
+
+.bottom-content-item2 {
+    width: 38%;
+    height: 100%;
+    /*border: 1px solid green;*/
+    display: flex;
+    background-color: aliceblue;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.bottom-content-item3 {
+    width: 20%;
+    height: 100%;
+    /*border: 1px solid green;*/
+    display: flex;
+    flex-wrap: wrap;
+    background-color: aliceblue;
+    align-items: center;
+}
+
+.button-div {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.radio-button {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #0e0e0e;
+    /*background: #19d113;*/
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.opened{
+    background: #19d113;
+}
+
+.closed{
+    background: #D14C49;
+}
+
+.radio-text {
+    color: #0f0f0f;
+    font-weight: 600;
+}
+
+.arg-div {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5rem;
+}
+
+.arg-name {
+    color: #0f0f0f;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.arg-value {
+    font-size: 1.9rem;
+    color: #0f0f0f;
+}
+
+.arg-unit {
+    font-size: 2.2rem;
+    color: #0f0f0f;
+}
+
+.top-center-content {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

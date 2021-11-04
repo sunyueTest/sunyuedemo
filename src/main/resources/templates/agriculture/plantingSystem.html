@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>种植物联网管理系统</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/common.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/plantingSystem.css}" media="all">
+    <link rel="stylesheet" href="https://apip.weatherdt.com/h5/static/css/reset.css?v=20181012">
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.8&key=f11845e043e81879739e937a449b3707"></script>
+    <link href="https://apip.weatherdt.com/h5/static/css/weather_he_h5.css?v=20181108" rel="stylesheet">
+    <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script th:src="@{/static/chart/echarts.min.js?v=1.0}"></script>
+    <script th:src="@{/static/js/china.js?v=1.0}"></script>
+    <script src="https://webapi.amap.com/maps?v=1.4.10&key=96a943dab4656930f33276727a084933&plugin=AMap.MarkerClusterer"></script>
+    <script th:src="@{/static/layui/layui.js}"></script>
+    <script th:src="@{/static/js/ezuikit.js?v=1.0}"></script>
+    <script src="/static/i18n/jquery.i18n.properties.js"></script>
+    <script src="/static/js/common.js" charset="utf-8"></script>
+    <script th:src="@{/static/js/agriculture/plantingSystem.js}"></script>
+    <script th:src="@{/static/js/fullScreen.js}" charset="utf-8"></script>
+    <script th:src="@{/static/js/cameraUtil.js}" charset="utf-8"></script>
+</head>
+<body>
+<style>
+    .layui-nav .layui-nav-item .base{
+        text-align: center;transition: all 0.5s;
+
+    }
+
+    body .contentBox .layui-nav .baseac{
+        background: rgba(0,0,0,0.1)!important;
+
+    }
+    body .contentBox .base:hover{
+
+        cursor: pointer;
+    }
+    .layui-nav-bar{display: none!important;}
+    .xmbg{
+        background: rgba(255,255,255,0.1);
+    }
+    .xmbg:hover{
+        background: rgba(255,255,255,0.1)!important;
+    }
+    .layui-nav{
+        background-color: transparent!important;
+    }
+    .gs{
+        background:rgba(0,0,0,0.2)!important;
+        margin: 0.5vh 0;
+    }
+    .layui-nav-itemed>.layui-nav-child{
+        background-color: transparent!important;
+    }
+    .nav-jd{margin: 0.5vh 0;}
+    .base{margin: 0.5vh 0;}
+</style>
+<div class="contentBox">
+<div class="leftBoxMb">
+
+</div>
+<div class="leftBox" style="overflow: auto">
+    <!--左侧搜索框未做暂时隐藏-->
+    <!--<div class="searchBox">-->
+        <!--<input class="searchInput" type="text" />-->
+        <!--<div class="searchBtn">-->
+            <!--<img class="searchImg" src="../../static/img/agriculture/search.png" />-->
+        <!--</div>-->
+
+    <!--</div>-->
+    <!--<div class="itemBox">-->
+
+    <!--</div>-->
+    <div class="leftBoxEnterprise">
+        <div>
+            <ul class="layui-nav layui-nav-tree" lay-filter="test" style="width: 95%;margin: 0 auto;margin-top: 3vh" id="nav-left">
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="rightBox">
+    <div class="rightTopMb">
+    </div>
+    <div class="rightTopBox">
+        <div class="rightBoxTitleBox">
+            <img class="rightTitleBoxIcon" src="../../static/img/agriculture/weather.png" />
+            <div class="rightTitleTextBox">
+                <p class="RightTitleTextTop"></p>
+                <p class="RightTitleText">气象环境</p>
+                <p class="RightTitleTextBottom"></p>
+            </div>
+  <!--          <img class="rightTitleTurnOn" src="../../static/img/agriculture/pointRight.png" />-->
+        </div>
+          <div class="rightTopCenterBox">
+              <div class="rightTopOne">
+<!--                    <img class="rightTopOneImg" src="../../static/img/agriculture/weatherImg.png" />-->
+<!--                    <img class="pointImg" src="../../static/img/agriculture/pointImg.png" />-->
+              </div>
+
+              <div class="rightTopTwo">
+                <div class="rightTopTwoTimeBox" style="visibility:hidden;">
+                    <span class="backTimeText">数据反馈时间：</span><span class="backTimeValue">2019-09-04 10:10:10</span>
+                </div>
+                  <div class="rightTopTwoItemBox">
+                  <!--    <div class="rightTopTwoItem bgYellow">
+                             <span class="rightTopTwoItemValue">温度:30℃</span>
+                      </div>
+                      <div class="rightTopTwoItem bgPur">
+                          <span>湿度：56%</span>
+                      </div>
+                      <div class="rightTopTwoItem bgBlue">
+                          <span>风向：东南</span>
+                      </div>
+                      <div class="rightTopTwoItem bgYellow">
+                          <span>PM2.5:80ug/m³</span>
+                      </div>
+                      <div class="rightTopTwoItem bgYellow">
+                          <span>PM10:120ugm/m³</span>
+                      </div>
+                      <div class="rightTopTwoItem bgBlue">
+                          <span>光照度：10000LUX</span>
+                      </div>
+                      <div class="rightTopTwoItem bgBlue">
+                          <span>虫害：</span>
+                      </div>
+                      <div class="rightTopTwoItem bgBlue">
+                          <span>作物病：</span>
+                      </div>
+                      <div class="rightTopTwoItem bgBlue">
+                          <span>风速：1.5m/s</span>
+                      </div>
+                      <div class="rightTopTwoItem bgBlue">
+                          <span>土壤温度：18℃</span>
+                      </div>
+                      <div class="rightTopTwoItem bgBlue">
+                          <span>土壤湿度：72%</span>
+                      </div>
+                      <div class="rightTopTwoItem bgBlue">
+                          <span>土壤PH：4.5</span>
+                      </div>-->
+                  </div>
+              </div>
+              <div class="rightTopThree">
+              <!--    <div id="weather-view-he"></div>-->
+                  <div id="h5"></div>
+              </div>
+          </div>
+    </div>
+    <div class="rightCenterMb">
+    </div>
+    <div class="rightCenterBox">
+        <div class="rightBoxTitleBox">
+            <img class="rightTitleBoxIcon" src="../../static/img/agriculture/camera.png" />
+            <div class="rightTitleTextBox">
+                <p class="RightTitleTextTop"></p>
+                <p class="RightTitleText">监控设备</p>
+                <p class="RightTitleTextBottom"></p>
+            </div>
+  <!--          <img class="rightTitleTurnOn" src="../../static/img/agriculture/pointRight.png" />-->
+        </div>
+        <div class="cameras">
+
+           <div class="camerasScrollBox">
+             <div class="camerasBox">
+                <div class="cameraOne camera">
+                    <div class="cameraTitle">
+                        1号摄像头
+                    </div>
+                </div>
+                <div class="cameraTwo camera">
+                    <div class="cameraTitle">
+                        2号摄像头
+                    </div>
+                </div>
+                <div class="cameraThree camera">
+                    <div class="cameraTitle">
+                        3号摄像头
+                    </div>
+                </div>
+                <div class="cameraFour camera">
+                    <div class="cameraTitle">
+                        4号摄像头
+                    </div>
+                </div>
+                <div class="cameraFive camera">
+                    <div class="cameraTitle">
+                        5号摄像头
+                    </div>
+                </div>
+                <div class="cameraSix camera">
+                    <div class="cameraTitle">
+                        6号摄像头
+                    </div>
+                </div>
+                <div class="cameraSeven camera">
+                    <div class="cameraTitle">
+                        7号摄像头
+                    </div>
+                </div>
+                <div class="cameraEight camera">
+                    <div class="cameraTitle">
+                        8号摄像头
+                    </div>
+
+                </div>
+                <div class="cameraNine camera">
+                    <div class="cameraTitle">
+                        9号摄像头
+                    </div>
+                </div>
+                <div class="cameraTen camera">
+                    <div class="cameraTitle">
+                        10号摄像头
+                    </div>
+                </div>
+                <div class="cameraEleven camera">
+                    <div class="cameraTitle">
+                        11号摄像头
+                    </div>
+                </div>
+                <div class="cameraTwelve camera">
+                    <div class="cameraTitle">
+                        12号摄像头
+                    </div>
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+    <div class="rightBottomMb">
+    </div>
+    <div class="rightBottomBox">
+        <div class="rightBoxTitleBox">
+            <img class="rightTitleBoxIcon" src="../../static/img/agriculture/remoteControl.png" />
+            <div class="rightTitleTextBox">
+                <p class="RightTitleTextTop"></p>
+                <p class="RightTitleText">远程控制</p>
+                <p class="RightTitleTextBottom"></p>
+            </div>
+<!--            <img class="rightTitleTurnOn" src="../../static/img/agriculture/pointRight.png" />-->
+        </div>
+
+        <div class="rightBottomItemBox">
+ <!--           <div class="rightBottomItem">
+                    <span class="deviceName">1号地温湿度传感器</span>
+                    <img class="signalImg" src="../../static/img/agriculture/strong.png" />
+                <div class="Box_points_switch" data-control="BOX" id="Box_points_switch1">
+                    <label><input class="mui-switch mui-switch-anim switch" checked type="checkbox" id="switch1"></label>
+                </div>
+                <div class="settingBtn">设置</div>
+            </div>
+            <div class="rightBottomItem">
+                <span class="deviceName">1号地PM2.5传感器</span>
+                <img class="signalImg" src="../../static/img/agriculture/strong.png" />
+                <div class="Box_points_switch" data-control="BOX" id="Box_points_switch2">
+                    <label><input class="mui-switch mui-switch-anim switch" type="checkbox" id="switch2"></label>
+                </div>
+                <div class="settingBtn">设置</div>
+            </div>
+            <div class="rightBottomItem">
+                <span class="deviceName">1号地土壤温湿度传感器</span>
+                <img class="signalImg" src="../../static/img/agriculture/strong.png" />
+                <div class="Box_points_switch" data-control="BOX" id="Box_points_switch3">
+                    <label><input class="mui-switch mui-switch-anim switch" type="checkbox" id="switch3"></label>
+                </div>
+                <div class="settingBtn">设置</div>
+            </div>
+            <div class="rightBottomItem">
+                <span class="deviceName">1号地作物病传感器</span>
+                <img class="signalImg" src="../../static/img/agriculture/strong.png" />
+                <div class="Box_points_switch" data-control="BOX" id="Box_points_switch4">
+                    <label><input class="mui-switch mui-switch-anim switch" checked type="checkbox" id="switch4"></label>
+                </div>
+                <div class="settingBtn">设置</div>
+            </div>
+            <div class="rightBottomItem">
+                <span class="deviceName">1号地虫害传感器</span>
+                <img class="signalImg"  src="../../static/img/agriculture/strong.png" />
+                <div class="Box_points_switch" data-control="BOX" id="Box_points_switch5">
+                    <label><input class="mui-switch mui-switch-anim switch" type="checkbox" id="switch5"></label>
+                </div>
+                <div class="settingBtn">设置</div>
+            </div>
+            <div class="rightBottomItem">
+                <span class="deviceName">1号地土壤PH传感器</span>
+                <img class="signalImg"  src="../../static/img/agriculture/strong.png" />
+                <div class="Box_points_switch" data-control="BOX" id="Box_points_switch6">
+                    <label><input class="mui-switch mui-switch-anim switch" type="checkbox" id="switch6"></label>
+                </div>
+                <div class="settingBtn">设置</div>
+            </div>-->
+        </div>
+    </div>
+
+
+
+</div>
+
+</div>
+
+
+
+
+<!--
+<script>
+    WIDGET = {ID: '2sQTBah3vt'};
+</script>
+<script type="text/javascript" src="https://apip.weatherdt.com/view/static/js/r.js?v=1111"></script>-->
+<script type="text/javascript">
+    WIDGET = {HID: 'VhJiRbxqEu'};
+</script>
+<script src="https://apip.weatherdt.com/h5/static/js/weather_he_h5.js?v=20181108"></script>
+</body>
+</html>
+
+
+
+

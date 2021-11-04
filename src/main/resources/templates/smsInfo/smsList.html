@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>短信通知</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+
+<table class="layui-hide" id="smsInfo" lay-filter="smsInfo"></table>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline abc">
+        <button class="layui-btn " lay-event="search">
+            <i class="layui-icon layui-icon-search "></i>
+        </button>
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="tel" id="tel" autocomplete="off" style="width:182px;"
+               placeholder="手机号">
+    </div>
+</script>
+
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script>
+    let table, form;
+    layui.use('table', function () {
+        table = layui.table;
+
+        table.render({
+            elem: '#smsInfo'
+            , url: '/smsInfo/getSmsList'
+            , toolbar: '#toolbar1'
+            , title: '短信通知'
+            , cols: [
+                [
+                    {
+                        type: 'checkbox'//, fixed: 'left'
+                    }
+                    , {
+                    field: 'id',
+                    title: 'ID',
+                    unresize: true,
+                    sort: true,
+                    align: 'center'
+                }
+                    , {field: 'tel', title: '手机号', align: 'center'}
+                    , {field: 'info', title: '类型', align: 'center'}
+                    , {field: 'content', title: '内容', align: 'center'}
+                    , {field: 'time', title: '发送时间', align: 'center'}
+                   ]
+            ]
+            , page: true,
+            request: {limitName: 'size'},
+            response: {
+                statusCode: 'success'
+            },
+            parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                return {
+                    "code": res.state, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.datas,//解析数据列表
+                };
+            }
+        });
+
+        $('#add').text($.i18n.prop('add'));
+        //头工具栏事件
+        table.on('toolbar(smsInfo)', function (obj) {
+            //var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'search':
+                    let tel = $('#tel').val();
+                    reloadSmsList(tel);
+                    break;
+            }
+            ;
+        });
+
+        //监听行工具事件
+        // table.on('tool(smsInfo)', function (obj) {
+        //     var data = obj.data;
+        //     console.log(data.id);
+            // if (obj.event === 'edit') {
+            //     layer.open({
+            //         type: 2,
+            //         area: ['400px', '360px'],
+            //         title: $.i18n.prop('editSystemType'),
+            //         btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+            //         btnAlign: 'c',
+            //         yes: function (index, layero) {
+            //             var body = layer.getChildFrame('body', index);
+            //             body.find('form').submit();
+            //             layer.close(index);
+            //         },
+            //         anim: 3,
+            //         content: 'smsInfoManage/getSystemTypeDetail?id=' + data.id,
+            //         success: function (layero, index) {
+            //             refresh();
+            //             /*//给弹出层添加一个标识
+            //             var body = layer.getChildFrame('body', index);
+            //             body.find('input[name="flag"]').val("add");*/
+            //         }
+            //     });
+            // }
+            // } else if (obj.event === 'del') {
+            //     layer.confirm($.i18n.prop('confirmDelete'), {
+            //         btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+            //         title: $.i18n.prop('info')
+            //     }, function (index) {
+            //
+            //         $.ajax({
+            //             type: "post",
+            //             url: '../smsInfoManage/deleteSystemType',
+            //             data: {
+            //                 id: data.id
+            //             },
+            //             success: function (result) {
+            //             }
+            //         });
+            //         table.reload("smsInfo", {});
+            //         layer.close(index);
+            //     });
+            // }
+        // });
+
+
+    });
+
+    function reloadSmsList(tel) {
+        table.reload('smsInfo', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                tel: tel
+            }
+        });
+    }
+
+    // function refresh() {
+    //     var btn = $('.layui-laypage-btn');
+    //     if (btn.length == 0) {
+    //         table.reload('smsInfo', {
+    //             page: {
+    //                 curr: 1 //重新从第 1 页开始
+    //             }
+    //         });
+    //     } else {
+    //         btn.click();
+    //     }
+    // }
+
+
+</script>
+<style>
+
+    .layui-table-view .layui-table {
+        width: 100%;
+
+    }
+
+    .layui-table tr {
+        width: 100%;
+    }
+
+    .layui-table thead tr, .layui-table-header thead {
+        width: 100%;
+    }
+
+    .abc {
+        float: right;
+        margin-bottom:5px;
+    }
+</style>
+</body>
+</html>

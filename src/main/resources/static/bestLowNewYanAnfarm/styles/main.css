@@ -1,0 +1,599 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* leaflet 默认map control */
+.main-content .leaflet-top {
+  top: 100px;
+  left: 11px;
+}
+
+.main-content #map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+/* 菜单样式 */
+.leftLogo {
+  background: rgba(0, 0, 0, 0) url("/static/newYanAnfarm/images/bglogo.png") no-repeat scroll 0 0 / 254px 54px;
+  height: 52px;
+  left: 20px;
+  position: absolute;
+  top: 20px;
+  width: 257px;
+  z-index: 1000;
+}
+
+.logo {
+  float: left;
+  margin: 5px 10px;
+}
+
+.logoTitle {
+  float: left;
+  line-height: 50px;
+  font-size: 22px;
+  color: #233628;
+  font-family: "微软雅黑";
+}
+
+.logoTitle a {
+  text-decoration: none;
+  color: #233628;
+}
+
+#leftTools {
+  position: absolute;
+  left: 22px;
+  top: 230px;
+  width: 35px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px grey;
+  z-index: 1000;
+}
+
+.mapSwitch {
+  height: 40px;
+  width: 35px;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+#tool {
+  float: left;
+  height: 40px;
+  width: 35px;
+  text-align: center;
+}
+
+#legend {
+  float: left;
+  height: 40px;
+  width: 35px;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.tool-text {
+  color: rgb(67, 67, 67);
+  font-size: 13px;
+  writing-mode: tb-rl;
+  margin-top: 7px;
+}
+
+.leftTools .highlight {
+  background: rgb(51, 133, 255);
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+}
+
+.highlight>.tool-text {
+  color: #fff;
+}
+
+.gexian {
+  float: left;
+  color: #808080;
+  width: 14px;
+  text-align: center;
+  line-height: 35px;
+  height: 35px;
+}
+
+.mapSwitchTooltip {
+  position: absolute;
+  top: 235px;
+  left: 57px;
+  width: 328px;
+  height: 35px;
+  background-color: #ffffff;
+  opacity: 0.85;
+  border-radius: 3px;
+  display: none;
+  z-index: 1111;
+}
+
+.mapSwitchTooltip .cont {
+  width: 59px;
+  height: 25px;
+  background-color: #ffffff;
+  float: left;
+  text-align: center;
+  padding-top: 5px;
+  padding-left: 1px;
+}
+
+.mapSwitchTooltip .item {
+  width: 100px;
+  height: 35px;
+  background-color: rgb(255, 255, 255);
+  float: left;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.mapSwitchTooltip .item img {
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.mapSwitchTooltip .cont span.text {
+  font-family: 微软雅黑;
+  font-size: 13px;
+  color: rgb(102, 102, 102);
+  cursor: pointer;
+}
+
+.mapSwitchTooltip .icon {
+  width: 40px;
+  height: 35px;
+  background-color: #ffffff;
+  float: left;
+  text-align: center;
+}
+
+.conditionBox {
+  position: fixed;
+  z-index: 1000;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 2px 2px 2px #aaa;
+  top: 18vh;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5vh 0.5vw;
+  background: url("/static/newYanAnfarm/images/navbg.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.conditionBox>ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  margin: 0 0 0 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.conditionBox b {
+}
+
+.conditionBox>ul>li {
+  float: left;
+  cursor: pointer;
+  font-size: 14px;
+  background: url("/static/newYanAnfarm/images/navlibg.png") no-repeat;
+  background-size: 100% 100%;
+  transition: all 0.5s;
+  width: 4vw;
+  height: 5vh;
+  line-height: 5vh;
+}
+.conditionBox ul li:hover{
+  background: url("/static/newYanAnfarm/images/navlihover.png") no-repeat!important;
+  background-size: 100% 100%!important;
+  cursor: pointer!important;
+  color: #000!important;
+}
+
+/*.yujing {*/
+/*  background-image: url("/static/newYanAnfarm/images/yj.png");*/
+/*}*/
+
+/*.yujing.active {*/
+/*  background-image: url("/static/newYanAnfarm/images/yjs.png");*/
+/*  color: rgb(0, 49, 255);*/
+/*}*/
+
+/*.zaiqing {*/
+/*  background-image: url("/static/newYanAnfarm/images/zq.png");*/
+/*}*/
+
+/*.zaiqing.active {*/
+/*  background-image: url("/static/newYanAnfarm/images/zqs.png");*/
+/*  color: rgb(0, 49, 255);*/
+/*}*/
+
+/*.shikuang {*/
+/*  background-image: url("/static/newYanAnfarm/images/sk.png");*/
+/*  position: relative;*/
+/*}*/
+
+/*.shikuang.active {*/
+/*  background-image: url("/static/newYanAnfarm/images/sks.png");*/
+/*  position: relative;*/
+/*  color: rgb(0, 49, 255);*/
+/*}*/
+
+/*.yubao {*/
+/*  background-image: url("/static/newYanAnfarm/images/yb.png");*/
+/*  position: relative;*/
+/*}*/
+
+/*.yubao.active {*/
+/*  background-image: url("/static/newYanAnfarm/images/ybs.png");*/
+/*  position: relative;*/
+/*  color: rgb(0, 49, 255);*/
+/*}*/
+
+/*.taifeng {*/
+/*  background-image: url("/static/newYanAnfarm/images/tf.png");*/
+/*}*/
+
+/*.taifeng.active {*/
+/*  background-image: url("/static/newYanAnfarm/images/tfs.png");*/
+/*  color: rgb(0, 49, 255);*/
+/*}*/
+
+/*.roller {*/
+/*  padding-right: 10px;*/
+/*  background-image: url("/static/newYanAnfarm/images/sd.png");*/
+/*  -webkit-background-size: auto 17px;*/
+/*  background-size: auto 17px;*/
+/*}*/
+
+/*.roller.active {*/
+/*  padding-right: 10px;*/
+/*  background-image: url("/static/newYanAnfarm/images/sds.png");*/
+/*  -webkit-background-size: auto 17px;*/
+/*  background-size: auto 17px;*/
+/*  color: rgb(0, 49, 255);*/
+/*}*/
+
+.conditionBox>ul>li.fenxi {
+  background-image: url("/static/newYanAnfarm/images/rh.png");
+  width: 80px;
+}
+
+/*.leida {*/
+/*  background-image: url("/static/newYanAnfarm/images/ld.png");*/
+/*}*/
+
+/*.leida.active {*/
+/*  background-image: url("/static/newYanAnfarm/images/lds.png");*/
+/*  color: rgb(0, 49, 255);*/
+/*}*/
+
+/*.tile {*/
+/*  background-image: url("/static/newYanAnfarm/images/wx.png");*/
+/*}*/
+
+/*.tile.active {*/
+/*  background-image: url("/static/newYanAnfarm/images/wxs.png");*/
+/*  color: rgb(0, 49, 255);*/
+/*}*/
+
+.clear {
+  clear: both;
+}
+
+.wrap_list {
+  position: absolute;
+  z-index: 600;
+  z-index: 1000;
+  top: 66px;
+}
+
+/* 绘图子菜单 */
+.draw_mlist {
+  top: 25vh;
+  left: 39vw;
+  display: none;
+}
+
+.wrap_mlist {
+  right: 375px;
+  display: none;
+}
+
+/* 地图子菜单 */
+.base_map_list {
+  top: 25vh;
+  left: 34vw;
+  display: none;
+}
+
+/* 图层子菜单 */
+.layer_list {
+  top: 25vh;
+  left: 44vw;
+  display: none;
+}
+
+.wrap_flist {
+  right: 469px;
+}
+
+.wrap_wlist {
+  right: 555px;
+}
+
+.wrap_glist {
+  right: 216px;
+}
+
+.menuList {
+  width: 6vw;
+}
+
+.menuList li {
+  width:100%;
+  background-position: 6px 12px;
+  font-size: 0.7vw;
+  height: 4vh;
+  line-height: 4vh;
+  cursor: pointer;
+  text-align: center;
+  background: url("/static/newYanAnfarm/images/navlibg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0.8vh 0.5vw;
+  transition: all 0.5s;
+}
+.menuList li:hover{
+  background: url("/static/newYanAnfarm/images/navlihover.png") no-repeat!important;
+  background-size: 100% 100%!important;
+  cursor: pointer!important;
+  color: #000!important;
+}
+.menuList li.active {
+}
+
+/* 地图卷帘 */
+.left {
+  position: absolute;
+  left: 20px;
+  top: 360px;
+  z-index: 1000;
+}
+
+.right {
+  position: absolute;
+  z-index: 1000;
+  top: 94vh;
+  left: 76%;
+  transform: translateY(-50%);
+}
+
+#sideSelect {
+  display: none;
+}
+
+li>img {
+  width: 15px;
+  height: 15px;
+  padding-right: 0.2rem;
+}
+
+/* 图例 */
+#map {
+  height: 600px;
+}
+
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+.legend {
+  line-height: 18px;
+  color: #555;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+#inttc{
+  /*position:fixed;*/
+  /*top:15vw;*/
+  /*left: 15vw;*/
+  /*z-index: 999*/
+}
+.inttc{
+  width: 13vw;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.newPriceIntList p{
+  color: #fff;
+}
+.newPriceIntList{
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border: 2px solid #00f9f2;
+  padding: 0.15vh 1vw;
+  width: 6vw;
+  position: relative;
+  background: rgba(10,43,76,.7);
+  box-shadow:rgba(11, 234, 235,0.5) 2px 2px 20px inset;
+  transition: all 0.5s;
+}
+.newPriceIntList:hover{
+  background: rgba(10,43,76,.9);
+}
+.newPriceIntList .vertical{
+  display: block;
+  position: absolute;
+  width: 4px;
+  height: 16px;
+  background: #00faf0;
+}
+.newPriceIntList .across{
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 4px;
+  background: #00faf0;
+}
+.ListTopLeft{
+  top: -4px;
+  left: -4px;
+  z-index: 99999;
+}
+.ListTopLeftTop{
+  top: -4px;
+  left: -4px;
+  z-index: 99999;
+}
+.ListTopRight{
+  top: -4px;
+  right: -4px;
+  z-index: 99999;
+}
+.ListTopRightTop{
+  top: -4px;
+  right: -4px;
+  z-index: 99999;
+}
+.ListBottomLeft,.ListBottomLeftBottom{
+  bottom: -4px;
+  left: -4px;
+  z-index: 99999;
+}
+.ListBottomRight,.ListBottomRightBottom{
+  bottom: -4px;
+  right: -4px;
+  z-index: 99999;
+}
+.newPriceIntList p{
+  font-size: 0.5vw;
+}
+.leaflet-popup-tip-container{
+  display: none;
+}
+.leaflet-popup-content-wrapper{
+  padding: 0!important;
+}
+.leaflet-popup-content{
+    box-shadow: none!important;
+}
+.leaflet-popup{
+  left: 0vw!important;
+}
+.inttcTitle{
+  height: 3vh;
+}
+.inttcTitle p{
+  font-size: 0.6vw;
+  color: #fff;
+  line-height: 3vh;
+  padding-left: 0.5vw;
+}
+.leaflet-popup-content p{
+  margin:0.1vh 0!important;
+}
+.leaflet-popup-content-wrapper{
+  background-color: transparent!important;
+    box-shadow: none!important;
+}
+.leaflet-popup-close-button{
+    display: none;!important;
+}
+.leaflet-popup-content{
+}
+
+.leaflet-sbs-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  cursor: ew-resize;
+  pointer-events: auto;
+  border: 1px solid #ddd;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+  border: 1px solid #007aff;
+}
+.leaflet-sbs-range::-ms-thumb {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  cursor: ew-resize;
+  pointer-events: auto;
+  border: 1px solid #ddd;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+
+}
+.leaflet-sbs-range::-moz-range-thumb {
+  padding: 0;
+  right: 0    ;
+  background: #fff;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  cursor: ew-resize;
+  pointer-events: auto;
+  border: 1px solid #ddd;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+
+}
+.leaflet-sbs{
+  width: 1px!important;
+}

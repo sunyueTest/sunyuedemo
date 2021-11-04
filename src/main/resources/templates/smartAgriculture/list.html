@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<table class="layui-hide" id="table" lay-filter="table"></table>
+
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline bg-transparent" id="addTaskDiv">
+        <button id="add" class="layui-btn layui-btn-primary layui-btn-radius"
+                lay-event="add"> 新增农场
+        </button>
+    </div>
+    <div class="layui-inline abc">
+        <button class="layui-btn " lay-event="search">
+            <i class="layui-icon layui-icon-search "></i>
+        </button>
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="farmName" id="farmName" autocomplete="off" style="width:182px;"
+               placeholder="名称">
+    </div>
+</script>
+
+<script type="text/html" id="barDemo">
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i
+            class="layui-icon"></i></button>
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="set"><i
+            class="layui-icon layui-icon-set-sm"></i></button>
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+            class="layui-icon layui-icon-delete"></i></button>
+</script>
+
+<script type="text/html" id="statusTpl">
+    <input id="status" type="checkbox" name="continuing" value="{{d.id}}" lay-skin="switch"
+           lay-filter="status" {{ d.status== 1 ?'checked' : '' }}>
+</script>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<style>
+    .abc {
+        float: right;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .layui-table-tool .layui-inline {
+        background-color: #eaeaea;
+    }
+</style>
+</body>
+</html>
+<script>
+    let table, form;
+    layui.use('table', function () {
+        let tableData = [
+            {
+                type: 'checkbox'//, fixed: 'left'
+            },
+            {
+                field: 'id', title: 'ID', width: 80, //fixed: 'left', unresize: true,
+                sort: true
+            },
+            {field: 'farmName', title: "农场名称", align: 'center'},
+            {field: 'createUser', title: "创建者", align: 'center'},
+            {field: 'createTime', title: "创建时间", width: 160, align: 'center'},
+            {
+                field: '',
+                title: $.i18n.prop('operation'),
+                toolbar: '#barDemo',
+                width: 200,
+                align: 'center'
+            }
+        ];
+
+        table = layui.table;
+        form = layui.form;
+
+        table.render({
+            elem: '#table'
+            , url: '../smartAgriculture/getSmartAgricultureList'
+            , toolbar: '#toolbar1'
+            , title: ''
+            , cols: [tableData]
+            , page: true,
+            request: {limitName: 'size'},
+            response: {
+                statusCode: 'success'
+            },
+            parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                return {
+                    "code": res.state, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.datas,//解析数据列表
+                };
+            }
+        });
+
+        //头工具栏事件
+        table.on('toolbar(table)', function (obj) {
+            switch (obj.event) {
+                case 'search':
+                    doLoginFilter();//登陆状态验证
+                    let farmName = $('#farmName').val();
+                    reloadSmartAgricultureList(farmName);
+                    break;
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        title: false,
+                        closeBtn: true,
+                        area: ['800px', '500px'],
+                        shade: 0.2,
+                        id: 'LAY_onLineCtrl',
+                        btnAlign: 'c',
+                        moveType: 1,
+                        content: '../smartAgriculture/toAdd',
+                        success: function (layero, index) {
+                        }
+                    });
+                    break;
+            }
+        });
+
+        //监听行工具事件
+        table.on('tool(table)', function (obj) {
+            let data = obj.data;
+            if (obj.event === 'edit') {
+                layer.open({
+                    type: 2,
+                    title: false,
+                    closeBtn: true,
+                    area: ['800px', '500px'],
+                    shade: 0.2,
+                    id: 'LAY_onLineCtrl',
+                    btnAlign: 'c',
+                    moveType: 1,
+                    content: '../smartAgriculture/toUpdate?id=' + data.id
+                });
+            } else if (obj.event === 'del') {
+                layer.confirm($.i18n.prop('confirmDelete'),
+                    {
+                        btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                        title: $.i18n.prop('info')
+                    }, function (index) {
+                        layer.load(2);
+                        $.ajax({
+                            url: "../smartAgriculture/del",
+                            data: {id: data.id},
+                            dataType: "json",
+                            type: "post",
+                            timeout: 30000,
+                            error: function (data, type, err) {
+                                layer.closeAll('loading');
+                                layer.msg($.i18n.prop('fail'), {
+                                    offset: '6px', icon: 2
+                                });
+                            },
+                            success: function (data) {
+                                layer.closeAll('loading');
+                                if ('success' == data.state) {
+                                    $('.layui-laypage-btn').click();
+                                    layer.msg($.i18n.prop(data.msg), {icon: 1})
+                                } else {
+                                    layer.msg($.i18n.prop(data.msg), {icon: 2})
+                                }
+                            }
+                        });
+                    });
+            }else if (obj.event === 'set'){
+                layer.open({
+                    type: 2,
+                    title: false,
+                    closeBtn: true,
+                    area: ['450px', '330px'],
+                    shade: 0.2,
+                    btnAlign: 'c',
+                    id: 'LAY_onLineCtrl',
+                    moveType: 1,
+                    content: '../smartAgriculture/toLandUse?farmId=' + data.id
+                });
+            }
+        });
+    });
+
+    function reloadSmartAgricultureList(farmName) {
+        table.reload('table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                farmName: farmName
+            }
+        });
+    }
+
+    function refresh() {
+        var btn = $('.layui-laypage-btn');
+        if (btn.length == 0) {
+            table.reload('table', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        } else {
+            btn.click();
+        }
+    }
+</script>

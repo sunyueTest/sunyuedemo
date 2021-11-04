@@ -1,0 +1,42 @@
+html,body,.index-bg{
+	height: 100%;
+	width: 100%;
+}
+
+.index-bg{
+	background: url(/static/img/aquaculture/traceability/sy-xt-bg_02.jpg) no-repeat;
+	background-size: 100% 100%;
+}
+.index-search{
+	position: fixed;	
+	width: 350px;
+	height: 105px;
+	top: 30%;
+	left: 50%;
+}
+.index-search-txt{
+	width: 250px;
+	height: 35px;
+	border-radius: 17px;
+	border: none;
+	box-sizing: border-box;
+	padding: 8px 15px;
+}
+.index-search-bnt{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 5px; 
+	right: 10px;
+	cursor: pointer;
+}
+.index-search-bnt img{
+	width: 100%;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>knowledgebase2-知识库</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet"  th:href="@{/static/css/agriculture/knowledgebaseAdmin.css}">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+
+</head>
+<body>
+<div class="conter">
+    <div class="teacher" id="teacher">
+    </div>
+</div>
+<div id="tc"  class="">
+    <h3 class="tc-title">
+        <div class="buddha-border">
+            <div class="buddha-pic">
+                <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+            </div>
+        </div>
+        <p>详细信息</p>
+    </h3>
+    <div class="tc-int test test-1" id="tcint">
+        <h2></h2>
+        <div>
+            <p></p>
+        </div>
+        <div class="tc-int-txt">
+            <p>
+            </p>
+        </div>
+    </div>
+    <div id="dele"></div>
+</div>
+<div id="deletc">
+    <div class="deletc-p">
+        是否确认删除
+    </div>
+    <div class="deletcbnt">
+        <div id="deleyes">确认</div>
+        <div id="deleno">点错了</div>
+    </div>
+</div>
+<div id="motai"></div>
+    <div class="page">
+        <div id="page"></div>
+    </div>
+</body>
+</body>
+</html>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}"></script>
+<script th:src="@{/static/js/agriculture/xlPaging.js}"></script>
+<script>
+    var num=1;
+    var sum=1;
+    function getlist(num){
+        $.ajax({
+            url: "../expertManage/findArticleList",
+            type : "POST",
+            data: {
+                myArticle:1,
+                type:0,
+                page:num,
+                size:10,
+            },
+            success: function (res) {
+                $("#page").paging({
+                    nowPage: sum, // 当前页码
+                    pageNum:Math.ceil(res.count/10), // 总页码
+                    buttonNum: 4, //要展示的页码数量
+                    canJump: 0,// 是否能跳转。0=不显示（默认），1=显示
+                    showOne: 1,//只有一页时，是否显示。0=不显示,1=显示（默认）
+                    callback: function (num) { //回调函数
+                        console.log(num);
+                        getlist(num)
+                        sum=num;
+                    }
+                });
+                var imgReg = /<img.*?(?:>|\/>)/gi;
+                var srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+                // var arr = str.match(imgReg);
+                // console.log(arr[0])
+                console.log(res)
+                var html="";
+                $.each(res.datas, function (i,item) {
+                    var arr = item.content.match(imgReg);
+                    html +='<div class="teacher-l">\n'
+                    if(item.content.match(imgReg)==null){
+                        html += '<div class="teacher-pic"><img src="/static/img/animalScreenNoData.jpg" alt=""></div>\n'
+                    }else{
+                        html += '<div class="teacher-pic">'+arr+'</div>\n'
+
+                    }
+                    html +='<div class="teacher-int">\n' +
+                        '<p>'+item.title+'</p>\n' +
+                        '<div style="display: flex; justify-content: space-between;">\n' +
+                        '<p>'+item.createTime+'</p>\n' +
+                        '<p>'+item.expertName+'</p>\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '<div class="teacher-icon">\n' +
+                        // '<div class="xiugai"><img src="/static/img/agriculture/specialistManagement/xiugai.png" alt=""></div>\n' +
+                        '<div class="chaxun" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>\n' +
+                        '<div class="dele" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>\n' +
+                        '</div>\n' +
+                        '</div>'
+                });
+                $('#teacher').html(html);
+
+            }
+        })
+    }
+    getlist()
+</script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+        //常规用法
+
+    });
+    var xiugai=document.getElementsByClassName('xiugai');
+    var chaxun=document.getElementsByClassName('chaxun');
+    var tc=document.getElementById('tc');
+    var dele=document.getElementById('dele');
+    $(document).on('click','.xiugai',function(){
+        tc.style.display='block'
+    })
+    $(document).on('click','.chaxun',function(){
+        var id=this.getAttribute("data-id")
+        console.log(id)
+        $.ajax({
+            url: "../expertManage/findArticle?id="+id,
+            type : "POST",
+            data: {
+
+            },
+            success: function (res) {
+                console.log(res.data.content)
+                var html=res.data.content;
+                $('#tcint').html(html);
+
+            }
+        })
+        tc.style.display='block'
+    })
+    var id=''
+    function delebz(){
+        console.log(id)
+        $.ajax({
+            url: "../expertManage/delArticle?id="+id,
+            type : "POST",
+            data: {
+
+            },
+            success: function (res) {
+                console.log(res)
+                if(res.state=="success"){
+                    layer.msg('删除成功');
+                    getlist()
+                }
+
+
+            }
+        })
+    }
+    $(document).on('click','.dele',function(){
+        id=$(this).data("id")
+        $('#deletc').show()
+        $('#motai').show()
+
+
+    })
+    $(document).on('click','#motai',function(){
+        $('#deletc').hide()
+        $('#motai').hide()
+    })
+    $(document).on('click','#deleno',function(){
+        $('#deletc').hide()
+        $('#motai').hide()
+    })
+    $(document).on('click','#deleyes',function(){
+        $('#deletc').hide()
+        $('#motai').hide()
+        delebz()
+    })
+    dele.onclick=function(){
+        tc.style.display='none'
+    }
+
+
+
+</script>

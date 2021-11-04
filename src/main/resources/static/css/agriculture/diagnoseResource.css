@@ -1,0 +1,405 @@
+*{margin: 0;padding: 0;color: #fff;}
+img{width: 100%;float: left;
+    }
+body{width: 100vw;overflow-x: hidden}
+.conter{
+    width: 100vw;
+    background: -webkit-linear-gradient(left,#053f67,#027187);
+    background: -o-linear-gradient(left,#053f67,#027187);
+    background: -moz-linear-gradient(left,#053f67,#027187);
+    background: -mos-linear-gradient(left,#053f67,#027187);
+    background: linear-gradient(left,#053f67,#027187);
+    box-sizing: border-box;
+    padding: 6vh 3vw;
+    overflow-x: hidden;
+    height: 100vh;
+}
+.title-int{
+    display: flex;
+    justify-content: flex-start;
+    width: 10vw;
+    line-height: 6vh;
+    height: 6vh;
+    cursor: pointer;
+}
+.titleac{
+    background:rgba(0,0,0,.3);
+    border-radius: 15px;
+}
+#title{
+    height: 6vh;
+    background: -webkit-linear-gradient(top,#053f67,#027187);
+    background: -o-linear-gradient(top,#053f67,#027187);
+    background: -moz-linear-gradient(top,#053f67,#027187);
+    background: -mos-linear-gradient(top,#053f67,#027187);
+    background: linear-gradient(top,#053f67,#027187);
+    border-radius:15px;
+}
+.title-pic{
+    width: 2vw;
+    height: 2vw;
+    margin-left: 1vw;
+    margin-right: 0.5vw;
+    margin-top: 1vh;
+}
+.title-p{
+    font-size: 1vw;
+    line-height: 6vh;
+    margin-right: 1vw;
+    height: 6vh;
+}
+.layui-form-select .layui-input {
+    background: transparent!important;
+    color: #fff;
+}
+.teacher{
+    display: flex;
+    /*justify-content: space-between;*/
+    flex-wrap: wrap;
+    margin-top: 4vh;
+}
+.teacher-l{
+    width: 80vw;
+    margin-bottom: 1.5vh;
+    margin: 0 auto;
+}
+.teacher-pic{
+    width: 8vw;
+    height: 10vh;
+    overflow: hidden;
+    margin-right: 1vw;
+}
+.teacher-icon{
+    display: flex;
+}
+.teacher-icon div{
+    width: 1.6vw;
+    margin: 5vh 0.5vw;
+    cursor: pointer;
+}
+.teacher-int{
+    font-size: 0.8vw;
+    width:50vw;
+}
+.tiweb{
+    font-size: 1vw;
+    line-height: 8vh;
+}
+.teacher-int p{
+    line-height: 4.5vh;
+}
+.page{
+    position:fixed;
+    bottom: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.page ul{
+    display: flex;
+}
+li{
+    list-style: none;
+    padding: 0.5vh 0.8vw;
+    margin: 0.4vh;
+    cursor: pointer;
+}
+.ac{
+    background: #027187;
+}
+
+#tc{
+    width: 60vw;
+    height: 78vh;
+    background: url(/static/img/agriculture/specialistManagement/tcbj.png) no-repeat;
+    background-size:100% 100%;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    display: none;
+}
+#tcadd{
+    width: 60vw;
+    height: 78vh;
+    background: url(/static/img/agriculture/specialistManagement/tcbj.png) no-repeat;
+    background-size:100% 100%;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    display: none;
+}
+
+
+
+
+.tc-title{
+    font-weight: normal;
+    font-size: 1.5vw;
+    line-height: 10vh;
+    margin-left: 3vw;
+    display: flex;
+}
+
+.tc-int-l{
+    width: 32vw;
+    box-sizing: border-box;
+    padding: 1vh 2vw;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.message{
+    font-size: 1.2vw;
+    margin-top: 2vh;
+}
+.informessage input{
+    outline: none;
+    background: transparent;
+    border: none;
+    color: #fff;
+    border-bottom: solid #39aed1 2px;
+    height: 4vh;
+    line-height: 4vh;
+    text-align: center;
+}
+.buddha{
+    display: flex;
+}
+.buddha-border{
+    width: 2vw;
+    height: 2vw;
+    padding: 1vw;
+    border: 1px solid #0872b2;
+    border-radius: 50%;
+    margin-top: 1.5vh;
+}
+.buddha-pic{
+    border-radius: 50%;
+    overflow: hidden;
+}
+.papers{
+    display: flex;
+}
+.papers-a{
+    width: 12vw;
+    height: 12vh;
+    text-align: center;
+    line-height: 12vh;
+    margin-top: 3vh;
+    border: 1px solid #94fcff;
+    box-sizing: border-box;
+    background: rgba(255,255,255,.1);
+    border-radius: 10px;
+}
+
+#deleadd{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 5vh;
+    cursor: pointer;
+}
+#dele{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 7vh;
+    cursor: pointer;
+}
+.tc-int{
+    width: 65vw;
+    height: 33vh;
+    margin: 0 auto;
+    margin-top: 4vh;
+    text-align: center;
+    overflow: scroll;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    display: flex;
+}
+.tc-int h2{
+    font-size: 1.2vw;
+    margin: 0 auto;
+    line-height: 4.5vh;
+    display: block;
+    width: 45vw;
+    height: 6vh;
+}
+.tc-int p{
+    font-size: 0.8vw;
+}
+.tc-int-txt{
+    font-size: 0.8vw;
+    line-height: 3vh;
+    text-align: left;
+    margin-top: 3vh;
+    width: 40vw;
+    margin: 0 auto;
+}
+.bz{
+    display: flex;
+    font-size: 0.8vw;
+    line-height: 6.5vh;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.bz-dele,.bz-chaxun{
+    width: 1.5vw;
+    margin-top: 1.5vh;
+    margin-left: 1vw;
+    cursor: pointer;
+}
+.bz-list{
+    display: flex;
+    margin: 0 2vw;
+    width: 14vw;
+    justify-content: space-between;
+}
+.tianjiabnt{
+    background:rgba(0,0,0,.2);
+    border: 1px solid #007aff;
+    cursor: pointer;
+    border-radius: 1vh;
+    width: 5vw;
+    height: 5vh;
+    line-height: 5vh;
+    text-align: center;
+    transition: all 0.5s;
+}
+.tianjiabnt:hover{
+    background:rgba(0,0,0,.3) ;
+}
+
+/*滚动条*/
+.test{
+
+    width: 53vw;
+
+    height: 42vh;
+
+    overflow: auto;
+
+    float: left;
+
+    margin: 5px;
+
+    border: none;
+
+}
+
+.scrollbar{
+
+    width: 30px;
+
+    height: 300px;
+
+    margin: 0 auto;
+
+
+
+}
+
+.test-1::-webkit-scrollbar {/*滚动条整体样式*/
+
+    width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+
+    height: 1px;
+
+}
+
+.test-1::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+
+    border-radius: 10px;
+
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+
+    background: #35aadc;
+
+}
+
+.test-1::-webkit-scrollbar-track {/*滚动条里面轨道*/
+
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+
+    border-radius: 10px;
+
+    background: #065681;
+}
+#deletc{
+    width: 20vw;
+    height: 20vh;
+    background: #fff;
+    position: fixed;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    display: none;
+}
+.deletc-p{
+    color: #0A0E11;
+    line-height: 15vh;
+    text-align: center;
+}
+.deletcbnt{
+    width: 13vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+#deleyes,#deleno{
+    width: 5vw;
+    height: 4vh;
+    line-height: 4vh;
+    background: #0d5bb0;
+    transition: all 0.5s;
+    text-align: center;
+    cursor: pointer;
+}
+#motai{
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: none;
+}
+#diseasesNamebnt{
+    width: 2vw;
+    height: 2vw;
+    background: #053960;
+    border-left: 1px solid #fff;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+#diseasesNamebnt img{
+    transform: scale(0.6);
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+
+#swchit{
+    display: flex;
+    justify-content: space-between;
+    width: 13vw;
+    position: fixed;
+    top: 2vh;
+    right: 15vw;
+    height: 2vw;
+}
+#diseasesName{
+    width: 11vw;
+    background: #053960;
+    border: none;
+    padding: 0 1vw;
+    box-sizing: border-box;
+    height: 2vw;
+}

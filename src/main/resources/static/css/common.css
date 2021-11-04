@@ -1,0 +1,158 @@
+thead, tr, th, .layui-table-tool, .layui-table-view {
+    background-color: transparent;
+}
+
+
+
+.layui-table {
+    background-color: transparent;
+    color: #fff;
+}
+
+.bg-transparent {
+
+    background-color: transparent !important;
+}
+
+/*
+.layui-table-header {
+    background-color: transparent;
+    background-image: url(../../img/device_item_1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+*/
+
+/*body div div div div table tbody tr {*/
+/*background-image: none;*/
+/*}*/
+
+.layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even) {
+    background-color: transparent;
+}
+
+tbody tr {
+    /*display:table;*/
+    background-color: transparent;
+    background-image: url(../../img/device_item_2.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 45px;
+}
+.layui-table td, .layui-table th, .layui-table-col-set, .layui-table-fixed-r, .layui-table-grid-down, .layui-table-header, .layui-table-page, .layui-table-tips-main, .layui-table-tool, .layui-table-total, .layui-table-view, .layui-table[lay-skin=line], .layui-table[lay-skin=row] {
+    border-width: 0;
+}
+
+body {
+    background-color: transparent;
+}
+
+body::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+.layui-form {
+    background-color: transparent;
+}
+
+.layui-table-tool-self .layui-inline {
+    background-color: #eaeaea;
+}
+
+.layui-laypage .layui-laypage-skip {
+    color: #fff;
+}
+
+.layui-table-page .layui-laypage span {
+    color: #fff;
+}
+
+.layui-table-box .layui-table-header {
+    /*margin-right: 15px;*/
+}
+
+.layui-form-switch {
+    background-color: transparent;
+}
+
+.layui-form-onswitch {
+    background-color: #5FB878;
+}
+
+.container-horizontal {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.match_parent {
+    float: left;
+    height: 100px;
+    width: 100%;
+}
+
+.horizontal {
+    display: inline;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.horizontal-top {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.horizontal-center {
+    display: flex;
+    flex-wrap: nowrap;
+    /* justify-content: center; */
+    margin: 0 auto;
+    align-items: center;
+}
+
+.horizontalLeft {
+    display: inline;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: left;
+    margin: 0 auto;
+    align-items: left;
+}
+
+.vertical {
+    display: flex;
+    position: relative;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+
+.verticalCenter {
+    display: flex;
+    position: relative;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.verticalLeft {
+    display: flex;
+    position: relative;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
+

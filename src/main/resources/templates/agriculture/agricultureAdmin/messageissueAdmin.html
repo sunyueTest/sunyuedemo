@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>messageissue-信息发布</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/messageissue.css}">
+    <link class="styles" rel="stylesheet" th:href="@{/static/KE/themes/default/default.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+
+</head>
+<style>
+    .ke-container {
+        width: 45vw !important;
+    }
+
+    .ke-container {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .ke-statusbar {
+        display: none !important;
+    }
+
+    #save {
+        margin-right: 3vw !important;
+        background: -webkit-linear-gradient(top, #064e80, #037389);
+        background: -o-linear-gradient(top, #064e80, #037389);
+        background: -moz-linear-gradient(top, #064e80, #037389);
+        background: -mos-linear-gradient(top, #064e80, #037389);
+        background: linear-gradient(top, #064e80, #037389);
+        border: none !important;
+        color: #fff !important;
+    }
+
+    .ke-toolbar {
+        background: #06517b !important;
+        border: none !important;
+    }
+
+    .ke-toolbar .ke-outline {
+        border-color: #06517b !important;
+
+    }
+
+    .ke-edit {
+        border: 1px solid #fff;
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 1px;
+    }
+    .main-l{
+        width:100vw;!important;
+    }
+    .mlsit{
+        width: 33vw;!important;
+    }
+    .main-l-list{
+        width: 99vw!important;
+        height: 67vh!important;
+    }
+    .mlsit{
+        width: 69vw!important;
+        margin: 1vh auto;
+    }
+    .mlsit-pic{
+        width: 11vw!important;
+        height: 6vw!important;
+    }
+    .mlsit-txt{
+        width: 49vw!important;
+    }
+    .dele{
+        width: 2vw!important;
+        height: 2vw!important;
+        margin-top: 1vh;
+    }
+    .tc-int{
+        width: 59vw!important;
+        box-sizing: border-box;
+        padding: 1vh 3vw;
+    }
+    .tc-int img{
+        width: 70%;
+        float: none;
+        margin: 0 auto;
+    }
+</style>
+<body>
+<div class="main">
+    <div class="main-l">
+        <div class="int-title">
+            <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a1.png"></div>
+            <div class="title-text">全部投稿<span class="title-text-top"></span><span
+                    class="title-text-bottom"></span></div>
+        </div>
+        <div class="main-l-list test test-1" id="mainlist">
+            <div class="mlsit">
+                <div class="mlsit-pic">
+                    <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                </div>
+                <div class="mlsit-txt">
+                    <h4>台风“杨柳”携风雨远去 南方“苦夏”熬到头头头</h4>
+                    <p>2019-09-02 08：10：10</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page" style="position: absolute;bottom: 3vh;left: 50%;transform: translateX(-50%)">
+        <div id="page"></div>
+    </div>
+</div>
+<div id="tc" class="">
+    <h3 class="tc-title">
+        <div class="buddha-border">
+            <div class="buddha-pic">
+                <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+            </div>
+        </div>
+        <p>详细信息</p>
+    </h3>
+    <div class="tc-int test test-1" id="tcint" style="margin-top: 3vh;">
+        <h2>台风“杨柳”携风雨远去 南方“苦夏”熬到头</h2>
+        <div>
+            <p>2019-09-02 08：10：10 来源：张三三教授</p>
+        </div>
+        <div class="tc-int-txt">
+            <p>
+            </p>
+        </div>
+    </div>
+    <div id="dele"></div>
+</div>
+<div id="deletc">
+    <div class="deletc-p">
+        是否确认删除
+    </div>
+    <div class="deletcbnt">
+        <div id="deleyes">确认</div>
+        <div id="deleno">点错了</div>
+    </div>
+</div>
+<div id="motai"></div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<!--<script th:src="@{/static/js/common.js}" charset="utf-8"></script> 此js加了文本域就被隐藏了,需要调-->
+<script th:src="@{/static/KE/kindeditor-all-min.js}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/agriculture/xlPaging.js}"></script>
+<script th:inline="javascript">
+    let layer;
+    layui.use(['form', 'layer', 'layedit', 'laydate'], function () {
+        layer = layui.layer;
+        findArticleList(1);
+    });
+    var sum=1;
+    findArticleList = function (page) {
+        $.ajax({
+            url: "../expertManage/findArticleList",
+            type: "POST",
+            data: {
+                myArticle: 1,
+                type: 1,
+                page:page,
+                size:5,
+            },
+            dataType: "json",
+            success: function (res) {
+                if (res.state == "success"){
+                    console.log(res)
+                    var imgReg = /<img.*?(?:>|\/>)/gi;
+                    var srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+                    console.log(res)
+                    var html = "";
+                    $.each(res.datas, function (i, item) {
+                        var arr = item.content.match(imgReg);
+                        html += '<div class="mlsit" >\n'
+                        if (item.content.match(imgReg) == null) {
+                            html += '<div class="mlsit-pic"><img src="/static/img/animalScreenNoData.jpg" alt=""></div>\n'
+                        } else {
+                            html += '<div class="mlsit-pic">' + arr + '</div>\n'
+                        }
+                        html += '<div class="mlsit-txt" data-id="' + item.id + '">\n' +
+                            '<p>' + item.title + '</p>\n' +
+                            '<div style="display: flex; justify-content: space-between;">\n' +
+                            '<p>' + item.createTime + '</p>\n' +
+                            '<p>' + item.expertName + '</p>\n' +
+                            '</div>\n' +
+                            '</div>\n' +
+                            '<div class="teacher-icon">\n' +
+                            '</div>\n' +
+                            '<div class="dele" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>\n' +
+                            '</div>'
+                    });
+                    $('#mainlist').html(html);
+                    $("#page").paging({
+                        nowPage: sum, // 当前页码
+                        pageNum: Math.ceil(res.count/5), // 总页码
+                        buttonNum: 3, //要展示的页码数量
+                        canJump: 0,// 是否能跳转。0=不显示（默认），1=显示
+                        showOne: 1,//只有一页时，是否显示。0=不显示,1=显示（默认）
+                        callback: function (num) { //回调函数
+                            console.log(num);
+                            // getlist(num,diseasesTypesId,index)
+                             sum=num;
+                            findArticleList(num)
+                        }
+                    });
+                }
+            }
+        });
+    }
+    $(document).on('click', '.mlsit-txt', function () {
+        id = this.getAttribute("data-id")
+        console.log(id)
+        $.ajax({
+            url: "../expertManage/findArticle?id=" + id,
+            type: "POST",
+            data: {},
+            success: function (res) {
+                console.log(res.data.content)
+                var html = res.data.content;
+                $('#tcint').html(html);
+
+            }
+        })
+        tc.style.display = 'block'
+    });
+    var dele=document.getElementById('dele');
+    dele.onclick = function () {
+        tc.style.display = 'none'
+    }
+
+    var id=''
+    function delebz(){
+        console.log(id)
+        $.ajax({
+            url: "../expertManage/delArticle?id="+id,
+            type : "POST",
+            data: {
+
+            },
+            success: function (res) {
+                console.log(res)
+                if(res.state=="success"){
+                    layer.msg('删除成功');
+                    findArticleList()
+                }
+
+
+            }
+        })
+    }
+    $(document).on('click','.dele',function(){
+        id=$(this).data("id")
+        $('#deletc').show()
+        $('#motai').show()
+
+
+    })
+    $(document).on('click','#motai',function(){
+        $('#deletc').hide()
+        $('#motai').hide()
+    })
+    $(document).on('click','#deleno',function(){
+        $('#deletc').hide()
+        $('#motai').hide()
+    })
+    $(document).on('click','#deleyes',function(){
+        $('#deletc').hide()
+        $('#motai').hide()
+        delebz()
+    })
+    dele.onclick=function(){
+        tc.style.display='none'
+    }
+
+</script>
+</html>

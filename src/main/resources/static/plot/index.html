@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>气象数据综合展示平台 | by giscafer</title>
+    <link href="./styles/main.css" rel="stylesheet" />
+    <link href="./libs/leaflet.css" rel="stylesheet" />
+    <link href="./libs/leaflet.label.css" rel="stylesheet" />
+    <link href="./libs/toastr.min.css" rel="stylesheet" />
+    <script src="./libs/jquery.min.js"></script>
+    <script src="./libs/leaflet.js"></script>
+    <script src="./libs/leaflet.label.js"></script>
+    <script src="./libs/toastr.min.js"></script>
+    <script src="./libs/moment.min.js"></script>
+    <script src="./libs/esri-leaflet.js"></script>
+    <script src="./libs/leaflet.ChineseTmsProviders.js"></script>
+</head>
+
+<body>
+<div class="main-content">
+    <div class="leftLogo">
+        <div class="logo"><img src="./images/logo.png" /></div>
+        <div class="logoTitle"><a href="/">精讯畅通GIS平台</a></div>
+    </div>
+
+    <!-- 基础地图 -->
+    <div id="map"></div>
+    <!-- 卷帘地图 -->
+    <div id="sideMap"></div>
+    <!-- 卷帘底图下拉框 -->
+    <div id='sideSelect'>
+        <div class="left">
+            <select id="selectLeftV">
+                <option value="0">OSM街道图</option>
+                <option value="1">ArcGIS影像图</option>
+            </select>
+        </div>
+        <div class="right">
+            <select id="selectRightV">
+                <option value="0">ArcGIS影像图</option>
+                <option value="1">OSM街道图</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- 右上角工具菜单 -->
+    <div class="conditionBox">
+        <ul>
+            <li class="yujing active" id="baseMap">地图<b></b></li>
+            <!-- <li class="yujing active" id="warning">预警<b></b></li> -->
+            <li class="yubao" id="drawer">绘图<b></b></li>
+            <!-- <li class="shikuang" id="sk">实况<b></b></li> -->
+            <li class="taifeng" id="typhoon">图层<b></b></li>
+            <li class="leida" id="radar">热力图<b></b></li>
+            <li class="tile" id="tile">行政区<b></b></li>
+            <li class="roller" id="roller">地图卷帘</li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+
+    <!-- 图层子菜单 -->
+    <div class="wrap_list layer_list" id="layerMenu">
+        <div class="menuList off">
+            <ul>
+                <!-- <li id="cropGrow" data-type="cropGrow">作物长势</li>
+                <li id="cropArea" data-type="cropArea">作物面积</li>
+                <li id="landUseType" data-type="landUseType">土地利用</li>
+                <li id="weihaiLandUseType" data-type="weihaiLandUseType">威海土地利用</li>
+                <li id="weihaiDem" data-type="weihaiDem">威海高程</li>
+                <li id="weihaiContour" data-type="weihaiContour">威海等高线</li> -->
+                <li id="polygons" data-type="polygons">重要地块</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 地图-子菜单 -->
+    <div class="wrap_list base_map_list" id="baseMapMenu">
+        <div class="menuList off">
+            <ul>
+                <li id="" data-type="zhitu" class='active'>智图地图</li>
+                <li id="" data-type="zhituNightBlue">智图午夜蓝</li>
+                <li id="" data-type="zhituGray">智图灰色</li>
+                <li id="" data-type="zhituWarm">智图暖色</li>
+                <li id="" data-type="tiandi">天地图</li>
+                <li id="" data-type="tiandiImage">天地图影像</li>
+                <li id="" data-type="google">谷歌地图</li>
+                <li id="" data-type="googleImage">谷歌影像</li>
+                <li id="" data-type="gaode">高德地图</li>
+                <li id="" data-type="gaodeImage">高德影像</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 绘图-子菜单 -->
+    <div class="wrap_list draw_mlist" id="drawmenu">
+        <div class="menuList off">
+            <ul>
+                <li id="foldLine" data-type="foldLine"><img src='./images/foldLine.png' />折线</li>
+                <li id="circle" data-type="circle"><img src='./images/circle.png' />圆形</li>
+                <li id="polygon" data-type="polygon"><img src='./images/polygon.png' />多边形</li>
+                <li id="rectangle" data-type="rectangle"><img src='./images/rectangle.png' />矩形</li>
+            </ul>
+        </div>
+    </div>
+    <!-- 实况-子菜单 -->
+    <!-- <div class=" wrap_list wrap_mlist" id="skmenu">
+        <div class="menuList off">
+            <ul>
+                <li id="115990101" unit="℃">气温</li>
+                <li id="115990102" unit="hpa">气压</li>
+                <li id="115990103" unit="%">相对湿度</li>
+                <li id="115990104" unit="m/s">风</li>
+                <li id="1150101020" unit="mm">降水</li>
+            </ul>
+        </div>
+    </div> -->
+</div>
+<script>
+    var ctx = "http://localhost:8888/dataGis";
+    // var ctx = "http://data.cma.cn/dataGis";
+    var globalParam = {};
+</script>
+<script src="./libs/leaflet.TileLayer.js"></script>
+<script src="./libs/leaflet-velocity.js"></script>
+<script src="./libs/echarts.js"></script>
+<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+<script src="./libs/heatmap.min.js"></script>
+<script src="./libs/leaflet-heatmap.js"></script>
+<script type="text/javascript" src="jxct.js"></script><script type="text/javascript" src="app.js"></script></body>
+
+</html>

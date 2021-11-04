@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>类别管理</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/categoryManagement.css}" media="all">
+
+    <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+    <script th:src="@{/static/layui/layui.js}"></script>
+    <script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+    <script th:src="@{/static/js/agriculture/categoryManagement.js}"></script>
+</head>
+<body>
+<div class="body_div">
+    <div class="div_top" style="height: 5vh">
+        <div id="addentry">添加</div>
+        <div id="swchit">
+            <input type="text" id="type">
+            <div id="diseasesNamebnt">
+                <img src="/static/img/agriculture/search.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="title">
+        <div class="sc category" data_val="1">蔬菜类</div>
+        <div class="sg category" data_val="2" checked="checked">水果类</div>
+        <div class="ls category" data_val="3">粮食类</div>
+        <div class="jj category" data_val="4">经济类</div>
+        <div class="qt category" data_val="5">其他</div>
+    </div>
+    <div class="categoryVal">
+
+    </div>
+</div>
+
+<div id="deletc" hidden="hidden">
+    <div class="deletc-p">
+        是否确认删除
+    </div>
+    <div class="deletcbnt">
+        <div id="deleyes">确认</div>
+        <div id="deleno">点错了</div>
+    </div>
+</div>
+<div id="motai"></div>
+
+<div id="tcadd" class="" style="display: none;">
+    <div id="deleadd"></div>
+    <h3 class="tc-title">
+        <p id="tctitleadd">农作物</p>
+    </h3>
+    <div style="width: 50vw;border-bottom: 1px solid #027187;padding-bottom: 3vh;">
+        <div style="width: 40vw;line-height: 12vh;display: flex;margin-left: 5vw;">
+            <p>作物种类：
+               </p>
+            <form class="layui-form" action="" style="transform: scale(0.8);">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <select name="quiz1" id="quiz" lay-filter="demo" lay-verify="required">
+                            <option value="蔬菜类+1">蔬菜类</option>
+                            <option value="水果类+2">水果类</option>
+                            <option value="粮食类+3">粮食类</option>
+                            <option value="经济类+4">经济类</option>
+                            <option value="其他+5">其他</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <p></p>
+        </div>
+        <div style="width: 40vw;line-height: 12vh;display: flex;margin-left: 5vw;">
+            <p>作物名称：
+            </p>
+            <span id="" style="display: block;width: 4vw;height: 6vh;">
+                    <input type="text" id="tcbingzhongadd">
+            </span>
+        </div>
+    </div>
+    <div id="addbnt">提交</div>
+</div>
+</body>
+</html>

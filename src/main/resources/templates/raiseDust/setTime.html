@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+    <style>
+        body {
+            font-weight: normal;
+            height: 100%;
+        }
+
+        html {
+            height: 90%;
+        }
+
+        .base-item {
+            display: flex;
+            text-align: center;
+            margin-top: 14px;
+            /*margin-left: 45px;*/
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            height: 100%;
+        }
+
+        .base-item span {
+            width: 140px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .base-item input {
+            width: 170px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            background-image: url(../../img/commend_btn.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 120px;
+            height: 35px;
+            border: 0px;
+            margin-left: 130px;
+            color: #5f4d6f;
+            margin-top: 10px;
+        }
+
+        .layui-laydate, .layui-laydate-main, .layui-laydate-header, .layui-laydate-content {
+            width: 300px;
+        }
+
+        .layui-laydate-content table {
+            width: 50%;
+        }
+
+        .layui-laydate-content > .layui-laydate-list {
+            padding-bottom: 0px;
+            overflow: hidden;
+        }
+
+        .layui-laydate-content > .layui-laydate-list > li {
+            width: 50%
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <input type="text" class="layui-input" id="trigger" style="display:none" th:value="${bean.id}">
+    <div style="margin-left: 15px;">
+        <div class="base-item layui-form">
+            <span id="interval"></span>
+            <select name="" id="intervalMy" lay-filter="myselect" style="width: 170px">
+                <option id="10mm" value="600000"></option>
+                <option id="30mm" value="1800000"></option>
+                <option id="1h" value="36000000"></option>
+            </select>
+        </div>
+        <div class="base-item">
+            <span id="farmNameSpan"></span>
+            <input type="text" id="durationTime" lay-verify="required" maxlength="16"
+                   style="width: 170px"
+                   class="layui-input" th:value="${bean.persist}" placeholder="">
+        </div>
+
+        <div class="base-item">
+            <span id="telSpan"> </span>
+            <input type="text" id="begin" lay-verify="required" style="width: 170px"
+                   class="layui-input" th:value="${bean.StartTime}" placeholder="">
+        </div>
+
+        <div class="base-item">
+            <span id="farmAddressSpan"> </span>
+            <input type="text" id="over" lay-verify="required"
+                   style="width: 170px"
+                   class="layui-input" th:value="${bean.endTime}" placeholder="">
+        </div>
+        <div class="base-item">
+            <button class="btn-primary" lay-submit="" id="save" style="margin-left: 40%"
+                    lay-filter="submit">
+            </button>
+        </div>
+    </div>
+</div>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/validation.js}" charset="utf-8"></script>
+</body>
+</html>
+<script>
+    $('#interval').text($.i18n.prop('最小间隔时间')+":");
+    $('#10mm').text( $.i18n.prop('10mm'));
+    $('#30mm').text($.i18n.prop('30mm'));
+    $('#1h').text($.i18n.prop('1h'));
+    $('#farmNameSpan').text($.i18n.prop('报警持续时间')+":");
+    $('#durationTime').attr('placeholder', $.i18n.prop('请输入报警时间'));
+    $('#telSpan').text($.i18n.prop('报警推送开始时间')+":");
+    $('#begin').attr('placeholder', $.i18n.prop('请输入开始时间'));
+    $('#farmAddressSpan').text($.i18n.prop('报警推送结束时间')+":");
+    $('#over').attr('placeholder', $.i18n.prop('请输入结束时间'));
+    $('#save').text($.i18n.prop('save'));
+
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    let layer, form;
+
+
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        layer = layui.layer;
+        form = layui.form;
+        laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#begin'
+            , type: 'time',
+            format: 'HH:mm',
+            trigger: 'click'
+        });
+        laydate.render({
+            elem: '#over'
+            , type: 'time'
+            ,
+            format: 'HH:mm',
+            trigger: 'click'
+        });
+        layui.form.on('select(myselect)', function (data) {
+            //最小间隔时间
+            $("#intervalMy").val(data.value);
+        })
+
+        form.on('submit(submit)', function (data) {
+            var intervalMy = $("#intervalMy").val();
+            // 持续时间
+            var durationTime = $("#durationTime").val();
+            //单位
+            var begin = $("#begin").val();
+            //系数
+            var over = $("#over").val();
+            var triggerId = $("#trigger").val();
+
+            if (durationTime.length < 1) {
+                return layer.msg($.i18n.prop('报警持续时间不能为空'));
+
+            }
+            if (!durationTime.match("^[0-9]*$")) {
+                return layer.msg($.i18n.prop('报警持续时间格式输入错误'));
+
+            }
+            if (durationTime > 24 * 60) {
+                return layer.msg($.i18n.prop('报警持续时间超过24小时'));
+
+            }
+            if (begin.length < 1) {
+                return layer.msg($.i18n.prop('warn32'));
+
+            }
+            if (over.length < 1) {
+                return layer.msg($.i18n.prop('warn33'));
+
+            }
+            $.post("../raise/setTime",
+                {
+                    "intervalMy": intervalMy,
+                    "durationTime": durationTime,
+                    "begin": begin,
+                    "over": over,
+                    "triggerId": triggerId
+                },
+                function (res) {
+                    if (res.state == 'success') {
+                        layer.msg($.i18n.prop(res.msg));
+                        parent.$('.layui-laypage-btn').click();
+                        parent.layer.msg($.i18n.prop('success'));
+                        parent.layer.close(myIframe);
+                    } else {
+                        layer.msg($.i18n.prop(res.msg), {icon: 2})
+                    }
+                });
+        });
+    });
+</script>

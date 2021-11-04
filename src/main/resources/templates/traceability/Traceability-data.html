@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Traceability-data溯源数据</title>
+    <link rel="stylesheet" href="/static/css/traceability/public.css">
+    <link rel="stylesheet" href="/static/css/traceability/Traceabilitydata.css">
+</head>
+<body>
+<div id="conter">
+    <div class="con-title">
+        <h3>溯源数据</h3>
+        <div class="search">
+            <input type="text" id="productCode" placeholder="输入产品编码" class="search-txt"/>
+            <div class="search-bnt"><img src="/static/img/aquaculture/traceability/index-search-bnt_04.jpg" alt="">
+            </div>
+            <div class="search-bnt-r"><img src="/static/img/aquaculture/traceability/sw-r_03.jpg" alt=""></div>
+        </div>
+    </div>
+    <div id="int">
+        <div class="int clearfix">
+            <div style="width: 15%;float:left;margin-left: 100px;">
+                <img  style="width: auto; max-width: 600px; min-width: 120px; height: 120px;" th:src="${data.imgSrc}" alt="" th:if="${data.imgSrc ne '' and data.imgSrc ne null} " >
+                <img  style="width: auto; max-width: 600px; min-width: 120px; height: 120px;" th:src="${data.imgSrc2}" alt="" th:if="${data.imgSrc2 ne ''and data.imgSrc2 ne null}" >
+                <img  style="width: auto; max-width: 600px; min-width: 120px; height: 120px;" th:src="${data.imgSrc3}" alt="" th:if="${data.imgSrc3 ne ''and data.imgSrc3 ne null}" >
+            </div>
+            <div class="int-txt">
+                <ul>
+                    <li>产品名称：<span th:text="${data.name}">精品秋刀鱼</span></li>
+                    <li>生产日期：<span th:text="${data.productDate}">2019-04-17</span></li>
+                    <li>产品编码：<span th:text="${data.productCode}">20190417598264</span></li>
+                    <li>规格：<span th:text="${data.specs}">1KG/条</span></li>
+                    <li>产地：<span th:text="${data.originPlace}"> 山东威海</span></li>
+                    <li>养殖企业：<span th:text="${data.enterprise}">山东威海渔产品养殖场</span></li>
+                    <li>饲料来源：<span th:text="${data.feedSource}">山东威海</span></li>
+                    <li>苗种来源：<span th:text="${data.seedSource}">示范渔产养殖场</span></li>
+                    <li>药品使用：<span th:text="${data.drugUse}">无用药情况</span></li>
+                    <li>加工服务：<span th:text="${data.processService}">无加工</span></li>
+                    <li>物流运输：<span th:text="${data.logistics}">顺丰15354564655131</span></li>
+                </ul>
+
+            </div>
+            <div class="int-pic">
+                <div>
+                    <img src="/static/img/aquaculture/traceability/rwm_03.jpg" alt="">
+                </div>
+                <p>扫描二维码，手机查看商品信息</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script>
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        $(".search-bnt").click(function () {
+            var productCode = $("#productCode").val();
+            window.location.href = "/traceSource/getTraceSource?productCode=" + productCode;
+        });
+    });
+</script>
+</html>

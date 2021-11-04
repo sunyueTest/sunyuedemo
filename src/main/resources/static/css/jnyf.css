@@ -1,0 +1,711 @@
+html {
+}
+
+.anchorBL {
+    display: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 625%;
+    color: #ffffff;
+    background-color: rgb(8, 30, 64);
+}
+#fullScreen{
+
+}
+.bgBox{
+    background-image:url("../img/smartFarmTwo/bg.jpg");
+    background-repeat: no-repeat;
+    background-size:100% 101%;
+}
+.content{
+    font-size:1rem;
+
+}
+
+.bannerImg {
+    text-align: center;
+    width: 100%;
+    background: url(../img/smartFarmTwo/banner.png) no-repeat 50% 100%;
+    background-size: 100%;
+    font-size: 2.3rem;
+    color: #ffffff;
+    height: 3rem;
+    line-height: 3.5rem;
+}
+
+
+.leftContent{
+    width: 26%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+.centerContent{
+    width: 49%;
+    height: 400px;
+    display: inline-block;
+    float: left;
+    position: relative;
+}
+.rightContent{
+    width: 25%;
+    float: right;
+}
+.leftTopTitleBox{
+    border-bottom: 1px solid #00FFFF;
+}
+.leftTop{
+    border: 1px solid #00FFFF;
+    width: 96%;
+    margin: 0 auto;
+}
+.leftTopTitleIcon{
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.leftTopTitle{
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+.topLeftTopTitle {
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+
+.msgTitleName {
+    display: inline-block;
+    float: left;
+}
+.msgTitle{
+    display: block;
+    font-size: .7rem;
+    height: 2rem;
+    line-height: 2rem;
+    width: 98%;
+}
+.msgBox{
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.msgItemBox {
+    height: 2.2rem;
+    line-height: 2.2rem;
+
+}
+.msgItemOne{
+    width:40%;
+    overflow:hidden;
+}
+.msgItemTwo{
+    width:60%;
+    white-space: nowrap;
+    display: inline-block;
+    /*overflow-x: auto;*/
+    /*overflow-y:hidden;*/
+}
+/*.msgItemThree{*/
+    /*width:30%;*/
+    /*overflow:hidden;*/
+/*}*/
+/*.msgItemFour{*/
+    /*width:19%;*/
+    /*overflow:hidden;*/
+/*}*/
+.msgItem {
+    font-size: .7rem;
+    text-align: center;
+    float: left;
+    height: 1.6rem;
+    display: block;
+}
+.colorYellow {
+    color: #f7a439;
+}
+.colorBlue {
+    color: #7fc8e5;
+}
+.colorRed {
+    color: #ff3232;
+}
+.colorGreen {
+    color: #85f379;
+}
+.leftBottom{
+    height: 180px;
+    width:96%;
+    border: 1px solid #00FFFF;
+    margin: 10px auto 0 auto;
+}
+.leftBottomTitleBox{
+    border-bottom: 1px solid #00FFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.leftBottomTitleIcon{
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.leftBottomTitle{
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+#attendanceLine {
+    height: 150px;
+    width: 100%;
+}
+.centerContentItemBox{
+    width: 99%;
+    height:100%;
+    margin: 0 auto;
+    border: 1px solid #00FFFF;
+    background: url(../img/smartFarmTwo/bgIcon.png) repeat;
+    background-size: 2%;
+}
+#mapContainer {
+    width:100%;
+    height: 100%;
+    background: rgb(252, 249, 242);
+    position: relative;
+
+}
+.centerContentOneMb{
+    position: absolute;
+    padding: 2px 8px;
+    background: #014780;
+    opacity: 0.5;
+    width: 8.5rem;
+    font-size: .8rem;
+    top: 10px;
+    left: 20px;
+    height: 64px;
+}
+.centerContentOnePart{
+    width: 8.5rem;
+    font-size: .8rem;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    padding: 2px 8px;
+    box-shadow: rgb(11, 234, 235) 0px 0px 5px inset;
+}
+.centerContentOneTitle{
+    height: 1.6rem;
+    line-height: 1.6rem;
+}
+.centerContentOneMsg{
+    height: 2.4rem;
+    line-height: 2.4rem;
+}
+.centerContentOneLeft{
+    font-size: 1.2rem;
+    color: #08f0f9;
+}
+.centerContentOneRight{
+    float: right;
+}
+.borderSpan {
+    position: absolute;
+    padding: 5px;
+    border-style: solid;
+    border-color: #00FFFF;
+}
+.borderTop {
+    border-width: 2px 0 0 2px;
+    top: -2px;
+    left: -2px;
+}
+.borderRight {
+    border-width: 2px 2px 0 0;
+    top: -2px;
+    right: -2px;
+}
+.borderBottom {
+    border-width: 0 2px 2px 0;
+    bottom: -2px;
+    right: -2px;
+}
+.borderLeft {
+    border-width: 0 0 2px 2px;
+    bottom: -2px;
+    left: -2px;
+}
+.centerContentThreeMb{
+    width: 35%;
+    height: 150px;
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+    background: #014780;
+    opacity: .5;
+}
+.centerContentThreePart{
+    width: 35%;
+    height: 150px;
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+}
+.centerContentFourMb{
+    height: 12rem;
+    background: #014780;
+    opacity: .5;
+    width: 25%;
+    position: absolute;
+    top: 10px;
+    right: 3%;
+    padding: 2px 8px;
+}
+.centerContentPart{
+    height: 12rem;
+    width: 25%;
+    position: absolute;
+    top: 10px;
+    right: 3%;
+    padding: 2px 8px;
+    box-shadow: rgb(11, 234, 235) 0px 0px 5px inset;
+}
+
+.conItemBox{
+    height: 17.5rem;
+}
+.conItem{
+
+}
+.nameCheckedBox{
+    background: rgba(1,86,147,0.8);
+    position: relative;
+    border-radius: 6px;
+}
+.nameBox{
+    cursor: pointer;
+    padding-left: 8px;
+    height: 1.8rem;
+    margin-top:10px;
+}
+.conName{
+    height: 1.8rem;
+    line-height: 1.8rem;
+    font-size: 0.9rem;
+    width: 84%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+.checkNameIcon{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 7px 6px 0;
+    border-style: solid;
+    border-color: #08f0f9 transparent transparent;
+    position: absolute;
+    top: 0.65rem;
+}
+.conComBox{
+    z-index: 999;
+    top: 1.84rem;
+    font-size: 0.8rem;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    cursor: pointer;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background: rgba(1,86,147,0.8);
+    height: 16rem;
+}
+.comBoxItem{
+    width: 100%;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+    padding-left: 6%;
+}
+.farmImgBox{
+    width: 93%;
+    margin: 1rem auto 0.2rem auto;
+    display: block;
+    position: relative;
+}
+.farmImg{
+    width: 100%;
+}
+/*.farmMsgBox{*/
+    /*font-size: 0.6rem;*/
+    /*width: 90%;*/
+    /*margin: 0.8rem auto 0 auto;*/
+    /*text-align:left;*/
+
+/*}*/
+/*.startTime{*/
+    /*height: 1.8rem;*/
+    /*line-height: 1.8rem;*/
+    /*overflow: hidden;*/
+    /*white-space: nowrap;*/
+    /*text-overflow: ellipsis;*/
+/*}*/
+/*.progress{*/
+    /*height: 1.8rem;*/
+    /*line-height: 1.8rem;*/
+    /*overflow: hidden;*/
+    /*white-space: nowrap;*/
+    /*text-overflow: ellipsis;*/
+/*}*/
+/*.endTime{*/
+    /*height: 1.8rem;*/
+    /*line-height: 1.8rem;*/
+    /*overflow: hidden;*/
+    /*white-space: nowrap;*/
+    /*text-overflow: ellipsis;*/
+/*}*/
+.centerContentFivePart{
+    width: 30%;
+    position: absolute;
+    bottom: 10px;
+    right: 3%;
+    padding: 2px 8px;
+    box-shadow: rgb(11, 234, 235) 0px 0px 5px inset;
+    background-color:rgba(1,86,147,0.5)
+}
+.dangerMsg{
+
+}
+.content{
+    padding-top:10px;
+}
+.dangerMsgTitle{
+    display: block;
+    font-size: .9rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+}
+.dangerMsgItemBox{
+    overflow: auto;
+
+}
+.dangerMsgItem{
+    font-size: .7rem;
+    line-height: 1.4rem;
+}.dangerMsgItemBox{
+     overflow: auto;
+
+ }
+.dangerMsgItem{
+    font-size: .7rem;
+    line-height: 1.4rem;
+}
+.dangerMsgTime{
+
+}
+.dangerMsgText{
+    color: #FF9600;
+    margin-left: 2px;
+    font-size: 1rem;
+    line-height: 1.4rem;
+    height: 1.4rem;
+}
+.rightTop{
+    border: 1px solid #00FFFF;
+    width: 96%;
+    margin: 0 auto;
+}
+.topRightTopTitleBox{
+    border-bottom: 1px solid #00FFFF;
+}
+.conOne{
+    display:none;
+}
+.conTwo{
+    display:none;
+}
+.topRightTopTitleIcon{
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.topRightTopTitle{
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+.environmental{
+    overflow-y: auto;
+    padding-bottom: 10px;
+}
+.itemBox{
+    width: 45%;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: .9rem;
+    float: left;
+    margin-left: 4%;
+    margin-top: .7rem;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+}
+.rightCenter{
+    border: 1px solid #00FFFF;
+    width: 96%;
+    margin: 3% auto 0 auto;
+    position: relative;
+}
+.topRightBottomTitleBox{
+    border-bottom: 1px solid #00FFFF;
+}
+.topRightBottomTitleIcon{
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.topRightBottomTitle{
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+.landLine{
+    height: 8.95rem;
+}
+.rightBottom{
+    height: 180px;
+    width: 96%;
+    border: 1px solid #00FFFF;
+    margin: 10px auto 0 auto;
+}
+.rightBottomTitleBox{
+    border-bottom: 1px solid #00FFFF;
+}
+.rightBottomTitleIcon{
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.rightBottomTitle{
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+.cropsItemBox{
+
+}
+.cropsItem{
+    height: 36px;
+    line-height: 36px;
+    padding: 0 22px;
+    font-size: 0.7rem;
+}
+.cropsName{
+    height: 36px;
+    line-height: 36px;
+    font-size: 0.7rem;
+    display:inline-block;
+}
+.growUpDate{
+    float: right;
+}
+.onLine{
+    color: #08F0F9;
+}
+.offLine{
+    color:#FE3155;
+}
+
+.comBoxItem:hover{
+
+    -webkit-box-shadow: #ccc inset 0px 0px 15px;
+    -moz-box-shadow: #ccc inset 0px 0px 15px;
+    box-shadow: #ccc inset 0px 0px 15px;
+}
+.opacityBox{
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0.5;
+}
+.goodBg {
+    background: #448ACA;
+}
+#landLine {
+    height: 8.95rem;
+}
+.itemNameValueBox {
+    text-align: center;
+    top: 0;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+}
+/*当前辖区里的下拉框*/
+.item{
+    float: right;
+    width: 30%;
+    background-color: rgba(1,86,147,0.8);
+    color: white;
+}
+
+
+.checkbox{
+    display: none;
+}
+/*滚动条*/
+::-webkit-scrollbar { /*滚动条整体部分，其中的属性有width,height,background,border等（就和一个块级元素一样）（位置1）*/
+    width: 6px;
+    border-radius: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-button { /*滚动条两端的按钮，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置2）*/
+    height: 0;
+    background: #ffffff;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track { /*外层轨道，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置3）*/
+
+}
+
+::-webkit-scrollbar-track-piece { /*内层轨道，滚动条中间部分（位置4）*/
+    width: 2px;
+    background: #081e40;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb { /*滚动条里面可以拖动的那部分（位置5）*/
+    background: rgb(49, 83, 121);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-corner { /*边角（位置6）*/
+    background: #82AFFF;
+}
+
+::-webkit-scrollbar-resizer { /*定义右下角拖动块的样式（位置7）*/
+    background: #FF0BEE;
+}
+
+.amap-logo,.amap-copyright{
+    display: none!important;
+}
+
+/*窗体*/
+.content-window-card {
+    position: relative;
+    box-shadow: none;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    padding: 0;
+}
+
+.content-window-card p {
+    height: 2rem;
+}
+
+.custom-info {
+    border: solid 1px silver;
+}
+
+div.info-top {
+    position: relative;
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-bottom: 1px solid #CCC;
+
+}
+
+div.info-top div {
+    display: inline-block;
+    color: #333333;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 31px;
+    padding: 0 10px;
+}
+
+div.info-top img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition-duration: 0.25s;
+}
+
+div.info-top img:hover {
+    box-shadow: 0px 0px 5px #000;
+}
+
+
+
+div.info-bottom {
+    height: 0px;
+    width: 100%;
+    clear: both;
+    text-align: center;
+}
+
+div.info-bottom img {
+    position: relative;
+    z-index: 104;
+}
+
+
+
+.info-middle img {
+    float: left;
+    margin-right: 6px;
+}
+
+.trigger{
+    overflow: auto;
+}
+.dangerMsgItem:hover {background-color:rgba(1,86,147,1)}
+
+
+

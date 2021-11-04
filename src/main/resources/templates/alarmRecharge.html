@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>报警充值</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/base.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/command.css}" media="all">
+</head>
+<body>
+<div class="container">
+    <span class="tip">
+    </span>
+    <div class="container-in">
+
+        <div class="c-item">
+            <span  style="width:95px;">充值用户：</span>
+            <div class="layui-form">
+                <input type="text" autocomplete="off" class="layui-input" id="userName" th:value="*{data.userName}"  readonly="readonly" >
+            </div>
+        </div>
+        <div class="c-item">
+            <span  style="width:95px;" >短信剩余量：</span>
+            <div class="layui-form">
+                <input type="number" id="smsCount" readonly="readonly" th:value="*{data.smsCount}"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="c-item">
+            <span  style="width:95px;">已使用量：</span>
+            <div class="layui-form">
+                <input type="number" id="smsSendCount" th:value="*{data.smsSendCount}"
+                       autocomplete="off" readonly="readonly"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="c-item">
+            <span  style="width:95px;">充值数量:</span>
+            <div class="layui-form" >
+                <input id="count" autocomplete="off" type="number"
+                       class="layui-input" placeholder="请输入本次充值数量">
+            </div>
+        </div>
+
+        <div class="c-item">
+            <a onclick="submit()" id="save" class="btn-primary"  style="margin-top: 30px;margin-left: 120px;"
+               lay-filter="submit"><span>充&nbsp;值</span>
+            </a>
+        </div>
+    </div>
+</div>
+<!--jquery需要引入的文件-->
+<script th:src="@{/static/jQuery/jquery-3.2.1.js}"></script>
+<script th:src="@{/static/layui/layui.all.js}" charset="utf-8"></script>
+<!--<script type="text/javascript" th:src="@{/static/js/tableSelect.js}"></script>-->
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script  language='javascript' th:inline="javascript">
+
+    //设置语言
+    $('#deviceNumber').attr('placeholder', $.i18n.prop('12deviceNo'));
+
+        var form = layui.form
+            , layer = layui.layer;
+    var table = layui.table;
+
+      /*  var tableSelect = layui.tableSelect;
+        tableSelect.render({
+            elem: '#userName',
+            //searchKey: 'name',
+            searchPlaceholder:$.i18n.prop('searchKey'),
+            table: {
+                url: '../alarmRecharge/getUserSelect',
+                cols: [
+                    [
+                        {type: 'radio'},
+                        {field: 'userName', title: "用户", width: 200},
+                        {field: 'smsCount', title: "短信剩余量", width: 100},
+                        {field: 'smsSendCount', title: "已发送量", width: 100}
+                    ]
+                ]
+            },
+            done: function (elem, data) {
+                var arr =data.data;
+                if(arr.length>0){
+                    $("#userName").val(arr[0].userName);
+                    $("#smsCount").val(arr[0].smsCount);
+                    $("#smsSendCount").val(arr[0].smsSendCount);
+                }
+            }
+        })*/
+
+        /*form.on('select(users)', function (data) {
+            if(data.value=="0"){
+                $('#smsCount').val("");
+                $('#smsSendNum').val("");
+                return;
+            }
+            // console.log(data.elem.getAttribute(data - aid)); //得到select原始DOM对象
+            $.ajax({
+                url: "../alarmRecharge/getUserInfo",
+                data: {
+                    userName:data.value
+                },
+                dataType: "json",
+                type: "get",
+                success: function (result) {
+                    var data = result.data;
+                    $('#smsCount').val(data.smsCount);
+                    $('#smsSendNum').val(data.smsSendCount);
+                }
+            });
+        });*/
+        //监听提交
+        function submit() {
+            var count = $('#count').val();
+            if(count==''){
+                layer.msg("请输入充值数量");
+                return false;
+            }
+            count=parseInt(count);
+            //加载层-风格3
+            layer.load(2);
+            $.ajax({
+                url: "../alarmRecharge/recharge",
+                data: {
+                    count: count,
+                    userName: $('#userName').val()
+                },
+                dataType: "json",
+                type: "post",
+                timeout: 30000,
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if (data.state == 'success') {
+                        layer.msg($.i18n.prop('success'));
+                    }else {
+                        layer.msg($.i18n.prop(data.msg));
+                    }
+                }
+            });
+            return false;
+        }
+
+
+</script>
+</body>
+<style>
+    .container-in{
+        background-image: url(../../img/commend_bg.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 400px;
+        padding: 20px;
+        padding-top: 80px;
+    }
+</style>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/zTreeStyle/zTreeStyleMyInner.css">
+    <link rel="stylesheet" type="text/css" href="/static/groupList/css/gropuList3.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css"/>
+    <style type="text/css">
+        .ztree * {font-size:18px;}
+        ::-webkit-scrollbar {display: none}
+        .ztree li span.button.noline_docu{margin-right: 18px}
+        .groupListView_three{width: 110px; height: 40px; line-height: 40px;}
+        .select{width: 370px;}
+        .selectAllGroupList{ width: 262px; height: 35px;}
+        .selectLikeGroup{ width: 47px; height: 36px;}
+        #topTwo{background-color: #0f2763; height: 40px; width: 98%; margin-top: 35px; margin-left: 43px;}
+        .topTwo{float: left;height: 35px;line-height: 35px;text-align: center;margin-top: 1px;width: 50px;border-radius: 10px;color: #FFFFFF;}
+        #name{margin-left: 20px;}
+        #url{margin-left: 240px;}
+        #englishi{margin-left: 240px;}
+        #crud{margin-left: 270px;}
+        .ztree li {
+          line-height: 25px;
+        }
+        .ztree * {
+             font-size: 14px;
+         }
+        .ztree li a {
+             height: 30px;
+             line-height: 30px;
+             background-color: rgba(28, 51, 103, 0.56);
+             color: #f7f7f7;
+         }
+    </style>
+</head>
+
+<body>
+<input id="cang" value="" type="hidden" />
+<div>
+    <!--top-->
+    <div id="top">
+        <div class="groupListView_three" onclick="groupListView_three(1)" title="添加新菜单">添加新菜单</div>
+        <div class="groupListView_three" onclick="groupListView_three(2)" title="全部展开">全部展开</div>
+        <div class="groupListView_three" onclick="groupListView_three(3)" title="全部折叠">全部折叠</div>
+        <div class="select">
+            <div class="selectLikeGroup"><img style="padding-top:5px" onclick="select()" src="/static/groupList/img/selectGroup.png" width="24" height="24" /></div>
+            <input autocomplete="off" id="likeGroupList" class="selectAllGroupList" type="text" placeholder=" &nbsp;输入分组名称查询"/>
+        </div>
+    </div>
+    <div id="topTwo">
+        <div class="topTwo" id="name" >名称</div>
+        <div class="topTwo" id="url">路径</div>
+        <div class="topTwo" id="englishi">英文</div>
+        <div class="topTwo" id="crud">操作</div>
+    </div>
+    <!--inter-->
+    <div class="treeBody">
+        <ul id="treeDemo"class="ztree"></ul>
+    </div>
+    <!--bottom-->
+    <div class="titleImgFortz"><img src="/static/groupList/img/alert.png" alt="加载失败，请刷新" onclick="deleteAlert()"></div>
+</div>
+<script type="text/javascript" src="/static/js/zTreejs/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/static/js/zTreejs/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="/static/layui/layui.all.js"></script>
+<script type="text/javascript" src="/static/layui/layui.js"></script>
+<script src="/static/i18n/jquery.i18n.properties.js"></script>
+<script src="/static/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+    <!--
+    var setting = {
+        edit: {
+            enable: true,
+            showRemoveBtn: false,
+            showRenameBtn: false
+        },
+        data: {
+            key: {
+                icon: "url1",
+            },
+            simpleData: {
+                enable: true,
+                dKey: "id",
+                pIdKey: "parentId",
+            }
+        },
+        callback: {
+            beforeDrop: zTreeBeforeDrop,
+        },
+        view:{
+            addDiyDom: addHoverDom,
+            showLine: false,
+            selectedMulti: false,
+            showIcon: true,
+        },
+    };
+    //增、删、改、按钮
+    function addHoverDom(treeId, treeNode) {
+        var sObj = $("#" + treeNode.tId + "_span");
+        if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+        if (treeNode.editNameFlag || $("#editBtn_"+treeNode.tId).length>0) return;
+        if (treeNode.editNameFlag || $("#removeBtn_"+treeNode.tId).length>0) return;
+        var margin = treeNode.level * 17;
+        if (treeNode.isParent == false) {margin = (treeNode.level)*16+(treeNode.level-1)*2;}
+        margin+=100;
+        var url = treeNode.url;
+        if(url == undefined){url = '&nbsp;'}
+        if(url == ''){url = '&nbsp;'}
+        var enName = treeNode.enName;
+        if(enName == undefined){enName = '&nbsp;'}
+        if(enName == ''){enName = '&nbsp;'}
+        var addStr = "<span class='button remove' id='removeBtn_" + treeNode.tId+"' title='删除菜单 "+treeNode.name+"' onfocus='this.blur();' style=' float: right;margin-right: "+margin+"px'></span>" +
+            "<span class='button edit' id='editBtn_" + treeNode.tId+"' title='重命名菜单 "+treeNode.name+"' onfocus='this.blur();' style=' float: right; margin-right: 30px; margin-left: 30px'></span>" +
+            "<span class='button add' id='addBtn_" + treeNode.tId+"' title='为菜单 "+treeNode.name+" 添加新的子菜单' onfocus='this.blur();' style='float: right;'></span>"+
+            "<p style='width:270px; overflow:hidden; text-overflow:ellipsis; float:right; margin-right: 20px'>"+enName+"</p>" +
+            "<p style='width:350px; overflow:hidden; text-overflow:ellipsis; float:right; margin-right: 15px'>"+url+"</p>";
+        sObj.after(addStr);
+        var btnAdd = $("#addBtn_"+treeNode.tId);
+        var btnEdit = $("#editBtn_"+treeNode.tId);
+        var btnRemove = $("#removeBtn_"+treeNode.tId);
+        if (btnAdd) btnAdd.bind("click", function(){
+            layer.open({
+                type: 2,
+                title: '为 '+treeNode.name+' 添加新的菜单',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['40%', '80%'],
+                content: '/templates/rights/addSonRightList.html',
+                success: function(layero, index){
+                    var iframe = window['layui-layer-iframe' + index];
+                    iframe.getFatherId(treeNode.id)
+                },
+                end: function () {
+                    if($("#cang").val() == 1){
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+        if (btnEdit) btnEdit.bind("click", function(){
+            layer.open({
+                type: 2,
+                title: "修改菜单 "+treeNode.name,
+                shadeClose: true,
+                shade: 0.8,
+                area: ['40%', '80%'],
+                content: '/templates/rights/updateRightList.html',
+                success: function(layero, index){
+                    var iframe = window['layui-layer-iframe' + index];
+                    iframe.getFatherId(treeNode.id);
+                },
+                end: function () {
+                    if($("#cang").val() == 1){
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+        if (btnRemove) btnRemove.bind("click", function(){
+            layer.confirm(
+                "您确定要删除菜单 "+treeNode.name+" 吗？",
+                function(index){
+                    $.ajax({
+                        type:"post",
+                        data:"id="+treeNode.id,
+                        url:"/rights/newDeleteOperation",
+                        success: function(data){
+                            if(data.state == "success"){
+                                window.location.reload();
+                            }
+                            layer.msg($.i18n.prop(data.msg));
+                        }
+                    });
+                    layer.close(index);
+                }
+            );
+        });
+    };
+    //拖动节点之后的操作
+    function zTreeBeforeDrop(treeId, treeNodes, targetNode, moveType, isCopy) {
+        if(isCopy != null){
+            if(moveType == "prev"){
+                layer.confirm(
+                    "您确定要移动节点 "+treeNodes[0].name+" 么?",
+                    {title:'提示'},
+                    function(index){
+                        $.ajax({
+                            type:"post",
+                            async: false,
+                            data:"treeNodesId="+treeNodes[0].id+"&targetNodeId="+targetNode.id+"&id=0",
+                            url:"/rights/updateRightListSort",
+                            success: function(data){
+                                if(data != 0){
+                                    layer.msg("不能将子节点变为跟节点");
+                                    return false;
+                                }else{
+                                    window.location.reload()
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                );
+                return false;
+            }else if(moveType == "inner"){
+                layer.confirm(
+                    "您确定要移动节点 "+treeNodes[0].name+" 么?",
+                    {title:'提示'},
+                    function(index){
+                        $.ajax({
+                            type:"post",
+                            async: false,
+                            data:"treeNodesId="+treeNodes[0].id+"&targetNodeId="+targetNode.id+"&id=1",
+                            url:"/rights/updateRightListSort",
+                            success: function(data){
+                                if(data != 0){
+                                    layer.msg("不能将子节点变为跟节点");
+                                    return false;
+                                }else{
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                );
+                return false;
+            }else if(moveType == "next"){
+                layer.confirm(
+                    "您确定要移动节点 "+treeNodes[0].name+" 么?",
+                    {title:'提示'},
+                    function(index){
+                        $.ajax({
+                            type:"post",
+                            async: false,
+                            data:"treeNodesId="+treeNodes[0].id+"&targetNodeId="+targetNode.id+"&id=2",
+                            url:"/rights/updateRightListSort",
+                            success: function(data){
+                                if(data != 0){
+                                    layer.msg("不能将子节点变为跟节点");
+                                    return false;
+                                }else{
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                );
+                return false;
+            }
+            return false;
+        }else{
+            return false;
+        }
+    };
+    //初始化
+    var treeObj, treeNodess;
+    $.ajax({
+        url: "/rights/getRightsList",
+        type: "post",
+        async: false,
+        success: function(data){
+            treeNodess = data.data;
+        }
+    });
+    $(document).ready(function(){treeObj = $.fn.zTree.init($("#treeDemo"), setting, treeNodess);});
+    //groupListView_three
+    function groupListView_three(str){
+        if(str == 1){
+            layer.open({
+                type: 2,
+                title: '添加新的菜单',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['40%', '80%'],
+                content: '/templates/rights/addRightsList.html',
+                end: function () {
+                    if($("#cang").val() == 1){
+                        window.location.reload();
+                    }
+                }
+            });
+        }else if(str == 2){
+            treeObj.expandAll(true);
+        }else{
+            treeObj.expandAll(false);
+        }
+    }
+    //模糊查询
+    function select(){
+        if($("#likeGroupList").val() != ""){
+            var treeNodessLike;
+            $.ajax({
+                type: "post",
+                async: false,
+                data:"name="+$("#likeGroupList").val(),
+                url: "/rights/selectLikeToName",
+                success: function(data){
+                    treeNodessLike = data;
+                }
+            });
+            $(document).ready(function(){treeObj = $.fn.zTree.init($("#treeDemo"), setting, treeNodessLike);});
+        }
+        else{
+            $.ajax({
+                url: "rights/getRightsList",
+                type: "post",
+                async: false,
+                success: function(data){
+                    treeNodess = data.data;
+                }
+            });
+            $(document).ready(function(){treeObj = $.fn.zTree.init($("#treeDemo"), setting, treeNodess);});
+        }
+    }
+    //删除 提示图片
+    function deleteAlert(){
+        $(".titleImgFortz").html("");
+    }
+    //父子页面传参
+    function getValues(a){
+        $("#cang").val(a);
+    }
+    -->
+</script>
+</body>
+</html>

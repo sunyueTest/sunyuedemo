@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>添加基本信息</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <style type="text/css">
+        ::-webkit-scrollbar {display:none}
+    </style>
+</head>
+
+<body>
+<div style="margin: 40px;" class="layui-form layui-form-pane">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>绑定设备信息</legend>
+    </fieldset>
+    <div class="layui-inline" style="margin: 5px">
+        <label class="layui-form-label">继电器编号</label>
+        <div class="layui-input-inline" style="width: 317px">
+            <input type="text" id="RelayNumber" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-inline" style="margin: 5px">
+        <label class="layui-form-label">摄像头编号</label>
+        <div class="layui-input-inline" style="width: 317px">
+            <input type="text" id="CameraNumber" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-inline" style="margin: 5px">
+        <label class="layui-form-label">经纬度</label>
+        <div class="layui-input-inline" style="width: 317px">
+            <input type="text" lay-verify="required" id="Position" name="cameraNumber" autocomplete="off" class="layui-input" value="0.0,0.0" disabled="disabled">
+            <img src="/static/img/location_icon.png" onclick="selectPoint()" style="height: 33px ;margin-left: 323px; margin-top: -56px;}">
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>添加基本信息</legend>
+    </fieldset>
+    <div class="layui-inline">
+        <label class="layui-form-label">产品编号</label>
+        <div class="layui-input-inline" style="width: 317px">
+            <input type="text" id="ProductCode" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-inline" style="margin: 5px">
+        <label class="layui-form-label">产品名称</label>
+        <div class="layui-input-inline" style="width: 317px">
+            <input type="text" id="Name" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">标题</label>
+        <div class="layui-input-inline" style="width: 317px">
+            <input type="text" id="Title" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-inline" style="margin: 5px">
+        <label class="layui-form-label">成熟时间</label>
+        <div class="layui-input-block" style="width: 317px">
+            <input type="text" id="MaturityTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">养殖面积</label>
+        <div class="layui-input-inline" style="width: 317px">
+            <input type="text" id="AquacultureArea" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-inline" style="margin: 5px">
+        <label class="layui-form-label">产量</label>
+        <div class="layui-input-inline" style="width: 317px">
+            <input type="text" id="Yield" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">产地</label>
+        <div class="layui-input-inline" style="width: 317px">
+            <input type="text" id="PlaceOfOrigin" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text" style="margin-top: 5px">
+        <label class="layui-form-label">产品简介</label>
+        <div class="layui-input-block">
+            <textarea id="Message" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item" style="margin-left: -103px">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" id="save">确认添加</button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-1.12.1.min.js"></script>
+<script src="https://webapi.amap.com/maps?v=1.4.15&key=6a24bd2480a54c61089fc9ec11a7a83a"></script>
+<script src="/static/layui/layui.js" charset="UTF-8"></script>
+<script src="/static/js/traceability/baseInfo.js" charset="UTF-8"></script>
+<script src="/static/i18n/jquery.i18n.properties.js"></script>
+<script src="/static/js/common.js" charset="utf-8"></script>
+<script src="/static/js/versionLayer.js" charset="utf-8"></script>
+</html>

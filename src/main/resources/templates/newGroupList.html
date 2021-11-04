@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>分组管理</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/zTreeStyle/zTreeStyleMyInner.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/groupList/css/gropuList3.css}"/>
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css?v=1">
+    <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script type="text/javascript" th:src="@{/static/js/zTreejs/jquery.ztree.all.js}"></script>
+    <script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/static/layui/layui.all.js?v=1.2}" charset="utf-8"></script>
+    <script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+    <script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+    <script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+    <script type="text/javascript">
+        <!--
+        var setting = {
+            edit: {
+                enable: true,
+                showRemoveBtn: false,
+                showRenameBtn: false
+            },
+            data: {
+                key: {
+                    title: "groupName",
+                    name: "groupName",
+                },
+                simpleData: {
+                    enable: true,
+                    dKey: "id",
+                    pIdKey: "pId",
+                }
+            },
+            callback: {
+                beforeDrop: zTreeBeforeDrop,
+            },
+            view: {
+                addDiyDom: addHoverDom,
+                showLine: false,
+                selectedMulti: false,
+                showIcon: true
+            },
+        };
+        //增、删、改、按钮
+        var newCount = 1;
+        function addHoverDom(treeId, treeNode) {
+            var sObj = $("#" + treeNode.tId + "_span");
+            if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
+            if (treeNode.editNameFlag || $("#editBtn_" + treeNode.tId).length > 0) return;
+            if (treeNode.editNameFlag || $("#removeBtn_" + treeNode.tId).length > 0) return;
+            var margin = treeNode.level * 18;
+            if (treeNode.isParent == false) {
+                margin = (treeNode.level) * 18 + (treeNode.level - 1) * 1;
+            }
+            margin += 200;
+            var addStr = "<span class='button remove' id='removeBtn_" + treeNode.tId + "' title='删除分组 " + treeNode.groupName + "' onfocus='this.blur();' style=' float: right;margin-right: " + margin + "px'></span>" +
+                "<span class='button edit' id='editBtn_" + treeNode.tId + "' title='重命名分组 " + treeNode.groupName + "' onfocus='this.blur();' style=' float: right; margin-right: 80px; margin-left: 80px'></span>" +
+                "<span class='button add' id='addBtn_" + treeNode.tId + "' title='为分组" + treeNode.groupName + " 添加新的分组' onfocus='this.blur();' style='float: right;'></span>";
+            sObj.after(addStr);
+            var btnAdd = $("#addBtn_" + treeNode.tId);
+            var btnEdit = $("#editBtn_" + treeNode.tId);
+            var btnRemove = $("#removeBtn_" + treeNode.tId);
+            if (btnAdd) btnAdd.bind("click", function () {
+                layer.prompt({
+                    title: '请输入分组名称',
+                }, function(value, index, elem){
+                    $.ajax({
+                        type: "post",
+                        url: "/groupManage/submitGroup",
+                        data: "flag=add&groupName="+value+"&pId="+treeNode.id,
+                        success: function (data) {
+                            if (data.success) {
+                                window.location.reload();
+                            }
+                        }
+                    });
+                    layer.close(index);
+                });
+                return false;
+            });
+            if (btnEdit) btnEdit.bind("click", function () {
+                layer.prompt({
+                    title: '请输入需要修改的分组名',
+                }, function(value, index, elem){
+                    if (treeNode.pId == null) {
+                        treeNode.pId = 0;
+                    }
+                    $.ajax({
+                        type: "post",
+                        data: "id="+treeNode.id+"&flag=edit&groupName="+value+"&pId="+treeNode.pId,
+                        url: "/groupManage/submitGroup",
+                        success: function (data) {
+                            window.location.reload();
+                        }
+                    });
+                    layer.close(index);
+                });
+            });
+            //文博版本
+            // if (btnRemove) btnRemove.bind("click", function(){
+            //     if(confirm("确认删除节点 " + treeNode.groupName + " 吗？")){
+            //         $.ajax({
+            //             type:"post",
+            //             data:"id="+treeNode.id+"&type="+treeNode.type,
+            //             url:"/groupManage/newDeleteOperation",
+            //             success: function(data){
+            //                 if(data.success){
+            //                     window.location.reload();
+            //                 }
+            //                 layer.msg(data.msg);
+            //             }
+            //         });
+            //     }
+            // });
+            //李英豪版本
+            if (btnRemove) btnRemove.bind("click", function () {
+                layer.confirm(
+                    "您确定要删除节点 "+treeNode.groupName+" 吗？",
+                    {title:'提示'},
+                    function(index){
+                        $.ajax({
+                            type: "post",
+                            data: "id=" + treeNode.id + "&type=" + treeNode.type,
+                            url: "/groupManage/deleteOperation_Two",
+                            success: function (result) {
+                                //alert(result.msg);
+                                //alert($.i18n.prop(result.msg));
+                                // console.log(result)
+                                layer.msg($.i18n.prop(result.msg));
+                                if(result.msg == "warn58"){
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                );
+            });
+        };
+
+        //拖动节点之后的操作
+        function zTreeBeforeDrop(treeId, treeNodes, targetNode, moveType, isCopy) {
+            if (isCopy != null) {
+                if (moveType == "inner") {
+                    layer.confirm(
+                        "您确定要移动节点"+treeNodes[0].groupName+"么?",
+                        {title:'提示'},
+                        function(index){
+                            $.ajax({
+                                type: "post",
+                                data: "id=" + treeNodes[0].id + "&targetId=" + targetNode.id,
+                                url: "/groupManage/updatePid",
+                                success: function(){
+                                    window.location.reload();
+                                }
+                            });
+                            layer.close(index);
+                        }
+                    );
+                } else {
+                    layer.confirm(
+                        "您确定要移动节点"+treeNodes[0].groupName+"么?",
+                        {title:'提示'},
+                        function(index){
+                            $.ajax({
+                                type: "post",
+                                data: "id=" + treeNodes[0].id + "&targetId=0",
+                                url: "/groupManage/updatePid",
+                                success: function(){
+                                    window.location.reload();
+                                }
+                            });
+                            layer.close(index);
+                        }
+                    );
+                }
+                return false;
+            }
+        };
+
+        //初始化
+        var treeObj, treeNodess;
+        $.ajax({
+            url: "/groupManage/getGroupList",
+            type: "post",
+            async: false,
+            success: function (data) {
+                treeNodess = data.data;
+            }
+        });
+        $(document).ready(function () {
+            treeObj = $.fn.zTree.init($("#treeDemo"), setting, treeNodess);
+        });
+
+        //groupListView_three
+        function groupListView_three(str) {
+            if (str == 1) {
+                layer.prompt({
+                    title: '请输入分组名称',
+                }, function(value, index, elem){
+                    $.ajax({
+                        tupe: "post",
+                        data: "flag=add&groupName="+value+"&pId=0",
+                        url: "/groupManage/submitGroup",
+                        success: function (data) {
+                            if (data.success) {
+                                window.location.reload();
+                            }
+                        }
+                    });
+                    layer.close(index);
+                });
+            } else if (str == 2) {
+                treeObj.expandAll(true);
+            } else {
+                treeObj.expandAll(false);
+            }
+        }
+
+        //模糊查询
+        function select() {
+            if ($("#likeGroupList").val() != "") {
+                var treeNodessLike;
+                $.ajax({
+                    type: "post",
+                    async: false,
+                    data: "groupName=" + $("#likeGroupList").val(),
+                    url: "/groupManage/likeUserGroupList",
+                    success: function (data) {
+                        treeNodessLike = data.datas;
+                    }
+                });
+                if (treeNodessLike != null) {
+                    $(document).ready(function () {
+                        treeObj = $.fn.zTree.init($("#treeDemo"), setting, treeNodessLike);
+                    });
+                }
+            } else {
+                $.ajax({
+                    url: "/groupManage/getGroupList",
+                    type: "post",
+                    async: false,
+                    success: function (data) {
+                        treeNodess = data.data;
+                    }
+                });
+                $(document).ready(function () {
+                    treeObj = $.fn.zTree.init($("#treeDemo"), setting, treeNodess);
+                });
+            }
+        }
+        //清除提示
+        function deleteAlert() {
+            $(".titleImgFortz").html("");
+        }
+        -->
+    </script>
+    <style type="text/css">
+        ::-webkit-scrollbar {
+            display: none
+        }
+        .ztree {
+            margin-top: 15px
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <!--top-->
+    <div id="top">
+        <div class="groupListView_three" onclick="groupListView_three(1)">添加根分组</div>
+        <div class="groupListView_three" onclick="groupListView_three(2)">全部展开</div>
+        <div class="groupListView_three" onclick="groupListView_three(3)">全部折叠</div>
+        <div class="select">
+            <div class="selectLikeGroup"><img style="padding-top: 2px" onclick="select()"
+                                              src="/static/groupList/img/selectGroup.png" width="24" height="24"/></div>
+            <input id="likeGroupList" class="selectAllGroupList" type="text" placeholder=" &nbsp;输入分组名称查询"/>
+        </div>
+    </div>
+    <!--inter-->
+    <div class="treeBody">
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+    <!--bottom-->
+    <div class="titleImgFortz"><img src="/static/groupList/img/alert.png" alt="加载失败，请刷新" onclick="deleteAlert()"></div>
+</div>
+</body>
+</html>

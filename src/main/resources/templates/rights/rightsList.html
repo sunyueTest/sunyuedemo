@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>分组</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <!--<link rel="stylesheet" href="../css/common.css">-->
+    <style>
+        .layui-container{
+            width:1050px;
+        }
+        input {
+            height: 36px;
+            line-height: 36px;
+            padding: 0 7px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            margin-bottom: -2px;
+            outline: none;
+        }
+
+        .layui-table-box .layui-table-header {
+            width: 1000px;
+        }
+
+        .layui-table-header .layui-table-cell {
+            text-align: center;
+            font-size: 17px;
+            /*box-shadow: 0 0 0 10px rgba(243, 106, 34, .4);*/
+            /*border-spacing:5px;*/
+        }
+        .layui-table-header {
+            background-color: transparent;
+            background-image: url(../../img/device_item_1.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        .layui-table-cell {
+            font-size: 20px;
+        }
+
+        input:focus {
+            /*border-color: #009E94;*/
+            border: 2px solid #009E94;
+        }
+        .layui-table {
+            background-color: transparent;
+            color: #FAFAFA;
+        }
+        tbody tr {
+            background-color: transparent;
+            background-image: url(../../img/device_item_2.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            height: 45px;
+        }
+
+        .layui-table td, .layui-table th, .layui-table-col-set, .layui-table-fixed-r, .layui-table-grid-down, .layui-table-header, .layui-table-page, .layui-table-tips-main, .layui-table-tool, .layui-table-total, .layui-table-view, .layui-table[lay-skin=line], .layui-table[lay-skin=row] {
+            border-width: 0 0 0px;
+        }
+        thead, tr, th, .layui-table-tool, .layui-table-view {
+            background-color: transparent;
+        }
+        .layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even) {
+            background-color: transparent;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="layui-container">
+    <!--<blockquote class="layui-elem-quote layui-text tou">
+        <span>注意：如果要查看设备信息，请双击区域名称</span>
+    </blockquote>-->
+
+    <!-- <div class="layui-btn-group">
+
+     </div>-->
+
+
+    <button class="layui-btn" id="addRoot"
+            style="background-color: #ffffff;color: #000000;">添加根菜单
+    </button>
+    <button class="layui-btn" id="btn-expand"
+            style="background-color: #ffffff;color: #000000;">全部展开
+    </button>
+    <button class="layui-btn" id="btn-fold" style="background-color: #ffffff;color: #000000;">全部折叠
+    </button>
+
+
+    <div style="float: right;">
+        <button class="layui-btn" id="btn-search"><i class="layui-icon layui-icon-search "></i>
+        </button>
+    </div>
+    <div style="float: right;"><input id="edt-search" type="text" placeholder="输入关键字"
+                                      style="width: 140px;" /></div>
+
+    <table id="auth-table" class="layui-table" lay-filter="auth-table"
+           style="font-size:20px;"></table>
+
+</div>
+<script type="text/html" id="barDemo">
+    <div class="layui-btn-group">
+
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="addGroup"><i
+                class="layui-icon"></i>
+        </button>
+        <!--<button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="addDevice"><i
+            class="layui-icon"></i>设备
+        </button>-->
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i
+                class="layui-icon"></i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="delete"><i
+                class="layui-icon"></i></button>
+    </div>
+
+</script>
+</body>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    layui.config({
+        base: '../static/module/'
+    }).extend({
+        treetable: 'treetable-lay/treeTable'
+    }).use(['table', 'treetable'], function () {
+        var $ = layui.jquery;
+        var table = layui.table;
+        var treetable = layui.treetable;
+
+        // 渲染表格
+        var renderTable = function () {
+            layer.load(2);
+            treetable.render({
+                treeColIndex: 1,
+                treeSpid: -1,
+                treeIdName: 'id',
+                treePidName: 'parentId',
+                elem: '#auth-table',
+                url: '../rights/getRightsList',
+                page: false,
+                cols: [
+                    [
+                        {field: 'id', width:80,title: "ID"},
+                        {field: 'name',width:280, title: "菜单"},
+                        {field: 'url', width:250, title: "URL"},
+                        {field: 'enName', width:150, title: "英文菜单"},
+                        {field: 'sort', width:80, title: "排序"}
+                        /*, {field: 'type', width: 100, title: '类别'}*/
+                        , {fixed: 'right', title: $.i18n.prop('operation'), width:170,toolbar: '#barDemo',}
+
+                    ]
+                ],
+                done: function () {
+                    layer.closeAll('loading');
+                }
+            });
+
+
+        }
+        /*var renderTable = setTimeout( render(),  1000 );*/
+        renderTable();
+
+        //设置语言
+     /*   $('#addRoot').text($.i18n.prop('addRoot'));
+        $('#btn-expand').text($.i18n.prop('expandAll'));
+        $('#btn-fold').text($.i18n.prop('foldAll'));
+        $('#addRoot').text($.i18n.prop('addRoot'));
+        $('#tips').text($.i18n.prop('tips'));
+        $('#edt-search').attr('placeholder',$.i18n.prop('groupSearch'));*/
+
+        $('#btn-expand').click(function () {
+            treetable.expandAll('#auth-table');
+        });
+
+        $('#btn-fold').click(function () {
+            treetable.foldAll('#auth-table');
+        });
+
+        $('#btn-search').click(function () {
+            var keyword = $('#edt-search').val();
+            var searchCount = 0;
+            $('#auth-table').next('.treeTable').find('.layui-table-body tbody tr td').each(function () {
+                $(this).css('background-color', 'transparent');
+                var text = $(this).text();
+                if (keyword != '' && text.indexOf(keyword) >= 0) {
+                    $(this).css('background-color', 'rgba(250,230,160,0.5)');
+                    if (searchCount == 0) {
+                        treetable.expandAll('#auth-table');
+                        $('html,body').stop(true);
+                        $('html,body').animate({scrollTop: $(this).offset().top - 150}, 500);
+                    }
+                    searchCount++;
+                }
+            });
+            if (keyword == '') {
+                layer.msg($.i18n.prop('warn12'), {icon: 5});
+            } else if (searchCount == 0) {
+                layer.msg($.i18n.prop('warn13'), {icon: 5});
+            }
+        });
+
+        $('#addRoot').click(function () {
+            layer.open({
+                type: 2,
+                area: ['500px', '450px'],
+                title: $.i18n.prop('addRoot'),
+                maxmin: true,
+                btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                btnAlign: 'c',
+                yes: function (index, layero) {
+                    //表单提交
+                    var body = layer.getChildFrame('body', index);
+                    body.find('form').submit();
+                    layer.close(index);
+                    reload();
+                },
+                anim: 3,
+                content: '../rights/getDetail?flag=add',
+                success: function (layero, index) {
+                    var body = layer.getChildFrame('body', index);
+                    body.find('input[name="pId"]').val(0);
+                    body.find('input[name="level"]').val(1);
+                    $(":focus").blur();
+                }
+            });
+        });
+        //监听行工具事件
+        table.on('tool(auth-table)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'delete') {
+                if (data.isParent) {
+                    layer.msg($.i18n.prop('warn15'));
+                    return false;
+                }
+                layer.confirm($.i18n.prop('confirmDelete'), { btn:[$.i18n.prop('yes'),$.i18n.prop('no')],title:$.i18n.prop('info')},function (index) {
+
+                    $.ajax({
+                        type: "post",
+                        url: '../rights/deleteOperation',
+                        data: {
+                            id: data.id,
+                            type: data.type
+                        },
+                        success: function (result) {
+
+                        }
+                    });
+
+                    layer.close(index);
+                    reload();
+
+                });
+            } else if (obj.event === 'addGroup') {
+                layer.open({
+                    type: 2,
+                    area: ['500px', '450px'],
+                    title: $.i18n.prop('addNode'),
+                    maxmin: true,
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    btnAlign: 'c',
+                    yes: function (index, layero) {
+                        //表单提交
+                        var body = layer.getChildFrame('body', index);
+                        body.find('form').submit();
+                        layer.close(index);
+                        //setTimeout(renderTable(),  10000 ) ;
+                        reload();
+                    },
+                    anim: 3,
+                    content: '../rights/getDetail?flag=add',
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);
+                        body.find('input[name="parentId"]').val(data.id);
+                        body.find("input[name='level']").val(data.level+1);
+                        $(":focus").blur();
+                    }
+                });
+            } else if (obj.event == 'edit') {
+                    layer.open({
+                        type: 2,
+                        area: ['500px', '450px'],
+                        title: $.i18n.prop('updateNode'),
+                        maxmin: true,
+                        btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                        btnAlign: 'c',
+                        yes: function (index, layero) {
+                            //表单提交
+                            var body = layer.getChildFrame('body', index);
+                            body.find('form').submit();
+                            layer.close(index);
+                            reload();
+                        },
+                        anim: 3,
+                        content: '../rights/getDetail?flag=edit&id=' + data.id,
+                        success: function (layero, index) {
+                            var body = layer.getChildFrame('body', index);
+                            body.find('input[name="flag"]').val("edit");
+                            $(":focus").blur();
+                        }
+                    });
+
+
+            }
+        });
+    });
+
+    function reload() {
+        window.location.reload();
+    }
+
+
+
+</script>
+
+
+</html>

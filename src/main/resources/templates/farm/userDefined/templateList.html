@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+</head>
+<body>
+
+<table class="layui-hide" id="device" lay-filter="device"></table>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline">
+        <button id="add" class="layui-btn addBtn" lay-event="add"> 添加</button>
+    </div>
+    <div class="layui-inline" style="float:right;">
+        <button class="layui-btn searchBtn" lay-event="search" id="searchButton"><i
+                class="layui-icon layui-icon-search "></i></button>
+    </div>
+    <div class="layui-inline" style="float:right;">
+        <input type="text" class="layui-input searchInput" name="name" id="name" autocomplete="off"
+               placeholder="模板名称">
+    </div>
+</script>
+
+<script type="text/html" id="barDemo">
+
+    <button class="opbtn" lay-event="edit"><i
+            class="layui-icon  iconfont icon-iconfontedit size25"></i></button>
+    <button class="opbtn" lay-event="del"><i
+            class="layui-icon  iconfont icon-shanchu size22"></i></button>
+</script>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    var table;
+    layui.use('table', function () {
+        table = layui.table;
+        table.render({
+            elem: '#device'
+            , url: '/userDefined/getTempList'
+            , toolbar: '#toolbar1'
+            , title: $.i18n.prop('templateList')
+            , cols: [
+                [
+                    {type: 'checkbox'}
+                    ,
+                    {
+                        field: 'id', title: 'ID', width: 80, //fixed: 'left', unresize: true,
+                        sort: true
+                    }
+                    , {field: 'name', title: $.i18n.prop('templateName'), width: 250, align: 'center'}
+                    , {field: 'userName', title: $.i18n.prop('userName'), width: 360, align: 'center'}
+                    , {
+                    field: 'right',
+                    title: $.i18n.prop('operation'),
+                    toolbar: '#barDemo',
+                    width: 350,
+                    align: 'center'
+                }
+                ]
+            ]
+            , page: true
+            , height: 600
+        });
+
+        //头工具栏事件
+        table.on('toolbar(device)', function (obj) {
+            //var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'add':
+                    var win = layer.open({
+                        type: 2,
+                        area: ['850px', '500px'],
+                        title: $.i18n.prop('addTemplate'),
+                        anim: 3,
+                        content: '../userDefined/tempDetail',
+                        success: function (layero, index) {
+                            /*//给弹出层添加一个标识
+                            var body = layer.getChildFrame('body', index);
+                            body.find('input[name="flag"]').val("add");*/
+                        }
+                    });
+                    layer.full(win);
+                    break;
+                case 'search':
+                    var name = $('#name').val();
+                    reload(name)
+                    break;
+
+            }
+            ;
+        });
+
+        //监听行工具事件
+        table.on('tool(device)', function (obj) {
+            var data = obj.data;
+
+            if (obj.event === 'edit') {
+                var win = layer.open({
+                    type: 2,
+                    area: ['850px', '500px'],
+                    title: $.i18n.prop('templateDetail'),
+                    anim: 3,
+                    content: '../userDefined/tempDetail?id=' + data.id,
+                    success: function (layero, index) {
+                        /*//给弹出层添加一个标识*/
+                     /*   var body = layer.getChildFrame('body', index);
+                        body.find('input[name="tempId"]').val(data.id);
+                        body.find('input[name="name"]').val(data.name);*/
+                    }
+                });
+                layer.full(win);
+            } else if (obj.event == 'del') {
+                layer.confirm($.i18n.prop('confirmDelete'),{ btn:[$.i18n.prop('yes'),$.i18n.prop('no')],title:$.i18n.prop('info')}, function (index) {
+                    layer.load(2);
+                    $.ajax({
+                        url: "../userDefined/delTemplate",
+                        data: {
+                            id:data.id
+                        },
+                        dataType: "json",
+                        type: "post",
+                        timeout: 30000,
+                        error: function (data, type, err) {
+                            console.log(err);
+                            layer.closeAll('loading');
+                            layer.msg($.i18n.prop('fail'), {
+                                offset: '6px', icon: 2
+                            });
+                        },
+                        success: function (data) {
+                            layer.closeAll('loading');
+                            if ( data.success) {
+                                table.reload('device', {
+                                    page: {
+                                        curr: 1 //重新从第 1 页开始
+                                    }
+                                });
+                                layer.msg($.i18n.prop(data.msg), {icon: 1})
+                            } else {
+                                layer.msg($.i18n.prop(data.msg), {icon: 2})
+                            }
+                        }
+                    });
+                });
+            }else if(obj.event == 'show'){
+                var win = layer.open({
+                    type: 2,
+                    area: ['850px', '500px'],
+                    title: data.name,
+                    anim: 3,
+                    content: '../userDefined?id=' + data.id,
+                    success: function (layero, index) {
+                        /*//给弹出层添加一个标识*/
+                        /*   var body = layer.getChildFrame('body', index);
+                           body.find('input[name="tempId"]').val(data.id);
+                           body.find('input[name="name"]').val(data.name);*/
+                    }
+                });
+            }
+        });
+
+
+    });
+
+    function reload(name) {
+        table.reload('device', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                name: name
+            }
+        });
+
+    }
+
+    function refresh() {
+        console.log('refresh');
+        var btn = $('.layui-laypage-btn');
+        if (btn.length == 0) {
+            table.reload('device', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        } else {
+            btn.click();
+        }
+    }
+</script>
+</body>
+</html>

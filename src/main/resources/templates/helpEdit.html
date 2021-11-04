@@ -1,0 +1,55 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+</head>
+<body>
+<textarea id="demo" name="content" style="width:800px;height:400px;"></textarea>
+
+<div style="text-align: center;margin-top: 10px;">
+    <button id="save" class="layui-btn layui-btn-primary layui-btn-radius" onclick="submit()">保存</button>
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/KE/kindeditor-all-min.js}" ></script>
+<script th:src="@{/static/KE/themes/default/default.css}" ></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script th:inline="javascript">
+    $('#save').text($.i18n.prop('save'));
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="content"]',{
+            uploadJson : '../goodsManage/uploadImg',
+        });
+        var text = [[${data}]];
+        editor.html(text);
+    });
+
+    function submit(){
+        editor.sync();
+
+        //保存数据
+        $.ajax({
+            url: "../home/saveHelpDetail",
+            type : "POST",
+            data: {
+                content:$('#demo').val()
+            },
+            dataType: "json",
+            success: function (result) {
+                layer.msg($.i18n.prop('success'));
+                $('.layui-layer-close').click();
+
+            }
+        });
+    }
+</script>
+</html>

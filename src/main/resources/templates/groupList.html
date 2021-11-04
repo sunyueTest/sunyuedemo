@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>分组</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        input {
+            height: 36px;
+            line-height: 36px;
+            padding: 0 7px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            margin-bottom: -2px;
+            outline: none;
+        }
+
+        .layui-table-box .layui-table-header {
+            /*width: 1050px;*/
+        }
+
+        .abc {
+            float: right;
+        }
+
+        .layui-table-header .layui-table-cell {
+            text-align: center;
+            font-size: 17px;
+            /*box-shadow: 0 0 0 10px rgba(243, 106, 34, .4);*/
+            /*border-spacing:5px;*/
+        }
+
+        .layui-table-cell {
+            font-size: 20px;
+        }
+
+        input:focus {
+            /*border-color: #009E94;*/
+            border: 2px solid #009E94;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="layui-container">
+    <button class="layui-btn" id="addRoot" style="background-color: #ffffff;color: #000000;">添加根分组
+    </button>
+    <button class="layui-btn" id="btn-expand" style="background-color: #ffffff;color: #000000;">全部展开
+    </button>
+    <button class="layui-btn" id="btn-fold" style="background-color: #ffffff;color: #000000;">全部折叠
+    </button>
+
+    <div style="float: right;">
+        <button class="layui-btn" id="btn-search"><i class="layui-icon layui-icon-search"></i>
+        </button>
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="aCode" id="edt-search" style="width:182px;border:none;"
+               autocomplete="off" placeholder="输入关键字">
+    </div>
+    <table id="auth-table" class="layui-table" lay-filter="auth-table" style="font-size:20px;"></table>
+    <div style="display: inline;color:#ffffff;float: right;">
+        <!--<i style="color: yellow;background-image: "  class="layui-icon layui-icon-tips" lay-offset="5"></i>-->
+        <img src="img/tips.png">
+        <span id="tips"></span>
+    </div>
+</div>
+<script type="text/html" id="barDemo">
+    <div class="layui-btn-group">
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="upgrade"><i
+                class="layui-icon layui-icon-upload-circle"></i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="addGroup"><i class="layui-icon"></i>
+        </button>
+        <!--<button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="addDevice"><i
+            class="layui-icon"></i>设备
+        </button>-->
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i class="layui-icon"></i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="delete"><i class="layui-icon"></i></button>
+    </div>
+
+</script>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<!--<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>-->
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<!--<script th:src="@{/static/layui/layui.all.js?v=1.2}" charset="utf-8"></script>-->
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    layui.config({
+        base: '../static/module/'
+    }).extend({
+        treetable: 'treetable-lay/treeTable'
+    }).use(['table', 'treetable'], function () {
+        var $ = layui.jquery;
+        var table = layui.table;
+        var treetable = layui.treetable;
+
+        // 渲染表格
+        var renderTable = function () {
+            layer.load(2);
+
+            treetable.render({
+                treeColIndex: 1,
+                treeSpid: -1,
+                treeIdName: 'id',
+                treePidName: 'pId',
+                elem: '#auth-table',
+                url: '../groupManage/getGroupList',
+                page: false,
+                cols: [
+                    [
+                        {type: 'numbers'},
+                        {field: 'groupName', width: 680, title: $.i18n.prop('group')},
+                        /*{field: 'type', width: 100, title: '类别'},*/
+                        {fixed: 'right', title: $.i18n.prop('operation'), toolbar: '#barDemo',}
+                    ]
+                ],
+                done: function () {
+                    layer.closeAll('loading');
+                }
+            });
+        };
+        renderTable();
+
+        //设置语言
+        $('#addRoot').text($.i18n.prop('addRoot'));
+        $('#btn-expand').text($.i18n.prop('expandAll'));
+        $('#btn-fold').text($.i18n.prop('foldAll'));
+        $('#addRoot').text($.i18n.prop('addRoot'));
+        $('#tips').text($.i18n.prop('tips'));
+        $('#edt-search').attr('placeholder', $.i18n.prop('groupSearch'));
+
+        $('#btn-expand').click(function () {
+            treetable.expandAll('#auth-table');
+        });
+
+        $('#btn-fold').click(function () {
+            treetable.foldAll('#auth-table');
+        });
+
+        $('#btn-search').click(function () {
+
+            var keyword = $('#edt-search').val();
+            var searchCount = 0;
+            $('#auth-table').next('.treeTable').find('.layui-table-body tbody tr td').each(function () {
+                $(this).css('background-color', 'transparent');
+                var text = $(this).text();
+                if (keyword != '' && text.indexOf(keyword) >= 0) {
+                    $(this).css('background-color', 'rgba(250,230,160,0.5)');
+                    if (searchCount == 0) {
+                        treetable.expandAll('#auth-table');
+                        $('html,body').stop(true);
+                        $('html,body').animate({scrollTop: $(this).offset().top - 150}, 500);
+                    }
+                    searchCount++;
+                }
+            });
+            if (keyword == '') {
+                layer.msg($.i18n.prop('warn12'), {icon: 5});
+            } else if (searchCount == 0) {
+                layer.msg($.i18n.prop('warn13'), {icon: 5});
+            }
+        });
+
+        $('#addRoot').click(function () {
+            layer.open({
+                type: 2,
+                area: ['360px', '170px'],
+                title: $.i18n.prop('addRoot'),
+                maxmin: true,
+                btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                btnAlign: 'c',
+                yes: function (index, layero) {
+                    //表单提交
+                    var body = layer.getChildFrame('body', index);
+                    var groupName = body.find('input[name="groupName"]').val();
+                    if (groupName == null || groupName == '') {
+                        layer.msg($.i18n.prop('warn14'))
+                        return
+                    }
+                    body.find('form').submit();
+                    layer.close(index);
+                    reload();
+                },
+                anim: 3,
+                content: '../groupManage/getGroupDetail?flag=add',
+                success: function (layero, index) {
+                    var body = layer.getChildFrame('body', index);
+                    body.find('input[name="pId"]').val(0);
+                    body.find("input[name='flag']").val('add');
+                    $(":focus").blur();
+                }
+            });
+        });
+        //监听行工具事件
+        table.on('tool(auth-table)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'delete') {
+                if (data.isParent) {
+                    layer.msg($.i18n.prop('warn15'));
+                    return false;
+                }
+                layer.confirm($.i18n.prop('confirmDelete'), {
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    title: $.i18n.prop('info')
+                }, function (index) {
+                    console.log(data.id);
+                    $.ajax({
+                        type: "post",
+                        url: '../groupManage/deleteOperation_Two',
+                        data: {
+                            id: data.id,
+                            type: data.type
+                        },
+                        success: function (result) {
+                            // alert(result.msg);
+                            // console.log(result);
+
+                            //reload();
+                            layer.msg($.i18n.prop(result.msg));
+                            //layer.close(index);
+                        }
+                    });
+                    layer.close(index);
+                    setTimeout(function () {
+                        reload();
+                    }, 1000);
+
+                });
+            } else if (obj.event === 'addGroup') {
+                //判断是否是设备，设备下不允许在衍生子节点
+                if (data.type == 1) {
+                    layer.msg($.i18n.prop('warn16'));
+                    return false;
+                }
+                layer.open({
+                    type: 2,
+                    area: ['360px', '170px'],
+                    title: $.i18n.prop('addNode'),
+                    maxmin: true,
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    btnAlign: 'c',
+                    yes: function (index, layero) {
+                        //表单提交
+                        var body = layer.getChildFrame('body', index);
+                        body.find('form').submit();
+                        layer.close(index);
+                        reload();
+                    },
+                    anim: 3,
+                    content: '../groupManage/getGroupDetail?flag=add',
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);
+                        body.find('input[name="pId"]').val(data.id);
+                        body.find("input[name='flag']").val('add');
+                        $(":focus").blur();
+                    }
+                });
+            } else if (obj.event === 'addDevice') {
+                layer.open({
+                    type: 2,
+                    area: ['500px', '300px'],
+                    title: '添加设备',
+                    maxmin: true,
+                    btn: ['确定', '取消'],
+                    btnAlign: 'c',
+                    yes: function (index, layero) {
+                        //表单提交
+                        var body = layer.getChildFrame('body', index);
+                        body.find('form').submit();
+                        layer.close(index);
+                    },
+                    anim: 3,
+                    content: '../groupManage/getGroupDeviceDetail?flag=add',
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);
+                        body.find('input[name="groupId"]').val(data.id);
+                        body.find("input[name='flag']").val('add');
+                    }
+                });
+            } else if (obj.event == 'edit') {
+                var type = data.type;//1代表设备
+                if (type == 1) {
+                    layer.open({
+                        type: 2,
+                        area: ['500px', '300px'],
+                        title: '修改设备',
+                        maxmin: true,
+                        btn: ['确定', '取消'],
+                        btnAlign: 'c',
+                        yes: function (index, layero) {
+                            //表单提交
+                            var body = layer.getChildFrame('body', index);
+                            body.find("form").submit();
+                            layer.close(index);
+                            renderTable();
+                        },
+                        anim: 3,
+                        content: '../groupManage/getGroupDeviceDetail?flag=edit&id=' + data.id,
+                        success: function (layero, index) {
+                            var body = layer.getChildFrame('body', index);
+                            body.find('input[name="flag"]').val("edit");
+                        }
+                    });
+                } else {
+                    layer.open({
+                        type: 2,
+                        area: ['360px', '170px'],
+                        title: $.i18n.prop('updateNode'),
+                        maxmin: true,
+                        btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                        btnAlign: 'c',
+                        yes: function (index, layero) {
+                            //表单提交
+                            var body = layer.getChildFrame('body', index);
+                            body.find('form').submit();
+                            layer.close(index);
+                            reload();
+                        },
+                        anim: 3,
+                        content: '../groupManage/getGroupDetail?flag=edit&id=' + data.id,
+                        success: function (layero, index) {
+                            var body = layer.getChildFrame('body', index);
+                            body.find('input[name="flag"]').val("edit");
+                            $(":focus").blur();
+                        }
+                    });
+                }
+
+            } else if (obj.event = 'upgrade') {
+                layer.confirm($.i18n.prop('确定升级为根分组')+"？", {
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    title: $.i18n.prop('info')
+                }, function (index) {
+
+                    $.ajax({
+                        url: "groupManage/upgrade",
+                        data: obj.data,
+                        dataType: "json",
+                        type: "post",
+                        timeout: 30000,
+                        error: function (data, type, err) {
+                            layer.closeAll('loading');
+                            layer.msg($.i18n.prop('fail'), {
+                                offset: '6px', icon: 2
+                            });
+                        },
+                        success: function (data) {
+                            layer.closeAll('loading');
+                            if (data.success) {
+                                layer.msg($.i18n.prop('success'), {icon: 1})
+                                setTimeout(function () {
+                                    reload();
+                                }, 1000);
+                            } else {
+                                layer.msg($.i18n.prop('fail'), {icon: 2})
+                            }
+                        }
+                    });
+                });
+            }
+        });
+
+
+        var drag = '';
+        //监听行单击事件。
+        table.on('rowDouble(auth-table)', function (obj) {
+            if (drag == '') {
+                this.style.background = 'red';
+                drag = obj.data.id;
+                layer.msg($.i18n.prop('warn17'));
+            } else if (drag == obj.data.id) {
+                this.style.background = '';
+                drag = '';
+                layer.msg($.i18n.prop('success'));
+            } else {
+                this.style.background = '';
+                //ajax 修改父id
+                $.ajax({
+                    url: "../groupManage/updatePid",
+                    data: {
+                        id: drag,
+                        targetId: obj.data.id
+                    },
+                    success: function (result) {
+                        layer.msg($.i18n.prop('success'));
+                        drag = '';
+                        renderTable();
+                        parent.sendBroadcast('bundDeviceSuccess', null);
+                    }
+                });
+            }
+        });
+    });
+
+    function reload() {
+        window.location.reload();
+        parent.sendBroadcast('bundDeviceSuccess', null);
+    }
+</script>
+</html>

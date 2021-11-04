@@ -1,0 +1,94 @@
+.layui-table-tool-self {
+    display: none;
+}
+
+.layui-table-tool-temp {
+    padding-right: 20px !important;
+}
+
+.layui-table-tool {
+    padding: 7px 0px 10px 0px !important;
+}
+
+.layui-input-block {
+    margin-left: 0px;
+}
+.layui-table-tool-self{
+    display: none!important;
+}
+
+.abc {
+    float: right;
+}
+
+body::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+.layui-table-tool .layui-inline {
+    /*background-color: #eaeaea;*/
+}
+
+.online {
+    color: #458B74;
+}
+
+.offline {
+    color: #8B7500;
+}
+.layui-layer{
+    border-radius: 20px!important;
+}
+.barDemo{
+    width: 150px;
+    display: flex;
+}
+.xiangqing{
+    border: 1px solid #8293FF;
+    margin-left: 10px;
+    width:40px;
+    height:24px;
+    text-align: center;
+    line-height: 23px
+}
+.xiangqing1{
+    color: white;
+    background-color: #8293FF;
+    width:36px;
+    height:20px;
+    margin:1px 1px;
+    cursor: pointer;
+}
+.tongguo{
+    border: 1px solid #81CA87;
+    margin-left: 10px;
+    width:40px;
+    height:24px;
+    text-align: center;
+    line-height: 23px;
+    cursor: pointer;
+}
+.tongguo1{
+    color: white;
+    background-color: #81CA87;
+    width:36px;
+    height:20px;
+    margin:1px 1px;
+}
+.bohui{
+    border: 1px solid #AF7D85;
+    margin-left: 10px;
+    width:40px;
+    height:24px;
+    text-align: center;
+    line-height: 23px;
+    cursor: pointer;
+}
+.bohui1{
+    color: white;
+    background-color: #AF7D85;
+    width:36px;
+    height:20px;
+    margin:1px 1px;
+}

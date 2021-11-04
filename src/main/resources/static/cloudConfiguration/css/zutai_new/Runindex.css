@@ -1,0 +1,751 @@
+@charset "utf-8";
+.pc-edit{
+	left:0 !important;
+}
+.Guide{
+	display:none !important;
+}
+.pc-canvas{
+	display:none !important;
+}
+.navFixed.navTop{
+	top:0 !important;
+}
+.navFixed.navLeft {
+	left:0 !important;
+	top:0 !important;
+}
+.navFixed.navRight {
+	top:0 !important;
+}
+.myPlayerNone, .weatherNone, .canvasTextNone, .Group_is{
+	display:none !important;
+}
+.switchON, .switchOFF, .addModal, .dataDown, .positionCurve, .fixedDown, .policeHistory{
+	cursor:pointer !important;
+}
+.DataSend{
+    position: fixed;
+    top: 0;
+    left:-105%;
+    width: 100%;
+    bottom: 0;
+    z-index: 999999;
+}
+.DataSend-T{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width:700px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    background-color: #383e41;
+    border-right: 1px solid #4a5053;
+    z-index: 99;
+}
+.DataSend-TD{
+	position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    color: #fff;
+}
+.DataSend-L{
+	position: absolute;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    background: #4a5053;
+}
+.DataSend-LC{
+	position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.DataSend-LA{
+	position: relative;
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color: #999ea8;
+    padding: 0 10px;
+    font-size: 14px;
+    overflow: hidden;
+}
+.DataSend-LB{
+	 background-color: #4c84ff;
+	 color: #fff;
+}
+.DataSend-R{
+	position: absolute;
+    top: 50px;
+    left: 200px;
+    bottom: 0;
+    width: 500px;
+    background-color:#eee;
+    border-right: 1px solid #4a5053;
+}
+.DataSend-RT{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 120px;
+    border-bottom: 1px solid #4a5053;
+}
+.DataSend-con{
+	position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.DataSend-RB{
+	position: absolute;
+    left: 0;
+    width: 100%;
+    bottom:0;
+    height:120px;
+    background-color: #fff;
+    border-bottom: 1px solid #4a5053;
+}
+.DataSend-YES, .DataSend-NO{
+	position: relative;
+    float: right;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    background-color: #4c84ff;
+    font-size: 14px;
+    border-radius: 5px;
+    margin: 60px 10px 0 0;
+}
+.DataSend-text{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    border: 0;
+    padding: 10px;
+    outline: none;
+    resize: none;
+}
+.DataSend-NO{
+	 background-color: #4a5053;
+}
+.DataSend-RTA, .DataSend-RTB{
+    position: relative;
+    width:400px;
+    line-height: 20px;
+    background-color: #fff;
+    margin: 10px 0 0 10px;
+    border: 1px solid #4c84ff;
+    padding: 10px 10px;
+    border-radius: 5px;
+   }
+.DataSend-RTB{
+	border: 1px solid #4a5053;	
+}
+.newModaldel{
+	display:block;
+}
+.tooltips{
+	top:-50px;
+}
+.map_spop_con
+	{
+		border: 1px solid #ccc;
+	    position: absolute;
+	    top: -73px;
+	    left: 50%;
+	    margin-left: -84px;
+	    width: 173px;
+	    height: 90px;
+	    background-color: #fff;
+	    color: #000;
+	    font-size: 14px;
+	    text-align: center;
+	    padding: 0 10px;
+	    overflow: hidden;
+	    z-index: 999;
+	    display: none;
+	}
+.map_spop_con_txt
+	{
+		position: absolute;
+	    top: 3px;
+	    left: 7px;
+	    width: 120px;
+	    height: 65px;
+	    overflow: hidden;
+	    text-align: left;
+	}
+#new-zishiying{
+	position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:-1;
+}	
+.map_spop_con_txt ul
+	{
+		padding:0;margin:0;
+	}
+.map_spop_con_txt ul li
+	{
+		height: 20px;
+	    line-height: 20px;
+	    font-size: 14px;
+	    list-style-type: none;
+	}
+.map_spop_con_jiantou
+	{
+		position: absolute;
+	    right: 6px;
+	    bottom: 5px;
+	    cursor: pointer;
+	    color: #199be1;
+	}
+.map_spop_con_time
+	{
+		position: absolute;
+	    right: 73px;
+	    bottom: 5px;
+	    cursor: pointer;
+	    color: #199be1;
+	}
+.map_spop_con_biao
+	{
+		position:absolute;right:10px;top:10px;width:18px;height:16px;background-repeat:no-repeat;background-size:18px 16px;background-image:url("../../images/biao.png"); cursor:pointer;
+	}
+.map_list
+	{
+		position:absolute;right:0;top:20px;bottom:0px;width:0;background-color:rgba(0,0,0,.8);box-shadow:0 0 10px rgba(0,0,0, .6);border-radius:5px;z-index:1000;overflow:auto;
+	}
+.map_list ul
+	{
+		position:absolute;top:0;left:20px;right:40px;bottom:0;width:635px;margin:0;padding:0;
+	}
+.map_list_title
+	{
+		position:relative;width:100%;height:50px;line-height:50px;font-size:16px;color:#fff;font-weight:700;border-bottom:1px solid #999;
+	}
+.map_list_title_left
+	{
+		float:left;
+	}
+.map_list_title_right
+	{
+		float:right;font-size:14px;font-weight:500;
+	}
+.map_list_title_tele
+	{
+		position:absolute;top:16px;right:-34px;width:24px;height:24px;background-image:url("../../images/cha.png");background-size:24px 24px;cursor:pointer;
+	}
+.map_list_con
+	{
+		position:absolute;top:50px;left:0;right:0;bottom:0;
+	}
+.map_list_con ul
+	{
+		position:absolute;top:0;left:0;right:0;bottom:0;padding:0;margin:0;
+	}
+.map_list_con ul li
+	{
+		position:relative;height:60px;line-height:60px;border-bottom:1px solid #999;padding:0;margin:0px;color:#fff;list-style-type:none;cursor:pointer 
+	}
+.map_list_con_img
+	{
+		position:relative;width:50px;height:50px;float:left;margin-top:5px;
+	}
+.map_list_con_img img
+	{
+		width:100%;height:100%;background-color:#f1b14f;border-radius:50%;
+	}
+.map_list_con_li_span1
+	{
+		position:relative;float:left;width:200px;font-size:18px;overflow:hidden;padding-left:10px;
+	}
+.map_list_con_li_span2
+	{
+		position:relative;float:left;width:60px;font-size:14px;text-align:center;overflow:hidden;
+	}
+.map_list_con_li_span3
+	{
+		position:relative;float:left;width:200px;text-align:center;font-size:14px;overflow:hidden;
+	}
+.map_list_con_li_span4
+	{
+		position:relative;float:left;width:75px;font-size:16px;text-align:center;font-weight:700;overflow:hidden;height:60px;
+	}
+.map_list_con_li_span5
+	{
+		position:relative;float:left;width:45px;font-size:14px;text-align:center;font-weight:700;overflow:hidden;height:60px;
+	}	
+.map_guanbi
+	{
+		position: absolute;
+	    top: 5px;
+	    right: 5px;
+	    font-size: 10px;
+	    z-index: 1000;
+	    color: #199be1;
+	}
+.pc-edit{
+	padding:0;
+}
+/* 数据下发 */
+.DataHistory{
+    position: fixed;
+    top: 0;
+    left:-105%;
+    width:100%;
+    bottom: 0;
+    z-index: 999999;
+}
+.DataHistory-T{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width:800px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    background-color: #383e41;
+    border-right: 1px solid #4a5053;
+    z-index: 99;
+}
+.DataHistory-T span{
+	float:left;
+	margin-left:10px;
+}
+.DataHistory_select{
+    width:160px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 5px;
+    border: 1px solid #000;
+	color: #000;
+}
+.DataHistory-TD{
+	position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    color: #fff;
+}
+.DataHistory-R{
+	position: absolute;
+    top: 50px;
+    left:0;
+    bottom:0;
+    width:800px;
+    background-color:#eee;
+}
+.dataType{
+	position:absolute;
+	top:0;
+	left:0;
+	width:800px;
+	bottom:0;
+	background-color:#eee;
+	border:1px solid #4a5053;
+	display:none;
+	overflow:hidden;
+}
+.dataTypeIs{
+	display:block !important;
+}
+.DataHistory-echarts{
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:50%;
+	overflow:hidden;
+}
+.DataHistory-time{
+	position:relative;
+	width:100%;
+	height:50px;
+	line-height:50px;
+	padding:0 10px;
+	font-size:14px;
+	background-color:#fff;
+	border-bottom:1px solid #d7d7d7;
+	white-space:nowrap;
+    text-overflow:ellipsis;
+	overflow:auto;
+}
+.DataHistory-timeA{
+	display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 10px;
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+	color:#333;
+}
+.DataHistory-timeB{
+	border:1px solid #4c84ff;
+}
+.DataHistory-biao{
+	position:absolute;
+	top:50px;
+	left:0;
+	right:0;
+	bottom:0;
+	overflow:hidden;
+}
+#DataHistoryEcharts{
+	width:100%;
+	height:100%;
+}
+.DataHistory-data{
+	position:absolute;
+	top:50%;
+	left:0;
+	right:0;
+	bottom:0;
+	overflow:hidden;
+}
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+    *margin-right: .3em;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url(../../images/zutai_new/glyphicons-halflings.png);
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+}
+.icon-arrow-left {
+    background-position: -240px -96px;
+}
+.icon-arrow-right {
+    background-position: -264px -96px;
+}
+.DataHistoryTime{
+	display: inline-block;
+	width:100px;
+	text-align:center;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 10px;
+    border: 1px solid #d7d7d7;
+	color:#333;
+}
+.DataHistoryTA{
+	display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 10px;
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+	color:#333;
+}
+.DataHistory-list{
+	position:absolute;
+	top:50px;
+	left:0;
+	right:0;
+	bottom:0;
+	overflow:auto;
+}
+.DataHistoryTab{
+	position:relative;
+	width:100%;
+	display:table;
+	border-collapse:collapse;
+	margin-top:-1px;
+	overflow:hidden;
+}
+.DataHistoryTr{
+	display:table-row;
+}
+.DataHistoryTrC{
+	background-color:#ddd;
+}
+.DataHistoryTd{
+	line-height:20px;
+	padding:10px 0;
+	text-align:center;
+	font-size:14px;
+	border:1px solid #fff;
+	display:table-cell;
+}
+.DataHistoryPage{
+	position:relative;
+	width:100%;
+	text-align:center;
+	margin:10px 0;
+	overflow:hidden;
+}
+.DataHistoryPageA, .DataHistoryPageNA{
+	display:inline-block;
+	height:30px;
+	line-height:30px;
+	padding:0 10px;
+	border:1px solid #d7d7d7;
+	font-size:12px;
+	color:#333;
+}
+.DataHistoryPageNB{
+	border:1px solid #4c84ff;
+}
+.MapData{
+	position: fixed;
+    top: 0;
+    left:-150%;
+    width:100%;
+    bottom: 0;
+    z-index: 999999;
+}
+.MapData-T{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width:700px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    background-color: #383e41;
+    border-right: 1px solid #4a5053;
+    z-index: 99;
+}
+#MapData-name{
+	float:left;
+	margin-left:10px;
+}
+.MapData-id{
+	float:right;
+	margin-right:60px;
+}
+
+.MapData-TD{
+	position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    color: #fff;
+}
+.MapData-R{
+	position: absolute;
+    top: 50px;
+    left:0;
+    bottom:0;
+    width:700px;
+    background-color:#eee;
+    border:1px solid #4a5053;
+}
+.MapData-body{
+	display:table;
+	width:100%;
+	overflow:hidden;
+}
+.MapData-tr{
+	display: table-row;
+}
+.MapData-td{
+	display: table-cell;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+	border-bottom: 1px solid #ddd;
+	font-size:14px;
+}
+.MapData-no{
+	color:#ff0000;
+}
+.MapData-yes{
+	color:#1296db;
+}
+.pc-center{
+	/*overflow: hidden;*/
+}
+/*  报警历史记录  */
+.policeHistoryDate{
+	position:fixed;
+    top:0;
+    left:-105%;
+    width:100%;
+    bottom:0;
+    display:none;
+    z-index:999999;
+}
+.policeHistoryDateCon{
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:50px;
+	overflow:hidden;
+}
+.policeHistoryDateTab{
+	position:relative;
+    width:100%;
+    display:table;
+    border-collapse:collapse;
+    margin-top:-1px;
+    overflow:hidden;
+}
+.policeHistoryDateTr{
+	display:table-row;
+}
+.policeHistoryDateTd{
+	display:table-cell;
+    padding:10px;
+    line-height:20px;
+    text-align:center;
+    border:1px solid #d7d7d7;
+    font-size:14px;
+    vertical-align:middle;
+}
+.policeHistoryDatePage{
+	position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    background-color:#fff;
+}
+.policeHistoryDatePage a{
+	display:inline-block;
+    padding:0 5px;
+    color:#333;
+    font-size:14px;
+}
+.policeHistoryDatePageA{
+	color:#0088cc !important;
+}
+.clickRefresh{
+	cursor:pointer;
+}
+.clickRefresh:hover,.fixedDown:hover,.dataDown:hover,.positionCurve:hover,.policeHistory:hover{
+
+	
+	-webkit-animation-name: jello;
+	animation-name: jello;
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	background-color: rgba(255,255,255,0.2);
+}
+@-webkit-keyframes jello {
+  from, 11.1%, to {
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  22.2% {
+    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
+    transform: skewX(-12.5deg) skewY(-12.5deg);
+  }
+
+  33.3% {
+    -webkit-transform: skewX(6.25deg) skewY(6.25deg);
+    transform: skewX(6.25deg) skewY(6.25deg);
+  }
+
+  44.4% {
+    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);
+    transform: skewX(-3.125deg) skewY(-3.125deg);
+  }
+
+  55.5% {
+    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);
+    transform: skewX(1.5625deg) skewY(1.5625deg);
+  }
+
+  66.6% {
+    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
+    transform: skewX(-0.78125deg) skewY(-0.78125deg);
+  }
+
+  77.7% {
+    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
+    transform: skewX(0.390625deg) skewY(0.390625deg);
+  }
+
+  88.8% {
+    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+  }
+}
+
+@keyframes jello {
+  from, 11.1%, to {
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  22.2% {
+    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
+    transform: skewX(-12.5deg) skewY(-12.5deg);
+  }
+
+  33.3% {
+    -webkit-transform: skewX(6.25deg) skewY(6.25deg);
+    transform: skewX(6.25deg) skewY(6.25deg);
+  }
+
+  44.4% {
+    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);
+    transform: skewX(-3.125deg) skewY(-3.125deg);
+  }
+
+  55.5% {
+    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);
+    transform: skewX(1.5625deg) skewY(1.5625deg);
+  }
+
+  66.6% {
+    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
+    transform: skewX(-0.78125deg) skewY(-0.78125deg);
+  }
+
+  77.7% {
+    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
+    transform: skewX(0.390625deg) skewY(0.390625deg);
+  }
+
+  88.8% {
+    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+  }
+}
+
+.DataHistoryTimeVideo{
+	display: inline-block;
+    width: 200px;
+    text-align: center;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 10px;
+    border: 1px solid #d7d7d7;
+    color: #333;
+}
+.video-player{
+	max-width: 1100px; 
+	width: 1100px; 
+	height: 500px;
+}

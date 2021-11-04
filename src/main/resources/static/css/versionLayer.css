@@ -1,0 +1,11 @@
+.fee-class .layui-layer-btn a{
+    border-color: #1E9FFF;
+    background-color: #1E9FFF;
+    color: #fff;
+}
+
+.fee-class .layui-layer-btn .layui-layer-btn0 {
+    border: 1px solid #dedede;
+    background-color: #fff;
+    color: #333;
+}

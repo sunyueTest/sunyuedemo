@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>*延安市智慧农业调度指挥中心</title>
+    <link href="./styles/main.css" rel="stylesheet" />
+    <link href="./styles/wisdomFarmCommandpx.css" rel="stylesheet" />
+    <link href="./libs/leaflet.css" rel="stylesheet" />
+    <link href="./libs/leaflet.label.css" rel="stylesheet" />
+    <link href="./libs/toastr.min.css" rel="stylesheet" />
+    <script src="./libs/jquery.min.js"></script>
+    <script src="./libs/leaflet.js"></script>
+    <script src="./libs/leaflet.label.js"></script>
+    <script src="./libs/toastr.min.js"></script>
+    <script src="./libs/moment.min.js"></script>
+    <script src="./libs/esri-leaflet.js"></script>
+    <script src="./libs/leaflet.ChineseTmsProviders.js"></script>
+</head>
+
+<body  id="container">
+<!--头部标题-->
+<div class="header">
+    <div style="width: 829px;height: 75px;margin: 0 auto;margin-top: 30px">
+        <img src="/static/newYanAnfarm/images/headerbgfont.png" alt="">
+    </div>
+    <p>Dispatching command center</p>
+</div>
+<div style="display: none" class="nav">
+    <ul>
+
+        <li>
+            <img src="/static/newYanAnfarm/images/3.png" alt="">
+
+        </li>
+        <li>
+            <img src="/static/newYanAnfarm/images/4.png" alt="">
+
+        </li>
+        <li>
+            <img src="/static/newYanAnfarm/images/5.png" alt="">
+
+        </li>
+        <li>
+            <img src="/static/newYanAnfarm/images/6.png" alt="">
+
+        </li>
+
+    </ul>
+</div>
+
+
+
+<!--左侧图表-->
+<div id="left" style="display: none;">
+    <div id="leftzoom">
+        <img src="/static/newYanAnfarm/images/zoomchu.png" alt="">
+    </div>
+    <!--实时价格更新-->
+    <div class="leftInt newPrice" style="display: none">
+        <div id="video">
+            <video  autoplay="autoplay"  muted="muted" width="100%" height="100%" loop="loop">
+                <source src="http://112.6.224.72:885/file/video.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <!--总产量-->
+    <div class="leftInt yield"  style="display: none">
+        <div class="yieldTitle">
+            <p>数据反馈时间：2019-12-04 10:10:10</p>
+        </div>
+        <div class="yield-text">
+            <p>苹果价格：<span id="yieldPrice">11.6</span>元/斤</p>
+        </div>
+        <div id="yieldechart" class="yieldechart"></div>
+    </div>
+    <!--周统计图-->
+    <div class="leftInt week">
+        <!-- 延安天气 -->
+        <div id="weather-view-he"></div>
+        <script>
+            // 第一个是切换城市；第二个是定位当前城市
+            // WIDGET = {ID: 'pg42IExl69'};
+            WIDGET = {ID: 'qA45kNZ7hr'};
+        </script>
+    </div>
+    <!--延安市产业链总量及分布-->
+    <div class="leftInt browse">
+        <div class="browseTitle">
+            <p>延安市产业链总量及分布</p>
+        </div>
+        <div class="browsebox">
+            <div id="browseechart" class="browseechart"></div>
+            <div class="browseboxList">
+                <ul>
+                    <li class="browseboxBnt ">
+                        <div class="browseboxListIcon colora"></div>
+                        <div class="browseboxListName">冷气库</div>
+                        <div class="browseboxListSun">30所</div>
+                    </li>
+                    <li class="browseboxBnt">
+                        <div class="browseboxListIcon colorb"></div>
+                        <div class="browseboxListName">苹果直销店</div>
+                        <div class="browseboxListSun">44所</div>
+                    </li>
+                    <li class="browseboxBnt">
+                        <div class="browseboxListIcon colorc"></div>
+                        <div class="browseboxListName">果品生产营销合作社</div>
+                        <div class="browseboxListSun">98所</div>
+                    </li>
+                    <li class="browseboxBnt">
+                        <div class="browseboxListIcon colord"></div>
+                        <div class="browseboxListName">果品生产企业</div>
+                        <div class="browseboxListSun">175所</div>
+                    </li>
+                    <li class="browseboxBnt">
+                        <div class="browseboxListIcon colore"></div>
+                        <div class="browseboxListName">果品深加工企业</div>
+                        <div class="browseboxListSun">256所</div>
+                    </li>
+                    <li class="browseboxBnt">
+                        <div class="browseboxListIcon colorf"></div>
+                        <div class="browseboxListName">关联加工企业</div>
+                        <div class="browseboxListSun">324所</div>
+                    </li>
+                    <li class="browseboxBnt">
+                        <div class="browseboxListIcon colorg"></div>
+                        <div class="browseboxListName">电子商务</div>
+                        <div class="browseboxListSun">147所</div>
+                    </li>
+                    <li class="browseboxBnt">
+                        <div class="browseboxListIcon colorh"></div>
+                        <div class="browseboxListName">果品出口企业</div>
+                        <div class="browseboxListSun">89所</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--延安现阶段种植比重-->
+    <div class="leftInt shopadd">
+        <div class="browseTitle">
+            <p>延安现阶段种植比重</p>
+        </div>
+        <div class="shopaddBox">
+            <div class="shopaddechar" id="shopaddechar"></div>
+            <div class="shopaddBoxList">
+                <ul>
+                    <li class="shopaddBoxListBnt">
+                        <div class="shopaddBoxListIcon shopaddBcolora"></div>
+                        <div class="shopaddBoxListName">苹果种植</div>
+                        <div class="shopaddBoxListPercent">50%</div>
+                        <div class="shopaddBoxListSun">8000亩</div>
+                    </li>
+                    <li class="shopaddBoxListBnt">
+                        <div class="shopaddBoxListIcon shopaddBcolorb"></div>
+                        <div class="shopaddBoxListName">桃子种植</div>
+                        <div class="shopaddBoxListPercent">12%</div>
+                        <div class="shopaddBoxListSun">1920亩</div>
+                    </li>
+                    <li class="shopaddBoxListBnt">
+                        <div class="shopaddBoxListIcon shopaddBcolorc"></div>
+                        <div class="shopaddBoxListName">杏种植</div>
+                        <div class="shopaddBoxListPercent">12%</div>
+                        <div class="shopaddBoxListSun">1920亩</div>
+                    </li>
+                    <li class="shopaddBoxListBnt">
+                        <div class="shopaddBoxListIcon shopaddBcolord"></div>
+                        <div class="shopaddBoxListName">梨种植</div>
+                        <div class="shopaddBoxListPercent">13%</div>
+                        <div class="shopaddBoxListSun">2080亩</div>
+                    </li>
+                    <li class="shopaddBoxListBnt">
+                        <div class="shopaddBoxListIcon shopaddBcolore"></div>
+                        <div class="shopaddBoxListName">葡萄种植</div>
+                        <div class="shopaddBoxListPercent">13%</div>
+                        <div class="shopaddBoxListSun">2080亩</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--延安市2019年种植作物总产量-->
+    <div class="leftInt directSelling">
+        <div class="browseTitle">
+            <p>延安市2019年种植作物总产量 </p>
+        </div>
+        <div class="directSellingechart" id="directSellingechart"></div>
+        <div class="directSellingechart" id="directSellingechartA"></div>
+        <div class="directSellingBnt">
+            <div class="directSellingBnta Bntabg">全市</div>
+            <div class="directSellingBnta">本区</div>
+        </div>
+    </div>
+    <!--虫疫防治信息统计-->
+    <div   style="display: none" class="leftInt equipment">
+        <div class="equipment-top">
+            <div class="equipment-l">
+                <div class="browseTitle">
+                    <p>延安现阶段种植比重</p>
+                </div>
+                <ul>
+                    <li>
+                        <div class="equipmentllist-pic"><img src="/static/img/jlDangerIcon.png" alt=""></div>
+                        <div class="equipmentllist-tiem"><canvas id="cavsElemA"></canvas></div>
+                    </li>
+                    <li>
+                        <div class="equipmentllist-pic"><img src="/static/img/jlDangerIcon.png" alt=""></div>
+                        <div class="equipmentllist-tiem"><canvas id="cavsElemB"></canvas></div>
+                    </li>
+                    <li>
+                        <div class="equipmentllist-pic"><img src="/static/img/jlDangerIcon.png" alt=""></div>
+                        <div class="equipmentllist-tiem"><canvas id="cavsElemC"></canvas></div>
+                    </li>
+                    <li>
+                        <div class="equipmentllist-pic"><img src="/static/img/jlDangerIcon.png" alt=""></div>
+                        <div class="equipmentllist-tiem"><canvas id="cavsElemD"></canvas></div>
+                    </li>
+                    <li>
+                        <div class="equipmentllist-pic"><img src="/static/img/jlDangerIcon.png" alt=""></div>
+                        <div class="equipmentllist-tiem"><canvas id="cavsElemE"></canvas></div>
+                    </li>
+                    <li>
+                        <div class="equipmentllist-pic"><img src="/static/img/jlDangerIcon.png" alt=""></div>
+                        <div class="equipmentllist-tiem"><canvas id="cavsElemF"></canvas></div>
+                    </li>
+                    <li>
+                        <div class="equipmentllist-pic"><img src="/static/img/jlDangerIcon.png" alt=""></div>
+                        <div class="equipmentllist-tiem"><canvas id="cavsElemG"></canvas></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="equipment-r">
+                <div class="equipment-r-list">
+                    <div class="equipment-r-list-int">
+                        <div class="equipment-r-list-int-pic"><img src="/static/newYanAnfarm/images/teacher1.png" alt=""></div>
+                        <div class="equipment-r-list-int-txt">
+                            <div style="height:8px"><canvas id="cavsTextA"></canvas></div>
+                            <div style="height:8px;"><canvas id="cavsTextaa"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="equipment-r-list-int">
+                        <div class="equipment-r-list-int-pic"><img src="/static/newYanAnfarm/images/teacher3.png" alt=""></div>
+                        <div class="equipment-r-list-int-txt">
+                            <div style="height:8px"><canvas id="cavsTextB"></canvas></div>
+                            <div style="height:8px;"><canvas id="cavsTextbb"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="equipment-r-list-int">
+                        <div class="equipment-r-list-int-pic"><img src="/static/newYanAnfarm/images/teacher2.png" alt=""></div>
+                        <div class="equipment-r-list-int-txt">
+                            <div style="height:8px"><canvas id="cavsTextC"></canvas></div>
+                            <div style="height: 8px;"><canvas id="cavsTextcc"></canvas></div>
+                        </div>
+                    </div>
+
+                    <div class="equipment-r-list-int">
+                        <div class="equipment-r-list-int-pic"><img src="/static/newYanAnfarm/images/teacher4.png" alt=""></div>
+                        <div class="equipment-r-list-int-txt">
+                            <div style="height:8px"><canvas id="cavsTextD"></canvas></div>
+                            <div style="height: 8px;"><canvas id="cavsTextdd"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="equipment-r-list-int">
+                        <div class="equipment-r-list-int-pic"><img src="/static/newYanAnfarm/images/teacher5.png" alt=""></div>
+                        <div class="equipment-r-list-int-txt">
+                            <div style="height:8px"><canvas id="cavsTextE"></canvas></div>
+                            <div style="height: 8px;"><canvas id="cavsTextee"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="equipment-r-list-int">
+                        <div class="equipment-r-list-int-pic"><img src="/static/newYanAnfarm/images/teacher6.png" alt=""></div>
+                        <div class="equipment-r-list-int-txt">
+                            <div style="height:8px"><canvas id="cavsTextF"></canvas></div>
+                            <div style="height: 8px;"><canvas id="cavsTextff"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="equipment-bootom">
+            <div class="equipment-bootom-pic">
+                <img src="/static/newYanAnfarm/images/videapic1.png" alt="">
+            </div>
+            <div class="equipment-bootom-txt">
+                <div class="equipment-bootom-txt-title">
+                    苹果白粉病防止方法
+                </div>
+                <div class="equipment-bootom-txt-p">
+                    <p>1、休眠期冬季修剪：去除病芽，减少越冬菌源</p>
+                    <p>2、保护的重点时期要放在春季，即在发病初期就把病情控制住，以免让病害大量发生后难于防治。使用药剂以15%三唑酮1000～1500倍液、70%甲基硫菌灵</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--基地及基础设施建设统计-->
+    <div   style="display: none"  class="leftInt statistics">
+        <div class="browseTitle">
+            <p>基地及基础设施建设统计</p>
+        </div>
+        <div class="statisticsInt">
+            <div class="statisticsIntList" id="statisticsIntListA"></div>
+            <div class="statisticsIntList" id="statisticsIntListB"></div>
+            <div class="statisticsIntList" id="statisticsIntListC"></div>
+            <div class="statisticsIntList" id="statisticsIntListD"></div>
+        </div>
+    </div>
+</div>
+<!--右侧摄像头-->
+<div id="zoomchu" style="display: none">
+    <img src="/static/newYanAnfarm/images/zoomchu.png" alt="">
+</div>
+<div id="right" style="display: none">
+    <div id="zoom">
+        <img src="/static/newYanAnfarm/images/zoom.png" alt="">
+    </div>
+    <!--    默認展示-->
+    <div  class="rightmoren rightInt">
+        <div class="rightAlertInt">
+            <div class="rightAlertIntl">
+                <div class="rightAlertIntl-title">
+                    延安市宝塔区101扶贫农场报警信息
+                </div>
+                <ul>
+                    <li>
+                        <p class="rightAlertIntl-time">2019-12-05 10:00:00</p>
+                        <p class="rightAlertIntl-int">土壤温度 <15℃</p>
+                    </li>
+                    <li>
+                        <p class="rightAlertIntl-time">2019-12-05 10:00:00</p>
+                        <p class="rightAlertIntl-int">土壤温度 <15℃</p>
+                    </li>
+                    <li>
+                        <p class="rightAlertIntl-time">2019-12-05 10:00:00</p>
+                        <p class="rightAlertIntl-int">土壤温度 <15℃</p>
+                    </li>
+                    <li>
+                        <p class="rightAlertIntl-time">2019-12-05 10:00:00</p>
+                        <p class="rightAlertIntl-int">土壤温度 <15℃</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="rightAlertIntr ">
+                <div class="equipmentEchart" id="equipmentchart"></div>
+                <div class="equipmentInt">
+                    <p>总设备数：321台</p>
+                    <p>在线设备：300台</p>
+                    <p>离线设备：21台</p>
+                </div>
+            </div>
+        </div>
+        <div class="rightviedo">
+            <div class="rightviedo-title">
+                延安市宝塔区101扶贫农场视频监控
+            </div>
+            <div class="rightviedoInt">
+                <div class="rightviedoIntlist">
+                    <div class="rightviedoIntlist-int viedapica"></div>
+                    <div class="rightviedoIntlist-p">
+                        <p>101扶贫农场蔬菜园监控</p>
+                    </div>
+                </div>
+                <div class="rightviedoIntlist">
+                    <div class="rightviedoIntlist-int viedapicb"></div>
+                    <div class="rightviedoIntlist-p">
+                        <p>101扶贫农场蔬菜园监控</p>
+                    </div>
+                </div>
+                <div class="rightviedoIntlist">
+                    <div class="rightviedoIntlist-int viedapicc"></div>
+                    <div class="rightviedoIntlist-p">
+                        <p>101扶贫农场蔬菜园监控</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rightmarket">
+            <div class="rightmarketl">
+                <div class="rightmarketl-title">
+                    延安市宝塔区101扶贫农场土地商情
+                </div>
+                <div class="weekTop">
+                    <div class="weekTopPlan" id="weekTopPlanA"></div>
+                    <div class="weekTopPlan" id="weekTopPlanB"></div>
+                    <div class="weekTopPlan" id="weekTopPlanC"></div>
+                    <div class="weekTopPlan" id="weekTopPlanD"></div>
+                </div>
+                <div class="rightmarketl-chart" id="rightmarketlChart"></div>
+            </div>
+            <div class="rightmarketr">
+                <div class="rightmarketl-title">
+                    延安市宝塔区101扶贫农场作物生长周期
+                </div>
+                <div class="rightmarketl-int">
+                    <ul>
+                        <li>
+                            <div class="rightmarketl-int-icon"><img src="/static/newYanAnfarm/images/marketicon6.png" alt=""></div>
+                            <div class="rightmarketl-int-name">苹果</div>
+                            <div class="rightmarketl-int-color"><div class="chengshu"></div></div>
+                            <div class="rightmarketl-int-alert">(成熟期)</div>
+                        </li>
+                        <li>
+                            <div class="rightmarketl-int-icon"><img src="/static/newYanAnfarm/images/marketicon5.png" alt=""></div>
+                            <div class="rightmarketl-int-name">葡萄</div>
+                            <div class="rightmarketl-int-color"><div class="miaoqi"></div></div>
+                            <div class="rightmarketl-int-alert">(苗期)</div>
+                        </li>
+                        <li>
+                            <div class="rightmarketl-int-icon"><img src="/static/newYanAnfarm/images/marketicon3.png" alt=""></div>
+                            <div class="rightmarketl-int-name">韭菜</div>
+                            <div class="rightmarketl-int-color "><div class="shengzhang"></div></div>
+                            <div class="rightmarketl-int-alert">(生长期)</div>
+                        </li>
+                        <li>
+                            <div class="rightmarketl-int-icon"><img src="/static/newYanAnfarm/images/marketicon1.png" alt=""></div>
+                            <div class="rightmarketl-int-name">芹菜</div>
+                            <div class="rightmarketl-int-color"><div class="shengzhang"></div></div>
+                            <div class="rightmarketl-int-alert">(生长期)</div>
+                        </li>
+                        <li>
+                            <div class="rightmarketl-int-icon"><img src="/static/newYanAnfarm/images/marketicon2.png" alt=""></div>
+                            <div class="rightmarketl-int-name">小油菜</div>
+                            <div class="rightmarketl-int-color"><div class="youmiao"></div></div>
+                            <div class="rightmarketl-int-alert">(幼苗期)</div>
+                        </li>
+                        <li>
+                            <div class="rightmarketl-int-icon"><img src="/static/newYanAnfarm/images/marketicon4.png" alt=""></div>
+                            <div class="rightmarketl-int-name">土豆</div>
+                            <div class="rightmarketl-int-color"><div class="shengzhang"></div></div>
+                            <div class="rightmarketl-int-alert">(生长期)</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="rightAnalyze">
+            <div class="rightAnalyzel">
+                <div class="rightmarketl-title">
+                    延安市宝塔区101扶贫农场作物种植比
+                </div>
+                <div class="rightAnalyzeChart" id="rightAnalyzeChart"></div>
+            </div>
+            <div class="rightAnalyzer">
+                <div class="rightmarketl-title">
+                    延安市宝塔区101扶贫农场生产总量<span style="color: #fff">6000</span>kg
+                </div>
+                <div class="rightAnalyzerChart" id="rightAnalyzerChart"></div>
+            </div>
+        </div>
+    </div>
+    <!--    蟲害-信息-->
+    <div  class="rightchonghai rightInt">
+        <div class="insectPestStatistics">
+            <div class="insectPestTitle">
+                虫疫防止信息统计
+            </div>
+            <ul class="palceUl">
+                <li class="placeLi">
+                    <p class="placeLiP" style="color:#6FF261">-●宝塔区-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP" style="color:#C7E15D">-●延川县-</p>
+                </li>
+                <li class="placeLi">
+                    <p class=placeLiP">-●志丹县-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP">-●子长县-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP">-●富县-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP">-●黄龙县-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP">-●黄陵县-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP" style="color:#E15DA8">-●延长县-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP">-●吴起县-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP">-●安塞区-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP">-●甘泉县-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP">-●宜川县-</p>
+                </li>
+                <li class="placeLi">
+                    <p class="placeLiP">-●洛川县-</p>
+                </li>
+            </ul>
+            <div class="placeStatistics" style="left: 22px;top: 62px;">
+                <div class="placeTitle"><span style="color:#6FF261">宝塔区信息统计</span><span></span></div>
+                <div class="statisticsBox">
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="placeStatistics" style="left: 328px;top: 62px;">
+                <div class="placeTitle"><span style="color:#E15DA8">延长县信息统计</span><span></span></div>
+                <div class="statisticsBox">
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="placeStatistics" style="left: 630px;top: 62px;">
+                <div class="placeTitle"><span style="color:#C7E15D">延川县信息统计</span><span></span></div>
+                <div class="statisticsBox">
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                    <div class="statisticsItem">
+                        <img class="statisticsIcon" src="/static/newYanAnfarm/images/warningIcon.png"/>
+                        <span class="timeText">2019-12-09 10:10:10</span>
+                        <span class="placeText">宝塔区</span>
+                        <span class="statisticsText">苹果白粉病</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="insectPestPlan">
+            <div class="insectPestTitle">
+                病虫害解决方案
+            </div>
+            <div class="insectPestPlanBox" style="">
+                <div class="insectPestPlanItem">
+                    <img class="insectPestPlanImg" src="/static/newYanAnfarm/images/planImgOne.png"/>
+                    <div class="insectPestPlanContentBox">
+                        <p class="insectPestPlanTitle">轮纹病</p>
+                        <p class="insectPestPlanContent">轮纹病主要为害枝干和果实，有时也为害叶片。病菌侵染枝干，多以皮孔为中心，初期出现水渍状的暗褐色小斑点，
+                            逐渐扩大形成圆形或近圆形褐色瘤状物。病部与健部之间有较深的裂纹，后 期病组织干枯并翘起，中央突起处周围出现散生的黑色小粒点。在主干和主枝上瘤状病斑发生严重时，
+                            病部树皮粗糙，呈粗皮状。后期常扩展到木质部，阻断枝干树皮上下水分、养分的输导和贮存，严 重削弱树势，造成枝条枯死，甚至死树、毁园的现象。</p>
+                    </div>
+                </div>
+                <div class="insectPestPlanItem">
+                    <img class="insectPestPlanImg" src="/static/newYanAnfarm/images/planImgTwo.png"/>
+                    <div class="insectPestPlanContentBox">
+                        <p class="insectPestPlanTitle">斑点落叶病</p>
+                        <p class="insectPestPlanContent">轮纹病主要为害枝干和果实，有时也为害叶片。病菌侵染枝干，多以皮孔为中心，初期出现水渍状的暗褐色小斑点，
+                            逐渐扩大形成圆形或近圆形褐色瘤状物。病部与健部之间有较深的裂纹，后 期病组织干枯并翘起，中央突起处周围出现散生的黑色小粒点。在主干和主枝上瘤状病斑发生严重时，
+                            病部树皮粗糙，呈粗皮状。后期常扩展到木质部，阻断枝干树皮上下水分、养分的输导和贮存，严 重削弱树势，造成枝条枯死，甚至死树、毁园的现象。</p>
+                    </div>
+                </div>
+                <div class="insectPestPlanItem">
+                    <img class="insectPestPlanImg" src="/static/newYanAnfarm/images/planImgThree.png"/>
+                    <div class="insectPestPlanContentBox">
+                        <p class="insectPestPlanTitle">桃小食心虫</p>
+                        <p class="insectPestPlanContent">轮纹病主要为害枝干和果实，有时也为害叶片。病菌侵染枝干，多以皮孔为中心，初期出现水渍状的暗褐色小斑点，
+                            逐渐扩大形成圆形或近圆形褐色瘤状物。病部与健部之间有较深的裂纹，后 期病组织干枯并翘起，中央突起处周围出现散生的黑色小粒点。在主干和主枝上瘤状病斑发生严重时，
+                            病部树皮粗糙，呈粗皮状。后期常扩展到木质部，阻断枝干树皮上下水分、养分的输导和贮存，严 重削弱树势，造成枝条枯死，甚至死树、毁园的现象。</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="expert">
+            <div class="insectPestTitle">
+                病虫害专家列表
+            </div>
+            <div class="expertBox">
+                <div class="expertItem">
+                    <img class="expertPhoto" src="/static/newYanAnfarm/images/doctor1.png"/>
+                    <p class="expertText">中国农业大学农学院生物质工 程中心，孙副教授</p>
+                    <img class="expertPhone" src="/static/newYanAnfarm/images/political_blue.png"/>
+                </div>
+                <div class="expertItem">
+                    <img class="expertPhoto" src="/static/newYanAnfarm/images/doctor2.png"/>
+                    <p class="expertText">中国农业大学农学院生物质工 程中心，孙副教授</p>
+                    <img class="expertPhone" src="/static/newYanAnfarm/images/political_blue.png"/>
+                </div>
+                <div class="expertItem">
+                    <img class="expertPhoto" src="/static/newYanAnfarm/images/doctor3.png"/>
+                    <p class="expertText">中国农业大学农学院生物质工 程中心，孙副教授</p>
+                    <img class="expertPhone" src="/static/newYanAnfarm/images/political_blue.png"/>
+                </div>
+                <div class="expertItem">
+                    <img class="expertPhoto" src="/static/newYanAnfarm/images/doctor4.png"/>
+                    <p class="expertText">中国农业大学农学院生物质工 程中心，孙副教授</p>
+                    <img class="expertPhone" src="/static/newYanAnfarm/images/political_blue.png"/>
+                </div>
+                <div class="expertItem">
+                    <img class="expertPhoto" src="/static/newYanAnfarm/images/doctor5.png"/>
+                    <p class="expertText">中国农业大学农学院生物质工 程中心，孙副教授</p>
+                    <img class="expertPhone" src="/static/newYanAnfarm/images/political_blue.png"/>
+                </div>
+                <div class="expertItem">
+                    <img class="expertPhoto" src="/static/newYanAnfarm/images/doctor6.png"/>
+                    <p class="expertText">中国农业大学农学院生物质工 程中心，孙副教授</p>
+                    <img class="expertPhone" src="/static/newYanAnfarm/images/political_blue.png"/>
+                </div>
+                <div class="expertItem">
+                    <img class="expertPhoto" src="/static/newYanAnfarm/images/doctor7.png"/>
+                    <p class="expertText">中国农业大学农学院生物质工 程中心，孙副教授</p>
+                    <img class="expertPhone" src="/static/newYanAnfarm/images/political_blue.png"/>
+                </div>
+                <div class="expertItem">
+                    <img class="expertPhoto" src="/static/newYanAnfarm/images/doctor8.png"/>
+                    <p class="expertText">中国农业大学农学院生物质工 程中心，孙副教授</p>
+                    <img class="expertPhone" src="/static/newYanAnfarm/images/political_blue.png"/>
+                </div>
+                <div class="expertItem">
+                    <img class="expertPhoto" src="/static/newYanAnfarm/images/doctor9.png"/>
+                    <p class="expertText">中国农业大学农学院生物质工 程中心，孙副教授</p>
+                    <img class="expertPhone" src="/static/newYanAnfarm/images/political_blue.png"/>
+                </div>
+                <div class="expertItem">
+                    <img class="expertPhoto" src="/static/newYanAnfarm/images/doctor10.png"/>
+                    <p class="expertText">中国农业大学农学院生物质工 程中心，孙副教授</p>
+                    <img class="expertPhone" src="/static/newYanAnfarm/images/political_blue.png"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    冷库信息-->
+    <div class="rightchanye rightInt">
+        <div class="storageSearchBox">
+            <input class="storageSearchInput" placeholder="请输入名称" />
+            <img class="searchIcon" src="/static/newYanAnfarm/images/searchIcon.png" />
+        </div>
+        <div class="changeItem">
+            <span class="item priceActice">宝塔区</span>
+            <span class="item priceActice">延川县</span>
+            <span class="item priceActice">延长县</span>
+            <span class="item priceActice">宜川县</span>
+            <span class="item priceActice">黄龙县</span>
+            <span class="item priceActice">洛川县</span>
+            <span class="item priceActice">黄陵县</span>
+            <span class="item priceActice">富县</span>
+            <span class="item priceActice">甘泉县</span>
+            <span class="item priceActice">志丹县</span>
+            <span class="item priceActice">安塞县</span>
+            <span class="item priceActice">吴起县</span>
+            <span class="item priceActice">子长县</span>
+        </div>
+
+        <div class="storageRoom">
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+            <div class="storageRoomLine">
+                <span class="storageRoomName">金丝带冷库</span>
+                <span class="storageRoomAddress c49E3FF">宝塔区303省道西50米</span>
+                <span class="storageRoomPerson c49E3FF">瞻顾：155 5555 5555</span>
+                <span class="storageRoomVal c49E3FF">容量：2000m³</span>
+            </div>
+        </div>
+    </div>
+    <!--    价格-->
+    <div class="rightprice rightInt">
+        <div class="changeItem">
+            <span class="item priceActice">宝塔区</span>
+            <span class="item">延川县</span>
+            <span class="item">延长县</span>
+            <span class="item">宜川县</span>
+            <span class="item">黄龙县</span>
+            <span class="item">洛川县</span>
+            <span class="item">黄陵县</span>
+            <span class="item">富县</span>
+            <span class="item">甘泉县</span>
+            <span class="item">志丹县</span>
+            <span class="item">安塞县</span>
+            <span class="item">吴起县</span>
+            <span class="item">子长县</span>
+        </div>
+        <div id="priceLine">
+
+        </div>
+        <div class="priceBox">
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+            <div class="priceLine">
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="price">3.8元/500g</span>
+                </div>
+                <div class="priceItem">
+                    <span class="priceName">苹果</span>
+                    <span class="priceAddress">宝塔区某某街道城东蔬菜市场</span>
+                    <span class="priceValue">3.8元/500g</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div style="display: none" class="cameraTalk">
+    <div class="cameraTalkaa">
+        <div class="cameraTalkDoctorBox">
+            <p class="cameraTalkTitle">视频连线</p>
+            <div class="doctorBox">
+                <img class="doctorCamera" src="/static/newYanAnfarm/images/doctor1.png"/>
+                <p class="doctorName">孙教授</p>
+                <p class="doctorText">中国农业大学农学院生物工程中心副教授</p>
+            </div>
+            <div class="cameraOnLine">视频请求中……</div>
+        </div>
+        <div class="cameraTalkDoctorBoxeit">
+            <img src="/static/newYanAnfarm/images/jiazai.gif" alt="">
+        </div>
+        <div class="cameraTalkrem">
+            <img src="/static/newYanAnfarm/images/videoClose.png" alt="">
+        </div>
+    </div>
+
+</div>
+<!--无人机视频景象-->
+<div  id="droneViedo" style="display: none">
+    <div class="droneViedo-title">
+        <p>2019-12-05 10:00:00 无人机101号返回图像</p>
+    </div>
+    <div class="droneViedo-pic">
+        <div id="droneViedoInt">
+            <video  autoplay="autoplay"  muted="muted" width="100%" height="100%" loop="loop">
+                <source src="http://112.6.224.72:885/file/c80c5c43920a482a970fde1880d01a13.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+<!--天气预警-->
+<div class="weatherwarning" style="cursor: pointer">
+    <div class="weatherwarning-title">
+        <div class="weatherwarning-title-a"></div>
+        <div class="weatherwarning-title-pic"><img src="/static/newYanAnfarm/images/weatherwarningtitlepic.png" alt=""></div>
+        <div class="weatherwarning-title-text">当前气象信息</div>
+    </div>
+    <div class="weatherwarning-int">
+        <div class="weatherwarning-int-top">
+            <div class="weatherwarning-int-top-l">
+                <p>当前气象灾难：大雾</p>
+                <p style="color: #f78c21">灾难等级：大雾预警</p>
+                <p>解决方案：</p>
+            </div>黄色预警
+            <div class="weatherwarning-int-top-r">
+                <img src="/static/newYanAnfarm/images/weatherwarning-int-top-r.png" alt="">
+            </div>
+        </div>
+        <div class="weatherwarning-int-bottom">
+            <img src="/static/newYanAnfarm/images/weatherwarning-int-bottompic.png" alt="">
+            <p>1. 及时收听、收看或上网查阅台风预警信息，了解政府的防台风行动对策。
+
+                2. 关紧门窗，紧固易被风吹动的搭建物。
+
+                3. 从危旧房屋中转移至安全处。
+
+                4. 处于可能受淹的低洼地区的人要及时转移。
+
+                5. 检查电路、炉火、煤气等设施是否安全。
+
+                6. 幼儿园、学校应采取暂避措施，必要时停课。</p>
+        </div>
+    </div>
+</div>
+<!--中间弹窗-->
+<div id="openWindows">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="main-content">
+    <div class="leftLogo">
+        <div class="logo"><img src="./static/newYanAnfarm/images/logo.png" /></div>
+        <div class="logoTitle"><a href="/">精讯畅通GIS平台</a></div>
+    </div>
+    <!-- 左侧工具菜单 -->
+    <!-- <div id="leftTools" class="leftTools">
+        <div id="mapSwitch" class="mapSwitch sel highlight">
+            <span class="tool-text">地图</span>
+        </div>
+        <div id="tool" class="tool">
+            <span class="tool-text">工具</span>
+        </div>
+        <div id="legend" class="">
+            <span class="tool-text">图例</span>
+        </div>
+    </div> -->
+    <!-- <div id="mapSwitchTooltip" class="mapSwitchTooltip">
+        <div class="item">
+            <div class="icon">
+                <img class="img_political" src="./static/newYanAnfarm/images/political.png" />
+            </div>
+            <div class="cont">
+                <span class="text" data-type="political" class="text">行政图</span>
+            </div>
+        </div>
+        <div class="gexian">|</div>
+        <div class="item">
+            <div class="icon">
+                <img class="img_satellite" src="./static/newYanAnfarm/images/satellite.png" />
+            </div>
+            <div class="cont">
+                <span class="text" data-type="satellite">卫星图</span>
+            </div>
+        </div>
+        <div class="gexian">|</div>
+        <div class="item">
+            <div class="icon">
+                <img class="img_topographic" src="./static/newYanAnfarm/images/topographic.png" />
+            </div>
+            <div class="cont">
+                <span class="text" data-type="topographic">地形图</span>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- 基础地图 -->
+    <div id="map"></div>
+    <!-- 卷帘地图 -->
+    <div id="sideMap"></div>
+    <!-- 卷帘底图下拉框 -->
+    <div id='sideSelect'>
+        <div class="left">
+            <select id="selectLeftV">
+                <option value="0">OSM街道图</option>
+                <option value="1">ArcGIS影像图</option>
+            </select>
+        </div>
+        <div class="right">
+            <select id="selectRightV">
+                <option value="0">ArcGIS影像图</option>
+                <option value="1">OSM街道图</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- 右上角工具菜单 -->
+    <div class="conditionBox">
+        <ul>
+            <li class="yujing active" id="baseMap">地图<b></b></li>
+            <!-- <li class="yujing active" id="warning">预警<b></b></li> -->
+            <li class="yubao" id="drawer">绘图<b></b></li>
+            <!-- <li class="shikuang" id="sk">实况<b></b></li> -->
+            <li class="taifeng" id="typhoon">图层<b></b></li>
+            <li class="leida" id="radar">热力图<b></b></li>
+            <li class="tile" id="tile">行政区<b></b></li>
+            <li class="roller" id="roller">地图卷帘</li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+
+    <!-- 图层子菜单 -->
+    <div class="wrap_list layer_list" id="layerMenu">
+        <div class="menuList off">
+            <ul>
+                <li id="cropGrow" data-type="cropGrow">作物长势</li>
+                <li id="cropArea" data-type="cropArea">作物面积</li>
+                <li id="landUseType" data-type="landUseType">土地利用</li>
+                <li id="weihaiLandUseType" data-type="weihaiLandUseType">威海土地利用</li>
+                <li id="weihaiDem" data-type="weihaiDem">威海高程</li>
+                <li id="weihaiContour" data-type="weihaiContour">威海等高线</li>
+                <li id="polygons" data-type="polygons">重要地块</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 地图-子菜单 -->
+    <div class="wrap_list base_map_list" id="baseMapMenu">
+        <div class="menuList off">
+            <ul>
+                <li id="" data-type="zhitu" class='active'>智图地图</li>
+                <li id="" data-type="zhituNightBlue">智图午夜蓝</li>
+                <li id="" data-type="zhituGray">智图灰色</li>
+                <li id="" data-type="zhituWarm">智图暖色</li>
+                <li id="" data-type="tiandi">天地图</li>
+                <li id="" data-type="tiandiImage">天地图影像</li>
+                <li id="" data-type="google">谷歌地图</li>
+                <li id="" data-type="googleImage">谷歌影像</li>
+                <li id="" data-type="gaode">高德地图</li>
+                <li id="" data-type="gaodeImage">高德影像</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 绘图-子菜单 -->
+    <div class="wrap_list draw_mlist" id="drawmenu">
+        <div class="menuList off">
+            <ul>
+                <li id="foldLine" data-type="foldLine"><img src='/static/newYanAnfarm/images/foldLine.png' />折线</li>
+                <li id="circle" data-type="circle"><img src='/static/newYanAnfarm/images/circle.png' />圆形</li>
+                <li id="polygon" data-type="polygon"><img src='/static/newYanAnfarm/images/polygon.png' />多边形</li>
+                <li id="rectangle" data-type="rectangle"><img src='/static/newYanAnfarm/images/rectangle.png' />矩形</li>
+            </ul>
+        </div>
+    </div>
+    <!-- 实况-子菜单 -->
+    <!-- <div class=" wrap_list wrap_mlist" id="skmenu">
+        <div class="menuList off">
+            <ul>
+                <li id="115990101" unit="℃">气温</li>
+                <li id="115990102" unit="hpa">气压</li>
+                <li id="115990103" unit="%">相对湿度</li>
+                <li id="115990104" unit="m/s">风</li>
+                <li id="1150101020" unit="mm">降水</li>
+            </ul>
+        </div>
+    </div> -->
+</div>
+<script>
+    var ctx = "http://localhost:8888/dataGis";
+    // var ctx = "http://data.cma.cn/dataGis";
+    var globalParam = {};
+
+</script>
+<!--    <script src="monitor/newIconYanAn/wisdomFarmCommand/jquery-2.0.3.min.js"></script>-->
+<!--    <script src="./libs/echarts.js"></script>-->
+<!--<script src="monitor/newIconYanAn/wisdomFarmCommand/wisdomFarmCommand.js"></script>-->
+<!--    <script src="./js/wisdomFarmCommandpc.js"></script>-->
+<script type="text/javascript" src="https://apip.weatherdt.com/view/static/js/r.js?v=1111"></script>
+
+<script src="./libs/leaflet.TileLayer.js"></script>
+<script src="./libs/leaflet-velocity.js"></script>
+<script src="./libs/echarts.js"></script>
+<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+<script src="./libs/heatmap.min.js"></script>
+<script src="./libs/leaflet-heatmap.js"></script>
+<script type="text/javascript" src="jxct.js"></script><script type="text/javascript" src="app.js"></script></body>
+
+</html>
+<script>
+    $(document).on('click','.weatherwarning',function () {
+        let html ='<iframe style="width: 100%;height: 80%;" src="/monitor/meteorologicalWarning"></iframe>\n' +
+            '<div id="weatherwarningrem" style="position: absolute;top: 5px;right:10px;width: 25px;height: 25px;cursor: pointer"><img src="/static/newYanAnfarm/images/videoClose.png" alt=""></div>';
+        $("#openWindows").css('width','1520px');
+        $("#openWindows").css('height','1000px');
+        $("#openWindows").show();
+        $('#openWindows').html(html);
+    })
+    $(document).on('click','#weatherwarningrem',function () {
+        $("#openWindows").hide();
+        $('#openWindows').html("");
+    })
+
+    $(document).on('click','#leftzoom',function () {
+        $("#left").css('left','-1400px');
+        $('#zoomchuleft').show();
+        $(".nav").show(1000)
+    })
+    $(document).on('click','#zoomchuleft',function () {
+        $("#left").css('left','40px');
+        $('#zoomchuleft').hide();
+        $(".nav").hide(1000);
+    })
+    $(document).on('click','.nav',function () {
+        $("#left").css('left','40px');
+        $('#zoomchuleft').hide();
+        $(".nav").hide(1000);
+    })
+</script>

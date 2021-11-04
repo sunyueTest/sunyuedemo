@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui1角色管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+
+<body>
+<table class="layui-hide" id="role" lay-filter="role"></table>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline ">
+        <button class="layui-btn " lay-event="add" id="add">添加</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <div class="layui-btn-group">
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="auth"><i
+                class="layui-icon layui-icon-search"></i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i class="layui-icon"></i></button>
+        <!--<button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i-->
+        <!--class="layui-icon"></i></button>-->
+    </div>
+</script>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+        table.render({
+            elem: '#role'
+            , url: '/roleManage/getRoleList'
+            , toolbar: '#toolbar1'
+            , title: '角色列表'
+            , cols: [
+                [
+                    {
+                        type: 'checkbox'//, fixed: 'left'
+                    },
+                    {field: 'id', title: 'ID', width: 80, unresize: true, sort: true, align: 'center'},
+                    {field: 'name', title: '角色名', width: 220, align: 'center'},
+                    {field: 'descr', title: '角色描述', width: 250, align: 'center'},
+                    {title: '操作', toolbar: '#barDemo', width: 'auto', align: 'center'}
+                ]
+            ]
+            , page: false
+            , height: 600
+        });
+
+        $('#add').text($.i18n.prop('add'));
+        //头工具栏事件
+        table.on('toolbar(role)', function (obj) {
+            //var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        area: ['350px', '350px'],
+                        title: $.i18n.prop('addRole'),
+                        btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+                        btnAlign: 'c',
+                        yes: function (index, layero) {
+                            var body = layer.getChildFrame('body', index);
+                            let id = body.find('input[name="id"]').val();
+                            let name = body.find('input[name="name"]').val();
+                            if (name == null || name.trim().length < 1) {
+                                layer.msg($.i18n.prop('warn60'), {icon: 2});
+                                return;
+                            }
+                            let descr = body.find('input[name="descr"]').val();
+                            let level = body.find('select[name="level"]').val();
+                            let indexUrl = body.find('input[name="indexUrl"]').val();
+                            let childId = body.find('input[name="childId"]').val();
+                            let enable = body.find('input[name="enable"]').val();
+                            $.ajax({
+                                type: "post",
+                                url: 'roleManage/saveRole',
+                                data: {
+                                    id: id,
+                                    name: name,
+                                    descr: descr,
+                                    level: level,
+                                    indexUrl: indexUrl,
+                                    childId: childId,
+                                    enable: enable
+                                },
+                                success: function (result) {
+                                    if ('success' == result.state) {
+                                        layer.msg($.i18n.prop(result.msg), {icon: 1})
+                                    } else {
+                                        layer.msg($.i18n.prop(result.msg), {icon: 2})
+                                    }
+                                    layer.close(index);
+                                    reload();
+                                },
+                                error: function (data, type, err) {
+                                    console.log(err);
+                                    layer.msg($.i18n.prop('fail'));
+                                    layer.close(index);
+                                },
+                            });
+                        },
+                        anim: 3,
+                        content: 'roleManage/getRoleDetail',
+                        success: function (layero, index) {
+                            /*//给弹出层添加一个标识
+                            var body = layer.getChildFrame('body', index);
+                            body.find('input[name="flag"]').val("add");*/
+                        }
+                    });
+                    break;
+            }
+            ;
+        });
+
+        //监听行工具事件
+        table.on('tool(role)', function (obj) {
+            var data = obj.data;
+            console.log(data.id);
+            if (obj.event === 'auth') {
+                layer.open({
+                    type: 2,
+                    area: ['500px', '500px'],
+                    title: $.i18n.prop('selRights'),
+                    anim: 3,
+                    content: 'roleManage/getAuthDetail?roleId=' + data.id,
+                    success: function (layero, index) {
+                        //给弹出层添加一个标识
+                        var body = layer.getChildFrame('body', index);
+                        //body.find('input[name="roleId"]').val(data.id);
+                        body.find('input[name="name"]').val(data.name);
+                    }
+                });
+            } else if (obj.event === 'edit') {
+                layer.open({
+                    type: 2,
+                    area: ['350px', '350px'],
+                    title: $.i18n.prop('editRole'),
+                    btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+                    btnAlign: 'c',
+                    yes: function (index, layero) {
+                        var body = layer.getChildFrame('body', index);
+                        let id = body.find('input[name="id"]').val();
+                        let name = body.find('input[name="name"]').val();
+                        if (name == null || name.trim().length < 1) {
+                            layer.msg($.i18n.prop('warn60'), {icon: 2});
+                            return;
+                        }
+                        let descr = body.find('input[name="descr"]').val();
+                        let level = body.find('select[name="level"]').val();
+                        let indexUrl = body.find('input[name="indexUrl"]').val();
+                        let childId = body.find('input[name="childId"]').val();
+                        let enable = body.find('input[name="enable"]').val();
+                        $.ajax({
+                            type: "post",
+                            url: 'roleManage/saveRole',
+                            data: {
+                                id: id,
+                                name: name,
+                                descr: descr,
+                                level: level,
+                                indexUrl: indexUrl,
+                                childId: childId,
+                                enable: enable
+                            },
+                            success: function (result) {
+                                if ('success' == result.state) {
+                                    layer.msg($.i18n.prop(result.msg), {icon: 1})
+                                } else {
+                                    layer.msg($.i18n.prop(result.msg), {icon: 2})
+                                }
+                                layer.close(index);
+                                reload();
+                            },
+                            error: function (data, type, err) {
+                                console.log(err);
+                                layer.msg($.i18n.prop('fail'));
+                                layer.close(index);
+                            },
+                        });
+                    },
+                    anim: 3,
+                    content: 'roleManage/getRoleDetail?roleId=' + data.id,
+                    success: function (layero, index) {
+                        /*//给弹出层添加一个标识
+                        var body = layer.getChildFrame('body', index);
+                        body.find('input[name="flag"]').val("add");*/
+                    }
+                });
+            } else if (obj.event === 'del') {
+                layer.confirm($.i18n.prop('confirmDelete'), {
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    title: $.i18n.prop('info')
+                }, function (index) {
+                    $.ajax({
+                        type: "post",
+                        url: '../roleManage/deleteRole',
+                        data: {
+                            id: data.id
+                        },
+                        success: function (result) {
+                        }
+                    });
+                    // table.reload("role", {});
+                    layer.close(index);
+                    document.location.reload();
+                });
+            }
+        });
+
+        function reload() {
+            table.reload('role', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+    });
+
+
+</script>
+<style>
+    .layui-table-view .layui-table {
+        width: 100%;
+    }
+
+    .layui-table tr {
+        width: 100%;
+    }
+
+    .layui-table thead tr, .layui-table-header thead {
+        width: 100%;
+    }
+</style>
+</body>
+</html>

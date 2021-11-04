@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>农业个人设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+</head>
+<style>
+    body {
+        font-family: 黑体;
+    }
+
+    .u-item {
+        display: flex;
+        text-align: center;
+        margin-top: 20px;
+        margin-left: 135px;
+    }
+
+    .m50 {
+        margin-top: 30px;
+    }
+
+    .u-item span {
+        width: 70px;
+        color: #000;
+        font-size: 16px;
+        line-height: 40px;
+    }
+
+    .u-item img {
+        width: 16px;
+        height: 16px;
+        margin: 12px;
+    }
+
+    .u-item input {
+        width: 200px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .u-item a {
+        color: #d3ac10;
+        text-decoration: underline;
+        /*margin-top: 20px;*/
+        margin-left: 200px;
+    }
+
+    .btn-primary {
+        background-color: transparent;
+        background-image: url(../img/commend_btn.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 120px;
+        height: 35px;
+        border: 0px;
+        margin-left: 140px;
+        color: #5f4d6f;
+        cursor: pointer;
+
+    }
+
+</style>
+<body >
+<div >
+    <div class="u-item m50">
+        <img src="../img/user_name_icon.png">
+        <span id="namespan">用户名：</span>
+        <input type="text" lay-verify="required" name="userName" id="userName"
+               autocomplete="off" maxlength="12" th:value="*{user.userName}"
+               class="layui-input" disabled="disabled">
+    </div>
+    <div class="u-item">
+        <img src="../img/name_icon.png">
+        <span id="realspan">姓&nbsp;名：</span>
+        <input type="text" name="realName" lay-verify="required" id="realName"
+               autocomplete="off" maxlength="12" th:value="*{user.realName}"
+               class="layui-input" placeholder="请输入姓名">
+    </div>
+    <div class="u-item">
+        <img src="../img/mail_icon.png">
+        <span id="emailspan">邮&nbsp;箱：</span>
+        <input type="text" lay-verify="required" name="email" id="email"
+               autocomplete="off" th:value="*{user.email}"
+               class="layui-input" placeholder="请输入常用电子邮箱">
+    </div>
+    <div class="u-item">
+        <img src="../img/tel_icon.png">
+        <span id="telspan">手机号：</span>
+        <input type="text" lay-verify="required" name="tel" id="tel"
+               autocomplete="off" maxlength="12" th:value="*{user.tel}"
+               class="layui-input" placeholder="请输入手机号">
+    </div>
+    <div class="u-item">
+        <a href="/farmDemo/changePassword" id="changePassword">点击修改用户密码</a>
+    </div>
+    <div class="u-item">
+        <button class="btn-primary" lay-submit="" id="save"
+                lay-filter="submit">提&nbsp;交
+        </button>
+    </div>
+    <input type="hidden" name="id" th:value="*{user.id}">
+</div>
+</body>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    layui.use('layer', function () {
+        var layer = layui.layer;
+    });
+
+    $('#namespan').text($.i18n.prop('userName')+':');
+    $('#realspan').text($.i18n.prop('realName')+':');
+    $('#realName').attr('placeholder',$.i18n.prop('realNameDesc'));
+    $('#emailspan').text($.i18n.prop('email')+':');
+    $('#email').attr('placeholder',$.i18n.prop('emailDesc'));
+    $('#telspan').text($.i18n.prop('telNo')+':');
+    $('#tel').attr('placeholder',$.i18n.prop('telDesc'));
+    $('#changePassword').text($.i18n.prop('changePassword'));
+    $('#save').text($.i18n.prop('save'));
+
+    $("#save").click(function () {
+
+        $.ajax({
+            type: "post",
+            url: "../userManage/updateMyInfo",
+            data: {
+                id: $('input[name="id"]').val(),
+                userName: $('input[name="userName"]').val(),
+                password: $('input[name="password"]').val(),
+                realName: $('input[name="realName"]').val(),
+                email: $('input[name="email"]').val(),
+                tel: $('input[name="tel"]').val(),
+            },
+            success: function (result) {
+                layer.msg($.i18n.prop('success'), {icon: 1});
+            }
+        });
+    });
+</script>
+
+</html>

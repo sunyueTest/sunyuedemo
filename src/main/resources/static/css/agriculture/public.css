@@ -1,0 +1,150 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike,
+strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td ,textarea,input { margin:0; padding:0;  }
+address,cite,dfn,em,var, i {font-style:normal;}
+body {font-size: 16px; line-height: 1.5; font-family:'Microsoft Yahei','simsun','arial','tahoma';  color: #333; }
+table { border-collapse:collapse; border-spacing:0; }
+h1, h2, h3, h4, h5, h6, th { font-size: 100%; font-weight: normal; }
+button,input,select,textarea{font-size:100%;}
+fieldset,img{border:0;}
+a,
+img {
+    -webkit-touch-callout: none;
+    width: 100%;
+    float: left;
+}
+a,
+a:active,
+a:focus,
+a:hover,
+a:visited {text-decoration: none}
+input[type=password],
+input[type=text],
+textarea {
+    resize: none;
+    outline: 0;
+    -webkit-appearance: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+ul, ol { list-style: none; }
+:focus{ outline:none;}
+.clearfix{ clear: both; content: ""; display: block; overflow: hidden }
+.clear{clear: both;}
+.fl{ float: left; }
+.fr{float: right;}
+
+/*分页样式*/
+#page {
+    margin: 20px auto;
+    color: #666;
+    display: block;
+    text-align: center;
+}
+
+#page li {
+    display: inline-block;
+    min-width: 30px;
+    height: 28px;
+    cursor: pointer;
+    color: #666;
+    font-size: 13px;
+    line-height: 28px;
+    background-color: #f9f9f9;
+    border: 1px solid #dce0e0;
+    text-align: center;
+    margin: 0 4px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.xl-nextPage,
+.xl-prevPage {
+    width: 60px;
+    color: #0073A9;
+    height: 28px;
+}
+
+#page li.xl-disabled {
+    opacity: .5;
+    cursor: no-drop;
+}
+
+#page li.xl-disabled:hover{
+    background-color: #f9f9f9 !important;
+    border: 1px solid #dce0e0 !important;
+    color: #666 !important;
+}
+#page li.xl-active {
+    background-color: #0073A9;
+    border-color: #0073A9;
+    color: #FFF
+}
+#page li:hover{
+    background-color: #0073A9 !important;
+    border-color: #0073A9;
+    color: #FFF
+}
+#page li.xl-jumpText {
+    background-color: rgba(0,0,0,0);
+    border-color: rgba(0,0,0,0);
+    opacity: 1;
+}
+
+#page li.xl-jumpText:hover{
+    background-color: rgba(0,0,0,0) !important;
+    border-color: rgba(0,0,0,0) !important;
+}
+#page li.xl-jumpButton{
+    padding: 0 5px;
+}
+
+#xlJumpNum {
+    width: 35px;
+    margin: 0 3px;
+}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+}
+input[type="number"]{
+    -moz-appearance:textfield;
+}
+.test{
+    overflow: auto;
+    float: left;
+    border: none;
+}
+.scrollbar{
+    width: 15px;
+    height: 300px;
+    margin: 0 auto;
+}
+.test-1::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+.test-1::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #35aadc;
+}
+.test-1::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #065681;
+}
+.box3 .scroll {
+    width: 50px;
+}
+.box3 p {
+    background: yellow;
+    letter-spacing: 10px;
+}
+.box3 p:nth-child(2n) {
+    background: #69ff9a;
+}
+
+
+
+

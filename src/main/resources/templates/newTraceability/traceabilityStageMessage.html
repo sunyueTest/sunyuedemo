@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" style="width: 1050px;margin-top: -70px;margin-left: -85px;">
+<head>
+    <meta charset="utf-8">
+    <title>修改阶段信息的展示</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <style>
+        .layui-upload-img {
+            width: 92px;
+            height: 92px;
+            margin: 0 10px 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+<input type="hidden" id="id" th:value="${data.id}"/>
+<input type="hidden" id="imgUrl" th:value="${data.imgUrl}" />
+<input type="hidden" id="imgInfoValue" th:value="${data.imgInfo}" />
+<input type="hidden" id="deleteAllImgValue" value="0" />
+<div style="margin: 80px;" class="layui-form layui-form-pane">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>修改信息</legend>
+    </fieldset>
+
+    <div class="layui-inline" style="margin: 5px">
+        <label class="layui-form-label">阶段名称</label>
+        <div class="layui-input-inline" style="width: 300px">
+            <input type="text" id="present" autocomplete="off" class="layui-input" th:value="${data.present}">
+        </div>
+    </div>
+
+    <div class="layui-inline" style="margin: 5px">
+        <label class="layui-form-label">当前阶段</label>
+        <div class="layui-input-inline" style="width: 300px">
+            <input type="text" id="stage" autocomplete="off" class="layui-input" placeholder="只能为数字" th:value="${data.stage}">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text" style="margin: 5px">
+        <label class="layui-form-label">当前阶段简介</label>
+        <div class="layui-input-block">
+            <textarea id="imgInfo" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top:30px;">
+        <legend>当前阶段以上传的图片</legend>
+    </fieldset>
+    <div id="vieImg"></div>
+    <div class="layui-upload" style="margin-top: 20px">
+        <span id="appenUploadImg"></span>
+        <span id="testTest"><button type="button" class="layui-btn" id="test2">继续上传</button></span>
+        <button type="button" class="layui-btn" id="deleteAllImg" style="margin-left:50px">清空已上传图片</button>
+        <span style="margin-left:50px; color:#f85063" id="alert"></span>
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+            预览图：
+            <div class="layui-upload-list" id="demo2"></div></blockquote>
+    </div>
+    <div class="layui-form-item" style="margin-left: -103px;margin-top: 50px">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" id="delete">删除当前阶段</button>
+            <button style="margin-left:100px" class="layui-btn layui-btn-normal" id="save">保存修改</button>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script src="/static/layui/layui.js" charset="UTF-8"></script>
+<script src="/static/layui/layui.all.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $(function(){
+        var str = new Array();
+        $("#imgInfo").html($("#imgInfoValue").val());
+        var imgUrl = $("#imgUrl").val();
+        var s = imgUrl.split("+");
+        for(var i=0;i<s.length-1; i++){
+            $("#vieImg").append(
+                "<img width='100' height='100' src='"+s[i]+"' />"
+            );
+        }
+        if(s.length-1 >= 8){
+            $("#test2").remove();
+            $("#alert").html("提示：以到达图片最大上传数量, 请先清空");
+        }
+        layui.use(['laydate', 'upload'], function () {
+            var flag = 0;
+            var upload = layui.upload, laydate = layui.laydate;
+            layui.use('upload', function () {
+                var $ = layui.jquery, upload = layui.upload;
+                upload.render({
+                    id: new Date().getTime(),
+                    elem: '#test2',
+                    url: '/newTraceSource/newUpLoadImg',
+                    multiple: true,
+                    before: function (obj) {
+                        //预读本地文件示例，不支持ie8
+                        obj.preview(function (index, file, result) {
+                            $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                        });
+                        if($("#deleteAllImgValue").val() == 1){
+                            if(flag == 7){
+                                $("#test2").remove();
+                                $("#alert").html("提示：以到达图片最大上传数量");
+                            }
+                        }else{
+                            if((s.length-1) + str.length >= 7){
+                                $("#test2").remove();
+                                $("#alert").html("提示：以到达图片最大上传数量, 请先清空");
+                            }
+                        }
+                    },
+                    done: function (res) {
+                        if (!res.code > 0) {
+                            str[flag] = res.url;
+                            flag++;
+                        }
+                    }
+                });
+            });
+            $('#save').click(function () {
+                var present = $('#present').val();
+                var stage = $("#stage").val();
+                var imgInfo = $('#imgInfo').val();
+                if(stage^[0-9]*$){
+                    if($("#deleteAllImgValue").val() == 1 && str.length == 0){
+                        layer.msg("图片不能为空")
+                    }else{
+                        if($("#deleteAllImgValue").val() == 1){
+                            $.ajax({
+                                type: "post",
+                                url: "/newTraceSource/updateTraceSourceMessage",
+                                data:  "data="+str+"&present="+present+"&imgInfo="+imgInfo+"&stage="+stage+"&id="+$("#id").val(),
+                                success: function (data) {
+                                    if (data.state == 'success') {
+                                        layer.msg("修改成功");
+                                        setTimeout(function(){
+                                            window.location.reload();
+                                        }, 500);
+                                    } else {
+                                        layer.msg(data.msg);
+                                    }
+                                }
+                            });
+                        }else{
+                            $.ajax({
+                                type: "post",
+                                url: "/newTraceSource/updateTraceSourceMessageAppenImg",
+                                data:  "data="+str+"&present="+present+"&imgInfo="+imgInfo+"&stage="+stage+"&id="+$("#id").val()+"&oldImg="+s,
+                                success: function (data) {
+                                    if (data.state == 'success') {
+                                        layer.msg("修改成功");
+                                        setTimeout(function(){
+                                            window.location.reload();
+                                        }, 500);
+                                    } else {
+                                        layer.msg(data.msg);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }else{
+                    layer.msg('当前阶段只能为数字');
+                }
+            });
+        });
+        $("#delete").click(function(){
+            layer.confirm('您确定要删除当前阶段么?',
+                {title:'提示'},
+                function(index){
+                    $.ajax({
+                        data: "id="+$("#id").val(),
+                        url: "/newTraceSource/deleteToTraceSourceStage",
+                        success: function(data){
+                            if(data.state == "success"){
+                                parent.reload();
+                            }
+                        }
+                    });
+                    layer.close(index);
+                }
+            );
+        });
+        $("#deleteAllImg").click(function(){
+            layer.confirm('您确定要清空所有已上传的图片么?',
+                {title:'提示'},
+                function(index){
+                    layer.close(index);
+                    $("#vieImg").remove();
+                    $("#deleteAllImgValue").val(1);
+                    if(s.length-1+str.length == 8){
+                        $("#testTest").append("<button type='button' class='layui-btn' id='test2'>继续上传</button>")
+                        $("#alert").html("");
+                        var flag = str.length;
+                        var upload = layui.upload, laydate = layui.laydate;
+                        layui.use('upload', function () {
+                            var $ = layui.jquery, upload = layui.upload;
+                            upload.render({
+                                id: new Date().getTime(),
+                                elem: '#test2',
+                                url: '/newTraceSource/newUpLoadImg',
+                                multiple: true,
+                                before: function (obj) {
+                                    //预读本地文件示例，不支持ie8
+                                    obj.preview(function (index, file, result) {
+                                        $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                                    });
+                                    if($("#deleteAllImgValue").val() == 1){
+                                        if(flag == 8){
+                                            $("#test2").remove();
+                                            $("#alert").html("提示：以到达图片最大上传数量");
+                                        }
+                                    }else{
+                                        if((s.length-1) + str.length >= 7){
+                                            $("#test2").remove();
+                                            $("#alert").html("提示：以到达图片最大上传数量, 请先清空");
+                                        }
+                                    }
+                                },
+                                done: function (res) {
+                                    if (!res.code > 0) {
+                                        str[flag] = res.url;
+                                        flag++;
+                                    }
+                                }
+                            });
+                        });
+                    }
+                }
+            );
+        });
+    })
+</script>
+</html>

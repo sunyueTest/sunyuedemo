@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加产品标签</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <style>
+        .layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
+    </style>
+</head>
+
+<body>
+<input id="period" type="hidden"/>
+<div style="margin: 40px;" class="layui-form layui-form-pane">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>添加产品标签</legend>
+    </fieldset>
+    <div class="layui-upload">
+        <button type="button" class="layui-btn" id="test3">上传图片</button>
+        <span id="alertTitle" style="color: red"></span>
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+            预览图：
+            <div class="layui-upload-list" id="demo3"></div>
+        </blockquote>
+    </div>
+    <div class="layui-form-item" style="margin-left: -103px;margin-top: 50px">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" id="save">完成添加</button>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script src="/static/layui/layui.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    var flag = 0;
+    var flagTwo = 0;
+    var str = new Array();
+    var upload = layui.upload, laydate = layui.laydate;
+    layui.use('upload', function () {
+        var $ = layui.jquery, upload = layui.upload;
+        upload.render({
+            elem: '#test3',
+            url: '/newTraceSource/newUpLoadImg',
+            multiple: true,
+            before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo3').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                });
+                if(flagTwo > 1){
+                    $("#test3").remove();
+                    $("#alertTitle").html("提示：产品标签最多上传三张");
+                }
+                flagTwo++;
+            },
+            done: function (res) {
+                if (!res.code > 0) {
+                    str[flag] = res.url;
+                    flag++;
+                }
+            }
+        });
+    });
+
+    $('#save').click(function () {
+        if(str.length != 0){
+            $.ajax({
+                type: "post",
+                url: "/newTraceSource/addQualifiedLabel",
+                data: "data="+str+"&sendId="+parent.getId(),
+                success: function (data) {
+                    if (data.state == 'success') {
+                        layer.msg("添加成功");
+                        setTimeout(function(){
+                            document.location.reload();
+                        }, 500);
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                }
+            });
+        }else{
+            layer.msg("上传图片不能为空");
+        }
+    });
+</script>
+</html>

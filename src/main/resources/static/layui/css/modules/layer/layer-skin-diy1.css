@@ -1,0 +1,14 @@
+
+body .layer_skin-diy1 .layui-layer-content{
+    background-color: #eaf3fd;
+}
+
+body .layer_skin-diy1 .layui-layer-title{
+    background-color: tomato;
+
+}
+body .layer_skin-diy1 .layui-layer-btn a{
+    border-color: brown;
+    background-color: tomato;
+    color: #fff;
+}

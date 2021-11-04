@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet"
+          href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style type="text/css">
+        html {
+            height: 100%;
+            background-color: white;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        .input-card .btn {
+            margin-right: 1.2rem;
+            width: 9rem;
+        }
+
+        .input-card .btn:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="deviceNumber" style="display: none">
+<div class="layui-fluid" style="height: 100%; padding: 0px; width: 98%">
+    <div class="layui-row layui-col-space15" style="height: 100%">
+        <div class="layui-col-md12 " style="height: 100%">
+            <div class="layui-card " style="height: 100%">
+                <div class="layui-card-header" style="padding: 0px; border: 0px; height: 10%">
+                    <div class="my_header">
+                        <span id="startDateSpan" style="float: left">开始日期 : </span>
+                        <input type="text" class="layui-input" id="startDate" lay-key="1"
+                               style="width: 170px; height: 35px; float: left">
+                        <span id="endDateSpan" style="float: left">结束日期 : </span>
+                        <input type="text" class="layui-input" id="endDate" lay-key="2"
+                               style="width: 170px; height: 35px; float: left">
+                        <button class="btn-primary" id="save"
+                                style="float: left; height: 35px; line-height: 35px"
+                                lay-filter="submit" lay-submit="">历史查询
+                        </button>
+                    </div>
+                </div>
+                <div class="layui-card-body farming-video" style="padding: 0px;height: 90%">
+                    <div style="height: 100%; width: 100%; padding: 2px; position: absolute">
+                        <iframe id="iframe" style="width: 100%;height: 100%"
+                                src='http://www.thingjs.com/guide/sampleindex.html?m=57869/1ogd19102241.js'></iframe>
+                        <!--                        <div id="container" class="map"-->
+                        <!--                             style="height:98%; width: 99.5%; position: absolute"></div>-->
+                        <!--                        <div class="input-card"-->
+                        <!--                             style="position: absolute; right: 10px; bottom: 10px; display: none"-->
+                        <!--                             id="replayCtrl">-->
+                        <!--                            <h4>轨迹回放控制</h4>-->
+                        <!--                            <div class="input-item">-->
+                        <!--                                <input type="button" class="btn" value="开始动画" id="start"-->
+                        <!--                                       onclick="startAnimation()"/>-->
+                        <!--                                <input type="button" class="btn" value="暂停动画" id="pause"-->
+                        <!--                                       onclick="pauseAnimation()"/>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="input-item">-->
+                        <!--                                <input type="button" class="btn" value="继续动画" id="resume"-->
+                        <!--                                       onclick="resumeAnimation()"/>-->
+                        <!--                                <input type="button" class="btn" value="停止动画" id="stop"-->
+                        <!--                                       onclick="stopAnimation()"/>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/GPSUtil.js}"></script>
+<script th:inline="none">
+    // 加载map
+    loadJS('https://webapi.amap.com/maps?v=1.4.10&key=96a943dab4656930f33276727a084933&plugin=AMap.MarkerClusterer', function () {
+        setTimeout(loadMap, 500);
+    });
+    let nCode;
+
+    function setDeviceNumber(deviceNumber) {
+        $('#deviceNumber').val(deviceNumber);
+        nCode = deviceNumber;
+    }
+
+    let map, layDate, form, marker, polyline, passedPolyline, lineArr;
+
+    function loadJS(url, callback) {
+        let script = document.createElement('script'),
+            fn = callback || function () {
+            };
+        script.type = 'text/javascript';
+        script.onload = function () {
+            fn();
+        };
+        script.src = url;
+        document.getElementsByTagName('head')[0].appendChild(script);
+    }
+
+    // $(
+    function loadMap() {
+
+        // '../deviceManage/getDeviceSensorList?sensorNcode=' + $("#deviceNumber").val()
+        layer.load(2);
+        $.ajax({
+            url: "../deviceManage/getDeviceSensorList",
+            data: {sensorNcode: nCode},
+            dataType: "json",
+            type: "post",
+            timeout: 30000,
+            error: function (data, type, err) {
+                console.log(err);
+                layer.closeAll('loading');
+                layer.msg($.i18n.prop('fail'), {
+                    offset: '6px'
+                });
+            },
+            success: function (data) {
+                layer.closeAll('loading');
+                if (0 == data.code) {
+                    console.log("初始经纬度：",data);
+                    let lat, lng;
+                    for (let i = 0; i < data.data.length; i++) {
+                        if (data.data[i].sensorName == '经度') {
+                            lng = data.data[i].sensorData.trim();
+                        }
+                        if (data.data[i].sensorName == '纬度') {
+                            lat = data.data[i].sensorData.trim();
+                        }
+                    }
+
+                    //如果初始加载经纬度为[0,0]，则设置威海为默认值
+                    if(lng == 0 && lat ==0){
+                        lng = 122.052023;
+                        lat = 37.524161;
+                    }
+                    let location = [lng,lat];
+                    console.log("location:",location);
+
+
+                   // 向thingjs中传入初始坐标点
+                   // 获取iframe标签对象
+                    var iframe = document.getElementById('iframe');
+                    let datas = {
+                        realtimePath: location,
+                    };
+                    setTimeout(function () {
+                        console.log('data: ', datas);
+                        var send = {funcName: 'updateDatas', param: datas};
+                        iframe.contentWindow.postMessage(send, '*');
+                    }, 2000)
+                }
+            }
+        });
+    }
+
+    function transformation(s) {
+        try {
+            s = s.toString();
+            let du = parseInt(s);
+            let d = s.substring(s.indexOf('.') + 1);
+            let fen = d.substring(0, 2);
+            let m = d.substring(2, 3);
+            let ml = d.substring(3, d.length);
+            let miao = m + (m == '' ? '0' : '.') + ml;
+            fen = parseFloat(fen) + parseFloat(miao / 60);
+            du = parseFloat(fen / 60) + parseFloat(du);
+
+            console.log(s + ' > ' + du.toFixed(5));
+            return du.toFixed(5);
+        } catch (e) {
+            return s;
+        }
+    }
+
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        layDate = layui.laydate;
+
+        //常规用法
+        layDate.render({
+            elem: '#startDate',
+            trigger: 'click',
+            type: 'datetime',
+            position: 'fixed',
+            format: 'yyyy-MM-dd HH:mm:ss'
+        });
+        layDate.render({
+            elem: '#endDate',
+            trigger: 'click',
+            type: 'datetime',
+            position: 'fixed',
+            format: 'yyyy-MM-dd HH:mm:ss'
+        });
+        form = layui.form;
+        form.on('submit(submit)', function (data) {
+            let endDate = $("#endDate").val(),
+                startDate = $("#startDate").val();
+
+            if (startDate.length < 1 || endDate.length < 1) {
+                return layer.msg('开始日期和结束日期不能为空');
+            }
+
+            // 获取经纬度数据
+            $.post("../trajectoryReplay/getTrajectoryByDate",
+                {"startDate": startDate, "endDate": endDate, "ncode": nCode},
+                function (res) {
+                    if (res.state == 'success') {
+                        $("#replayCtrl").show();
+                        lineArr = res.data;
+                        console.log("lineArr:",lineArr);
+
+                        //将获取的历史经纬度进行非空处理
+                        var lineArr1 =[];
+                        if(lineArr.length != 0){
+                            for(var i=0; i<lineArr.length; i++){
+                                if(lineArr[i][0] == 0 && lineArr[i][1]==0){
+                                    continue;
+                                }
+                                lineArr1.push(lineArr[i]);
+                            }
+                        }
+
+                        //将高德经纬度转换为谷歌经纬度
+                        var newArr = [];
+                        for (var i = 0; i < lineArr1.length; i++) {
+                            var a = lineArr1[i][1];
+                            var b = lineArr1[i][0];
+                            var c = gcj02_To_Gps84(a, b);
+                            newArr.push(c);
+                        }
+                        if (lineArr.length == 0 ||lineArr1.length ==0 || newArr.length ==0) {
+                            layer.msg("无数据");
+                        }
+
+                        //向thingjs中传入历史坐标路径
+                        //获取iframe标签对象
+                        var iframe = document.getElementById('iframe');
+                        let data = {
+                            historicalPath: newArr,
+                        };
+                        console.log('data: ', data);
+                        var send = {funcName: 'updateData', param: data};
+                        iframe.contentWindow.postMessage(send, '*');
+                    } else {
+                        layer.msg($.i18n.prop(res.msg), {icon: 2})
+                    }
+                });
+        });
+    });
+    $('#startDate').val(formatDate(new Date(new Date() - 1000 * 60 * 60 * 24)));
+    $('#endDate').val(toDate(new Date()));
+
+    function formatDate(date) {
+        var year = date.getFullYear(),
+            month = date.getMonth() + 1,//月份是从0开始的
+            day = date.getDate(),
+            hour = date.getHours(),
+            min = date.getMinutes(),
+            sec = date.getSeconds();
+        var newTime = year + '-' +
+            month + '-' +
+            day + ' ' +
+            hour + ':' +
+            min + ':' +
+            sec;
+        return newTime;
+    }
+
+    function toDate(date) {
+        var year = date.getFullYear(),
+            month = date.getMonth() + 1,//月份是从0开始的
+            day = date.getDate();
+
+        var newTime = year + '-' +
+            month + '-' +
+            day + ' ' +
+            23 + ':' +
+            59 + ':' +
+            59;
+        return newTime;
+    }
+
+</script>

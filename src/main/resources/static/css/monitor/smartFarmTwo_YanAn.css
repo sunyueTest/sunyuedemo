@@ -1,0 +1,1241 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+}
+
+.anchorBL {
+    display: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 625%;
+    color: #ffffff;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.bgBox {
+    background-image: url("/../img/smartFarmTwo/smartFarmTwo.jpg");
+    background-size: 100% 100%;
+    width: 100vw;
+    height: 100vh;
+    animation: run 30s linear infinite;
+}
+
+.content {
+    font-size: 1rem;
+
+}
+
+.bannerImg {
+    text-align: center;
+    width: 100%;
+    height: 48px;
+    background: url("/../img/smartFarmTwo/banner.png") no-repeat 50% 100%;
+    background-size: 100%;
+    font-size: 2.6rem;
+    color: #ffffff;
+}
+
+.leftTitle {
+    font-size: 1.1rem;
+    height: 2.5rem;
+    display: block;
+    line-height: 2.5rem;
+    text-align: center;
+}
+
+.topCenter {
+    width: 49%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+    color: #ffffff;
+}
+
+.topLeftTop {
+    width: 95%;
+    height: 50%;
+    margin: 0 auto 0 auto;
+    border: 1px solid #00FFFF;
+}
+
+.topLeftTopTitleBox {
+    border-bottom: 1px solid #00FFFF;
+}
+
+.topContent {
+    margin-top: 10px;
+}
+
+.topCenterContent {
+    width: 99%;
+    margin: 0 auto;
+    border: 1px solid #00FFFF;
+    background: url("../img/smartFarmTwo/bgIcon.png") repeat;
+    background-size: 2%;
+}
+
+.topLeftTopTitle {
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+
+#mapContainer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+
+.changeToiletText {
+    cursor: pointer;
+    color: #5EEFD9;
+}
+
+span a:hover {
+    color: #8def25;
+}
+
+.pre {
+    float: left;
+    margin-left: 30px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.pre:hover, .next:hover {
+    color: #5EEFD9;
+}
+
+.next {
+    float: right;
+    margin-right: 30px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.dateText {
+    display: block;
+}
+
+.progressLineBox {
+    display: inline-block;
+}
+
+.show-info-img {
+    width: 6rem;
+    margin-left: 1.6rem;
+    margin-right: 1.5rem;
+    border: none;
+}
+
+.msgItemBox {
+    height: 1.6rem;
+    line-height: 1.6rem;
+}
+
+.colorYellow {
+    color: #f7a439;
+}
+
+.colorBlue {
+    color: #7fc8e5;
+}
+
+.colorRed {
+    color: #ff3232;
+}
+
+.colorGreen {
+    color: #85f379;
+}
+
+.show-info-item_title {
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+
+.show-address {
+    font-size: 0.1rem;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+
+.topLeftBottom {
+    position: relative;
+    width: 95%;
+    height: 50%;
+    margin: 3% auto 0 auto;
+    overflow: hidden;
+    border: 1px solid #00FFFF;
+
+}
+
+.topLeftBottomTitleBox {
+    border-bottom: 1px solid #00FFFF;
+}
+
+.topLeftBottomTitle {
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+
+}
+
+.topLeftBottomTitleIcon {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.playerBox {
+    position: relative;
+    width: 99%;
+    height: 99%;
+
+}
+
+#player {
+    width: 100%;
+    height: 100%;
+}
+
+/*设备数据动态显示部分*/
+.msgTitleBox {
+    display: block;
+    font-size: .7rem;
+    text-align: center;
+    height: 69%;
+    line-height: 2rem;
+    overflow-y: auto;
+}
+
+/*农场数据动态显示部分*/
+.msgBox {
+    display: block;
+    font-size: .7rem;
+    text-align: center;
+    height: 69%;
+    line-height: 2rem;
+    overflow-y: auto;
+}
+
+.equipmentItemBox {
+    overflow: auto;
+}
+
+#landBar {
+    width: 100%;
+
+}
+
+.bottomContent {
+    width: 99%;
+    height: 200px;
+    font-size: 0.8rem;
+    border: 1px solid #6967F9;
+    margin: 10px auto 0 auto;
+}
+
+.personNumBox div {
+    padding: .5rem .2rem;
+    display: inline-block;
+    font-size: 0.5rem;
+    color: #fdf102;
+    margin-left: 5px;
+}
+
+
+.personNumBox {
+    border: 1px solid #00FFFF;
+    width: 94%;
+    margin: 0 auto;
+}
+
+
+.sectionBox p {
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: 0.6rem;
+}
+
+.allPersonValue {
+    color: #df8e14;
+}
+
+.personValue {
+    color: #fdf102;
+}
+
+.bottomOne {
+    border-right: 1px solid #00FFFF;
+    margin-top: 10px;
+    height: 180px;
+    display: inline-block;
+    float: left;
+    clear: left;
+}
+
+
+.bottomTwo {
+    border-right: 1px solid #00FFFF;
+    margin-top: 10px;
+    height: 180px;
+    display: inline-block;
+    float: left;
+    position: relative;
+}
+
+.bottomThree {
+    margin-top: 10px;
+    height: 180px;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid #00FFFF;
+}
+
+.bottomFour {
+
+    height: 190px;
+    display: inline-block;
+    float: right;
+    font-size: .9rem;
+}
+
+.topLeft {
+    width: 26%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+
+
+.topRight {
+    width: 25%;
+    float: right;
+
+}
+
+.itemBox {
+    width: 45%;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: .9rem;
+    float: left;
+    margin-left: 4%;
+    margin-top: .7rem;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+}
+
+.goodBg {
+    background: #448ACA;
+
+}
+
+.warmBg {
+    background: #FF9600;
+
+}
+
+.dangerBg {
+    background: #E5004F;
+
+}
+
+
+.bottomTwo {
+    font-size: 1rem;
+}
+
+
+.sendBtn {
+    font-size: .9rem;
+    margin-bottom: 8%;
+    margin-left: 7%;
+    text-align: center;
+    line-height: 1.3rem;
+    display: inline-block;
+    padding: 0.2rem;
+    width: 30%;
+    height: 1.3rem;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.msgTitle {
+    display: block;
+    font-size: .7rem;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+}
+
+.msgTitleTwo {
+    display: block;
+    font-size: .7rem;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    cursor: pointer;
+}
+
+.msgNameOne {
+    text-align: center;
+    width: 15%;
+    display: inline-block;
+    font-size: .7rem;
+}
+
+.msgNameTwo {
+    text-align: center;
+    width: 40%;
+    display: inline-block;
+    font-size: .7rem;
+}
+
+.msgNameThree {
+    text-align: center;
+    width: 15%;
+    display: inline-block;
+    font-size: .7rem;
+}
+
+.msgNameFour {
+    text-align: center;
+    width: 15%;
+    display: inline-block;
+    font-size: .7rem;
+}
+
+
+/*设备样式*/
+.msgTitleNameTwo {
+    text-align: center;
+    width: 48%;
+    display: inline-block;
+}
+
+.msgItemTwo {
+    font-size: .7rem;
+    text-align: center;
+    width: 32%;
+    display: inline-block;
+}
+
+.equipment {
+    display: block;
+    font-size: 1.1rem;
+    text-align: center;
+    height: 3rem;
+    line-height: 3rem;
+}
+
+
+.constructionItem {
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+
+.constructionItemBox {
+    width: 7rem;
+    right: 0rem;
+    position: absolute;
+    z-index: 999;
+    background: rgba(247, 247, 247, 0.8);
+    top: 1.3rem;
+    font-size: .9rem;
+    display: none;
+    color: #000000;
+}
+
+.constructionItem {
+    cursor: pointer;
+    display: block;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    padding: .5rem .7rem;
+}
+
+.constructionItem:hover {
+    background: #a7a7a7;
+}
+
+.constructionIcon {
+    width: 1.5rem;
+
+}
+
+.constructionIconBox:hover .constructionItemBox {
+    display: block;
+}
+
+.constructionIconBox {
+    width: 1.5rem;
+    position: absolute;
+    top: 1.4em;
+    right: 2rem;
+}
+
+.nomsg {
+    font-size: .9rem;
+    height: 2rem;
+    line-height: 2rem;
+    color: #FF7979;
+    display: block;
+    text-align: center;
+}
+
+.environmental {
+    overflow-y: auto;
+    padding-bottom: 10px;
+}
+
+
+/*滚动条*/
+::-webkit-scrollbar { /*滚动条整体部分，其中的属性有width,height,background,border等（就和一个块级元素一样）（位置1）*/
+    width: 6px;
+    border-radius: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-button { /*滚动条两端的按钮，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置2）*/
+    height: 0;
+    background: #ffffff;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track { /*外层轨道，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置3）*/
+
+}
+
+::-webkit-scrollbar-track-piece { /*内层轨道，滚动条中间部分（位置4）*/
+    width: 2px;
+    background: #081e40;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb { /*滚动条里面可以拖动的那部分（位置5）*/
+    background: rgb(49, 83, 121);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-corner { /*边角（位置6）*/
+    background: #82AFFF;
+}
+
+::-webkit-scrollbar-resizer { /*定义右下角拖动块的样式（位置7）*/
+    background: #FF0BEE;
+}
+
+
+.borderColorB3 {
+    border-color: #b3b3b3;
+}
+
+.borderColorFF {
+    border-color: #ffffff;
+}
+
+
+.topCenterOneTitle {
+    height: 1.6rem;
+    line-height: 1.6rem;
+}
+
+.topCenterOneMsg {
+    height: 2.4rem;
+    line-height: 2.4rem;
+}
+
+.topCenterOneLeft {
+    font-size: 1.2rem;
+    color: #08f0f9;
+}
+
+.topCenterOneRight {
+    color: #54FF00;
+    float: right;
+}
+
+
+.topCenterTwoPart {
+    width: 8.5rem;
+    font-size: .8rem;
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    padding: 2px 8px;
+    box-shadow: rgb(11, 234, 235) 0px 0px 5px inset;
+}
+
+.topCenterTwoTitle {
+    height: 1.6rem;
+    line-height: 1.6rem;
+}
+
+.topCenterTwoMsg {
+    height: 2.4rem;
+    line-height: 2.4rem;
+}
+
+.topCenterTwoLeft {
+    font-size: 1.2rem;
+    color: #08f0f9;
+}
+
+.topCenterTwoRight {
+    color: #54FF00;
+    float: right;
+}
+
+
+.topCenterThreePart {
+    width: 30%;
+    height: 120px;
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+    background-color: rgba(1, 71, 128, 0.5);
+}
+
+/*.topCenterThreeMb{*/
+/*width:30%;*/
+/*height:120px;*/
+/*position: absolute;*/
+/*left:20px;*/
+/*bottom:10px;*/
+/*background:#014780;*/
+/*opacity: .5;*/
+/*}*/
+
+
+/*边角css样式*/
+.borderSpan {
+    position: absolute;
+    padding: 5px;
+    border-style: solid;
+    border-color: #00FFFF;
+}
+
+.borderTop {
+    border-width: 2px 0 0 2px;
+    top: -2px;
+    left: -2px;
+}
+
+.borderRight {
+    border-width: 2px 2px 0 0;
+    top: -2px;
+    right: -2px;
+}
+
+.borderBottom {
+    border-width: 0 2px 2px 0;
+    bottom: -2px;
+    right: -2px;
+}
+
+.borderLeft {
+    border-width: 0 0 2px 2px;
+    bottom: -2px;
+    left: -2px;
+}
+
+.topCenterFourPart {
+    width: 26%;
+    position: absolute;
+    top: 10px;
+    right: 3%;
+    padding: 2px 8px;
+    box-shadow: rgb(11, 234, 235) 0px 0px 5px inset;
+    background-color: rgba(1, 71, 128, 0.5);
+}
+
+.farmName {
+    height: 1.8rem;
+    line-height: 1.8rem;
+    font-size: 0.9rem;
+}
+
+.farmImgBox {
+    width: 93%;
+    margin: 0.6rem auto;
+    display: block;
+    position: relative;
+}
+
+.farmImg {
+    width: 100%;
+    height: 6rem;
+}
+
+.farmMsgBox {
+    font-size: 0.6rem;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.farmMsgBox p {
+    height: 1.8rem;
+    line-height: 1.8rem;
+}
+
+.farmItemBox {
+    height: 14.5rem;
+}
+
+.topCenterFivePart {
+    width: 26%;
+    position: absolute;
+    bottom: 10px;
+    right: 3%;
+    padding: 2px 8px;
+    box-shadow: rgb(11, 234, 235) 0px 0px 5px inset;
+    background-color: rgba(1, 71, 128, 0.5);
+}
+
+.dangerMsgItem {
+    display: block;
+    font-size: .7rem;
+    line-height: 1.4rem;
+}
+
+.dangerMsgTitle, .topCenterThreePartText {
+    display: block;
+    font-size: .9rem;
+
+    height: 1.8rem;
+    line-height: 1.8rem;
+}
+
+.dangerMsgItemBox {
+    height: 20%;
+    overflow-y: auto;
+}
+
+.msg {
+    margin-left: 20px;
+}
+
+.dangerMsgTime {
+
+}
+
+.dangerMsgText {
+    margin-left: 15px;
+    color: red;
+}
+
+.topLeftTopTitleIcon {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.topRightTopTitleIcon {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.topRightTopTitle {
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+
+.topRightTopTitleBox {
+    border-bottom: 1px solid #00FFFF;
+}
+
+.topRightTop {
+    border: 1px solid #00FFFF;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.opacityBox {
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0.5;
+}
+
+.itemNameValueBox {
+    text-align: center;
+    top: 0;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    align-items: center;
+}
+
+.topRightBottomTitleBox {
+    border-bottom: 1px solid #00FFFF;
+}
+
+.topRightBottomTitleIcon {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.topRightBottomTitle {
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+
+.topRightBottom {
+    border: 1px solid #00FFFF;
+    width: 95%;
+    margin: 3% auto 0 auto;
+    position: relative;
+}
+
+#landLine {
+    height: 8.95rem;
+}
+
+#attendanceLine {
+    height: 120px;
+    width: 100%;
+}
+
+.bottomOneTitleBox {
+
+}
+
+.bottomOneTitleIcon {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.bottomOneTitle {
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+
+.personImg {
+    margin-left: 5px;
+    width: 12px;
+    vertical-align: middle;
+    margin-top: -5px;
+}
+
+.bottomTwoTitleBox {
+
+}
+
+.bottomTwoTitleIcon {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+    position: absolute;
+    top: 12px;
+}
+
+.bottomTwoTitle {
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+
+#landBar {
+    width: 100%;
+    height: 180px;
+}
+
+.bottomThreeTitleBox {
+
+}
+
+.bottomThreeTitleIcon {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.bottomThreeTitle {
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+
+#allLandPie {
+    height: 160px;
+    width: 60%;
+    display: inline-block;
+}
+
+#growthPie {
+    width: 38%;
+    height: 160px;
+    display: inline-block;
+}
+
+.bottomFourTitleBox {
+
+}
+
+.bottomThreeTitleIcon {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #08F0F9;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.bottomThreeTitle {
+    height: 1.8rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.8rem;
+}
+
+.bottomFour {
+    margin-top: 10px;
+    height: 180px;
+    display: inline-block;
+    float: left;
+}
+
+.cropsImg {
+    width: 25px;
+    height: 25px;
+    margin-left: 15px;
+    margin-right: 3px;
+}
+
+.cropsItem {
+    height: 36px;
+    line-height: 36px;
+}
+
+.cropsName {
+    width: 56px;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.crops {
+    width: 138px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 10px;
+
+}
+
+.cropsItemBox {
+    height: 150px;
+    overflow-y: auto;
+}
+
+.toBG {
+    animation: myto 1s ease infinite;
+    -webkit-animation: myto 1s ease infinite;
+    -moz-animation: myto 1s ease infinite;
+}
+
+/*苗期绿色*/
+.daBG {
+    animation: myd 1s ease infinite;
+    -webkit-animation: myd 1s ease infinite;
+    -moz-animation: myd 1s ease infinite;
+}
+
+.qBG {
+    animation: myq 1s ease infinite;
+    -webkit-animation: myq 1s ease infinite;
+    -moz-animation: myq 1s ease infinite;
+}
+
+.toColor {
+    color: #FE3155;
+}
+
+.daColor {
+    color: #24c768;
+}
+
+.qColor {
+    color: #E5ce10;
+}
+
+#player a {
+    color: red;
+    display: block;
+    font-size: 15px;
+}
+
+/*.topCenterOneMb{*/
+/*position: absolute;*/
+/*padding: 2px 8px;*/
+/*background:#014780;*/
+/*opacity:0.5;*/
+/*width:8.5rem;*/
+/*font-size: .8rem;*/
+/*top: 10px;*/
+/*left: 20px;*/
+/*height:64px;*/
+
+/*}*/
+.topCenterOnePart {
+    /*background:#7FA0BA;*/
+    background-color: rgba(1, 71, 128, 0.5);
+    width: 9rem;
+    font-size: .8rem;
+    position: absolute;
+    /*opacity:0.5;*/
+    top: 10px;
+    left: 20px;
+    padding: 2px 8px;
+    box-shadow: rgb(11, 234, 235) 0px 0px 5px inset;
+}
+
+/*.topCenterFourMb{*/
+/*height: 232px;*/
+/*background: #014780;*/
+/*opacity: .5;*/
+/*width: 25%;*/
+/*position: absolute;*/
+/*top: 10px;*/
+/*right: 3%;*/
+/*padding: 2px 8px;*/
+/*}*/
+/*.topCenterFiveMb{*/
+/*background: #014780;*/
+/*opacity: .5;*/
+/*width: 25%;*/
+/*position: absolute;*/
+/*bottom: 10px;*/
+/*right: 3%;*/
+/*padding: 2px 8px;*/
+/*}*/
+.conTwo {
+    display: none;
+}
+
+.conOne {
+    display: none;
+    /* margin-left: 20px;*/
+}
+
+.amap-logo, .amap-copyright {
+    display: none !important;
+}
+
+/*多选框按钮隐藏*/
+.checkbox {
+    display: none;
+}
+
+.playerSizeBox {
+    height: 151px;
+}
+
+.playerSizeBox1, .playerSizeBox2 {
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.source {
+    width: 50%;
+    height: 75px;
+    display: flex;
+    cursor: pointer;
+
+}
+
+.massif {
+    width: 50%;
+    height: 75px;
+    display: flex;
+    cursor: pointer;
+}
+
+.stand-by {
+    width: 50%;
+    height: 75px;
+    cursor: pointer;
+    display: flex;
+
+}
+.suyuan{
+    background: url("/../../img/monitor/suyuan.png") no-repeat;
+    background-size: 100% 100%;
+}
+.dikuai{
+    background: url("/../../img/monitor/dikuai.png") no-repeat;
+    background-size: 100% 100%;
+}
+.jxy{
+    background: url("/../../img/monitor/tianjia.png") no-repeat;
+    background-size: 100% 100%;
+}
+.daiding{
+    background: url("/../../img/monitor/tianjia.png") no-repeat;
+    background-size: 100% 100%;
+}
+.source span, .massif span, .stand-by span {
+    width: 55px;
+    height: 55px;
+    margin-top: 20px;
+    margin-left: 3px;
+    display: inline-block;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.button1 {
+    height: 55px;
+    width: 55px;
+    margin-top: 10px;
+    margin-left: 20%;
+}
+
+.button2 {
+    height: 55px;
+    width: 55px;
+    margin-top: 10px;
+    margin-left: 10%;
+}
+
+
+/*背景渐变色*/
+@keyframes myto {
+    0% {
+        background: linear-gradient(30deg, #FFA500, #FF8C00, #F4A460, #CD853F, #D2691E, #FFA500);
+    }
+    25% {
+        background: linear-gradient(30deg, #FF8C00, #F4A460, #CD853F, #D2691E, #FFA500, #FF8C00);
+    }
+    50% {
+        background: linear-gradient(30deg, #F4A460, #CD853F, #D2691E, #FFA500, #FF8C00, #F4A460);
+    }
+    75% {
+        background: linear-gradient(30deg, #CD853F, #D2691E, #FFA500, #FF8C00, #F4A460, #CD853F);
+    }
+    100% {
+        background: linear-gradient(30deg, #D2691E, #FFA500, #FF8C00, #F4A460, #CD853F, #D2691E);
+    }
+}
+
+@keyframes myd {
+    0% {
+        background: linear-gradient(30deg, #98FB98, #00FF7F, #00FF00, #7FFF00, #ADFF2F, #98FB98);
+    }
+    25% {
+        background: linear-gradient(30deg, #00FF7F, #00FF00, #7FFF00, #ADFF2F, #98FB98, #00FF7F);
+    }
+    50% {
+        background: linear-gradient(30deg, #00FF00, #7FFF00, #ADFF2F, #98FB98, #00FF7F, #00FF00);
+    }
+    75% {
+        background: linear-gradient(30deg, #7FFF00, #ADFF2F, #98FB98, #00FF7F, #00FF00, #7FFF00);
+    }
+    100% {
+        background: linear-gradient(30deg, #ADFF2F, #98FB98, #00FF7F, #00FF00, #7FFF00, #ADFF2F);
+    }
+}
+
+@keyframes myq {
+    0% {
+        background: linear-gradient(30deg, #FFD700, #F0E68C, #FFD700, #EEE8AA, #FFFF00, #FFD700);
+    }
+    25% {
+        background: linear-gradient(30deg, #F0E68C, #FFD700, #EEE8AA, #FFFF00, #FFD700, #FAFAD2);
+    }
+    50% {
+        background: linear-gradient(30deg, #FFD700, #EEE8AA, #FFFF00, #FFD700, #F0E68C, #FFD700);
+    }
+    75% {
+        background: linear-gradient(30deg, #EEE8AA, #FFFF00, #FFD700, #F0E68C, #FFD700, #EEE8AA);
+    }
+    100% {
+        background: linear-gradient(30deg, #FFFF00, #FFD700, #F0E68C, #FFD700, #EEE8AA, #FFFF00);
+    }
+}
+
+@keyframes run {
+    from {
+        background-position: 100vw 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}

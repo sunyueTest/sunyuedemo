@@ -1,0 +1,118 @@
+.tail {
+    /* width: 100%; */
+    background-color: #1C1B20;
+    position: relative;
+    /* padding-top: 20px; */
+    /* padding-bottom: 50px; */
+}
+
+.tail_body {
+    /* position: absolute; */
+    /* margin: auto; */
+    /* left: 0; */
+    /* right: 0; */
+    width: 1069px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px 0 20px;
+}
+
+.tail_body .tail_box {
+    float: left;
+    margin-right: 48px;
+    /* height: 100%; */
+    text-align: left;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.tail_box .box_title {
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    padding: 15px 0;
+    float: left;
+    color: #fff;
+    font-family: 'Chinese';
+    font-size: 13px;
+}
+
+.tail_box .box_going {
+    float: left;
+    color: #fff;
+    margin-right: -32px;
+    font-family: 'Chinese';
+    font-size: 13px;
+}
+
+.box_going span {
+    /* float: left; */
+    width: auto;
+    margin: 20px 0;
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.tail_box ul {
+    float: left;
+    width: 100%;
+    color: #fff;
+    font-family: 'Chinese';
+}
+
+.tail_box ul>li {
+    margin: 15px 0;
+    font-size: 13px;
+}
+
+.no-right {
+    margin-right: 0 !important;
+}
+
+.tail_box .box_going img {
+    margin-top: 20px;
+    width: 100px;
+    margin-right: 15px;
+}
+
+.copyrin {
+    width: 100%;
+    float: left;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    font-family: 'Chinese';
+    margin-top: 10px;
+    opacity: .9;
+}
+
+.copyrin a {
+    color: #fff;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+a {
+    text-decoration: none !important;
+    color: inherit;
+    border: 0;
+}
+
+.navbar-brand {
+    width: 150px;
+    display: block;
+    height: 80px;
+    line-height: 50px;
+    padding-top: 1px;
+    box-sizing: border-box;
+}

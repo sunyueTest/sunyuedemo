@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>编辑溯源档案</title>
+    <link rel="stylesheet" href="/static/css/traceability/public.css">
+    <link rel="stylesheet" href="/static/css/traceability/Traceabilityfile.css">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <script th:src="@{/static/KE/themes/default/default.css}"></script>
+
+</head>
+<body>
+<input type="hidden" id="id" th:value="*{data.id}">
+<div id="conter">
+    <div class="con-title">
+        <h3>编辑溯源档案</h3>
+    </div>
+    <div id="int">
+        <div class="int clearfix">
+            <div class="layui-form-item">
+                <label class="layui-form-label">产品名称</label>
+                <div class="layui-input-block">
+                    <input type="text" id="name" lay-verify="title" autocomplete="off" placeholder="请输入产品名称"
+                           class="layui-input" th:value="*{data.name}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">产品编号</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="productCode" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.productCode}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">生产日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="productDate" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.productDate}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">养殖企业</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="enterprise" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.enterprise}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">规格</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="specs" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.specs}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">产地</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="originPlace" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.originPlace}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">饲料来源</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="feedSource" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.feedSource}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">苗种来源</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="seedSource" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.seedSource}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">药品使用</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="drugUse" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.drugUse}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">检测服务</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="testService" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.testService}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">加工服务</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="processService" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.processService}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">物流运输</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="logistics" lay-verify="title" autocomplete="off" placeholder=""
+                               class="layui-input" th:value="*{data.logistics}">
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="layui-upload layui-col-xs2">
+                    <button type="button" class="layui-btn" id="test1">上传图片</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="demo1">
+                        <input type="hidden" id="imgSrc" th:value="*{data.imgSrc}">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
+
+                <div class="layui-upload layui-col-xs2">
+                    <button type="button" class="layui-btn" id="test2">上传图片</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="demo2">
+                        <input type="hidden" id="imgSrc2" th:value="*{data.imgSrc2}">
+                        <p id="demoText2"></p>
+                    </div>
+                </div>
+
+                <div class="layui-upload layui-col-xs2">
+                    <button type="button" class="layui-btn" id="test3">上传图片</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="demo3">
+                        <input type="hidden" id="imgSrc3" th:value="*{data.imgSrc3}">
+                        <p id="demoText3"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="height: 38px">
+                <button class="layui-btn layui-btn-normal" id="customize">自定义信息</button>
+            </div>
+
+            <div id="defined">
+
+            </div>
+
+            <div style="height: 38px;margin-top: 20px;">
+                <button style="margin-left: 50%;" class="layui-btn layui-btn-normal" id="save">保存</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+<script th:src="@{/static/KE/kindeditor-all-min.js}"></script>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script src="/static/layui/layui.js"></script>
+<script>
+    var layer;
+    //var editor = new Array();
+    var kinderIndex = 0;
+
+    var options = {
+        //filterMode: true,
+        //allowImageUpload: true,
+        //width : '600px',
+        //height: '250px',
+        uploadJson: '/traceSource/uploadImg',
+        afterBlur: function () {
+            this.sync();
+        }
+    };
+
+
+    layui.use(['table', 'layer', 'laydate', 'upload'], function () {
+        var upload = layui.upload, laydate = layui.laydate;
+
+        //初始化
+        $.ajax({
+            type: "POST",
+            url: "/traceSource/getCustomizeTraceDetail",
+            data: {
+                headerId: $('#id').val()
+            },
+            dataType: "json",
+            error: function (res) {
+                console.log(res);
+            },
+            success: function (res) {
+                if (res.state == 'success') {
+                    var data = res.data;
+                    kinderIndex = data.length - 1;
+                    for (var x in data) {
+                        var html = '<div class="aaa"><input type="hidden" value='+data[x].id+'><button style="float:right;"onclick="closeKind(this)">删除</button><h5 style="font-size: 18px;line-height: 38px">自定义标题:<input type="text" class="layui-input" id="title' + (x + 1) + '"></h5><textarea id="area' + (x + 1) + '" name="content" style=" width:100%;height:300px;"></textarea></div>';
+                        $('#defined').append(html);
+                        var editor=KindEditor.create('#area' + (x+1), options);
+                        $('#title'+x).val(data[x].title);
+                        editor.html(data[x].content);
+                        editor.sync();
+                    }
+                } else {
+                    layer.msg(res.msg);
+                }
+            }
+        })
+
+        laydate.render({
+            elem: '#productDate' //指定元素
+        });
+        //普通图片上传
+        var uploadInst1 = upload.render({
+            elem: '#test1'
+            , url: '/traceSource/uploadFile/'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.state == 'success') {
+                    console.log(res.url);
+                    $("#imgSrc").val(res.url);
+                } else {
+                    layer.msg('上传失败');
+                }
+                //上传成功
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst1.upload();
+                });
+            }
+        });
+
+        var uploadInst2 = upload.render({
+            elem: '#test2'
+            , url: '/traceSource/uploadFile/'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo2').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.state == 'success') {
+                    console.log(res.url);
+                    $("#imgSrc2").val(res.url);
+                } else {
+                    layer.msg('上传失败');
+                }
+                //上传成功
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText2');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst2.upload();
+                });
+            }
+        });
+
+        var uploadInst3 = upload.render({
+            elem: '#test3'
+            , url: '/traceSource/uploadFile/'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo3').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.state == 'success') {
+                    console.log(res.url);
+                    $("#imgSrc3").val(res.url);
+                } else {
+                    layer.msg('上传失败');
+                }
+                //上传成功
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText3');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst3.upload();
+                });
+            }
+        });
+
+        $(document).on("click", "#customize", function () {
+            var id = 'area' + (kinderIndex + 1);
+            var html = '<div class="aaa"><input type="hidden"><button style="float:right;"onclick="closeKind(this)">删除</button><h5 style="font-size: 18px;line-height: 38px">自定义标题:<input type="text" class="layui-input" id="title' + (kinderIndex + 1) + '"></h5><textarea id=' + id + ' name="content" style=" width:100%;height:300px;"></textarea></div>';
+            $('#defined').append(html);
+            KindEditor.create('#' + id, options);   //正确
+            kinderIndex++;
+            /*for(var x in editor){
+                editor[x].readOnly=false;
+            }*/
+        });
+        $(document).on("click", "#save", function () {
+            var name = $('#name').val();
+            var productCode = $('#productCode').val();
+            var productTime = $('#productDate').val();
+            var enterprise = $('#enterprise').val();
+            var specs = $('#specs').val();
+            var originPlace = $('#originPlace').val();
+            var feedSource = $('#feedSource').val();
+            var seedSource = $('#seedSource').val();
+            var drugUse = $('#drugUse').val();
+            var testService = $('#testService').val();
+            var processService = $('#processService').val();
+            var logistics = $('#logistics').val();
+            var imgSrc = $("#imgSrc").val();
+            var imgSrc2 = $("#imgSrc2").val();
+            var imgSrc3 = $("#imgSrc3").val();
+            var divs = $('#defined').children('.aaa');
+            var data = [];
+            for (var i = 0; i < divs.length; i++) {
+                var hidden = $(divs[i]).find('input[type=hidden]')[0];
+                var id=hidden.val();
+                var input = $(divs[i]).find('input[type=text]')[0];
+                var title = $(input).val();
+                var textarea = $(divs[i]).find('textarea[name="content"]')[0];
+                var content = $(textarea).val();
+                if (title != '') {
+                    data.push({id:id,title: title, content: content});
+                }
+            }
+            console.log(data);
+            $.ajax({
+                type: "post",
+                url: "/traceSource/updateCustomizeTrace",
+                timeout: 30000,
+                data: {
+                    id:$('#id').val(),
+                    name: name,
+                    productCode: productCode,
+                    productTime: productTime,
+                    enterprise: enterprise,
+                    specs: specs,
+                    originPlace: originPlace,
+                    feedSource: feedSource,
+                    seedSource: seedSource,
+                    drugUse: drugUse,
+                    testService: testService,
+                    processService: processService,
+                    logistics: logistics,
+                    imgSrc: imgSrc,
+                    imgSrc2: imgSrc2,
+                    imgSrc3: imgSrc3,
+                    data: JSON.stringify(data)
+                }, error: function (data, type, err) {
+                    console.log(err);
+                    layer.closeAll('loading');
+                    layer.msg($.i18n.prop('fail'), {
+                        offset: '6px'
+                    });
+                },
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if (data.state == 'success') {
+                        layer.msg("创建成功");
+                        window.location.href = "/traceSource/traceList";
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                }
+
+            });
+        });
+
+    });
+
+    function closeKind(a) {
+        $(a).parent().remove();
+    }
+</script>
+<style>
+    .aaa {
+        border: 1px solid #eee;
+        margin-top: 10px;
+        padding: 10px 25px;
+        width: 100%
+    }
+</style>
+</html>

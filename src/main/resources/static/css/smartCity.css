@@ -1,0 +1,282 @@
+body{
+    margin:0;
+    padding:0;
+    font-size: 62.5% !important;
+}
+.allBox{
+    width:100%;
+    height:100%;
+    background-image:url(../img/smartCity/background.png);
+    background-size:100% 100%;
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+}
+.banner{
+    width:100%;
+    height:60px;
+    background-image:url(../img/smartCity/bannerImg.png);
+    background-size:100% 100%;
+}
+
+.bottomContent{
+    height:150px;
+    width:100%;
+    position:absolute;
+    bottom:15px;
+}
+.bottomLeft{
+    width:30%;
+    height:100%;
+    display:inline-block;
+    background-image:url(../img/smartCity/itemBg.png);
+    background-size:100% 100%;
+    margin-left:1%;
+    position: relative;
+}
+.bottomCenter{
+    width:40%;
+    height:100%;
+    display:inline-block;
+    background-image:url(../img/smartCity/itemBg.png);
+    background-size:100% 100%;
+    margin-left:1%;
+    position: relative;
+}
+.bottomRight{
+    width:25%;
+    height:100%;
+    display:inline-block;
+    background-image:url(../img/smartCity/itemBg.png);
+    background-size:100% 100%;
+    margin-left:1%;
+    position: relative;
+}
+.content{
+    margin-top:10px;
+}
+.topLeft{
+    width:30%;
+    height:100%;
+    display:inline-block;
+
+    margin-left:1%;
+}
+.topLeftTop{
+    width:100%;
+    height:47%;
+    background-image:url(../img/smartCity/itemBg.png);
+    background-size:100% 100%;
+    position: relative;
+}
+.topLeftBottom{
+    margin-top:6%;
+    width:100%;
+    height:47%;
+    background-image:url(../img/smartCity/itemBg.png);
+    background-size:100% 100%;
+    position: relative;
+}
+.topCenter{
+    position: relative;
+    width:40%;
+    height:100%;
+    display:inline-block;
+    background-image:url(../img/smartCity/itemBg.png);
+    background-size:100% 100%;
+    margin-left:1%;
+}
+.topRight{
+    width:25%;
+    height:100%;
+    display:inline-block;
+    background-image:url(../img/smartCity/itemBg.png);
+    background-size:100% 100%;
+    margin-left:1%;
+    position: relative;
+}
+/*边角css样式*/
+.borderSpan{
+    position: absolute;
+    padding: 5px;
+    border-style: solid;
+    border-color: #00FFFF;
+}
+.borderTop{
+    border-width: 2px 0 0 2px;
+    top: -3px;
+    left: -3px;
+}
+.borderRight{
+    border-width: 2px 2px 0 0;
+    top: -3px;
+    right: -3px;
+}
+.borderBottom{
+    border-width: 0 2px 2px 0;
+    bottom: -3px;
+    right: -3px;
+}
+.borderLeft{
+    border-width: 0 0 2px 2px;
+    bottom: -3px;
+    left: -3px;
+}
+
+.itemTitle{
+    position: absolute;
+    left:1rem;
+    top:.5rem;
+    font-size:1rem;
+    color:#00FFFF;
+}
+.screenFiveNotice{
+    width:100%;
+}
+.screenFiveNoticeTitle{
+    display:inline-block;
+    margin-left:30px;
+    padding: 5px 15px;
+
+
+}
+.screenFiveNoticeTitleText{
+    display:block;
+    height:1.7rem;
+    line-height:1.7rem;
+}
+.itemBox{
+    display:inline-block;
+    border:1px solid #00B9B9;
+    padding:5px 15px;
+    border-radius:5px;
+    margin-right:10px;
+}
+.itemBox span{
+    display:block;
+    height:1.7rem;
+    line-height:1.7rem;
+}
+.travelBox{
+    float: right;
+    margin-right:7px;
+}
+.itemName{
+    color:#ffffff;
+}
+.weatherTitle{
+    color:#00FFFF;
+}
+.weatherBox{
+
+}
+.weatherTop{
+    position:absolute;
+    top:5px;
+    width:100%;
+}
+.weatherTitle{
+    margin-left: 10px;
+    font-size: .9rem;
+    float: left;
+}
+.weatherIcon{
+    width:30px;
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    margin-left: -15px;
+}
+.weatherContent{
+    width: 100%;
+    position: absolute;
+    bottom: 4px;
+}
+.weatherItemName{
+    color: #708ACC;
+    display: inline-block;
+    width: 50%;
+    background: #0d4b82;
+    opacity: 0.8;
+}
+
+.weatherItemValue{
+    background: #0e4279;
+    opacity: 0.8;
+    color: #00D8FC;
+    display: inline-block;
+    width: 50%;
+    margin-left: -4px;
+
+}
+.weatherItemBox{
+    width:25%;
+    padding: 3px 0;
+    display: inline-block;
+    line-height: 40px;
+    height: 40px;
+    text-align: center;
+    border:1px solid rgba(3,94,255,0.1);
+    margin-left:5.5%;
+ /*   background:url(../img/smartCity/weatherItemBg.png) 100% 100%  no-repeat;*/
+}
+.searchHot{
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    width: 100%;
+}
+.searchHotLeftItem{
+    line-height: 50px;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    opacity: 0.9;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: .7rem;
+}
+
+.searchHotLeftTitleBox{
+    color: #00FFFF;
+    margin-top:5px;
+}
+.searchHotTitle{
+    color: #00FFFF;
+    font-size:.9rem;
+    display:block;
+}
+.searchHotLeftItemBox{
+    position: relative;
+}
+.searchLeftPart{
+
+}
+.searchRightPart{
+    position: absolute;
+    right: 27px;
+    top: 21px;
+    font-size:.8rem;
+}
+.talkTop{
+    color:#ffffff;
+}
+.talkTopName{
+    color:#ffffff;
+}
+.talkTopValue{
+    color:#00FFFF;
+    margin-left:15px;
+}
+.talkTopItem{
+    height:20px;
+    line-height: 20px;
+}
+.screenFiveNotice{
+    bottom:2px;
+    position: absolute;
+}

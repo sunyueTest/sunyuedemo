@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>leaveparoleSystem-留言系统</title>
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/leaveparoleSystem.css}">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+
+</head>
+<body>
+<div class="conter">
+    <!--<div style="height: 10vh;background: #053F67;width:100vw;position: fixed;top: 0;left: 0;display: flex;">-->
+        <!--<div class="buddha-border" style="border: none;">-->
+            <!--<div class="buddha-pic">-->
+                <!--<img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<p style="font-size: 0.8vw;line-height: 11.5vh;">张三教授</p>-->
+    <!--</div>-->
+    <div class="teacher" style="margin-top: 6vh;" id="teacher">
+        <!--<div class="teacher-l">-->
+            <!--<div class="teacher-pic"><img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">-->
+            <!--</div>-->
+            <!--<div class="teacher-int">-->
+                <!--<p>张教授您好，我想问下最近我种植的葡萄，叶子发黄、根茎部位有限些开裂，是什么原因造成的？怎么解决？</p>-->
+                <!--<div style="display: flex; justify-content: space-between;">-->
+                    <!--<p>2019-09-02 08:10:10</p>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="tiweb">农户李斯</div>-->
+            <!--<div class="teacher-icon">-->
+                <!--<div class="chaxun"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+    <div class="page">
+        <div id="page"></div>
+    </div>
+</div>
+<div id="tc" class="">
+    <h3 class="tc-title">
+        <div class="buddha-border">
+            <div class="buddha-pic">
+                <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+            </div>
+        </div>
+        <p id="tcusername">用户李斯</p>
+    </h3>
+    <div style="display: flex;width: 50vw;margin: 0 auto;border-bottom: 1px solid #027187;padding-bottom: 3vh;height: 25vh;">
+        <div style="width: 8vw;line-height: 6vh;margin-top: 2vh">
+            <p>病情描述：</p>
+        </div>
+        <div class="tc-int test test-1">
+            <div style="text-align: left;width: 40vw;margin-top:2vh">
+                <p id="diseaseContent">
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex;width: 50vw;margin: 0 auto;border-bottom: 1px solid #027187;padding-bottom: 3vh;">
+        <div style="width: 8vw;line-height: 12vh;height: 25vh;">
+            <p>专家回答：</p>
+        </div>
+        <div class="tc-int" style="overflow: hidden;font-size: 0.8vw">
+            <div style="text-align: left;display: flex" id="tchuida">
+            </div>
+        </div>
+    </div>
+    <div id="dele"></div>
+</div>
+</body>
+</html>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/js/agriculture/xlPaging.js}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script>
+    let layer;
+    layui.use(['form', 'layer', 'layedit', 'laydate'], function () {
+        layer = layui.layer;
+    });
+    var pageNum = '';
+    var numa = 1;
+    function getlist(page) { //获取留言列表
+        $.ajax({
+            url: "../expertManage/findAquacultureExpertList",
+            type: "POST",
+            data: {
+                page: page,
+                size: 5,
+            },
+            success: function (res) {
+                if(res.datas.length==0){
+                    $('#teacher').html('<img style="width: auto;float: none;margin: 0 auto" src="/static/img/agriculture/zhanwei.png" alt="">\n');
+                    return;
+                }
+                console.log('获取留言列表');
+                console.log(res);
+                var html = '';
+                $.each(res.datas, function (i, item) {
+                    html += '        <div class="teacher-l">\n'
+                    if (!item.diagnosisPic) {
+                        html += '            <div class="teacher-pic"><img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt=""></div>\n'
+                    } else {
+                        html += '            <div class="teacher-pic"><img src="' + item.diagnosisPic + '" alt=""></div>\n'
+                    }
+                    html += '            <div class="teacher-int">\n' +
+                        '                <p>' + item.species + '</p>\n' +
+                        '                <div style="display: flex; justify-content: space-between;">\n' +
+                        '                    <p>' + item.createTime + '</p>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '            <div class="tiweb">' + item.createName + '</div>\n' +
+                        '            <div class="teacher-icon">\n' +
+                        '                <div class="chaxun" data-id="' + item.id + '"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>\n' +
+                        '            </div>\n' +
+                        '        </div>'
+                });
+                $('#teacher').html(html);
+                $("#page").paging({
+                    nowPage: page, // 当前页码
+                    pageNum: Math.ceil(res.count/5), // 总页码
+                    buttonNum: 3, //要展示的页码数量
+                    canJump: 0,// 是否能跳转。0=不显示（默认），1=显示
+                    showOne: 1,//只有一页时，是否显示。0=不显示,1=显示（默认）
+                    callback: function (num) { //回调函数
+                        console.log(num);
+                        page = num;
+                        getlist(num)
+                    }
+                });
+            }
+        })
+    }
+    getlist(1, 5)
+    var xiugai = document.getElementsByClassName('xiugai');
+    var chaxun = document.getElementsByClassName('chaxun');
+    var tc = document.getElementById('tc');
+    var dele = document.getElementById('dele');
+    var id
+    $(document).on('click', '.chaxun', function () {
+        tc.style.display = 'block'
+        id = this.getAttribute("data-id")
+        $.ajax({
+            url: "../productService/fishermanQuestionsDetails?id=" + id,
+            type: "POST",
+            data: {},
+            success: function (res) {
+                console.log('点击留言详情');
+                console.log(res);
+                $('#tcusername').html(res.data.createUser);
+                $('#diseaseContent').html(res.data.species);
+                if (!res.data.diagnosisPic) {
+                    var a = '            <img src="/static/img/agriculture/specialistManagement/teacherpic.png" >\n'
+                    $('#tcpix').html(a)
+                } else {
+                    var a = '<img src="' + res.data.diagnosisPic + '" >\n'
+                    $('#tcpix').html(a)
+                }
+                if (res.data.answerFlag == 1) {
+                    var answer = res.data.answer;
+                    $('#tchuida').html(answer);
+
+                } else if (res.data.answerFlag == 0) {
+                    var answer = '<textarea class="answer" style="width: 28vw;height: 26vh;margin-top: 1vh;background: transparent;border-color: #31a9ce;box-sizing: border-box;padding: 1vh 1vw;overflow: hidden;resize:none;">\n' +
+                        '</textarea>      ' +
+                        '<div onclick="submit()" class="fabubnt" style="width: 4vw;height: 4vh;background: #fff;color: #000;font-size: 0.8vw;line-height: 4vh;text-align: center;margin-left: 1vw;margin-top: 1vh;cursor: pointer">发布</div>\n'
+                    $('#tchuida').html(answer);
+                }
+            }
+        })
+    })
+    dele.onclick = function () {
+        tc.style.display = 'none';
+    };
+    submit = function () {
+        console.log(id);
+        let answer = $(".answer").val();
+        if (typeof (answer) == "undefined" || !answer) {
+            alert("请正确回复问题");
+            return false;
+        }
+        $.ajax({
+            url: "../productService/expertFeedback",
+            type: "POST",
+            data: {
+                id: id,
+                expertReply: answer
+            },
+            success: function (res) {
+                console.log(res);
+                if(res.state=="success"){
+                    tc.style.display = 'none';
+                    layer.msg(res.msg);
+                    getlist(1, 10);
+                }else{
+                    layer.msg(res.msg);
+                }
+            }
+        })
+    }
+</script>
+
+
+
+

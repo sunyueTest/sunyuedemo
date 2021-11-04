@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/common.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/agricultureIndex.css}" media="all">
+    <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script th:src="@{/static/chart/echarts.min.js?v=1.0}"></script>
+    <script th:src="@{/static/js/china.js?v=1.0}"></script>
+<!--    <script
+            src="https://webapi.amap.com/maps?v=1.4.10&key=96a943dab4656930f33276727a084933&plugin=AMap.MarkerClusterer"></script>-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=5u3R0Gc74WVv6T6sM8R6NQieZQaCK7Pr"></script>
+    <script th:src="@{/static/layui/layui.js}"></script>
+    <script th:src="@{/static/js/ezuikit.js?v=1.0}"></script>
+    <script src="/static/i18n/jquery.i18n.properties.js"></script>
+    <script src="/static/js/common.js" charset="utf-8"></script>
+    <script th:src="@{/static/js/agriculture/agricultureIndex.js}"></script>
+    <script th:src="@{/static/js/fullScreen.js}" charset="utf-8"></script>
+</head>
+<style>
+    body{
+        width: 100vw;
+        height:100vh;
+        overflow: hidden;
+    }
+    .layui-nav .layui-nav-item .base{
+        text-align: center;transition: all 0.5s;
+    }
+
+    body .contentBox .layui-nav .baseac{
+        background: rgba(0,0,0,0.1)!important;
+    }
+    body .contentBox .base:hover{
+        cursor: pointer;
+    }
+    .layui-nav-bar{display: none!important;}
+    .xmbg{
+        background: rgba(255,255,255,0.1);
+    }
+    .xmbg:hover{
+        background: rgba(255,255,255,0.1)!important;
+    }
+    .layui-nav{
+        background-color: transparent!important;
+    }
+    .gs{
+        background:rgba(0,0,0,0.2)!important;
+        margin: 0.5vh 0;
+    }
+    .layui-nav-itemed>.layui-nav-child{
+        background-color: transparent!important;
+    }
+    .nav-jd{margin: 0.5vh 0;}
+    .base{margin: 0.5vh 0;}
+    /*.gs{font-size: 1.1vw;max-font-size: 12px}*/
+    /*.xmbg{font-size: 0.9vw;max-font-size: 12px}*/
+    /*.item{font-size: 0.7vw;max-font-size: 12px}*/
+    #mapContainer{background: #0a325c!important;
+        font-size: 60px !important;
+    }
+</style>
+<body>
+<div class="contentBox">
+<div id="mapContainer" style="width:100%;">
+</div>
+<div class="leftBoxMb isMap">
+</div>
+<div class="leftBox isMap" style="overflow: auto">
+    <!--左侧搜索框未做暂时隐藏-->
+    <!--<div class="searchBox">-->
+        <!--<input class="searchInput" type="text" />-->
+        <!--<div class="searchBtn">-->
+            <!--<img class="searchImg" src="../../static/img/agriculture/search.png" />-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="itemBox">-->
+    <!--</div>-->
+    <div class="leftBoxEnterprise">
+        <div>
+            <ul class="layui-nav layui-nav-tree" lay-filter="test" style="width: 95%;margin: 0 auto;margin-top: 3vh" id="nav-left">
+                <!--<li class="layui-nav-item">-->
+                    <!--<a href="javascript:;">企业</a>-->
+                    <!--<div class="layui-nav-child">-->
+                        <!--<div class="layui-nav-item">-->
+                            <!--<a href="javascript:;">项目</a>-->
+                            <!--<div class="layui-nav-child base">基地4</div>-->
+                            <!--<div class="layui-nav-child base">基地4</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+    <div class="rightBox isMap">
+        <a href="http://www.macromedia.com/go/getflashplayer" target="_blank">请点击此处下载安装最新的flash插件</a>
+        <div class="rightOneBoxMb"></div>
+        <div class="rightOneBox">
+                <div class="rightBoxTitleBox">
+                    <img class="rightTitleBoxIcon" src="../../static/img/agriculture/camera.png" />
+                    <div class="rightTitleTextBox">
+                        <p class="RightTitleTextTop"></p>
+                        <p class="RightTitleText">监控设备</p>
+                        <p class="RightTitleTextBottom"></p>
+                    </div>
+                    <img class="rightTitleTurnOn" src="../../static/img/agriculture/pointRight.png" />
+                </div>
+            <div class="rightOneRightBox">
+                <div class="rightOneBoxTop">
+                    <img class="rightOneBoxPhoto" style="display:none;" src="../../static/img/agriculture/farmerPhoto.jpg" />
+                    <div class="rightOneBoxTopMsg">
+                        <p class="p1"></p>
+                        <p class="p2"></p>
+                      <!--  <p class="p3">联系方式：156 9919 1227</p>-->
+                        <p class="p3"></p>
+                    </div>
+                </div>
+                <div class="cameraBox" style="height: 34vh;">
+                    <div class="cameraOne camera">
+                    </div>
+                    <img class='cameraNoMsg' src="../../static/img/agriculture/noMsg.png" />
+                </div>
+            </div>
+        </div>
+        <div class="rightTwoBoxMb">
+        </div>
+        <div class="rightTwoBox">
+            <div class="rightBoxTitleBox">
+                <img class="rightTitleBoxIcon" src="../../static/img/agriculture/dangerMsg.png" />
+                <div class="rightTitleTextBox">
+                    <p class="RightTitleTextTop"></p>
+                    <p class="RightTitleText">预警信息</p>
+                    <p class="RightTitleTextBottom"></p>
+                </div>
+                <img class="rightTitleTurnOn" src="../../static/img/agriculture/pointRight.png" />
+            </div>
+            <div id="dangerCharts">
+            </div>
+            <div class="dangerMsg">
+                <p class="dangerTime" style="visibility:hidden;">时间：2019-09:19 10:10</p>
+                <div class="dangerMsgItem">
+<!--                    <p><span class="dangerIcon cyellow"></span><span class="dangerText A">湿度<62%</span></p>
+                    <p><span class="dangerIcon cyellow"></span><span class="dangerText B">作物病：苹果病害</span></p>
+                    <p><span class="dangerIcon cyellow"></span><span class="dangerText C">温度：45℃</span></p>
+                    <p><span class="dangerIcon cRed"></span><span class="dangerText D">土壤湿度：150</span></p>
+                    <p><span class="dangerIcon cRed"></span><span class="dangerText E">温度>28℃</span></p>
+                    <p><span class="dangerIcon cRed"></span><span class="dangerText F">土壤PH>6.5</span></p>-->
+                </div>
+            </div>
+        </div>
+        <div class="rightThreeBoxMb">
+        </div>
+        <div class="rightThreeBox">
+            <div class="allMapTitleBox">
+                <div class="allMapTitle">
+                    <img class="allMapTitleImg" src="../../static/img/agriculture/allSee.png" />
+                    <span class="allMapTitleText">当前区域全景图</span>
+                </div>
+                <span class="allMapCloseBtn" ></span>
+            </div>
+            <div id="allMapBox">
+            </div>
+        </div>
+        <div class="rightFourBoxMb">
+        </div>
+        <div class="rightFourBox">
+            <div class="rightBoxTitleBox">
+                <img class="rightTitleBoxIcon" src="../../static/img/agriculture/device.png" />
+                <div class="rightTitleTextBox">
+                    <p class="RightTitleTextTop"></p>
+                    <p class="RightTitleText">设备状态</p>
+                    <p class="RightTitleTextBottom"></p>
+                </div>
+                <img class="rightTitleTurnOn" src="../../static/img/agriculture/pointLeft.png" />
+            </div>
+            <div id="devicePie">
+            </div>
+        </div>
+        <div class="rightFiveBoxMb">
+        </div>
+        <div class="rightFiveBox">
+            <div class="rightBoxTitleBox">
+                <img class="rightTitleBoxIcon" src="../../static/img/agriculture/data.png" />
+                <div class="rightTitleTextBox">
+                    <p class="RightTitleTextTop"></p>
+                    <p class="RightTitleText">环境实时数据</p>
+                    <p class="RightTitleTextBottom"></p>
+                </div>
+                <img class="rightTitleTurnOn" src="../../static/img/agriculture/pointLeft.png" />
+            </div>
+            <div id="environmentBar">
+            </div>
+            <img class='environmentBarNoMsg' src="../../static/img/agriculture/noMsg.png" />
+        </div>
+        <div class="rightSixBoxMb">
+        </div>
+        <div class="rightSixBox">
+            <div class="rightBoxTitleBox">
+                <img class="rightTitleBoxIcon" src="../../static/img/agriculture/placeMsg.png" />
+                <div class="rightTitleTextBox">
+                    <p class="RightTitleTextTop"></p>
+                    <p class="RightTitleText">土地墒情</p>
+                    <p class="RightTitleTextBottom"></p>
+                </div>
+                <img class="rightTitleTurnOn" src="../../static/img/agriculture/pointLeft.png" />
+            </div>
+            <div id="landBar">
+            </div>
+            <img class='landBarNoMsg' src="../../static/img/agriculture/noMsg.png"/>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+

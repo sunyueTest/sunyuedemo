@@ -1,0 +1,264 @@
+.base-item {
+    display: flex;
+    text-align: center;
+}
+
+.list-border {
+    padding: 0 15px;
+}
+
+.base-item span {
+    width: 100px;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 40px;
+    text-align: right;
+    margin-right: 16px;
+}
+
+.base-item input {
+    width: 200px;
+    height: 40px;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: transparent;
+    background-image: url(../../img/commend_btn.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 120px;
+    height: 35px;
+    border: 0px;
+    margin-left: 130px;
+    color: #5f4d6f;
+    margin-top: 110px;
+}
+
+.ztree li a {
+    color: #fff;
+}
+
+.base-item img {
+    border: none;
+    width: 50px;
+    height: 50px;
+    margin-top: -4px;
+    text-align: right;
+    margin-left: 10px;
+}
+
+ul.ztree {
+    background-color: #5FB878 !important;
+    margin-top: 0px !important;
+    background-image: none !important;
+    width: 247px !important;
+    height: 220px !important;
+    margin-left: -7px !important;
+}
+
+.layui-table-header {
+    border: 0px;
+    background-color: #fff
+}
+
+.ztree {
+    margin-top: 0;
+    width: 190px;
+    height: 220px;
+}
+
+.ztree li a {
+    margin-left: -5px;
+}
+
+.menuContent {
+    display: none;
+    position: absolute;
+    overflow: hidden;
+    height: 231px;
+}
+
+.list-border .layui-table td {
+    font-size: 12px;
+    text-align: center;
+}
+
+#groupSel {
+    text-align: left;
+    color: #666;
+    width: 238px;
+    display: block;
+    padding-left: 10px;
+    height: 38px;
+    line-height: 38px;
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    margin: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    border-radius: 2px;
+}
+
+.layui-form .layui-inline .layui-input-inline {
+    width: 250px;
+
+}
+
+.layui-form .layui-form-item .layui-inline {
+    margin-bottom: 25px;
+}
+
+.list-border .layui-elem-field legend {
+    height: 45px;
+    color: #fff;
+    line-height: 50px;
+    width: 95%;
+    border-bottom: 2px solid #c7c7c7;
+    border-radius: 10px 0px 0px 10px;
+    padding: 0px;
+}
+
+.list-border .layui-elem-field legend .layui-titlee-sj1 {
+    line-height: 45px;
+    height: 45px;
+    display: inline-block;
+    width: 100px;
+    background: #c7c7c7;
+    float: left;
+    border-radius: 10px 0px 0px 10px;
+    padding-left: 10px;
+    color: #000;
+    font-family: "微软雅黑";
+    font-weight: 400;
+}
+
+.list-border .layui-elem-field legend .layui-titlee-sj2 {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 45px 0 0 45px;
+    border-color: transparent transparent transparent #c7c7c7;
+}
+
+.layui-titlee-sj3 {
+    width: 93%;
+    border: 1px solid #c7c7c7;
+    margin-left: 28px;
+    margin-top: 3px;
+}
+
+.list-border .layui-field-title {
+    border: 0px;
+}
+
+.layui-form-select dl::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 5px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+
+.layui-form-select dl::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.layui-form-select dl::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/*.layui-table-body::-webkit-scrollbar {!*滚动条整体样式*!*/
+/*width: 12px;     !*高宽分别对应横竖滚动条的尺寸*!*/
+/*height: 12px;*/
+/*}*/
+/*.layui-table-body::-webkit-scrollbar-thumb {!*滚动条里面小方块*!*/
+/*border-radius: 5px;*/
+/*-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
+/*background: rgba(0,0,0,0.2);*/
+/*}*/
+/*.layui-table-body::-webkit-scrollbar-track {!*滚动条里面轨道*!*/
+/*-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
+/*border-radius: 0;*/
+/*background: rgba(0,0,0,0.1);*/
+/*}*/
+.layui-table-view .layui-table-cell {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.layui-table td {
+    height: 50px;
+    line-height: 50px;
+}
+
+.list-border .layui-table-header .layui-table thead tr {
+    background-image: url(../../img/bule-dark.png);
+    background-size: 100% 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+}
+
+.layui-table, .layui-table-view {
+    margin: 20px 0;
+}
+
+.layui-table-main .layui-table tr {
+    background-image: url(../../img/bule-light.png);
+    background-size: 100% 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.layui-table-view .layui-table-cell span {
+    font-size: 16px;
+    font-family: "微软雅黑";
+    font-weight: 600;
+    color: #333;
+}
+
+.list-border .layui-table td {
+    border-style: none;
+}
+
+.list-border .layui-table[lay-skin=line] {
+    border-style: none;
+}
+
+.layui-table-view {
+    border-style: none;
+    border: none;
+}
+
+.layui-inline-adress {
+    position: relative;
+}
+
+.layui-inline-adress img {
+    position: absolute;
+    left: 90%;
+    top: 5px;
+    width: 25px;
+    height: 25px;
+}
+
+.btn-primary {
+    background-color: transparent;
+    background-image: url(../../img/commend_btn.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 120px;
+    height: 35px;
+    border: 0px;
+    margin-left: 130px;
+    color: #5f4d6f;
+    margin-top: 30px;
+}

@@ -1,0 +1,93 @@
+#conter{
+	padding: 35px 38px;
+}
+.con-title{
+	height: 65px;
+	border-bottom:1px solid #eeeeee;
+	margin-bottom: 15px;
+}
+.con-title h3{
+	float: left;
+	font-weight: normal;
+	font-size: 22px;
+}
+#int{
+	width: 100%;
+	border: 1px solid #eee;
+	padding: 45px 0;
+}
+.int{width: 100%;margin: 0 auto;}
+.int-pic{
+	float: left;
+	width: 15%;
+}
+.int-pic img{
+	width: 100%;
+}
+.int-txt{
+	float: left;
+	width: 50%;
+	text-align: left;
+	box-sizing: border-box;
+	padding: 0 20px;
+}
+.int-txt li{
+	font-size: 18px;
+	line-height: 30px;
+}
+.int-pic p{
+	font-size: 12px;
+	line-height: 25px;
+	color: #999999;
+}
+#conter .search-txt{
+	width: 170px;
+	height: 25px;
+	padding: 2px 15px;
+	border: 1px solid #eae9ea;
+	padding-left: 35px;
+	border-radius: 15px;
+	box-sizing: border-box;
+}
+.search{
+	width: 170px;
+	height: 25px;	
+	float: right;
+	margin-top: 10px;
+	position: relative;
+	margin-right: 45px;
+}
+.search-bnt{
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	top: 3px;
+	left: 10px;
+	cursor: pointer;
+}
+.search-bnt img{
+	width: 100%;
+}
+.search-bnt-r{
+	width: 28px;
+	height: 28px;
+	position: absolute;
+	right: -40px;
+	bottom: 0;
+	cursor: pointer;
+}
+.search-bnt-r img{
+	width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+

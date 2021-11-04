@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>specialistcoze-专家回复</title>
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/specialistcoze.css}">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+</head>
+<body>
+<div class="header">
+    <div class="logo">
+        <h3>警讯云平台</h3>
+    </div>
+    <div class="nav">
+        <ul>
+            <li>知识库</li>
+            <li>远程诊断</li>
+            <li>信息发布</li>
+            <li>留言系统</li>
+            <li>评价反馈</li>
+        </ul>
+    </div>
+    <div class="user">
+        <div class="user-pic"><img src="/static/img/agriculture/specialistManagement/teacherpic.png" ></div>
+        <div class="user-txt">张三教授</div>
+    </div>
+</div>
+<div class="main">
+    <div class="left-nav">
+        <ul class="test test-1">
+            <li><P>用户A</P><span>2</span></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+            <li><P>用户A</P></li>
+        </ul>
+    </div>
+    <div class="conter">
+        <div class="clearfix">
+            <div class="consult-l">
+                <div class="consult-l-pic"><img src="" alt=""></div>
+                <div class="consult-l-txt">老师您好，关于葡萄对的某个问题怎么解决问题怎么解决问题怎么解决问题怎么解决问题怎么解决问题怎么解决</div>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="consult-r">
+                <div class="consult-r-txt">老师您好，关于葡萄对的某个问题怎么解决</div>
+                <div class="consult-r-pic"><img src="" alt=""></div>
+            </div>
+        </div>
+        <div class="import">
+            <textarea style="width:70vw; height:19vh; border:solid 1px #ccc; border-radius:10px 0 0 20px; resize:none;" placeholder="请输入聊天信息"></textarea>
+            <div class="import-bnt">发送</div>
+        </div>
+    </div>
+</div>
+<div id="tc">
+    <h3 class="tc-title">专家信息</h3>
+    <div class="tc-int">
+        <div class="tc-int-l">
+            <div class="message">
+                <p>姓名：</p>
+                <div class="informessage">
+                    <input type="text" id="" value="" placeholder="请输入姓名"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>昵称：</p>
+                <div class="informessage">
+                    <input type="text" id="" value="" placeholder="请输入昵称"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>身份证号码：</p>
+                <div class="informessage">
+                    <input type="text" id="" value="" placeholder="请输入身份证号码"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>擅长：</p>
+                <div class="informessage">
+                    <input type="text" id="" value="" placeholder="请输入擅长"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>工作单位：</p>
+                <div class="informessage">
+                    <input type="text" id="" value="" placeholder="请输入工作单位"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>职务：</p>
+                <div class="informessage">
+                    <input type="text" id="" value="" placeholder="请输入职务"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>手机号码：</p>
+                <div class="informessage">
+                    <input type="text" id="" value="" placeholder="请输入手机号码"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>最高学历：</p>
+                <div class="informessage">
+                    <input type="text" id="" value="" placeholder="请输入最高学历"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>个人简介：</p>
+                <div class="informessage">
+					<textarea style="width: 28vw;height: 15vh;margin-top: 2vh;background: transparent;border-color: #31a9ce;box-sizing: border-box;padding: 1vh 1vw;overflow: hidden;resize:none;">
+					</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="tc-int-r">
+            <div class="buddha">
+                <div>上传头像：</div>
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="papers">
+                <div>上传证件照：</div>
+                <div class="papers-pic">
+                    <div class="papers-a">
+                        身份证正面
+                    </div>
+                    <div class="papers-a">
+                        身份证反面
+                    </div>
+                    <div class="papers-a">
+                        资质证书
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dele"></div>
+</div>
+<div id="tc1"  class="">
+    <h3 class="tc-title">
+        <p>聊天记录</p>
+    </h3>
+    <div class="Records test test-1">
+        <div class="log-l">
+            <div class="log-l-pic">
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="log-l-txt">
+                <p class="naem">张三教授</p>
+                <p class="txt">您好，请问有什么需要?</p>
+            </div>
+        </div>
+        <div class="log-r">
+
+            <div class="log-l-txt">
+                <p class="naem-r">张三教授</p>
+                <p class="txt">您好，请问有什么需要?</p>
+            </div>
+            <div class="log-l-pic"  style="margin-left: 1vw;">
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="log-l">
+            <div class="log-l-pic">
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="log-l-txt">
+                <p class="naem">张三教授</p>
+                <p class="txt">您好，请问有什么需要?</p>
+            </div>
+        </div>
+        <div class="log-r">
+
+            <div class="log-l-txt">
+                <p class="naem-r">张三教授</p>
+                <p class="txt">您好，请问有什么需要?</p>
+            </div>
+            <div class="log-l-pic"  style="margin-left: 1vw;">
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="log-l">
+            <div class="log-l-pic">
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="log-l-txt">
+                <p class="naem">张三教授</p>
+                <p class="txt">您好，请问有什么需要?</p>
+            </div>
+        </div>
+        <div class="log-r">
+
+            <div class="log-l-txt">
+                <p class="naem-r">张三教授</p>
+                <p class="txt">您好，请问有什么需要?</p>
+            </div>
+            <div class="log-l-pic"  style="margin-left: 1vw;">
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="log-l">
+            <div class="log-l-pic">
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="log-l-txt">
+                <p class="naem">张三教授</p>
+                <p class="txt">您好，请问有什么需要?</p>
+            </div>
+        </div>
+        <div class="log-r">
+
+            <div class="log-l-txt">
+                <p class="naem-r">张三教授</p>
+                <p class="txt">您好，请问有什么需要?</p>
+            </div>
+            <div class="log-l-pic"  style="margin-left: 1vw;">
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="log-l">
+            <div class="log-l-pic">
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="log-l-txt">
+                <p class="naem">张三教授</p>
+                <p class="txt">您好，请问有什么需要?</p>
+            </div>
+        </div>
+        <div class="log-r">
+
+            <div class="log-l-txt">
+                <p class="naem-r">张三教授</p>
+                <p class="txt">您好，请问有什么需要?</p>
+            </div>
+            <div class="log-l-pic"  style="margin-left: 1vw;">
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dele1"></div>
+</div>
+</body>
+</html>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+

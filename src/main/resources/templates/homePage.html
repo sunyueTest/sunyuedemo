@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <style>
+        .layui-table {
+            color: #bbb;
+        }
+
+        .layui-table tbody tr:hover, .layui-table-hover {
+            background-color: #062739;
+        }
+
+        .layui-table td {
+            border-color: #CCCCCC;
+        }
+
+        .layui-col-md4 {
+            margin-bottom: 80px;
+        }
+
+        .layui-card {
+            background: rgba(6, 39, 57, .6);
+        }
+
+        .layui-table {
+            background-color: transparent;
+        }
+
+        html {
+            background: transparent;
+        }
+    </style>
+</head>
+<body style="background: transparent;">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <!--左侧栏目-->
+        <div class="layui-col-md8">
+
+            <div class="layui-row layui-col-space15">
+
+                <div class="layui-col-md3" id="deviceNum">
+                    <style>
+                        #page1 {
+                            background: url("/static/img/indexcss/page1.png") no-repeat;
+                            background-size: 100% 100%;
+                        }
+
+                        #page2 {
+                            background: url("/static/img/indexcss/page2.png") no-repeat;
+                            background-size: 100% 100%;
+                        }
+
+                        #page3 {
+                            background: url("/static/img/indexcss/page3.png") no-repeat;
+                            background-size: 100% 100%;
+                        }
+
+                        #level {
+                            background: url("/static/img/indexcss/page4.png") no-repeat;
+                            background-size: 100% 100%;
+                        }
+                    </style>
+                    <div class="layui-card" id="page1">
+
+                        <div class="layui-card-body">
+                            <span id="deviceNum1"
+                                  style="font-size:20px;display:block;padding: 15px 0px;text-align:center;color: #ffffff;"></span>
+                            <span
+                                style="font-size:35px;display:block;padding: 15px 0px;text-align:center;color: #ffffff;"
+                                th:text="${data.deviceNum}"></span>
+                            <span
+                                style="font-size:20px;display:block;padding: 15px 0px;text-align:center;"><a
+                                href="javascript:void(0)" id="deviceNum2"
+                                style="color:#ffffff;"></a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-card" id="page2">
+                        <div class="layui-card-body">
+                            <span id="dataNum1"
+                                  style="font-size:20px;display:block;padding: 15px 0px;text-align:center;color: #ffffff;"></span>
+                            <span
+                                style="font-size:35px;display:block;padding: 15px 0px;text-align:center;color: #ffffff;"
+                                th:text="${data.dataNum}"></span>
+                            <span
+                                style="font-size:20px;display:block;padding: 15px 0px;text-align:center;"><a
+                                id="dataNum2" href="javascript:void(0)" style="color:#ffffff;"></a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-card" id="page3">
+
+                        <div class="layui-card-body">
+                            <span id="trigger1"
+                                  style="font-size:20px;display:block;padding: 15px 0px;text-align:center;color: #ffffff;"></span>
+                            <span
+                                style="font-size:35px;display:block;padding: 15px 0px;text-align:center;color: #ffffff;"
+                                th:text="${data.trigNum}">0</span>
+                            <span
+                                style="font-size:20px;display:block;padding: 15px 0px;text-align:center;"><a
+                                href="javascript:void(0)" id="trigger2" style="color:#ffffff;"></a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-card" id="level">
+
+                        <div class="layui-card-body">
+                            <span
+                                style="font-size:20px;display:block;padding: 15px 0px;text-align:center;color: #ffffff;"
+                                id="user_count"></span>
+                            <span
+                                style="font-size:35px;display:block;padding: 15px 0px;text-align:center;color: #ffffff;"
+                                th:text="${data.accountNum}"></span>
+                            <span
+                                style="font-size:20px;display:block;padding: 15px 0px;text-align:center;"><a
+                                href="javascript:void(0)" id="user_count2"
+                                style="color:#ffffff;"></a></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class=" layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <span id="usehelp1" style="color:#45B566;"></span>
+                            <a id="usehelp2" shiro:hasPermission="/systemNotice"
+                               style="float:right;color:#fff;cursor: pointer;"
+                               onclick="updateHelp()"> </a>
+                        </div>
+                        <div class="layui-card-body" id="help"></div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md12" id="systemNotices" style="display: none">
+                    <div class="layui-card" style="margin-bottom: 10rem;">
+                        <div class="layui-card-header">
+                            <span id="sysnotice" style="color:#5DA7D5;"></span>
+                            <i class="layui-icon layui-icon-tips" lay-offset="5"></i>
+                        </div>
+                        <div class="layui-card-body layui-text layadmin-text">
+                            <ul>
+                                <li th:each="notice,iterStat : ${data.notices}">
+                                    <a th:attr="target='_blank', href=${notice.url}"
+                                       class="ng-binding" th:text="${notice.title}"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!--右侧栏目-->
+        <div class="layui-col-md4">
+            <!--<div class="layui-card">-->
+                <!--<div class="layui-card-header"><span id="versionInfo" style="color:#569DC9;"></span>-->
+                <!--</div>-->
+                <!--<div class="layui-card-body layui-text">-->
+                    <!--<table class="layui-table">-->
+                        <!--<colgroup>-->
+                            <!--<col width="100">-->
+                            <!--<col>-->
+                        <!--</colgroup>-->
+                        <!--<tbody>-->
+                        <!--<tr>-->
+                            <!--<td id="version">当前版本</td>-->
+                            <!--<td>-->
+                                <!--v2.0.0-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td id="iframe">基于框架</td>-->
+                            <!--<td>-->
+                                <!--jquery+layui-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td id="feature">主要特色</td>-->
+                            <!--<td id="content">零门槛 / 响应式 / 清爽 / 极简</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    <span id="updatelog1" style="color:#887442;"></span>
+                    <a id="updatelog2" shiro:hasPermission="/systemNotice"
+                       style="float:right;color:#fff;cursor: pointer;" onclick="updateLog()"> </a>
+                </div>
+                <div class="layui-card-body layui-text" id="updateLog"></div>
+            </div>
+
+            <div class="layui-card" style="display: none;" id="appInfo">
+                <div class="layui-card-header"><span id="miniProgram" style="color:#fff;"></span>
+                </div>
+                <div class="layui-card-body" style="display: flex;" th:if="${data.wechat_show}">
+                    <img id="appImg" style="width:300px;height:300px;" th:src="${data.appPath}">
+                    <div id="app_qrcode_text_div"
+                         style="width:130px;height:130px;position: absolute;margin-left: 84px;margin-top: 84px;display: flex;justify-content: center">
+                        <img id="app_qrcode_bg"
+                             style="width:130px;height:130px;border-radius: 80px;"
+                             src="../static/img/app_qrcode_bg.jpg">
+                        <span id="app_qrcode_text"
+                              style="color: #ccc;position: absolute;font-size: 20px;margin-top:
+                               50px;letter-spacing: 5px;font-family: '新宋体';font-weight: bold;"
+                        ></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="layui-card">
+                <div class="layui-card-header"><span id="loginInfo" style="color:#724245;"></span>
+                </div>
+                <div class="layui-card-body">
+                    <span id="lastLogin"
+                          style="display:block;padding: 15px 0px;color:#000;"></span>
+                    <span style="display:block;color:#000;"
+                          th:text="${data.lastLogin}"> 2018-11-13 09:29:43 </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:inline="javascript">
+    $.ajax({
+        type: "POST",
+        url: "/user/selUserDetails",
+        dataType: "json",
+        success: function (res) {
+            if (res.state == 'success') {
+                a = res.data.info.style + 1;
+                console.log("style:" + a);
+                var styles = document.getElementsByClassName('styles')[0];
+                styles.href = '/static/css/indexCss/indexsubject' + a + '.css';
+            } else {
+            }
+        }
+    });
+</script>
+<script th:inline="javascript">
+    var isinitQrcode = false;
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        var updateLog = [[${data.updateLog}]];
+        var help = [[${data.help}]];
+        $('#updateLog').html(updateLog);
+        $('#help').html(help);
+        var level = [[${data.level}]];
+        if (level > 1) {
+            document.getElementById('level').style.display = 'none';
+            document.getElementById('deviceNum').style.marginLeft = '100px'
+        } else if (level < 1) {
+            var userCount = document.getElementById('user_count');
+            userCount.innerText = $.i18n.prop('userCount');
+        }
+
+        if (parent.userData != undefined) {
+            initQrcode();
+        }
+
+        //页面层-自定义
+        /*
+                layer.open({
+                    type: 1,
+                    title: '温馨提示',
+                    closeBtn: 0,
+                    shadeClose: false,
+                    btn: ['同意'],
+                    skin: 'yourclass',
+                    content: '自定义HTML内容'
+                });*/
+    });
+
+    function initQrcode() {
+        if (isinitQrcode == true) {
+            return;
+        }
+        isinitQrcode = true;
+        if (parent.userData == null || parent.userData.info == null ||
+            parent.userData.info.systematic == '') {
+            document.getElementById('systemNotices').style.display = 'block';
+            document.getElementById('appInfo').style.display = 'block';
+            document.getElementById('app_qrcode_text_div').style.display = 'none';
+        } else if (parent.userData != null && parent.userData.info != null &&
+            parent.userData.info.qrcode != '') {
+            document.getElementById('appImg').src = parent.userData.info.qrcode;
+            document.getElementById('appInfo').style.display = 'block';
+            if (parent.userData.info.homePageType == '1') {
+                document.getElementById('app_qrcode_text_div').style.display = 'none';
+            } else if (parent.userData.info.systematic.length < 6) {
+                document.getElementById('app_qrcode_text').innerHTML =
+                    parent.userData.info.systematic;
+            } else {
+                document.getElementById('app_qrcode_text').style.fontSize = '15px';
+                document.getElementById('app_qrcode_text').innerHTML =
+                    parent.userData.info.systematic.substring(0, 5) + '..';
+            }
+        }
+    }
+
+    function onReceive(type, data) {
+        if ('changeSystematic' == type) {
+            document.getElementById('appImg').src = data.qrcode;
+            document.getElementById('appInfo').style.display = 'block';
+            if (parent.userData.info.systematic.length < 6) {
+                document.getElementById('app_qrcode_text').innerHTML =
+                    data.systematic;
+            } else {
+                document.getElementById('app_qrcode_text').style.fontSize = '15px';
+                document.getElementById('app_qrcode_text').innerHTML =
+                    data.substring(0, 5) + '..';
+            }
+        } else if ('initQrcode' == type) {
+            initQrcode();
+        }
+
+    }
+
+    function updateHelp() {
+        layer.open({
+            type: 2,
+            area: ['800px', '500px'],
+            title: $.i18n.prop('useHelp'),
+            maxmin: true,
+            /*btn: ['确定', '取消'],
+            btnAlign: 'c',
+            yes: function (index, layero) {
+                var body = layer.getChildFrame('body', index);
+                body.find();
+                layer.close(index);
+                window.location.reload();
+            },*/
+            anim: 3,
+            content: '../home/getHelpEdit',
+            success: function (layero, index) {
+
+            }
+        });
+    }
+
+    function updateLog() {
+        layer.open({
+            type: 2,
+            area: ['800px', '500px'],
+            title: $.i18n.prop('updateLog'),
+            maxmin: true,
+            anim: 3,
+            content: '../home/getUpdateLog',
+            success: function (layero, index) {
+
+            }
+        });
+    }
+
+    loadI18nProperties(function () {
+        $('#deviceNum1').text($.i18n.prop('deviceNumber'));
+        $('#deviceNum2').text($.i18n.prop('deviceManage'));
+        $('#dataNum1').text($.i18n.prop('dataNumber'));
+        $('#dataNum2').text($.i18n.prop('dataManage'));
+        $('#trigger1').text($.i18n.prop('triggerNumber'));
+        $('#trigger2').text($.i18n.prop('triggerManage'));
+        $('#user_count').text($.i18n.prop('userCount'));
+        $('#user_count2').text($.i18n.prop('userManage'));
+        $('#usehelp1').text($.i18n.prop('useHelp'));
+        $('#usehelp2').text($.i18n.prop('modify'));
+        $('#sysnotice').text($.i18n.prop('sysNotice'));
+        $('#versionInfo').text($.i18n.prop('versionInfo'));
+        $('#updatelog1').text($.i18n.prop('updateLog'));
+        $('#updatelog2').text($.i18n.prop('modify'));
+        $('#miniProgram').text($.i18n.prop('miniProgram'));
+        $('#loginInfo').text($.i18n.prop('loginInfo'));
+        $('#lastLogin').text($.i18n.prop('lastLogin'));
+        $('#version').text($.i18n.prop('version'));
+        $('#iframe').text($.i18n.prop('iframe'));
+        $('#feature').text($.i18n.prop('feature'));
+        $('#content').text($.i18n.prop('featureContent'));
+    });
+
+
+</script>
+
+
+</html>

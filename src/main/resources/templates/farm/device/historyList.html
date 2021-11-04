@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>农业deviceList</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+    <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/static/js/jquery.nicescroll.min.js}"></script>
+    <script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+    <script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+</head>
+<body>
+
+
+
+        <!--<div class="toolbar">
+
+        </div>-->
+        <table class="layui-hide" id="history" lay-filter="history"></table>
+
+
+
+
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline " style="margin-top: 5px;" >
+        <label id="devicelabel" class="layui-form-label" style="width:100px;"></label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input searchInput" id="deviceNumber" placeholder="">
+        </div>
+    </div>
+
+
+
+    <div class="layui-inline ">
+        <label id="timelabel" class="layui-form-label" style="width:100px;"> 起止：</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input searchInput" id="from" placeholder="">
+        </div>
+    </div>
+
+    <div class="layui-inline ">
+        <label class="layui-form-label" style="width:30px;"> - </label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input searchInput" id="to" placeholder="">
+        </div>
+    </div>
+    <div class="layui-inline" >
+        <button class="layui-btn searchBtn" lay-event="search" id="searchButton"><i
+                class="layui-icon layui-icon-search "></i></button>
+    </div>
+    <div class="inline" style="float:right;" lay-event="LAYTABLE_PRINT">
+        <button class="toolbtn "  >
+            <i class="layui-icon iconfont icon-dayin "></i>
+        </button>
+    </div>
+
+    <div class="inline" style="float:right;">
+        <button class="toolbtn " lay-event="export" id="export">
+            <i class="layui-icon iconfont icon-daochu"></i>
+        </button>
+    </div>
+    <div class="inline" style="float:right;" >
+        <button class="toolbtn"  ><i
+                class="layui-icon iconfont icon-refresh_icon "></i></button>
+    </div>
+</script>
+
+
+<!--<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="show">查看</a>
+
+</script>-->
+
+
+<script>
+    $('.layui-icon layui-icon-export').parent().off('click');
+    layui.use(['form', 'laydate', 'layer', 'table'], function () {
+        var laydate = layui.laydate;
+        //ztree
+        var zNodes = [], requestCount = 0, deviceNumber = "", currentNode = '';
+        function get_cookie(Name) {
+            var search = Name + "="//查询检索的值
+            var returnvalue = "";//返回值
+            if (document.cookie.length > 0) {
+                sd = document.cookie.indexOf(search);
+                if (sd != -1) {
+                    sd += search.length;
+                    end = document.cookie.indexOf(";", sd);
+                    if (end == -1)
+                        end = document.cookie.length;
+                    //unescape() 函数可对通过 escape() 编码的字符串进行解码。
+                    returnvalue = unescape(document.cookie.substring(sd, end))
+                }
+            }
+            return returnvalue;
+        }
+
+        var deviceNumber = get_cookie("deviceNumber");
+        var table = layui.table;
+        table.render({
+            elem: '#history'
+            , url: '../history/getHistoryList?deviceNumber=' + deviceNumber
+            , toolbar: '#toolbar1'
+            , title: '历史数据'
+            , cols: [
+                [
+                    {field: 'id', title: 'ID', width: 90, align: 'center'},
+
+                    {
+                        field: 'deviceNumber',
+                        title: $.i18n.prop('deviceNo'),
+                        width: 150,
+                        align: 'center'
+                    }
+                        // ,{field: 'type', title: $.i18n.prop('dataType'), width: 150, align: 'center'}
+                    , {
+                    field: 'sensorData',
+                    title: $.i18n.prop('deviceData'),
+                    width: 360,
+                    align: 'center'
+                }
+                    , {
+                    field: 'drecordTime',
+                    title: $.i18n.prop('acceptTime'),
+                    width: 230,
+                    align: 'center'
+                }
+                ]
+            ]
+            , page: true
+            , height: 600
+           , defaultToolbar: []
+        });
+        //设置语言
+        //$('#timelabel').text($.i18n.prop('timelabel'));
+        $('#from').attr('placeholder', $.i18n.prop('startTime'));
+        $('#to').attr('placeholder', $.i18n.prop('endTime'));
+        $('#devicelabel').text($.i18n.prop('devicelabel'));
+        $('#deviceNumber').attr('placeholder', $.i18n.prop('deviceDescription'));
+
+        laydate.render({
+            elem: '#from'
+            , type: 'datetime'
+        });
+        laydate.render({
+            elem: '#to'
+            , type: 'datetime'
+        });
+        $('#from').val(formatDate(new Date(new Date() - 1000 * 60 * 60 * 24)));
+        $('#to').val(toDate(new Date()));
+
+        function formatDate(date) {
+            var year = date.getFullYear(),
+                month = date.getMonth() + 1,//月份是从0开始的
+                day = date.getDate(),
+                hour = date.getHours(),
+                min = date.getMinutes(),
+                sec = date.getSeconds();
+            var newTime = year + '-' +
+                month + '-' +
+                day + ' ' +
+                hour + ':' +
+                min + ':' +
+                sec;
+            return newTime;
+        }
+
+        function toDate(date) {
+            var year = date.getFullYear(),
+                month = date.getMonth() + 1,//月份是从0开始的
+                day = date.getDate();
+
+            var newTime = year + '-' +
+                month + '-' +
+                day + ' ' +
+                23 + ':' +
+                59 + ':' +
+                59;
+            return newTime;
+        }
+
+        table.on('toolbar(history)', function (obj) {
+            if (obj.event == 'search') {
+                doLoginFilter();//登陆状态验证
+                var from = $('#from').val();
+                var to = $('#to').val();
+                var a = $('#deviceNumber').val();
+                var ncode;
+                if (a != '' && a != undefined && a != 'undefined') {
+                    ncode = a;
+                }
+                else if (deviceNumber === null || deviceNumber === undefined || deviceNumber === '') {
+                    layer.msg($.i18n.prop('warn0'));
+                    return false;
+                } else {
+                    ncode = deviceNumber;
+                }
+
+                if (from === null || from === undefined || from === '') {
+                    layer.msg($.i18n.prop('warn1'));
+                    return false;
+                }
+                if (to === null || to === undefined || to === '') {
+                    layer.msg($.i18n.prop('warn2'));
+                    return false;
+                }
+                var cha1 = parseInt(new Date(to) - new Date(from)) / (1000 * 60 * 60 * 24);
+                var cha2 = parseInt(new Date() - new Date(from)) / (1000 * 60 * 60 * 24);
+                if (cha1 > 7) {
+                    layer.msg($.i18n.prop('warn3'));
+                    return false;
+                }
+                if (cha2 > 90) {
+                    layer.msg($.i18n.prop('warn4'));
+                    return false;
+                }
+                var index = layer.load(2);
+                table.reload('history', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        ncode: ncode,
+                        from: from,
+                        to: to
+                    }, done: function (res, curr, count) {
+                        layer.close(index);
+                        laydate.render({
+                            elem: '#from'
+                            , type: 'datetime'
+                            , value: from
+                        });
+                        laydate.render({
+                            elem: '#to'
+                            , type: 'datetime'
+                            , value: to
+                        });
+                        $('#deviceNumber').val(a);
+                        //设置语言
+                        $('#timelabel').text($.i18n.prop('timelabel'));
+                        $('#from').attr('placeholder', $.i18n.prop('startTime'));
+                        $('#to').attr('placeholder', $.i18n.prop('endTime'));
+                        $('#devicelabel').text($.i18n.prop('devicelabel'));
+                        $('#deviceNumber').attr('placeholder', $.i18n.prop('deviceDescription'));
+
+                    }
+                });
+
+            } else if (obj.event == 'reset') {
+                laydate.render({
+                    elem: '#from'
+                    , type: 'datetime'
+                    , value: new Date(new Date() - 1000 * 60 * 60 * 24)
+                });
+                laydate.render({
+                    elem: '#to'
+                    , type: 'datetime'
+                    , value: new Date()
+                });
+                $('#deviceNumber').val('');
+            } else if (obj.event == 'export') {
+                var from = $('#from').val();
+                var to = $('#to').val();
+                if (deviceNumber === null || deviceNumber === undefined || deviceNumber === '') {
+                    layer.msg($.i18n.prop('warn0'));
+                    return false;
+                }
+                var a = $('#deviceNumber').val();
+                if (a != '' && a != undefined && a != 'undefined') {
+                    deviceNumber = a;
+                }
+                //window.location.href='../history/historyExport?ncode='+deviceNumber+'&from='+from+'&to='+to;
+                window.open('../history/historyExport?ncode=' + deviceNumber + '&from=' + from + '&to=' + to);
+            }
+        });
+
+
+    });
+
+
+</script>
+<style>
+
+
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    /*   .layui-table-body .layui-table-main{
+           height:500px;!important;
+       }*/
+
+    .layui-inline .device {
+        float: left;
+    }
+    .layui-table-body {
+
+        height: auto !important;
+    }
+
+    .iconfont{
+        font-size: 18px;!important;
+    }
+    .layui-table-view .layui-table{
+        width: 100%!important;
+    }
+    .layui-table-header thead{
+        width: 100%!important;
+    }
+</style>
+</body>
+</html>

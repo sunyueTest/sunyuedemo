@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>onlineConsultation-评价反馈</title>
+    <link rel="stylesheet"  th:href="@{/static/css/agriculture/onlineConsultation.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+</head>
+<body>
+<div class="conter" style="overflow: hidden">
+    <div class="teacher-l title-teacher-l" style="">
+        <div class="teacher-pic">时间</div>
+        <div class="tiweb">用户名称</div>
+        <div class="pingjia">
+           评价
+        </div>
+        <div class="teacher-int" style="line-height: 6vh">
+            回复内容
+        </div>
+        <div class="teacher-icon">
+            操作
+        </div>
+    </div>
+    <div id="teacher" class="teacher">
+    </div>
+</div>
+<div id="tc"  class="">
+    <h3 class="tc-title">
+        <p>聊天记录</p>
+    </h3>
+    <div class="tc-int">
+        <div class="tc-int-l">
+            <p>用户留言</p>
+            <div class="tcintl-top text test-1">
+                <div class="" id="myliu">
+                </div>
+            </div>
+            <p>我的回复</p>
+            <div class="tcintl-top text test-1">
+                <div class="" id="myhufu">
+                </div>
+            </div>
+        </div>
+        <div class="tc-int-r" id="pingfen" style="position: relative">
+            <div style="line-height: 8vh;margin-left: 1vw">用户评分：</div>
+            <div class="table-evaluate"  style="margin-left: 2vw;width: 20vw">
+                <div id="table-evaluate">还未评分</div>
+                <div id="test5" style="margin-left: 1vw;transform: scale(0.7)"></div>
+            </div>
+            <div style="margin-top: 19vh">
+                <p style="margin-left: 1vw;line-height: 4vh">用户反馈</p>
+                <div id="tcintl-top" class="tcintl-top text test-1" style="width: 25vw;background: transparent;margin-left: 1vw;resize: none;color: #fff"></div>
+            </div>
+        </div>
+    </div>
+    <div id="dele"></div>
+</div>
+<div class="page">
+    <div id="page"></div>
+</div>
+</body>
+</html>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/agriculture/xlPaging.js}"></script>
+<script>
+    let layer;
+    layui.use(['form', 'layer', 'layedit', 'laydate'], function () {
+        layer = layui.layer;
+    });
+    var pageNum = '';
+    var numa = 1;
+    function getlist(page){
+        $.ajax({
+            url: "../expertManage/findAquacultureExpertList",
+            type : "POST",
+            data: {
+                page:page,
+                size:12,
+            },
+            success: function (res) {
+                console.log(res);
+                var trs = ""; //标题
+                if(res.datas.length==0){
+                    $('#teacher').html('<img style="width: 50%;float: none;margin: 0 auto" src="/static/img/agriculture/zhanwei.png" alt="">\n');
+                    return;
+                }
+                $.each(res.datas, function (i,item) {
+                    trs +='        <div class="teacher-l">\n' +
+                        '            <div class="teacher-pic">'+item.createTime+'</div>\n' +
+                        '            <div class="tiweb">'+item.createUser+'</div>\n' +
+                        '            <div class="pingjia">';
+                    if(item.totalScore==0){
+                        trs +=  '                    <div>未评价</div>\n'
+                    }
+                    else if(item.totalScore<=1){
+                        trs +=  '                    <div>极差</div>\n'
+                    }else if(item.totalScore<=2){
+                        trs +=  '                    <div>差</div>\n'
+                    }else if(item.totalScore<=3){
+                        trs +=  '                    <div>中等</div>\n'
+                    }else if(item.totalScore<=4){
+                        trs +=  '                    <div>好</div>\n'
+                    }else if(item.totalScore<=5){
+                        trs +=  '                    <div>极好</div>\n'
+                    }
+                    trs +='            </div>\n' +
+                        '            <div class="teacher-int">'
+                    if(item.answer){
+                        trs +='<p>'+item.answer+'</p>\n'
+                    }else {
+                        trs +='<p>还未回复</p>\n'
+                    }
+                    trs +='            </div>\n' +
+                        '            <div class="teacher-icon">\n' +
+                        '                <div class="chaxun" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>\n' +
+                        '            </div>\n' +
+                        '        </div>'
+                });
+                $('#teacher').html(trs);
+                console.log(Math.ceil(res.count/10));
+                $("#page").paging({
+                    nowPage: page, // 当前页码
+                    pageNum: Math.ceil(res.count/12), // 总页码
+                    buttonNum: 3, //要展示的页码数量
+                    canJump: 0,// 是否能跳转。0=不显示（默认），1=显示
+                    showOne: 1,//只有一页时，是否显示。0=不显示,1=显示（默认）
+                    callback: function (num) { //回调函数
+                        console.log(num);
+                        page = num;
+                        getlist(num);
+                    }
+                });
+            }
+        })
+    };
+    getlist(1);
+    $(document).on('click','.chaxun',function(){
+        $('#tc').show();
+        let id=$(this).data("id");
+        $.ajax({
+            url: "/productService/fishermanQuestionsDetails?id="+id,
+            type : "POST",
+            data: {
+            },
+            success: function (res) {
+                console.log(res)
+                if(res.data.species){
+                    $('#myliu').html(res.data.species);
+                }
+                if(res.data.answer){
+                    $('#myhufu').html(res.data.answer);
+                }
+                if(res.data.comment){
+                    $('#tcintl-top').html(res.data.comment);
+                }else {
+                    $('#tcintl-top').html('用户未评论');
+                }
+                if(res.data.totalScore){
+                    $('#table-evaluate').hide();
+                    $('#test5').show();
+                    var layuivalue=res.data.totalScore;
+                    layui.use(['rate'], function(){
+                        var rate = layui.rate;
+                        //基础效果
+                        rate.render({
+                            elem: '#test5'
+                            ,value: layuivalue
+                            ,half: true
+                            ,text: true
+                            ,readonly: true
+                            ,setText: function(value){
+                                // this.span.text(value+'星');
+                                pingfen=value;
+                                console.log(pingfen);
+                                var arrs = {
+                                    '1': '极差'
+                                    ,'2': '差'
+                                    ,'3': '中等'
+                                    ,'4': '好'
+                                    ,'5': '极好'
+                                };
+                                this.span.text(arrs[value] || ( value + "星"));
+                            }
+                        })
+                    });
+                }else {
+                    $('#table-evaluate').show();
+                    $('#test5').hide();
+                }
+            }
+        })
+    });
+    var xiugai=document.getElementsByClassName('xiugai');
+    var chaxun=document.getElementsByClassName('chaxun');
+    var tc=document.getElementById('tc');
+    var dele=document.getElementById('dele');
+    for(var i=0;i<chaxun.length;i++){
+        chaxun[i].onclick=function(){
+            tc.style.display='block';
+        }
+    }
+    dele.onclick=function(){
+        tc.style.display='none';
+    }
+</script>
+
+
+
+

@@ -1,0 +1,561 @@
+/*全局样式*/
+*{padding:0;margin:0;}
+div,dl,dt,dd,form,h1,h2,h3,h4,h5,h6,img,ol,ul,li,table,th,td,p,span,a{border:0;font-family:”微软雅黑”;color: #FFFFFF}
+img,input{border:none;vertical-align:middle;}
+img{width: 100%;
+    height: 100%;}
+body{font-family:Tahoma,Arial,Helvetica,"宋体";font-size:12px;text-align:center;background:#FFF;color:#000;}
+/*html{overflow-y:scroll;}*/
+ul,ol{list-style-type:none;}
+th,td,input{font-size:12px;}
+input{outline:none;border:none;box-shadow:none;}
+h3{font-size:14px;}
+button{border:none;cursor:pointer;font-size:12px;background-color:transparent;}
+select{border-width:1px;_zoom:1;border-style:solid;padding-top:2px;font-size:12px;}
+.clear{clear:both;font-size:1px;height:0;visibility:hidden;line-height:0;}
+.clearfix:after{content:"";display:block;clear:both;}
+.clearfix{zoom:1;}
+a:link,a:visited{text-decoration:none;color:#333;}
+a:hover,a:active{color:#f60;}
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+.test{
+    overflow: auto;
+    float: left;
+        border: none;
+}
+.scrollbar{
+    width: 5px;
+    height: 300px;
+    margin: 0 auto;
+}
+.test-1::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 5px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+.test-1::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #35aadc;
+}
+.test-1::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #065681;
+}
+.inner{width: 1100px;margin: 0 auto;}
+.amap-logo{
+    display: none!important;
+}
+.amap-copyright{
+    display: none!important;
+}
+#conterbody{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: url("/static/img/monitor/protectionWater/bodybg.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+#header{
+    width: 100vw;
+    height: 4vh;
+    background: url("/static/img/monitor/protectionWater/headerbg.png") no-repeat;
+    background-size: 100% 100%;
+    margin-top: 3vh;
+}
+#header h2{
+    font-size: 1.8vw;
+    line-height: 3.5vh;
+}
+#main{
+    width: 100vw;
+    height: 92vh;
+    box-sizing: border-box;
+    padding: 0.5vw;
+    display:flex;
+    justify-content: space-between;
+}
+.left{
+    width: 25vw;
+    height: 91vh;
+    box-sizing: border-box;
+}
+.video{
+    width: 25vw;
+    height: 35vh;
+    border: 1px #68ebff solid;
+    box-sizing: border-box;
+}
+.videowindow{
+    width: 100%;
+    height: 30vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.video .title{
+    height: 6vh;
+    line-height: 6vh;
+    width: 100%;
+    border-bottom: 1px solid #66ebfc;
+    box-sizing: border-box;
+    font-size: 0.8vw;
+}
+.video .title-p{
+    display: flex;
+    width: 15vw;
+    box-sizing: border-box;
+    padding-left: 0.5vw;
+}
+.video .title-p .icon{
+    color: #66ebfc;
+    margin-right: 0.5vw;
+}
+.graph{
+    width: 25vw;
+    height: 55vh;
+    border: 1px #68ebff solid;
+    box-sizing: border-box;
+    margin-top: 1vh;
+}
+.graph .title{
+    height: 4vh;
+    line-height: 4vh;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.8vw;
+}
+.graph .title-p{
+    display: flex;
+    width: 15vw;
+    box-sizing: border-box;
+    padding-left: 0.5vw;
+}
+.graph .title-p .icon{
+    color: #66ebfc;
+    margin-right: 0.5vw;
+}
+.graph-bnt{
+    width: 23vw;
+    height: 15vh;
+    margin: 0 auto;
+    display: flex;
+}
+#swiper {
+    width: 22vw;
+    margin: 0 auto;
+    height: 12vh;
+}
+#swiper ul{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+#swiper ul li {
+    background: rgba(38,106,171,0.5);
+    padding: 0.2vh 0.2vw;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 2vh;
+    line-height: 2vh;
+    transition: all 0.3s;
+    margin: 0.2vw 0.5vw;
+    font-size: 0.5vw;
+}
+#swiper ul li:hover{
+    background: -webkit-linear-gradient(left,#0071db,#02c6ba);
+    background: -o-linear-gradient(left,#0071db,#02c6ba);
+    background: -moz-linear-gradient(left,#0071db,#02c6ba);
+    background: -mos-linear-gradient(left,#0071db,#02c6ba);
+    background: linear-gradient(left,#0071db,#02c6ba);
+}
+#swiper ul .olibg{
+    background: -webkit-linear-gradient(left,#0071db,#02c6ba);
+    background: -o-linear-gradient(left,#0071db,#02c6ba);
+    background: -moz-linear-gradient(left,#0071db,#02c6ba);
+    background: -mos-linear-gradient(left,#0071db,#02c6ba);
+    background: linear-gradient(left,#0071db,#02c6ba);
+}
+
+
+.graphchart{
+    width: 24vw;
+    height: 35vh;
+    box-sizing: border-box;
+    margin:0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.graphchart div{
+    width: 11.5vw;
+    height: 17vh;
+    box-sizing: border-box;
+    margin:0 auto;
+}
+
+
+
+.centre{
+    width: 50vw;
+    height: 91vh;
+    box-sizing: border-box;
+    border: 1px #68ebff solid;
+    position: relative;
+}
+.map-int{
+    width: 16vw;
+    height: 35vh;
+    background: url("/static/img/monitor/protectionWater/topbg.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 1vh;
+    right: 0.5vw;
+    box-sizing: border-box;
+    padding: 1vh 1vw;
+    z-index: 99999;
+}
+.map-int-title{
+    line-height: 5vh;
+    font-size: 1vw;
+    text-align: left;
+}
+.map-int-pic{
+    width: 100%;
+    height: 15vh;
+    margin-bottom: 1vh;
+}
+.map-int p{
+    text-align: left;
+    font-size: 0.7vw;
+    line-height: 3vh;
+}
+.map-warning{
+    width: 16vw;
+    height: 18vh;
+    background: url("/static/img/monitor/protectionWater/tongjibg.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 38vh;
+    right: 0.5vw;
+    box-sizing: border-box;
+    padding: 1vh 1vw;
+    z-index: 99999;
+}
+.map-warning ul li{
+    display: flex;
+    justify-content: space-between;
+    line-height: 3.5vh;
+    font-size: 0.8vw;
+}
+#map-warning{
+    width: 14vw;
+    height: 10vh;
+}
+.map-warning ul li p{
+    width: 10vw;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+.map-warning ul li span{
+    width: 5vw;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+
+.warninga{
+    color: #ff9b00;
+
+}
+.warningb{
+    color: red;
+}
+.maphourgraph{
+    width: 20vw;
+    height: 25vh;
+    background: url("/static/img/monitor/protectionWater/tongjibg.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    bottom: 2vh;
+    left: 1vw;
+    box-sizing: border-box;
+    padding: 0.5vw;
+    z-index: 99999;
+}
+.map-swch{
+    width: 15vw;
+    height: 10vh;
+    position: absolute;
+    top: 2vh;
+    left: 1vw;
+    z-index: 99999;
+}
+#maphourgraph{
+    width: 19vw;
+    height: 20vh;
+}
+
+.maphourgraph-title{
+    line-height: 4vh;
+    text-align: left;
+    margin-left: 1vw;
+    font-size: 1vw;
+}
+.right{
+    width: 23vw;
+    height: 91vh;
+    box-sizing: border-box;
+}
+.environmentdata{
+    width: 23vw;
+    height: 29vh;
+    box-sizing: border-box;
+    border: 1px #68ebff solid;
+}
+.environmentdata-int{
+    width: 100%;
+    height: 25vh;
+    box-sizing: border-box;
+    padding: 1vh 0.2vw;
+    overflow: auto;
+}
+.environmentdata-int-l{
+    float: left;
+    width: 10vw;
+    height: 4vh;
+    line-height: 4vh;
+    font-size: 0.8vw;
+    background: rgba(255,255,255,.1);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.5s;
+    margin: 0.8vh 0.4vw;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+.environmentdata-int-l:hover{
+    background: -webkit-linear-gradient(left,#0071db,#02c6ba);
+    background: -o-linear-gradient(left,#0071db,#02c6ba);
+    background: -moz-linear-gradient(left,#0071db,#02c6ba);
+    background: -mos-linear-gradient(left,#0071db,#02c6ba);
+    background: linear-gradient(left,#0071db,#02c6ba);
+    transform: translateY(-2px);
+    box-shadow:2px 2px 20px #000000;
+}
+.environmentdata .title{
+    height: 4vh;
+    line-height: 4vh;
+    width: 100%;
+    border-bottom: 1px solid #66ebfc;
+    box-sizing: border-box;
+    font-size: 0.8vw;
+
+}
+.environmentdata .title-p{
+    display: flex;
+    width: 15vw;
+    box-sizing: border-box;
+    padding-left: 0.5vw;
+}
+.environmentdata .title-p .icon{
+    color: #66ebfc;
+    margin-right: 0.5vw;
+}
+.environmenthistory-int-l{
+    float: left;
+    width: 10vw;
+    height: 4vh;
+    line-height: 4vh;
+    background: rgba(255,255,255,.1);
+    margin:0.3vw 0.6vw;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-size: 0.8vw;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+.environmenthistory-int-l:hover{
+    background: -webkit-linear-gradient(left, #0071db, #02c6ba);
+    background: -o-linear-gradient(left, #0071db, #02c6ba);
+    background: -moz-linear-gradient(left, #0071db, #02c6ba);
+    background: -mos-linear-gradient(left, #0071db, #02c6ba);
+    background: linear-gradient(left, #0071db, #02c6ba);
+    transform: translateY(-2px);
+    box-shadow: 2px 2px 20px #000000;
+}
+.environmenthistorycolora{background: rgba(129,112,66,0.8)}
+.environmenthistorycolorb{background: rgba(115,33,99,0.8)}
+.environmenthistory{
+    width: 23vw;
+    height: 30vh;
+    box-sizing: border-box;
+    border: 1px #68ebff solid;
+    margin-top: 1vh;
+}
+.environmenthistory .title{
+    height: 4vh;
+    line-height: 4vh;
+    width: 100%;
+    border-bottom: 1px solid #66ebfc;
+    box-sizing: border-box;
+    font-size: 0.8vw;
+    display: flex;
+}
+.title-operation{
+    padding: 0 0.5vw;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    width: 13vw;
+}
+.title-operation-icon{
+    width: 1.5vw;
+    height: 1.5vw;
+    margin-top: 0.5vh;
+}
+.title-operation-tiem{
+    width: 10vw;
+}
+.title-operation-icon img{
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+.environmenthistory .title-p{
+    display: flex;
+    width: 15vw;
+    box-sizing: border-box;
+    padding-left: 0.5vw;
+}
+.environmenthistory .title-p .icon{
+    color: #66ebfc;
+    margin-right: 0.5vw;
+}
+.environmenthistory-int{
+    width: 100%;
+    height: 25vh;
+    box-sizing: border-box;
+    padding: 1vh 0;
+}
+.equipment{
+    width: 23vw;
+    height: 30vh;
+    box-sizing: border-box;
+    border: 1px #68ebff solid;
+    margin-top: 1vh;
+}
+.equipment-int{
+    width: 100%;
+    height: 25vh;
+    box-sizing: border-box;
+    padding: 0.5vh 3vw;
+}
+/*.equipment-int ul{*/
+    /*width: 90%;*/
+    /*height: 25vh;*/
+    /*box-sizing: border-box;*/
+    /*margin: 0 auto;*/
+/*}*/
+.equipment-int ul li{
+    display: flex;
+    justify-content: space-between;
+    line-height: 5vh;
+}
+.equipment-int ul li span{
+    color: #69ebff;
+    text-shadow:0 0 0.2em #69ebff,
+    -0 -0 0.2em #69ebff;
+}
+.equipment-intcolor{
+    color: #fe0002!important;
+    text-shadow:none!important;
+}
+.equipment .title{
+    height: 4vh;
+    line-height: 4vh;
+    width: 100%;
+    border-bottom: 1px solid #66ebfc;
+    box-sizing: border-box;
+    font-size: 0.8vw;
+
+}
+.equipment .title-p{
+    display: flex;
+    width: 15vw;
+    box-sizing: border-box;
+    padding-left: 0.5vw;
+}
+.equipment .title-p .icon{
+    color: #66ebfc;
+    margin-right: 0.5vw;
+}
+.layui-form-select .layui-input,.layui-form-select dl{
+    background: rgba(255,255,255,0.5)!important;
+}
+.layui-form-select .layui-edge{
+    border-top-color: #0A0E11!important;
+}
+.layui-form-select dl dd.layui-this{
+    background-color: #007aff!important;
+}
+.layui-form-select dl dd:hover{
+    color: #0A0E11!important;
+}
+/*弹框样式*/
+.layui-layer-title{
+    background: transparent!important;
+    border: none!important;
+}
+.layui-layer-rim{
+    border: none!important;
+}
+tbody tr{
+    background: transparent!important;
+    height: auto!important;
+}
+iframe{
+    transform: scale(0.9);
+}
+.layui-layer{
+    background: url("/static/img/monitor/protectionWater/tcbg.png") no-repeat!important;
+    background-size: 100% 100%!important;
+}
+.layui-layer-setwin{
+    width: 8vw;
+    height: 8vh;
+    background: url("/static/img/monitor/protectionWater/tcdelebg.png") no-repeat!important;
+    background-size: 100% 100%!important;
+    display: block!important;
+    top: 2.5vh!important;
+    right: 0.8vw!important;
+}
+.layui-layer-ico{
+    background: url("/static/img/monitor/protectionWater/tcdele.png") no-repeat!important;
+    background-size: 100% 100%!important;
+    width: 3vw!important;
+    height: 3vw!important;
+    margin-left: 0!important;
+    margin-top: 0.5vh;
+}
+.layui-layer-title{
+    height: 4vh!important;
+    line-height: 6vh!important;
+}
+
+
+
+
+
+
+

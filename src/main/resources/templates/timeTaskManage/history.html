@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+
+<table class="layui-hide" id="table" lay-filter="table"></table>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline bg-transparent">
+    </div>
+    <div class="layui-inline abc">
+        <button class="layui-btn " lay-event="search">
+            <i class="layui-icon layui-icon-search "></i>
+        </button>
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="aCode" id="aCode" autocomplete="off"  style="width:182px;"
+               placeholder="节点编号">
+    </div>
+</script>
+
+
+<script type="text/html" id="barDemo">
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i
+            class="layui-icon"></i></button>
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+            class="layui-icon"></i></button>
+</script>
+<script type="text/html" id="statusTpl">
+    <input id="status" type="checkbox" name="continuing" value="{{d.id}}" lay-skin="switch"
+           lay-filter="status" {{ d.status== 1 ?'checked' : '' }}>
+</script>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/aquaculture/timedTaskManage/timedTaskManageHistory.js?v=1.3}" charset="utf-8"></script>
+<style>
+    .abc {
+        float: right;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .layui-table-tool .layui-inline {
+        background-color: #eaeaea;
+    }
+
+    .online {
+        color: #ffff00;
+    }
+
+    .offline {
+        color: #458B74;
+    }
+</style>
+</body>
+</html>

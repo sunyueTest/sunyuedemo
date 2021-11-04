@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>溯源</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/traceability/customizedTarceSource.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/traceability/reset.css}" media="all">
+</head>
+<body>
+<input type="hidden" th:value="*{data.productCode}" id="productCode">
+<div id="cloudtitle">
+    <div class="cloudtcon">
+        <h2>
+
+        </h2>
+        <div class="cloudserch">
+            <input type="text" id="text" placeholder="产品名称">
+            <span id="btnsearch">溯源</span>
+        </div>
+    </div>
+</div>
+
+<!--主图产品介绍-->
+<div id="goodsphone" class="clearfix boxs">
+    <div class="goodsphone fl clearfix">
+        <div class="phone fl">
+            <a href="javascript:void(0);">
+                <img id="ProductImageFirst" alt=""
+                     src="">
+            </a>
+        </div>
+        <div class="fl phoneslt">
+            <span class="btnphonetop"></span>
+            <div>
+                <ul id="ProductImage">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="goodsdetail fr clearfix">
+        <span class="gooddetaillogo"></span>
+        <div class="gdtitle">
+            <p id="ProductName" th:value="*{data.name}">北纬45五常有机稻花香</p>
+            <!--本段文字做下限字 最好三行文字-->
+            <p id="ProductIntro" th:value="*{data.enterprise}">
+                </p>
+        </div>
+        <div class="gdcanshu">
+            <ul class="clearfix">
+                <li class="gdcsfi">
+                    <p class="gbcst" id="EnvironmentGrade">100</p>
+                    <p class="gbcscon">溯源档案综合评分</p>
+                </li>
+                <li class="gdcsfi gdcsfiodd">
+                    <div >
+                        <p class="gbcst"></p>
+                        <p class="gbcscon ProductQuality">有机</p>
+                    </div>
+                </li>
+                <li>
+                    <p class="gbcst" id="HarvestDate" th:value="*{data.productDate}">2017.10.8</p>
+                    <p class="gbcscon">生产日期</p>
+                </li>
+                <li>
+                    <p class="gbcst" id="Output">10000</p>
+                    <p class="gbcscon">产量（吨）</p>
+                </li>
+                <li>
+                    <p class="gbcst" id="OriginArea">20000</p>
+                    <p class="gbcscon">种植面积（亩）</p>
+                </li>
+                <li>
+                    <p class="gbcst" id="OriginCity">黑龙江省五常市</p>
+                    <p class="gbcscon">商品产地</p>
+                </li>
+            </ul>
+        </div>
+        <!--<div style="display:none;">
+            <div id="level_tip">
+                <p class="tip_tit">当前农产品安全等级：<em class="ProductQuality">有机</em></p>
+                <ul class="clearfix">
+                    <li class="fl">
+                        <div class="tit">
+                            <p>有机农产品</p>
+                            <div>
+
+                            </div>
+                        </div>
+                        <div class="con">
+                            <p>根据有机农业原则，有机农产品生产过程绝对<em>禁止使用人工合成的农药、化肥、色素</em>等化学物质，采用对环境无害的方式生产，销售过程受专业认证机构全程监控，通过独立认证机构认证并颁发证书，销售总量受控制的一类真正<em>纯天然、高品味、高质量</em>的食品。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="fl">
+                        <div class="tit">
+                            <p>绿色食品</p>
+                            <div>
+
+                            </div>
+                        </div>
+                        <div class="con">
+                            <p>是指<em>无污染、优质、营养</em>食品，经国家绿色食品发展中心认可，许可使用绿色食品商标的产品。绿色食品分为两级，即<em>A级绿色食品</em>（生产条件要求较低的食品）和<em>AA级绿色食品</em>，要求质量较高，与有机食品要求基本相同。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="fl">
+                        <div class="tit">
+                            <p>无公害农产品</p>
+                            <div>
+
+                            </div>
+                        </div>
+                        <div class="con">
+                            <p>这类食品不对人的身体健康造成任何危害，是对食品的最起码要求，我们的食品均应符合这种食品的要求，所以无公害食品是指<em>无污染、无毒害、安全</em>的食品。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>-->
+    </div>
+</div>
+
+<!--锚点导航-->
+<div class="maproot">
+    <div id="maproot" class="clearfix boxs ">
+        <div class="map fl clearfix layui-tab">
+            <ul id="title" class="layui-tab-title">
+
+            </ul>
+            <div class="layui-tab-content">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--<div class="maproot maprootfixed" style="display: none;">
+    <div id="maprootplus" class="clearfix boxs">
+        <div class="map fl clearfix">
+            <ul>
+                <li class="active">产地介绍</li>
+                &lt;!&ndash;<li class="zhuisu">全程追溯</li>&ndash;&gt;
+                <li class="">环境监测</li>
+                <li class="">全程追溯</li>
+                <li class="">检测报告</li>
+                <li class="">企业信息</li>
+            </ul>
+        </div>
+
+    </div>
+</div>-->
+<!--地图监控-->
+<!--<div id="rootsmap" class="boxs">
+    <div class="canshuvideo">
+        <div class="title">
+            <div class="areasselect layui-form">
+                <select name="areaselect" lay-filter="areaselect">
+                    <option value="0" selected="selected">一号地块</option>
+                </select>
+                <div class="layui-unselect layui-form-select">
+                    <div class="layui-select-title"><input type="text" placeholder="请选择" value="一号地块" readonly=""
+                                                           class="layui-input layui-unselect"><i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd lay-value="0" class="layui-this">一号地块</dd>
+                    </dl>
+                </div>
+            </div>
+            <p class="title" id="OriginAddress">黑龙江哈尔滨市五常市营城子乡</p>
+        </div>
+        <div class="sensorlaylist" style="height: 308px; width: 276px; border-radius: 0px;">
+            <div class="showall" style="">
+                <div class="senlay_tit_con"><p class="senlay_tit"><span onclick="sensorweatherfn(this)">传感器</span> <span
+                        onclick="sensorweatherfn(this)">气象站</span></p> </div>
+                <div class="sensorllist">
+                    <div class="sensorl_item" style="">
+                        <ul class="clearfix sensorllist_tit">
+                            <li class="active" onclick="sensortabtogglefn(this)">土壤</li>
+                            <li onclick="sensortabtogglefn(this)">水质</li>
+                            <li onclick="sensortabtogglefn(this)">空气</li>
+                        </ul>
+                        <div class="sensorlist_content">
+                            <ul class="clearfix sensorllist_con" tabindex="1"
+                                style="overflow: hidden; outline: none; cursor: grab;">
+                                <li>镉离子<span class="fr">0.87<i>ppb</i></span></li>
+                                <li>铜离子<span class="fr">1.01<i>ppb</i></span></li>
+                                <li>铅离子<span class="fr">0.22<i>ppb</i></span></li>
+                                <li>PH值<span class="fr">6.78<i></i></span></li>
+                            </ul>
+                            <ul class="clearfix sensorllist_con" tabindex="2"
+                                style="overflow: hidden; outline: none; cursor: grab;">
+                                <li>镉离子<span class="fr">0.77<i>ppb</i></span></li>
+                                <li>铜离子<span class="fr">0.96<i>ppb</i></span></li>
+                                <li>铅离子<span class="fr">0.12<i>ppb</i></span></li>
+                                <li>PH值<span class="fr">7.66<i></i></span></li>
+                            </ul>
+                            <ul class="clearfix sensorllist_con" tabindex="3"
+                                style="overflow: hidden; outline: none; cursor: grab;">
+                                <li>AQI指数<span class="fr">26<i></i></span></li>
+                                <li>PM2.5<span class="fr">21<i>ug/m3</i></span></li>
+                                <li>空气湿度<span class="fr">25<i>%</i></span></li>
+                                <li>空气温度<span class="fr">3<i>℃</i></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sensorl_item sensor_weather" style="display: none;">
+                        <div class="sensorlist_content">
+                            <ul class="clearfix sensorllist_con" tabindex="4"
+                                style="overflow: hidden; outline: none; cursor: grab;">
+                                <li>西南<i></i></span></li>
+                                <li>1.5<i>m/s</i></span></li>
+                                <li>10937<i>lux</i></span></li>
+                                <li>降水量<span class="fr">0<i>mm</i></span></li>
+                                <li>3<i>℃</i></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="showpointer" style="display: none;">
+
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<!--生长环境数据全程可视-->
+<!--<div id="allenvdata" class="boxs">
+    <h3>生长环境数据全程可视</h3>
+    <div class="allenvdata_header">
+        <div class="markcon">
+            <div class="markline">
+                <div class="markpointer" style="margin-left: 927px;"><span class="san"></span><span class="sanboxshadow"></span><span class="n" style="color: rgb(68, 218, 128);">99</span><p>今日环境指数</p></div>
+            </div>
+            <div class="linebg"></div>
+            <ul class="split clearfix">
+                <li><span></span><br>0</li><li><span></span><br>40</li><li><span></span><br>60</li><li><span></span><br>80</li><li><span></span><br>90</li><li><span></span><br>100</li>
+            </ul>
+            <ul class="status">
+                <li class="status_e">重度污染</li><li class="status_d">中度污染</li><li class="status_c">轻度污染</li><li class="status_b">良好</li><li class="status_a">优质</li>
+            </ul>
+        </div>
+        <div class="envsleval clearfix">
+            <div class="envlevalcon">土壤环境指数：<span class="status_a">100</span></div>
+            <div class="envlevalcon">水质环境指数：<span class="status_b">89</span></div>
+            <div class="envlevalcon">空气环境指数：<span class="status_a">99</span></div>
+        </div>
+    </div>
+    <div class="envlinestyle clearfix"><span></span><div></div><span></span></div>
+    <div class="envlevels clearfix"><span><i class="status_a">优质</i><i class="day">180天</i></span><span><i class="status_b">良好</i><i class="day">10天</i></span><span>轻度污染</i><i class="day">1天</i></span><span>中度污染</i><i class="day">0天</i></span><span><i class="status_e">重度污染</i><i class="day">0天</i></span></div>
+    <div id="logentries">
+        <div class="logentries_con">
+            <ul class="l_allmouth"><li class="l_mouth clearfix"><span class="l_mouth_tit">2017年4月</span> <ul class="clearfix"><li class="statusa" time="4月1日" status="0"></li><li class="statusa" time="4月2日" status="0"></li><li class="statusa" time="4月3日" status="0"></li><li class="statusa" time="4月4日" status="0"></li><li class="statusa" time="4月5日" status="0"></li><li class="statusb" time="4月6日" status="1"></li><li class="statusc" time="4月7日" status="2"></li><li class="statusb" time="4月8日" status="1"></li><li class="statusa" time="4月9日" status="0"></li><li class="statusa" time="4月10日" status="0"></li><li class="statusa" time="4月11日" status="0"></li><li class="statusa" time="4月12日" status="0"></li><li class="statusa" time="4月13日" status="0"></li><li class="statusa" time="4月14日" status="0"></li><li class="statusa" time="4月15日" status="0"></li><li class="statusa" time="4月16日" status="0"></li><li class="statusa" time="4月17日" status="0"></li><li class="statusa" time="4月18日" status="0"></li><li class="statusa" time="4月19日" status="0"></li><li class="statusa" time="4月20日" status="0"></li><li class="statusa" time="4月21日" status="0"></li><li class="statusa" time="4月22日" status="0"></li><li class="statusa" time="4月23日" status="0"></li><li class="statusb" time="4月24日" status="1"></li><li class="statusa" time="4月25日" status="0"></li><li class="statusa" time="4月26日" status="0"></li><li class="statusa" time="4月27日" status="0"></li><li class="statusa" time="4月28日" status="0"></li><li class="statusb" time="4月29日" status="1"></li><li class="statusb" time="4月30日" status="1"></li></ul></li><li class="l_mouth clearfix"><span class="l_mouth_tit">2017年5月</span> <ul class="clearfix"><li class="statusa" time="5月1日" status="0"></li><li class="statusa" time="5月2日" status="0"></li><li class="statusa" time="5月3日" status="0"></li><li class="statusa" time="5月4日" status="0"></li><li class="statusa" time="5月5日" status="0"></li><li class="statusa" time="5月6日" status="0"></li><li class="statusa" time="5月7日" status="0"></li><li class="statusa" time="5月8日" status="0"></li><li class="statusa" time="5月9日" status="0"></li><li class="statusa" time="5月10日" status="0"></li><li class="statusa" time="5月11日" status="0"></li><li class="statusa" time="5月12日" status="0"></li><li class="statusa" time="5月13日" status="0"></li><li class="statusa" time="5月14日" status="0"></li><li class="statusa" time="5月15日" status="0"></li><li class="statusa" time="5月16日" status="0"></li><li class="statusa" time="5月17日" status="0"></li><li class="statusa" time="5月18日" status="0"></li><li class="statusa" time="5月19日" status="0"></li><li class="statusa" time="5月20日" status="0"></li><li class="statusa" time="5月21日" status="0"></li><li class="statusa" time="5月22日" status="0"></li><li class="statusa" time="5月23日" status="0"></li><li class="statusa" time="5月24日" status="0"></li><li class="statusa" time="5月25日" status="0"></li><li class="statusa" time="5月26日" status="0"></li><li class="statusa" time="5月27日" status="0"></li><li class="statusa" time="5月28日" status="0"></li><li class="statusa" time="5月29日" status="0"></li><li class="statusa" time="5月30日" status="0"></li><li class="statusa" time="5月31日" status="0"></li></ul></li><li class="l_mouth clearfix"><span class="l_mouth_tit">2017年6月</span> <ul class="clearfix"><li class="statusa" time="6月1日" status="0"></li><li class="statusa" time="6月2日" status="0"></li><li class="statusa" time="6月3日" status="0"></li><li class="statusa" time="6月4日" status="0"></li><li class="statusb" time="6月5日" status="1"></li><li class="statusb" time="6月6日" status="1"></li><li class="statusb" time="6月7日" status="1"></li><li class="statusa" time="6月8日" status="0"></li><li class="statusa" time="6月9日" status="0"></li><li class="statusa" time="6月10日" status="0"></li><li class="statusa" time="6月11日" status="0"></li><li class="statusb" time="6月12日" status="1"></li><li class="statusb" time="6月13日" status="1"></li><li class="statusa" time="6月14日" status="0"></li><li class="statusa" time="6月15日" status="0"></li><li class="statusa" time="6月16日" status="0"></li><li class="statusa" time="6月17日" status="0"></li><li class="statusa" time="6月18日" status="0"></li><li class="statusa" time="6月19日" status="0"></li><li class="statusa" time="6月20日" status="0"></li><li class="statusa" time="6月21日" status="0"></li><li class="statusa" time="6月22日" status="0"></li><li class="statusa" time="6月23日" status="0"></li><li class="statusa" time="6月24日" status="0"></li><li class="statusa" time="6月25日" status="0"></li><li class="statusa" time="6月26日" status="0"></li><li class="statusa" time="6月27日" status="0"></li><li class="statusa" time="6月28日" status="0"></li><li class="statusa" time="6月29日" status="0"></li><li class="statusa" time="6月30日" status="0"></li></ul></li><li class="l_mouth clearfix"><span class="l_mouth_tit">2017年7月</span> <ul class="clearfix"><li class="statusa" time="7月1日" status="0"></li><li class="statusa" time="7月2日" status="0"></li><li class="statusa" time="7月3日" status="0"></li><li class="statusa" time="7月4日" status="0"></li><li class="statusa" time="7月5日" status="0"></li><li class="statusa" time="7月6日" status="0"></li><li class="statusa" time="7月7日" status="0"></li><li class="statusa" time="7月8日" status="0"></li><li class="statusa" time="7月9日" status="0"></li><li class="statusa" time="7月10日" status="0"></li><li class="statusa" time="7月11日" status="0"></li><li class="statusa" time="7月12日" status="0"></li><li class="statusa" time="7月13日" status="0"></li><li class="statusa" time="7月14日" status="0"></li><li class="statusa" time="7月15日" status="0"></li><li class="statusa" time="7月16日" status="0"></li><li class="statusa" time="7月17日" status="0"></li><li class="statusa" time="7月18日" status="0"></li><li class="statusa" time="7月19日" status="0"></li><li class="statusa" time="7月20日" status="0"></li><li class="statusa" time="7月21日" status="0"></li><li class="statusa" time="7月22日" status="0"></li><li class="statusa" time="7月23日" status="0"></li><li class="statusa" time="7月24日" status="0"></li><li class="statusa" time="7月25日" status="0"></li><li class="statusa" time="7月26日" status="0"></li><li class="statusa" time="7月27日" status="0"></li><li class="statusa" time="7月28日" status="0"></li><li class="statusa" time="7月29日" status="0"></li><li class="statusa" time="7月30日" status="0"></li><li class="statusa" time="7月31日" status="0"></li></ul></li><li class="l_mouth clearfix"><span class="l_mouth_tit">2017年8月</span> <ul class="clearfix"><li class="statusa" time="8月1日" status="0"></li><li class="statusa" time="8月2日" status="0"></li><li class="statusa" time="8月3日" status="0"></li><li class="statusa" time="8月4日" status="0"></li><li class="statusa" time="8月5日" status="0"></li><li class="statusa" time="8月6日" status="0"></li><li class="statusa" time="8月7日" status="0"></li><li class="statusa" time="8月8日" status="0"></li><li class="statusa" time="8月9日" status="0"></li><li class="statusa" time="8月10日" status="0"></li><li class="statusa" time="8月11日" status="0"></li><li class="statusa" time="8月12日" status="0"></li><li class="statusa" time="8月13日" status="0"></li><li class="statusa" time="8月14日" status="0"></li><li class="statusa" time="8月15日" status="0"></li><li class="statusa" time="8月16日" status="0"></li><li class="statusa" time="8月17日" status="0"></li><li class="statusa" time="8月18日" status="0"></li><li class="statusa" time="8月19日" status="0"></li><li class="statusa" time="8月20日" status="0"></li><li class="statusa" time="8月21日" status="0"></li><li class="statusa" time="8月22日" status="0"></li><li class="statusa" time="8月23日" status="0"></li><li class="statusa" time="8月24日" status="0"></li><li class="statusa" time="8月25日" status="0"></li><li class="statusa" time="8月26日" status="0"></li><li class="statusa" time="8月27日" status="0"></li><li class="statusa" time="8月28日" status="0"></li><li class="statusa" time="8月29日" status="0"></li><li class="statusa" time="8月30日" status="0"></li><li class="statusa" time="8月31日" status="0"></li></ul></li><li class="l_mouth clearfix"><span class="l_mouth_tit">2017年9月</span> <ul class="clearfix"><li class="statusa" time="9月1日" status="0"></li><li class="statusa" time="9月2日" status="0"></li><li class="statusa" time="9月3日" status="0"></li><li class="statusa" time="9月4日" status="0"></li><li class="statusa" time="9月5日" status="0"></li><li class="statusa" time="9月6日" status="0"></li><li class="statusa" time="9月7日" status="0"></li><li class="statusa" time="9月8日" status="0"></li><li class="statusa" time="9月9日" status="0"></li><li class="statusa" time="9月10日" status="0"></li><li class="statusa" time="9月11日" status="0"></li><li class="statusa" time="9月12日" status="0"></li><li class="statusa" time="9月13日" status="0"></li><li class="statusa" time="9月14日" status="0"></li><li class="statusa" time="9月15日" status="0"></li><li class="statusa" time="9月16日" status="0"></li><li class="statusa" time="9月17日" status="0"></li><li class="statusa" time="9月18日" status="0"></li><li class="statusa" time="9月19日" status="0"></li><li class="statusa" time="9月20日" status="0"></li><li class="statusa" time="9月21日" status="0"></li><li class="statusa" time="9月22日" status="0"></li><li class="statusa" time="9月23日" status="0"></li><li class="statusa" time="9月24日" status="0"></li><li class="statusa" time="9月25日" status="0"></li><li class="statusa" time="9月26日" status="0"></li><li class="statusa" time="9月27日" status="0"></li><li class="statusa" time="9月28日" status="0"></li><li class="statusa" time="9月29日" status="0"></li><li class="statusa" time="9月30日" status="0"></li></ul></li><li class="l_mouth clearfix"><span class="l_mouth_tit">2017年10月</span> <ul class="clearfix"><li class="statusa" time="10月1日" status="0"></li><li class="statusa" time="10月2日" status="0"></li><li class="statusa" time="10月3日" status="0"></li><li class="statusa" time="10月4日" status="0"></li><li class="statusa" time="10月5日" status="0"></li><li class="statusa" time="10月6日" status="0"></li><li class="statusa" time="10月7日" status="0"></li><li class="statusa" time="10月8日" status="0"></li><li title="10月9日"></li><li title="10月10日"></li><li title="10月11日"></li><li title="10月12日"></li><li title="10月13日"></li><li title="10月14日"></li><li title="10月15日"></li><li title="10月16日"></li><li title="10月17日"></li><li title="10月18日"></li><li title="10月19日"></li><li title="10月20日"></li><li title="10月21日"></li><li title="10月22日"></li><li title="10月23日"></li><li title="10月24日"></li><li title="10月25日"></li><li title="10月26日"></li><li title="10月27日"></li><li title="10月28日"></li><li title="10月29日"></li><li title="10月30日"></li><li title="10月31日"></li></ul></li></ul>
+        </div>
+    </div>
+</div>-->
+
+<!--<div id="farmingitem" class="boxs">
+    <p class="farmingtitle">产地到餐桌全流程追溯</p>
+    <img src="http://zaic-pts.oss-cn-shanghai.aliyuncs.com/zaic-aes/1812010100019/07C30D28478ED5EF99F388377CA3C760.jpg">
+</div>-->
+
+<!--<div id="report" class="boxs">
+    <div class="tit">
+        <h5>种植全过程经严格检测</h5>
+    </div>
+    <div><img src="http://zaic-pts.oss-cn-shanghai.aliyuncs.com/zaic-aes/1812010100019/CDD471DB394832929ACC10C33EB99F6A.jpg"></div>
+</div>-->
+
+<!--<div id="company" class="boxs">
+    <div class="tit">
+        <h5>企业信息展示</h5>
+    </div>
+    <div class="info">
+        <p id="EnterpriseName">企业名称：黑龙江荣程粮食加工有限公司</p>
+        <p id="LegalPerson">企业负责人：张明</p>
+        <p id="OriginAddress1">企业地址：黑龙江哈尔滨市五常市营城子乡</p>
+    </div>
+    <img src="http://zaic-pts.oss-cn-shanghai.aliyuncs.com/zaic-aes/1812010100019/CDD471DB394832929ACC10C33EB99F6A.jpg">
+</div>-->
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script src="/static/layui/layui.js"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script>
+    var liindex;
+    layui.use(['layer','table','form','element'], function () {
+        $(document).on('mouseenter', '#goodsphone .goodsphone .phoneslt div ul li', function () {
+            $(this).addClass("active").siblings("li").removeClass("active");
+            var src = $(this).children()[0].src;
+            $('#ProductImageFirst').attr("src", src);
+        });
+        $(document).on('click', '.maproot  ul li', function () {
+            $(this).addClass("active").siblings("li").removeClass("active");
+        });
+
+      /*  function tabscrollinitfn() {
+            var maproottop = $("#rootsmap").offset().top;
+            var rootsmaptop = $("#allenvdata").offset().top;
+            var farmingtop = $("#farmingitem").offset().top;
+            var reporttop = $("#report").offset().top;
+            var companytop = $("#company").offset().top ;
+            var wh = parseInt($(window).height());
+            var hitemarr = [maproottop,rootsmaptop, farmingtop, reporttop, companytop];
+            //var hitemarr = [maproottop,rootsmaptop];
+            $(".map ul li").click(function () {
+                liindex = $(this).index();
+                $("html,body").animate({ "scrollTop": hitemarr[liindex] - wh * 0.16 }, 600);
+            })
+            $(window).scroll(function () {
+                var nowtop = $(window).scrollTop();
+                if (nowtop > maproottop) {
+                    if (!$(".maprootfixed").is(":visible")) {
+                        $(".maprootfixed").show();
+                    }
+                } else if ($(".maprootfixed").is(":visible")) {
+                    $(".maprootfixed").hide();
+                }
+
+
+                nowtop += wh * 0.3;
+                if (nowtop<rootsmaptop) {
+                    changeLi(0);
+                } else if (nowtop > rootsmaptop && nowtop<farmingtop) {
+                    changeLi(1);
+                } else if (nowtop > farmingtop && nowtop < reporttop) {
+                    changeLi(2);
+                } else if (nowtop > reporttop && nowtop < companytop) {
+                    changeLi(3);
+                } else {
+                    changeLi(4);
+                }
+            })
+            //切换active li
+            function changeLi(i) {
+                if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                    $("#maprootplus .map ul li").eq(liindex).addClass("active").siblings("li").removeClass("active");
+                    $("#maproot .map ul li").eq(liindex).addClass("active").siblings("li").removeClass("active");
+                }
+                else {
+                    if(i>=0){
+                        liindex = i;
+                        $("#maprootplus .map ul li").eq(i).addClass("active").siblings("li").removeClass("active");
+                        $("#maproot .map ul li").eq(i).addClass("active").siblings("li").removeClass("active");
+                    }else{
+                        $("#maprootplus .map ul li").removeClass("active");
+                        $("#maproot .map ul li").removeClass("active");
+                    }
+                }
+            }
+        }*/
+        //搜索框 获取光标变蓝
+        $("#cloudtitle .cloudtcon .cloudserch input").focus(function () {
+            $("#cloudtitle .cloudtcon .cloudserch").addClass("cloudserchfocus");
+        })
+        $("#cloudtitle .cloudtcon .cloudserch input").blur(function () {
+            $("#cloudtitle .cloudtcon .cloudserch").removeClass("cloudserchfocus");
+        })
+
+        $.ajax({
+            type: "POST",
+            url: "/traceSource/getCustomizeTrace",
+            data:{
+                productCode:$('#productCode').val()
+            },
+            dataType: "json",
+            error:function(res){
+                console.log(res);
+            },
+            success: function (res) {
+                if(res.state=='success'){
+                    var header =res.data.header;
+                    $('#ProductImageFirst').attr("src",header.imgSrc);
+                    $('#ProductImage').append(' <li class="active"><img' +
+                        '                            src=' +header.imgSrc+
+                        '                            alt=""' +
+                        '                            style="width: auto; max-width: 600px; min-width: 90px; height: 90px; margin-left: 0px;">\n' +
+                        '                    </li>')
+                    $('#ProductImage').append(' <li ><img' +
+                        '                            src=' +header.imgSrc2+
+                        '                            alt=""' +
+                        '                            style="width: auto; max-width: 600px; min-width: 90px; height: 90px; margin-left: 0px;">\n' +
+                        '                    </li>')
+                    $('#ProductImage').append('<li ><img' +
+                        '                            src=' +header.imgSrc3+
+                        '                            alt=""' +
+                        '                            style="width: auto; max-width: 600px; min-width: 90px; height: 90px; margin-left: 0px;">\n' +
+                        '                    </li>')
+                    var detail =res.data.detail;
+                    for(var x in detail){
+                        if(x==0){
+                            $('#title').append('  <li class="layui-this active">'+detail[x].title+'</li>')
+                            $('.layui-tab-content').append(' <div class="layui-tab-item layui-show">'+detail[x].content+'</div>');
+                        }else{
+                            $('#title').append('  <li class="layui-this">'+detail[x].title+'</li>')
+                            $('.layui-tab-content').append(' <div class="layui-tab-item">'+detail[x].content+'</div>');
+                        }
+
+                    }
+                }else{
+                    layer.msg(res.msg);
+                }
+            }
+        })
+    });
+</script>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>历史曲线</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+</head>
+<body style="font-size: 12px; ">
+<!--搜索栏-->
+<form class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label1" class="layui-form-label">选择设备</label>
+            <div class="layui-input-inline">
+                <select id="device" name="device"  lay-filter="device">
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label id="label2" class="layui-form-label">选择传感器</label>
+            <div class="layui-input-inline">
+                <select id="sensor" name="sensor"  lay-filter="sensor">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label3"  class="layui-form-label">日期</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="from" placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">~</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="to" placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input id="search" type="button" class="layui-btn" data-type="reload" value="搜索">
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--曲线图-->
+<div id="history" style="height:430px;width: 100%;">
+
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.common.js"></script>
+<script th:src="@{/static/js/dark.js}"  charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    layui.use(['laydate','form','layer'], function(){
+        var laydate = layui.laydate;
+        var form =layui.form;
+        laydate.render({
+            elem: '#from'
+            ,theme: '#393D49'
+            ,type: 'datetime',
+            value:new Date(new Date()-1000*60*60*24),
+            done:function (value) {
+                // var $from=$("#from").val();
+                var $to=$("#to").val();
+                if(value>$to){
+                    layer.msg("开始时间不可以超过结束时间");
+                    return false;
+                }
+            }
+
+        });
+        laydate.render({
+            elem: '#to'
+            ,theme: '#393D49'
+            ,type: 'datetime',
+            value:new Date(),
+            done:function (value) {
+                var $from=$("#from").val();
+                // var $to=$("#to").val();
+                if($from>value){
+                    layer.msg("开始时间不可以超过结束时间");
+                }
+            }
+
+        });
+
+        //设置语言
+        $('#aCode').attr('placeholder',$.i18n.prop('nodeNumber'));
+        $('#label1').text($.i18n.prop('selDevice'));
+        $('#label2').text($.i18n.prop('selectSensor'));
+        $('#label3').text($.i18n.prop('time'));
+        $('#search').val($.i18n.prop('search'));
+
+        //加载设备下拉框
+        $.ajax({
+            url: "../monitor/getDeviceSelect",
+            data: {},
+            dataType: "json",
+            type: "get",
+            success: function (result) {
+                var data = result.data;
+                var str='';
+                for(var x in data){
+                    str += '<option value = "' + data[x].deviceNumber + '">' + data[x].deviceName + '</option>'
+                }
+                $("#device").html(str);
+                form.render('select');
+
+                $.ajax({
+                    url: "../monitor/getSensorSelect",
+                    data: {deviceNumber:data[0].deviceNumber},
+                    dataType: "json",
+                    type: "get",
+                    success: function (result) {
+                        var data = result.data;
+                        var str='';
+                        for(var x in data){
+                            str += '<option value = "' + data[x].sensorCode + '">' + data[x].sensorName + '</option>'
+                        }
+                        $("#sensor").html(str);
+                        form.render('select');
+
+                    }
+                });
+            }
+        });
+
+        //下拉监听事件
+        form.on('select(device)', function(data){
+            var deviceNumber=$("#device").val();//获得选中的option的值
+            $.ajax({
+                url: "../monitor/getSensorSelect",
+                data: {deviceNumber:deviceNumber},
+                dataType: "json",
+                type: "get",
+                success: function (result) {
+                    var data = result.data;
+                    var str='';
+                    for(var x in data){
+                        str += '<option value = "' + data[x].sensorCode + '">' + data[x].sensorName + '</option>'
+                    }
+                    $("#sensor").html(str);
+                    form.render('select');
+
+                }
+            });
+        });
+        //加载历史曲线
+        $(' .layui-btn').on('click', function(){
+            var sensorCode=$('#sensor').val();
+            if(sensorCode==undefined){
+                layer.msg($.i18n.prop('warn31'));
+                return false;
+            }
+            var from =$('#from').val();
+            if(from==undefined){
+                layer.msg($.i18n.prop('warn32'));
+                return false;
+            }
+            var to=$('#to').val();
+            if(to==undefined){
+                layer.msg($.i18n.prop('warn33'));
+                return false;
+            }
+            if(from>to){
+                layer.msg("开始时间不可以超过结束时间");
+                return false;
+            }
+            //layer.msg(from+":=="+to);
+            var index=layer.load(1);
+            $.ajax({
+                url: "../monitor/getHistoryData",
+                data: {
+                    sensorCode:sensorCode,
+                    from:from,
+                    to:to
+                },
+                dataType: "json",
+                type: "get",
+                success: function (result) {
+                    layer.close(index);
+                    if(result.success){
+                        one.setOption({
+                            xAxis:{
+                                data:result.data.x
+                            },
+                            series:[{
+                                data:result.data.y
+                            }]
+                        });
+                        //layer.msg('查询完成');
+                    }
+                }
+            });
+
+        });
+    });
+</script>
+<script>
+    /**
+     * 曲线图
+     */
+    var one = echarts.init(document.getElementById('history'),'dark');
+    historyOption = {
+        //backgroundColor: '#011226',
+        /*title: {
+            text: '24小时数据监测',//图标标题
+            x: 'left'//水平居中
+        },*/
+        legend: {
+            orient: 'horizontal',//横向布局
+            x: 'right'
+            //height:100,
+            //data:['']
+        },
+        xAxis: {
+            type: 'category',
+            data:[]
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            //name:name,
+            data:[],
+            type: 'line',
+            lineStyle:{
+                normal:{ width:2  }//线条的颜色及宽度
+            },
+            itemStyle : { normal: {label : {show: true}}}
+        }]
+    };
+    one.setOption(historyOption);
+</script>
+</html>

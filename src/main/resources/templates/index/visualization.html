@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>大数据首页</title>
+    <link rel="shortcut icon" href="../../static/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../static/layui/css/modules/layer/default/layer.css">
+    <link rel="stylesheet" href="../../static/css/admin.css">
+    <link rel="stylesheet" href="../../static/layui/myicon/iconfont.css">
+    <link rel="stylesheet" href="../../static/tost/src/jquery.toast.css">
+    <link rel="stylesheet" href="/static/css/agriculture/swiper.min.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+    <script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+    <script th:src="@{/static/layui/layui.js}"></script>
+    <script th:src="@{/static/js/socket.js?v=1.0.2}"></script>
+    <script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+</head>
+<style>
+    html {
+        background-color: #102536;
+    }
+
+    body {
+        height: 100vh;
+        width: 100%;
+        background-color: #102536; /* 浏览器不支持的时候显示 */
+        background-image: radial-gradient(#12347C, #102948, #102536); /* 标准的语法（必须放在最后） */
+        overflow: hidden;
+    }
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+
+    li {
+        cursor: pointer;
+    }
+
+    .index-title {
+        display: flex;
+        height: 3rem;
+        padding-top: 0.5rem;
+    }
+
+    .index-btn {
+        display: flex;
+        margin-left: 1rem;
+        width: 44px;
+        height: 47px;
+        cursor: pointer;
+        z-index: 50;
+    }
+
+    .index-title-center {
+        display: flex;
+        position: absolute;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .index-weather {
+        margin-right: 1rem;
+        cursor: pointer;
+        z-index: 50;
+    }
+
+    .fill {
+        width: 100%;
+    }
+
+    .index-title-text {
+        line-height: 3rem;
+        font-size: 1.8rem;
+        color: #00f6ff;
+    }
+
+    .index-weather-text {
+        color: #00f6ff;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .inex-line {
+        height: 0.5rem;
+        width: 100%;
+        background-color: #00f6ff; /* 浏览器不支持的时候显示 */
+        background-image: radial-gradient(#00f6ff, #102536e0, #102536);
+    }
+
+    .index-weather > div > span {
+        line-height: 2rem;
+    }
+
+    .index-weather > div > img {
+        height: 2rem;
+    }
+
+    .index-weather > span {
+        height: 2rem;
+    }
+
+    .index-weather .index-title-text {
+        font-size: 1.5rem;
+    }
+
+    .nav-label {
+        color: white;
+        position: absolute;
+        text-align: center;
+        margin-left: 10rem;
+        margin-top: 3rem;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    #index-nav {
+        position: absolute;
+        z-index: 100;
+    }
+
+    .index-second-bottom {
+        display: flex;
+        color: white;
+        font-size: 10px;
+    }
+
+    .index-second-bottom div {
+        display: flex;
+        flex-direction: column;
+        margin-left: 1.8rem;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+        cursor: pointer;
+    }
+
+    .index-second-bottom img {
+        width: 2rem;
+        height: 2rem;
+        margin-left: 8px;
+    }
+
+    .nav-second-level {
+        margin: 1rem;
+        background-color: #244782ab;
+        background-image: linear-gradient(#244782b5, #0c637fb8);
+        border-radius: 5px;
+    }
+
+    .layui-form-checkbox[lay-skin=primary] span {
+        color: #eeeeee;
+    }
+
+    .auth-sp {
+        display: none;
+    }
+
+    .layui-form-checkbox[lay-skin=primary] {
+        padding-left: 5px;
+    }
+
+    .auth-child {
+        padding-left: 20px !important;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .auth-status {
+        padding-top: 5px;
+    }
+
+    .layui-form-checkbox[lay-skin=primary] i {
+        display: none;
+    }
+
+    #LAY-auth-tree-index {
+        color: white !important;
+        margin-left: 1rem;
+        padding-top: 1rem;
+        height: 50vh;
+    }
+
+    .auth-tree {
+
+        overflow-y: auto;
+    }
+
+    .auth-tree::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 5px rgba(8, 30, 64, 1) !important;
+        background: rgb(49, 83, 121);
+    }
+
+    .auth-tree::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background: rgb(84, 108, 136);
+    }
+
+    /*滚动条样式*/
+    .auth-tree::-webkit-scrollbar { /*滚动条整体样式*/
+        width: 6px; /*高宽分别对应横竖滚动条的尺寸*/
+        height: 6px;
+    }
+</style>
+<body>
+
+
+<!--&lt;!&ndash;<iframe src="http://www.hightopo.com/demo/earthTopo/"></iframe>&ndash;&gt;-->
+<!--</div>-->
+<!--<div style="background-color: white"></div>-->
+<!--</div>-->
+<div class="index-title">
+    <div class="index-title-center">
+        <img class="index-heading" th:src="@{/static/img/visual/heading_le.png}"> </img>
+        <div class="index-title-text">土地利用现状分布图</div>
+        <img class="index-heading" th:src="@{/static/img/visual/title_righ.png}"> </img>
+    </div>
+    <img class="index-btn" th:src="@{/static/img/visual/return.png}"> </img>
+    <img class="index-btn" th:src="@{/static/img/visual/set_up.png}"> </img>
+    <img class="index-btn" th:src="@{/static/img/visual/mail.png}"> </img>
+    <img class="index-btn" th:src="@{/static/img/visual/personal_c.png}"> </img>
+    <div class="fill"></div>
+    <div class="index-weather">
+        <div class="flex">
+            <span class="index-title-text">12℃</span>
+            <img class="index-heading" th:src="@{/static/img/visual/weather.png}"> </img>
+        </div>
+        <span class="index-weather-text">晴转多云</span>
+    </div>
+</div>
+<div class="inex-line"></div>
+<div>
+    <!--侧边菜单-->
+    <div id="index-nav">
+        <ul class="nav">
+            <li>
+                <div class="flex">
+                    <img class="index-heading"
+                         th:src="@{/static/img/visual/platform_d.png}"></img>
+                    <span class="nav-label">平台数据<br />中心</span>
+                </div>
+            </li>
+            <li>
+                <div class="flex">
+                    <img class="index-heading"
+                         th:src="@{/static/img/visual/gis_applic.png}"> </img>
+                    <span class="nav-label">GIS<br />应用平台</span>
+                </div>
+                <div class="nav-second-level">
+                    <div class="layui-form">
+                        <div class="auth-tree" id="LAY-auth-tree-index">
+                        </div>
+                    </div>
+                    <div class="index-second-bottom">
+                        <div>
+                            <img th:src="@{/static/img/visual/applicatio.png}"> </img>
+                            <span>应用APP</span>
+                        </div>
+                        <div>
+                            <img th:src="@{/static/img/visual/service_sy.png}"> </img>
+                            <span>服务系统</span>
+                        </div>
+                        <div>
+                            <img th:src="@{/static/img/visual/log_and_fe.png}"> </img>
+                            <span>日志反馈</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <iframe id="myframe0" style="
+    height: 93vh;
+    width: 100%;
+    overflow: hidden;"
+            src="http://www.hightopo.com/demo/earthTopo/"
+            frameborder="0">
+    </iframe>
+    <!--气象-->
+    <iframe id="myframe1" style="
+    height: 93vh;
+    width: 100%;
+    overflow: hidden;display: none"
+            src="https://www.supermapol.com/apps/dataviz/view.html?id=1673131869"
+            frameborder="0">
+    </iframe>
+    <!--城市质量-->
+    <iframe id="myframe2" style="
+    height: 93vh;
+    width: 100%;
+    overflow: hidden;display: none"
+            src="http://www.hightopo.com/demo/blog_baidu_20150928/ht-baidu.html"
+            frameborder="0">
+    </iframe>
+    <!--遥感分析-->
+    <iframe id="myframe3" style="
+    height: 93vh;
+    width: 100%;
+    overflow: hidden;display: none"
+            src="https://netease.youdata.163.com/dash/integration/700209493?rid=142159&token=1542867020539728822941cde72dd3c793ee0&toolbar=[%22export%22]&mode=simple"
+            frameborder="0">
+    </iframe>
+</div>
+
+<script>
+    layui.config({
+        base: '../../module/',
+    }).extend({
+        authtree: 'authtree',
+    });
+    layui.use(['jquery', 'authtree', 'form', 'layer'], function () {
+        var $ = layui.jquery;
+        var authtree = layui.authtree;
+        var list = [
+            {
+                "id": 1,
+                "name": "产区管理",
+                "parentId": 0
+            }, {
+                "id": 2,
+                "name": "气象情况",
+                "parentId": 1
+            }, {
+                "id": 3,
+                "name": "专家指导",
+                "parentId": 0
+            }, {
+                "id": 4,
+                "name": "城市质量",
+                "parentId": 3
+            }, {
+                "id": 5,
+                "name": "苹果管家",
+                "parentId": 0
+            }, {
+                "id": 6,
+                "name": "苹果管家2",
+                "parentId": 5
+            }, {
+                "id": 7,
+                "name": "资源管理",
+                "parentId": 0
+            }, {
+                "id": 8,
+                "name": "资源管理2",
+                "parentId": 7
+            }, {
+                "id": 9,
+                "name": "遥感卫星",
+                "parentId": 0
+            }, {
+                "id": 10,
+                "name": "遥感分析",
+                "parentId": 9
+            }, {
+                "id": 11,
+                "name": "设备实施管理",
+                "parentId": 0
+            }, {
+                "id": 12,
+                "name": "设备实施管理2",
+                "parentId": 11
+            }, {
+                "id": 13,
+                "name": "指挥调动中心",
+                "parentId": 0
+            }, {
+                "id": 14,
+                "name": "指挥调动中心2",
+                "parentId": 13
+            }, {
+                "id": 15,
+                "name": "溯源管理",
+                "parentId": 0
+            }, {
+                "id": 16,
+                "name": "溯源管理2",
+                "parentId": 15
+            }, {
+                "id": 17,
+                "name": "自然管理",
+                "parentId": 0
+            }, {
+                "id": 18,
+                "name": "土地利用现状分布",
+                "parentId": 17
+            }, {
+                "id": 19,
+                "name": "绿地分布图",
+                "parentId": 17
+            }, {
+                "id": 20,
+                "name": "裸地分布图",
+                "parentId": 17
+            }, {
+                "id": 21,
+                "name": "水系分布图",
+                "parentId": 17
+            }, {
+                "id": 22,
+                "name": "疑似城市违章建筑图",
+                "parentId": 17
+            }, {
+                "id": 23,
+                "name": "水产养殖",
+                "parentId": 17
+            }, {
+                "id": 24,
+                "name": "地质灾害",
+                "parentId": 17
+            }, {
+                "id": 25,
+                "name": "森林分布",
+                "parentId": 17
+            }
+        ];
+        // 一般来说，权限数据是异步传递过来的
+        var trees = authtree.listConvert(list, {
+            primaryKey: 'id'
+            , startPid: 0
+            , parentKey: 'parentId'
+            , nameKey: 'name'
+            , valueKey: 'id'
+        });
+        console.log(trees);
+        // 如果后台返回的不是树结构，请使用 authtree.listConvert 转换
+        authtree.render('#LAY-auth-tree-index', trees, {
+            inputname: 'authids[]',
+            layfilter: 'lay-check-auth',
+            autowidth: true,
+        });
+        var iframeId = 0;
+        //监听指定开关
+        form.on('checkbox', function (data) {
+            // layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+            console.log(data.value);
+            document.getElementById('myframe' + iframeId).style.display = 'none';
+            switch (data.value) {
+                case '2':
+                    console.log('产区管理2');
+                    // document.getElementById("myframe").src = "https://www.supermapol.com/apps/dataviz/view.html?id=1673131869";
+                    iframeId = 1;
+                    break;
+                case '4':
+                    iframeId = 2;
+                    break;
+                case '10':
+                    console.log('遥感分析');
+                    iframeId = 3;
+                    break;
+                default:
+                    iframeId = 0;
+            }
+
+            document.getElementById('myframe' + iframeId).style.display = 'block';
+        });
+    });
+
+</script>
+
+</body>
+</html>

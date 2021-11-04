@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>messageissue-信息发布</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/messageissue.css}">
+    <link class="styles" rel="stylesheet" th:href="@{/static/KE/themes/default/default.css}"/>
+</head>
+<style>
+    .tc-int{
+        width: 58vw;
+        box-sizing: border-box;
+        padding: 0 2vw;
+    }
+    .tc-int img{
+        display: block;
+        width: 70%;
+        margin: 10px auto;
+        float: none;
+    }
+</style>
+<body>
+<div class="main">
+    <div class="main-l">
+        <div class="int-title">
+            <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a1.png"></div>
+            <div class="title-text">全部投稿<span class="title-text-top"></span><span class="title-text-bottom"></span></div>
+        </div>
+        <div class="main-l-list test test-1" id="mainlist">
+            <!--<div class="mlsit">-->
+                <!--<div class="mlsit-pic">-->
+                    <!--<img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">-->
+                <!--</div>-->
+                <!--<div class="mlsit-txt">-->
+                    <!--<h4>台风“杨柳”携风雨远去 南方“苦夏”熬到头头头</h4>-->
+                    <!--<p>2019-09-02 08：10：10</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="main-r">
+        <div class="int-title">
+            <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a2.png"></div>
+            <div class="title-text">编辑信息<span class="title-text-top"></span><span class="title-text-bottom"></span></div>
+            <div style="position: absolute;right: 2vw;">
+                <form class="layui-form" action="" style="margin-top: 0!important;">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="新闻|文章">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div style="width: 50vw;box-sizing: border-box;padding: 2vh 1vw">
+            <input id="type" hidden="hidden" th:value="1"><!--文章还是信息  文章0  信息 1，尽量弄成动态的，后台传值-->
+            <div class="title-value">
+                <div class="layui-inline abc"
+                     style="display: flex;line-height:4vh;font-size: 1vw;margin: 1vh 0;margin-bottom: 3vh">
+                    <div style="color: #fff;">文章标题：</div>
+                    <input type="text" class="layui-input"  name="title" id="title" autocomplete="off" style="width:400px;background: transparent;color: white;" placeholder="文章标题">
+                </div>
+                <textarea id="demo" name="content" style="width:40vw;height:400px;"></textarea>
+                <div style="text-align: right;margin-top: 10px;">
+                    <button id="save" class="layui-btn layui-btn-primary layui-btn-radius"
+                            onclick="submit()">保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="tc" class="">
+    <h3 class="tc-title">
+        <div class="buddha-border">
+            <div class="buddha-pic">
+                <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+            </div>
+        </div>
+        <p>详细信息</p>
+    </h3>
+    <div class="tc-int test test-1" id="tcint">
+
+    </div>
+    <div id="dele"></div>
+</div>
+<div id="deletc">
+    <div class="deletc-p">
+        是否确认删除
+    </div>
+    <div class="deletcbnt">
+        <div id="deleyes">确认</div>
+        <div id="deleno">点错了</div>
+    </div>
+</div>
+<div id="motai"></div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<!--<script th:src="@{/static/js/common.js}" charset="utf-8"></script> 此js加了文本域就被隐藏了,需要调-->
+<script th:src="@{/static/KE/kindeditor-all-min.js}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:inline="javascript">
+    var id='';//删除id
+    let layer;
+    var choiceid='1';
+    layui.use(['form', 'layer', 'layedit', 'laydate'], function (){
+        var form = layui.form;
+        layer = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+        findArticleList();
+        form.on('switch(switchTest)', function(data){
+            layer.msg('您选择了：'+ (this.checked ? '新闻' : '文章'), {
+                offset: '6px'
+            });
+            if(this.checked){
+                choiceid=1;
+            }else {
+                choiceid=0;
+            }
+            console.log(choiceid);
+            layer.tips('选择发送文章还是新闻', data.othis)
+        });
+    });
+
+    //输入框适配
+
+
+    //文本信息的图片上传
+    var editor;
+    KindEditor.ready(function (K) {
+        editor = K.create('textarea[name="content"]', {
+            // uploadJson : '../goodsManage/uploadImg',
+            allowImageUpload: true,
+            uploadJson: '../aquacultureSystemSetting/uploadImgTwo',
+        });
+        var text = [[${data}]];
+        editor.html(text);
+    });
+
+    /*
+         文本信息的提交
+         点击选取发布文章或者新闻
+         点击选择  新闻、1或者文章、0 默认1
+
+     */
+    function submit() {
+        editor.sync();
+        let title = $('#title').val();
+        if (title == null || title == "") {
+            layer.msg("文章标题不可为空!");
+            return;
+        }
+        let beyond=title.length-35
+        if(title.length>35){
+            layer.msg("标题输入文字超出"+beyond);
+            return;
+        }
+        //保存数据
+        $.ajax({
+            url: "../expertManage/saveOrUpdateArticleContent",
+            type: "POST",
+            data: {
+                id: $('#id').val(),
+                content: $('#demo').val(),
+                title: $('#title').val(),
+                type: choiceid
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result.state == "success") {
+                    layer.msg('发布成功');
+                    findArticleList();
+                    var _body = window.parent;
+                    var _iframe1=_body.document.getElementById('homeIframe');
+                    _iframe1.contentWindow.location.reload(true);
+                }
+            }
+        });
+    }
+    findArticleList = function () {
+        $.ajax({
+            url: "../expertManage/findArticleList",
+            type: "POST",
+            data: {
+                myArticle: 0,
+                type: 1
+            },
+            dataType: "json",
+            success: function (res) {
+                if (res.state == "success") {
+                    console.log(res)
+                    var imgReg = /<img.*?(?:>|\/>)/gi;
+                    var srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+                    console.log(res)
+                    var html = "";
+                    if(res.datas.length==0){
+                        $('#mainlist').html('<img  style="width: 70%;margin: 0 auto;float: none!important;" src="/static/img/agriculture/zhanwei.png" alt="">\n');
+                    }else {
+                        $.each(res.datas, function (i, item) {
+                            var arr = item.content.match(imgReg);
+                            html += '<div class="mlsit" data-id="' + item.id + '">\n'
+                            if (item.content.match(imgReg) == null) {
+                                html += '<div class="mlsit-pic"><img src="/static/img/animalScreenNoData.jpg" alt=""></div>\n'
+                            } else {
+                                html += '<div class="mlsit-pic">' + arr[0] + '</div>\n'
+                            }
+                            html += '<div class="mlsit-txt">\n' +
+                                '<p>' + item.title + '</p>\n' +
+                                '<div style="display: flex; justify-content: space-between;">\n' +
+                                '<p>' + item.createTime + '</p>\n' +
+                                '<p>' + item.expertName + '</p>\n' +
+                                '</div>\n' +
+                                '</div>\n' +
+                                '<div class="teacher-icon chakanbnt"  data-id="' + item.id + '"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>\n' +
+                                '<div class="teacher-icon dele"  data-id="' + item.id + '"><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>\n' +
+                                '</div>'
+                        });
+                        $('#mainlist').html(html);
+                    }
+                }
+            }
+        });
+    }
+    $(document).on('click', '.chakanbnt', function () {
+        var id = this.getAttribute("data-id")
+        console.log(id);
+        $.ajax({
+            url: "../expertManage/findArticle?id=" + id,
+            type: "POST",
+            data: {},
+            success: function (res) {
+                console.log(res.data.content);
+                var html = res.data.content;
+                $('#tcint').html(html);
+
+            }
+        });
+        tc.style.display = 'block'
+    });
+    dele.onclick = function () {
+        tc.style.display = 'none'
+    };
+
+    $(document).on('click','.dele',function(){
+        id=$(this).data("id");
+        $('#deletc').show();
+        $('#motai').show();
+
+    });
+    $(document).on('click','#motai',function(){
+        $('#deletc').hide();
+        $('#motai').hide();
+    });
+    $(document).on('click','#deleno',function(){
+        $('#deletc').hide();
+        $('#motai').hide();
+    });
+    $(document).on('click','#deleyes',function(){
+        $('#deletc').hide();
+        $('#motai').hide();
+        delebz()
+    });
+    function delebz(){
+        console.log(id);
+        $.ajax({
+            url: "../expertManage/delArticle?id="+id,
+            type : "POST",
+            data: {
+            },
+            success: function (res) {
+                console.log(res)
+                if(res.state=="success"){
+                    layer.msg('删除成功');
+                    findArticleList()
+                }
+            }
+        })
+    }
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

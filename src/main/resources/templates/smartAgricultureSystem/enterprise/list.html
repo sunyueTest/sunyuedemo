@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../../../static/css/listNewStyle.css?id=1.3">
+    <style>
+
+        .layui-form-select dl {
+            background: #195884;
+            border-left: 1px solid #89f3ff;
+            box-shadow: inset 0px 0px 6px #0080ca;
+            color: #fff;
+            text-indent: .5rem;
+            font-size: .7rem;
+            border-right: 1px solid #89f3ff;
+            border-top: none;
+            border-bottom: none;
+            border-radius: 0.15rem;
+        }
+
+        .layui-form-select dl dd.layui-this {
+            background-color: #29bbd0;
+            color: #fff;
+        }
+
+        .layui-form-select dl dd:hover {
+            background: none;
+        }
+
+
+        .layui-table-tool-panel {
+            background: #195884;
+            border-left: 1px solid #89f3ff;
+            box-shadow: inset 0px 0px 6px #0080ca;
+            color: #fff;
+            font-size: .7rem;
+            border-right: 1px solid #89f3ff;
+            border-top: none;
+            border-bottom: none;
+            border-radius: 0.15rem;
+        }
+
+        .layui-form-checkbox span {
+            color: #fff !important;
+        }
+
+        .layui-table-tool-panel li:hover {
+            background: none;
+        }
+
+        .layui-form-checked i {
+            border-color: #026e87 !important;
+            background-color: #026e87 !important;
+        }
+
+        .layui-form-checkbox:hover i {
+            border-color: #026e87 !important;
+        }
+
+        /*    .layui-layer-btn{
+                margin-top:0!important;
+            }
+            .layui-layer-btn1{
+                display:none!important;
+            }
+            .layui-layer-btn0{
+                width: 10%!important;
+                background: none!important;
+                border-left: 1px solid #89f3ff!important;
+                box-shadow: inset 0px 0px 6px #0080ca!important;
+                color: #fff!important;
+                font-size: .7rem!important;
+                border-right: 1px solid #89f3ff!important;
+                border-top: none!important;
+                border-bottom: none!important;
+                border-radius: 0.15rem!important;
+
+            }
+    */
+    </style>
+</head>
+<body>
+<table class="layui-hide" id="table" lay-filter="table"></table>
+
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline bg-transparent" id="addProjectDiv">
+        <button id="add" class="layui-btn layui-btn-primary layui-btn-radius"
+                lay-event="add"> 新增企业
+        </button>
+    </div>
+    <div class="layui-inline bg-transparent" id="expiortEnterpriseDiv">
+        <button id="export" class="layui-btn layui-btn-primary layui-btn-radius"
+                lay-event="export"> 导出企业数据
+        </button>
+    </div>
+
+    <div class="layui-inline abc">
+        <button class="layui-btn " lay-event="search">
+            <i class="layui-icon layui-icon-search "></i>
+        </button>
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="enterpriseName" id="enterpriseName" autocomplete="off"
+               style="width:182px;"
+               placeholder="企业名称">
+    </div>
+
+</script>
+
+<script type="text/html" id="barDemo">
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i
+            class="layui-icon"></i></button>
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="user" title="设置企业用户"><i
+            class="layui-icon layui-icon-user"></i></button>
+     {{#  if(d.state == '0'){ }}
+                 
+    <button class="layui-btn layui-btn-primary layui-btn-sm stop" lay-event="stop" title="企业停用"><i
+            class="layui-icon layui-icon-pause stopImg"></i></button>
+      {{#  } }}
+     {{#  if(d.state == '1'){ }}
+                 
+    <button class="layui-btn layui-btn-primary layui-btn-sm stop" lay-event="stop" title="企业恢复"><i
+            class="layui-icon layui-icon-play stopImg"></i></button>
+      {{#  } }}
+
+
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+            class="layui-icon layui-icon-delete"></i></button>
+</script>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<style>
+    .abc {
+        float: right;
+        margin-left: 10px;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .layui-table-tool .layui-inline {
+        background-color: #eaeaea;
+    }
+</style>
+</body>
+</html>
+<script>
+
+
+    let table, form;
+    layui.use(['table', 'form'], function () {
+        let tableData = [
+            {
+                field: 'id', title: 'ID', width: 80, //fixed: 'left', unresize: true,
+                sort: true
+            },
+            {field: 'name', title: "企业名称", align: 'center'},
+            {field: 'address', title: "企业地址", align: 'center'},
+            {field: 'header', title: "负责人", width: 160, align: 'center'},
+            {field: 'tel', title: "联系电话", width: 160, align: 'center'},
+            {
+                field: 'state', title: "企业停用或启用", hide: true,
+            },
+            {field: 'stateValue', title: "状态", width: 80, align: 'center'},
+            {
+                field: '',
+                title: $.i18n.prop('operation'),
+                toolbar: '#barDemo',
+                width: 230,
+                align: 'center',
+            }
+        ];
+
+        table = layui.table;
+        form = layui.form;
+        table.render({
+            elem: '#table'
+            , url: '../projectBaseScene/listEnterprises'
+            , toolbar: '#toolbar1'
+            , title: ''
+            , cols: [tableData]
+            , page: true,
+            request: {limitName: 'size', projectId: 0},
+            response: {
+                statusCode: 'success'
+            },
+            parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                return {
+                    "code": res.state, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.datas,//解析数据列表
+                };
+            }
+        });
+
+        //头工具栏事件
+        table.on('toolbar(table)', function (obj) {
+            switch (obj.event) {
+                case 'search':
+                    doLoginFilter();//登陆状态验证
+                    let projectName = $('#enterpriseName').val();
+                    reloadSmartAgricultureList(projectName);
+                    break;
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        title: false,
+                        closeBtn: true,
+                        area: ['700px', '500px'],
+                        shade: 0.2,
+                        id: 'LAY_onLineCtrl',
+                        btnAlign: 'c',
+                        moveType: 1,
+                        content: '../projectBaseScene/toAddEnterprise',
+                        success: function (layero, index) {
+                        }
+                    });
+                    break;
+                case 'export':
+                    window.location.href = '../projectBaseScene/exportEnterprises';
+            }
+        });
+
+        //监听行工具事件
+        table.on('tool(table)', function (obj) {
+            let data = obj.data;
+            if (obj.event === 'edit') {
+                layer.open({
+                    type: 2,
+                    title: false,
+                    closeBtn: true,
+                    area: ['700px', '500px'],
+                    shade: 0.2,
+                    id: 'LAY_onLineCtrl',
+                    btnAlign: 'c',
+                    moveType: 1,
+                    content: '../projectBaseScene/toUpdateEnterprise?id=' + data.id
+                });
+            } else if (obj.event === 'del') {
+                if (data.state == 0) {
+                    layer.msg("请先停用企业，然后删除该企业");
+                    return;
+                }
+                layer.confirm($.i18n.prop('confirmDelete'), {
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    title: false,
+                }, function (index) {
+                    layer.load(2);
+                    $.ajax({
+                        url: "../projectBaseScene/delEnterprise",
+                        data: {id: data.id},
+                        dataType: "json",
+                        type: "post",
+                        timeout: 30000,
+                        error: function (data, type, err) {
+                            layer.closeAll('loading');
+                            layer.msg($.i18n.prop('fail'), {
+                                offset: '6px', icon: 2
+                            });
+                        },
+                        success: function (data) {
+                            layer.closeAll('loading');
+                            if ('success' == data.state) {
+                                $('.layui-laypage-btn').click();
+                                layer.msg($.i18n.prop(data.msg), {icon: 1})
+                            } else {
+                                layer.msg($.i18n.prop(data.msg), {icon: 2})
+                            }
+                        }
+                    });
+                });
+            } else if (obj.event === 'user') {
+                if (data.state != 0) {
+                    layer.msg("企业停用中，无法添加用户");
+                    return;
+                }
+                layer.open({
+                    type: 2,
+                    title: false,
+                    closeBtn: true,
+                    area: ['750px', '500px'],
+                    shade: 0.2,
+                    id: 'LAY_onLineCtrl',
+                    btnAlign: 'c',
+                    moveType: 1,
+                    content: '../projectBaseScene/toBoundEnterpriseManagerList?enterpriseName=' + data.name + '&enterpriseId=' + data.id
+                });
+            } else if (obj.event === 'stop') {
+                let confirm = "尊敬的管理员，确认停用该企业么，停用后企业下用户无法登录，企业不会在主页展示平台显示。";
+                let state = "1";
+                if (data.state == '1') {
+                    confirm = "尊敬的管理员，确认恢复该企业么，恢复后企业下用户将可以正常登录，企业会在主页展示平台显示。";
+                    state = "0";
+                }
+
+                layer.confirm(confirm, {
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    title: false,
+                }, function (index) {
+                    $.ajax({
+                        url: "../projectBaseScene/updateEnterpriseState",
+                        data: {
+                            id: data.id,
+                            state: state
+                        },
+                        dataType: "json",
+                        type: "post",
+                        timeout: 30000,
+                        error: function (data, type, err) {
+                            layer.closeAll('loading');
+                            layer.msg($.i18n.prop('fail'), {
+                                offset: '6px', icon: 2
+                            });
+                        },
+                        success: function (data) {
+                            layer.closeAll('loading');
+                            if ('success' == data.state) {
+                                $('.layui-laypage-btn').click();
+                                layer.msg($.i18n.prop(data.msg), {icon: 1})
+                            } else {
+                                layer.msg($.i18n.prop(data.msg), {icon: 2})
+                            }
+                        }
+
+                    });
+                });
+            }
+            ;
+        });
+
+        var winHeight = $(window).height();
+
+        $(".layui-table-body").height(winHeight - 39 - 65 - 41 - 20);
+
+
+    });
+
+    function reloadSmartAgricultureList(enterpriseName) {
+        table.reload('table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                enterpriseName: enterpriseName
+            }
+        });
+        var winHeight = $(window).height();
+
+        $(".layui-table-body").height(winHeight - 39 - 65 - 41 - 20);
+        $("#enterpriseName").val(enterpriseName);
+    }
+
+</script>

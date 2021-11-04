@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>deviceList1</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="css/common.css">
+    <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" src="js/zTreejs/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+    <script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+    <script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+    <script th:src="@{/static/chart/echarts.min.js?v=1.0}"></script>
+
+</head>
+<body>
+<div class="body content_wrap">
+    <div class="left">
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+
+    <div class="right" style="padding-top:27px;">
+            <div class="barBox">
+                    <div class="layui-inline" style="background-color: #eaeaea;">
+                        <label id="timelabel" class="layui-form-label" style="width:70px;"></label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="from" autocomplete="off" readonly placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline"  style="background-color: #eaeaea;">
+                        <label class="layui-form-label" style="width:0;"> - </label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="to" readonly placeholder="">
+                        </div>
+                    </div>
+
+
+                    <div class="layui-inline" style="">
+                        <button class="layui-btn " lay-event="search" id="search">
+
+                        </button>
+                    </div>
+
+            </div>
+
+
+
+
+
+
+
+        <div id="myChart" style="width:100%;margin-top:20px;">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+    var dev = '' ;
+    var myChart;
+    $(function(){
+       $("#myChart").height($(window).height()- $(".barBox").height() - 30 - 30);
+
+        $("#search").click(function(){
+
+            getLineByDate();
+
+
+        })
+    });
+
+    layui.use(['form', 'laydate', 'layer', 'table'], function () {
+
+        var laydate = layui.laydate;
+
+        //ztree
+        var zNodes = [], requestCount = 0, deviceNumber = "", currentNode = '';
+        var setting = {
+            view: {
+                showLine: false,
+                // dblClickExpand: dblClickExpand
+                // selectedMulti: false
+                fontCss: getFont,
+                showIcon: false,
+                selectedMulti: false,
+                dblClickExpand: false,
+                addDiyDom: addDiyDom,
+            },
+            data: {
+                key: {
+                    title: "groupName",
+                    name: "groupName"
+                },
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: onClick
+            }
+        };
+
+        function getFont(treeId, node) {
+            // return {'color': '#000'};
+            return node.font ? node.font : {};
+        }
+
+        function addDiyDom(treeId, treeNode) {
+            var spaceWidth = 10;
+            var switchObj = $("#" + treeNode.tId + "_switch"),
+                icoObj = $("#" + treeNode.tId + "_ico");
+            switchObj.remove();
+            icoObj.before(switchObj);
+            if (treeNode.level >= 1) {
+                if (treeNode.deviceNumber) {
+                    var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level) + "px'></span><span style='color:#ffffff'>●</span>";
+                    switchObj.before(spaceStr);
+                } else {
+                    var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level) + "px'></span>";
+                    switchObj.before(spaceStr);
+                }
+
+
+            }
+
+            switch (treeNode.level) {
+                case 0:
+                    $("#" + treeNode.tId + "_a").css('background', '#132553');
+                    break;
+                case 1:
+                    $("#" + treeNode.tId + "_a").css('background', '#1A2F5C');
+                    break;
+                case 2:
+                    $("#" + treeNode.tId + "_a").css('background', '#203864');
+                    break;
+                case 3:
+                    $("#" + treeNode.tId + "_a").css('background', '#254169');
+                    break;
+                case 4:
+                    $("#" + treeNode.tId + "_a").css('background', '#2E4E75');
+                    break;
+                default:
+                    $("#" + treeNode.tId + "_a").css('background', '#2E4E75');
+                /* case 5:$("#" + treeNode.tId + "_a").css('background','#355A88');
+                     break;
+                 case 6:$("#" + treeNode.tId + "_a").css('background','#3C679C');
+                     break;
+                 case 7:$("#" + treeNode.tId + "_a").css('background','#4577B5');
+                     break;*/
+
+            }
+        }
+
+        function onClick(event, treeId, treeNode, clickFlag) {
+            if (treeNode.isGroup == null || treeNode.isGroup == true) {
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                zTree.expandNode(treeNode);
+            } else {
+                if (currentNode != '') {
+                    $("#" + currentNode).css('color', '#ffffff');
+
+                    //获取上一个节点 并删除
+                    $("#" + currentNode).next().remove();
+
+                }
+                $("#" + treeNode.tId + "_span").css('color', '#098CCF');
+
+                var img = '<img style="width:8px;height: 8px;margin-right: 5px;" src="../../css/zTreeStyle/img/diy/arrow.png">';
+                $("#" + treeNode.tId + "_span").after(img);
+                currentNode = treeNode.tId + "_span";
+                deviceNumber = treeNode.deviceNumber;
+                dev = treeNode.deviceNumber;
+                getLineByDate();
+            }
+        }
+
+        $.ajax({
+            url: "group/selGroupList",
+            data: {},
+            dataType: "json",
+            type: "get",
+            timeout: 30000,
+            error: function (data, type, err) {
+                console.log(err);
+                layer.msg($.i18n.prop('fail'));
+            },
+            success: function (data) {
+                // layer.closeAll('loading');
+                if (data.state == 'success') {
+                    for (var i = 0; i < data.datas.length; i++) {
+                        zNodes.push(data.datas[i])
+                    }
+                    menuInit(-1);
+                    requestCount = data.datas.length + 1;
+                    getNodeData(0, 0);
+                    for (var i = 0; i < data.datas.length; i++) {
+                        data.datas[i].font = {'color': '#ffffff'};
+                        data.datas[i].isGroup = true;
+                        getNodeData(data.datas[i].id, 0);
+                    }
+
+                } else {
+                    layer.msg($.i18n.prop(data.msg));
+                }
+            }
+        });
+
+        function getNodeData(id, len) {
+            $.ajax({
+                url: "group/selDeviceForGroup",
+                data: {id: id},
+                dataType: "json",
+                type: "get",
+                timeout: 30000,
+                error: function (data, type, err) {
+                    console.log(err);
+                    layer.msg($.i18n.prop('fail'));
+                },
+                success: function (data) {
+                    // layer.closeAll('loading');
+                    if (data.state == 'success') {
+                        len = data.datas.length;
+                        for (var i = 0; i < len; i++) {
+                            var datai = data.datas[i];
+                            datai.isGroup = false;
+                            datai.id = datai.id + 100000;
+                            datai.pId = datai.groupId;
+                            datai.groupName = datai.deviceName;
+                            datai.iconSkin = "icon02";
+                            datai.font = {'color': '#ffffff'};
+                            zNodes.push(datai);
+                            if (dev ==''){
+                                dev =  datai.deviceNumber;
+                            }
+                        }
+
+
+
+                        if (data.isLast) {
+                            if (requestCount == 1) {
+                                menuInit(openExp(0, 0));
+                            }
+                            requestCount -= 1;
+                        } else {
+                            getNodeData(data.datas[i].id, len);
+                        }
+                    } else {
+                        layer.msg($.i18n.prop(data.msg))
+                    }
+                }
+            });
+        }
+
+        function openExp(index, oId) {
+            for (var i = index; i < zNodes.length; i++) {
+                if (zNodes[i].pId == oId && zNodes[i].isGroup == true) {
+                    zNodes[i].open = true;
+                    return openExp(0, zNodes[i].id)
+                }
+            }
+            for (var i = index; i < zNodes.length; i++) {
+                if (zNodes[i].pId == oId) {
+                    return zNodes[i].id;
+                }
+            }
+        }
+
+        function menuInit(id) {
+            var treeObj = $("#treeDemo");
+            // zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
+            // curMenu = zTree_Menu.getNodes()[0].children[0].children[0];
+            // zTree_Menu.selectNode(curMenu);
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            treeObj.hover(function () {
+                if (!treeObj.hasClass("showIcon")) {
+                    treeObj.addClass("showIcon");
+                }
+            }, function () {
+                treeObj.removeClass("showIcon");
+            });
+            if (id != -1) {
+                var tree = $.fn.zTree.getZTreeObj("treeDemo");
+                var sel = tree.getNodeByParam('id', id);
+                if (sel != null) {
+                    $("#" + sel.tId + "_a").click(); // 点击节点
+                }
+            }
+        }
+
+        function get_cookie(Name) {
+            var search = Name + "="//查询检索的值
+            var returnvalue = "";//返回值
+            if (document.cookie.length > 0) {
+                sd = document.cookie.indexOf(search);
+                if (sd != -1) {
+                    sd += search.length;
+                    end = document.cookie.indexOf(";", sd);
+                    if (end == -1)
+                        end = document.cookie.length;
+                    //unescape() 函数可对通过 escape() 编码的字符串进行解码。
+                    returnvalue = unescape(document.cookie.substring(sd, end))
+                }
+            }
+            return returnvalue;
+        }
+
+         deviceNumber = get_cookie("deviceNumber");
+
+        //设置语言
+        $('#timelabel').text($.i18n.prop('timelabel'));
+        $('#from').attr('placeholder', $.i18n.prop('startTime'));
+        $('#to').attr('placeholder', $.i18n.prop('endTime'));
+        $('#devicelabel').text($.i18n.prop('devicelabel'));
+        $('#deviceNumber').attr('placeholder', $.i18n.prop('deviceDescription'));
+        $('#search').text($.i18n.prop('search'));
+
+        laydate.render({
+            elem: '#from'
+            ,format: 'yyyy-MM-dd'
+        });
+        laydate.render({
+            elem: '#to'
+            ,format: 'yyyy-MM-dd'
+        });
+        $('#from').val(new Date(new Date().getTime() - 24*15*60*60*1000).Format('yyyy-MM-dd'));
+        $('#to').val(new Date().Format('yyyy-MM-dd'));
+
+        function formatDate(date) {
+            var year = date.getFullYear(),
+                month = date.getMonth() + 1,//月份是从0开始的
+                day = date.getDate(),
+                hour = date.getHours(),
+                min = date.getMinutes(),
+                sec = date.getSeconds();
+            var newTime = year + '-' +
+                month + '-' +
+                day + ' ' +
+                hour + ':' +
+                min + ':' +
+                sec;
+            return newTime;
+        }
+
+        function toDate(date) {
+            var year = date.getFullYear(),
+                month = date.getMonth() + 1,//月份是从0开始的
+                day = date.getDate();
+
+            var newTime = year + '-' +
+                month + '-' +
+                day + ' ' +
+                23 + ':' +
+                59 + ':' +
+                59;
+            return newTime;
+        }
+
+
+
+
+    });
+
+
+
+    //通过时间以及设备号查询曲线数据
+    function getLineByDate(){
+        //起止时间转为yyyy/MM/dd格式，ie,safari浏览器new Date(yyyy-MM-dd)会报错
+        var fromVal = $.trim($("#from").val().replace(/-/g,'/')+' ' +'00:00:00');
+        var toVal = $.trim($("#to").val().replace(/-/g,'/')+' ' +'23:59:59');
+        var cha1 = parseInt(new Date(new Date(toVal).Format('yyyy-MM-dd')) - new Date(new Date(fromVal).Format('yyyy-MM-dd')))/ (1000 * 60 * 60 * 24);
+        var cha2 = parseInt(new Date(new Date().Format('yyyy-MM-dd')) - new Date(new Date(fromVal).Format('yyyy-MM-dd')) ) / (1000 * 60 * 60 * 24);
+        var cha3 = parseInt(new Date(new Date().Format('yyyy-MM-dd')) - new Date(new Date(toVal).Format('yyyy-MM-dd'))) / (1000 * 60 * 60 * 24);
+        if(fromVal==""){
+            layer.msg('起始时间不能为空');
+            return false;
+        }
+        if(toVal==""){
+            layer.msg('截止时间不能为空');
+            return false;
+        }
+        if (cha1 < 0) {
+            layer.msg('起始时间不能小于截止时间');
+            return false;
+        }
+        if (cha3 < 0) {
+            layer.msg('截止时间不能大于当天');
+            return false;
+        }
+        if (cha1 > 30) {
+            layer.msg('查询时间跨度不能超过30天');
+            return false;
+        }
+        if (cha2 > 90) {
+            layer.msg('不支持查询3个月以前的数据');
+            return false;
+        }
+        $.ajax({
+            url: "monitor/getSensorCustomReport",
+            data: {deviceNumber:dev,
+                //起止时间转为yyyy-MM-dd格式，接口不识别yyyy/MM/dd,会报错
+                startTime:fromVal.replace(/\//g,'-'),
+                endTime:toVal.replace(/\//g,'-')
+            },
+            dataType: "json",
+            type: "get",
+            timeout: 30000,
+            error: function (data, type, err) {
+                console.log(err);
+                layer.msg($.i18n.prop('fail'));
+            },
+            success: function (data) {
+                if (data.success == true) {
+                    if(data.data!="") {
+                        getMsgLine(data.data);
+                    }
+                } else {
+                    layer.msg($.i18n.prop(data.msg));
+                }
+            }
+        });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    //日期方法
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+
+
+
+
+
+    function getMsgLine(data){
+         myChart = echarts.init(document.getElementById('myChart'));
+        myChart.clear();
+        var res = data;
+
+        var keyArr = Object.keys(res);
+        if(keyArr.length>0){
+            keyArr.remove('type');
+            var newKeyArr = [];
+            for(var w = 0;w<keyArr.length;w++){
+                if(keyArr[w]!="type"){
+                    newKeyArr.push(keyArr[w].split("-")[1]);
+                }
+            }
+            var lastObj = {};
+            for(var m=0;m<keyArr.length;m++){
+                var nKey = newKeyArr[m];
+                var nVal = keyArr[m];
+                lastObj[nKey] = res[nVal];
+            }
+
+            var server =[];
+            var colorNum = 0;
+            var colorArr = ['rgb(255,244,92)','rgb(0,255,255)','rgb(128,194,105)','rgb(255,92,119)','rgb(64,255,0)','rgb(255,190,0)','rgb(92,103,255)','rgb(0,148,255)','rgb(255,111,92)'];
+            for(var q = 0;q<newKeyArr.length;q++){
+                    var sObj = {};
+                    sObj.name = newKeyArr[q];
+                    sObj.type ='line';
+                sObj.smooth = true;
+                sObj.symbolSize =5;
+                sObj.lineStyle = {};
+                sObj.lineStyle.width = 2;
+                    var ss = newKeyArr[q];
+                    var cArr = [];
+                    for(var c = 0;c<lastObj[ss].length;c++){
+                        cArr.push(Number(lastObj[ss][c]));
+                    }
+                    sObj.data = cArr;
+                    sObj.itemStyle={
+                        normal:{
+                            color:colorArr[colorNum]
+                        }
+                    };
+
+                sObj.areaStyle= {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: colorArr[colorNum]
+                        },
+                            {
+                                offset: 0.5,
+                                color: 'rgba(255,255,255,0.1)'
+                            },
+                            {
+                                offset: 1,
+                                color: 'rgba(255,255,255,0.01)'
+                            }
+                        ], false),
+                    }
+                },
+
+
+
+
+
+
+
+                    colorNum++;
+                    server.push(sObj);
+
+
+            }
+            var legData = [];
+            for(var v=0;v<server.length;v++){
+                legData.push(server[v].name)
+            }
+
+
+                    option = {
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        grid: {
+                            top: '10%',
+                            left: '1%',
+                            right: '1%',
+                            bottom: '3%',
+                            height: '75%',
+                            containLabel: true
+                        },
+                        legend: {
+                            // color: ['#F58080','#47D8BE','#F9A589','#f8d351'],
+                            data:legData,
+                            top: '0',
+                            right: '0',
+                            itemWidth:1,//图例的宽度
+                            itemHeight:8,//图例的高度
+                            textStyle:{//图例文字的样式
+                                color:'#fff',
+                                fontSize:10,
+                                marginLeft:5
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'],
+                            axisTick:{//坐标轴刻度相关设置。
+                                show: false,
+                            },
+                            axisLabel: {
+                                margin: 10,
+                                textStyle: {
+                                    fontSize: 10
+                                }
+                            },
+                            axisLine: {
+
+                                lineStyle: {
+                                    color: "#fff"
+                                }
+                            }
+                        },
+                        yAxis: {
+                            type: 'value',
+
+                            splitLine: {
+                                show:false,
+                                lineStyle: {
+                                    type: 'dashed',
+                                    color: '#fff'
+                                }
+                            },
+                            axisLabel: {
+                                margin: 10,
+                                textStyle: {
+                                    fontSize: 10
+                                }
+                            },
+                            axisLine:{
+                                lineStyle:{
+                                    color:'#fff'
+                                }
+                            },
+                            nameTextStyle: {
+                                color: "#fff"
+                            },
+                            axisTick:{
+                                inside : true
+                            },
+                            splitArea: {
+                                show: false
+                            }
+                        },
+                        series: server
+                    };
+                    myChart.setOption(option);
+
+                }
+
+
+
+
+
+    }
+
+
+    Array.prototype.remove = function(val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    };
+
+
+
+</script>
+<style>
+    body{
+        width: 100%!important;
+    }
+    tbody tr{
+        height: auto!important;
+    }
+    .layui-table{
+        width: 90%!important;
+        padding: 0 2%;
+        box-sizing: border-box;
+    }
+    .layui-table thead tr{
+        width: 100%!important;
+    }
+    .layui-table thead,.layui-table tr{
+        width: 100%!important;
+
+    }
+    .body {
+        width: 100%;
+    }
+    .left {
+        width: 20%;
+        float: left;
+    }
+    .right {
+        width: 80%;
+        float: left;
+    }
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+    .layui-table-tool .layui-inline {
+        background-color: #eaeaea;
+    }
+    /*   .layui-table-body .layui-table-main{
+           height:500px;!important;
+       }*/
+    .layui-table thead {
+        background-color: #132553;
+    }
+    .layui-table tbody {
+        background-color: #254169;
+    }
+    .layui-table-header thead{
+        background-image: none;
+        display: table;
+    }
+    .toolbar {
+        height: 50px;
+    }
+    ul.ztree {
+        margin-top: 20px;
+        border: 0px solid #fff;
+        background-color: transparent;
+        width: 90%;
+        height: 500px;
+        overflow-y: auto;
+        overflow-x: auto;
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
+    }
+    ul.ztree::-webkit-scrollbar {
+        width: 0 !important;
+    }
+    .ztree * {
+        font-size: 10pt;
+        font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial
+    }
+    .ztree li ul {
+        margin: 0;
+        padding: 0
+    }
+    .ztree li {
+        line-height: 30px;
+    }
+    .ztree li a {
+        width: 100%;
+        height: 30px;
+        padding-top: 0px;
+        margin-top: 2px;
+    }
+    .ztree li a:hover {
+        text-decoration: none;
+        background-color: #475e80;
+    }
+    /* .ztree li a span.button.switch {
+         visibility: visible
+     }
+
+     .ztree.showIcon li a span.button.switch {
+         visibility: visible
+     }*/
+    .ztree li a.curSelectedNode {
+        background-color: #475e80;
+        border: 0;
+        height: 30px;
+    }
+    .ztree li span {
+        line-height: 30px;
+    }
+    .ztree li span.button {
+        margin-top: -7px;
+    }
+    .ztree li span.button.switch {
+        width: 20px;
+        height: 16px;
+    }
+
+    /*.ztree li a.level0 span {font-size: 150%;font-weight: bold;}*/
+    /*node_name*/
+    .ztree li span.button {
+
+        /*background-image: url("../../img/left_menuForOutLook.png");*/
+
+    }
+
+    .ztree li span.button.switch.level0 {
+        margin-left: 5px;
+        /*width: 20px;
+        height: 20px*/
+    }
+
+    .ztree li span.button.switch.level1 {
+        /*width: 20px;
+        height: 20px*/
+    }
+    .ztree li span.button.noline_open {
+        background-position: 0 0;
+        background-image: url("../../img/open.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    .ztree li span.button.noline_close {
+        background-position: 0 0;
+        background-image: url("../../img/close.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .layui-inline .device {
+        float: left;
+    }
+    .layui-table-body {
+        height: auto!important;
+    }
+
+</style>
+</body>
+</html>

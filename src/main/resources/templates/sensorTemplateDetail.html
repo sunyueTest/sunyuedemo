@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>模板详情</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+
+</head>
+<body>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="moveUp">上移</a>
+    ｜  <a class="layui-btn layui-btn-xs" lay-event="moveDown">下移</a>
+    ｜  <a class="layui-btn layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<div style="margin-top: 20px;">
+
+    <form class="layui-form">
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label1" class="layui-form-label">模板名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="name" id="name" autocomplete="off"
+                           th:value="*{data.name}" class="layui-input">
+                    <input type="hidden" name="id" th:value="*{data.id}" id="id">
+                    <input type="hidden" name="flag" id="flag" th:value="*{data.flag}">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label2" class="layui-form-label">选择传感器</label>
+                <div class="layui-input-inline" id="dele">
+                    <input type="text" autocomplete="off" class="layui-input" id="demo"  readonly="readonly" >
+                    <input type="hidden" id="templates" name="templates">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="button" class="layui-btn layui-btn-radius" id="save" value="保存">
+            </div>
+        </div>
+
+    </form>
+</div>
+<fieldset class="layui-elem-field layui-field-title">
+    <legend id="legend">已选择</legend>
+</fieldset>
+<table class="layui-hide" id="sensor" lay-filter="sensor"></table>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.all.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/static/js/tableSelect.js}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script language='javascript' th:inline="javascript">
+    var table = layui.table,id;
+    id=[[${data.id}]];
+    table.render({
+        elem: '#sensor'
+        , url: '../sensorTemplate/getTempSensorList?id=' + id
+        , title: $.i18n.prop('sensor')
+        , cols: [
+            [
+                {field: 'id', title: 'ID', width: 80, fixed: 'left', unresize: true, sort: true}
+                , {field: 'name', title: $.i18n.prop('name'), width: 150}
+                , {field: 'unit', title: $.i18n.prop('unit'), width: 120},
+                  {field: 'coeffcient', title: "系数", width: 120}
+                , {fixed: 'right', title: $.i18n.prop('operation'), toolbar: '#barDemo', width: 220}
+            ]
+        ]
+        , page: false
+    });
+    //设置语言
+    $('#label1').text($.i18n.prop('templateName'));
+    $('#label2').text($.i18n.prop('selectSensor'));
+    $('#save').val($.i18n.prop('save'));
+    $('#legend').text($.i18n.prop('selected'));
+
+    table.on('tool(sensor)', function (obj) {
+        if (obj.event === 'moveUp') {
+            var index =$(this).parent().parent().parent().attr('data-index');
+            $.ajax({
+                type: "post",
+                url: "../sensorTemplate/moveUp",
+                data: {
+                    index: index,
+                    tempId: $("#id").val()
+                },
+                success: function (result) {
+                    layer.msg($.i18n.prop('success'), {icon: 1});
+                    table.reload('sensor', {});
+                    parent.refresh();
+                }
+            });
+            //layer.msg("上移");
+            //传参数
+            } else if (obj.event === 'moveDown') {
+            var index =$(this).parent().parent().parent().attr('data-index');
+            //$(this).parent().parent().next("tr").after($(this).parent().parent());
+            $.ajax({
+                type: "post",
+                url: "../sensorTemplate/moveDown",
+                data: {
+                    index:index,
+                    tempId: $("#id").val()
+                },
+                success: function (result) {
+                    layer.msg($.i18n.prop('success'), {icon: 1});
+                    table.reload('sensor', {});
+                    parent.refresh();
+                }
+            });
+        } else if (obj.event === 'delete') {
+            var index =$(this).parent().parent().parent().attr('data-index');
+            $.ajax({
+                type: "post",
+                url: "../sensorTemplate/delete",
+                data: {
+                    index:index,
+                    tempId: $("#id").val()
+                },
+                success: function (result) {
+                    layer.msg($.i18n.prop('success'), {icon: 1});
+                    table.reload('sensor', {});
+                    parent.refresh();
+                }
+            });
+        }
+    });
+    //提交数据
+    $("#save").click(function () {
+        var name = $("#name").val();
+        if (name == '' || name.length == 0) {
+            layer.msg($.i18n.prop('warn11'), {icon: 5});
+            return false;
+        }
+        var flag = $("#flag").val();
+        var param = {
+            name: name,
+            id: $("#id").val(),
+            templates: $("#templates").val(),
+            flag: flag
+        };
+        $.ajax({
+            type: "post",
+            url: "../sensorTemplate/saveTemp",
+            data: param,
+            async: false,
+            success: function (result) {
+                if (result.success) {
+                    layer.msg($.i18n.prop('success'), {icon: 1});
+                    id=result.data;
+                    $("#flag").val("edit");
+                    $("#id").val(id);
+                    table.reload('sensor', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        , where: {
+                           id2:id
+                        }
+                    });
+                   /* if ('edit' == flag) {
+                        table.reload('sensor', {});
+                    } else if ('add' == flag) {
+                        //result 需要返回id列，然后根据id跳转编辑页面
+                         window.location.href = '../sensorTemplate/getDetail?id=' + result.data;
+                    }*/
+                    parent.refresh();
+                    /*setTimeout(function () {
+                        //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index);
+                    }, 1500)*/
+                } else {
+                    layer.msg($.i18n.prop(result.msg), {icon: 2});
+                }
+            }
+        });
+    });
+
+    //下拉表格
+    var tableSelect = layui.tableSelect;
+    tableSelect.render({
+        elem: '#demo',
+        //searchKey: 'name',
+        searchPlaceholder:$.i18n.prop('searchKey'),
+        table: {
+            url: '../sensorTemplate/getSensorList',
+            cols: [
+                [
+                    {type: 'checkbox'},
+                    {field: 'id', title: 'id', width: 100},
+                    {field: 'name', title: $.i18n.prop('name'), width: 200},
+                    {field: 'unit', title: $.i18n.prop('unit'), width: 100},
+                    {field: 'coeffcient', title: $.i18n.prop('coefficient'), width: 100}
+                ]
+            ]
+        },
+        done: function (elem, data) {
+            var NEWJSON = [];
+            var templates = [];
+            layui.each(data.data, function (index, item) {
+                NEWJSON.push(item.name);
+                templates.push(item.id);
+            });
+            elem.val(NEWJSON.join(","));
+            $("#templates").val(templates.join(","));
+        }
+    })
+
+
+</script>
+
+</html>

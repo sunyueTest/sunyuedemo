@@ -1,0 +1,23 @@
+.log{
+    height: 13vh;
+    width: 90vw;
+    margin-left: 5vw;
+    margin-top: 5vh;
+    font-size: 14px;
+    position:relative;
+}
+.remarks{
+    min-height: 5vh;
+    max-height: 7vh;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.remarksA{
+    position: absolute;
+    right: 5px;
+    bottom: -25px;
+    color: #0a8eff!important;
+}
+.remarksA:hover{
+    background-color: white;
+}

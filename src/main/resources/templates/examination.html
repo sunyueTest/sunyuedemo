@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备体验</title>
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="dashboard/css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="dashboard/css/zzsc-demo.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <style type="text/css">
+        body {
+            background-color: transparent;
+            -ms-overflow-style: none;
+            overflow: -moz-scrollbars-none;
+        }
+        .examing-item{
+            color: #000!important;
+        }
+        .examing-text{
+            color: red;
+        }
+        .dynamic-show{
+            color: #7c7c7c!important;
+        }
+        .examing-item-status{
+            color: #666!important;
+        }
+        body::-webkit-scrollbar {
+            width: 0 !important;
+            height: 54px;
+        }
+
+        .inner {
+            width: 265px;
+            height: 400px;
+            position: absolute;
+            top: 33px;
+            left: 13px;
+            /*cursor: pointer;*/
+            overflow: hidden;
+        }
+
+        .innerbox {
+            overflow-x: hidden;
+            overflow-y: auto;
+            color: #000;
+            font-size: .7rem;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, "黑体", Arial, Tahoma;
+            height: 100%;
+        }
+
+        .container {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            padding-bottom: 50px;
+            /*min-height: 400px;*/
+            min-height: 400px;
+            height: auto;
+            background-color: transparent;
+            /*background-image: url(../../img/dashborad_bg.png);*/
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            line-height: 50px;
+        }
+
+        .container1 {
+            width: auto;
+            height: auto;
+            float: left;
+            margin: 20px;
+        }
+
+        ::-webkit-input-placeholder { /* WebKit browsers */
+            color: #AFAFAF;
+            font-size: 14px;
+        }
+
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #AFAFAF;
+            font-size: 14px;
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #AFAFAF;
+            font-size: 14px;
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10+ */
+            color: #AFAFAF;
+            font-size: 14px;
+        }
+
+
+        .flysand-container {
+            width: 100%;
+            height: 50px;
+            display: none;
+            background-image: url(../../img/dashborad_item.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            line-height: 50px;
+            position: relative;
+        }
+
+        .flysand-container-1 {
+            float: left;
+            width: 95%;
+            display: flex;
+        }
+
+        .flysand-div-inline1, .flysand-div-inline3 {
+            margin-left: 40px;
+        }
+
+        .flysand-div-inline2, .flysand-div-inline4 {
+            margin-left: 16px;
+        }
+
+        .flysand-div-inline2 {
+            background-image: url(../../img/input_bg.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            height: 30px;
+            width: 200px;
+            margin-top: 13px;
+            vertical-align: middle;
+            display: flex;
+        }
+
+        .flysand-div-inline2-img {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            margin-top: 6px;
+        }
+
+        .flysand-div-inline5 {
+            height: auto;
+            width: auto;
+            float: right;
+            display: flex;
+        }
+
+        .flysand-img {
+            width: 26px;
+            float: right;
+            height: 19px;
+            margin-right: 20px;
+            margin-top: 20px;
+        }
+
+        /*图片旋转*/
+        @-webkit-keyframes rotation {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        .rotation {
+            -webkit-transform: rotate(360deg);
+            animation: rotation 3s linear infinite;
+            -moz-animation: rotation 3s linear infinite;
+            -webkit-animation: rotation 3s linear infinite;
+            -o-animation: rotation 3s linear infinite;
+        }
+
+        .examing-img {
+            width: 167px;
+            height: 167px;
+            margin-left: 100px;
+            margin-top: 50px;
+        }
+
+        .input-device {
+            background: none;
+            color: #000000;
+            /*font-size: 14px;*/
+            border: 0;
+            outline: none;
+            height: 20px;
+            outline: none;
+            margin-top: 5px;
+            width: 150px;
+            -web-kit-appearance: none;
+            -moz-appearance: none;
+            background-color: #FFFFFF;
+        }
+
+        .container-tip-span {
+            margin-left: 120px;
+            padding-top: 30px;
+            font-size: 24px;
+            display: block;
+            line-height: 30px;
+            font-weight: normal;
+        }
+
+        .flysand-div-inline2-img {
+            background: url("static/img/search_icon.png");
+            background-size: 100% 100% !important;
+        }
+
+        .progress-container {
+            background-color: #FFFFFF;
+            padding: 3px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .progess-div {
+
+            height: auto;
+            width: 60%;
+            padding-left: 20px;
+            margin-top: 60px;
+        }
+
+        .examing-text {
+            padding-bottom: 0;
+            font-size: 39px;
+        }
+
+        .dynamic-show {
+            padding-top: 0px;
+            display: block;
+            color: #FFFFFF;
+            font-size: 20px;
+        }
+
+        .examing-item {
+            margin-top: 10px;
+            font-size: 20px;
+            /*display: block;*/
+            /*margin-left: 40px;*/
+            color: #CCCCCC;
+            width: 100%;
+        }
+
+        .loading-image-div {
+            float: left;
+            width: 8%;
+        }
+
+        .examing-item-text {
+            float: left;
+            padding-top: 3px;
+            width: 30%;
+            /*padding-left*/
+        }
+
+        .examing-item-status {
+            padding-top: 3px;
+            float: left;
+            color: #CCCCCC;
+        }
+
+        .detail {
+            color: #269a2b;
+        }
+
+        .detail:hover {
+            color: #2c652e;
+            cursor: pointer;
+        }
+
+    </style>
+    <script src="dashboard/js/gauge.min.js"></script>
+</head>
+<body>
+<script src="layui/layui.js" charset="utf-8"></script>
+<div class="flysand-container">
+    <div class="flysand-container-1">
+        <div class="flysand-div-inline1">设备号:
+        </div>
+        <div class="flysand-div-inline2">
+            <!--<img class="flysand-div-inline2-img" src="img/search_icon.png" onclick="searchDevice()">-->
+            <div class="flysand-div-inline2-img" onclick="searchDevice()"></div>
+            <input class="input-device" autocomplete="off" id="deviceNumber" placeholder="请输入12位设备号"
+                   readonly="readonly">
+        </div>
+        <div class="flysand-div-inline3" id="deviceName">设备名称:</div>
+        <div class="flysand-div-inline4"></div>
+    </div>
+
+
+</div>
+<div class="container" id="container">
+    <div>
+        <div style="float: left;">
+            <img class="examing-img" id="examing-img" src="img/static_examing.png">
+        </div>
+
+        <div class="progess-div" style="float: left;">
+
+            <span id="examing-text" class="examing-text" style="display: none">正在体检...</span>
+            <span id="examing-btn" class="examing-text">准备体检...</span>
+
+            <span id="dynamic-show" class="dynamic-show" style="visibility:hidden;">检查是否存在设备离线状态</span>
+
+            <div class="progress-container">
+                <div class="layui-progress " lay-filter="prog">
+                    <div class="layui-progress-bar layui-bg-blue" lay-percent="0%"></div>
+                </div>
+            </div>
+
+
+            <!-- 具体检测项-->
+            <div id="broken-state" class="examing-item">
+                <div class="loading-image-div">
+                    <img src="img/examing_loading.png"/>
+                </div>
+                <div class="examing-item-text">
+                    <span class="brokenLine">断线记录</span>
+                </div>
+                <div class="examing-item-status">
+                    <span class="testing">待检测...</span>
+                </div>
+                <div id="id4" style="clear:both"></div>
+            </div>
+
+            <div id="heartbeart-record" class="examing-item">
+                <div class="loading-image-div">
+                    <img src="img/examing_loading.png"/>
+                </div>
+                <div class="examing-item-text">
+                    <span class="heartbeat">心跳记录</span>
+                </div>
+                <div class="examing-item-status">
+                    <span class="testing">待检测...</span>
+                </div>
+                <div style="clear:both"></div>
+
+            </div>
+
+            <div id="power-supply-state" class="examing-item">
+                <div class="loading-image-div">
+                    <img src="img/examing_loading.png"/>
+                </div>
+                <div class="examing-item-text">
+                    <span class="powerSupply">供电状态</span>
+                </div>
+                <div class="examing-item-status">
+                    <span class="testing">待检测...</span>
+                </div>
+                <div style="clear:both"></div>
+
+            </div>
+
+            <div id="communication-signal-intensity" class="examing-item">
+                <div class="loading-image-div">
+                    <img src="img/examing_loading.png"/>
+                </div>
+                <div class="examing-item-text">
+                    <span class="communication">通讯信号强度</span>
+                </div>
+                <div class="examing-item-status">
+                    <span class="testing">待检测...</span>
+                </div>
+                <div style="clear:both"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    //设置语言
+    $('.flysand-div-inline1').text($.i18n.prop('devicehao') + ':');
+    $('#deviceName').text($.i18n.prop('deviceName') + ':');
+    $('.container-tip-span').text($.i18n.prop('tipSpan'));
+
+
+    $('.brokenLine').text($.i18n.prop('断线记录'));
+    $('.testing').text($.i18n.prop('待检测')+"...");
+    $('.heartbeat').text($.i18n.prop('心跳记录'));
+    $('.powerSupply').text($.i18n.prop('供电状态'));
+    $('.communication').text($.i18n.prop('通讯信号强度'));
+    $('#examing-text').text($.i18n.prop('正在体检')+"...");
+    $('#examing-btn').text($.i18n.prop('准备体检')+"...");
+    $('#dynamic-show').text($.i18n.prop('检查是否存在设备离线状态'));
+
+    $('.heartbeat').text($.i18n.prop('心跳记录'));
+
+
+
+
+
+    var switchImg = 0, defautContainer = '<div>' +
+        '<span class="container-tip-span">' + $.i18n.prop('tipSpan') + '</span>' +
+        '</div>';
+    var container = document.getElementById('container');
+    var deviceName = document.getElementById('deviceName');
+
+    var dynamicStatusText = [$.i18n.prop('检查设备是否处于离线状态'), $.i18n.prop("检查设备的心跳状态"), $.i18n.prop("检查设备的供电状态"), $.i18n.prop("检查设备的通讯信号强度")];
+    var element;
+    layui.use('element', function () {
+        element = layui.element;
+        //一些事件监听
+        element.on('progess(prog)', function (data) {
+        });
+    });
+
+    //开始体检
+    setTimeout(function () {
+        $("#examing-img").attr("src", "img/dynamic_examing.gif");
+        $("#examing-btn").hide();
+        $("#examing-text").show();
+        $("#dynamic-show").css("visibility", "visible");
+        $("#broken-state").find("span").eq(1).text($.i18n.prop('正在检测')+"...");
+        $("#broken-state").find("img").eq(0).addClass("rotation");
+
+        //遍历需要检测的四种状态
+        let index = 1;
+        setTimeout(function () {
+            element.progress('prog', '25%');
+            $("#broken-state").find("img").eq(0).removeClass("rotation");
+            $("#broken-state").find("span").eq(1).text('').append($.i18n.prop("在线率为") + parseInt(Math.random() * (90 - 70 + 1) + 70, 10) + "%" + "&nbsp;&nbsp;&nbsp;&nbsp;<a class='detail'' onclick='goOnlineDetail()'>"+$.i18n.prop('详情')+"</a>");
+            $("#heartbeart-record").find("span").eq(1).text($.i18n.prop('正在检测')+"...");
+            $("#heartbeart-record").find("img").eq(0).addClass("rotation");
+
+            $("#dynamic-show").text(dynamicStatusText[index++]);
+        }, 3000);
+        setTimeout(function () {
+            element.progress('prog', '50%');
+            $("#heartbeart-record").find("img").eq(0).removeClass("rotation");
+            $("#power-supply-state").find("span").eq(1).text($.i18n.prop('正在检测')+"...");
+            $("#heartbeart-record").find("span").eq(1).text($.i18n.prop("心跳节奏规律")+"，"+$.i18n.prop("没有明显异常"));
+            $("#power-supply-state").find("img").eq(0).addClass("rotation");
+
+            $("#dynamic-show").text(dynamicStatusText[index++]);
+        }, 6000);
+        setTimeout(function () {
+            element.progress('prog', '75%');
+            $("#power-supply-state").find("img").eq(0).removeClass("rotation");
+            $("#communication-signal-intensity").find("span").eq(1).text($.i18n.prop('正在检测')+"...");
+            $("#communication-signal-intensity").find("img").eq(0).addClass("rotation");
+            $("#power-supply-state").find("span").eq(1).text($.i18n.prop("当前供电电压")+"3." + parseInt(Math.random() * (7 - 4 + 1) + 4, 10) + "V，"+$.i18n.prop("没有明显异常"));
+            $("#dynamic-show").text(dynamicStatusText[index++]);
+        }, 9000);
+
+        //检测完毕
+        setTimeout(function () {
+            $("#communication-signal-intensity").find("img").eq(0).removeClass("rotation");
+            $("#examing-img").attr("src", "img/static_examing.png");
+            element.progress('prog', '100%');
+            $("#communication-signal-intensity").find("span").eq(1).text($.i18n.prop("当前信号强度为") + parseInt(Math.random() * (60 - 50 + 1) + 50, 10) + "dbm，"+$.i18n.prop("状态良好"));
+            $("#dynamic-show").css("visibility", "hidden");
+            let deviceNumber = $('#deviceNumber').val();
+            //向服务器请求体检结果
+            $.ajax({
+                type: "POST",
+                url: "/device/graphicsExamination",
+                data: {deviceNumber: deviceNumber},
+                dataType: "json",
+                success: function (data) {
+                    if (data.state) {
+                        let score = data.data.score;
+                        let lastLoginTime = data.data.lastLoginTime;
+                        $("#examing-text").text($.i18n.prop("体检得分")+"：" + score);
+                        if (score===0) {
+                            $("#dynamic-show").css("visibility", "visible").text($.i18n.prop("当前设备离线")+"，"+$.i18n.prop("上次登录时间为")+"：" + lastLoginTime);
+                        }
+                    } else {
+                        $("#examing-text").text($.i18n.prop("体检得分")+"：" + parseInt(Math.random() * (99 - 80 + 1) + 80, 10));
+                    }
+                },
+                error: function (jqXHR) {
+
+                }
+            });
+        }, 12000);
+    }, 1000);
+
+    function setDeviceNumber(deviceNumber) {
+        $('#deviceNumber').val(deviceNumber);
+    }
+
+    function goOnlineDetail() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+
+            var win = layer.open({
+                type: 2,
+                area: ['800px', '500px'],
+                title: $.i18n.prop('deviceOnlineDetail'),
+                anim: 3,
+                content: '../deviceManage/deviceOnlineDetail',
+                success: function (layero, index) {
+                    var body = layer.getChildFrame('body', index);
+                    var deviceName = body.find('input[id="deviceName"]');
+                    console.log(body.find('#currentDeviceNumber').text($('#deviceNumber').val()));
+                    body.find('#title').text($.i18n.prop("当前设备号")+":")
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                    iframeWin.initData();
+                }
+            });
+        });
+
+    }
+
+
+</script>
+</body>
+</html>

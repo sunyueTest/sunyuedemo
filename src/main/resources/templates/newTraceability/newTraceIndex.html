@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Traceability-system溯源系统</title>
+    <link rel="stylesheet" href="/static/css/traceability/public.css">
+    <link rel="stylesheet" href="/static/css/traceability/index.css">
+    <style type="text/css">
+        ::-webkit-scrollbar{display: none}
+    </style>
+</head>
+
+<body>
+<div class="index-bg">
+    <div class="index-search">
+        <div class="newfile">
+            <span class="new-span">建立溯源档案</span>
+        </div>
+        <div class="viewsource">
+            <span class="new-span">查看溯源列表</span>
+        </div>
+        <style>
+            .new-span{
+                font-size: 18px;
+                color: #fff;
+                width: 100%;
+                height: 60px;
+                line-height: 60px;
+                display: block;
+                background-image: linear-gradient(to right , #2e6bff, #4095ff);
+                border-radius: 5px;
+                margin: 10px auto;
+                cursor: pointer;
+            }
+        </style>
+    </div>
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script>
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        $(".newfile").click(function () {
+            layer.open({
+                type: 2,
+                title: '建立溯源档案',
+                area: ['90%', '90%'],
+                content: '/templates/newTraceability/addTraceArchive.html',
+            })
+        });
+        $(".viewsource").click(function () {
+            window.location.href = "/newTraceSource/newViewAllTrace";
+        });
+    });
+</script>
+</html>

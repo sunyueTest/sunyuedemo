@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改溯源阶段信息</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css?v=1.0.1" media="all">
+</head>
+
+<body>
+<div class="layui-tab" lay-filter="docDemoTabBrief">
+    <ul class="layui-tab-title"></ul>
+    <div class="layui-tab-content"></div>
+</div>
+</body>
+<script type="text/javascript" src="/static/js/jquery.min.js?v=1.0.1"></script>
+<script src="/static/layui/layui.js?v=1.0.1" charset="UTF-8"></script>
+<script src="/static/layui/layui.all.js?v=1.0.1" charset="UTF-8"></script>
+<script type="text/javascript">
+    $.ajax({
+        cache: "true",
+        data: "sendId="+parent.getId(),
+        url: "/newTraceSource/selectAllTraceabilityStage",
+        success: function(data){
+            var flag = 0;
+            if(data.data.length > 0){
+                for(var i=0; i<data.data.length;i++){
+                    if(flag != 0){
+                        $(".layui-tab-title").append("<li>"+data.data[i].present+"</li>");
+                    }else{
+                        $(".layui-tab-title").append("<li class='layui-this'>"+data.data[i].present+"</li>");
+                    }
+                    if(flag != 0){
+                        $(".layui-tab-content").append(
+                            "<div class='layui-tab-item'>" +
+                            "<iframe src='/newTraceSource/selectTraceabilityStageToId?id="+data.data[i].id+"' width='970' height='850' id='"+data.data[i].id+"' frameborder='0'></iframe>" +
+                            "</div>"
+                        );
+                    }else{
+                        $(".layui-tab-content").append(
+                            "<div class='layui-tab-item layui-show'>" +
+                            "<iframe src='/newTraceSource/selectTraceabilityStageToId?id="+data.data[i].id+"' width='970' height='850' id='"+data.data[i].id+"' frameborder='0'></iframe>" +
+                            "</div>"
+                        );
+                        flag++;
+                    }
+                }
+            }
+        }
+    });
+    function reload(){
+        window.location.reload();
+    }
+</script>
+</html>

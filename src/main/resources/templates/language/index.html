@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>[[#{首页}]]</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}">
+    <script th:src="@{/static/layui/layui.js}"></script>
+    <script th:src="@{/static/jQuery/jquery-3.2.1.js}"></script>
+    <style>
+        .layui-form, .layui-table {
+            margin-top: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color: #a8d3e4; height: 45px; padding:0 15px;
+        display: flex; align-items:center;">
+        <button type="button" onclick="selectLang('zh_CN')" class="layui-btn">中文</button>
+        <button type="button" onclick="selectLang('en_US')" class="layui-btn layui-btn-normal">English</button>
+    </div>
+    <table class="layui-table" id="langTable" lay-filter="langTableFilter"></table>
+</body>
+
+<!-- 表格顶部操作组 -->
+<script type="text/html" id="toolbar">
+    <div class="layui-inline" style="padding-left: 15px;">
+        <div class="layui-input-inline">
+            <input type="text" name="code" id="code" class="layui-input">
+        </div>
+        <!-- 查询按钮 -->
+        <button class="layui-btn" lay-event="search">
+            <i class="layui-icon layui-icon-search"></i>
+        </button>
+        <!-- 添加按钮 -->
+        <button class="layui-btn layui-btn-warm" lay-event="add">
+            <i class="layui-icon layui-icon-add-1"></i>
+        </button>
+    </div>
+</script>
+
+<!-- 表格右侧操作组 -->
+<script type="text/html" id="optionBar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">[[#{edit}]]</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">[[#{delete}]]</a>
+</script>
+
+<script th:src="@{/static/js/language/language.js}" th:inline="none"></script>
+</html>

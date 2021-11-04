@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/css/tree.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/groupDevice.css" media="all">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../static/css/base.css" media="all">
+    <link rel="stylesheet" href="../static/css/versionLayer.css" media="all">
+
+    <style>
+        body {
+            font-weight: normal;
+        }
+
+        .base-item {
+            display: flex;
+            text-align: center;
+            margin-top: 20px;
+            margin-left: 45px;
+        }
+
+        .base-item span {
+            width: 100px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .base-item input {
+            width: 200px;
+            height: 40px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            background-image: url(../../img/commend_btn.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 120px;
+            height: 35px;
+            border: 0px;
+            margin-left: 130px;
+            color: #5f4d6f;
+        }
+
+        .base-item img {
+            border: none;
+            width: 50px;
+            height: 50px;
+            margin-top: -4px;
+            text-align: right;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layui-col-xs5">
+    <input type="hidden" id="id" name="id" th:value="*{data.id}">
+    <div class="base-item">
+        <span id="namespan">名&nbsp;称</span>
+        <input type="text" id="name" lay-verify="required"
+               autocomplete="off" maxlength="16" th:value="*{data.name}"
+               class="layui-input" placeholder="请输入组态名称">
+    </div>
+    <div class="base-item">
+        <span id="nodespan">节点编号</span>
+        <input type="text" id="sensorCode"
+               autocomplete="off" maxlength="16" th:value="*{data.sensorCode}"
+               class="layui-input" placeholder="设备数据节点编号">
+    </div>
+    <div class="base-item">
+        <span id="pwdspan">设备密码</span>
+        <input type="text" id="password" lay-verify="required"
+               autocomplete="off" maxlength="12"
+               class="layui-input" placeholder="任意字符没有可不填">
+    </div>
+
+    <div class="base-item">
+        <span id="expspan">表达式</span><input type="hidden" id="exps" th:value="*{data.expression}">
+        <div class="layui-form">
+            <select id="expression" name="device" lay-filter="device">
+                <!-- <option value="">请选择表达式</option>-->
+                <option value=">"> ></option>
+                <option value="="> =</option>
+                <option value="<"> <</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="base-item">
+        <span id="valuespan">数值</span>
+        <input type="number" lay-verify="required"
+               autocomplete="off" id="value" th:value="*{data.value}"
+               class="layui-input" placeholder="">
+
+    </div>
+    <div class="base-item">
+        <button class="btn-primary" lay-submit="" id="save"
+                lay-filter="submit">保&nbsp;存
+        </button>
+    </div>
+    <!-- <div id="menuContent" class="menuContent">
+         <ul id="groupTree" class="ztree showIcon"></ul>
+     </div>-->
+</div>
+<div class="layui-col-xs6">
+    <div class="base-item" style="margin-left: 0px;">
+        <span id="switchspan" style="text-align: left;">继电器开关</span>
+        <div>
+            <input style="width: 150px;float: left;margin-bottom: 11px;height: 38px;"
+                   type="text" name="command" th:value="*{data.toDevice}"
+                   autocomplete="off" id="command"
+                   class="layui-input" placeholder="输入联动设备号">
+            <button style="float: left;background-color: rgb(0,150,136);" class="layui-btn "
+                    id="search">
+                <i class="layui-icon layui-icon-search "></i>
+            </button>
+        </div>
+    </div>
+    <table class="layui-hide" id="table" lay-filter="table"></table>
+    <!-- <div class="base-item">
+         <button class="btn-primary"  id="confirm">设置完成</button>
+     </div>-->
+</div>
+<script type="text/html" id="barDemo">
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+        class="layui-icon"></i></button>
+</script>
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" name="continuing" lay-skin="switch"
+           lay-filter="status" {{ d.state== 1 ?'checked' : '' }}>
+    <input type="hidden" value="{{d.state}}">
+</script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script src="../static/jQuery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../static/js/zTreejs/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="../static/js/zTreejs/jquery.ztree.core.js"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/condition/conditionAdd.js}" charset="utf-8" th:inline="javascript"></script>
+<script th:src="@{/static/js/versionLayer.js}" charset="utf-8"></script>
+
+<!--<script th:inline="javascript">
+    /*  var isShowMenu = false, type;
+      function hideMenu() {
+          $("#menuContent").fadeOut("fast");
+          $("body").unbind("mousedown", onBodyDown);
+          isShowMenu = false;
+      }*/
+
+    /* function onBodyDown(event) {
+         console.log('onBodyDown')
+         if (!(event.target.id == "groupSel" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length > 0)) {
+             hideMenu();
+         }
+     }*/
+    //设置语言
+    $('#name').attr('placeholder', $.i18n.prop('conditionName'));
+    $('#namespan').text($.i18n.prop('name'));
+    $('#sensorCode').attr('placeholder', $.i18n.prop('dataNodeNo'));
+    $('#nodespan').text($.i18n.prop('nodeNumber'));
+    $('#password').attr('placeholder', $.i18n.prop('dvpwdDesc'));
+    $('#pwdspan').text($.i18n.prop('devicePassword'));
+    $('#expspan').text($.i18n.prop('expression'));
+    $('#valuespan').text($.i18n.prop('value'));
+    $('#switchspan').text($.i18n.prop('relaySwitch'));
+    $('#save').text($.i18n.prop('save'));
+
+    var expression = [[${data.expression}]];
+    $("#expression").val(expression);
+    var form, layer;
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        form = layui.form
+            , layer = layui.layer, table = layui.table;
+
+        //加载右侧表格数据
+        var tableData = [
+            {field: 'sensorCode', title: $.i18n.prop('nodeNumber'), width: 150, align: 'center'}
+            , {
+                field: '',
+                title: $.i18n.prop('relaySwitch'),
+                width: 200,
+                align: 'center',
+                toolbar: '#statusTpl'
+            }
+            , {
+                field: '',
+                title: $.i18n.prop('operation'),
+                toolbar: '#barDemo',
+                minWidth: 20,
+                align: 'center'
+            }
+        ];
+        table.render({
+            elem: '#table'
+            , url: '../conditionConfig/getSensorList?id=' + $('#id').val()
+            // , toolbar: '#toolbar1'
+            , title: ''
+            , cols: [tableData]
+            , page: false
+            // limitName: 'page',
+            // height: 600,
+
+        });
+        table.on('tool(table)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                $(this).parent().parent().parent().remove();
+            }
+        });
+        document.getElementById('search').onclick = function () {
+            var ncode = $('#command').val();
+            reload(ncode);
+        }
+
+        function getCommand(toDevice) {
+            var trs = $("tbody").find("tr");
+            var text = '';
+            for (var i = 0; i < trs.length; i++) {
+                var td1 = trs[i].firstChild;
+                var td2 = td1.nextSibling;
+                var sensorCode = td1.firstChild.innerHTML;
+                var sw = td2.firstChild.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.value;
+                text += '0' + sensorCode.replace(toDevice, '') + "0" + sw
+            }
+            return text;
+        }
+
+        //继电器开关控制。
+        form.on('switch(status)', function (obj) {
+
+            // layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+            var state = 0;
+            if (obj.elem.checked) {
+                state = 1;
+            }
+            this.nextSibling.nextSibling.nextSibling.value = state;
+        });
+        //监听提交
+        form.on('submit(submit)', function (data) {
+
+            var name = $('#name').val();
+            var sensorCode = $('#sensorCode').val();
+            var expression = $('#expression').val();
+            var toDevice = $('#command').val();
+            if (name == null || name == '') {
+                layer.msg($.i18n.prop('warn34'));
+                return;
+            }
+            if (sensorCode == null || sensorCode == '') {
+                layer.msg($.i18n.prop('warn35'));
+                return;
+            }
+            if (expression == null) {
+                layer.msg($.i18n.prop('warn36'));
+                return;
+            }
+            if (toDevice == null || toDevice == '') {
+                layer.msg($.i18n.prop('err105'));
+                return;
+            }
+            var command = getCommand(toDevice);
+            if (command == null || command == '') {
+                layer.msg($.i18n.prop('configureCommand'));
+                return;
+            }
+            //加载层-风格3
+            layer.load(2);
+
+            $.ajax({
+                url: "../conditionConfig/saveCondition",
+                data: {
+                    name: name,
+                    sensorCode: sensorCode,
+                    value: $('#value').val(),
+                    password: $('#password').val(),
+                    expression: expression,
+                    toDevice: toDevice,
+                    command: command,
+                    id: $('#id').val() > 0 ? $('#id').val() : 0,
+                },
+                dataType: "json",
+                type: "post",
+                timeout: 30000,
+                error: function (data, type, err) {
+                    console.log(err);
+                    layer.closeAll('loading');
+                    //$('.layui-layer-close').click();
+                    layer.msg($.i18n.prop('fail'), {
+                        offset: '6px'
+                    }, {icon: 2});
+                },
+                success: function (result) {
+                    layer.closeAll('loading');
+                    //$('.layui-layer-close').click();
+                    if (result.success) {
+                        parent.reloadDeviceList('');
+                        layer.msg($.i18n.prop('success'));
+                        setTimeout(function () {
+                            //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+                            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                            parent.layer.close(index);
+                        }, 1000)
+                    } else {
+                        layer.msg($.i18n.prop(result.msg), {icon: 2})
+                    }
+                }
+            });
+            return false;
+        });
+    });
+
+    function reload(aCode) {
+        table.reload('table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                ncode: aCode
+            }
+        });
+    }
+
+    /*function getController(){
+        layer.open({
+            type: 2,
+            area: ['500px', '400px'],
+            title: $.i18n.prop('relaySwitch'),
+            // maxmin: true,
+            //btn: ['确定', '取消'],
+            //btnAlign: 'c',
+            yes: function (index, layero) {
+                //表单提交
+                /!*  var body = layer.getChildFrame('body', index);
+                  body.find('form').submit();
+                  layer.close(index);
+*!/
+            },
+            anim: 3,
+            content: '../conditionConfig/getController',
+            success: function (layero, index) {
+                 var body = layer.getChildFrame('body', index);
+                 body.find('input[name="index"]').val(index);
+
+            }
+        });
+    }*/
+
+    /*  function commandText(text){
+          $("#command").val(text);
+      }*/
+
+</script>-->
+</body>
+</html>

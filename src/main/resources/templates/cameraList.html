@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui摄像头管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/versionLayer.css" media="all">
+
+</head>
+<body>
+
+<table class="layui-hide" id="camera" lay-filter="camera"></table>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline ">
+        <button class="layui-btn " lay-event="add" id="add"></button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <div class="layui-btn-group">
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="pwd"><i
+                class="layui-icon layui-icon-password"></i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="bind"><i
+                class="layui-icon layui-icon-add-circle"></i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="video"><i
+                class="layui-icon layui-icon-video"></i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i
+                class="layui-icon"></i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+                class="layui-icon"></i></button>
+    </div>
+</script>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/versionLayer.js}" charset="utf-8"></script>
+
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+        table.render({
+            elem: '#camera'
+            , url: '/cameraManage/getCameraList'
+            , toolbar: '#toolbar1'
+            , title: $.i18n.prop('cameraList')
+            , cols: [
+                [
+                    {
+                        type: 'checkbox'//, fixed: 'left'
+                    }
+                    , {
+                    field: 'id',
+                    title: 'ID',
+                    unresize: true,
+                    sort: true,
+                    align: 'center'
+                }
+                    , {field: 'name', title: $.i18n.prop('name'), align: 'center'}
+                    , {field: 'validateCode', title: $.i18n.prop('validateCode'), align: 'center'}
+                    , {field: 'serial', title: $.i18n.prop('serialNo'), align: 'center'}
+                    , {
+                    title: $.i18n.prop('operation'),
+                    toolbar: '#barDemo',
+                    width: 250,
+                    align: 'center'
+                }
+
+                ]
+            ]
+            , page: true
+            , height: 600,
+            done: function (res, curr, count) {
+                $('#add').text($.i18n.prop('add'));
+            }
+        });
+
+        $('#add').text($.i18n.prop('add'));
+        //头工具栏事件
+        table.on('toolbar(camera)', function (obj) {
+            //var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        area: ['500px', '500px'],
+                        title: $.i18n.prop('addCamera'),
+                        btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+                        btnAlign: 'c',
+                        yes: function (index, layero) {
+                            var body = layer.getChildFrame('body', index);
+                            //ajax提交
+                            var name = body.find('input[name="name"]').val();
+                            var serial = body.find('input[name="serial"]').val();
+                            var validateCode = body.find('input[name="validateCode"]').val();
+                            var ncode = body.find('select[name="ncode"]').val();
+                            let cameraType = body.find('select[name="cameraType"]').val();
+                            let channelNo = body.find('input[name="channelNo"]').val();
+
+                            if (name.trim().length <= 0) {
+                                layer.msg($.i18n.prop('warn11'));
+                                return;
+                            }
+
+                            if (serial.trim().length <= 0) {
+                                layer.msg($.i18n.prop("序列号不能为空"));
+                                return;
+                            }
+
+                            $.ajax({
+                                url: "../cameraManage/saveCamera",
+                                data: {
+                                    name: name,
+                                    serial: serial,
+                                    ncode: ncode,
+                                    cameraType: cameraType,
+                                    validateCode: validateCode,
+                                    channelNo: channelNo,
+                                },
+                                dataType: "json",
+                                type: "get",
+                                success: function (result) {
+                                    if (result.success) {
+                                        layer.msg($.i18n.prop('success'));
+                                        layer.close(index);
+                                        table.reload("camera", {});
+                                    } else {
+                                        let msg = result.msg;
+                                        if (msg.indexOf("err106/") == 0) {
+                                            let strs = msg.split("/");
+                                            let num = strs.length == 2 ? strs[1] : 10;
+                                            feeEscalation($.i18n.prop('创建的摄像头数量'), num);
+                                        } else if (msg == "err108") {
+                                            renewal();
+                                        } else {
+                                            console.log(result);
+                                            layer.msg($.i18n.prop(msg));
+                                        }
+                                    }
+                                }
+                            });
+                        },
+                        anim: 3,
+                        content: 'cameraManage/getCameraDetail',
+                        success: function (layero, index) {
+                            /*//给弹出层添加一个标识
+                            var body = layer.getChildFrame('body', index);
+                            body.find('input[name="flag"]').val("add");*/
+                        }
+                    });
+                    break;
+            }
+            ;
+        });
+//#######################################
+        //监听行工具事件
+        table.on('tool(camera)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'edit') {
+                layer.open({
+                    type: 2,
+                    area: ['500px', '500px'],
+                    title: $.i18n.prop('editCamera'),
+                    btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+                    btnAlign: 'c',
+                    yes: function (index, layero) {
+                        var body = layer.getChildFrame('body', index);
+                        var name = body.find('input[name="name"]').val();
+                        var ncode = body.find('select[name="ncode"]').val();
+                        let cameraType = body.find('select[name="cameraType"]').val();
+                        let serial = body.find('input[name="serial"]').val();
+                        let channelNo = body.find('input[name="channelNo"]').val();
+                        let validateCode = body.find('input[name="validateCode"]').val();
+
+                        if (name.trim().length <= 0) {
+                            layer.msg($.i18n.prop("warn11"));
+                            return;
+                        }
+
+                        if (serial.trim().length <= 0) {
+                            layer.msg($.i18n.prop("序列号不能为空"));
+                            return;
+                        }
+                        $.ajax({
+                            url: "../cameraManage/saveCamera",
+                            data: {
+                                name: name,
+                                id: data.id,
+                                serial: serial,
+                                ncode: ncode,
+                                channelNo: channelNo,
+                                cameraType: cameraType,
+                                validateCode: validateCode
+                            },
+                            dataType: "json",
+                            type: "get",
+                            success: function (result) {
+                                if (result.success) {
+                                    layer.msg($.i18n.prop('success'));
+                                    layer.close(index);
+                                    table.reload("camera", {});
+                                } else {
+                                    layer.msg($.i18n.prop(result.msg));
+
+                                }
+                            }
+                        });
+
+                    },
+                    anim: 3,
+                    content: 'cameraManage/getCameraDetail?id=' + data.id,
+                    success: function (layero, index) {
+
+                        var body = layer.getChildFrame('body', index);
+                        // body.find('input[name="serial"]').attr("readOnly", "true");
+                        // body.find('input[name="validateCode"]').attr("readOnly", "true");
+                    }
+                });
+            } else if (obj.event === 'del') {
+                layer.confirm($.i18n.prop('confirmDelete'), {
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    title: $.i18n.prop('info')
+                }, function (index) {
+                    $.ajax({
+                        type: "post",
+                        url: '../cameraManage/deleteCamera',
+                        data: {
+                            id: data.id,
+                            serial: data.serial
+                        },
+                        success: function (result) {
+                            table.reload("camera", {});
+
+                        }
+                    });
+                    layer.close(index);
+                });
+            } else if (obj.event === 'video') {
+                var win = layer.open({
+                    type: 2,
+                    area: ['700px', '450px'],
+                    title: $.i18n.prop('viewLive'),
+                    maxmin: true,
+                    btn: [$.i18n.prop('cancel')],
+                    btnAlign: 'c',
+                    yes: function (index, layero) {
+                        layer.close(index);
+                    },
+                    anim: 3,
+                    content: 'cameraManage/getVideoPlayer?id=' + data.id,
+                    success: function (layero, index) {
+
+                    }
+                });
+            } else if (obj.event === 'bind') {
+                $.ajax({
+                    type: "post",
+                    url: '../cameraManage/bind',
+                    data: {
+                        validateCode: data.validateCode,
+                        deviceSerial: data.serial,
+                        userName: data.userName//每个摄像头对应用户名
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            table.reload("camera", {});
+                            var msg=result.msg;
+                            layer.msg($.i18n.prop('success'));
+                        } else {
+                            if(result.msg!="设备已经被自己添加"){
+                                layer.msg($.i18n.prop('fail'));
+                            }else{
+                                layer.msg($.i18n.prop(result.msg));
+                            }
+
+                        }
+                    }
+                });
+
+            } else if (obj.event === 'pwd') {
+                layer.load(1);
+                $.ajax({
+                    type: "post",
+                    url: '../cameraManage/decrypt',
+                    data: {
+                        validateCode: data.validateCode,//验证码
+                        deviceSerial: data.serial,//序列号
+                        userName: data.userName//每个摄像头对应用户名
+                    },
+                    timeout: 30000,
+                    error: function (data, type, err) {
+                        layer.closeAll('loading');
+                        // layer.closeAll();
+                        layer.msg($.i18n.prop('fail'), {
+                            offset: '6px', icon: 2
+                        });
+                    },
+                    success: function (result) {
+                        layer.closeAll('loading');
+                        if (result.msg != null) {
+                           var msg=result.msg;
+                            if(result.msg=="加密未开启，无需关闭"){
+                                msg=$.i18n.prop("加密未开启");
+                            }
+                            layer.msg(msg);
+                        } else {
+                            layer.msg($.i18n.prop('fail'));
+                        }
+                    }
+                });
+
+            }
+        });
+    });
+</script>
+<style>
+    body {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .layui-table-view .layui-table {
+        width: 100%;
+    }
+
+    .layui-table tr {
+        width: 100%;
+    }
+
+    .layui-table thead tr, .layui-table-header thead {
+        width: 100%;
+    }
+</style>
+</body>
+</html>

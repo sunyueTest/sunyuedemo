@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新增企业</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" href="../../../static/css/addNewStyle.css">
+    <style>
+        .layui-form-item .layui-inline {
+            margin-left: 160px !important;
+        }
+        .body{
+            background-image:url(/static/img/OperationRecord.png)no-repeat;
+        }
+        /*.layui-layer{*/
+            /*background-color:rgba(255,255,255,0) !important;*/
+            /*background-image:url(/static/img/addOperationRecord.png)no-repeat;*/
+            /*background-size:100% 100%;*/
+            /*color:#fff;*/
+        /*}*/
+    </style>
+</head>
+
+<body >
+
+<div class="formDiv">
+    <form class="layui-form" style="margin-left: -41px;">
+        <input type="hidden" name="id" th:value="*{bean.id}" id="id">
+
+        <div class="layui-form-item" style="margin-top: 94px;">
+            <div class="layui-inline">
+                <label id="label1" class="layui-form-label">课程时间</label>
+                <div class="layui-input-block" style="margin-left: 110px;">
+                    <input type="text" id="classTime" name="classTime" placeholder="yyyy-MM-dd HH:mm:ss"
+                           th:value="*{#strings.substring(bean.classTime,0,19)}"   autocomplete="off" style="width: 200px;"
+                           class="layui-input test-item">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label2" class="layui-form-label">讲师姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="userName" id="userName" autocomplete="off" style="width: 200px;"
+                           th:value="*{bean.userName}"    class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label3" class="layui-form-label">科目名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="projectName" id="projectName" autocomplete="off" style="width: 200px;"
+                           th:value="*{bean.projectName}"   class="layui-input">
+                </div>
+            </div>
+        </div>
+        <!--<div class="layui-form-item">-->
+            <!--<div class="layui-input-block">-->
+                <!--<input type="button" class="layui-btn layui-btn-radius" id="save" value="保存">-->
+            <!--</div>-->
+        <!--</div>-->
+    </form>
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.all.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/static/js/tableSelect.js}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //同时绑定多个
+        lay('.test-item').each(function(){
+            laydate.render({
+                elem: this
+                ,type:'datetime'
+                ,trigger: 'click'
+            });
+        });
+    });
+</script>
+
+<!--<script language='javascript' th:inline="javascript">-->
+<!--let table = layui.table, position;-->
+<!--let uploadUrl = '../demoAddress/uploadImg/';-->
+<!--let myIframe = parent.layer.getFrameIndex(window.name);-->
+<!--//设置语言-->
+<!--$('#label1').text($.i18n.prop('enpriseName'));-->
+<!--$('#label2').text($.i18n.prop('enterpriseAddress'));-->
+<!--$('#label3').text($.i18n.prop('enterpriseHeader'));-->
+<!--$('#label4').text($.i18n.prop('enterpriseTel'));-->
+<!--$('#input_positionSpan').text($.i18n.prop('position'));-->
+<!--$('#save').val($.i18n.prop('save'));-->
+
+<!--//提交数据-->
+<!--$("#save").click(function () {-->
+<!--let name = $("#name").val();-->
+<!--let header = $("#header").val();-->
+<!--let address = $("#address").val();-->
+<!--let tel = $("#tel").val();-->
+
+<!--if (name == '' || name.length == 0) {-->
+<!--layer.msg($.i18n.prop('warn11'), {icon: 5});-->
+<!--return false;-->
+<!--}-->
+
+<!--if (position == null) {-->
+<!--let inputPostion = $('#input_position').val();-->
+<!--let location = inputPostion.split(',');-->
+<!--console.log(location);-->
+<!--position = {lat: location[1], lng: location[0]}-->
+<!--}-->
+<!--if (tel!="" && checkPhone(tel)) {-->
+<!--layer.msg('手机号码有误，请重填！', {icon: 5});-->
+<!--return false;-->
+<!--}-->
+<!--let param = {-->
+<!--name: name,-->
+<!--id: $("#id").val(),-->
+<!--header: header,-->
+<!--address: address,-->
+<!--tel: tel,-->
+<!--longitude: position.lng,-->
+<!--latitude: position.lat-->
+<!--};-->
+
+<!--$.ajax({-->
+<!--type: "post",-->
+<!--url: "../projectBaseScene/saveEnterprise",-->
+<!--data: param,-->
+<!--async: false,-->
+<!--success: function (result) {-->
+<!--console.log($("#id").val());-->
+<!--if (result.state == "success") {-->
+<!--layer.msg($.i18n.prop('success'), {icon: 1});-->
+<!--id = result.data.id;-->
+<!--$("#id").val(id);-->
+<!--$("#demo").val(result.data.cameraName);-->
+<!--//农场列表刷新-->
+<!--parent.layui.table.reload('table');-->
+<!--parent.layer.close(myIframe);-->
+
+<!--} else {-->
+<!--layer.msg($.i18n.prop(result.msg), {icon: 2});-->
+<!--}-->
+<!--}-->
+<!--});-->
+<!--});-->
+
+<!--/*  layui.use('upload', function () {-->
+<!--let upload = layui.upload;-->
+<!--//执行实例-->
+<!--let uploadInst = upload.render({-->
+<!--elem: '#imgUrl'-->
+<!--, url: uploadUrl-->
+<!--, done: function (res) {-->
+<!--if (res.state == 'success') {-->
+<!--$("#logo").val(res.msg);-->
+<!--$('#imgUrl_img').attr('src', res.msg);-->
+<!--} else {-->
+<!--layer.msg('上传失败');-->
+<!--}-->
+<!--}-->
+<!--});-->
+<!--});*/-->
+
+<!--function selectPoint() {-->
+<!--layer.open({-->
+<!--type: 2,-->
+<!--title: false,-->
+<!--closeBtn: false,-->
+<!--area: ['600px', '400px'],-->
+<!--shade: 0.2,-->
+<!--id: 'LAY_layuipro',-->
+<!--btn: [$.i18n.prop('yes'), $.i18n.prop('no')],-->
+<!--btnAlign: 'c',-->
+<!--moveType: 1,-->
+<!--content: '../selectPoint',-->
+<!--yes: function () {-->
+<!--var iframeWin = $("div.layui-layer-content > iframe")[0].contentWindow; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();-->
+<!--position = iframeWin.getPoint(); //调用子页面的form_submit函数-->
+<!--$('#input_position').val(position);-->
+<!--layer.closeAll();-->
+<!--}-->
+<!--});-->
+<!--}-->
+
+<!--let imgStr = $("#logo").val();-->
+<!--if (imgStr != null && imgStr.length > 0) {-->
+<!--$('#imgUrl_img').attr('src', imgStr);-->
+<!--}-->
+
+
+<!--var ht = ht || {};-->
+<!--ht.request = function (keyValue) {-->
+<!--var search = location.search.slice(1);-->
+<!--var arr = search.split("&");-->
+<!--for (var i = 0; i < arr.length; i++) {-->
+<!--var ar = arr[i].split("=");-->
+<!--if (ar[0] == keyValue) {-->
+<!--if (decodeURIComponent(ar[1]) == 'undefined') {-->
+<!--return "";-->
+<!--} else {-->
+<!--return decodeURIComponent(ar[1]);-->
+<!--}-->
+<!--}-->
+<!--}-->
+<!--return "";-->
+<!--}-->
+
+
+<!--function checkPhone(tel){-->
+<!--if(!(/^1[3456789]\d{9}$/.test(tel))){-->
+<!--return true;-->
+<!--}-->
+<!--}-->
+<!--</script>-->
+
+
+</html>

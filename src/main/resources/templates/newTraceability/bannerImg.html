@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图片的修改</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css?v=1.0.1" media="all">
+</head>
+
+<body>
+<div>
+    <input type="hidden" id="deleteAllImgValue" value="0" />
+    <div id="imgView" style="height: 120px"></div>
+    <div class="layui-upload">
+        <span id="oldImgUpload"></span>
+        <span id="testTest"><button type="button" class="layui-btn" id="test3">继续上传</button></span>
+        <button type="button" class="layui-btn" id="deleteAllImg" style="margin-left:20px">清空所有已上传图片</button>
+        <span id="alertTitle" style="color: red"></span>
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+            预览图：
+            <div class="layui-upload-list" id="demo3"></div>
+        </blockquote>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="margin-left: -5px">
+            <button class="layui-btn layui-btn-normal" onclick="submitImgUrl('updateBannerImg', 'updateBannerImgAppendImg')">保存修改</button>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/static/js/jquery.min.js?v=1.0.1"></script>
+<script src="/static/layui/layui.js?v=1.0.1" charset="UTF-8"></script>
+<script src="/static/layui/layui.all.js?v=1.0.1" charset="UTF-8"></script>
+<script src="/static/js/traceability/process.js?v=1.0.1" charset="UTF-8"></script>
+<script type="text/javascript">
+    ajaxImg('getTraceSourceBannerForId');
+</script>
+</html>

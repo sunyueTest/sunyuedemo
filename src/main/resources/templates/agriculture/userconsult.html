@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userconsult-用户咨询</title>
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/specialistcoze.css}">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+</head>
+<body>
+
+<div class="main">
+    <div class="left-nav">
+        <ul class="test test-1" id="teacher">
+            <!--<li><P>专家</P><span>2</span></li>-->
+            <!--<li><P>专家</P></li>-->
+        </ul>
+    </div>
+    <div class="conter">
+        <div id="chitchat" class="chitchat">
+            <!--<div class="clearfix">-->
+                <!--<div class="consult-l">-->
+                    <!--<div class="consult-l-pic"><img src="" alt=""></div>-->
+                    <!--<div class="consult-l-txt">老师您好，关于葡萄对的某个问题怎么解决问题怎么解决问题怎么解决问题怎么解决问题怎么解决问题怎么解决-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="clearfix">-->
+                <!--<div class="consult-r">-->
+                    <!--<div class="consult-r-txt">老师您好，关于葡萄对的某个问题怎么解决</div>-->
+                    <!--<div class="consult-r-pic"><img src="" alt=""></div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="import">
+            <textarea id="species" style="width:70vw; height:10vh; border:solid 1px #ccc; border-radius:20px; resize:none;" placeholder="请输入聊天信息"></textarea>
+            <div class="import-bnt" id="import">
+                <div>
+                    发送
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script>
+    var id = '';
+    $.ajax({
+        url: "../aquacultureSystemSetting/getExpertsList",
+        type: "POST",
+        data: {
+            type: 0
+        },
+        success: function (res) {
+            console.log(res);
+            let html = '';
+            $.each(res.data, function (i, item) {
+                html += '<li class="li" data-id="' + item.id + '" data-onLine="' + item.onLine + '"><P>' + item.name + '</P></li>'
+            });
+            if (res.data[0].onLine == 1) {
+                $('#import').html('留言');
+            } else if (res.data[0].onLine == 0) {
+                $('#import').html('发送');
+            }
+            $('#teacher').html(html);
+            if (res.data.length > 0) {
+                $('.li').eq(0).addClass('li ac')
+            }
+            id = res.data[0].id
+        }
+    });
+    $(document).on('click', '.li', function () {
+        id = this.getAttribute("data-id");
+        var onLine = this.getAttribute("data-onLine");
+        console.log(onLine);
+        $('.li').removeClass('ac');
+        $(this).addClass('ac');
+        if (onLine == 1) {
+            $('#import').html('留言');
+        } else if (onLine == 0) {
+            $('#import').html('发送');
+        }
+    });
+    $(document).on('click', '#import', function () {
+        console.log(id);
+        var species = $('#species').val();
+        console.log(species);
+        // $.ajax({
+        //     url: "../productService/addExpertsDiagnosis",
+        //     type: "POST",
+        //     data: {
+        //         expertsId: id,
+        //         species: species
+        //     },
+        //     success: function (res) {
+        //         console.log(res)
+        //         var html = '            <div class="clearfix">\n' +
+        //             '                <div class="consult-r">\n' +
+        //             '                    <div class="consult-r-txt">' + species + '</div>\n' +
+        //             '                    <div class="consult-r-pic"><img src="" alt=""></div>\n' +
+        //             '                </div>\n' +
+        //             '            </div>'
+        //         $('#chitchat').append(html)
+        //     }
+        // })
+        send('A00003',species)
+    });
+    var username=new Array;
+    var teacherint=new Array;
+    function onReceive(type, data) {
+        console.log(type);
+        if ('topic' == type) {
+            console.log(data);
+            let data=data.split('#::')
+            let user
+            let teahcer
+            user=data[0]
+            teahcer=data[1]
+            username.push(user)
+            teacherint.push(teahcer)
+            console.log('username')
+            console.log(username)
+            console.log('teacherint')
+            console.log(teacherint)
+
+        }
+    }
+
+    function send(user, data) {
+        parent.send(user, data);
+    }
+</script>
+

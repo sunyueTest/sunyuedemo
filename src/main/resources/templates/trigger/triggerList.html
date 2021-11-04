@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>triggerList</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+
+<table class="layui-hide" id="table" lay-filter="table"></table>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline bg-transparent">
+        <button id="addTriggerAll" class="layui-btn layui-btn-primary layui-btn-radius" lay-event="addTriggerAll">
+            一键添加
+        </button>
+        <button id="toggle" class="layui-btn layui-btn-primary layui-btn-radius" lay-event="toggle">
+            开启/关闭
+        </button>
+        <button id="addTrigger" class="layui-btn layui-btn-primary layui-btn-radius"
+                lay-event="addTrigger">
+            添加触发
+        </button>
+
+    </div>
+    <div class="layui-inline abc">
+        <button class="layui-btn " lay-event="search">
+            <i class="layui-icon layui-icon-search "></i>
+        </button>
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="aCode" id="aCode" autocomplete="off"
+               style="width:182px;"
+               placeholder="节点编号">
+    </div>
+</script>
+
+
+<script type="text/html" id="barDemo">
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="set"><i
+            class="layui-icon">&#xe620</i></button>
+    <!--<a class="layui-btn layui-btn-xs edit" lay-event="edit">编辑</a>-->
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i
+    class="layui-icon"></i></button>
+    <!--<a class="layui-btn layui-btn-xs del" lay-event="del">删除</a>-->
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+            class="layui-icon"></i></button>
+</script>
+<script type="text/html" id="statusTpl">
+    <input id="status" type="checkbox" name="continuing" value="{{d.id}}" lay-skin="switch"
+           lay-filter="status" {{ d.state == 1 ?'checked' : '' }}>
+</script>
+<script type="text/html" id="autoCloseTpl">
+    <input id="autoClose" type="checkbox" name="autoClose" value="{{d.id}}" lay-skin="switch"
+           lay-filter="autoClose" {{ d.autoClose == 1 ?'checked' : '' }}>
+</script>
+<!--<script type="text/html" id="typeTpl">
+    {{#  if(d.type == 'email'){ }}
+    邮件
+    {{# }else if(d.type == 'tel'){ }}
+    手机
+    {{# }}}
+</script>-->
+<!--<script type="text/html" id="onLine">-->
+<!--{{#  if(d.state == 1){ }}-->
+<!--<span class="online">报警</span>-->
+<!--{{#  }else{ }}-->
+<!--<span class="offline">正常</span>-->
+<!--{{#  } }}-->
+<!--</script>-->
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/triggerList.js?v=1.0}" charset="utf-8"></script>
+<style>
+    .abc {
+        float: right;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .layui-table-tool .layui-inline {
+        background-color: #eaeaea;
+    }
+
+    .online {
+        color: #ffff00;
+    }
+
+    .offline {
+        color: #458B74;
+    }
+</style>
+</body>
+</html>

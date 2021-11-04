@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改所有信息的TAB</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css?v=1.0.1}" media="all">
+    <style type="text/css">
+        ::-webkit-scrollbar {display: none;}
+    </style>
+</head>
+
+<body>
+<input type="hidden" id="traceSourceMessageId" th:value="${id}" />
+<div>
+    <div class="layui-tab" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li onclick="basicMessage()" class="layui-this">基本信息</li>
+            <li onclick="traceStage()">溯源阶段</li>
+            <li onclick="bannerImg()">轮播图片</li>
+            <li onclick="qualifiedLabel()">产品标签</li>
+            <li onclick="enterpriseInfo()">检测证书</li>
+            <li onclick="certificate()">企业信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class='layui-tab-item layui-show' id='iframe1'>
+                <iframe src='/templates/newTraceability/basicMessage.html' width='970' height='800' frameborder='0'></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/static/js/jquery.min.js?v=1.0.1}"></script>
+<script th:src="@{/static/layui/layui.js?v=1.0.1}" charset="UTF-8"></script>
+<script th:src="@{/static/layui/layui.all.js?v=1.0.1}" charset="UTF-8"></script>
+<script type="text/javascript">
+    function getId(){
+        return $("#traceSourceMessageId").val();
+    }
+    //基本信息
+    function basicMessage(){
+        $(".layui-tab-content").html(
+            "<div class='layui-tab-item layui-show' id='iframe1'>" +
+            "<iframe src='/templates/newTraceability/basicMessage.html' width='970' height='800' frameborder='0'></iframe>" +
+            "</div>"
+        );
+    }
+    //溯源阶段
+    function traceStage(){
+        $(".layui-tab-content").html(
+            "<div class='layui-tab-item layui-show' id='iframe2'>" +
+            "<iframe src='/templates/newTraceability/updateTraceabilityStage.html' width='970' height='1000' frameborder='0'></iframe>" +
+            "</div>"
+        );
+    }
+    //轮播图
+    function bannerImg(){
+        $(".layui-tab-content").html(
+            "<div class='layui-tab-item layui-show' id='iframe3'>" +
+            "<iframe src='/templates/newTraceability/bannerImg.html' width='970' height='600' frameborder='0'></iframe>" +
+            "</div>"
+        );
+    }
+    //产品标签
+    function qualifiedLabel(){
+        $(".layui-tab-content").html(
+            "<div class='layui-tab-item layui-show' id='iframe4'>" +
+            "<iframe src='/templates/newTraceability/qualifiedLabel.html' width='970' height='600' frameborder='0'></iframe>"+
+            "</div>"
+        );
+    }
+    //监测证书
+    function enterpriseInfo(){
+        $(".layui-tab-content").html(
+            "<div class='layui-tab-item layui-show' id='iframe5'>" +
+            "<iframe src='/templates/newTraceability/enterpriseInfo.html' width='970' height='600' frameborder='0'></iframe>"+
+            "</div>"
+        );
+    }
+    //企业信息
+    function certificate(){
+        $(".layui-tab-content").html(
+            "<div class='layui-tab-item layui-show' id='iframe6'>" +
+            "<iframe src='/templates/newTraceability/certificate.html' width='970' height='600' frameborder='0'></iframe>"+
+            "</div>"
+        );
+    }
+</script>
+</html>

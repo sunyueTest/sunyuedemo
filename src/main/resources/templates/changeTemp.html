@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+
+
+<body>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label id="label1" class="layui-form-label">选择模板：</label>
+        <div class="layui-input-block">
+            <select name="quiz"></select>
+        </div>
+    </div>
+</form>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script language='javascript' th:inline="javascript">
+    $('#label1').text($.i18n.prop('selectTemplate')+':');
+    layui.use('form', function () {
+        var data = [[${result}]], html = '', form = layui.form;
+        console.log(data);
+
+        if (data != null) {
+            $.each(data, function (index, item) {
+                html += "<option value='" + item.id + "'>" + item.name + "</option>";
+            });
+            $("select[name='quiz']").append(html);
+            //append后必须从新渲染
+            form.render('select');
+        }
+    });
+</script>
+</html>

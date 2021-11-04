@@ -1,0 +1,163 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <title>地图选点</title>
+    <link rel="stylesheet"
+          href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+
+        .amap-marker:first-child .amap-icon img {
+            width: 25px;
+            height: 34px;
+        }
+
+        #pickerBox {
+            position: absolute;
+            z-index: 9999;
+            top: 50px;
+            right: 30px;
+            width: 300px;
+        }
+
+        #pickerInput {
+            width: 200px;
+            padding: 5px 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<div id="pickerBox">
+    <input id="pickerInput" placeholder="输入关键字/鼠标拖拽选取地点"/>
+</div>
+<script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.10&key=96a943dab4656930f33276727a084933&plugin=AMap.CitySearch"></script>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+<script type="text/javascript" th:inline="javascript">
+    $('#pickerInput').attr('placeholder', $.i18n.prop('输入关键字'));
+    let positionObj = [[${position}]];
+    let position = [positionObj.longitude, positionObj.latitude];
+    if (position[0] == 0 && position[1] == 0) {
+        position = [122.0963, 37.5119];
+    }
+
+    $('.info').text($.i18n.prop('mapInfo'));
+    var lang = getCookie("jxct_lang");
+    if (lang != 'en') {
+        lang = 'zh_cn';
+    }
+
+    var map = new AMap.Map("container", {
+        resizeEnable: true,
+        center: position,
+        zoom: 13,
+        lang: lang
+    });
+    var marker;
+
+    AMapUI.loadUI(['misc/PoiPicker'], function (PoiPicker) {
+
+        var poiPicker = new PoiPicker({
+            //city:'北京',
+            input: 'pickerInput'
+        });
+
+
+        //初始化poiPicker
+        poiPickerReady(poiPicker);
+    });
+
+    function poiPickerReady(poiPicker) {
+
+        window.poiPicker = poiPicker;
+        //选取了某个POI
+        poiPicker.on('poiPicked', function (poiResult) {
+            var source = poiResult.source,
+                poi = poiResult.item;
+            //marker.setMap(map);
+            marker.setPosition(poi.location);
+            $('#pickerInput').val(poi.name);
+        });
+    }
+
+    //获取用户所在城市信息
+    function showCityInfo() {
+        //实例化城市查询类
+        var citysearch = new AMap.CitySearch();
+        //自动获取用户IP，返回当前城市
+        citysearch.getLocalCity(function (status, result) {
+
+            if (status === 'complete' && result.info === 'OK') {
+                if (result && result.city && result.bounds) {
+                    var cityinfo = result.city;
+                    var citybounds = result.bounds;
+                    //地图显示当前城市
+                    // map.setBounds(citybounds);
+                    marker = new AMap.Marker({
+                        position: position,
+                        icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png',
+                        offset: new AMap.Pixel(-13, -30),
+                        // 设置是否可以拖拽
+                        draggable: true,
+                        cursor: 'move',
+                        // 设置拖拽效果
+                        raiseOnDrag: true
+                    });
+                    marker.setMap(map);
+                }
+            } else {
+                //兼容国外用户和其他异常情况，全部给定默认值
+                marker = new AMap.Marker({
+                    position: map.getCenter(),
+                    icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png',
+                    offset: new AMap.Pixel(-13, -30),
+                    // 设置是否可以拖拽
+                    draggable: true,
+                    cursor: 'move',
+                    // 设置拖拽效果
+                    raiseOnDrag: true
+                });
+                marker.setMap(map);
+            }
+        });
+    }
+
+    showCityInfo();
+
+
+    function getPoint() {
+        return marker.getPosition();
+    }
+
+    //添加点标记
+    function addMarker(longitude, latitude) {
+        marker = new AMap.Marker({
+            icon: "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png",
+            position: [longitude, latitude],
+            offset: new AMap.Pixel(-13, -30)
+        });
+        marker.setMap(map);
+    }
+
+    //清除点标记
+    function clearMarker() {
+        if (marker) {
+            marker.setMap(null);
+            marker = null;
+        }
+    }
+</script>
+</body>
+</html>

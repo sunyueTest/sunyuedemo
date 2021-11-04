@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>adminindexspecialist-管理首页</title>
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/adminindexspecialist.css}">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+</head>
+<body>
+<div class="header">
+    <div class="logo">
+        <h3></h3>
+    </div>
+    <div class="nav">
+        <ul>
+            <li class="nav_li"  valueData="knowledgebase">知识库</li>
+            <li class="nav_li"  valueData="remotediagnosis">远程诊断</li>
+            <li class="nav_li"  valueData="messageissue">信息发布</li>
+            <li class="nav_li"  valueData="leaveparoleSystem">留言系统</li>
+            <li class="nav_li"  valueData="onlineConsultation">评价反馈</li>
+            <li class="nav_li"  valueData="diagnoseResource">诊断资源库</li>
+        </ul>
+    </div>
+    <div class="user">
+        <div class="user-pic"><img src="/static/img/agriculture/specialistManagement/teacherpic.png"></div>
+        <div class="user-txt">张三教授</div>
+    </div>
+</div>
+<div class="main">
+    <!--<div class="left-nav">-->
+        <!--<div class="putin" id="xiugai">-->
+            <!--<p>申请成为专家</p>-->
+        <!--</div>-->
+        <!--<ul class="test test-1">-->
+            <!--<li><P>专家A</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+            <!--<li><P>专家</P></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <div class="conter">
+        <iframe id="homeIframe" style="height:100%;width: 100%;" allowtransparency="true"
+                 frameborder="0"></iframe>
+    </div>
+</div>
+<div id="tc">
+    <h3 class="tc-title">专家信息</h3>
+    <div class="tc-int" id="tc-int">
+        <div class="tc-int-l">
+            <div class="message">
+                <p>姓名：</p>
+                <div class="informessage">
+                    <input type="text" id="name" value="" placeholder="请输入姓名"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>擅长病因：</p>
+                <div class="informessage">
+                    <input type="text" id="goodAtFish" value="" placeholder="请输入昵称"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>身份证号码：</p>
+                <div class="informessage">
+                    <input type="text" id="idCardNo" value="" placeholder="请输入身份证号码"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>擅长：</p>
+                <div class="informessage">
+                    <input type="text" id="goodAtDisease" value="" placeholder="请输入擅长"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>工作单位：</p>
+                <div class="informessage">
+                    <input type="text" id="workUnits" value="" placeholder="请输入工作单位"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>职务：</p>
+                <div class="informessage">
+                    <input type="text" id="position" value="" placeholder="请输入职务"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>手机号码：</p>
+                <div class="informessage">
+                    <input type="text" id="phoneNo" value="" placeholder="请输入手机号码"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>最高学历：</p>
+                <div class="informessage">
+                    <input type="text" id="educationalBackground" value="" placeholder="请输入最高学历"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>个人简介：</p>
+                <div class="informessage">
+					<textarea id="personalInfo"
+                              style="width: 28vw;height: 15vh;margin-top: 2vh;background: transparent;border-color: #31a9ce;box-sizing: border-box;padding: 1vh 1vw;overflow: hidden;resize:none;">
+					</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="tc-int-r">
+            <div class="buddha">
+                <div>上传头像：</div>
+                <div class="buddha-border" id="test1">
+                    <div class="buddha-pic">
+                        <img id="demo1" src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="papers">
+                <div>上传证件照：</div>
+                <div class="papers-pic">
+                    <div class="papers-a" id="test2" style="position: relative;">
+                        身份证正面
+                        <img src="" alt="" id="demo2" style="position: absolute;top: 0;left: 0">
+                    </div>
+                    <div class="papers-a" id="test3" style="position: relative;">
+                        身份证反面
+                        <img src="" alt="" id="demo3" style="position: absolute;top: 0;left: 0">
+                    </div>
+                    <div class="papers-a" id="test4" style="position: relative;">
+                        资质证书
+                        <img src="" alt="" id="demo4" style="position: absolute;top: 0;left: 0">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dele"></div>
+    <div id="getteacher">
+        <p style="width: 5vw;height: 4vh;line-height: 4vh;text-align: center;">确定</p>
+    </div>
+</div>
+
+
+</body>
+</html>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+
+<script>
+    var userData;
+    $.ajax({
+        url: "../expertManage/findExpertExamineVal_Two",
+        type: "POST",
+        data: {},
+        success: function (res) {
+            if (res.data == null) {
+
+            } else if (res.data.examine == 0) {
+                var html = '<p>正在审核，请耐心等待</p>\n'
+                $('#xiugai').html(html)
+            } else if (res.data.examine == 1) {
+                var html = '<p>审核通过您已成为专家</p>\n'
+                $('#xiugai').html(html)
+            } else if (res.data.examine == 2) {
+                var html = '<p>审核未通过请重新提交申请</p>\n'
+                $('#xiugai').html(html)
+            }
+            console.log(res)
+
+        }
+    })
+
+
+    var name = '';//姓名
+    var goodAtFish = '';//擅长
+    var idCardNo = '';//身份证
+    var goodAtDisease = '';//擅长病种
+    var workUnits = '';//工作单位
+    var position = '';//职务
+    var phoneNo = '';//手机号码
+    var educationalBackground = '';//学历
+    var idCardPicPositive = '';//身份证正面
+    var idCardPicReverse = '';//身份证反面
+    var certificatePic = '';//资质证书
+    var headPhotoPic = '';//头像
+    var personalInfo = '';//个人简介
+    var type = '0';//农业0 渔业1
+    $(document).on('click', '#getteacher', function () {
+        name = $("#name").val();
+        goodAtFish = $("#goodAtFish").val();
+        idCardNo = $("#idCardNo").val();
+        goodAtDisease = $("#goodAtDisease").val();
+        workUnits = $("#workUnits").val();
+        position = $("#position").val();
+        phoneNo = $("#phoneNo").val();
+        educationalBackground = $("#educationalBackground").val();
+        personalInfo = $("#personalInfo").val();
+        console.log(name)
+        $.ajax({
+            url: "../expertManage/addExpert",
+            type: "POST",
+            data: {
+                name: name,//姓名
+                goodAtFish: goodAtFish,//擅长
+                idCardNo: idCardNo,//身份证
+                goodAtDisease: goodAtDisease,//擅长病种
+                workUnits: workUnits,//工作单位
+                position: position,//职务
+                phoneNo: phoneNo,//手机号码
+                educationalBackground: educationalBackground,//学历
+                idCardPicPositive: idCardPicPositive,//身份证正面
+                idCardPicReverse: idCardPicReverse,//身份证反面
+                certificatePic: certificatePic,//资质证书
+                headPhotoPic: headPhotoPic,//头像
+                personalInfo: personalInfo,//个人简介
+                type: 0,//农业0 渔业1
+            },
+            success: function (res) {
+
+                console.log(res)
+
+            }
+        })
+    })
+    $(document).on('click', '.nav_li', function () {
+        var valueData=$(this).attr("valueData");
+        $("#homeIframe").attr("src","../agriculture/pageSkipping?valueData="+valueData);
+    });
+
+    layui.use('upload', function () {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+        //头像图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            , url: '/aquacultureSystemSetting/uploadFile'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                console.log(res)
+                headPhotoPic = res.msg
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+        //身份证正面图片上传
+        var idCardPicPositivea = upload.render({
+            elem: '#test2'
+            , url: '/aquacultureSystemSetting/uploadFile'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo2').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                console.log(res)
+                idCardPicPositive = res.msg
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    idCardPicPositivea.upload();
+                });
+            }
+        });
+        //身份证反面图片上传
+        var idCardPicReversea = upload.render({
+            elem: '#test3'
+            , url: '/aquacultureSystemSetting/uploadFile'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo3').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                console.log(res)
+                idCardPicReverse = res.msg
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    idCardPicReversea.upload();
+                });
+            }
+        });
+        //资质证书图片上传
+        var certificatePica = upload.render({
+            elem: '#test4'
+            , url: '/aquacultureSystemSetting/uploadFile'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo4').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                console.log(res)
+                certificatePic = res.msg
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    certificatePica.upload();
+                });
+            }
+        });
+    });
+
+
+    var xiugai = document.getElementsByClassName('xiugai');
+    var chaxun = document.getElementsByClassName('chaxun');
+    var tc = document.getElementById('tc');
+    var dele = document.getElementById('dele');
+
+    $(document).on('click', '#xiugai', function () {
+        tc.style.display = 'block'
+        $.ajax({
+            url: "../expertManage/findExpertExamineVal_Two",
+            type: "POST",
+            data: {},
+            success: function (res) {
+                if (res.data == null) {
+
+                } else if (res.data.examine == 0) {
+                    var html = '<p class="tc-p" style="">正在审核，请耐心等待</p>\n' +
+                        '<div id="dele"></div>'
+                    $('#tc').html(html)
+                } else if (res.data.examine == 1) {
+                    var html = '<p class="tc-p" style="">审核通过您已成为专家</p>\n' +
+                        '<div id="dele"></div>'
+                    $('#tc').html(html)
+                } else if (res.data.examine == 2) {
+                    // var html='<p class="tc-p" style="">审核未通过请重新提交申请</p> \n' +
+                    //     '<div id="dele"></div>'
+                    // $('#tc').html(html)
+                    $("#name").val(res.data.name)//姓名
+                    $("#goodAtFish").val(res.data.goodAtFish);//擅长
+                    $("#validCardNo").val(res.data.idCardNo)//身份证
+                    $("#valgoodAtDisease").val(res.data.goodAtDisease)//擅长病种
+                    $("#workUnits").val(res.data.workUnits)//工作单位
+                    $("#valposition").val(res.data.position)//职务
+                    $("#valphoneNo").val(res.data.phoneNo)//手机号码
+                    $("#valeducationalBackground").val(res.data.educationalBackground)//学历
+                    $("#validCardPicPositive").val(res.data.idCardPicPositive)//身份证正面
+                    $("#validCardPicReverse").val(res.data.idCardPicReverse)//身份证反面
+                    $("#valcertificatePic").val(res.data.certificatePic)//资质证书
+                    $("#valheadPhotoPic").val(res.data.headPhotoPic)//头像
+                    $("#valpersonalInfo").val(res.data.personalInfo)
+                }
+                console.log(res)
+            }
+        })
+    })
+    $(document).on('click', '.chaxun', function () {
+        tc.style.display = 'block'
+    })
+    $(document).on('click', '#dele', function () {
+        tc.style.display = 'none'
+    })
+
+    $(function () {
+        $.ajax({
+            url: "/user/selUserDetails",
+            data: {},
+            dataType: "json",
+            type: "post",
+            timeout: 30000,
+            error: function (data, type, err) {
+                console.log(err);
+            },
+            success: function (data) {
+                userData = data.data;
+            }
+        });
+        $(".nav_li:first").click();
+    })
+
+</script>

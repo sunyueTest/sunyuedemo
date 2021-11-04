@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新建场景</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/publicToiletDetail.css}" media="all">
+    <link rel="stylesheet" href="../../../static/css/addNewStyle.css">
+    <style>
+
+        .layui-form-item .layui-inline {
+            margin-left: 160px !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="formDiv">
+    <div class="formTitle">新增场景</div>
+    <form class="layui-form">
+        <input type="hidden" name="id" th:value="*{data.bean.id}" id="id">
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label1" class="layui-form-label">场景名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="farmName" id="farmName" autocomplete="off" style="width: 200px;"
+                           th:value="*{data.bean.farmName}" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label2" class="layui-form-label">所属基地</label>
+                <div class="layui-input-inline">
+                    <select lay-filter="quiz" class="select" id="parentId" lay-verify="type"
+                            th:value="*{data.bean.parentId}"
+                            name="projectId">
+                        <option th:each="base:*{data.bases}" th:value="*{base.id}" th:text="*{base.name}"
+                                th:selected="${base.id == data.bean.parentId}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label3" class="layui-form-label">场景类型</label>
+                <div class="layui-input-inline">
+                    <select lay-filter="quiz" class="select" id="subType" lay-verify="type" name="subType">
+                        <option value="0" th:selected="*{data.bean.subType==0}">种植场景</option>
+                        <option value="1" th:selected="*{data.bean.subType==1}">生产场景</option>
+                        <option value="2" th:selected="*{data.bean.subType==2}">仓储场景</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="input_positionSpan" class="layui-form-label">经纬度</label>
+
+                <input type="text" lay-verify="required" style="width:165px;"
+                       autocomplete="off" th:value="*{data.bean.longitude}+','+*{data.bean.latitude}"
+                       disabled="disabled" id="input_position"
+                       class="layui-input" placeholder="点击右侧按钮选取地址">
+                <img src="../img/location_icon.png" onclick="selectPoint()" style="height: 33px">
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="button" class="layui-btn layui-btn-radius" id="save" value="保存">
+            </div>
+        </div>
+
+    </form>
+</div>
+
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.all.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/static/js/tableSelect.js}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script language='javascript' th:inline="javascript">
+    let longitude = [[${data.bean.longitude}]];
+    let latitude = [[${data.bean.latitude}]];
+    let table = layui.table, position;
+    let uploadUrl = '../demoAddress/uploadImg/';
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    //设置语言
+    $('#label1').text($.i18n.prop('sceneName'));
+    $('#label2').text($.i18n.prop('baseBelongedTo'));
+    $('#label3').text($.i18n.prop('sceneType'));
+    $('#input_positionSpan').text($.i18n.prop('position'));
+    $('#save').val($.i18n.prop('save'));
+
+    //提交数据
+    $("#save").click(function () {
+        let farmName = $("#farmName").val();
+        let parentId = $("#parentId").val();
+        let subType = $("#subType").val();
+
+        if (farmName == '' || farmName.length == 0) {
+            layer.msg($.i18n.prop('warn11'), {icon: 5});
+            return false;
+        }
+
+        if (parentId == null || parentId == undefined) {
+            layer.msg($.i18n.prop('warn72'), {icon: 5});
+            return false;
+        }
+        let inputPostion = $('#input_position').val();
+        if (inputPostion == "0.0,0.0") {
+            layer.msg($.i18n.prop('warn73'), {icon: 5});
+            return false;
+        }
+        if (position == null) {
+            let location = inputPostion.split(',');
+            console.log(location);
+            position = {lat: location[1], lng: location[0]}
+        }
+
+        let param = {
+            farmName: farmName,
+            id: $("#id").val(),
+            subType: subType,
+            parentId: parentId,
+            longitude: position.lng,
+            latitude: position.lat
+        };
+
+        $.ajax({
+            type: "post",
+            url: "../projectBaseScene/saveScene",
+            data: param,
+            async: false,
+            success: function (result) {
+                console.log($("#id").val());
+                if (result.state == "success") {
+                    layer.msg($.i18n.prop('success'), {icon: 1});
+                } else {
+                    layer.msg(result.msg);
+                }
+                setTimeout(function(){
+                    //场景列表刷新
+                    parent.layui.table.reload('table');
+                    parent.layer.close(myIframe);
+                },800);
+            }
+        });
+    });
+
+    // layui.use('upload', function () {设置企业用户
+    //     let upload = layui.upload;
+    //     //执行实例
+    //     let uploadInst = upload.render({
+    //         elem: '#imgUrl'
+    //         , url: uploadUrl
+    //         , done: function (res) {
+    //             if (res.state == 'success') {
+    //                 $("#logo").val(res.msg);
+    //                 $('#imgUrl_img').attr('src', res.msg);
+    //             } else {
+    //                 layer.msg('上传失败');
+    //             }
+    //         }
+    //     });
+    // });
+
+    function selectPoint() {
+        layer.open({
+            type: 2,
+            title: false,
+            closeBtn: false,
+            area: ['600px', '400px'],
+            shade: 0.2,
+            id: 'LAY_layuipro',
+            btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+            btnAlign: 'c',
+            moveType: 1,
+            content: '../selectPoint?longitude=' + longitude + "&latitude=" + latitude,
+            yes: function () {
+                var iframeWin = $("div.layui-layer-content > iframe")[0].contentWindow; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                position = iframeWin.getPoint(); //调用子页面的form_submit函数
+                $('#input_position').val(position);
+                layer.closeAll();
+            }
+        });
+    }
+
+    // let imgStr = $("#logo").val();
+    // if (imgStr != null && imgStr.length > 0) {
+    //     $('#imgUrl_img').attr('src', imgStr);
+    // }
+
+    $(function () {
+
+        var id = ht.request("id");
+        if (id != "") {
+            $(".formTitle").text("编辑场景");
+        }
+    });
+    var ht = ht || {};
+    ht.request = function (keyValue) {
+        var search = location.search.slice(1);
+        var arr = search.split("&");
+        for (var i = 0; i < arr.length; i++) {
+            var ar = arr[i].split("=");
+            if (ar[0] == keyValue) {
+                if (decodeURIComponent(ar[1]) == 'undefined') {
+                    return "";
+                } else {
+                    return decodeURIComponent(ar[1]);
+                }
+            }
+        }
+        return "";
+    }
+</script>
+
+
+</html>

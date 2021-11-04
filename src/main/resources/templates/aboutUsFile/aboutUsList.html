@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AboutUs后台管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/versionLayer.css" media="all">
+</head>
+<body>
+<table class="layui-hide" id="device" lay-filter="device"></table>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline">
+    </div>
+    <div class="layui-inline" style="float:right;">
+        <button class="layui-btn " lay-event="search" id="searchButton"><i
+                class="layui-icon layui-icon-search "></i></button>
+    </div>
+    <div class="layui-inline" style="float:right;">
+        <input type="text" class="layui-input" name="message" id="message" autocomplete="off"
+               placeholder="输入留言搜索">
+    </div>
+</script>
+<script type="text/html" id="getMsg">
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="see"><i
+            class="layui-icon layui-icon-search"></i></button>
+</script>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/versionLayer.js}" charset="utf-8"></script>
+<script>
+    var table,form;
+    layui.use('table', function () {
+        table = layui.table;
+        table.render({
+            elem: '#device'
+            , url: '/aboutUs/getInfoList'
+            , toolbar: '#toolbar1'
+            , title: '用户数据表'
+            , cols: [
+                [
+                    {
+                        field: 'id',
+                        title: 'ID',
+                        width: 60,
+                        sort: true,
+                        unresize: true, align: 'center'
+                    }
+                    ,
+                    {field: 'name', title: "姓名", align: 'center'}
+                    , {field: 'email', title: "邮箱", align: 'center'}
+                    , {field: 'tel', title: "电话", align: 'center'}
+                    , {field: 'message', title: "留言", align: 'center'}
+                    , {field: 'state', title: "状态", templet: cc, align: 'center'}
+                    , {field: 'deliveryTime', title: "发送时间", align: 'center'}
+                    ,
+                    {
+                        title: "查看留言",
+                        toolbar: '#getMsg',
+                        align: 'center'
+                    }
+                ]
+            ],
+            page: true,
+            request: {limitName: 'limit'},
+            response: {
+                statusCode: 'success'
+            },
+            parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                return {
+                    "code": res.state, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.datas,//解析数据列表
+                };
+            }
+        });
+        //头工具栏事件
+        table.on('toolbar(device)', function (obj) {
+            //var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'search':
+                    var msg = $('#message').val();
+                    reload(msg);
+                    break;
+            }
+            ;
+        });
+
+        //监听行工具事件
+        table.on('tool(device)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'see') {
+                layer.open({
+                    type: 2,
+                    title: '查看信息',
+                    shadeClose: true,
+                    offset: '5%',
+                    area: ['72%', '90%'],
+                    content: '/aboutUs/getMsg?id=' + data.id,
+                    end: function () {
+                        location.reload();
+                    }
+                })
+            }
+        });
+
+    });
+
+    function cc(data) {
+        var a = data.state;
+        if (a == '未读') {
+            return "<span style='color: red'>未读</span>"
+        } else {
+            return "<span style='color: green'>已读</span>"
+        }
+    }
+    function reload(msg) {
+        table.reload('device', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                msg: msg
+            }
+        });
+        $('#message').val(msg);
+    }
+</script>
+<style>
+
+    .layui-table-view .layui-table {
+        width: 100%;
+
+    }
+
+    .layui-table tr {
+        width: 100%;
+    }
+
+    .layui-table thead tr, .layui-table-header thead {
+        width: 100%;
+    }
+
+    .abc {
+        float: right;
+        margin-bottom:5px;
+    }
+</style>
+</body>
+</html>

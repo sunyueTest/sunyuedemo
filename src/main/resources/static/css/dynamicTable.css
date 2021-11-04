@@ -1,0 +1,72 @@
+/*单元格字体样式*/
+.htBold {
+    font-weight: bold !important;
+}
+
+.htItalic {
+    font-style: italic !important;
+}
+
+.htUnderline {
+    text-decoration: underline !important;
+}
+
+/*单元格背景颜色*/
+.primary_bkgcolor {
+    background-color: #E91E63 !important;
+}
+
+.primary_dark_bkgcolor {
+    background-color: #C2185B !important;
+}
+
+.primary_light_bkgcolor {
+    background-color: #F8BBD0 !important;
+}
+
+.accent_bkgcolor {
+    background-color: #CDDC39 !important;
+}
+
+.primary_text_bkgcolor {
+    background-color: #212121 !important;
+}
+
+.secondary_text_bkgcolor {
+    background-color: #727272 !important;
+}
+
+.divider_bkgcolor {
+    background-color: #B6B6B6 !important;
+}
+
+/*单元格字体颜色*/
+.primary_fcolor {
+    color: #E91E63 !important;
+}
+
+.primary_dark_fcolor {
+    color: #C2185B !important;
+}
+
+.primary_light_fcolor {
+    color: #F8BBD0 !important;
+}
+
+.accent_fcolor {
+    color: #CDDC39 !important;
+}
+
+.primary_text_fcolor {
+    color: #212121 !important;
+}
+
+.secondary_text_fcolor {
+    color: #727272 !important;
+}
+
+.divider_fcolor {
+    color: #B6B6B6 !important;
+}
+
+

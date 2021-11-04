@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+</head>
+<!--style="background-image: linear-gradient(175deg, #0a325c 30%, #011226 70%);"-->
+<body>
+<form class="layui-form">
+    <div style="margin-right: 38px;">
+        <input type="hidden" id="id" name="id" th:value="*{data.role.id}">
+        <input type="hidden" id="enable" name="enable" th:value="*{data.role.enable}">
+        <input type="hidden" id="childId" name="childId" th:value="*{data.role.childId}">
+        <div class="layui-form-item">
+            <label id="label1" class="layui-form-label">角色名</label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" name="name" lay-verify="title" th:value="*{data.role.name}"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label id="label2" class="layui-form-label">角色描述</label>
+            <div class="layui-input-inline">
+                <input type="text" id="descr" name="descr" lay-verify="title" th:value="*{data.role.descr}"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label id="label3" class="layui-form-label">角色等级</label>
+            <div class="layui-input-inline">
+                <select id="level" name="level">
+                    <option th:each="item,sta:${data.levels}" th:value="${item.level}" th:text="${item.name}"
+                            th:selected="${data.role.level+''==item.level}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label id="label4" class="layui-form-label">角色主页</label>
+            <div class="layui-input-inline">
+                <input type="text" id="indexUrl" name="indexUrl" lay-verify="title" th:value="*{data.role.indexUrl}"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+</form>
+</body>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    $('#label1').text($.i18n.prop('roleName'));
+    $('#label2').text($.i18n.prop('roleDesc'));
+
+    layui.use('form', function () {
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        form.render("select");
+    });
+</script>
+</html>

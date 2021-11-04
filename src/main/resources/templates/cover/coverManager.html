@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>coverManager</title>
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .layui-form-checkbox[lay-skin=primary] span {
+            color: white;
+        }
+
+        .layui-form {
+            margin-top: 1rem;
+            margin-left: 1rem;
+        }
+
+        #LAY-auth-tree-index {
+            margin-top: 1rem;
+            border: 0px solid #fff;
+            border-radius: 5px;
+            background-color: #354761;
+            width: 20rem;
+            height: 28rem;
+            overflow-y: scroll;
+            overflow-x: auto;
+        }
+
+        #LAY-auth-tree-index::-webkit-scrollbar { /*滚动条整体样式*/
+            width: 5px; /*高宽分别对应横竖滚动条的尺寸*/
+            height: 5px;
+        }
+
+        #LAY-auth-tree-index::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+            -webkit-box-shadow: inset 0 0 5px rgba(8, 30, 64, 1);
+            border-radius: 5px;
+            background: rgba(8, 30, 64, 1);
+        }
+
+        #LAY-auth-tree-index::-webkit-scrollbar-track { /*滚动条里面轨道*/
+            border-radius: 5px;
+            -webkit-box-shadow: inset 0 0 5px rgb(49, 83, 121);
+            background: rgb(49, 83, 121);
+        }
+
+        .layui-form-item {
+            display: flex;
+        }
+
+        .layui-column {
+
+            display: flex;
+            flex-direction: column;
+            margin-left: 1rem;
+            margin-top: 1rem;
+        }
+
+        .layui-btn + .layui-btn {
+            margin-left: 0px;
+            margin-top: 1rem;
+        }
+        .content-table{
+            width: 70%;
+        }
+        .layui-table-tool{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div id="LAY-auth-tree-index"></div>
+        <div class="layui-column">
+            <button class="layui-btn layui-btn-primary layui-btn-radius" id="selectAll">
+                全选
+            </button>
+            <button class="layui-btn layui-btn-primary layui-btn-radius" id="show">
+                显示/隐藏
+            </button>
+            <button class="layui-btn layui-btn-primary layui-btn-radius" id="activate">
+                一键激活
+            </button>
+            <button class="layui-btn layui-btn-primary layui-btn-radius" id="logout">
+                一键注销
+            </button>
+        </div>
+      <div class="content-table">
+          <div>
+              <table class="layui-hide" id="device" lay-filter="device"></table>
+          </div>
+
+          <script type="text/html" id="delTemplate">
+              <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+                      class="layui-icon"></i></button>
+          </script>
+      </div>
+    </div>
+</div>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:inline="none" th:src="@{/static/js/commandList.js}"></script>
+<script th:inline="none" th:src="@{/static/js/coverManager.js?v=1.0}"></script>
+</body>
+</html>

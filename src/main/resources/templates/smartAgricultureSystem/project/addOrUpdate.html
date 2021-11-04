@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新建项目</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/publicToiletDetail.css}" media="all">
+    <link rel="stylesheet" href="../../../static/css/addNewStyle.css">
+    <style>
+
+
+    </style>
+</head>
+<body>
+
+<div class="formDiv">
+    <div class="formTitle">新增项目</div>
+    <form class="layui-form">
+        <input type="hidden" name="id" th:value="*{data.bean.id}" id="id">
+        <input type="hidden" name="logo" id="logo" th:value="${data.bean.logo}">
+        <input type="hidden" name="createUser" th:value="*{data.bean.createUser}" id="createUser">
+        <input type="hidden" name="createTime" th:value="*{data.bean.createTime}" id="createTime">
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label1" class="layui-form-label">项目名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="name" id="name" autocomplete="off" style="width: 200px;"
+                           th:value="*{data.bean.name}" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label id="enterpriseBelongedTo" class="layui-form-label">所属企业</label>
+                <div class="layui-input-inline">
+                    <div class="layui-input-inline">
+                        <select lay-filter="quiz" class="select" id="enterpriseId" lay-verify="type"
+                                th:value="*{data.bean.enterpriseId}"
+                                name="enterpriseId">
+                            <option th:each="enterprise:*{data.enterprises}" th:value="*{enterprise.id}"
+                                    th:text="*{enterprise.name}"
+                                    th:selected="${enterprise.id == data.bean.enterpriseId}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label2" class="layui-form-label">项目类型</label>
+                <div class="layui-input-inline">
+                    <select lay-filter="quiz" class="select" id="type" lay-verify="type" th:value="*{data.bean.type}"
+                            name="type">
+                        <option th:selected="${data.bean.type==1}" value="1">市级项目</option>
+                        <option th:selected="${data.bean.type==2}" value="2">县级项目</option>
+                        <option th:selected="${data.bean.type==3}" value="3">乡级项目</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label id="label3" class="layui-form-label">建设单位</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="constructionCompany" id="constructionCompany" autocomplete="off"
+                           style="width: 200px;"
+                           th:value="*{data.bean.constructionCompany}" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label4" class="layui-form-label">支持单位</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="supportingCompany" id="supportingCompany" autocomplete="off"
+                           style="width: 200px;"
+                           th:value="*{data.bean.supportingCompany}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label id="label5" class="layui-form-label">网站地址</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="website" id="website" autocomplete="off" style="width: 200px;"
+                           th:value="*{data.bean.website}" class="layui-input">
+                </div>
+            </div>
+
+        </div>
+
+        <!--logo的上传，暂时隐藏，因为没有地方展示-->
+        <!--<div class="layui-form-item">-->
+            <!--<div class="layui-inline">-->
+                <!--<label id="imgUrlSpan" class="layui-form-label">logo上传</label>-->
+                <!--<div class="add-uploading" id="imgUrl">-->
+                    <!--<img src="../../../static/img/agriculture/addImg.png" alt="" id="imgUrl_img"-->
+                         <!--style="width:100px;height:100px;">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="button" class="layui-btn layui-btn-radius" id="save" value="保存">
+            </div>
+        </div>
+
+    </form>
+</div>
+<!--<fieldset class="layui-elem-field layui-field-title">-->
+<!--    <legend id="legend">已选择</legend>-->
+<!--</fieldset>-->
+<!--<table class="layui-hide" id="sensor" lay-filter="sensor"></table>-->
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.all.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/static/js/tableSelect.js}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script language='javascript' th:inline="javascript">
+    let table = layui.table;
+    let uploadUrl = '../demoAddress/uploadImg/';
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    //设置语言
+    $('#label1').text($.i18n.prop('projectName'));
+    $('#label2').text($.i18n.prop('selcectType'));
+    $('#label3').text($.i18n.prop('constructionCompany'));
+    $('#label4').text($.i18n.prop('supportingCompany'));
+    $('#label5').text($.i18n.prop('website'));
+    $('#save').val($.i18n.prop('save'));
+    $('#imgUrlSpan').text($.i18n.prop('logoUpload'));
+
+    //提交数据
+    $("#save").click(function () {
+        let name = $("#name").val();
+        let type = $("#type").val();
+        let constructionCompany = $("#constructionCompany").val();
+        let supportingCompany = $("#supportingCompany").val();
+        let enterpriseId = $("#enterpriseId").val();
+        let website = $("#website").val();
+        let logo = $("#logo").val();
+        console.log(enterpriseId);
+        if (name == '' || name.length == 0) {
+            layer.msg($.i18n.prop('warn11'), {icon: 5});
+            return false;
+        }
+        if (enterpriseId==null||enterpriseId == '' || enterpriseId.length == 0) {
+            layer.msg("所属企业不能为空");
+            return false;
+        }
+
+        if (enterpriseId == null || enterpriseId == undefined) {
+            layer.msg($.i18n.prop('warn70'), {icon: 5});
+            return false;
+        }
+
+        let param = {
+            name: name,
+            id: $("#id").val(),
+            type: type,
+            constructionCompany: constructionCompany,
+            supportingCompany: supportingCompany,
+            website: website,
+            logo: logo,
+            enterpriseId: enterpriseId,
+            createUser: $("#createUser").val(),
+            createTime: $("#createTime").val()
+        };
+
+        $.ajax({
+            type: "post",
+            url: "../projectBaseScene/saveProject",
+            data: param,
+            async: false,
+            success: function (result) {
+                console.log($("#id").val());
+                if (result.state == "success") {
+                    parent.layer.msg($.i18n.prop('success'), {icon: 1});
+                    id = result.data.id;
+                    $("#id").val(id);
+                    $("#demo").val(result.data.cameraName);
+                    //农场列表刷新
+                    parent.layui.table.reload('table');
+                    parent.layer.close(myIframe);
+
+                } else {
+                    layer.msg($.i18n.prop(result.msg), {icon: 2});
+                }
+            }, error: function () {
+                layer.msg($.i18n.prop("fail"), {icon: 2});
+            }
+        });
+    });
+
+    layui.use('upload', function () {
+        let upload = layui.upload;
+        //执行实例
+        let uploadInst = upload.render({
+            elem: '#imgUrl'
+            , url: uploadUrl
+            , done: function (res) {
+                if (res.state == 'success') {
+                    $("#logo").val(res.msg);
+                    $('#imgUrl_img').attr('src', res.msg);
+                } else {
+                    layer.msg('上传失败');
+                }
+            }
+        });
+    });
+
+    let imgStr = $("#logo").val();
+    if (imgStr != null && imgStr.length > 0) {
+        $('#imgUrl_img').attr('src', imgStr);
+    }
+
+
+    $(function () {
+
+        var id = ht.request("id");
+        if (id != "") {
+            $(".formTitle").text("编辑项目");
+        }
+    });
+    var ht = ht || {};
+    ht.request = function (keyValue) {
+        var search = location.search.slice(1);
+        var arr = search.split("&");
+        for (var i = 0; i < arr.length; i++) {
+            var ar = arr[i].split("=");
+            if (ar[0] == keyValue) {
+                if (decodeURIComponent(ar[1]) == 'undefined') {
+                    return "";
+                } else {
+                    return decodeURIComponent(ar[1]);
+                }
+            }
+        }
+        return "";
+    }
+
+</script>
+
+
+</html>

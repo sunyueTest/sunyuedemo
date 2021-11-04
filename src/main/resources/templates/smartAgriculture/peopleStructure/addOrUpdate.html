@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新建人员结构</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <style>
+        body {
+            font-weight: normal;
+            height: 100%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .base-item {
+            display: flex;
+            text-align: center;
+            margin-top: 20px;
+            /*margin-left: 45px;*/
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            height: 100%;
+        }
+
+        .base-item span {
+            width: 180px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .base-item input {
+            width: 170px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            background-image: url(../../img/commend_btn.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 120px;
+            height: 35px;
+            border: 0px;
+            margin-left: 130px;
+            color: #5f4d6f;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <input type="text" style="display: none" id="id" th:value="${bean.id}">
+    <!--    <input type="text" style="display: none" id="imgUrl_str" th:value="${bean.imgUrl}">-->
+
+    <div style="width: 45%; height: 100%; border: 1px; float: left">
+        <div class="base-item">
+            <span id="structureNameSpan">人员结构名称 : </span>
+            <input type="text" id="structureName" lay-verify="required" maxlength="16" th:value="${bean.structureName}"
+                   style="width: 170px"
+                   class="layui-input" placeholder="请输入人员结构名称">
+        </div>
+
+        <div class="base-item">
+            <span id="maleNumSpan">男性人数 : </span>
+            <input type="text" id="maleNum" lay-verify="required" maxlength="16" th:value="${bean.maleNum}"
+                   style="width: 170px"
+                   class="layui-input" placeholder="请输入正整数,默认0">
+        </div>
+
+        <div class="base-item">
+            <span id="under35NumSpan">35岁以下人数 : </span>
+            <input type="text" id="under35Num" lay-verify="required" maxlength="16" th:value="${bean.under35Num}"
+                   style="width: 170px"
+                   class="layui-input" placeholder="请输入正整数,默认0">
+        </div>
+        <div class="base-item">
+            <span id="between3545Span">35~45岁人数 : </span>
+            <input type="text" id="between3545Num" lay-verify="required" maxlength="16"
+                   th:value="${bean.between3545Num}" style="width: 170px"
+                   class="layui-input" placeholder="请输入正整数,默认0">
+        </div>
+        <div class="base-item">
+            <span id="between4555Span">45~55人口数量 : </span>
+            <input type="text" id="between4555Num" lay-verify="required" maxlength="16"
+                   th:value="${bean.between4555Num}" style="width: 170px"
+                   class="layui-input" placeholder="请输入正整数,默认0">
+        </div>
+        <div class="base-item">
+            <span id="over55Span">大于55岁人口数量 : </span>
+            <input type="text" id="over55Num" lay-verify="required" maxlength="16" th:value="${bean.over55Num}"
+                   style="width: 170px"
+                   class="layui-input" placeholder="请输入正整数,默认0">
+        </div>
+
+
+        <div class="base-item">
+            <button class="btn-primary" lay-submit="" id="save" style="margin-left: 40%"
+                    lay-filter="submit">保&nbsp;存
+            </button>
+        </div>
+    </div>
+    <div style="width: 45%; height: 100%; border: 1px; float: left">
+        <div class="base-item">
+            <span id="femaleNumSpan">女性人数 : </span>
+            <input type="text" id="femaleNum" lay-verify="required" maxlength="16" th:value="${bean.femaleNum}"
+                   style="width: 170px"
+                   class="layui-input" placeholder="请输入正整数,默认0">
+        </div>
+        <div class="base-item">
+            <span id="elderlyPeopleSpan">孤寡老人数量 : </span>
+            <input type="text" id="elderlyPeopleNum" lay-verify="required" maxlength="16"
+                   th:value="${bean.elderlyPeopleNum}" style="width: 170px"
+                   class="layui-input" placeholder="请输入正整数,默认0">
+        </div>
+        <div class="base-item">
+            <span id="leftBehindChildrenSpan">留守儿童数量 : </span>
+            <input id="leftBehindChildrenNum" lay-verify="required " th:value="${bean.leftBehindChildrenNum}"
+                   style="width: 170px"
+                   class="layui-input" placeholder="请输入正整数,默认0">
+        </div>
+        <div class="base-item">
+            <span id="poorPeopleSpan">贫困人口数量 : </span>
+            <input id="poorPeopleNum" lay-verify="required " th:value="${bean.poorPeopleNum}" style="width: 170px"
+                   class="layui-input" placeholder="请输入正整数,默认0">
+        </div>
+        <div class="base-item">
+            <span id="disabledNumberSpan">残疾人口数量 : </span>
+            <input id="disabledPeopleNum" lay-verify="required " th:value="${bean.disabledPeopleNum}"
+                   style="width: 170px"
+                   class="layui-input" placeholder="请输入正整数,默认0">
+        </div>
+    </div>
+</div>
+
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.all.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/static/js/tableSelect.js}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script language='javascript' th:inline="javascript">
+    var table = layui.table, id;
+    id = [[${bean.id}]];
+    let myIframe = parent.layer.getFrameIndex(window.name);
+
+    //设置语言
+    $('#label1').text($.i18n.prop('farmName'));
+    $('#save').val($.i18n.prop('save'));
+
+    //提交数据
+    $("#save").click(function () {
+        var maleNum = $("#maleNum").val();
+        var femaleNum = $("#femaleNum").val();
+        var under35Num = $("#under35Num").val();
+        var between3545Num = $("#between3545Num").val();
+        var between4555Num = $("#between4555Num").val();
+        var over55Num = $("#over55Num").val();
+        var elderlyPeopleNum = $("#elderlyPeopleNum").val();
+        var leftBehindChildrenNum = $("#leftBehindChildrenNum").val();
+        var poorPeopleNum = $("#poorPeopleNum").val();
+        var disabledPeopleNum = $("#disabledPeopleNum").val();
+        var structureName = $("#structureName").val();
+        if (structureName == null||structureName.replace(/[\s　]/g,"")=="") {
+            layer.msg($.i18n.prop('warn57'), {icon: 5});
+            return false;
+        }
+        // if (!verify(maleNum) || !verify(femaleNum) || !verify(under35Num) ||
+        //     !verify(between3545Num) || !verify(between4555Num) || !verify(over55Num) ||
+        //     !verify(elderlyPeopleNum) || !verify(leftBehindChildrenNum) || !verify(poorPeopleNum) ||
+        //     !verify(disabledPeopleNum)) {
+        //     layer.msg($.i18n.prop('warn56'), {icon: 5});
+        //     return false;
+        // }
+        if(!verify(maleNum)&&maleNum!=0){
+            layer.msg("男性数值不符合规范", {icon: 5});
+            return false;
+        }else if(!verify(femaleNum)&&femaleNum!=0){
+            layer.msg("女性数值不符合规范", {icon: 5});
+            return false;
+        }else if(!verify(under35Num)&&under35Num!=0){
+            layer.msg("35岁以下数值不符合规范", {icon: 5});
+            return false;
+        }else if(!verify(between3545Num)&&between3545Num!=0){
+            layer.msg("35~45岁数值不符合规范", {icon: 5});
+            return false;
+        }else if(!verify(over55Num)&&over55Num!=0){
+            layer.msg("大于55岁数值不符合规范", {icon: 5});
+            return false;
+        }else if(!verify(elderlyPeopleNum)&&elderlyPeopleNum!=0){
+            layer.msg("孤寡老人数值不符合规范", {icon: 5});
+            return false;
+        }else if(!verify(leftBehindChildrenNum)&&leftBehindChildrenNum!=0){
+            layer.msg("留守儿童数值不符合规范", {icon: 5});
+            return false;
+        }else if(!verify(poorPeopleNum)&&poorPeopleNum!=0){
+            layer.msg("贫困人口数值不符合规范", {icon: 5});
+            return false;
+        }else if(!verify(disabledPeopleNum)&&disabledPeopleNum!=0){
+            layer.msg("残疾人口数值不符合规范", {icon: 5});
+            return false;
+        }
+        var param = {
+            id: $("#id").val(),
+            maleNum: maleNum,
+            femaleNum: femaleNum,
+            under35Num: under35Num,
+            between3545Num: between3545Num,
+            between4555Num: between4555Num,
+            over55Num: over55Num,
+            elderlyPeopleNum: elderlyPeopleNum,
+            leftBehindChildrenNum: leftBehindChildrenNum,
+            poorPeopleNum: poorPeopleNum,
+            disabledPeopleNum: disabledPeopleNum,
+            structureName: structureName
+        };
+
+        $.ajax({
+            type: "post",
+            url: "../smartAgriculture/savePeopleStructure",
+            data: param,
+            async: false,
+            success: function (result) {
+                console.log($("#id").val());
+                if (result.state == "success") {
+                    // layer.msg($.i18n.prop('success'), {icon: 1});
+                    // id = result.data.id;
+                    // $("#id").val(id);
+                    // //人员结构列表刷新
+                    // parent.refresh();
+                    parent.layer.msg($.i18n.prop(result.state));
+                    parent.$('.layui-laypage-btn').click();
+                    parent.layer.close(myIframe);
+                } else {
+                    layer.msg($.i18n.prop(result.msg), {icon: 2});
+                }
+            }
+        });
+    });
+
+    //判断是否为正整数
+    function verify(num) {
+        let r = /^\+?[1-9][0-9]*$/;
+        return r.test(num);
+    }
+
+</script>
+<script type="text/javascript" language='javascript' src="../js/publicToiletDetail.js?v1"></script>
+
+
+</html>

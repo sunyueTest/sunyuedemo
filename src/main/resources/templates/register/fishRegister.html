@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" th:href="@{/static/css/register/fishRegister.css}" />
+    <!--<link rel="stylesheet" th:href="@{/static/css/bootstrap.css}"/>-->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/input.css}" />
+
+</head>
+<body style="background: url(static/img/login/login-bg.jpg) no-repeat;background-size: 100% 100%">
+<!--头部-->
+<!-- <div class="header">
+     &lt;!&ndash;<a class="logo" href="##"></a>&ndash;&gt;
+     <div class="desc">欢迎注册</div>
+ </div>-->
+<!--版心-->
+<div class="language">
+    <a style="color:white;" onclick="setLanguage('zh')">简体中文</a> |
+    <a style="color:white;" onclick="setLanguage('en')">English</a>
+</div>
+<div class="container">
+    <!--京东注册模块-->
+    <div class="register">
+        <div class="title">
+            <span id="title" style="color: #575757">精讯云平台注册</span>
+        </div>
+        <!--用户名-->
+        <div class="register-box">
+            <!--表单项-->
+            <div class="box default">
+                <label for="userName"><span style="color:red;"></span><span
+                    id="span1">用户名:</span></label>
+                <input type="text" id="userName" placeholder="支持汉字、字母、数字、-、_" autocomplete="off" />
+                <i></i>
+            </div>
+            <!--提示信息-->
+            <div class="tip">
+                <i></i>
+                <span></span>
+            </div>
+        </div>
+        <!--设置密码-->
+        <div class="register-box">
+            <!--表单项-->
+            <div class="box default">
+                <label for="pwd"><span style="color:red;"></span><span
+                    id="span2">设置密码:</span></label>
+                <input type="password" id="pwd" placeholder="建议至少两种字符组合" autocomplete="off" />
+                <i></i>
+            </div>
+            <!--提示信息-->
+            <div class="tip">
+                <i></i>
+                <span></span>
+            </div>
+        </div>
+        <!--确认密码-->
+        <div class="register-box">
+            <!--表单项-->
+            <div class="box default">
+                <label for="pwd2"><span style="color:red;"></span><span
+                    id="span3">确认密码:</span></label>
+                <input type="password" id="pwd2" placeholder="请再次输入密码" autocomplete="off" />
+                <i></i>
+            </div>
+            <!--提示信息-->
+            <div class="tip">
+                <i></i>
+                <span></span>
+            </div>
+        </div>
+        <!--设置密码-->
+        <div class="register-box">
+            <!--表单项-->
+            <div class="box default">
+                <label for="email"><span id="span4">手机/邮箱:</span></label>
+                <input type="text" name='email' id="email" placeholder="请输入手机号/邮箱"
+                       autocomplete="off" />
+                <i></i>
+            </div>
+            <!--提示信息-->
+            <div class="tip">
+                <i></i>
+                <span></span>
+            </div>
+        </div>
+        <!--手机验证-->
+        <div class="register-box">
+            <!--表单项-->
+            <div class="box default">
+                <label><span id="span5">验证码:</span></label>
+                <input style='width:150px;' type="text" id="code" placeholder="请输入验证码"
+                       autocomplete="off" />
+                <button id='fresh'
+                        style="cursor: pointer;background: #00118f; color: #fff;border: none; text-align: center;text-decoration: none;display: inline-block;width: 40%;height: 100%;position: absolute;right: 0;top: 0;">
+                    获取验证码
+                </button>
+            </div>
+            <!--提示信息-->
+            <!--<div class="tip">
+                <i></i>
+                <span></span>
+            </div>-->
+        </div>
+        <!--注册协议-->
+        <div>
+				<span style="color: #999;margin-left: 8rem;">
+					点击注册，表示您同意精讯云 <a href="agreement" style="color: #0000CC;" target="_Blank">《用户服务协议》</a>
+				</span>
+
+        </div>
+        <!--<div class="register-box xieyi">
+
+            <div class="box default" >
+                <input type="hidden" id="ck" />
+                <!--<span>我已阅读并同意<a href="##">《京东用户注册协议》</a></span>-->
+            </div>
+
+            <!--<div class="tip">
+                <i></i>
+                <span></span>
+            </div>-->
+        </div>
+
+        <div align="center" id="btn" style="width: 250px;height: 40px;line-height: 40px;margin-left: 20%;background: #00118f;color: #fff;z-index: 99999"><span id="register">立即注册</span></div>
+    </div>
+
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    /* layui.use(['layer','form'], function(){
+         var layer = layui.layer;
+     });*/
+    function setLanguage(value) {
+
+        //setCookie('jxct_lang', local, 30);
+        var exdate = new Date()
+        exdate.setDate(exdate.getDate() + 30)
+        document.cookie = "jxct_lang" + "=" + escape(value) +
+            (";expires=" + exdate.toGMTString());
+
+        window.location.reload();
+    }
+
+    //设置语言
+    $('#password').attr('placeholder', $.i18n.prop('passwordDesc'));
+    $('#title').text($.i18n.prop('registerTitle'));
+    $('#span1').text($.i18n.prop('userName') + ':');
+    $('#userName').attr('placeholder', $.i18n.prop('userNamePo'));
+    $('#span2').text($.i18n.prop('setPwd') + ':');
+    $('#pwd').attr('placeholder', $.i18n.prop('pwdPo'));
+    $('#span3').text($.i18n.prop('confirmPwd') + ':');
+    $('#pwd2').attr('placeholder', $.i18n.prop('pwdPo2'));
+    $('#span4').text($.i18n.prop('telemail') + ':');
+    $('#email').attr('placeholder', $.i18n.prop('emailPo'));
+    $('#span5').text($.i18n.prop('validCode') + ':');
+    $('#code').attr('placeholder', $.i18n.prop('codePo'));
+    $('#fresh').text($.i18n.prop('getCode'));
+    $('#register').text($.i18n.prop('registernow'));
+    var token = 'eyJhbGciOiJIUzUxMiJ9';
+    // 字母、数字、_ - 4-20
+    var regs = {
+        userNameReg: /^[a-zA-Z][a-zA-Z0-9]{5,19}$/,
+        pwdReg: /^.{6,20}$/,
+        numReg: /\d/,
+        strReg: /[a-zA-Z]/,
+        tsReg: /[^\u4e00-\u9fa5a-zA-Z0-9]/
+    };
+    window.onload = function () {
+
+        /*//语言切换
+		$('.language').mouseover(function(){
+            $(".lang").css('display','block');
+        });
+       $(".lang").mouseout(function(){
+            $(".lang").css('display','none');
+        });*/
+        // 用户名字母、数字、_、-、中文  \u4e00-\u9fa5  4-20
+        // box   常规 box  出错的时候  box error  正确的时候  box right
+        // tip   常规 tip hide  出错的时候  tip error  默认的时候  tip default
+        var userName = document.getElementById("userName");
+        var pwd = document.getElementById("pwd");
+        var pwd2 = document.getElementById("pwd2");
+        var email = document.getElementById("email");
+        //var mobile = document.getElementById("mobile");
+        var ck = document.getElementById("ck");
+        var btn = document.getElementById("btn");
+
+        /* userName.onkeyup=userName.onfocus=userName.onblur=function(evt) {
+             var e = evt || window.event;
+             checkUserName(e);
+         }*/
+        function checkUserName(_e) {
+            var type;
+            if (_e) {
+                type = _e.type;
+            }
+            var value = userName.value;
+            var box = userName.parentNode;
+            var tip = box.nextElementSibling;
+            var span = tip.lastElementChild;
+            if (type == "focus") {
+                if (value == "") {
+                    box.className = "box";
+                    tip.className = "tip default";
+                    span.innerHTML = $.i18n.prop('warn38');
+                    return false;
+                }
+            }
+            if (type == "blur") {
+                if (value == "") {
+                    box.className = "box";
+                    tip.className = "tip hide";
+                    return false;//不继续往下走
+                }
+            }
+
+            if (value == "") {
+                box.className = "box error";
+                tip.className = "tip error";
+                span.innerHTML = $.i18n.prop('warn39');
+                return false;
+            } else if (value.length < 6) {
+                box.className = "box error";
+                tip.className = "tip error";
+                span.innerHTML = $.i18n.prop('warn40');
+                return false;
+            } else if (regs.userNameReg.test(value)) {
+                box.className = "box right";
+                tip.className = "tip hide";
+                return true;
+            } else {
+                box.className = "box error";
+                tip.className = "tip error";
+                span.innerHTML = $.i18n.prop('warn41');
+                return false;
+            }
+        }
+
+        /* pwd.onkeyup=pwd.onfocus=pwd.onblur=function(evt) {
+             var e = evt || window.event;
+             checkPwd(e);
+         }*/
+        function checkPwd(_e) {
+            var type;
+            if (_e) {
+                type = _e.type;
+            }
+            var value = pwd.value;
+            var box = pwd.parentNode;
+            var tip = box.nextElementSibling;
+            var span = tip.lastElementChild;
+            if (type == "focus") {
+                if (value == "") {
+                    box.className = "box";
+                    tip.className = "tip default";
+                    span.innerHTML = $.i18n.prop('warn42');
+                    return false;
+                }
+            }
+            if (type == "blur") {
+                if (value == "") {
+                    box.className = "box";
+                    tip.className = "tip hide";
+                    return false;
+                }
+            }
+
+            if (value == "") {
+                box.className = "box error";
+                tip.className = "tip error";
+                span.innerHTML = $.i18n.prop('warn43');
+                return false;
+            } else if (regs.pwdReg.test(value)) {
+                box.className = "box right";
+                var level = getPwdLevel(value);
+                switch (level) {
+                    case 1:
+                        tip.className = "tip ruo";
+                        break;
+                    case 2:
+                        tip.className = "tip zhong";
+                        break;
+                    case 3:
+                        tip.className = "tip qiang";
+                        break;
+                }
+                return true;
+                // 弱  中  强
+                // 字母、数字、特殊字符
+                // level 1弱 2中  3强
+                // tip ruo zhong qiang
+                // jkj343?
+                // tip.className = ""
+            } else {
+                box.className = "box error";
+                tip.className = "tip error";
+                span.innerHTML = $.i18n.prop('warn44');
+                return false;
+            }
+        }
+
+        /* pwd2.onkeyup=pwd2.onfocus=pwd2.onblur=function(evt) {
+             var e = evt || window.event;
+             checkPwd2(e);
+         }*/
+        function checkPwd2(_e) {
+            var type;
+            if (_e) {
+                type = _e.type;
+            }
+            var value1 = pwd.value;
+            var value = pwd2.value;
+            var box = pwd2.parentNode;
+            var tip = box.nextElementSibling;
+            var span = tip.lastElementChild;
+            if (type == "focus") {
+                if (value == "") {
+                    box.className = "box";
+                    tip.className = "tip default";
+                    span.innerHTML = $.i18n.prop('warn45');
+                    return false;
+                }
+            }
+            if (value == "") {
+                box.className = "box error";
+                tip.className = "tip error";
+                span.innerHTML = $.i18n.prop('warn45');
+                return false;
+            } else if (value1 == value) {
+                box.className = "box right";
+                tip.className = "tip hide";
+                return true;
+            } else {
+                box.className = "box error";
+                tip.className = "tip error";
+                span.innerHTML = $.i18n.prop('warn46');
+                return false;
+            }
+        }
+
+        /*  email.onkeyup=email.onfocus=email.onblur=function(evt) {
+              var e = evt || window.event;
+              checkEmail(e);
+          }*/
+        function checkEmail(_e) {
+            var type;
+            if (_e) {
+                type = _e.type;
+            }
+            var value = email.value;
+            var box = email.parentNode;
+            var tip = box.nextElementSibling;
+            var span = tip.lastElementChild;
+            if (type == "focus") {
+                if (value == "") {
+                    /*box.className = "box";
+                    tip.className = "tip default";
+                    span.innerHTML = "支持汉字、字母、数字、“-”“_”的组合，4-20个字符";*/
+                    return false;
+                }
+            }
+            if (type == "blur") {
+                if (value == "") {
+                    box.className = "box";
+                    tip.className = "tip hide";
+                    return false;//不继续往下走
+                }
+            }
+
+            if (value == "") {
+                box.className = "box error";
+                tip.className = "tip error";
+                span.innerHTML = $.i18n.prop('emailPo');
+                return false;
+            } else if (value.indexOf('@') != -1) {
+                //邮箱格式验证
+                if (!/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(value)) {
+                    box.className = "box error";
+                    tip.className = "tip error";
+                    span.innerHTML = $.i18n.prop('warn47');
+                    return false;
+                } else {
+                    box.className = "box right";
+                    tip.className = "tip hide";
+                    return true;
+                }
+
+            } else {
+                if (!/^1\d{10}$/.test(value)) {
+                    box.className = "box error";
+                    tip.className = "tip error";
+                    span.innerHTML = $.i18n.prop('warn48');
+                    return false;
+                } else {
+                    box.className = "box right";
+                    tip.className = "tip hide";
+                    return true;
+                }
+            }
+            /* else {
+                            box.className = "box error";
+                            tip.className = "tip error";
+                            span.innerHTML = "格式错误，请输入正确的手机号/邮箱";
+                            return false;
+                        }*/
+        }
+
+        function checkCode() {
+            if ($('#code').val() != '' && $('#code').val() != 'undefined' && $('#code').val() != null) {
+                return true;
+            }
+            alert($.i18n.prop('codePo'));
+            return false;
+        }
+
+        btn.onclick = function () {
+            /* var box = ck.parentNode;
+             var tip = box.nextElementSibling;
+             var span = tip.lastElementChild;*/
+
+            if (checkUserName() && checkPwd() && checkPwd2() && checkEmail() && checkCode()) {
+                //doRegister();
+                //手机号/邮箱 不为空，需要校验验证码
+                /*if($('#email').val() != '' && $('#email').val()!='undefined' && $('#email').val()!=null){
+
+				}*/
+                var param = {
+                    userName: userName.value,
+                    pwd: pwd.value,
+                    code: $('#code').val(),
+                    email: email.value
+
+                };
+                $.ajax({
+                    type: "post",
+                    url: "/index/register",
+                    data: param,
+                    /*userName:userName,
+                    password:pwd,
+                    tel:mobile,
+                    email:email*/
+                    success: function (result) {
+
+                        if (result.success) {
+                            alert($.i18n.prop('registerSuccess'));
+                            setTimeout(window.location.href = "/doLogin", "2000");
+                        } else {
+                            alert($.i18n.prop(result.msg));
+                            console.log(result);
+                        }
+                    }
+                });
+            }
+            else {
+                return false;
+            }
+
+        }
+
+
+        /*
+        if(ck.checked) {
+
+        } else {
+            tip.className = "tip error";
+            span.innerHTML = "请同意协议";
+            return false;
+        }*/
+
+        /*ck.onclick = function() {
+            var box = ck.parentNode;
+            var tip = box.nextElementSibling;
+            var span = tip.lastElementChild;
+            if(ck.checked) {
+                tip.className = "tip hide";
+            }
+        }*/
+    }
+
+    function getPwdLevel(pwd) {
+        var level = 0;
+        var numReg = true, strReg = true, tsReg = true;
+        for (var i = 0; i < pwd.length; i++) {
+            if (numReg && regs.numReg.test(pwd[i])) {
+                level++;
+                numReg = false;
+                continue;
+            }
+            if (strReg && regs.strReg.test(pwd[i])) {
+                level++;
+                strReg = false;
+                continue;
+            }
+            if (tsReg && regs.tsReg.test(pwd[i])) {
+                level++;
+                tsReg = false;
+            }
+        }
+        return level;
+    }
+
+
+</script>
+<script>
+    var after = '';
+    var InterValObj; //timer变量，控制时间  
+    var count = 60; //间隔函数，1秒执行  
+    var curCount = 60;//当前剩余秒数    
+    var exp = new Date();
+    var time;
+    time = exp.getTime();
+
+
+    //获取cookie值  
+    function getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+
+    //这是有设定过期时间的使用示例：   
+    //s20是代表20秒   
+    //h是指小时，如12小时则是：h12   
+    //d是天数，30天则：d30       
+    //设置cookie  
+    function setCookie(name, value, time) {
+        var strsec = getsec(time);
+        var exp = new Date();
+        exp.setTime(exp.getTime() + strsec * 1);
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+    }
+
+    function getsec(str) {
+        // alert(str);   
+        var str1 = str.substring(1, str.length) * 1;
+        var str2 = str.substring(0, 1);
+        if (str2 == "s") {
+            return str1 * 1000;
+        }
+        else if (str2 == "h") {
+            return str1 * 60 * 60 * 1000;
+        }
+        else if (str2 == "d") {
+            return str1 * 24 * 60 * 60 * 1000;
+        }
+    }
+
+    document.getElementById('fresh').onclick = function sendMessage() {
+        if (getCookie('after') > time && document.cookie.indexOf('after=') != -1) {
+            alert($.i18n.prop('warn49'));
+            return false;
+        }
+        trySend();//调用一次          
+    }
+
+    function trySend() {
+        if (getCookie('after') < time || document.cookie.indexOf('after=') == -1 || getCookie('after') == null) {
+            //判断是手机还是邮箱，手机进行手机号校验，邮箱进行邮箱号校验，校验成功后发送验证码
+            var em = $('#email').val();
+            var url;
+            /*if(!checkEmail()){
+                return false;
+			}
+            if(em.indexOf('@') != -1){
+                url='index/sendEmailCode';
+			}else{
+                url='index/SendSms';
+			}*/
+            if (em == '' || em == 'undefined' || em == null) {//邮箱
+
+                alert($.i18n.prop('emailPo'));
+                return false;
+            } else if (em.indexOf('@') != -1) {
+                //邮箱格式验证
+                if (!/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(em)) {
+                    alert($.i18n.prop('warn47'));
+                    return false;
+                }
+                url = 'index/sendEmailCode';
+
+            } else {
+                //手机号格式验证
+                if (!/^1\d{10}$/.test(em)) {
+                    alert($.i18n.prop('warn48'));
+                    return false;
+                }
+                url = 'index/SendSms';
+
+            }
+            $.ajax({
+                url: url,
+                type: "post",
+                dataType: "json",
+                data: {param: em},
+                beforeSend: function (XMLHttpRequest) {
+                    XMLHttpRequest.setRequestHeader("token", token);
+                },
+                success: function (data) {
+                    if (data.success) {
+                        alert($.i18n.prop('warn50'));
+                    } else {
+                        alert($.i18n.prop(data.msg));
+                    }
+                },
+                error: function () {
+
+                }
+            });
+
+            setCookie("after", time + 60 * 1000, "s60");
+            setCookie("phone", $('#phone').val(), "s60");
+            curCount = count;
+            //设置button效果，开始计时  
+            $('#fresh').attr("disabled", "true");
+            document.getElementById('fresh').innerHTML = curCount + $.i18n.prop('warn51');
+            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次  
+        }
+    }
+
+    //timer处理函数  
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器  
+            $("#fresh").removeAttr("disabled");//启用按钮  
+            document.getElementById('fresh').innerHTML = $.i18n.prop('warn52');
+            // code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效     
+        } else {
+            curCount--;
+            document.getElementById('fresh').innerHTML = curCount + $.i18n.prop('warn51');
+        }
+    }
+
+
+</script>
+<style>
+    html,body{width: 100%;
+        height: 100%;}
+    .language {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        cursor: pointer;
+        color: white;
+    }
+
+    /*	.language .lang {
+            width: 100px;
+            padding: 10px 0;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            z-index: 200;
+            display: none;
+            cursor: pointer;
+            background: rgba(255,255,255,0.5);
+        }*/
+</style>
+</html>

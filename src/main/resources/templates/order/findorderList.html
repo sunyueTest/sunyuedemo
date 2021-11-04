@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>预约列表</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/findorderList.css}">
+</head>
+<body>
+<div class="int-title">
+    <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a1.png"></div>
+    <div class="title-text">查看预约<span class="title-text-top"></span><span class="title-text-bottom"></span>
+    </div>
+</div>
+<div class="body-div">
+    <div class="title">
+        <table class="layui-hide" id="table" lay-filter="table"></table>
+    </div>
+    <div class="orderDetails" hidden="hidden">
+        <div class="order-time"><span>&nbsp;&nbsp;预约时间：</span><span class="orderTime"></span><span>&nbsp;&nbsp;预约人：</span><span class="orderName"></span></div>
+        <p style="margin-top: 5vh">预约信息：</p>
+        <div class="order-Details"></div>
+        <p style="margin-top: 5vh;">专家回复：</p>
+        <div class="order-Reply"></div>
+        <button id="order" class="layui-btn layui-btn-primary layui-btn-radius"
+                lay-event="lotAdd" style="margin-left: 70%;!important;"> 撤销预约
+        </button>
+    </div>
+</div>
+
+</body>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    $("#order").hide();
+    layui.use('table', function () {
+        let tableData = [
+            {field: 'orderTitle', title: "预约标题", align: 'center', width: '50%'},
+            {field: 'expertsName', title: "专家名称", align: 'center', width: '25%'},
+            {
+                field: 'isOrder', title: "预约状态", align: 'center', width: '25%',
+                templet: function (d) {
+                    if (d.isOrder == 0) {
+                        return '<span>待接受</span>'
+                    } else if (d.isOrder == 1) {
+                        return '<span style="color: greenyellow;">已同意</span>'
+                    } else if (d.isOrder == 2) {
+                        return '<span style="color: red;">已拒绝</span>'
+                    }else if (d.isOrder == 3) {
+                        return '<span style="color: grey;">已取消</span>'
+                    }
+                }
+            },
+        ];
+
+        table = layui.table;
+        form = layui.form;
+
+        table.render({
+            elem: '#table'
+            , url: '/sysUserOrder/findorder'
+            , title: ''
+            , cols: [tableData]
+            , page: true,
+            request: {limitName: 'size'},
+            response: {
+                statusCode: 'success'
+            },
+            done: function (res, curr, count){
+                $(".layui-laypage-btn").text("转");
+            },
+            parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                return {
+                    "code": res.state, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.datas,//解析数据列表
+
+                };
+                if ('success' != res.state) {
+                    layer.msg($.i18n.prop(res.msg), {icon: 2})
+                }
+            }
+        });
+
+        table.on('row(table)', function (obj) {
+            let data = obj.data;
+            obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+            $.ajax({
+                url: '/sysUserOrder/findorderDetails',
+                type: "GET",
+                data: {
+                    id: data.id,
+                },
+                dataType: "json",
+                error: function (data, type, err) {
+                    layer.closeAll('loading');
+                    layer.msg($.i18n.prop('fail'), {
+                        offset: '6px', icon: 2
+                    });
+                },
+                success: function (data) {
+                    if (data.state == "success") {
+                        $(".orderDetails").show();
+                        $(".orderTime").text(data.data.orderTime);
+                        $(".order-Details").html("<span>"+data.data.orderDetails+"</span>");
+                        $(".orderName").text(data.data.orderName);
+                        if (data.data.orderReply != null && data.data.orderReply != "") {
+                            $(".order-Reply").html("<span>"+data.data.orderReply+"</span>");
+                            $(".order-Reply").css("color","#FFFFFF");
+                        } else {
+                            $(".order-Reply").html("<span>当前专家暂无回复</span>");
+                            $(".order-Reply").css("color","#B08F54");
+                        }
+                        $("#order").attr("dataId", data.data.id);
+                        var now = new Date(data.data.orderTime);
+                        if (data.data.isOrder == "0") {
+                            $("#order").show();
+                        }else if(data.data.isOrder == "1"&& now>new Date()){
+                            $("#order").show();
+                        }else if(data.data.isOrder == "1"&& now<new Date()){
+                            $("#order").hide();
+                        } else {
+                            $("#order").hide();
+                        }
+                    }
+                }
+            })
+        })
+    });
+    $("#order").click(function () {
+        var id = $("#order").attr("dataId");
+        layer.confirm("是否确定取消预约？", {
+            btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+            title: $.i18n.prop('info')
+        }, function (index) {
+            $.ajax({
+                url: '/sysUserOrder/updateOrder',
+                type: "GET",
+                data: {
+                    id: id,
+                    isOrder: 3
+                },
+                dataType: "json",
+                error: function (data, type, err) {
+                    layer.closeAll('loading');
+                    layer.msg($.i18n.prop('fail'), {
+                        offset: '6px', icon: 2
+                    });
+                },
+                success: function (data) {
+                    layer.msg($.i18n.prop(data.msg));
+                    if (data.state == "success") {
+                        reloadTable();
+                        $(".orderDetails").hide();
+                    }
+                }
+            })
+        })
+    })
+
+    function reloadTable() {
+        table.reload('table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+</script>
+</html>

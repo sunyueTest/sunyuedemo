@@ -1,0 +1,221 @@
+/*重置默认的外边距和内边距*/
+*{
+   /* margin:0;
+    padding:0;*/
+}
+body{
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+/*常用标签的样式重置*/
+i{
+    font-style: normal;
+}
+a{
+    text-decoration: none;
+}
+input{
+    outline: none;
+    border:none;
+}
+/*设定html和body的宽度为100%*/
+html,body{
+    width:100%;
+    font-size: 14px;
+}
+/*版心*/
+.container{
+    width:1210px;
+    margin:0 auto;
+    
+}
+/*头部*/
+.header{
+    width:100%;
+    height: 110px;
+    box-shadow: 10px 10px 10px rgba(111,111,111,.5);
+    position: relative;
+
+}
+/*Logo*/
+.header .logo{
+    display: inline-block;
+    width: 160px;
+    height:50px;
+    background: url("../img/icon.png") no-repeat;
+    position: absolute;
+    top:20px;
+    left:20px;
+}
+.header .desc{
+    font-size: 18px;
+    line-height: 34px;
+    border-left: 1px solid #ccc;
+    position: absolute;
+    left: 200px;
+    top:28px;
+    padding-left: 20px;
+    font-weight:bold;
+}
+.title{
+	color: #ffffff;
+	font-size:25px;
+	text-align: center;
+	padding-bottom:10px ;
+	letter-spacing: 5px;
+	line-height: 58px;
+}
+/*-----------------------------------注册模块---------------------------*/
+.register{
+	width: 500px;
+	height:388px;
+	padding-top:40px;
+	position: relative;
+	margin-top: 70px;
+	background: url("../img/register/white.png") ;
+	margin-left: 5%;
+}
+/*包裹表单项和对应的提示信息的容器的样式设置*/
+.register-box{
+	width:400px;
+	height: 50px;
+	padding-bottom: 5px;
+	padding-left: 80px;
+	font-size: 10px;
+
+}
+/*表单项样式设置*/
+.register-box .box{
+	width:350px;
+	height:65%;
+	padding-left: 10px;
+	border: 1px solid #ccc;
+	position: relative;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+
+}
+.register-box .box.error i{
+	/*border:1px solid red;*/
+	width:40px;
+	height: 40px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	top:50%;
+	margin-top: -20px;
+	/*right: 15px;*/
+	left:350px;
+	border-radius: 50%;
+}
+.register-box .box input{
+	display:inline;
+	width:220px;
+	height:32px;
+	folat:right;
+	font-size:10px;
+	color: #999;
+	padding-left: 20px;
+	background:transparent;
+}
+.register-box .box label{
+	color:#000;
+	margin-left: 10px;
+}
+
+/*验证通过*/
+.register-box .box.right i{
+	width:40px;
+	height: 40px;
+	background-image: url(../img/register/right.png) ;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	top:50%;
+	margin-top: -20px;
+	/*right: 15px;*/
+	left:350px;
+	border-radius: 50%;
+}
+/*提示信息样式设置*/
+.register-box .tip {
+	width:100%;
+	/*line-height: 30px;*/
+	font-size: 12px;
+}
+.register-box .tip i{
+	width: 20px;
+
+	display: inline-block;
+	vertical-align: middle;
+}
+.register-box .tip span{
+	color: #CCCCCC;
+}
+/*提示信息隐藏样式*/
+.register-box .tip.hide{
+	display: none;
+}
+/*提示信息默认样式*/
+.register-box .tip.default i {
+	/*background: url(../img/default.png) no-repeat center center;*/
+}
+.register-box .tip.default span{
+	color: #ccc;
+}
+/*提示信息错误样式*/
+.register-box .tip.error i {
+	/*background: url(../img/err.png) no-repeat center center;*/
+}
+.register-box .tip.error span{
+	color: red;
+}
+/*提示信息密码弱*/
+.register-box .tip.ruo i {
+	/*background: url(../img/ruo.png) no-repeat center center;*/
+}
+/*提示信息密码中*/
+.register-box .tip.zhong i {
+	/*background: url(../img/zhong.png) no-repeat center center;*/
+}
+/*提示信息密码中*/
+.register-box .tip.qiang i {
+	/*background: url(../img/qiang.png) no-repeat center center;*/
+}
+/*京东用户注册协议*/
+.register-box.xieyi{
+	width:100%;
+	height: 1px;
+	padding-bottom: 30px;
+/*	background-color: #ccc;*/
+}
+.register-box.xieyi .box{
+	line-height: normal;
+	padding: 0;
+	border: none;
+}
+.register-box.xieyi .box.error{
+	line-height: normal;
+	padding: 0;
+	border: 1px solid red;
+}
+.register-box.xieyi .box input{
+	width: auto;
+}
+/*注册*/
+ .register #btn{
+	width: 180px;
+	height: 40px;
+	font:bold 18px/40px "宋体";
+	color: white;
+	background-image:  url(../img/register/regbtn.png);
+	 background-repeat: no-repeat;
+	 background-size: 100% 100%;
+	 display:block;
+	 margin:0 auto;
+	outline-color: white;
+	 cursor: pointer;
+}
+/*.register button:hover{
+	background-color: red;
+}*/

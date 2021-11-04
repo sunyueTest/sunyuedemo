@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" style="width: 1050px;margin-top: -70px;margin-left: -85px;">
+<head>
+    <meta charset="utf-8">
+    <title>添加溯源阶段信息</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <style>
+        .layui-upload-img {
+            width: 92px;
+            height: 92px;
+            margin: 0 10px 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+<input id="send" value="" />
+<div style="margin: 80px;" class="layui-form layui-form-pane">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>添加信息</legend>
+    </fieldset>
+
+    <div class="layui-inline" style="margin: 5px">
+        <label class="layui-form-label">阶段名称</label>
+        <div class="layui-input-inline" style="width: 300px">
+            <input type="text" id="present" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-inline" style="margin: 5px">
+        <label class="layui-form-label">当前阶段</label>
+        <div class="layui-input-inline" style="width: 300px">
+            <input type="text" id="stage" autocomplete="off" class="layui-input" placeholder="只能为数字">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text" style="margin: 5px">
+        <label class="layui-form-label">当前阶段简介</label>
+        <div class="layui-input-block"><textarea id="imgInfo" placeholder="请输入内容" class="layui-textarea"></textarea></div>
+    </div>
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top:30px;"><legend>上传溯源图片</legend></fieldset>
+    <div class="layui-upload">
+        <button type="button" class="layui-btn" id="test2">添加溯源图片</button>
+        <span id="alert" style="margin-left: 20px; color:#f85063"></span>
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">预览图：
+            <div class="layui-upload-list" id="demo2"></div></blockquote>
+    </div>
+
+    <div class="layui-form-item" style="margin-left: -103px;margin-top: 50px">
+        <div class="layui-input-block"><button class="layui-btn layui-btn-normal" id="save">确认添加</button></div>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script src="/static/layui/layui.js" charset="UTF-8"></script>
+<script src="/static/layui/layui.all.js" charset="UTF-8"></script>
+<script>
+    $(function () {
+        $("#send").val(parent.as());
+        layui.use(['laydate', 'upload'], function () {
+            var flag = 0;
+            var str = new Array();
+            var upload = layui.upload, laydate = layui.laydate;
+            layui.use('upload', function () {
+                var $ = layui.jquery, upload = layui.upload;
+                //多图片上传
+                upload.render({
+                    id: new Date().getTime(),
+                    elem: '#test2',
+                    url: '/newTraceSource/newUpLoadImg',
+                    multiple: true,
+                    before: function (obj) {
+                        //预读本地文件示例，不支持ie8
+                        obj.preview(function (index, file, result) {
+                            $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                        });
+                        if(flag == 7){
+                            $("#test2").remove();
+                            $("#alert").html("提示：达到图片最大上传数量");
+                        }
+                    },
+                    done: function (res) {
+                        if (!res.code > 0) {
+                            str[flag] = res.url;
+                            flag++;
+                        }
+                    }
+                });
+            });
+            $('#save').click(function () {
+                var present = $('#present').val();
+                var stage = $("#stage").val();
+                // var userName = $('#userName').val();
+                var imgInfo = $('#imgInfo').val();
+                var sendid = $('#send').val();
+                if(stage^[0-9]*$){
+                    if(str != null && str.length > 0){
+                        $.ajax({
+                            type: "post",
+                            url: "/newTraceSource/newAddTraceSourceInfo",
+                            data:  "data="+str+"&present="+ present+ "&imgInfo="+imgInfo+"&stage="+stage+"&sendid="+sendid,
+                            success: function (data) {
+                                if (data.state == 'success') {
+                                    layer.msg("创建成功");
+                                    setTimeout("document.location.reload();",500);
+                                } else {
+                                    layer.msg(data.msg);
+                                }
+                            }
+                        });
+                    }else{
+                        layer.msg('阶段图片不能为空');
+                    }
+                }else{
+                    layer.msg('当前阶段只能为数字');
+                }
+            });
+        });
+    });
+</script>
+</html>

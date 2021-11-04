@@ -1,0 +1,809 @@
+body{
+    padding:0;
+    margin:0;
+    font-size:625%;
+}
+.contentBox{
+    position:relative;
+    font-size:1rem;
+}
+.pointIcon{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: .8vh .7vh 0;
+    border-style: solid;
+    border-color: #fff transparent transparent;
+    vertical-align: middle;
+    margin-top: -1.5vh;
+
+}
+.dangerCheckedText{
+    margin: 0 .2vw 0 0;
+    display: inline-block;
+    line-height: 3vh;
+    height: 3vh;
+    width: 6.5vw;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+.constructionCheckedText{
+    margin: 0 .2vw 0 0;
+    display: inline-block;
+    line-height: 3vh;
+    height: 3vh;
+    width: 6.5vw;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.banner{
+    position:absolute;
+    top:0;
+    left:0;
+    color:#fff;
+    background:url("../../static/img/jialing/jlBannerBg.jpg")no-repeat;
+    background-size:100% 100%;
+    width:100%;
+    height:8.8vh;
+}
+.dangerCheckedImg{
+    height: 2vh;
+    margin-top: -1.8vh;
+}
+.constructionChecked{
+    background: rgba(11,92,145,0.55);
+    padding: .5vh .4vw;
+    font-size: 1.8vh;
+    height: 3vh;
+    line-height: 3vh;
+    cursor: pointer;
+}
+.dangerChecked{
+    background: rgba(11,92,145,0.55);
+    padding: .5vh .4vw;
+    font-size: 1.8vh;
+    height: 3vh;
+    line-height: 3vh;
+    cursor: pointer;
+}
+.dataAndImg{
+     width: 1vw;
+     margin-top: 2vh;
+     margin-left: .8vw;
+     margin-right: .8vw;
+ }
+.settingIcon{
+    width: .8vw;
+    margin-right: .3vw;
+}
+#startTime{
+    height: 4vh;
+    line-height: 4vh;
+    margin-top: 2vh;
+    vertical-align: middle;
+    border: none;
+    color: #fff;
+    background: url(../../static/img/jialing/dateIcon.png)no-repeat 5% center rgba(11,92,145,0.55);
+    background-size: 12%;
+    padding-left: 2.2vw;
+    width: 8vw;
+    font-size: 1.8vh;
+    cursor: pointer;
+
+}
+#endTime{
+    height: 4vh;
+    line-height: 4vh;
+    margin-top: 2vh;
+    vertical-align: middle;
+    border: none;
+    color: #fff;
+    background: url(../../static/img/jialing/dateIcon.png)no-repeat 5% center rgba(11,92,145,0.55);
+    background-size: 12%;
+    padding-left: 2.2vw;
+    width: 8vw;
+    font-size: 1.8vh;
+    cursor: pointer;
+}
+.updatePlaceText{
+    display:inline-block;
+    width: 9vw;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    float: right;
+    height: 4vh;
+    line-height: 4vh;
+    text-align:right;
+    font-size: 1.8vh;
+    margin-right:1vw;
+}
+.searchInputBox{
+    display:none;
+}
+.constructionItemBox{
+    display:none;
+    background: rgb(10, 92, 143);
+    position: absolute;
+    font-size: 2vh;
+    width: 10vw;
+    text-align: left;
+    text-indent: 1vw;
+    max-height: 55vh;
+    overflow-y: auto;
+}
+.constructionItem{
+    height: 4vh;
+    line-height: 4vh;
+    cursor: pointer;
+    font-size: 1.8vh;
+
+}
+.constructionItem:hover{
+    background: rgba(4,143,250,0.45);
+}
+.itemNameValueBox{
+
+}
+.itemBox {
+    width: 45%;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: .9rem;
+    float: left;
+    margin-left: 4%;
+    margin-top: .7rem;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+}
+.placeDeviceItem{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 1.8vh;
+    width: 10vw;
+    text-align: center;
+    height: 4vh;
+    line-height: 4vh;
+    background: #448ACA;
+    border-radius: 5px;
+    margin: .5vh 0 .5vh .5vw;
+}
+.placeLeft{
+    width:22vw;
+    float: left;
+    height:40vh;
+}
+.placeRight{
+    width: 9vw;
+    float: right;
+    height:40vh;
+}
+.placeMsg p{
+    height: 3vh;
+    line-height: 3vh;
+    display: block;
+    margin-left: .5vw;
+    font-size: 1.5vh;
+}
+.placeTitle{
+    height: 4vh;
+    line-height: 4vh;
+    display: inline-block;
+    font-size: 2vh;
+    margin-left: .5vw;
+}
+.placeRightImg{
+    width: 9vw;
+    height:40vh;
+}
+.placeDeviceItemBox{
+    height:25vh;
+    overflow-y:auto;
+}
+.placeBox{
+    display:none;
+    position: absolute;
+    top: 8.5vh;
+    left: 28.2vw;
+    background: rgb(9, 83, 131);
+    color: #fff;
+    width: 22vw;
+    height: 40vh;
+}
+.constructionItemImg{
+    height: 2vh;
+    margin-top: -3vh;
+}
+.constructionItemText{
+    height: 4vh;
+    line-height: 4vh;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    width: 7vw;
+}
+.dangerItemBox{
+    background: rgb(10, 92, 143);
+    position: absolute;
+    font-size: 2vh;
+     display: none;
+    width: 10vw;
+    text-align: center;
+}
+.dangerItem{
+    height: 4vh;
+    line-height: 4vh;
+    cursor: pointer;
+    font-size: 1.8vh;
+}
+.dangerItemImg{
+    height: 2vh;
+    margin-top: -3vh;
+}
+.dangerItemText{
+    height: 4vh;
+    line-height: 4vh;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    width: 7vw;
+}
+.logoBox{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 1.6vh;
+    margin-left:1.5vw;
+}
+.constructionCheckedImg{
+    height: 2vh;
+    margin-top: -1.8vh;
+}
+.logoImg{
+    height: 4.5vh;
+    max-width:5vw;
+}
+.logoText{
+    font-size: 3.5vh;
+    line-height: 5vh;
+    height: 5vh;
+    display: inline-block;
+    vertical-align: middle;
+    width:24vw;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.noMsg{
+    font-size: 2vh;
+    text-align: center;
+    position: absolute;
+    top: 12vh;
+    left: 50%;
+    margin-left: -2vw;
+}
+.noDeviceMsg{
+    display:none;
+    margin-top: 7vh;
+    font-size: 2vh;
+    text-align: center;
+}
+.noUpdateMsg{
+    display:none;
+    margin-top: 7vh;
+    font-size: 2vh;
+    text-align: center;
+}
+.noPlaceMsg{
+    text-align: center;
+    margin-top: 7vh;
+    font-size: 2vh;
+}
+.constructionBox{
+    display: inline-block;
+    margin-top: 2vh;
+    vertical-align: middle;
+/*    margin-left: 2vw;*/
+    cursor: pointer;
+    width: 10vw;
+}
+.dangerPointBox{
+    display:inline-block;
+    margin-top: 2vh;
+    vertical-align: middle;
+    margin-left:2vw;
+    cursor:pointer;
+    width:10vw;
+}
+.dangerItem:hover{
+    background: rgba(4,143,250,0.45);
+}
+.dataBox{
+    display:inline-block;
+    margin-left:2vw;
+}
+
+.settingBox{
+    background: rgba(11,92,145,0.55);
+    padding: .5vh 1vw;
+    font-size: 1.8vh;
+    height: 3vh;
+    line-height: 3vh;
+    cursor: pointer;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 2vh;
+    margin-left: 2vw;
+}
+.rightTopWeather{
+    top: 15vh;
+    position: absolute;
+    height: 24vh;
+    width: 19vw;
+    color: #fff;
+    left: 1.8vw;
+    background: rgb(10, 92, 145);
+    font-size: 1.5vh;
+}
+
+.rightTopWeatherItem{
+    padding: .5vh 0;
+    margin: 0 auto;
+    width: 18vw
+}
+.weatherNum{
+    display: inline-block;
+    width: 4vw;
+}
+.weatherColor{
+    display: inline-block;
+    width: 9vw;
+    height: 1.4vh;
+}
+.weatherText{
+    margin-left: .5vw;
+}
+
+
+
+
+
+
+
+
+
+.monitorBox{
+    display:inline-block;
+    margin-top: 2vh;
+    vertical-align: middle;
+    margin-left:2vw;
+    cursor:pointer;
+    width:10vw;
+}
+
+.monitorChecked{
+    background: rgba(11,92,145,0.55);
+    padding: .5vh .4vw;
+    font-size: 1.8vh;
+    height: 3vh;
+    line-height: 3vh;
+    cursor: pointer;
+}
+.monitorCheckedImg{
+    height: 2vh;
+    margin-top: -1.8vh;
+}
+
+
+
+.monitorCheckedText{
+    margin: 0 .2vw 0 0;
+    display: inline-block;
+    line-height: 3vh;
+    height: 3vh;
+    width: 6.5vw;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+
+
+.pointIcon{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: .8vh .7vh 0;
+    border-style: solid;
+    border-color: #fff transparent transparent;
+    vertical-align: middle;
+    margin-top: -1.8vh;
+
+}
+
+
+.monitorItemBox{
+    background: rgb(10, 92, 143);
+    position: absolute;
+    font-size: 2vh;
+    display: none;
+    width: 10vw;
+    text-align: center;
+}
+
+
+
+.monitorItem{
+    height: 4vh;
+    line-height: 4vh;
+    cursor: pointer;
+    font-size: 1.8vh;
+}
+
+.monitorItem:hover{
+    background: rgba(4,143,250,0.45);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*switch开关*/
+.mui-switch {
+    width: 2.3vw;
+    height: 2vh;
+    position: relative;
+    border: 1px solid #dfdfdf;
+    background-color: #fdfdfd;
+    box-shadow: #dfdfdf 0 0 0 0 inset;
+    border-radius: 3rem;
+    background-clip: content-box;
+    display: inline-block;
+    -webkit-appearance: none;
+    user-select: none;
+    outline: none;
+    cursor: pointer;
+}
+.mui-switch:before {
+    content: '';
+    width: 1.8vh;
+    height: 1.8vh;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    border-radius: 3rem;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+.mui-switch:checked:before {
+    left: 2.1rem;
+}
+.mui-switch.mui-switch-anim {
+    transition: border cubic-bezier(0, 0, 0, 1) 0.4s, box-shadow cubic-bezier(0, 0, 0, 1) 0.4s;
+}
+.mui-switch.mui-switch-anim:before {
+    transition: left 0.3s;
+}
+.mui-switch.mui-switch-anim:checked {
+    box-shadow: #64bd63 0 0 0 16px inset;
+    background-color: #64bd63;
+    transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s;
+}
+.mui-switch.mui-switch-anim:checked:before {
+    transition: left 0.3s;
+}
+
+
+
+
+
+.Box_points_switch{
+    display: inline-block;
+    vertical-align: middle;
+    text-align:center;
+    cursor: pointer;
+}
+.leftBox{
+    position: absolute;
+    height: 27vh;
+    width: 22vw;
+    color: #fff;
+    right: 1.5vw;
+    background: rgb(10, 92, 145);
+}
+.leftOneBox{
+    top: 15vh;
+
+}
+.leftTwoBox{
+top:43vh;
+}
+.leftThreeBox{
+top:71vh;
+}
+.boxTitle{
+    margin-left:1vw;
+    margin-top:1vh;
+}
+.rightBoxTitle{
+    position: absolute;
+    left: 1vw;
+    top: 1.5vh;
+}
+.titleImg{
+    display: inline-block;
+    border: 2px solid #04fa83;
+    height: 2vh;
+    vertical-align: middle;
+    margin-top: -.3vh;
+}
+.titleText{
+    height: 4vh;
+    line-height: 4vh;
+    display: inline-block;
+    font-size:2.4vh;
+    margin-left:.5vw;
+}
+#regionalStatePie{
+    width: 22vw;
+    height: 22vh;
+}
+.deviceBox{
+    font-size:2vh;
+    margin-top: 2vh;
+    display:none;
+}
+.deviceName{
+    width:10vw;
+    text-align: left;
+    display:inline-block;
+    text-indent: 1vw;
+    float:left;
+}
+.deviceType{
+    width:5vw;
+    text-align: left;
+    display:inline-block;
+
+}
+.deviceTypeName{
+    width:5vw;
+    text-align: left;
+    display:inline-block;
+
+}
+.deviceSwitch{
+    width:6vw;
+    text-align: center;
+    display:inline-block;
+
+}
+.deviceTitle{
+
+}
+.deviceItemBox{
+    margin-top: 1.5vh;
+    font-size: 1.8vh;
+    height: 15vh;
+    overflow-y: auto;
+}
+.deviceItem{
+
+}
+.template{
+    font-size: 1.8vh;
+    height:4vh;
+}
+.closeBtn {
+    cursor: pointer;
+    position: absolute;
+    right:1vw;
+    top:1vh;
+    display: inline-block;
+    margin-left: 8px;
+    text-align: center;
+    color: #fff;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    font-family: layui-icon!important;
+    font-size: 2vh;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+}
+.rightBox{
+    position: absolute;
+    top: 14vh;
+    right: 1vw;
+    color: #ffffff;
+    height: 82vh;
+    overflow-y: auto;
+    z-index:999;
+}
+.templateBox{
+    margin-top: 1.5vh;
+    height: 20vh;
+    overflow-y:auto;
+    display:none;
+}
+.templateName{
+    width: 9vw;
+    display: inline-block;
+    text-indent: 1vw;
+    height: 4vh;
+    float: left;
+    line-height: 4vh;
+}
+.dangerBorder{
+    border:2px solid #ef004f;
+}
+.warningBorder{
+    border:2px solid #ff9600;
+}
+.templateValue{
+    width: 11vw;
+    text-align: center;
+    display: inline-block;
+    color: #04fa83;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 4vh;
+    line-height: 4vh;
+}
+.editIcon{
+    width: 2vh;
+    margin-left: 1.8vw;
+    cursor:pointer;
+}
+.hiddenBtn{
+    position: absolute;
+    right: -1.3vw;
+    top: 8vh;
+    width: 1.3vw;
+    cursor:pointer;
+}
+.rightTopWeatherTitle{
+    height: 3vh;
+    line-height: 3vh;
+    font-size: 1.8vh;
+    margin-left: .5vw;
+}
+.rightHiddenBtn{
+    position: absolute;
+    right: 22vw;
+    top: 10vh;
+    width: 1.3vw;
+    cursor: pointer;
+}
+.rightItem{
+    width: 20vw;
+    height: 22vh;
+    background: rgba(0,0,0,0.2);
+    border-radius: 1vh;
+    position:relative;
+    margin-bottom: 5vh;
+}
+.jlDangerIcon{
+    display: inline-block;
+    width: 5vw;
+    float: left;
+    margin-left: 1vw;
+}
+.rightItemBottomRight{
+    display: inline-block;
+    float: left;
+    font-size: 2.3vh;
+}
+.rightItemBottom{
+    position: absolute;
+    bottom: 2vh;
+}
+.dangerTime{
+
+}
+.dangerMsg{
+
+}
+.rightItemBottomRight p{
+    height: 6vh;
+    line-height: 7vh;
+    text-align: center;
+    width:13vw;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+input::-webkit-input-placeholder{
+    color:#fff;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#fff;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#fff;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+    color:#fff;
+}
+
+
+.BMap_cpyCtrl {
+    display: none;
+}
+.anchorBL{display:none;}
+
+
+
+.onTrialImg{
+    display:block;
+    position:absolute;
+    left:0;
+    height:100%;
+}
+
+
+
+
+
+/*æ»šåŠ¨æ¡*/
+::-webkit-scrollbar { /*æ»šåŠ¨æ¡æ•´ä½“éƒ¨åˆ†ï¼Œå…¶ä¸­çš„å±žæ€§æœ‰width,height,background,borderç­‰ï¼ˆå°±å’Œä¸€ä¸ªå—çº§å…ƒç´ ä¸€æ ·ï¼‰ï¼ˆä½ç½®1ï¼‰*/
+    width: 6px;
+    border-radius: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-button { /*æ»šåŠ¨æ¡ä¸¤ç«¯çš„æŒ‰é’®ï¼Œå¯ä»¥ç”¨display:noneè®©å…¶ä¸æ˜¾ç¤ºï¼Œä¹Ÿå¯ä»¥æ·»åŠ èƒŒæ™¯å›¾ç‰‡ï¼Œé¢œè‰²æ”¹å˜æ˜¾ç¤ºæ•ˆæžœï¼ˆä½ç½®2ï¼‰*/
+    height: 0;
+    background: #ffffff;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track { /*å¤–å±‚è½¨é“ï¼Œå¯ä»¥ç”¨display:noneè®©å…¶ä¸æ˜¾ç¤ºï¼Œä¹Ÿå¯ä»¥æ·»åŠ èƒŒæ™¯å›¾ç‰‡ï¼Œé¢œè‰²æ”¹å˜æ˜¾ç¤ºæ•ˆæžœï¼ˆä½ç½®3ï¼‰*/
+
+}
+
+::-webkit-scrollbar-track-piece { /*å†…å±‚è½¨é“ï¼Œæ»šåŠ¨æ¡ä¸­é—´éƒ¨åˆ†ï¼ˆä½ç½®4ï¼‰*/
+    width: 2px;
+    background: -webkit-linear-gradient(#064b7f , #027589); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#064b7f , #027589); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#064b7f , #027589); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#064b7f , #027589); /* 标准的语法 */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb { /*æ»šåŠ¨æ¡é‡Œé¢å¯ä»¥æ‹–åŠ¨çš„é‚£éƒ¨åˆ†ï¼ˆä½ç½®5ï¼‰*/
+    background: #027589;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-corner { /*è¾¹è§’ï¼ˆä½ç½®6ï¼‰*/
+    background: #82AFFF;
+}
+
+::-webkit-scrollbar-resizer { /*å®šä¹‰å³ä¸‹è§’æ‹–åŠ¨å—çš„æ ·å¼ï¼ˆä½ç½®7ï¼‰*/
+    background: #FF0BEE;
+}
+

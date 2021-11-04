@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新建农场</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/publicToiletDetail.css}" media="all">
+
+</head>
+<body>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="moveUp">上移</a>
+    ｜  <a class="layui-btn layui-btn-xs" lay-event="moveDown">下移</a>
+    ｜  <a class="layui-btn layui-btn-xs" lay-event="delete">删除</a>
+</script>
+
+<div class="formDiv" style="margin-top: 20px;">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label1" class="layui-form-label">农场名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="name" id="name" autocomplete="off" style="width: 200px;"
+                           th:value="*{bean.farmName}" class="layui-input">
+                    <input type="hidden" name="id" th:value="*{bean.id}" id="id">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline layui-inline-adress ">
+                <label id="publicToiletPosition" class="layui-form-label">农场地址</label>
+                <div class="layui-input-inline">
+                    <input type="text" lay-verify="required" style="width: 200px;"
+                           autocomplete="off"
+                           disabled="disabled" id="input_position"
+                           th:value="*{bean.longitude}+','+*{bean.latitude}"
+                           class="layui-input" placeholder="点击右侧按钮选取设备地址">
+                </div>
+                <img src="../img/location_icon.png" onclick="selectPoint()">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="label2" class="layui-form-label">选择摄像头</label>
+                <div class="layui-input-inline">
+                    <input type="text" autocomplete="off" class="layui-input" id="demo" readonly="readonly"
+                           th:value="${bean.cameraName}" style="width: 200px;">
+                    <input type="hidden" id="cameras" name="cameras" th:value="${bean.cameraNumber}">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="button" class="layui-btn layui-btn-radius" id="save" value="保存">
+            </div>
+        </div>
+
+    </form>
+</div>
+<!--<fieldset class="layui-elem-field layui-field-title">-->
+<!--    <legend id="legend">已选择</legend>-->
+<!--</fieldset>-->
+<!--<table class="layui-hide" id="sensor" lay-filter="sensor"></table>-->
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.all.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/static/js/tableSelect.js}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script language='javascript' th:inline="javascript">
+    var table = layui.table, id;
+    id = [[${bean.id}]];
+
+
+    //设置语言
+    $('#label1').text($.i18n.prop('farmName'));
+    $('#label2').text($.i18n.prop('selectCamera'));
+    $('#save').val($.i18n.prop('save'));
+    $('#legend').text($.i18n.prop('selected'));
+
+    //提交数据
+    $("#save").click(function () {
+        var name = $("#name").val();
+        if (name == '' || name.length == 0) {
+            layer.msg($.i18n.prop('warn11'), {icon: 5});
+            return false;
+        }
+        var position = $("input_position").val();
+        if (position == null) {
+            var inputPostion = $('#input_position').val();
+            var location = inputPostion.split(',');
+            if (location[0] == null || location[1] == 0) {
+                layer.msg($.i18n.prop('warn54'))
+                return false;
+            } else {
+                position = {lat: location[1], lng: location[0]}
+            }
+        }
+
+        var param = {
+            farmName: name,
+            id: $("#id").val(),
+            longitude: position.lng,
+            latitude: position.lat,
+            cameraNumber: $("#cameras").val(),
+            cameraName: $("#demo").val(),
+        };
+
+        $.ajax({
+            type: "post",
+            url: "../smartAgriculture/saveFarm",
+            data: param,
+            async: false,
+            success: function (result) {
+                console.log($("#id").val());
+                if (result.state == "success") {
+                    layer.msg($.i18n.prop('success'), {icon: 1});
+                    id = result.data.id;
+                    $("#id").val(id);
+                    $("#demo").val(result.data.cameraName);
+                    //农场列表刷新
+                    parent.refresh();
+
+                } else {
+                    layer.msg($.i18n.prop(result.msg), {icon: 2});
+                }
+            }
+        });
+    });
+
+    //选择摄像头的下拉表格
+    var tableSelect = layui.tableSelect;
+    tableSelect.render({
+        elem: '#demo',
+        //searchKey: 'name',
+        searchPlaceholder: $.i18n.prop('searchKey'),
+        table: {
+            url: '../cameraManage/getCameraList',
+            cols: [
+                [
+                    {type: 'radio'},
+                    {field: 'id', title: 'id', width: 100},
+                    {field: 'name', title: $.i18n.prop('name'), width: 130},
+                    {field: 'validateCode', title: $.i18n.prop('validateCode'), width: 135},
+                    {field: 'serial', title: $.i18n.prop('serialNo'), width: 135}
+                ]
+            ]
+        },
+        done: function (elem, data) {
+            var NEWJSON = [];
+            var cameras = [];
+            layui.each(data.data, function (index, item) {
+                NEWJSON.push(item.name);
+                cameras.push(item.id);
+            });
+            elem.val(NEWJSON.join(","));
+            $("#cameras").val(cameras.join(","));
+        }
+    })
+
+</script>
+<script type="text/javascript" language='javascript' src="../js/publicToiletDetail.js?v1"></script>
+
+
+</html>

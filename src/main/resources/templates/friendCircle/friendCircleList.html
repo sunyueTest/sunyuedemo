@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>农友圈</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+
+    <style>
+        .container {
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        ul {
+            margin_top: 10px;
+        }
+
+        li {
+            background-color: #EBF9FF;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .header {
+            width: 100%;
+            height: 60px;
+            padding-top: 10px;
+            margin-left: 3%;
+        }
+
+        .head_img {
+            width: 70px;
+            height: 60px;
+            float: left;
+        }
+
+        .personal {
+            margin-left: 20px;
+            margin-top: 5px;
+            float: left;
+        }
+
+        .name {
+            font-size: 20px;
+            color: blue;
+        }
+
+        .time {
+            display: block;
+            margin-top: 5px;
+            font-size: 10px;
+            color: grey;
+        }
+
+        .content {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 3%;
+            margin-right: 3%;
+        }
+
+        .comments {
+
+        }
+
+        .bottom {
+            margin-left: 3%;
+            margin-right: 3%;
+            margin-bottom: 10px;
+        }
+
+        .text_div {
+            margin: 10px;
+
+        }
+
+        .content_text {
+            font-size: 18px;
+        }
+
+        .content_img {
+            width: 30%;
+            height: 200px;
+            margin-left: 5px;
+            margin-bottom: 4px;
+        }
+
+        .buttons {
+
+            height: 50px;
+        }
+
+        .opbtn {
+            height: 50px;
+            line-height: 50px;
+            padding: 0 10px;
+            background-color: transparent;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            float: right;
+
+        }
+
+        .my_comment {
+            height: 100px;
+            margin-top: 10px;
+        }
+
+        .comment_input_div {
+            border: 1px solid #c5cddb;
+        }
+
+        .comment_input {
+            height: 40px;
+            line-height: 40px;
+            width: 93%;
+            font-size: 15px;
+            border: none;
+            display: inline-block;
+            background: transparent;
+        }
+
+        .comment_btn {
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
+            background-color: transparent;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .size25 {
+            font-size: 25px;
+        }
+
+        .publish {
+            height: 40px;
+            width: 80px;
+            float: right;
+            background: forestgreen;
+            cursor: pointer;
+            text-align: center;
+            line-height: 40px;
+            margin-top: 5px;
+        }
+
+        .publish a span {
+            color: white;
+            font-size: 18px;
+        }
+
+        .comment_content {
+            margin-top: 10px;
+            margin-left: 15px;
+        }
+
+        .comment_content a {
+            text-decoration: underline;
+            color: #98E445;
+            font-size: 15px;
+            cursor: pointer;
+
+        }
+
+        .fc_pub {
+            height: 50px;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .fc_pub a {
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            line-height: 40px;
+            height: 40px;
+            width: 80px;
+            float: right;
+            background: forestgreen;
+            font-size: 18px;
+        }
+
+        .say_something {
+            background-color: #EBF9FF;
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-top: 10px;
+        }
+
+        .fc_inputer {
+            width: 100%;
+            border: 1px solid #c5cddb;
+        }
+
+        .fc_inputer textarea {
+            height: 80px;
+            width: 93%;
+            border-style: none solid none none;
+            border-width: 1px;
+            border-color: #c5cddb;
+            box-sizing: border-box;
+            padding: 1%;
+        }
+
+        .say_camera {
+            height: 80px;
+            line-height: 80px;
+            padding: 0 12px;
+            background-color: transparent;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            position: absolute;
+        }
+
+        .dynamic {
+            margin-left: 10%;
+            margin-right: 10%;
+            height: 45px;
+            line-height: 45px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: #EBF9FF;
+            border-bottom-style: solid;
+            border-width: 1px;
+            border-color: #eaedd5;
+        }
+
+        .dynamic span {
+            margin-left: 15px;
+            font-weight: 700;
+            color: #31332e;
+            font-size: 13px;
+        }
+
+        .btn_reply {
+            color: #79a5e5 !important;
+            display: none;
+            margin: 0;
+            min-width: auto;
+            font-size: 12px;
+            height: 20px;
+            line-height: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="say_something">
+        <div class="fc_inputer">
+            <textarea id="content" placeholder="说点儿什么吧"></textarea>
+            <button class="say_camera" id="test">
+                <i class=" iconfont icon-xiangji size25"></i>
+            </button>
+        </div>
+
+        <div class="fc_pub">
+            <a onclick="publishDynamics()"><span>发表</span></a>
+        </div>
+        <div class="layui-upload-list" id="demo"></div>
+    </div>
+
+    <div class="dynamic">
+        <span>全部动态</span>
+    </div>
+
+    <ul class="flow-default" id="circle">
+    </ul>
+
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:inline="javascript">
+    var totalPage = [[${map.totalPage}]], imgUrls = '', flow, layer, upload, type = [[${map.type}]];
+    layui.use(['flow', 'layer', 'upload'], function () {
+        flow = layui.flow, layer = layui.layer, upload = layui.upload;
+        //查询总页数。
+        flow.load({
+            elem: '#circle' //流加载容器
+            , done: function (page, next) { //执行下一页的回调
+                $.ajax({
+                    url: "friendCircle/circleShow",
+                    data: {
+                        page: page,
+                        limit: 10,
+                        type: type
+                    },
+                    dataType: "json",
+                    type: "post",
+                    timeout: 30000,
+                    error: function (data, type, err) {
+                        layer.closeAll('loading');
+                        layer.msg($.i18n.prop('fail'));
+                    },
+                    success: function (result) {
+                        if (result.state = 'success') {
+                            var data = result.data;
+                            var list = data.list;
+                            layer.closeAll('loading');
+                            var lis = [];
+                            for (var i = 0; i < list.length; i++) {
+                                var innerHtml = '' +
+                                    '<li >\n' +
+                                    '    <div class="header">\n' +
+                                    '        <div class="head_img">\n' +
+                                    '            <img class="head_img" src="/static/img/farming_portrait.jpg">\n' +
+                                    '        </div>\n' +
+                                    '        <div class="personal">\n' +
+                                    '            <span class="name">' + list[i].userName + '</span>\n' +
+                                    '            <span class="time">' + list[i].createTime + '</span>\n' +
+                                    '        </div>\n' +
+                                    '    </div>\n' +
+                                    '    <div class="content">\n' +
+                                    '        <div class="text_div">\n' +
+                                    '            <span class="content_text">' + list[i].content + '</span>\n' +
+                                    '        </div>\n' +
+                                    '        <div class="imgs">\n';
+
+                                //发表的图片列表
+                                var pictures = list[i].picture;
+                                if (pictures != undefined && pictures != '') {
+                                    var pArr = pictures.split(',');
+                                    for (var j = 0; j < pArr.length; j++) {
+                                        innerHtml += '<img onclick="previewImg(this)" class="content_img" src=' + pArr[j] + '>\n';
+                                    }
+                                }
+                                innerHtml += '        </div>\n' +
+                                    '        <div class="buttons"><span style="line-height: 50px;">';
+                                if (list[i].likeCount > 0) {
+                                    innerHtml += "已有" + list[i].topThree + "等" + list[i].likeCount + "人点赞"
+                                }
+                                innerHtml += '</span>' +
+                                    '            <button class="opbtn dianzanbtn" ><i\n' +
+                                    '                    class="iconfont icon-dianzan size25"></i></button><input type="hidden" value=' + list[i].id + '>' +
+                                    '            <button class="opbtn pinglun" ><i\n' +
+                                    '                    class="iconfont icon-weibiaoti- size25"></i></button>\n' +
+                                    '        </div>\n' +
+                                    '    </div>\n' +
+                                    '    <div class="bottom">\n' +
+                                    '        <div class="comments">\n';
+                                //评论列表
+                                var commentList = list[i].commentList;
+                                for (var k = 0; k < commentList.length; k++) {
+                                    innerHtml += '<div class="comment_content" onmouseover="showReply(this)" onmouseout="hideReply(this)" >';
+                                    if (commentList[k].toUser != '' && commentList[k].toUser != null && commentList[k].toUser != 'null' && commentList[k].toUser !== undefined) {
+                                        innerHtml += '<a style="text-decoration:none;"><span class="origUser">' + commentList[k].userName + '</span>&nbsp;&nbsp;回复&nbsp;&nbsp;<span>' + commentList[k].toUser + '</span></a>:';
+                                    } else {
+                                        innerHtml += '<a  style="text-decoration:none;"><span class="origUser">' + commentList[k].userName + '</span></a>:';
+                                    }
+
+                                    innerHtml += '   <span>' + commentList[k].content + '</span><span style="color:grey;">&nbsp;&nbsp;&nbsp;&nbsp;(' + commentList[k].createTime + ')</span> <input type="hidden" value=' + commentList[k].id + '>' +
+                                        '            <a onclick="replyComment(this)" class="btn_reply">回复</a></div>\n';
+                                }
+
+                                innerHtml += '</div>\n' +
+                                    '        <div class="my_comment" style="display: none">\n' +
+                                    '            <div class="comment_input_div">\n' +
+                                    '                <input type="text"  placeholder="评论" class="comment_input">\n' +
+                                    '                <button class="comment_btn" ><i\n' +
+                                    '                        class=" iconfont icon-xiangji size25"></i></button>\n' +
+                                    '            </div>\n' +
+                                    '            <div class="publish">\n' +
+                                    '                <a class="comment_a"><span>回复</span><input type="hidden" name="commentId"></a>' + '<input type="hidden" value=' + list[i].id + '>'
+                                '            </div>\n' +
+                                '        </div>\n' +
+                                '    </div>\n' +
+                                '</li>';
+                                lis.push(innerHtml);
+                            }
+                            //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                            //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                            next(lis.join(''), page < totalPage); //总页数为 totalPage
+                        }
+                    }
+                });
+
+
+            }
+        });
+        //多图片上传
+        upload.render({
+            elem: '#test'
+            , url: 'friendCircle/upload/'
+            , multiple: true,
+            size: 1024,
+//			最多上传的数量
+            number: 9,
+            before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo').append('<div style="display: inline-block;"><img style="width: 200px;height: 200px;" src="' + result + '" alt="' + file.name + '" class="layui-upload-img"></div>')
+                });
+            }
+            , done: function (res, index, upload) {
+                //上传完毕
+
+                if (res.state == 'success') {
+                    imgUrls += res.data.src + ",";
+                } else {
+                    layer.msg(res.msg);
+                }
+            }
+        });
+    });
+
+    function previewImg(obj) {
+        var img = new Image();
+        img.src = obj.src;
+        var imgHtml = "<img src='" + obj.src + "' width='600px' height='450px'/>";
+        //弹出层
+        layer.open({
+            type: 1,
+            shade: 0.8,
+            offset: 'auto',
+            area: [600 + 'px',450+'px'],
+            shadeClose:true,
+            skin: 'layui-layer-nobg',
+            scrollbar: false,
+            title: false, //不显示标题
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+
+    function publishDynamics() {
+        var content = $('#content').val();
+        if (imgUrls == '' && content == '') {
+            layer.msg("先随便说两句吧....");
+        }
+        imgUrls = imgUrls.substring(0, imgUrls.lastIndexOf(','));
+        $.ajax({
+            url: "friendCircle/publishDynamics",
+            data: {
+                content: content,
+                picture: imgUrls,
+                type: type
+            },
+            dataType: "json",
+            type: "post",
+            timeout: 30000,
+            error: function (data, type, err) {
+
+                layer.closeAll('loading');
+                layer.msg($.i18n.prop('fail'), {
+                    offset: '6px', icon: 2
+                });
+            },
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.state == 'success') {
+                    layer.msg("发布成功");
+                    window.location.reload();
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+
+
+    $("body").on("click", ".comment_a", function () {
+        var fcmid = $(this).next().val();
+        var commentId = $(this).find('input[name="commentId"]').val();
+        var content = $(this).parent().parent().find('input').val();
+        $.ajax({
+            url: "friendCircle/comment",
+            data: {
+                fcmid: fcmid,
+                toId: commentId,
+                content: content
+            },
+            dataType: "json",
+            type: "post",
+            timeout: 30000,
+            error: function (data, type, err) {
+
+                layer.closeAll('loading');
+                layer.msg($.i18n.prop('fail'), {
+                    offset: '6px', icon: 2
+                });
+            },
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.state == 'success') {
+                    layer.msg("发布成功");
+                    window.location.reload();
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    })
+
+    $("body").on("click", ".dianzanbtn", function () {
+        var btn = $(this);
+        var id = btn.next().val();
+        $.ajax({
+            url: "friendCircle/like",
+            data: {
+                id: id,
+            },
+            dataType: "json",
+            type: "post",
+            timeout: 30000,
+            error: function (data, type, err) {
+                console.log(err);
+                layer.closeAll('loading');
+                layer.msg($.i18n.prop('fail'), {
+                    offset: '6px', icon: 2
+                });
+            },
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.state == 'success') {
+                    layer.msg("点赞成功");
+                    btn.parent().find('span').html('已有' + data.data.topThree + '等' + data.data.likeCount + '人点赞');
+                    //window.location.reload();
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    })
+
+    $("body").on("click", ".pinglun", function () {
+        var btn = $(this);
+        btn.parent().parent().next().find('.my_comment').show();
+        btn.parent().parent().next().find('.comment_input').focus();
+    });
+    function showReply(ele) {
+        $(ele).find('.btn_reply').show();
+    }
+
+    function hideReply(ele) {
+        $(ele).find('.btn_reply').hide();
+    }
+
+    function replyComment(ele) {
+        //获取回复用户名 评论id
+        var id = $(ele).prev().val();
+        var username = $(ele).prev().prev().prev().prev().find('.origUser').text();
+        $(ele).parent().parent().next().find('input[name="commentId"]').val(id);
+        $(ele).parent().parent().next().find('.comment_input').val('[reply]' + username + '[/reply]:').focus();
+    }
+
+</script>
+</html>

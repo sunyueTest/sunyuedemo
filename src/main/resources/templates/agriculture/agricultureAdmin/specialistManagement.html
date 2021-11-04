@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>specialistManagement-专家管理</title>
+    <link rel="stylesheet"  th:href="@{/static/css/agriculture/specialistManagement.css}">
+</head>
+<style>
+    .buddha-pic{
+        width: 100%;
+        height: 100%;
+    }
+    .buddha-pic img{
+        height: 100%;
+    }
+    .tbntac{
+        background: #0a325c!important;
+    }
+</style>
+<body>
+<div class="conter">
+    <div class="teacherbnt">
+        <div class="tbnt tbntac" id="shenhe">已通过</div>
+        <div class="tbnt" id="daishenhe">待审核</div>
+    </div>
+    <div class="teacher" id="teacher">
+        <div class="teacher-l">
+            <div class="teacher-pic"><img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt=""></div>
+            <div class="teacher-int">
+                <h4>张三</h4>
+                <p>博士、教授、研究生导师</p>
+                <p>擅长：虫病防护、无土栽培</p>
+                <p>2019-09-02 08:10:10</p>
+            </div>
+            <div class="teacher-icon">
+                <div class="xiugai"><img src="/static/img/agriculture/specialistManagement/xiugai.png" alt=""></div>
+                <div><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>
+                <div class="chaxun"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>
+                <div><img src="/static/img/agriculture/specialistManagement/zhuangtai.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="page">-->
+        <!--<ul>-->
+            <!--<li>上一页</li>-->
+            <!--<li class="ac">1</li>-->
+            <!--<li>2</li>-->
+            <!--<li>3</li>-->
+            <!--<li>4</li>-->
+            <!--<li>5</li>-->
+            <!--<li>6</li>-->
+            <!--<li>7</li>-->
+            <!--<li>8</li>-->
+            <!--<li>9</li>-->
+            <!--<li>下一页</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+</div>
+<div id="tc">
+    <h3 class="tc-title">专家信息</h3>
+    <div class="tc-int">
+        <div class="tc-int-l" style="height: 45vh;">
+            <div class="message">
+                <p>姓名：</p>
+                <div class="informessage">
+                    <input type="text" id="name" value="" placeholder="请输入姓名"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>种类：</p>
+                <div class="informessage">
+                    <input type="text" id="goodAtFish" value="" placeholder="请输入种类"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>身份证号码：</p>
+                <div class="informessage">
+                    <input type="text" id="idCardNo" value="" placeholder="请输入身份证号码"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>擅长：</p>
+                <div class="informessage">
+                    <input type="text" id="goodAtDisease" value="" placeholder="请输入擅长"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>工作单位：</p>
+                <div class="informessage">
+                    <input type="text" id="workUnits" value="" placeholder="请输入工作单位"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>职务：</p>
+                <div class="informessage">
+                    <input type="text" id="position" value="" placeholder="请输入职务"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>手机号码：</p>
+                <div class="informessage">
+                    <input type="text" id="phoneNo" value="" placeholder="请输入手机号码"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>最高学历：</p>
+                <div class="informessage">
+                    <input type="text" id="educationalBackground" value="" placeholder="请输入最高学历"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>个人简介：</p>
+                <div class="informessage">
+					<textarea id="personalInfo" style="width: 28vw;height: 15vh;margin-top: 2vh;background: transparent;border-color: #31a9ce;box-sizing: border-box;padding: 1vh 1vw;overflow: hidden;resize:none;">
+					</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="tc-int-r">
+            <div class="buddha">
+                <div>上传头像：</div>
+                <div class="buddha-border">
+                    <div class="buddha-pic">
+                        <img id="headPhotoPic" src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="papers">
+                <div>上传证件照：</div>
+                <div class="papers-pic">
+                    <div class="papers-a">
+                        <div id="img1">
+                            <p>身份证正面</p>
+                            <img id="idCardPicPositive" src="" alt="">
+                        </div>
+
+                    </div>
+                    <div class="papers-a" id="img2">
+                        身份证反面
+                        <img id="idCardPicReverse" src="" alt="">
+
+                    </div>
+                    <div class="papers-a" id="img3">
+                        资质证书
+                        <img id="certificatePic" src="" alt="">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dele"></div>
+</div>
+<div id="deletc">
+    <div class="deletc-p">
+        是否确认删除
+    </div>
+    <div class="deletcbnt">
+        <div id="deleyes">确认</div>
+        <div id="deleno">点错了</div>
+    </div>
+</div>
+<div id="deletcsh">
+    <div class="deletc-p">
+        是否确认次操作
+    </div>
+    <div class="deletcbnt">
+        <div id="deleyessh">确认</div>
+        <div id="delenosh">点错了</div>
+    </div>
+</div>
+<div id="motai"></div>
+</body>
+</html>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script>
+
+    /**
+    *删除专家
+     */
+    var deleid='';
+    $(document).on('click','.dele',function(){
+        deleid=this.getAttribute("data-id");
+        $('#deletc').show();
+        $('#motai').show();
+    });
+    $(document).on('click','#deleno',function(){
+        $('#deletc').hide();
+        $('#motai').hide();
+    });
+    $(document).on('click','#deleyes',function() {
+        $.ajax({
+            url: "/expertManage/delExpertExamine?id="+deleid,
+            type : "POST",
+            data: {
+            },
+            success: function (res) {
+                $('#deletc').hide();
+                $('#motai').hide();
+                shenhe();
+            }
+        })
+    })
+
+
+    function shenhe(){  //审核通过专家列表
+        $.ajax({
+            url: "../aquacultureSystemSetting/getExpertsList",
+            type : "POST",
+            data: {
+                type:0
+            },
+            success: function (res) {
+                console.log(res)
+                var html='';
+
+                $.each(res.data, function (i,item) {
+                    html+='<div class="teacher-l">\n' +
+                        '            <div class="teacher-pic"><img src="'+item.headPhotoPic+'" alt=""></div>\n' +
+                        '            <div class="teacher-int" >\n' +
+                        '                <h4>'+item.name+'</h4>\n' +
+                        '                <p>用户名：'+item.createUser+'</p>\n' +
+                        '                <p>工作单位：'+item.educationalBackground+'</p>\n' +
+                        '                <p>擅长：'+item.goodAtFish+'</p>\n' +
+                        '                <p>申请时间：'+item.createTime+'</p>\n' +
+                        '            </div>\n' +
+                        '            <div class="teacher-icon">\n' +
+                        // '                <div class="xiugai"><img src="/static/img/agriculture/specialistManagement/xiugai.png" alt=""></div>\n' +
+                        // '                <div><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>\n' +
+                        '                <div  data-id="'+item.id+'" class="chaxun"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt="查看" title="查看"></div>\n' +
+                        '                <div data-id="'+item.id+'" class="dele"><img src="/static/img/agriculture/specialistManagement/dele.png" alt="删除专家"  title="删除专家"></div>\n' +
+                        '            </div>\n' +
+                        '        </div>'
+                });
+                $('#teacher').html(html);
+
+            }
+        })
+    }
+    shenhe();
+    function daishenhe(){ //待审核专家获取
+        $.ajax({
+            url: "../expertManage/findExpertExamineList",
+            type : "POST",
+            data: {
+                type:0
+            },
+            success: function (res) {
+                console.log(res)
+                var html='';
+
+                $.each(res.datas, function (i,item) {
+                    html+='<div class="teacher-l">\n' +
+                        '            <div class="teacher-pic"><img src="'+item.headPhotoPic+'" alt=""></div>\n' +
+                        '            <div class="teacher-int">\n' +
+                        '                <h4>'+item.name+'</h4>\n' +
+                        '                <p>用户名：'+item.createUser+'</p>\n' +
+                        '                <p>工作单位：'+item.educationalBackground+'</p>\n' +
+                        '                <p>擅长：'+item.goodAtFish+'</p>\n' +
+                        '                <p>申请时间：'+item.createTime+'</p>\n' +
+                        '            </div>\n' +
+                        '            <div class="teacher-icon">\n' +
+                        // '                <div class="xiugai"><img src="/static/img/agriculture/specialistManagement/xiugai.png" alt=""></div>\n' +
+                        // '                <div><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>\n' +
+                        '                <div  data-id="'+item.id+'" class="chaxun"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt="查看"  title="查看"></div>\n' +
+                        '                <div id="shenheno" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/zhuangtai.png" alt="审核不通过"  title="审核不通过"></div>\n' +
+                        '                <div id="shenheyes"  data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/zhuangtai2.png" alt="审核通过" title="审核通过" ></div>\n' +
+                        '            </div>\n' +
+                        '        </div>'
+                });
+                $('#teacher').html(html);
+            }
+        })
+    }
+
+
+    /**
+     * 审核弹窗
+     * shenheyes =>审核通过函数  参数id
+     * shenheno =>审核不通过通过函数  参数id
+     */
+    $(document).on('click','#delenosh',function(){
+        $('#deletcsh').hide();
+        $('#motai').hide();
+    });
+    function shenheyes(id){
+        $.ajax({
+            url: "../expertManage/updateExpertExamine",
+            type : "POST",
+            data: {
+                id:id,
+                examine:'1'
+            },
+            success: function (res) {
+                console.log(res);
+                shenhe();
+            }
+        })
+    }
+    function shenheno(id){
+        $.ajax({
+            url: "../expertManage/updateExpertExamine",
+            type : "POST",
+            data: {
+                id:id,
+                examine:'2'
+            },
+            success: function (res) {
+                console.log(res);
+                shenhe();
+            }
+        })
+    }
+
+    $(document).on('click','#shenheyes',function(){
+        var id=this.getAttribute("data-id")
+        console.log(id);
+        let html='    <div class="deletc-p">\n' +
+            '        是否确认专家审核通过\n' +
+            '    </div>\n' +
+            '    <div class="deletcbnt">\n' +
+            '        <div id="deleyessh" class="shenheyes" data-id="'+id+'">确认</div>\n' +
+            '        <div id="delenosh">点错了</div>\n' +
+            '    </div>'
+        $('#deletcsh').html(html);
+        $('#deletcsh').show();
+        $('#motai').show();
+    });
+    $(document).on('click','#shenheno',function(){
+        var id=this.getAttribute("data-id");
+        console.log(id);
+        let html='    <div class="deletc-p">\n' +
+            '        是否确认专家审核不通过\n' +
+            '    </div>\n' +
+            '    <div class="deletcbnt">\n' +
+            '        <div id="deleyessh" class="shenheno" data-id="'+id+'">确认</div>\n' +
+            '        <div id="delenosh">点错了</div>\n' +
+            '    </div>';
+        $('#deletcsh').html(html);
+        $('#deletcsh').show();
+        $('#motai').show();
+    });
+    $(document).on('click','.shenheyes',function(){
+        let id=this.getAttribute("data-id");
+        shenheyes(id);
+        $('#deletcsh').hide();
+        $('#motai').hide();
+    });
+    $(document).on('click','.shenheno',function(){
+        let id=this.getAttribute("data-id");
+        shenheno(id);
+        $('#deletcsh').hide();
+        $('#motai').hide();
+    });
+
+
+
+
+
+
+
+
+
+
+    $(document).on('click','#shenhe',function(){
+        shenhe();
+        $('.tbnt').removeClass('tbntac')
+        $(this).addClass('tbntac')
+    })
+    $(document).on('click','#daishenhe',function(){
+        daishenhe()
+        $('.tbnt').removeClass('tbntac')
+        $(this).addClass('tbntac')
+    })
+    var xiugai=document.getElementsByClassName('xiugai');
+    var chaxun=document.getElementsByClassName('chaxun');
+    var tc=document.getElementById('tc');
+    var dele=document.getElementById('dele');
+    // for(var i=0;i<xiugai.length;i++){
+    //     xiugai[i].onclick=function(){
+    //         tc.style.display='block'
+    //     }
+    //     chaxun[i].onclick=function(){
+    //         tc.style.display='block'
+    //     }
+    // }
+    $(document).on('click','.xiugai',function(){
+        tc.style.display='block'
+    })
+    $(document).on('click','.chaxun',function(){
+        tc.style.display='block'
+        var id=this.getAttribute("data-id")
+        $.ajax({
+            url: "../expertManage/findExpertExamineVal",
+            type : "POST",
+            data: {
+                id:id
+            },
+            success: function (res) {
+                console.log(res)
+                $('#name').val(res.data.name);
+                $('#goodAtFish').val(res.data.goodAtFish);
+                $('#idCardNo').val(res.data.idCardNo);
+                $('#goodAtDisease').val(res.data.goodAtDisease);
+                $('#workUnits').val(res.data.workUnits);
+                $('#position').val(res.data.position);
+                $('#phoneNo').val(res.data.phoneNo);
+                $('#educationalBackground').val(res.data.educationalBackground);
+                $('#personalInfo').val(res.data.personalInfo);
+                $("#headPhotoPic").attr("src",res.data.headPhotoPic);
+                // $("#idCardPicPositive").attr("src",res.data.idCardPicPositive);
+                // $("#idCardPicReverse").attr("src",res.data.idCardPicReverse);
+                // $("#certificatePic").attr("src",res.data.certificatePic);
+                if(res.data.idCardPicPositive){
+                    $('#img1').html('<img id="idCardPicPositive" src="'+res.data.idCardPicPositive+'" alt="">')
+                }
+                if(res.data.idCardPicReverse){
+                    $('#img2').html('<img id="idCardPicPositive" src="'+res.data.idCardPicReverse+'" alt="">')
+                }
+                if(res.data.certificatePic){
+                    $('#img3').html('<img id="idCardPicPositive" src="'+res.data.certificatePic+'" alt="">')
+                }
+
+
+            }
+        })
+
+    })
+    dele.onclick=function(){
+        tc.style.display='none'
+    }
+</script>
+
+
+
+

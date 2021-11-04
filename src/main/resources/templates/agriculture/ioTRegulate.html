@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>ioTRegulate-加工物联网管理系统</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/common.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/ioTRegulate.css}">
+    <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script th:src="@{/static/chart/echarts.min.js?v=1.0}"></script>
+    <script th:src="@{/static/js/china.js?v=1.0}"></script>
+    <link rel="stylesheet" href="https://apip.weatherdt.com/h5/static/css/reset.css?v=20181012">
+    <script src="https://webapi.amap.com/maps?v=1.4.10&key=96a943dab4656930f33276727a084933&plugin=AMap.MarkerClusterer"></script>
+    <script th:src="@{/static/layui/layui.js}"></script>
+    <script th:src="@{/static/js/ezuikit.js?v=1.0}"></script>
+    <script src="/static/i18n/jquery.i18n.properties.js"></script>
+    <script src="/static/js/common.js" charset="utf-8"></script>
+    <script th:src="@{/static/js/fullScreen.js}" charset="utf-8"></script>
+</head>
+<div class="contentBox">
+    <div class="leftBoxMb">
+
+    </div>
+    <div class="leftBox" style="overflow: auto">
+        <!--左侧搜索框未做暂时隐藏-->
+        <!--<div class="searchBox">-->
+            <!--<input class="searchInput" type="text"/>-->
+            <!--<div class="searchBtn">-->
+                <!--<img class="searchImg" src="../../static/img/agriculture/search.png"/>-->
+            <!--</div>-->
+
+        <!--</div>-->
+        <!--<div class="itemBox">-->
+
+        <!--</div>-->
+        <div class="leftBoxEnterprise">
+            <div>
+                <ul class="layui-nav layui-nav-tree" lay-filter="test" style="width: 95%;margin: 0 auto;margin-top: 3vh" id="nav-left">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="rightBox">
+        <div class="rightBoxScroll">
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+</body>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //常规用法
+        laydate.render({
+            elem: '#test1'
+        });
+
+
+    });
+
+
+    $(function () {
+        var wHeight = $(window).height();
+        $(".contentBox").height(wHeight - 10);
+        $(".itemBox").height($(".leftBox").height() - $(".searchBox").height() - 15 - 30);
+        $(".rightBox").height($(".contentBox").height());
+
+
+        $(window).resize(function () {
+            var wHeight = $(window).height();
+            $(".contentBox").height(wHeight - 10);
+            $(".itemBox").height($(".leftBox").height() - $(".searchBox").height() - 15 - 30);
+            $(".rightBox").height($(".contentBox").height());
+
+
+            for (var h = 0; h < $(".weatherBar").length; h++) {
+
+            }
+        });
+        /**
+         * 一级公司名称列表渲染插入
+         */
+        var navsum= new Array;
+        function getlistnav(){
+            $.ajax({
+                url: "/projectBaseScene/findEntperpriseList",
+                type : "POST",
+                data: {
+                    size:200,
+                    page:1,
+                },
+                success: function (res) {
+                    console.log(res)
+                    let html='';
+                    $.each(res.datas, function (i, item) {
+                        navsum.push(item.id);
+                        html += '<li class="layui-nav-item nav-li" data-id="'+item.id+'">' +
+                            '<a href="javascript:;" class="gs">'+item.name+'</a>' +
+                            '<div class="layui-nav-child  nav-xm">'+
+                            '</div>'+
+                            '</li>'
+                    });
+                    $('#nav-left').append(html);
+                    getlistxm();
+                    // allinitialize();
+
+                }
+            });
+        }
+        getlistnav();
+        /**
+         * 二级项目名称列表渲染插入
+         * 渲染二级列表时会同时初始化页面
+         */
+        var navxm= new Array;
+        function getlistxm(){
+            for(var i=0;i<navsum.length;i++){
+                let id=navsum[i];
+                let index=i;
+                $.ajax({
+                    async: false,
+                    url: "/projectBaseScene/findProjectList?entperpriseId="+id,
+                    type : "POST",
+                    data: {
+                        size:200,
+                        page:1,
+                    },
+                    success: function (res) {
+                        // console.log(res);
+                        let html='';
+                        $.each(res.datas, function (i, item) {
+                            navxm.push(item.id);
+                            html += '                      <div class="layui-nav-item nav-jd" data-id="'+item.id+'" id="'+item.id+'">\n' +
+                                '                            <a href="javascript:;" class="xmbg">'+item.name+'</a>\n' +
+                                '                        </div>'
+                        });
+                        $('.nav-xm').eq(index).append(html);
+                    }
+                });
+                if(i==navsum.length-1){
+                    getlistjd();
+                    jdinitialize(navxm);
+                }
+            }
+        }
+        /**
+         * 三级基地名称
+         */
+        function getlistjd(){
+            for(var i=0;i<navxm.length;i++){
+                let id=navxm[i];
+                $.ajax({
+                    url: "/projectBaseScene/findBaseList?projectId="+id,
+                    type : "POST",
+                    data: {
+                        size:200,
+                        page:1,
+                    },
+                    success: function (res){
+                        let html='';
+                        $.each(res.datas, function (i, item){
+                            html += '<div class="layui-nav-child base item" baseid="'+item.id+'" basename="'+item.name+'" baseuser="'+item.createUser+'"  lon="'+item.longitude+'" lat="'+item.latitude+'">'+item.name+'</div>'
+                        });
+                        $('#'+id).append(html);
+                        // $(".item").eq(0).trigger("click");
+                        layui.use('element', function(){
+                            var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+                        });
+                    }
+                });
+            }
+        }
+        /**
+         * 页面初始化
+         */
+        function jdinitialize(navxm){
+            var fige='';
+            for(var i=0;i<navxm.length;i++){
+                if(!fige){
+                    $.ajax({
+                        async: false,
+                        url: "/projectBaseScene/findBaseList?projectId="+navxm[i],
+                        type : "POST",
+                        data: {
+                            size:200,
+                            page:1,
+                        },
+                        success: function (res){
+                            if(res.datas.length>0){
+                                let lon=res.datas[0].longitude;
+                                let lat=res.datas[0].latitude;
+                                let name=res.datas[0].name;
+                                let user=res.datas[0].createUser;
+                                let id=res.datas[0].id;
+                                getScene(id);
+                                fige=true;
+                                console.log(fige);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        /**
+         * 点击切换页面内容
+         */
+        $(document).on('click','.item',function(){
+            $(".item").removeClass("checkedItem");
+            $(this).addClass("checkedItem");
+            getScene($(this).attr("baseId"));
+
+        })
+        /**
+         * 分级导航二级菜单选中样式
+         */
+        $(document).on('click','.nav-jd',function() {
+            $('.nav-jd').removeClass('layui-this');
+        });
+
+
+
+
+
+        //获取左侧菜单信息
+        // getLeftItem();
+
+    });
+
+
+    //获取左侧菜单信息
+    function getLeftItem() {
+        $.ajax({
+            type: "POST",
+            url: "/projectBaseScene/listBases",
+            async: true,
+            data: {
+                page: 1,
+                size: 100
+            },
+            dataType: "json",
+            success: function (res) {
+                var resData = res.datas;
+                if (resData && resData.length > 0) {
+                    addLeftItem(resData);
+                }
+
+
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+
+    //添加左侧菜单
+    function addLeftItem(msg) {
+        var $itemBox = $(".itemBox");
+        $itemBox.empty();
+        for (var i = 0; i < msg.length; i++) {
+            var $item = $("<span class='item'></span>");
+            $item.text(msg[i].name);
+            $item.attr("baseId", msg[i].id);
+            $item.appendTo($itemBox);
+
+        }
+
+
+        $(".item").click(function () {
+            $(".item").removeClass("checkedItem");
+            $(this).addClass("checkedItem");
+            //点击基地获取基地下对应的场景
+            getScene($(this).attr("baseId"));
+            //给没有设备的位置增加 补位图
+        });
+        $(".item").eq(0).trigger("click");
+
+    }
+
+
+    //通过基地获取场景信息
+    function getScene(baseId) {
+        $.ajax({
+            type: "POST",
+            url: "/projectBaseScene/listScenesByBaseId",
+            async: true,
+            data: {
+                baseId: baseId,
+                sceneType: 1
+            },
+            dataType: "json",
+            success: function (res) {
+                var resData = res.datas;
+                if (resData.length > 0) {
+                    //创建基地下场景模块
+                    addSceneBox(res.datas);
+                } else {
+                    $(".rightBoxScroll").empty();
+                    $(".rightBoxScroll").css("width", "100%");
+                    setTimeout(function () {
+                        $(".rightBoxScroll").html("<img class='noMsg' src='../../static/img/agriculture/noMsg.png' />");
+
+                    }, 200);
+
+
+                }
+
+
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+
+    function addSceneBox(resData) {
+        var $rightBoxScroll = $(".rightBoxScroll");
+        $rightBoxScroll.empty();
+        for (var i = 0; i < resData.length; i++) {
+            var $sceneItem = $("<div class='sceneItem'></div>");
+            var $secneTitle = $("<div class='secneTitle'></div>");
+            var $secneTitleImg = $("<img class='secneTitleImg' src='/static/img/agriculture/ioTRegulate/a1.png' />");
+            var $secneTitleText = $("<span class='secneTitleText'></span>");
+            $secneTitleText.text(resData[i].farmName);
+
+
+            $secneTitleImg.appendTo($secneTitle);
+            $secneTitleText.appendTo($secneTitle);
+            $secneTitle.appendTo($sceneItem);
+
+            var $camera = $("<div class='camera'></div>");
+            $camera.attr("id", ('camera' + i));
+            $camera.appendTo($sceneItem);
+            var $weatherBar = $("<div class='weatherBar'></div>");
+            $weatherBar.attr("id", ('weatherBar' + i));
+            $weatherBar.appendTo($sceneItem);
+
+            var $deviceBox = $("<div class='deviceBox'></div>");
+            $deviceBox.appendTo($sceneItem);
+            $sceneItem.appendTo($rightBoxScroll);
+            $sceneItem.width($(".rightBox").width() * 0.32);
+            $sceneItem.css("margin-right", $(".rightBox").width() * 0.013);
+            //加载摄像头
+            getCamera(resData[i].id, i);
+            //获取场景下所有设备
+            getWeatherMsg(resData[i].id, i)
+
+
+        }
+
+
+        $(".rightBoxScroll").width($(".rightBox").width() * 0.333 * resData.length);
+
+        for (var w = 0; w < $(".camera").length; w++) {
+            if ($(".camera").eq(w).children("div").length == 0) {
+                $(".camera").eq(w).html("<img class='cameraNoMsg' src='../../static/img/agriculture/noMsg.png' />")
+            }
+            if ($(".weatherBar").eq(w).children("div").length == 0) {
+                $(".weatherBar").eq(w).html("<img class='barNoMsg' src='../../static/img/agriculture/noMsg.png' />")
+            }
+
+            if ($(".deviceBox").eq(w).children("div").length == 0) {
+                $(".deviceBox").eq(w).html("<img class='deviceNoMsg' src='../../static/img/agriculture/noMsg.png' />")
+            }
+
+        }
+    }
+
+    //获取场景下摄像头信息
+    function getCamera(sceneId, i) {
+        $.ajax({
+            type: "POST",
+            url: "../cameraApplication/getPerspectiveCameraList",
+            async: false,
+            data: {
+                page: 1,
+                size: 100,
+                appId: sceneId,
+                appType: 1
+
+            },
+            dataType: "json",
+            success: function (res) {
+                var resData = res.datas;
+                if (resData.length > 0) {
+                    var resData = res.datas;
+                    camerNumberList = resData;
+                    getCamareUrl(resData[0].cameraId, i);
+
+                } else {
+
+                }
+
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+
+    //获取基地下第一个采集设备
+    function getWeatherMsg(farmId, i) {
+        $.ajax({
+            type: "POST",
+            url: "/projectBaseScene/listSceneDevices",
+            async: false,
+            data: {
+                page: 1,
+                size: 10,
+                sceneId: farmId,
+            },
+            dataType: "json",
+            success: function (res) {
+                var resData = res.datas;
+                if (resData.length > 0) {
+                    for (var j = 0; j < resData.length; j++) {
+                        if (resData[j].deviceType != 2) {
+                            $(".environmentBarNoMsg").css("display", "none");
+                            //加载柱状图
+                            initEnvironmentBar(resData[j].deviceNumber, i);
+                            break;
+                        }
+                    }
+
+                    for (var x = 0; x < resData.length; x++) {
+                        if (resData[x].deviceType == 2) {
+                            $(".environmentBarNoMsg").css("display", "none");
+                            //加载继电器开关
+                            getEquipmentMsg(resData[x].deviceNumber, i);
+                            break;
+                        }
+                    }
+                } else {
+
+                }
+
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+
+
+    //得到场景下第一个继电器设备
+    function getEquipmentMsg(ncode, i) {
+        $.ajax({
+            type: "POST",
+            url: "../aquacultureUserSensor/getSensorList",
+            data: {size: '100', page: 1, ncode: ncode},
+            dataType: "json",
+            async: false,
+            success: function (res) {
+                var resData = res.datas;
+                if (resData.length > 0) {
+                    addEquipment(resData, i);
+                } else {
+
+
+                }
+
+
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
+    }
+
+    //创建场景下第一个继电器设备下的设备
+    function addEquipment(equipmentList, i) {
+
+        var $rightBottomItemBox = $(".deviceBox").eq(i);
+        $rightBottomItemBox.empty();
+
+
+        for (var j = 0; j < equipmentList.length; j++) {
+            var $rightBottomItem = $("<div class='rightBottomItem'></div>");
+            var $deviceName = $("<span class='deviceName'></span>");
+            $deviceName.text(equipmentList[j].sensorName);
+            var $signalImg = $("<img class='signalImg' src='../../static/img/agriculture/strong.png' />");
+            var $Box_points_switch = $("<div class='Box_points_switch' data-control='BOX'></div>");
+            $Box_points_switch.attr("id", "Box_points_switch" + (j + 1));
+            var $label = $("<label></label>");
+            var $switch = $("<input class='mui-switch mui-switch-anim switch' type='checkbox' />");
+            if (equipmentList[j].state == '0') {
+                $switch.attr("checked", false);
+            } else {
+                $switch.attr("checked", true);
+            }
+
+            /*      $switch.attr("id","switch" + (j+1));*/
+            $switch.attr("data-sensorCode", equipmentList[j].sensorCode);
+            $switch.attr("data-sensorNcode", equipmentList[j].sensorNcode);
+
+            /*  var $settingBtn = $("<div class='settingBtn'>设置</div>");*/
+
+            $switch.appendTo($label);
+            $label.appendTo($Box_points_switch);
+
+            $deviceName.appendTo($rightBottomItem);
+            $signalImg.appendTo($rightBottomItem);
+            $Box_points_switch.appendTo($rightBottomItem);
+            /*         $settingBtn.appendTo($rightBottomItem);*/
+            $rightBottomItem.appendTo($rightBottomItemBox);
+
+
+            $switch.click(function (e) {
+
+
+                var $that = $(this);
+
+                var indexNum = $(".switch").index(this) + 1;
+                //操作继电器开关
+                $.ajax({
+                    type: "POST",
+                    url: "../aquacultureUserSensor/sendCommand",
+                    data: {
+                        sensorCode: $that.attr("data-sensorCode"),
+                        deviceNumber: $that.attr("data-sensorNcode"),
+                        command: getIndex(indexNum, $that.prop("checked") ? true : false)
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        layer.msg(data.msg, {
+                            offset: '20rem'
+                        });
+                        if (data.state == "failed") {
+                            setTimeout(function () {
+                                if ($that.prop("checked")) {
+                                    $that.prop("checked", false);
+                                } else {
+                                    $that.prop("checked", true);
+                                }
+
+                            }, 200)
+                        }
+                    },
+                    error: function (e) {
+                        setTimeout(function () {
+                            if ($that.prop("checked")) {
+                                $that.prop("checked", false);
+                            } else {
+                                $that.prop("checked", true);
+                            }
+
+                        }, 200)
+                    }
+                });
+
+            });
+
+        }
+
+    }
+
+
+    //获取场景下设备
+    /*
+        function addDataBack(farmId){
+            $.ajax({
+                type: "POST",
+                url: "/newFarmInfo/getFarmDeviceList",
+                async: true,
+                data:{
+                    page:1,
+                    size:10,
+                    farmId:farmId,
+                },
+                dataType: "json",
+                success: function (res) {
+                    var $rightTopTwoItemBox = $(".rightTopTwoItemBox");
+                    var $backTimeText = $(".backTimeText");
+                    var $backTimeValue = $(".backTimeValue");
+                    $rightTopTwoItemBox.empty();
+                    $backTimeText.empty();
+                    $backTimeValue.empty();
+                    var resData = res.datas;
+                    if(resData.length>0){
+
+                        for(var x = 0;x<resData.length;x++){
+                            if(resData[x].type.length>0){
+                                var itemName = resData[x].type;
+                                var itemValue = resData[x].data;
+                                if(itemName.length>0){
+                                    $backTimeText.text("数据反馈时间：");
+                                    $backTimeValue.text(resData[x].time);
+
+                                    var itemNameArr = itemName.split("/");
+
+                                    if (itemValue && itemValue.length > 0) {
+                                        var itemValueArr = itemValue.split("|");
+
+                                        for (var i = 0; i < itemValueArr.length; i++) {
+                                            var $rightTopTwoItem = $("<div class='rightTopTwoItem bgBlue'></div>");
+                                            var $rightTopTwoItemValue = $("<span class='rightTopTwoItemValue'></span>");
+                                            $rightTopTwoItemValue.text(itemNameArr[i] + ":" +itemValueArr[i]);
+                                            $rightTopTwoItemValue.appendTo($rightTopTwoItem);
+                                            $rightTopTwoItem.appendTo($rightTopTwoItemBox);
+                                        }
+                                    }
+
+
+                                }
+                                break;
+                            }
+                        }
+
+
+
+
+
+
+
+                    }else{
+                        $rightTopTwoItemBox.html("");
+                        setTimeout(function(){
+                            $(".rightTopTwoItemBox").html("<span class='noDeviceMsg'>未绑定设备</span>");
+                            $(".noDeviceMsg").height($(".rightTopTwoItemBox").height()).css("line-height",$(".rightTopTwoItemBox").height()+'px');
+                        },200);
+
+
+                    }
+
+
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }*/
+
+    // 获取视频监控url
+    function getCamareUrl(id, m) {
+        var $playerBox = $(".camera").eq(m);
+        $("#player" + m).remove();
+        $("#playerNoData" + m).remove();
+        var $player = $('<video  style="width: 100%;height:100%;" poster="" controls playsInline webkit-playsinline autoplay></video>');
+        var $rtmpHd = $('<source  type="rtmp/flv"/>');
+        var $hlsHd = $('<source type="application/x-mpegURL"/>');
+        $player.attr("id", "player" + m);
+        $rtmpHd.attr("id", "rtmpHd" + m);
+        $hlsHd.attr("id", "hlsHd" + m);
+        $rtmpHd.appendTo($player);
+        $hlsHd.appendTo($player);
+        $player.appendTo($playerBox);
+        var $playerNoData = $('<div style = "height: 100%; width: 100%; text-align: center;position:absolute;top:0; background-color: black;"></div>');
+        var $nomsg = $("<span class='nomsg' style ='position:absolute;left:0.5rem;'></span>");
+        var $img = $('<img src="../static/img/playBtn.png" style="width: 2rem; margin-top: 1.5rem />');
+        $playerNoData.attr("id", "playerNoData" + m);
+        $nomsg.appendTo($playerNoData);
+        $img.appendTo($playerNoData);
+        $playerNoData.appendTo($playerBox);
+        $.ajax({
+            type: "GET",
+            url: "../cameraManage/getPlayerAddress",
+            dataType: "json",
+            async: false,
+            data: {
+                "id": id,
+                "perspective": 1
+            },
+            success: function (data) {
+                if (data.state == 'success') {
+                    var data = data.data;
+                    var rtmpHd = document.getElementById("rtmpHd" + m);
+                    // var hlsHd = document.getElementById("hlsHd");
+                    rtmpHd.src = data.rtmp;
+                    // hlsHd.src = data.hlsHd;
+                    var player = new EZUIPlayer('player' + m);
+                    $("#player" + m).show();
+                    $("#playerNoData" + m).hide();
+                } else {
+                    $("#playerNoData" + m).find(".nomsg").text(data.msg).css("display", "block");
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+
+
+    //初始化实时环境数据
+    function initEnvironmentBar(deviceNumber, i) {
+
+        var weatherId = "weatherBar" + i;
+
+
+        environmentBar = echarts.init(document.getElementById(weatherId));
+        environmentBar.clear();
+
+
+        $.ajax({
+            type: "POST",
+            url: "../monitor/getSensorDataByDayCountNew",
+            data: {
+                "deviceNumber": deviceNumber,
+                "dayCount": 7
+            },
+            async: false,
+            dataType: "json",
+            success: function (res) {
+                if (res.state == "success" && res.data) {
+                    var res = res.data;
+
+                    var keyArr = Object.keys(res);
+                    if (keyArr.length > 0) {
+                        keyArr.remove('type');
+                        var newKeyArr = [];
+                        for (var w = 0; w < keyArr.length; w++) {
+                            if (keyArr[w] != "type") {
+                                newKeyArr.push(keyArr[w].split("-")[1]);
+                            }
+                        }
+                        var lastObj = {};
+                        for (var m = 0; m < keyArr.length; m++) {
+                            var nKey = newKeyArr[m];
+                            var nVal = keyArr[m];
+                            lastObj[nKey] = res[nVal];
+                        }
+                        var server = [];
+                        var weatherNum = 0;
+                        for (var q = 0; q < newKeyArr.length; q++) {
+                            var serverObj = {};
+                            if (newKeyArr[q] == "温度" || newKeyArr[q] == "湿度" || newKeyArr[q] == "光照度" || newKeyArr[q] == "雨量") {
+                                var weatherColor = ["#0068b7", "#80c269", '#00ffff', "#fff45c"];
+                                weatherNum++;
+                                var ss = newKeyArr[q];
+                                var cArr = [];
+                                for (var c = 0; c < 7; c++) {
+                                    cArr.push(Number(lastObj[ss][c]));
+                                }
+
+                                serverObj.name = ss;
+                                serverObj.type = 'bar';
+                                serverObj.data = cArr;
+                                serverObj.barWidth = 8;
+                                serverObj.barGap = 0;
+                                serverObj.type = 'bar';
+                                serverObj.label = {//图形上的文本标签
+                                    normal: {
+                                        show: false,
+                                        position: 'top',
+                                        textStyle: {
+                                            color: weatherColor[weatherNum],
+                                            fontStyle: 'normal',
+                                            fontFamily: '微软雅黑',
+                                            fontSize: 10,
+                                        },
+                                    },
+                                };
+                                serverObj.itemStyle = {
+                                    normal: {
+                                        color: weatherColor[weatherNum],
+                                    }
+
+                                };
+
+                                server.push(serverObj);
+
+
+                            }
+                        }
+
+
+                        var timeData = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
+                        var option = {
+                            title: {
+                                text: "",
+                                left: "15",
+                                top: "3",
+                                textStyle: {
+                                    color: "#fff",
+                                    fontSize: 14
+                                }
+                            },
+                            tooltip: { //提示框组件
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'shadow',
+                                    label: {
+                                        backgroundColor: ''
+                                    }
+                                },
+                                textStyle: {
+                                    color: '#fff',
+                                    fontStyle: 'normal',
+                                    fontFamily: '微软雅黑',
+                                    fontSize: 12,
+                                }
+                            },
+                            grid: {
+                                top: '25%',
+                                left: '2%',
+                                right: '5%',
+                                bottom: '10%',
+                                containLabel: true
+                            },
+                            legend: {//图例组件，颜色和名字
+                                center: "0",
+                                top: "10%",
+                                itemWidth: 16,
+                                itemHeight: 12,
+                                itemGap: 5,
+                                data: [{
+                                    name: '温度',
+                                }, {
+                                    name: '湿度',
+                                },
+                                    {
+                                        name: '光照度',
+                                    },
+                                    {
+                                        name: '雨量',
+                                    }],
+                                textStyle: {
+                                    color: '#ffffff',
+                                    fontStyle: 'normal',
+                                    fontFamily: '微软雅黑',
+                                    fontSize: 10,
+                                }
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: true,//坐标轴两边留白
+                                    data: timeData,
+                                    axisLabel: { //坐标轴刻度标签的相关设置。
+                                        interval: 0,//设置为 1，表示『隔一个标签显示一个标签』
+                                        margin: 8,
+                                        textStyle: {
+                                            color: '#ffffff',
+                                            fontStyle: 'normal',
+                                            fontFamily: '微软雅黑',
+                                            fontSize: 10,
+                                        }
+                                    },
+
+                                    axisTick: {//坐标轴刻度相关设置。
+                                        show: false,
+                                    },
+                                    axisLine: {//坐标轴轴线相关设置
+                                        lineStyle: {
+                                            color: '#fff',
+                                            opacity: 0.2
+                                        }
+                                    },
+                                    splitLine: { //坐标轴在 grid 区域中的分隔线。
+                                        show: false,
+                                    }
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    splitNumber: 2,
+                                    axisLabel: {
+                                        textStyle: {
+                                            color: '#ffffff',
+                                            fontStyle: 'normal',
+                                            fontFamily: '微软雅黑',
+                                            fontSize: 10,
+                                        }
+                                    },
+                                    axisLine: {
+                                        lineStyle: {
+                                            color: '#fff',
+                                            opacity: 0.2
+                                        }
+                                    },
+                                    axisTick: {
+                                        show: false
+                                    },
+                                    splitLine: {
+                                        show: true,
+                                        lineStyle: {
+                                            color: ['#fff'],
+                                            opacity: 0.06
+                                        }
+                                    }
+
+                                }
+                            ],
+                            series: server
+                        };
+
+                        environmentBar.setOption(option);
+
+
+                    }
+
+                } else {
+
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
+    }
+
+
+    Array.prototype.remove = function (val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    };
+
+    var getIndex = function (index, type) {
+        if (index < 10) {
+            index = "0" + index;
+        }
+
+        if (type == true) {
+            type = "01";
+        } else {
+            type = "00";
+        }
+
+        return index + type;
+
+    }
+
+</script>
+</html>
+

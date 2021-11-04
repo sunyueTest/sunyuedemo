@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>deviceList1</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="css/common.css">
+    <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" src="js/zTreejs/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+    <script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+    <script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+</head>
+<style>
+    .layui-table-tool .layui-inline{
+       margin-bottom: 5px;
+    }
+</style>
+<body>
+<div class="body content_wrap">
+    <div class="left">
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+
+    <div class="right">
+        <!--<div class="toolbar">
+
+        </div>-->
+        <table class="layui-hide" id="history" lay-filter="history"></table>
+    </div>
+
+
+</div>
+<script type="text/html" id="toolbar1">
+
+
+    <div class="layui-inline ">
+        <label id="timelabel" class="layui-form-label" style="width:100px;"></label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="from" placeholder="">
+        </div>
+    </div>
+
+    <div class="layui-inline ">
+        <label class="layui-form-label" style="width:30px;"> - </label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="to" placeholder="">
+        </div>
+    </div>
+
+    <div class="layui-inline " style="" shiro:hasPermission="/systemNotice">
+        <label id="devicelabel" class="layui-form-label" style="width:100px;"></label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="deviceNumber" placeholder="">
+        </div>
+    </div>
+
+    <div class="layui-inline" style="float: right; ">
+        <button class="layui-btn " lay-event="export" id="export">
+
+        </button>
+    </div>
+    <div class="layui-inline" style="float: right;margin-left: 2px;margin-right: 2px;">
+        <button class="layui-btn " lay-event="reset" id="reset">
+
+        </button>
+    </div>
+    <div class="layui-inline" style="float: right;">
+        <button class="layui-btn " lay-event="search" id="search">
+
+        </button>
+    </div>
+
+
+</script>
+
+
+<!--<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="show">查看</a>
+
+</script>-->
+
+
+<script>
+    $('.layui-icon layui-icon-export').parent().off('click');
+    layui.use(['form', 'laydate', 'layer', 'table'], function () {
+
+
+        var laydate = layui.laydate;
+
+        //ztree
+        var zNodes = [], requestCount = 0, deviceNumber = "", currentNode = '';
+        var setting = {
+            view: {
+                showLine: false,
+                // dblClickExpand: dblClickExpand
+                // selectedMulti: false
+                fontCss: getFont,
+                showIcon: false,
+                selectedMulti: false,
+                dblClickExpand: false,
+                addDiyDom: addDiyDom,
+            },
+            data: {
+                key: {
+                    title: "groupName",
+                    name: "groupName"
+                },
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: onClick
+            }
+        };
+
+        function getFont(treeId, node) {
+            // return {'color': '#000'};
+            return node.font ? node.font : {};
+        }
+
+        function addDiyDom(treeId, treeNode) {
+            var spaceWidth = 10;
+            var switchObj = $("#" + treeNode.tId + "_switch"),
+                icoObj = $("#" + treeNode.tId + "_ico");
+            switchObj.remove();
+            icoObj.before(switchObj);
+            if (treeNode.level >= 1) {
+
+                if (treeNode.deviceNumber) {
+                    var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level) + "px'></span><span style='color:#ffffff'>●</span>";
+                    switchObj.before(spaceStr);
+                } else {
+                    var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level) + "px'></span>";
+                    switchObj.before(spaceStr);
+                }
+
+
+            }
+
+            switch (treeNode.level) {
+                case 0:
+                    $("#" + treeNode.tId + "_a").css('background', '#132553');
+                    break;
+                case 1:
+                    $("#" + treeNode.tId + "_a").css('background', '#1A2F5C');
+                    break;
+                case 2:
+                    $("#" + treeNode.tId + "_a").css('background', '#203864');
+                    break;
+                case 3:
+                    $("#" + treeNode.tId + "_a").css('background', '#254169');
+                    break;
+                case 4:
+                    $("#" + treeNode.tId + "_a").css('background', '#2E4E75');
+                    break;
+                default:
+                    $("#" + treeNode.tId + "_a").css('background', '#2E4E75');
+                /* case 5:$("#" + treeNode.tId + "_a").css('background','#355A88');
+                     break;
+                 case 6:$("#" + treeNode.tId + "_a").css('background','#3C679C');
+                     break;
+                 case 7:$("#" + treeNode.tId + "_a").css('background','#4577B5');
+                     break;*/
+
+            }
+        }
+
+        function onClick(event, treeId, treeNode, clickFlag) {
+            if (treeNode.isGroup == null || treeNode.isGroup == true) {
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                zTree.expandNode(treeNode);
+            } else {
+                if (currentNode != '') {
+                    $("#" + currentNode).css('color', '#ffffff');
+
+                    //获取上一个节点 并删除
+                    $("#" + currentNode).next().remove();
+
+                }
+                $("#" + treeNode.tId + "_span").css('color', '#098CCF');
+
+                var img = '<img style="width:8px;height: 8px;margin-right: 5px;" src="../../css/zTreeStyle/img/diy/arrow.png">';
+                $("#" + treeNode.tId + "_span").after(img);
+                currentNode = treeNode.tId + "_span";
+                deviceNumber = treeNode.deviceNumber;
+            }
+        }
+
+        $.ajax({
+            url: "group/selGroupList",
+            data: {},
+            dataType: "json",
+            type: "get",
+            timeout: 30000,
+            error: function (data, type, err) {
+                console.log(err);
+                layer.msg($.i18n.prop('fail'));
+            },
+            success: function (data) {
+                // layer.closeAll('loading');
+                if (data.state == 'success') {
+                    for (var i = 0; i < data.datas.length; i++) {
+                        zNodes.push(data.datas[i])
+                    }
+                    menuInit(-1);
+                    requestCount = data.datas.length + 1;
+                    getNodeData(0, 0);
+                    for (var i = 0; i < data.datas.length; i++) {
+                        data.datas[i].font = {'color': '#ffffff'};
+                        data.datas[i].isGroup = true;
+                        getNodeData(data.datas[i].id, 0);
+                    }
+
+                } else {
+                    layer.msg($.i18n.prop(data.msg));
+                }
+            }
+        });
+
+        function getNodeData(id, len) {
+            $.ajax({
+                url: "group/selDeviceForGroup",
+                data: {id: id},
+                dataType: "json",
+                type: "get",
+                timeout: 30000,
+                error: function (data, type, err) {
+                    console.log(err);
+                    layer.msg($.i18n.prop('fail'));
+                },
+                success: function (data) {
+                    // layer.closeAll('loading');
+                    if (data.state == 'success') {
+                        len = data.datas.length;
+                        for (var i = 0; i < len; i++) {
+                            var datai = data.datas[i];
+                            datai.isGroup = false;
+                            datai.id = datai.id + 100000;
+                            datai.pId = datai.groupId;
+                            datai.groupName = datai.deviceName;
+                            datai.iconSkin = "icon02";
+                            datai.font = {'color': '#ffffff'};
+                            zNodes.push(datai);
+                            if (deviceNumber ==''){
+                                deviceNumber =  datai.deviceNumber;
+                                $('#search').click();
+                            }
+                        }
+                        if (data.isLast) {
+                            if (requestCount == 1) {
+                                menuInit(openExp(0, 0));
+                            }
+                            requestCount -= 1;
+                        } else {
+                            getNodeData(data.datas[i].id, len);
+                        }
+                    } else {
+                        layer.msg($.i18n.prop(data.msg))
+                    }
+                }
+            });
+        }
+
+        function openExp(index, oId) {
+            for (var i = index; i < zNodes.length; i++) {
+                if (zNodes[i].pId == oId && zNodes[i].isGroup == true) {
+                    zNodes[i].open = true;
+                    return openExp(0, zNodes[i].id)
+                }
+            }
+            for (var i = index; i < zNodes.length; i++) {
+                if (zNodes[i].pId == oId) {
+                    return zNodes[i].id;
+                }
+            }
+        }
+
+        function menuInit(id) {
+            var treeObj = $("#treeDemo");
+            // zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
+            // curMenu = zTree_Menu.getNodes()[0].children[0].children[0];
+            // zTree_Menu.selectNode(curMenu);
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            treeObj.hover(function () {
+                if (!treeObj.hasClass("showIcon")) {
+                    treeObj.addClass("showIcon");
+                }
+            }, function () {
+                treeObj.removeClass("showIcon");
+            });
+            if (id != -1) {
+                var tree = $.fn.zTree.getZTreeObj("treeDemo");
+                var sel = tree.getNodeByParam('id', id);
+                if (sel != null) {
+                    $("#" + sel.tId + "_a").click(); // 点击节点
+                }
+            }
+        }
+
+        function get_cookie(Name) {
+            var search = Name + "="//查询检索的值
+            var returnvalue = "";//返回值
+            if (document.cookie.length > 0) {
+                sd = document.cookie.indexOf(search);
+                if (sd != -1) {
+                    sd += search.length;
+                    end = document.cookie.indexOf(";", sd);
+                    if (end == -1)
+                        end = document.cookie.length;
+                    //unescape() 函数可对通过 escape() 编码的字符串进行解码。
+                    returnvalue = unescape(document.cookie.substring(sd, end))
+                }
+            }
+            return returnvalue;
+        }
+
+        var deviceNumber = get_cookie("deviceNumber");
+        var table = layui.table;
+        table.render({
+            elem: '#history'
+            , url: '../history/getHistoryList?deviceNumber=' + deviceNumber
+            , toolbar: '#toolbar1'
+            , title: '历史数据'
+            , cols: [
+                [
+                    {field: 'id', title: 'ID', width: 90, align: 'center'},
+
+                    {
+                        field: 'deviceNumber',
+                        title: $.i18n.prop('deviceNo'),
+                        width: 150,
+                        align: 'center'
+                    }
+                        // ,{field: 'type', title: $.i18n.prop('dataType'), width: 150, align: 'center'}
+                    , {
+                    field: 'sensorData',
+                    title: $.i18n.prop('deviceData'),
+                    width: 360,
+                    align: 'center'
+                }
+                    , {
+                    field: 'drecordTime',
+                    title: $.i18n.prop('acceptTime'),
+                    width: 230,
+                    align: 'center'
+                }
+                ]
+            ]
+            , page: true
+            , height: 600
+            , defaultToolbar: ['filter', 'print']
+        });
+        //设置语言
+        $('#timelabel').text($.i18n.prop('timelabel'));
+        $('#from').attr('placeholder', $.i18n.prop('startTime'));
+        $('#to').attr('placeholder', $.i18n.prop('endTime'));
+        $('#devicelabel').text($.i18n.prop('devicelabel'));
+        $('#deviceNumber').attr('placeholder', $.i18n.prop('deviceDescription'));
+        $('#export').text($.i18n.prop('export'));
+        $('#reset').text($.i18n.prop('reset'));
+        $('#search').text($.i18n.prop('search'));
+
+        laydate.render({
+            elem: '#from'
+            , type: 'datetime'
+        });
+        laydate.render({
+            elem: '#to'
+            , type: 'datetime'
+        });
+        $('#from').val(formatDate(new Date(new Date() - 1000 * 60 * 60 * 24)));
+        $('#to').val(toDate(new Date()));
+
+        function formatDate(date) {
+            var year = date.getFullYear(),
+                month = date.getMonth() + 1,//月份是从0开始的
+                day = date.getDate(),
+                hour = date.getHours(),
+                min = date.getMinutes(),
+                sec = date.getSeconds();
+            var newTime = year + '-' +
+                month + '-' +
+                day + ' ' +
+                hour + ':' +
+                min + ':' +
+                sec;
+            return newTime;
+        }
+
+        function toDate(date) {
+            var year = date.getFullYear(),
+                month = date.getMonth() + 1,//月份是从0开始的
+                day = date.getDate();
+
+            var newTime = year + '-' +
+                month + '-' +
+                day + ' ' +
+                23 + ':' +
+                59 + ':' +
+                59;
+            return newTime;
+        }
+
+        table.on('toolbar(history)', function (obj) {
+            if (obj.event == 'search') {
+                doLoginFilter();//登陆状态验证
+                var from = $('#from').val();
+                var to = $('#to').val();
+                var a = $('#deviceNumber').val();
+                var ncode;
+                if (a != '' && a != undefined && a != 'undefined') {
+                    ncode = a;
+                }
+                else if (deviceNumber === null || deviceNumber === undefined || deviceNumber === '') {
+                    layer.msg($.i18n.prop('warn0'));
+                    return false;
+                } else {
+                    ncode = deviceNumber;
+                }
+
+                if (from === null || from === undefined || from === '') {
+                    layer.msg($.i18n.prop('warn1'));
+                    return false;
+                }
+                if (to === null || to === undefined || to === '') {
+                    layer.msg($.i18n.prop('warn2'));
+                    return false;
+                }
+                var cha1 = parseInt(new Date(to) - new Date(from)) / (1000 * 60 * 60 * 24);
+                var cha2 = parseInt(new Date() - new Date(from)) / (1000 * 60 * 60 * 24);
+                if (cha1 > 7) {
+                    layer.msg($.i18n.prop('warn3'));
+                    return false;
+                }
+                if (cha2 > 90) {
+                    layer.msg($.i18n.prop('warn4'));
+                    return false;
+                }
+                var index = layer.load(2);
+                table.reload('history', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        ncode: ncode,
+                        from: from,
+                        to: to
+                    }, done: function (res, curr, count) {
+                        layer.close(index);
+                        laydate.render({
+                            elem: '#from'
+                            , type: 'datetime'
+                            , value: from
+                        });
+                        laydate.render({
+                            elem: '#to'
+                            , type: 'datetime'
+                            , value: to
+                        });
+                        $('#deviceNumber').val(a);
+                        //设置语言
+                        $('#timelabel').text($.i18n.prop('timelabel'));
+                        $('#from').attr('placeholder', $.i18n.prop('startTime'));
+                        $('#to').attr('placeholder', $.i18n.prop('endTime'));
+                        $('#devicelabel').text($.i18n.prop('devicelabel'));
+                        $('#deviceNumber').attr('placeholder', $.i18n.prop('deviceDescription'));
+                        $('#export').text($.i18n.prop('export'));
+                        $('#reset').text($.i18n.prop('reset'));
+                        $('#search').text($.i18n.prop('search'));
+                    }
+                });
+
+            } else if (obj.event == 'reset') {
+                laydate.render({
+                    elem: '#from'
+                    , type: 'datetime'
+                    , value: new Date(new Date() - 1000 * 60 * 60 * 24)
+                });
+                laydate.render({
+                    elem: '#to'
+                    , type: 'datetime'
+                    , value: new Date()
+                });
+                $('#deviceNumber').val('');
+            } else if (obj.event == 'export') {
+                var from = $('#from').val();
+                var to = $('#to').val();
+                if (deviceNumber === null || deviceNumber === undefined || deviceNumber === '') {
+                    layer.msg($.i18n.prop('warn0'));
+                    return false;
+                }
+                var a = $('#deviceNumber').val();
+                if (a != '' && a != undefined && a != 'undefined') {
+                    deviceNumber = a;
+                }
+                //window.location.href='../history/historyExport?ncode='+deviceNumber+'&from='+from+'&to='+to;
+                window.open('../history/historyExport?ncode=' + deviceNumber + '&from=' + from + '&to=' + to);
+            }
+        });
+
+
+    });
+
+
+</script>
+<style>
+    body{
+        width: 100%!important;
+    }
+    .layui-table{
+        width: 90%!important;
+        padding: 0 2%;
+        box-sizing: border-box;
+    }
+    .layui-table thead tr{
+        width: 100%!important;
+    }
+    .layui-table thead,.layui-table tr{
+        width: 100%!important;
+
+    }
+
+    .body {
+        width: 100%;
+    }
+
+    .left {
+        width: 20%;
+        float: left;
+    }
+
+    .right {
+        width: 80%;
+        float: left;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .layui-table-tool .layui-inline {
+        background-color: #eaeaea;
+    }
+
+    /*   .layui-table-body .layui-table-main{
+           height:500px;!important;
+       }*/
+    .layui-table thead {
+        background-color: #132553;
+    }
+
+    .layui-table tbody {
+        background-color: #254169;
+    }
+
+    .layui-table-header thead{
+         background-image: none;
+         display: table;
+    }
+
+
+    .toolbar {
+        height: 50px;
+    }
+
+    ul.ztree {
+        margin-top: 20px;
+        border: 0px solid #fff;
+        background-color: transparent;
+        width: 90%;
+        height: 500px;
+        overflow-y: auto;
+        overflow-x: auto;
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
+    }
+    ul.ztree::-webkit-scrollbar {
+        width: 0 !important;
+    }
+    .ztree * {
+        font-size: 10pt;
+        font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial
+    }
+
+    .ztree li ul {
+        margin: 0;
+        padding: 0
+    }
+
+    .ztree li {
+        line-height: 30px;
+    }
+
+    .ztree li a {
+        width: 100%;
+        height: 30px;
+        padding-top: 0px;
+        margin-top: 2px;
+    }
+
+    .ztree li a:hover {
+        text-decoration: none;
+        background-color: #475e80;
+    }
+
+    /* .ztree li a span.button.switch {
+         visibility: visible
+     }
+
+     .ztree.showIcon li a span.button.switch {
+         visibility: visible
+     }*/
+
+    .ztree li a.curSelectedNode {
+        background-color: #475e80;
+        border: 0;
+        height: 30px;
+    }
+
+    .ztree li span {
+        line-height: 30px;
+    }
+
+    .ztree li span.button {
+        margin-top: -7px;
+    }
+
+    .ztree li span.button.switch {
+        width: 20px;
+        height: 16px;
+    }
+
+    /*.ztree li a.level0 span {font-size: 150%;font-weight: bold;}*/
+    /*node_name*/
+    .ztree li span.button {
+
+        /*background-image: url("../../img/left_menuForOutLook.png");*/
+
+    }
+
+    .ztree li span.button.switch.level0 {
+        margin-left: 5px;
+        /*width: 20px;
+        height: 20px*/
+    }
+
+    .ztree li span.button.switch.level1 {
+        /*width: 20px;
+        height: 20px*/
+    }
+    .ztree li span.button.noline_open {
+        background-position: 0 0;
+        background-image: url("../../img/open.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    .ztree li span.button.noline_close {
+        background-position: 0 0;
+        background-image: url("../../img/close.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .layui-inline .device {
+        float: left;
+    }
+    .layui-table-body {
+        height: auto!important;
+    }
+
+</style>
+</body>
+</html>

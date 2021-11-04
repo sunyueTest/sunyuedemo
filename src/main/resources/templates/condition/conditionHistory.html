@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>historyList</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/common.css">
+
+</head>
+<body>
+
+<table class="layui-hide" id="table" lay-filter="table"></table>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline bg-transparent" style="display: flex">
+        <input type="text" class="layui-input" name="aCode" id="aCode" autocomplete="off"
+               placeholder="节点编号" style="width: 182px">
+        <button class="layui-btn " lay-event="search">
+            <i class="layui-icon layui-icon-search "></i>
+        </button>
+        </button>
+    </div>
+</script>
+
+
+<script type="text/html" id="barDemo">
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+        class="layui-icon"></i></button>
+</script>
+<!--<script type="text/html" id="typeTpl">
+    {{#  if(d.type == 'email'){ }}
+    邮件
+    {{# }else if(d.type == 'tel'){ }}
+    手机
+    {{# }}}
+</script>-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/condition/conditionHistory.js}" charset="utf-8"></script>
+
+<!--<script>
+    var table, rol = false;
+    layui.use('table', function () {
+        var tableData = [
+            // {
+            //     type: 'checkbox'//, fixed: 'left'
+            // },
+            {
+                field: 'id',
+                title: 'ID',
+                width: 50,
+                // fixed: 'left',
+                sort: true, align: 'center'
+            }, {
+                field: 'name', width: 140, title: $.i18n.prop('name'), align: 'center'
+            }
+            , {field: 'sensorCode', width: 160, title: $.i18n.prop('nodeNumber'), align: 'center'}
+            , {field: 'expression', width: 120, title: $.i18n.prop('expression'), align: 'center'}
+            , {
+                field: 'time',
+                width: 160, title: $.i18n.prop('time'), align: 'center'
+            }
+            , {
+                field: 'toDevice',
+                width: 140, title: $.i18n.prop('deviceNo'), align: 'center'
+            }
+            // , {
+            //     field: 'result',
+            //     width: 100, title: $.i18n.prop('result'), align: 'center'
+            // }
+            , {
+                field: 'msg',
+                width: 100, title: $.i18n.prop('info'), align: 'center'
+            }
+            , {
+                field: 'command', title: $.i18n.prop('command'), align: 'center'
+            }
+            , {
+                width: 100,
+                field: '', title: $.i18n.prop('operation'),
+                toolbar: '#barDemo', align: 'center'
+            }
+        ];
+
+        table = layui.table;
+        table.render({
+            elem: '#table'
+            , url: '../conditionConfig/getHistoryList'
+            , toolbar: '#toolbar1'
+            , cellMinWidth: 50
+            , title: ''
+            , cols: [tableData]
+            , page: true,
+            // limitName: 'page',
+            // height: 600,
+        });
+        //设置语言
+        $('#aCode').attr('placeholder', $.i18n.prop('nodeNumber'));
+
+        //头工具栏事件
+        table.on('toolbar(table)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'search':
+                    doLoginFilter();//登陆状态验证
+                    var aCode = $('#aCode').val();
+                    console.log(aCode);
+                    reloadDeviceList(aCode);
+                    break;
+            }
+        });
+
+        //监听行工具事件
+        table.on('tool(table)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm($.i18n.prop('confirmDelete'), {
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    title: $.i18n.prop('info')
+                }, function (index) {
+                    layer.load(2);
+                    $.ajax({
+                        url: "condition/deleteHistory",
+                        data: obj.data,
+                        dataType: "json",
+                        type: "post",
+                        timeout: 30000,
+                        error: function (data, type, err) {
+                            console.log(err);
+                            layer.closeAll('loading');
+                            layer.msg($.i18n.prop('fail'), {
+                                offset: '6px', icon: 2
+                            });
+                        },
+                        success: function (data) {
+                            layer.closeAll('loading');
+                            if ('success' == data.state) {
+                                $('.layui-laypage-btn').click();
+                                layer.msg($.i18n.prop(data.msg), {icon: 1})
+                            } else {
+                                layer.msg($.i18n.prop(data.msg), {icon: 2})
+                            }
+                        }
+                    });
+                });
+            }
+        });
+    });
+
+    function reloadDeviceList(aCode) {
+        table.reload('table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                sensorCode: aCode
+            }
+        });
+        $('#aCode').val(aCode);
+        $('#aCode').attr('placeholder', $.i18n.prop('nodeNumber'));
+        $('a.layui-btn.layui-btn-xs.edit').text($.i18n.prop('edit'));
+        $('a.layui-btn.layui-btn-xs.del').text($.i18n.prop('delete'));
+    }
+
+</script>-->
+<style>
+    .abc {
+        float: right;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .layui-table-tool .layui-inline {
+        background-color: #eaeaea;
+    }
+
+    .online {
+        color: #ffff00;
+    }
+
+    .offline {
+        color: #458B74;
+    }
+</style>
+</body>
+</html>

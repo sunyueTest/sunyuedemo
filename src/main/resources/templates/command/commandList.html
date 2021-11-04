@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>指令列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<style>
+</style>
+<body>
+
+<div>
+    <table class="layui-hide" id="device" lay-filter="device"></table>
+</div>
+
+<script type="text/html" id="delTemplate">
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+            class="layui-icon"></i></button>
+</script>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline">
+        <button id="sendCommand" class="layui-btn layui-btn-primary layui-btn-radius"
+                lay-event="sendCommand">下发指令
+        </button>
+    </div>
+
+    <div class="layui-inline abc">
+        <button class="layui-btn " lay-event="search"><i class="layui-icon layui-icon-search "></i>
+        </button>
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="aCode" id="input_device_code"
+               style="width:182px;"
+               autocomplete="off"
+               placeholder="设备编码">
+
+    </div>
+</script>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    // $(document).ready(
+    //     $(function () {
+    //         $('html').niceScroll({
+    //             autohidemode: true, cursorborder: "", cursorcolor: "rgba(0,0,0,0)", boxzoom: true
+    //         })
+    //     })
+    // )
+</script>
+<script type="text/html" id="stateTpl">
+    {{#  if(d.isSuccess == 1){ }}
+    <span class="success">成功</span>
+    {{#  }else{ }}
+    <span class="wait">等待</span>
+    {{#  } }}
+</script>
+<script type="text/html" id="commandTpl">
+    <input class="stateInput" value="{{ commandMap.get(d.command)}}" disabled='disabled'>
+    </input>
+</script>
+<script th:inline="none" th:src="@{/static/js/commandList.js}"></script>
+<style>
+    .abc {
+        float: right;
+    }
+
+    .wait {
+        color: #8B7500;
+    }
+
+    .success {
+        color: #458B74;
+    }
+
+    /*body {*/
+    /*overflow-y: hidden;*/
+    /*}*/
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .stateInput {
+        background-color: transparent;
+        border: 0px;
+        color: #87CEEB;
+    }
+
+    html {
+        overflow: auto !important;
+    }
+
+</style>
+</body>
+</html>

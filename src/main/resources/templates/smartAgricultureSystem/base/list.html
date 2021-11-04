@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../../../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../../../static/css/listNewStyle.css?id=1.3">
+    <style>
+
+        .layui-form-select dl {
+            background: #195884;
+            border-left: 1px solid #89f3ff;
+            box-shadow: inset 0px 0px 6px #0080ca;
+            color: #fff;
+            text-indent: .5rem;
+            font-size: .7rem;
+            border-right: 1px solid #89f3ff;
+            border-top: none;
+            border-bottom: none;
+            border-radius: 0.15rem;
+        }
+
+        .layui-form-select dl dd.layui-this {
+            background-color: #29bbd0;
+            color: #fff;
+        }
+
+        .layui-form-select dl dd:hover {
+            background: none;
+        }
+
+
+        .layui-table-tool-panel {
+            background: #195884;
+            border-left: 1px solid #89f3ff;
+            box-shadow: inset 0px 0px 6px #0080ca;
+            color: #fff;
+            font-size: .7rem;
+            border-right: 1px solid #89f3ff;
+            border-top: none;
+            border-bottom: none;
+            border-radius: 0.15rem;
+        }
+
+        .layui-form-checkbox span {
+            color: #fff !important;
+        }
+
+        .layui-table-tool-panel li:hover {
+            background: none;
+        }
+
+        .layui-form-checked i {
+            border-color: #026e87 !important;
+            background-color: #026e87 !important;
+        }
+
+        .layui-form-checkbox:hover i {
+            border-color: #026e87 !important;
+        }
+    </style>
+</head>
+<body>
+<table class="layui-hide" id="table" lay-filter="table"></table>
+
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline bg-transparent" id="addProjectDiv">
+        <button id="add" class="layui-btn layui-btn-primary layui-btn-radius"
+                lay-event="add"> 新增基地
+        </button>
+    </div>
+    <div class="layui-inline bg-transparent" id="exportBaseDiv">
+        <button id="export" class="layui-btn layui-btn-primary layui-btn-radius"
+                lay-event="export"> 导出基地
+        </button>
+    </div>
+
+    <div class="layui-inline abc">
+        <button class="layui-btn " lay-event="search">
+            <i class="layui-icon layui-icon-search "></i>
+        </button>
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="baseName" id="baseName" autocomplete="off"
+               style="width:182px;"
+               placeholder="基地名称">
+    </div>
+    <div class="layui-inline bg-transparent abc" id="projectDiv">
+        <select id="projectId" lay-filter="projectFilter">
+
+        </select>
+    </div>
+    <div class="layui-inline bg-transparent abc" id="enterpriseDiv">
+        <select id="enterpriseId" lay-filter="enterpriseFilter">
+            <option value="0" selected>请选择企业</option>
+            <option th:each="enterprise:*{data.enterprises}" th:value="*{enterprise.id}"
+                    th:text="*{enterprise.name}"></option>
+        </select>
+    </div>
+
+
+</script>
+
+<script type="text/html" id="barDemo">
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i
+            class="layui-icon"></i></button>
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+            class="layui-icon layui-icon-delete"></i></button>
+</script>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<style>
+    .abc {
+        float: right;
+        margin-left: 10px;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .layui-table-tool .layui-inline {
+        background-color: #eaeaea;
+    }
+</style>
+</body>
+</html>
+<script>
+    let html;
+    $(function () {
+        var winHeight = $(window).height();
+        $(".layui-table-body").height(winHeight - 200);
+
+        $(window).resize(function () {
+            $(".layui-table-body").height(winHeight - 200);
+        });
+    });
+
+
+    let table, form;
+    layui.use(['table', 'form'], function () {
+        let tableData = [
+            {
+                field: 'id', title: 'ID', width: 80, //fixed: 'left', unresize: true,
+                sort: true
+            },
+            {field: 'name', title: "基地名称", align: 'center'},
+            {field: 'createUser', title: "创建者", align: 'center'},
+            {field: 'createTime', title: "创建时间", width: 160, align: 'center'},
+            {
+                field: '',
+                title: $.i18n.prop('operation'),
+                toolbar: '#barDemo',
+                width: 200,
+                align: 'center'
+            }
+        ];
+
+        table = layui.table;
+        form = layui.form;
+        let projectId = 0;
+        table.render({
+            elem: '#table'
+            , url: '../projectBaseScene/listBases'
+            , toolbar: '#toolbar1'
+            , title: ''
+            , cols: [tableData]
+            , page: true,
+            request: {limitName: 'size', projectId: 0},
+            response: {
+                statusCode: 'success'
+            },
+            parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                return {
+                    "code": res.state, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.datas,//解析数据列表
+                };
+            }
+        });
+
+        //监听企业下拉菜单的变化，获取其下的所有项目
+        form.on('select(enterpriseFilter)', function () {
+            if ($('#enterpriseId').val() != '0') {
+                $('#projectDiv').show();
+                $.ajax({
+                    url: "../projectBaseScene/listProjectsByEnterpriseId?enterpriseId=" + $('#enterpriseId').val(),
+                    dataType: "json",
+                    type: "get",
+                    timeout: 30000,
+                    error: function (data, type, err) {
+                        layer.msg($.i18n.prop('err182'), {
+                            offset: '6px', icon: 2
+                        });
+                    },
+                    success: function (data) {
+                        layer.closeAll('loading');
+                        if ('success' == data.state) {
+                            let list = data.datas;
+                            html = "";
+                            console.log(list);
+                            for (let i = 0; i < list.length; i++) {
+                                if (i == 0) {
+                                    html += "<option value='0'>请选择项目</option>";
+                                }
+                                html += "<option value=" + list[i]["id"] + ">" + list[i]["name"] + "</option>";
+                            }
+                            $("#projectId").empty();
+                            $("#projectId").append(html);
+                            form.render();
+                        } else {
+                            console.log("项目列表获取失败");
+                            layer.msg($.i18n.prop('err183'), {icon: 2})
+                        }
+                    }
+                });
+            } else {
+                $("#projectId").empty();
+                form.render();
+            }
+        });
+
+        //头工具栏事件
+        table.on('toolbar(table)', function (obj) {
+            switch (obj.event) {
+                case 'search':
+                    doLoginFilter();//登陆状态验证
+                    let baseName = $('#baseName').val();
+                    let projectId = $('#projectId').val();
+                    let enterpriseId = $('#enterpriseId').val();
+                    reloadSmartAgricultureList(projectId, baseName, enterpriseId);
+                    break;
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        title: false,
+                        closeBtn: true,
+                        area: ['700px', '500px'],
+                        shade: 0.2,
+                        id: 'LAY_onLineCtrl',
+                        btnAlign: 'c',
+                        moveType: 1,
+                        content: '../projectBaseScene/toAddBase',
+                        success: function (layero, index) {
+                        }
+                    });
+                    break;
+                case 'export':
+                    window.location.href = '../projectBaseScene/exportBases';
+            }
+        });
+
+        //监听行工具事件
+        table.on('tool(table)', function (obj) {
+            let data = obj.data;
+            if (obj.event === 'edit') {
+                layer.open({
+                    type: 2,
+                    title: false,
+                    closeBtn: true,
+                    area: ['700px', '500px'],
+                    shade: 0.2,
+                    id: 'LAY_onLineCtrl',
+                    btnAlign: 'c',
+                    moveType: 1,
+                    content: '../projectBaseScene/toUpdateBase?id=' + data.id
+                });
+            } else if (obj.event === 'del') {
+                layer.confirm($.i18n.prop('confirmDelete'),
+                    {
+                        btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                        title: $.i18n.prop('info')
+                    }, function (index) {
+                        layer.load(2);
+                        $.ajax({
+                            url: "../projectBaseScene/delBase",
+                            data: {id: data.id},
+                            dataType: "json",
+                            type: "post",
+                            timeout: 30000,
+                            error: function (data, type, err) {
+                                layer.closeAll('loading');
+                                layer.msg($.i18n.prop('fail'), {
+                                    offset: '6px', icon: 2
+                                });
+                            },
+                            success: function (data) {
+                                layer.closeAll('loading');
+                                if ('success' == data.state) {
+                                    $('.layui-laypage-btn').click();
+                                    layer.msg($.i18n.prop(data.msg), {icon: 1})
+                                } else {
+                                    layer.msg($.i18n.prop(data.msg), {icon: 2})
+                                }
+                            }
+                        });
+                    });
+            }
+        });
+        var winHeight = $(window).height();
+
+        $(".layui-table-body").height(winHeight - 39 - 65 - 41 - 20);
+    });
+
+    function reloadSmartAgricultureList(projectId, baseName, enterpriseId) {
+        table.reload('table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                projectId: projectId,
+                baseName: baseName
+            }
+        });
+        var winHeight = $(window).height();
+
+        $(".layui-table-body").height(winHeight - 39 - 65 - 41 - 20);
+        $('#projectId').append(html);
+        $("#projectId").val(projectId);
+        $("#baseName").val(baseName);
+        $("#enterpriseId").val(enterpriseId);
+    }
+
+</script>

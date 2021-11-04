@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/base.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/deviceDetail.css?v=1}" media="all">
+</head>
+<style>
+    .deviceNumber{
+        font-size:23px;
+    }
+</style>
+
+<body>
+<blockquote class="layui-elem-quote deviceNumber"><span id="title">当前设备号：</span>
+    <span id="currentDeviceNumber"></span>
+</blockquote>
+<div class="layui-col-xs10 list-border layui-col-xs-offset1" >
+    <table class="layui-hide layui-table " id="onlineDetail" lay-filter="onlineDetail"></table>
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:inline="javascript">
+    var devciedata = [[${data}]];
+</script>
+<script type="text/javascript" language='javascript' src="../js/deviceOnlineDetail.js?v1"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+</html>

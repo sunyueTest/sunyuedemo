@@ -1,0 +1,258 @@
+
+/*logo字体颜色*/
+#span_company{
+    background: linear-gradient(to top, #ffce95, #febb61, #feb34d);
+    -webkit-background-clip: text;
+    color: transparent;
+
+}
+.iconfont {
+    background: linear-gradient(to top, #dc7937, #febb61, #ffce95);
+    -webkit-background-clip: text;
+    color: transparent!important;
+}
+.layui-card-header{background: rgb(212, 55, 38)!important;color: #fff!important;}
+.layui-layout-admin .layui-logo{background:#d43726;
+    background-size:100% 100%;
+    background-size: 78% 76%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #d43726!important;
+}
+.layui-layout-admin .layui-header{background: #d43726;
+}
+.layui-side{background: #393D49;color: #000;
+}
+/*导航下拉自体颜色*/
+.layui-nav-child dd span{
+    background: linear-gradient(to top, #dc7937, #febb61, #ffce95);
+    -webkit-background-clip: text;
+    color: #febb61 ;
+    font-weight: normal;
+}
+.layui-nav-child .layui-this a{
+    background: #ffc270!important;
+}
+.layui-nav-child .layui-this span{
+    color: #fff!important;
+}
+/*头部字体颜色*/
+.layui-layout-admin .layui-header a, .layui-layout-admin .layui-header a cite{
+    color: #febb61;
+}
+/*导航*/
+.layui-tab-title{
+    background: #ffc78a!important;
+    color: #d43726!important;
+    border: 1px solid #d43726;
+    border-radius: 10px;
+    width: 96%;
+    margin: 0 auto;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+.layui-tab-title li .layui-tab-close{color: #d43726;}
+a cite{    background: linear-gradient(to top, #dc7937, #febb61, #ffce95);
+    -webkit-background-clip: text;
+    color: transparent;
+    /*text-shadow:1px 1px 1px #b6241a;*/
+    font-weight: bold;
+    font-size: 16px!important;
+
+}
+.layui-side-menu .layui-nav .layui-nav-item .layui-icon{color: #febb61;font-size: 20px!important;margin-top: -23px!important;}
+/*内容背景*/
+body .layui-layout-admin .layui-body{background-image:url("/static/img/indexcss/body-bg.png")!important;}
+body .layui-card a{color: #000}
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
+    background: none;
+}
+
+/*导航背景*/
+.layui-tab-title .layui-this{
+    background: url("/static/img/indexcss/nav-bg.jpg"); !important;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: #d43726!important;
+    border-radius: 10px!important;
+}
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after{
+    border-bottom: none!important;
+}
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after{
+    border-bottom: none!important;
+}
+
+
+
+.layui-nav-tree .layui-nav-bar {
+    background: #ffb866;
+}
+.layui-tab-brief>.layui-tab-title .layui-this{
+    color: #fff;
+}
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after{
+    border-bottom: 2px solid #b79661;
+}
+.layui-nav-itemed>.layui-nav-child{background: #f94f3d!important;}
+.ztree li a{color: #000;!important;}
+.layui-nav .layui-nav-more{border-top-color: #febb61;}
+.layui-nav .layui-nav-mored, .layui-nav-itemed>a .layui-nav-more{border-color: transparent transparent #febb61;}
+
+.layui-card-body{color: #fff}
+
+/*语言选择、管理员三角号*/
+.layui-layout-admin .layui-header .layui-nav .layui-nav-more{
+    border-top-color: #fff!important;
+}
+.layui-layout-admin .layui-header .layui-layout-right .layui-nav-child{
+    background:#d43726!important;
+}
+.layui-header .layui-nav-child a{
+    color: #000!important;
+    background: #d43726;!important
+}
+.layui-header .layui-nav-child a:hover{
+    color: #fff!important;
+    background: #d43726;!important
+}
+/*___________红色主题_____________________________________________________________________________________________________________________________________________*/
+/*!*列表显示*!*/
+.flysand-container-horizontal{
+background-image:none !important;
+background: #ffc78a!important;
+color: #d43726!important;
+border: 1px solid #d43726;
+}
+.flysand-ul li{
+background-image:none !important;
+background: #ffc78a!important;
+color: #d43726!important;
+border: 1px solid #d43726;
+}
+ul.ztree{
+background-image:none !important;
+background: #ffc78a!important;
+color: #d43726!important;
+border: 1px solid #d43726;
+}
+.ztree li a{
+color: #d43726!important;
+}
+.ztree li a.curSelectedNode{
+background:#d43726 no-repeat!important;
+background-size: 100% 100%!important;
+color: #fff!important;
+}
+.ztree li a:hover{
+background:#d43726 no-repeat!important;
+background-size: 100% 100%!important;
+color: #fff!important;
+}
+/*图形化显示*/
+.flysand-container,.container{
+background-image:none !important;
+background: #ffc78a!important;
+color: #d43726!important;
+border: 1px solid #d43726;
+}
+.ztree li a{
+background: none!important;
+}
+.layui-btn{
+background: #d43726!important;
+color: #fff!important;
+}
+.layui-table thead{
+background-image:none !important;
+background: #ffc78a!important;
+color: #d43726!important;
+border: 1px solid #d43726;
+}
+.layui-form-label{
+background: #ffc78a!important;
+color: #fff!important;
+}
+/*设备管理*/
+.layui-btn-primary{
+color: #fff!important;
+}
+.layui-table-tool-self .layui-icon{
+color: #e50000;
+}
+/*组态列表*/
+/*开关*/
+.layui-form-onswitch{
+background: #d43726!important;
+border-color:#ffc78a!important;
+}
+/*分页*/
+.layui-laypage .layui-laypage-curr .layui-laypage-em{
+background: #d43726!important;
+}
+/*中型管理按钮颜色*/
+button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {
+background: #d43726!important;
+border-color: #ffc78a!important;
+}
+button.btn.btn-primary{
+background: #d43726!important;
+border-color: #ffc78a!important;
+}
+/*全选按钮*/
+.layui-form-checked[lay-skin=primary] i{
+background: #d43726!important;
+border-color: #ffc78a!important;
+}
+.fa {
+    color: #d43726!important;
+}
+/*首页css修改*/
+
+.layui-card-header span{
+    color: #fff!important;
+}
+html body .layui-side-scroll .layui-nav-item dd a{
+    padding-left: 44px!important;
+}
+
+.layui-side-menu .layui-nav .layui-nav-item a {
+    padding-left: 25px;
+}
+
+
+.flysand-table-cell-1, .flysand-table-cell-2, .flysand-table-cell-3, .flysand-table-cell-4, .flysand-table-cell-5, .flysand-table-cell-6 {
+    color: #000!important;
+}
+.flysand-container{
+    height: 45px;
+}
+/*首页背景颜色修改，字体颜色修改*/
+#help{
+    background: rgba(255,255,255,.3)!important;
+    color: #000!important;
+}
+.layui-col-md4 .layui-card-body{
+    background: rgba(255,255,255,.3)!important;
+    color: #000!important;
+}
+.layui-col-md4 .layui-table td{
+    color: #fff!important;
+}
+/*列表显示*/
+#deviceName{
+    line-height: 46px!important;
+    color: #000!important;
+}
+#deviceNumber{
+    line-height: 49px!important;
+    background: transparent!important;
+    color: #000!important;
+    border: none!important;
+}
+.layui-table tr:hover{background: rgba(0,0,0,.8)!important;}
+.layui-table tbody{background: none!important;color: #fff!important;}
+.progess-div span{color: #fff!important;}
+#examing-text{color: red!important;}
+
+

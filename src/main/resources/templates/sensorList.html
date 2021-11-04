@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+
+</head>
+<body>
+
+
+<input type="hidden" id="deviceNumber" th:value="*{deviceNumber}">
+<table class="layui-hide" id="sensor" lay-filter="sensor"></table>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    var table;
+    layui.use('table', function () {
+        table = layui.table;
+        var deviceNumber = $("#deviceNumber").val();
+        layer.load(2);
+        table.render({
+            elem: '#sensor'
+            , url: '../deviceManage/getSensorList?deviceNumber=' + deviceNumber
+            , title: '传感器列表'
+            , cols: [
+                [
+                    {
+                        field: 'icon', title: $.i18n.prop('icon'), width: 100, templet: function (d) {
+                            var img = d.name.replace(/\s+/g, "")
+                            return '<img width="60" height="60" src="../static/img/' + img + '.png" />';
+                        }
+                    }
+                    , {
+                    field: 'name', title: $.i18n.prop('sensorName'), width: 200, templet: function (d) {
+                        return '<span style="color:black;font-weight:700;">' + d.name + '</span>';
+                    }
+                }
+                    , {
+                    field: 'sensorData', title: $.i18n.prop('data'), width: 200, templet: function (d) {
+                        return '<span style="color:green;font-weight:700;">' + d.sensorData + '</span>';
+                    }
+                }
+                    , {
+                    field: 'unit', title:  $.i18n.prop('unit'), width: 150, templet: function (d) {
+                        return '<span style="font-size:18px;">' + d.unit + '</span>'
+                    }
+                }
+                ]
+            ]
+            , page: false
+            , height: 600
+        });
+        layer.closeAll('loading');
+    });
+
+
+</script>
+<style>
+    .layui-table-cell {
+        height: 60px;
+        line-height: 60px;
+    }
+
+    .layui-table td {
+        height: 60px;
+        line-height: 60px;
+        font-size: 38px;
+    }
+
+
+</style>
+</body>
+</html>

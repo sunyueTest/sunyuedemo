@@ -1,0 +1,27 @@
+/*可以在这里添加你自己的css*/
+body
+{
+   font:12px Arial,"PingFang SC","Hiragino Sans GB",STHeiti,"Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+.view
+	{
+		margin:0;
+		height:100%
+	}
+.view p
+	{
+		margin:0;
+	}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+table
+	{
+
+	}
+td, th {
+    padding: 5px;
+    border: 1px solid #DDD;
+}	

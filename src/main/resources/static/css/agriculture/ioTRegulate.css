@@ -1,0 +1,422 @@
+body{
+    padding:0;
+    margin:0;
+    font-size:625%;
+}
+.contentBox{
+    position:relative;
+}
+.leftBox{
+    width:14%;
+    font-size:1rem;
+    position:absolute;
+    height:100%;
+    left:0;
+    top:0;
+    color:#fff;
+
+    /*    background: -webkit-linear-gradient(#064b7f , #027589); !* Safari 5.1 - 6.0 *!
+        background: -o-linear-gradient(#064b7f , #027589); !* Opera 11.1 - 12.0 *!
+        background: -moz-linear-gradient(#064b7f , #027589); !* Firefox 3.6 - 15 *!
+        background: linear-gradient(#064b7f , #027589); !* æ ‡å‡†çš„è¯­æ³• *!*/
+}
+.noDeviceMsg{
+    font-size:1.4rem;
+}
+.leftBoxMb{
+    width:14%;
+    font-size:1rem;
+    position:absolute;
+    height:100%;
+    left:0;
+    top:0;
+    color:#fff;
+    opacity: 0.8;
+    background: -webkit-linear-gradient(#064b7f , #027589); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#064b7f , #027589); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#064b7f , #027589); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#064b7f , #027589); /* æ ‡å‡†çš„è¯­æ³• */
+}
+
+.searchBtn{
+    display:inline-block;
+    width: 15%;
+    height:100%;
+    background:#012e50;
+    margin-left:1px;
+
+}
+.searchBox{
+    height: 2.5rem;
+    margin-top: 1.5rem;
+    display: flex;
+}
+.searchImg{
+    width:100%;
+    height:100%;
+    cursor: pointer;
+}
+.searchInput{
+    border: none;
+    display: inline-block;
+    width: 70%;
+    float: left;
+
+    font-size: 1rem;
+    background: #012e50;
+    height: 100%;
+    color: #fff;
+    margin-left: 0.5rem;
+}
+.itemBox{
+    overflow-y:auto;
+    width:90%;
+    margin-top:5%;
+}
+
+
+.checkedItem{
+    background:#27375d;
+}
+
+.rightBox{
+    width: 86%;
+    position: absolute;
+    left: 14%;
+    top: 0;
+    font-size: 1rem;
+    color: #fff;
+    background:url(../../../static/img/agriculture/plantingSystemRightBg.jpg)no-repeat;
+    background-size:100% 100%;
+    overflow-y:hidden;
+    overflow-x:auto;
+}
+.sceneItem{
+    position: relative;
+    width: 32%;
+    float: left;
+    height: 100%;
+
+    background: -webkit-linear-gradient(#064b7f , #027589);
+    background: -o-linear-gradient(#064b7f , #027589);
+    background: -moz-linear-gradient(#064b7f , #027589);
+    background: linear-gradient(#064b7f , #027589);
+    margin-top: 7vh;
+}
+.secneTitleImg{
+    vertical-align: middle;
+    height: 2rem;
+    width: 2rem;
+}
+.secneTitle{
+
+    position: absolute;
+    top: -2.5rem;
+}
+.secneTitleText{
+    margin-left: .5rem;
+    display: inline-block;
+    height: 2rem;
+    line-height: 2rem;
+}
+.weatherBar{
+    width:100%;
+    height:40vh;
+    position:relative;
+}
+
+
+.deviceBox{
+    position:relative;
+    height:10vh;
+    overflow-y:auto;
+}
+
+.camera{
+    height:40vh;
+    width:100%;
+    position:relative;
+}
+.rightBottomItem {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 2.8%;
+}
+
+
+.deviceName {
+    width: 40%;
+    display: inline-block;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+}
+
+.signalImg {
+    height: .8rem;
+    vertical-align: middle;
+    margin-top: -.3rem;
+}
+
+.Box_points_switch {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 2rem;
+    cursor: pointer;
+}
+
+
+
+.settingBtn {
+    margin-left: 1rem;
+    border: none;
+    background: #045f83;
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+    color: #fff;
+    font-size: 1rem;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: .1rem;
+}
+
+
+
+
+
+.cameraNoMsg{
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    margin-top: -30%;
+    margin-left: -25%;
+    left: 50%;
+}
+
+.barNoMsg{
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    margin-top: -30%;
+    margin-left: -25%;
+    left: 50%;
+}
+
+.deviceNoMsg{
+    position: absolute;
+    width: 25%;
+    top: 50%;
+    margin-top: -8%;
+    margin-left: -12%;
+    left: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*switchå¼€å…³*/
+.mui-switch {
+    width: 2.5rem;
+    height: 1.14rem;
+    position: relative;
+    border: 1px solid #dfdfdf;
+    background-color: #fdfdfd;
+    box-shadow: #dfdfdf 0 0 0 0 inset;
+    border-radius: 3rem;
+    background-clip: content-box;
+    display: inline-block;
+    -webkit-appearance: none;
+    user-select: none;
+    outline: none;
+}
+.mui-switch:before {
+    content: '';
+    width:  1rem;
+    height: 1rem;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    border-radius: 3rem;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+.mui-switch:checked:before {
+    left: 1.38rem;
+}
+.mui-switch.mui-switch-anim {
+    transition: border cubic-bezier(0, 0, 0, 1) 0.4s, box-shadow cubic-bezier(0, 0, 0, 1) 0.4s;
+}
+.mui-switch.mui-switch-anim:before {
+    transition: left 0.3s;
+}
+.mui-switch.mui-switch-anim:checked {
+    box-shadow: #64bd63 0 0 0 16px inset;
+    background-color: #64bd63;
+    transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s;
+}
+.mui-switch.mui-switch-anim:checked:before {
+    transition: left 0.3s;
+}
+
+
+
+
+
+
+
+
+
+.rightBoxScroll{
+    height:100%;
+}
+
+.noSceneMsg{
+    display: block;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-left: -4.5rem;
+    font-size: 1.5rem;
+
+}
+
+
+
+.noMsg{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -14%;
+    margin-top: -16%;
+    width: 27%;
+
+}
+.layui-nav .layui-nav-item .base{
+    text-align: center;transition: all 0.5s;
+
+}
+
+body .contentBox .layui-nav .baseac{
+    background: rgba(0,0,0,0.1)!important;
+
+}
+body .contentBox .base:hover{
+
+    cursor: pointer;
+}
+.layui-nav-bar{display: none!important;}
+.xmbg{
+    background: rgba(255,255,255,0.1);
+}
+.xmbg:hover{
+    background: rgba(255,255,255,0.1)!important;
+}
+.layui-nav{
+    background-color: transparent!important;
+}
+.gs{
+    background:rgba(0,0,0,0.2)!important;
+    margin: 0.5vh 0;
+}
+.layui-nav-itemed>.layui-nav-child{
+    background-color: transparent!important;
+}
+.nav-jd{margin: 0.5vh 0;}
+.base{margin: 0.5vh 0;}
+.layui-nav .layui-nav-item .base{
+    text-align: center;transition: all 0.5s;
+
+}
+
+body .contentBox .layui-nav .baseac{
+    background: rgba(0,0,0,0.1)!important;
+
+}
+body .contentBox .base:hover{
+
+    cursor: pointer;
+}
+.layui-nav-bar{display: none!important;}
+.xmbg{
+    background: rgba(255,255,255,0.1);
+}
+.xmbg:hover{
+    background: rgba(255,255,255,0.1)!important;
+}
+.layui-nav{
+    background-color: transparent!important;
+}
+.gs{
+    background:rgba(0,0,0,0.2)!important;
+    margin: 0.5vh 0;
+}
+.layui-nav-itemed>.layui-nav-child{
+    background-color: transparent!important;
+}
+.nav-jd{margin: 0.5vh 0;}
+.base{margin: 0.5vh 0;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*æ»šåŠ¨æ¡*/
+::-webkit-scrollbar { /*æ»šåŠ¨æ¡æ•´ä½“éƒ¨åˆ†ï¼Œå…¶ä¸­çš„å±žæ€§æœ‰width,height,background,borderç­‰ï¼ˆå°±å’Œä¸€ä¸ªå—çº§å…ƒç´ ä¸€æ ·ï¼‰ï¼ˆä½ç½®1ï¼‰*/
+    width: 6px;
+    border-radius: 5px;
+    height: 7px!important;
+}
+
+::-webkit-scrollbar-button { /*æ»šåŠ¨æ¡ä¸¤ç«¯çš„æŒ‰é’®ï¼Œå¯ä»¥ç”¨display:noneè®©å…¶ä¸æ˜¾ç¤ºï¼Œä¹Ÿå¯ä»¥æ·»åŠ èƒŒæ™¯å›¾ç‰‡ï¼Œé¢œè‰²æ”¹å˜æ˜¾ç¤ºæ•ˆæžœï¼ˆä½ç½®2ï¼‰*/
+    width:0;
+    height: 0;
+    background: #ffffff;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track { /*å¤–å±‚è½¨é“ï¼Œå¯ä»¥ç”¨display:noneè®©å…¶ä¸æ˜¾ç¤ºï¼Œä¹Ÿå¯ä»¥æ·»åŠ èƒŒæ™¯å›¾ç‰‡ï¼Œé¢œè‰²æ”¹å˜æ˜¾ç¤ºæ•ˆæžœï¼ˆä½ç½®3ï¼‰*/
+
+}
+
+::-webkit-scrollbar-track-piece { /*å†…å±‚è½¨é“ï¼Œæ»šåŠ¨æ¡ä¸­é—´éƒ¨åˆ†ï¼ˆä½ç½®4ï¼‰*/
+    width: 2px;
+    background: -webkit-linear-gradient(#064b7f , #027589); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#064b7f , #027589); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#064b7f , #027589); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#064b7f , #027589); /* 标准的语法 */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb { /*æ»šåŠ¨æ¡é‡Œé¢å¯ä»¥æ‹–åŠ¨çš„é‚£éƒ¨åˆ†ï¼ˆä½ç½®5ï¼‰*/
+    background: #027589;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-corner { /*è¾¹è§’ï¼ˆä½ç½®6ï¼‰*/
+    background: #82AFFF;
+}
+
+::-webkit-scrollbar-resizer { /*å®šä¹‰å³ä¸‹è§’æ‹–åŠ¨å—çš„æ ·å¼ï¼ˆä½ç½®7ï¼‰*/
+    background: #FF0BEE;
+}

@@ -1,0 +1,162 @@
+*{margin: 0;padding: 0;}
+img{width: 100%;float: left;}
+li{list-style: none;}
+#header{
+    position: relative;
+    width: 100vw;
+    height: 8vh;
+    display: flex;
+    z-index: 9999999;
+    justify-content: space-between;
+}
+.header-l{
+    display: flex;
+    color: #fff;
+}
+.header-l-logo{
+    width: 1.5vw;
+    margin-left: 1vw;
+    position: fixed;
+    margin-top: 0.7vh;
+}
+.header-l p{
+    font-size: 1vw;
+    line-height: 5vh;
+    margin-left: 3.3vw;
+}
+#main{
+    width: 100vw;
+    height: 90vh;
+    box-sizing: border-box;
+    padding: 0 1vw;
+}
+#position{
+    position: relative;
+    z-index: 999999;
+}
+.list{float: left;}
+
+.li-title{
+    display: flex;
+    color: #FFFFFF!important;
+}
+.list-main{
+    width: 18.5vw;
+    height: 57vh;
+    background: rgba(4,143,250,.5);
+    color: #FFFFFF;
+    box-sizing: border-box;
+    padding: 1vh 0.5vw;
+    font-size: 0.8vw;
+}
+#main .list-title{font-size: 1.2vw;line-height: 5vh;color: #FFFFFF!important;position: relative;margin-left: 1vw;}
+.list-title-icon{position: absolute;width: 0.5vw;height: 2.5vh;background: #06D58C;left: -1vw;top: 1.2vh;}
+#main .list-main ul  li{display: flex;justify-content: space-around;line-height: 5vh;color: #06d58c;}
+#main .list-main ul  li div:nth-child(1){color: #FFFFFF;}
+.list-30day{
+    width: 18.5vw;
+    height: 32vh;
+    background: rgba(4,143,250,.5);
+    color: #FFFFFF;
+    box-sizing: border-box;
+    margin-top: 2vh;
+    padding: 0.6vh 0.5vw;
+
+}
+.centre{
+    float: left;
+    width: 34vw;
+    height: 45vh;
+    background: rgba(4,143,250,.5);
+    margin-left: 15vw;
+    margin-top: 10vh;
+    overflow: hidden;
+    display: flex;
+}
+.centre-main{
+    width:19vw;
+    height: 45vh;
+    padding: 0.4vh 0.8vw;
+}
+.cm-title{display: flex;justify-content: space-between;font-size: 1vw;color: #fff;line-height: 4.5vh;}
+.cm-title-r{color: #06D58C;}
+.cm-m{display: flex;justify-content: space-between;flex-wrap: wrap;font-size: 1vw;color: #fff;}
+.cm-m-l{text-align: center;line-height: 4vh;background: rgba(0,0,0,.3);width: 8.5vw;margin: .5vh 0;font-size: 0.4vw;border-radius: 4px;}
+.cm-site{font-size: 0.4vw;color: #FFFFFF;line-height: 4.5vh;}
+.right{
+    float: right;
+}
+.right-top{
+    width: 20vw;
+    height: 20vh;
+    background: rgba(4,143,250,.5);
+    box-sizing: border-box;
+    padding: 0.6vh 0.5vw;
+}
+.right-m{
+    width: 20vw;
+    height: 32vh;
+    background: rgba(4,143,250,.5);
+    box-sizing: border-box;
+    padding: 0.6vh 0.5vw;
+    margin-top: 2vh;
+}
+.right-bom{
+    width: 20vw;
+    height: 35vh;
+    background: rgba(4,143,250,.5);
+    box-sizing: border-box;
+    padding: 0.6vh 0.5vw;
+    margin-top: 2vh;
+}
+.right-bom-list{font-size: 0.5vw;color: #fff;}
+.rbl-title{display: flex;justify-content: space-between;font-size: 1vw;line-height: 6vh;}
+.right-bom-list ul li{display: flex;height: 4.5vh;line-height: 4.5vh;}
+.right-bom-list ul li div:nth-child(1){width: 8.6vw;}
+.right-bom-list ul li div:nth-child(2){}
+#main1{
+    width: 15vw;
+    height: 15vh;
+}
+#main2{
+    width: 17.5vw;
+    height: 25vh;
+}
+#main3{
+    width: 17.5vw;
+    height: 25vh;
+}
+.layui-form{margin-top: -1vh!important;display: block;transform: scale(0.8);}
+.layui-input-block{margin-left: 5vw!important;}
+.layui-input{background:rgba(4,143,250,.5)!important;}
+.layui-form-select .layui-input{color: #fff;}
+.layui-input, .layui-textarea{color: #fff;
+    border: none!important;}
+.layui-form-label{color: #fff;}
+.header-r,.header-r2{
+    box-sizing: border-box;
+    padding-top: 1vh;
+}
+.layui-form-selected dl{
+    background:rgba(4,143,250,.5)!important;
+    color: #fff!important;
+}
+.layui-form-selected dd:hover{
+    background-color: blue!important;
+}
+.layui-form-select dl dd.layui-this{
+    background-color: blue!important;
+}
+.layui-laydate{
+    background:rgba(4,143,250,.9)!important;
+}
+.layui-form-item .layui-inline{
+    margin: 0!important;
+}
+.header-r,.header-r2{
+    box-sizing: border-box;
+    padding-top: 1vh;
+}
+#header .layui-form-item{width:50vw;}
+#header .layui-form{width: 38vw;}
+#header .header-l{width: 25vw;}

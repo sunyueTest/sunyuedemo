@@ -1,0 +1,430 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.body-home {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/img/monitor/wisdomToilet/body.png");
+    background-size: 100vw 100vh;
+}
+
+.home-top {
+    width: 100vw;
+    height: 12vh;
+    text-align: center;
+    line-height: 12vh;
+    display: flex;
+    justify-content: space-between;
+
+}
+.body1{
+   width: 30vw;
+}
+.body2{
+    width: 30vw;
+}
+#screenTitle {
+    color: white;
+    font-weight: bold;
+    font-size: 3.5vw;
+    line-height: 12vh;
+}
+
+.home-bottom {
+    width: 100vw;
+    height: 88vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-left {
+    width: 18vw;
+    height: 88vh;
+}
+
+.bottom-center {
+    width: 60vw;
+    height: 88vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-right {
+    width: 18vw;
+    height: 88vh;
+}
+
+.left-top-img{
+    width: 18vw;
+    height: 30vh;
+}
+.boyImg{
+    margin-left: 4vw;
+    margin-top: 2vh;
+    width: 10vw;
+    height: 26vh;
+}
+.right-top-img {
+    width: 18vw;
+    height: 30vh;
+}
+.girlImg{
+    margin-left:4vw;
+    margin-top: 2vh;
+    width: 10vw;
+    height: 26vh;
+}
+.left-center-val, .right-center-val {
+    width: 18vw;
+    height: 49vh;
+    /*background-color: red;*/
+    overflow-y: hidden;
+    overflow-x:hidden;
+}
+.left-center-val span, .right-center-val span{
+    font-size: 0.8vw;
+    font-weight: normal;
+}
+.left-center-tigger, .right-center-tigger {
+    width: 18vw;
+    height: 9vh;
+    font-weight: bold;
+    color: #02F4F6;
+    display: flex;
+    justify-content: center;
+}
+.left-center-tigger img, .right-center-tigger img{
+    margin-left: 1vw;
+    width: 3vh;
+    height: 3vh;
+}
+.left-center-tigger span, .right-center-tigger span{
+    margin-left: 1vw;
+    /*width: 3vh;*/
+    /*height: 3vh;*/
+}
+.left-center-tigger div, .right-center-tigger div{
+    margin-top: 1vh;
+    /*width: 3vh;*/
+    /*height: 3vh;*/
+}
+
+.valList{
+    height: 7vh;
+}
+.val {
+    height: 3.5vh;
+    display: flex;
+    justify-content: space-between;
+    color: #02F4F6;
+    font-size: 16px;
+    font-weight: bolder;
+    /*background-image: url("/img/monitor/wisdomToilet/data.png");*/
+}
+.valImg{
+    width: 18vw;
+    height: 3.5vh;
+    background-image: url("/img/monitor/wisdomToilet/data.png");
+    background-size: 18vw 3.5vh;
+}
+.valName {
+    display: block;
+    height: 3.5vh;
+    width: 6vw;
+    text-align: right;
+    white-space: nowrap; /*强制文本不能换行*/
+    overflow: hidden; /*隐藏溢出内容*/
+    text-overflow: ellipsis;
+    letter-spacing: 2px;
+}
+
+.valVal {
+    display: block;
+    height: 3.5vh;
+    width: 6vw;
+    text-align: center;
+    white-space: nowrap; /*强制文本不能换行*/
+    overflow: hidden; /*隐藏溢出内容*/
+    text-overflow: ellipsis;
+}
+
+.valUnit {
+    display: block;
+    height: 3.5vh;
+    width: 6vw;
+    text-align: left;
+    white-space: nowrap; /*强制文本不能换行*/
+    overflow: hidden; /*隐藏溢出内容*/
+    text-overflow: ellipsis;
+}
+
+.center-all {
+    width: 60vw;
+    height: 72vh;
+}
+
+.center-top {
+    width: 60vw;
+    height: 7vh;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    line-height: 7vh;
+    font-size: 2vw;
+    font-weight: bolder;
+}
+#tigger img{
+    width: 4vh;
+    height: 4vh;
+}
+#tigger{
+    margin-right: 8vw;
+    font-weight: normal!important;
+}
+
+.center-bottom {
+    width: 60vw;
+    height: 65vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-center-top {
+    width: 60vw;
+    height: 65vh;
+    background-image: url("/img/monitor/wisdomToilet/center.png");
+    background-size: 60vw 65vh;
+    position: absolute;
+}
+.bottom-center-bottom{
+    width: 60vw;
+    height: 16vh;
+    color: #FFFFFF;
+}
+.YYYYMMDD{
+    width: 45vw;
+    height: 8vh;
+    margin-left: 2.5vw;
+    font-size: 25px;
+    line-height: 8vh;
+    display: flex;
+    justify-content: center;
+}
+.hhmm{
+    width: 30vw;
+    height: 8vh;
+    margin-left: 10vw;
+    font-size: 20px;
+    line-height: 8vh;
+    display: flex;
+    justify-content: center;
+}
+.boy1Img, .boy2Img, .boy3Img, .boy4Img, .girl1Img, .girl2Img, .girl3Img, .girl4Img {
+    width: 5vw;
+    height: 8vh;
+}
+
+.boy1Img {
+    position: absolute;
+    left: 0.6vw;
+    top: 1.4vh;
+    /*width: 6vw;*/
+    /*height: 13vh;*/
+}
+
+.boy2Img {
+    position: absolute;
+    left: 0.6vw;
+    top: 11.9vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.boy3Img {
+    position: absolute;
+    left: 0.6vw;
+    top: 21.7vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.boy4Img {
+    position: absolute;
+    left: 0.6vw;
+    top: 31.5vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.girl1Img {
+    position: absolute;
+    left: 16.4vw;
+    top: 1.4vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.girl2Img {
+    position: absolute;
+    left: 16.4vw;
+    top: 11.9vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.girl3Img {
+    position: absolute;
+    left: 16.4vw;
+    top: 21.7vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.girl4Img {
+    position: absolute;
+    left: 16.4vw;
+    top: 31.5vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.boy1Spot {
+    position: absolute;
+    left: 6.6vw;
+    top: 4.9vh;
+    /*width: 6vw;*/
+    /*height: 13vh;*/
+}
+
+.boy2Spot {
+    position: absolute;
+    left: 6.6vw;
+    top: 14.4vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.boy3Spot {
+    position: absolute;
+    left:6.6vw;
+    top: 25.2vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.boy4Spot {
+    position: absolute;
+    left:6.6vw;
+    top: 35vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.girl1Spot {
+    position: absolute;
+    left: 22.4vw;
+    top: 4.9vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.girl2Spot {
+    position: absolute;
+    left: 22.4vw;
+    top: 14.4vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.girl3Spot {
+    position: absolute;
+    left: 22.4vw;
+    top: 25.2vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+.girl4Spot {
+    position: absolute;
+    left: 22.4vw;
+    top: 35vh;
+    /*width: 8vw;*/
+    /*height: 15vh;*/
+}
+
+
+.pedestal1{
+    position: absolute;
+    left: 32vw;
+    top:41vh;
+    width: 3vw;
+    height: 5vh;
+}
+.pedestal2{
+    position: absolute;
+    left: 36vw;
+    top:41vh;
+    width: 3vw;
+    height: 5vh;
+}
+.pedestalSpot{
+    position: absolute;
+    left: 35vw;
+    top:46vh;
+    width: 1vw;
+    height: 1vw;
+}
+
+.spot{
+    border-radius: 15px;
+    width: 1.5vh;
+    height: 1.5vh;
+    background-color:#02F4F6 ;
+}
+
+
+
+
+
+
+
+
+
+
+/*滚动条*/
+::-webkit-scrollbar { /*滚动条整体部分，其中的属性有width,height,background,border等（就和一个块级元素一样）（位置1）*/
+    width: 6px;
+    border-radius: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-button { /*滚动条两端的按钮，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置2）*/
+    height: 0;
+    background: #ffffff;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track { /*外层轨道，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置3）*/
+
+}
+
+::-webkit-scrollbar-track-piece { /*内层轨道，滚动条中间部分（位置4）*/
+    width: 2px;
+    background: #081e40;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb { /*滚动条里面可以拖动的那部分（位置5）*/
+    background: rgb(49, 83, 121);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-corner { /*边角（位置6）*/
+    background: #82AFFF;
+}
+
+::-webkit-scrollbar-resizer { /*定义右下角拖动块的样式（位置7）*/
+    background: #FF0BEE;
+}

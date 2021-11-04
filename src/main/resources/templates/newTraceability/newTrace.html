@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>溯源查询页面</title>
+    <link rel="stylesheet" href="/static/css/traceability/public.css">
+    <link rel="stylesheet" href="/static/css/traceability/index.css">
+    <style type="text/css">
+        ::-webkit-scrollbar{display: none}
+    </style>
+</head>
+
+<body>
+<div class="index-bg">
+    <div class="index-search">
+        <input type="text" id="productCode" class="index-search-txt" placeholder="输入产品编码进行溯源"/>
+        <div class="index-search-bnt">
+            <img src="/static/img/aquaculture/traceability/index-search-bnt_04.jpg" alt="加载失败" title="点击查询">
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery/jquery-1.12.1.min.js"></script>
+<script src="/static/i18n/jquery.i18n.properties.js"></script>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script>
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        $(".index-search-bnt").click(function () {
+            var productCode = $("#productCode").val();
+            $.ajax({
+                data: "productCode="+productCode,
+                url:"/newTraceSource/selectAllTraceSourceToId",
+                success: function (data) {
+                    if (data.state=='success') {
+                        window.location.href = "/newTraceSource/newGetTraceSource?productCode=" + productCode;
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            });
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.0" id="图层_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="105px" height="105px"
+	 viewBox="0 0 105 105" enable-background="new 0 0 105 105" xml:space="preserve">
+<switch>
+	<foreignObject requiredExtensions="&ns_ai;" x="0" y="0" width="1" height="1">
+		<i:pgfRef  xlink:href="#adobe_illustrator_pgf">
+		</i:pgfRef>
+	</foreignObject>
+	<g i:extraneous="self">
+		
+			<text transform="matrix(1 0 0 1 18.8516 18.6626)" fill="#FFFFFF" font-family="'NotoSansHans-Medium-GBpc-EUC-H'" font-size="14">堆栈面积图</text>
+		<g>
+			
+				<line fill="none" stroke="#999999" stroke-width="0.2449" stroke-miterlimit="10" x1="17.853" y1="94.525" x2="95.685" y2="94.525"/>
+			
+				<line fill="none" stroke="#999999" stroke-width="0.2449" stroke-miterlimit="10" x1="17.853" y1="82.82" x2="95.685" y2="82.82"/>
+			
+				<line fill="none" stroke="#999999" stroke-width="0.2449" stroke-miterlimit="10" x1="17.853" y1="71.115" x2="95.685" y2="71.115"/>
+			
+				<line fill="none" stroke="#999999" stroke-width="0.2449" stroke-miterlimit="10" x1="17.853" y1="59.41" x2="95.685" y2="59.41"/>
+			
+				<line fill="none" stroke="#999999" stroke-width="0.2449" stroke-miterlimit="10" x1="17.853" y1="47.705" x2="95.685" y2="47.705"/>
+			<line fill="none" stroke="#999999" stroke-width="0.2449" stroke-miterlimit="10" x1="17.853" y1="36" x2="95.685" y2="36"/>
+		</g>
+		<text transform="matrix(1 0 0 1 7.9893 35.9995)"><tspan x="0" y="0" fill="#CCCCCC" font-family="'NotoSansHans-Medium-GBpc-EUC-H'" font-size="7">2.5</tspan><tspan x="0" y="11.6" fill="#CCCCCC" font-family="'NotoSansHans-Medium-GBpc-EUC-H'" font-size="7">2.0</tspan><tspan x="0" y="23.2" fill="#CCCCCC" font-family="'NotoSansHans-Medium-GBpc-EUC-H'" font-size="7">1.5</tspan><tspan x="0" y="34.8" fill="#CCCCCC" font-family="'NotoSansHans-Medium-GBpc-EUC-H'" font-size="7">1.0</tspan><tspan x="0" y="46.4" fill="#CCCCCC" font-family="'NotoSansHans-Medium-GBpc-EUC-H'" font-size="7">0.5</tspan><tspan x="0" y="58" fill="#CCCCCC" font-family="'NotoSansHans-Medium-GBpc-EUC-H'" font-size="7">0.0</tspan></text>
+		
+			<text transform="matrix(1 0 0 1 22.0156 99.1299)" fill="#CCCCCC" font-family="'NotoSansHans-Regular-GBpc-EUC-H'" font-size="4">11:00</text>
+		
+			<text transform="matrix(1 0 0 1 54.2266 99.1299)" fill="#CCCCCC" font-family="'NotoSansHans-Regular-GBpc-EUC-H'" font-size="4">11:05</text>
+		
+			<text transform="matrix(1 0 0 1 86.4375 99.1299)" fill="#CCCCCC" font-family="'NotoSansHans-Regular-GBpc-EUC-H'" font-size="4">11:10</text>
+		<linearGradient id="XMLID_3_" gradientUnits="userSpaceOnUse" x1="57.4941" y1="94.625" x2="57.4941" y2="52.4954">
+			<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0"/>
+			<stop  offset="0.163" style="stop-color:#FCFEFD;stop-opacity:0.163"/>
+			<stop  offset="0.2936" style="stop-color:#F2FDF8;stop-opacity:0.2936"/>
+			<stop  offset="0.4129" style="stop-color:#E1FAEF;stop-opacity:0.4129"/>
+			<stop  offset="0.5255" style="stop-color:#C9F6E2;stop-opacity:0.5255"/>
+			<stop  offset="0.6335" style="stop-color:#AAF1D2;stop-opacity:0.6335"/>
+			<stop  offset="0.7379" style="stop-color:#85EABE;stop-opacity:0.7379"/>
+			<stop  offset="0.8396" style="stop-color:#58E3A7;stop-opacity:0.8396"/>
+			<stop  offset="0.9364" style="stop-color:#25DA8C;stop-opacity:0.9364"/>
+			<stop  offset="1" style="stop-color:#00D478"/>
+		</linearGradient>
+		<polygon id="XMLID_1_" fill="url(#XMLID_3_)" points="19.862,62.458 34.21,49.5 43.601,57.875 52.847,44.75 59.53,59.41 
+			69.956,51.75 78.782,61.25 95.125,41 95.125,94.525 19.862,94.525 		"/>
+		
+			<polyline fill="none" stroke="#00FF33" stroke-width="1.0107" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			19.874,62.458 34.12,49.5 43.446,58 52.847,44.75 59.266,59.41 69.956,51.75 78.782,61.25 94.614,41 		"/>
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="57.4941" y1="94.875" x2="57.4941" y2="59.7672">
+			<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0"/>
+			<stop  offset="1" style="stop-color:#000000"/>
+		</linearGradient>
+		<polygon fill="url(#SVGID_1_)" points="19.862,71.979 32.519,61.66 43.601,66.125 52.847,57.75 59.266,64.375 69.956,59.41 
+			78.782,66.25 95.125,57.042 95.125,94.525 19.862,94.525 		"/>
+		
+			<polyline fill="none" stroke="#FFFF33" stroke-width="1.0107" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			19.874,71.979 32.441,61.66 43.446,66.125 52.847,57.75 59.266,64.375 69.956,59.41 78.782,66.25 94.614,57.375 		"/>
+	</g>
+</switch>
+
+</svg>

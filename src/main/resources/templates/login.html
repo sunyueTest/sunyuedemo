@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>login</title>
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="shortcut icon" href="../static/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/demo.css}"/>
+    <!--必要样式-->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/component.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/input.css}"/>
+</head>
+
+<body>
+<div class="language">
+    <a style="color:white;" id="setLanguagezh">简体中文</a> |
+    <a style="color:white;font-size: 20px;" id="setLanguageen">English</a>
+</div>
+<div class="container demo-1">
+    <div id="large-header" class="large-header">
+        <canvas id="demo-canvas" style="cursor:-webkit-grab"></canvas>
+        <div class="logo_box">
+            <h3><span id="titles"></span></h3>
+            <form action="/index" name="f" id="loginForm" method="post">
+                <div class="input_outer">
+                    <span class="u_user"></span>
+                    <input name="userName" class="text" id="userName"
+                           style="color:#FFFFFF !important;background-color:transparent !important;"
+                           type="text" placeholder="请输入账户" autocomplete="off">
+                </div>
+                <div class="input_outer">
+                    <span class="us_uer"></span>
+                    <input name="password" class="text" id="password"
+                           style="color: #FFFFFF !important; position:absolute; z-index:100;"
+                           value="" type="password" placeholder="请输入密码" autocomplete="off">
+                </div>
+                <div class="mb2"><a id="login" class="act-but submit" href="javascript:;"
+                                    style="color: #FFFFFF">登录</a></div>
+                <div class="mb2"
+                     th:style="'display:'+@{(${data.registeredFunction} ? 'block' : 'none')}+''"><a
+                        id="register" class="act-but submit" href="/register"
+                        style="color: #FFFFFF">注册</a></div>
+            </form>
+        </div>
+    </div>
+</div><!-- /container -->
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/html5.js}"></script>
+<script th:src="@{/static/js/TweenLite.min.js}"></script>
+<script th:src="@{/static/js/EasePack.min.js}"></script>
+<script th:src="@{/static/js/rAF.js}"></script>
+<script th:src="@{/static/js/demo-1.js}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script language='javascript' th:inline="javascript">
+    var demoUser = [[${data.user}]];
+    var demoPwd = [[${data.pwd}]];
+    var title = [[${data.name}]];
+    $("#titles").text($.i18n.prop(title));
+</script>
+<script th:src="@{/static/js/login.js?v=1.0.0}" charset="utf-8"></script>
+<style>
+    .language {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        cursor: pointer;
+        color: white;
+        z-index: 300;
+    }
+
+    /*    .language .lang {
+            width: 100px;
+            padding: 10px 0;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            z-index: 500;
+            display: none;
+            cursor: pointer;
+            background: rgba(255,255,255,0.5);
+        }*/
+</style>
+</html>

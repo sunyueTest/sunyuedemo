@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>智慧管理大数据平台</title>
+    <link rel="stylesheet" th:href="@{/static/css/Login/public.css}">
+    <link rel="stylesheet" th:href="@{/static/css/Login/wisdomLogin.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+</head>
+<body>
+<div class="model">
+            <p class="login-r-title">智慧管理大数据平台</p>
+            <div class="lalbe">
+                <p class="icon"><img th:src="@{/static/img/login/wellCoverLoginicon.png}" alt=""></p><input type="text" name=""  value="" placeholder="请输入账号" id="userName" />
+            </div>
+            <div class="lalbe">
+                <p class="icon"><img th:src="@{/static/img/login/wellCoverLoginicon2.png}" alt=""></p><input type="password" name=""  value="" placeholder="请输入密码" id="password"/>
+            </div>
+            <a href="javascript:;" class="logincity-bnt" id="login">登录</a>
+            <!--<a href="/fishRegister" class="zhuce">注册新用户</a>-->
+</div>
+<div class="footer">
+    <!--<p>威海精讯畅通电子科技有限公司</p>-->
+</div>
+</body>
+<script language='javascript' th:inline="javascript">
+    try {
+        var ctx = [[${#httpServletRequest.getContextPath()}]];
+        var demoUser = [[${data.user}]];
+        var demoPwd = [[${data.pwd}]];
+    }catch (e) {
+
+    }
+</script>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/html5.js}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/login.js?v=1.1}" charset="utf-8"></script>
+</html>

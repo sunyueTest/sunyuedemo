@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>权限管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+
+</head>
+<body>
+<form class="layui-form">
+    <div class="layui-form-item">
+        <label id="label1" class="layui-form-label">角色名称</label>
+        <div class="layui-input-block">
+            <input class="layui-input" type="text" name="name" readonly="readonly"/>
+            <input type="hidden" name="roleId" id="roleId" th:value="*{map.roleBean.id}"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="indexUrlLabel" class="layui-form-label">主页链接</label>
+        <div class="layui-input-block">
+            <input class="layui-input" type="text" name="indexUrl" id="indexUrl" th:value="*{map.roleBean.indexUrl}"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="subUserRoleLabel" class="layui-form-label">子用户角色</label>
+        <div class="layui-input-block">
+            <select lay-filter="quiz" class="select" id="childId"
+                    lay-verify="type"
+                    name="quiz">
+                <option th:each="role :${map.roles}" th:value="${role.id}" th:text="${role.name}"
+                        th:selected="${role.id == map.roleBean.childId}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="label2" class="layui-form-label">选择权限</label>
+        <div class="layui-input-block">
+            <div id="LAY-auth-tree-index"></div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <a class="layui-btn  layui-btn-radius" id="submit">提交</a>
+        </div>
+    </div>
+</form>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    //设置语言
+    $('#label1').text($.i18n.prop('roleName'));
+    $('#label2').text($.i18n.prop('selRights'));
+    $('#submit').text($.i18n.prop('submit'));
+
+    layui.config({
+        base: '../static/module/',
+    }).extend({
+        authtree: 'authtree',
+    });
+    layui.use(['jquery', 'authtree', 'form', 'layer'], function () {
+        var $ = layui.jquery;
+        var authtree = layui.authtree;
+        var form = layui.form;
+        var layer = layui.layer;
+        var roleId = $("#roleId").val();
+
+        // 一般来说，权限数据是异步传递过来的
+        $.ajax({
+            url: '../roleManage/getAuthList?roleId=' + roleId,
+            dataType: 'json',
+            success: function (result) {
+
+                var trees = authtree.listConvert(result.data.list, {
+                    primaryKey: 'id'
+                    , startPid: 0
+                    , parentKey: 'parentId'
+                    , nameKey: 'name'
+                    , valueKey: 'id'
+                    , checkedKey: result.data.checkedId
+                });
+                console.log(trees);
+                // 如果后台返回的不是树结构，请使用 authtree.listConvert 转换
+                authtree.render('#LAY-auth-tree-index', trees, {
+                    inputname: 'authids[]',
+                    layfilter: 'lay-check-auth',
+                    autowidth: true,
+                });
+            }
+        });
+        $("#submit").click(function () {
+            var authids = authtree.getChecked('#LAY-auth-tree-index');
+            console.log(authids);
+            var rights = '';
+            for (var i = 0; i < authids.length; i++) {
+                if (i == authids.length - 1) {
+                    rights += authids[i];
+                } else {
+                    rights += authids[i] + ",";
+                }
+            }
+
+            var indexUrl = $("#indexUrl").val();
+            var childId = $("#childId").val();
+            $.ajax({
+                url: '../roleManage/updateAuth',
+                dataType: 'json',
+                data: {
+                    roleId: roleId,
+                    rights: rights,
+                    indexUrl: indexUrl,
+                    childId: childId
+                }, error: function (data, type, err) {
+                    console.log(err);
+                    layer.closeAll('loading');
+                    layer.msg($.i18n.prop('fail'), {
+                        offset: '6px'
+                    });
+                },
+                success: function (res) {
+                    console.log(res)
+                    layer.msg($.i18n.prop('success'), {icon: 1});
+                    setTimeout(function () {
+                        //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index);
+                    }, 1000)
+                }
+            });
+
+        })
+    });
+
+    function close() {
+        console.log('close')
+        setTimeout(function () {
+            console.log('closestart')
+            window.opener = null;
+            window.close();
+            console.log('closeend')
+        }, 2000);
+    }
+</script>
+</html>

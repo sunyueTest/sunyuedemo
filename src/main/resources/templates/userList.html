@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>用户管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" href="css/common.css">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="css/versionLayer.css" media="all">
+</head>
+<body>
+
+<table class="layui-hide" id="user" lay-filter="user"></table>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline">
+        <button class="layui-btn " lay-event="add" id="add">添加</button>
+    </div>
+
+    <div class="layui-inline" style="float:right;">
+        <button class="layui-btn " lay-event="search" id="searchButton"><i
+                class="layui-icon layui-icon-search "></i></button>
+    </div>
+    <div class="layui-inline" style="float:right;">
+        <input type="text" class="layui-input" name="userName" id="userName" autocomplete="off" style="width:182px;"
+               placeholder="用户名">
+    </div>
+
+</script>
+
+
+<script type="text/html" id="barDemo">
+    <div class="layui-btn-group">
+        {{# if(parent.userData.user.level <0){ }}
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="showParent"><i
+                class="layui-icon">&#xe612</i></button>
+        {{# } }}
+
+        {{# if(parent.userData.user.level <0){ }}
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="assignRole"><i
+                class="layui-icon layui-icon-user"></i></button>
+        {{# } }}
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i
+                class="layui-icon"></i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="show"><i
+                class="layui-icon">&#xe857</i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+                class="layui-icon"></i></button>
+
+    </div>
+</script>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/versionLayer.js}" charset="utf-8"></script>
+
+
+<script>
+    var table;
+    layui.use('table', function () {
+        table = layui.table;
+        table.render({
+            elem: '#user'
+            , url: '/userManage/getUserList'
+            , toolbar: '#toolbar1'
+            , title: '用户列表'
+            , cols: [
+                [
+                    {
+                        type: 'checkbox'//, fixed: 'left'
+                    }
+                    , {
+                    field: 'id', title: 'ID', width: 60, //fixed: 'left',
+                    unresize: true, sort: true, align: 'center'
+                }
+                    , {field: 'userName', title: $.i18n.prop('userName'), width: 150, align: 'center'}
+                    , {field: 'realName', title: $.i18n.prop('realName'), width: 150, align: 'center'}
+                    , {field: 'tel', title: $.i18n.prop('telNo'), width: 140, align: 'center'}
+                    , {field: 'email', title: $.i18n.prop('email'), width: 160, align: 'center'}
+                    , {field: 'lastLoginTime', title: $.i18n.prop('lastLoginTime'), width: 160, align: 'center'}
+                    // , {field: 'name', title: '角色', width: 100, align: 'center'}
+                    , {
+                    field: 'right', title: $.i18n.prop('operation'),
+                    toolbar: '#barDemo', width: 250, align: 'center'
+                }
+
+                ]
+            ]
+            , page: true
+            , height: 600
+            , done: function (res, curr, count) {
+                $('#add').text($.i18n.prop('add'));
+                $('#userName').attr('placeholder', $.i18n.prop('userName'));
+            }
+
+        });
+
+
+        //头工具栏事件
+        table.on('toolbar(user)', function (obj) {
+            //var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        area: ['470px', '400px'],
+                        title: $.i18n.prop('addUser'),
+                        btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+                        btnAlign: 'c',
+                        yes: function (index, layero) {
+                            var body = layer.getChildFrame('body', index);
+                            var userName = body.find('input[name="userName"]').val();
+                            var password = body.find('input[name="password"]').val();
+                            var tel = body.find('input[name="tel"]').val();
+                            var email = body.find('input[name="email"]').val();
+                            var realName = body.find('input[name="realName"]').val();
+                            var uPattern = /^[a-zA-Z0-9_-]{6,16}$/;
+                            if (!uPattern.test(userName)) {
+                                layer.msg($.i18n.prop('warn29'), {icon: 5});
+                                return false;
+                            }
+                            uPattern = /(.+){6,12}$/;
+                            if (!uPattern.test(password)) {
+                                layer.msg($.i18n.prop('warn30'), {icon: 5});
+                                return false;
+                            }
+                            //邮箱验证
+                            if (email != "") {
+                                uPattern = /.*@.*/;
+                                if (!uPattern.test(email)) {
+                                    layer.msg($.i18n.prop('warn47'), {icon: 5});
+                                    return false;
+                                }
+                            }
+                            //手机号格式验证
+                            if (tel != "") {
+                                uPattern = /^1\d{10}$/;
+                                if (!uPattern.test(tel)) {
+                                    layer.msg($.i18n.prop('warn48'), {icon: 5});
+                                    return false;
+                                }
+                            }
+                            $.ajax({
+                                type: "post",
+                                url: "../userManage/saveUser",
+                                data: {
+                                    userName: userName,
+                                    password: password,
+                                    tel: tel,
+                                    email: email,
+                                    realName: realName
+                                },
+                                success: function (result) {
+                                    if (result.success) {
+                                        layer.msg($.i18n.prop('success'), {icon: 1});
+                                        layer.close(index);
+                                        var btn = $('.layui-laypage-btn');
+                                        if (btn.length == 0) {
+                                            table.reload('user', {
+                                                page: {
+                                                    curr: 1 //重新从第 1 页开始
+                                                }
+                                            });
+                                        } else {
+                                            btn.click();
+                                        }
+                                    } else {
+                                        let msg = result.msg;
+                                        if (msg.indexOf("err106/") == 0) {
+                                            let strs = msg.split("/");
+                                            let num = strs.length == 2 ? strs[1] : 10;
+                                            feeEscalation($.i18n.prop("userCount"), num);
+                                        } else if (msg == "err108") {
+                                            renewal();
+                                        } else {
+                                            console.log(result);
+                                            layer.msg($.i18n.prop(msg));
+                                        }
+                                    }
+                                }
+                            });
+
+                        },
+                        anim: 3,
+                        content:
+                            'userManage/getUserDetail',
+                        success:
+
+                            function (layero, index) {
+
+                            }
+                    });
+                    break;
+                case
+                'search'
+                :
+                    doLoginFilter();//登陆状态验证
+                    var userName = $('#userName').val();
+                    console.log('userName:' + userName)
+                    table.reload('user', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        , where: {
+                            likeName: userName
+                        }
+                    });
+                    $('#userName').val(userName);
+                    $('#add').text($.i18n.prop('add'));
+                    $('#userName').attr('placeholder', $.i18n.prop('userName'));
+                    break;
+
+            }
+            ;
+        })
+        ;
+
+        //监听行工具事件
+        table.on('tool(user)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'assignRole') {
+                layer.open({
+                    type: 2,
+                    area: ['500px', '500px'],
+                    title: $.i18n.prop('userConfig'),
+                    btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+                    btnAlign: 'c',
+                    yes: function (index, layero) {
+                        var parentIndex = index;
+                        var body = layer.getChildFrame('body', index);
+                        var roleId = body.find('select[id="roleId"]').val();
+                        var versionId = body.find('select[id="versionId"]').val();
+                        var id = body.find('input[id="id"]').val();
+                        var userId = body.find('input[id="userId"]').val();
+                        var userName = body.find('input[id="userName"]').val();
+                        var expiryTime = body.find('input[id="expiryTime"]').val();
+                        var indexType = body.find('select[id="indexType"]').val();
+                        var typeId = body.find('select[id="typeId"]').val();
+                        var customizationFlag = body.find('input[id="customizationFlag"]').val();
+                        if (expiryTime == '' || expiryTime == null) {
+                            expiryTime = '2030-06-11 11:54:31';
+                        }
+                        if (customizationFlag == '' || customizationFlag == null) {
+                            customizationFlag = '2019-09-11 11:54:31';
+                        }
+                        $.ajax({
+                            type: "get",
+                            url: "../raise/levelCompare",
+                            data: {
+                                roleId: roleId,
+                                userName: userName,
+                            },
+                            success: function (result) {
+                                console.log(result);
+                                if (result.state == "success" && result.msg == "down") {
+                                    //弹出一个修改的弹框
+                                    var parentUserName = "";
+                                    layer.prompt({
+                                        formType: 0,
+                                        value: '',
+                                        title: '修改父用户',
+                                        btn: ['确定'], //按钮，
+                                        btnAlign: 'c',
+                                        yes: function (index, layero) {
+                                            // 获取文本框输入的值
+                                            var newParentUserName = layero.find(".layui-layer-input").val();
+                                            $.ajax({
+                                                type: "post",
+                                                url: "../userManage/updataUserRoleNew",
+                                                data: {
+                                                    roleId: roleId,
+                                                    id: id,
+                                                    versionId: versionId,
+                                                    userId: userId,
+                                                    userName: userName,
+                                                    expiryTime: expiryTime,
+                                                    indexType: indexType,
+                                                    customizationFlag: customizationFlag,
+                                                    typeId: typeId,
+                                                    parentUserName: newParentUserName
+                                                },
+                                                success: function (result) {
+                                                    console.log(result);
+                                                    if (result.state == "success") {
+                                                        layer.msg($.i18n.prop('success'), {icon: 1});
+
+                                                        layer.close(index);
+                                                        layer.close(parentIndex);//关闭所有的iframe层
+                                                    } else {
+                                                        console.log('?????');
+                                                        console.log(result.msg);
+                                                        layer.msg($.i18n.prop(result.msg), {icon: 5});
+                                                    }
+                                                    $('#searchButton').click();
+                                                }
+                                            });
+
+                                        }
+
+
+                                    });
+
+                                } else if (result.msg == "up") {
+                                    $.ajax({
+                                        type: "post",
+                                        url: "../userManage/updataUserRoleNew",
+                                        data: {
+                                            roleId: roleId,
+                                            id: id,
+                                            versionId: versionId,
+                                            userId: userId,
+                                            userName: userName,
+                                            expiryTime: expiryTime,
+                                            indexType: indexType,
+                                            customizationFlag: customizationFlag,
+                                            typeId: typeId,
+                                        },
+                                        success: function (result) {
+                                            console.log(result);
+                                            if (result.state == "success") {
+                                                layer.msg($.i18n.prop('success'), {icon: 1});
+                                                layer.close(index);
+                                            } else {
+                                                console.log('?????');
+                                                console.log(result.msg);
+                                                layer.msg($.i18n.prop(result.msg), {icon: 5});
+                                            }
+                                            $('#searchButton').click();
+
+                                        }
+                                    });
+
+                                } else {
+                                    console.log('?????');
+                                    console.log(result.msg);
+                                    layer.msg($.i18n.prop(result.msg), {icon: 5});
+                                }
+                                $('#searchButton').click();
+                            }
+                        });
+
+                    },
+                    anim: 3,
+                    content: '../userManage/assignRole?userName=' + data.userName,
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);
+                        body.find('input[name="level"]').val(data.level);
+                        //body.find('input[name="role"]').val(data.role);
+                        /*body.find('select[name="quiz"]').val(data.role);
+                        console.log( body.find('select[name="quiz"]').val());*/
+                    }
+                });
+            } else if (obj.event === 'showParent') {
+                if (data.level > 1) {
+                    return layer.msg("二级用户无法添加下级用户");
+                }
+                layer.open({
+                    type: 2,
+                    title: false,
+                    closeBtn: true,
+                    area: ['1000px', '500px'],
+                    shade: 0.2,
+                    id: 'LAY_onLineCtrl',
+                    btnAlign: 'c',
+                    moveType: 1,
+                    content: '../raise/toSonUser?userName=' + data.userName
+                });
+            } else if (obj.event === 'edit') {
+                layer.open({
+                    type: 2,
+                    area: ['470px', '400px'],
+                    title: $.i18n.prop('editUser'),
+                    btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+                    btnAlign: 'c',
+                    yes: function (index, layero) {
+                        var body = layer.getChildFrame('body', index);
+                        var userName = body.find('input[name="userName"]').val();
+                        var password = body.find('input[name="password"]').val();
+                        var tel = body.find('input[name="tel"]').val();
+                        var email = body.find('input[name="email"]').val();
+                        var realName = body.find('input[name="realName"]').val();
+                        var uPattern = "";
+                        //邮箱验证
+                        if (email != "") {
+                            uPattern = /.*@.*/;
+                            if (!uPattern.test(email)) {
+                                layer.msg($.i18n.prop('warn47'), {icon: 5});
+                                return false;
+                            }
+                        }
+                        //手机号格式验证
+                        if (tel != "") {
+                            uPattern = /^1\d{10}$/;
+                            if (!uPattern.test(tel)) {
+                                layer.msg($.i18n.prop('warn48'), {icon: 5});
+                                return false;
+                            }
+                        }
+                        layer.load(2);
+                        $.ajax({
+                            type: "post",
+                            url: "../user/updateUserInfo",
+                            timeout: 10000,
+                            data: {
+                                userName: userName,
+                                newPassword: password,
+                                tel: tel,
+                                email: email,
+                                realName: realName
+                            }, error: function (data, type, err) {
+                                console.log(err);
+                                layer.closeAll('loading');
+                                layer.msg($.i18n.prop('fail'), {
+                                    offset: '6px'
+                                });
+                            },
+                            success: function (result) {
+                                layer.closeAll('loading');
+                                if (result.state == 'success') {
+                                    layer.msg($.i18n.prop('success'), {icon: 1});
+                                    $('.layui-laypage-btn').click();
+                                    layer.close(index);
+                                } else {
+                                    layer.msg($.i18n.prop(result.msg), {icon: 5});
+                                }
+                            }
+                        });
+
+                    },
+                    anim: 3,
+                    content: '../userManage/getUserDetail?id=' + data.id,
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);
+                        var userNameInput = body.find('input[name="userName"]');
+                        userNameInput.attr("disabled", "disabled");
+                    }
+                });
+            } else if (obj.event === 'del') {
+                layer.confirm($.i18n.prop('confirmDelete'), {
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    title: $.i18n.prop('info')
+                }, function (index) {
+
+                    $.ajax({
+                        type: "post",
+                        url: '../userManage/deleteUser',
+                        data: {
+                            id: data.id
+                        },
+                        success: function (result) {
+                            $('#searchButton').click();
+                        }
+                    });
+                    layer.close(index);
+                });
+            } else if (obj.event === 'show') {
+                layer.open({
+                    type: 2,
+                    title: false,
+                    closeBtn: true,
+                    area: ['750px', '500px'],
+                    shade: 0.2,
+                    id: 'LAY_onLineCtrl',
+                    btnAlign: 'c',
+                    moveType: 1,
+                    content: '../raise/toBoundDeviceByUser?userId=' + data.id
+                });
+
+            }
+        });
+
+
+    })
+    ;
+
+    // function userTable() {
+    //     table.reload('user', {
+    //         page: {
+    //             curr: 1 //重新从第 1 页开始
+    //         }
+    //     });
+    // }
+
+</script>
+<style>
+    body::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .layui-table-view .layui-table {
+        width: 100%;
+
+    }
+
+    .layui-table tr {
+        width: 100%;
+    }
+
+    .layui-table thead tr, .layui-table-header thead {
+        width: 100%;
+    }
+
+</style>
+</body>
+</html>

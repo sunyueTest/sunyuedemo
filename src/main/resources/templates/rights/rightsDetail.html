@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+
+</head>
+<body>
+
+
+<form class="layui-form" action="../rights/saveRights">
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label1" class="layui-form-label">菜单名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" autocomplete="off"
+                       th:value="*{data.name}"
+                       lay-verify="userName" class="layui-input">
+                <input type="hidden" name="id" autocomplete="off" th:value="*{data.id}">
+                <input type="hidden" name="parentId" autocomplete="off" th:value="*{data.parentId}">
+                <input type="hidden" name="level" autocomplete="off" th:value="*{data.level}">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label2" class="layui-form-label">url</label>
+            <div class="layui-input-inline">
+                <input type="text" name="url" autocomplete="off"   th:value="*{data.url}"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label3" class="layui-form-label">英文名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="enName" autocomplete="off"
+                       th:value="*{data.enName}" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label4" class="layui-form-label">图标</label>
+            <div class="layui-input-inline">
+                <input type="text" name="icon" autocomplete="off" th:value="*{data.icon}"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label5" class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input type="number" name="sort" autocomplete="off" th:value="*{data.sort}"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+</form>
+
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script>
+    /*$('#label1').text($.i18n.prop('userName'));
+    $('#label2').text($.i18n.prop('password'));
+    $('#label3').text($.i18n.prop('realName'));
+    $('#label4').text($.i18n.prop('email'));
+    $('#label5').text($.i18n.prop('telNo'));*/
+    // layui.use('form', function () {
+    //     var form = layui.form;
+    //     // form.verify({
+    //     //     userName: function (value) {
+    //     //         var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
+    //     //         if (!uPattern.test(value)) {
+    //     //             return '用户名不符合规范';
+    //     //         }
+    //     //     }, password: [/(.+){4,12}$/, '密码必须4到12位']
+    //     // });
+    //     form.on('submit(demo1)', function (data) {
+    //         layer.alert(JSON.stringify(data.field), {
+    //             title: '最终的提交信息'
+    //         })
+    //         // upSubUserInfo
+    //         return false;
+    //     });
+    // });
+
+</script>
+</html>

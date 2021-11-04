@@ -1,0 +1,82 @@
+屏保功能，十分炫酷。随机一种切换方式切换屏幕样式
+问题1：无法固定切屏时间，应该是根据js判断的时间，偶尔初始加载就不会切换，需要移动鼠标才可以（未找到问题）
+问题2：需要极多的js
+问题3：因为本身很多js都是内部调用，所以路径被写死了。。。作为公共方法这一版已经完全写好了，无需改动，如果换一个项目，可能要改动一些js里的路径，否则会有很多404
+问题3：挺操蛋的写的。。。。。。
+问题5：只需要引用下面的js与css其余的不需要放在html中，modernizr.min.js要放在jquery的下面其余两个js的引用可以放在最后
+
+ <link rel="stylesheet" th:href="@{/static/public/screenSaver/style.css}" media="all">
+ <script th:src="@{/static/public/screenSaver/modernizr.min.js?ver=2.6.1}"></script>
+ <script th:src="@{/static/public/screenSaver/cute.slider.js?ver=2.0.0}"></script>
+ <script th:src="@{/static/public/screenSaver/cute.transitions.all.js?ver=2.0.0}"></script>
+
+body:需要几个图片切换就加几个<li data-delay="5" data-src="5" >即可
+
+    <div class="c-860 c-demoslider" style="width:100vw;height:100vh;">
+        <div id="cuteslider_3_wrapper" class="cs-circleslight" style="width:100vw;height:100vh;">
+            <div id="cuteslider_3" class="cute-slider" data-height="665" data-width="1360" data-overpause="true">
+                <ul data-type="slides">
+                    <li data-delay="5" data-src="5" data-trans3d="tr6,tr17,tr22,tr23,tr29,tr27,tr32,tr34,tr35,tr53,tr54,tr62,tr63,tr4,tr13,tr45" data-trans2d="tr3,tr8,tr12,tr19,tr22,tr25,tr27,tr29,tr31,tr34,tr35,tr38,tr39,tr41">
+                        <img  src="/img/monitor/agyc/1.jpg" >
+                    </li>
+                    <li data-delay="5" data-src="5" data-trans3d="tr6,tr17,tr22,tr23,tr26,tr27,tr29,tr32,tr34,tr35,tr53,tr54,tr62,tr63,tr4,tr13" data-trans2d="tr3,tr8,tr12,tr19,tr22,tr25,tr27,tr29,tr31,tr34,tr35,tr38,tr39,tr41">
+                        <img data-src="/img/monitor/agyc/2.jpg" >
+                    </li>
+                    <li data-delay="5" data-src="5" data-trans3d="tr6,tr17,tr22,tr23,tr26,tr27,tr29,tr32,tr34,tr35,tr53,tr54,tr62,tr63,tr4,tr13" data-trans2d="tr3,tr8,tr12,tr19,tr22,tr25,tr27,tr29,tr31,tr34,tr35,tr38,tr41">
+                        <img  data-src="/img/monitor/agyc/3.jpg">
+                    </li>
+                    <li data-delay="5" data-src="5" data-trans3d="tr6,tr17,tr22,tr23,tr26,tr27,tr29,tr32,tr34,tr35,tr53,tr54,tr62,tr63,tr4,tr13" data-trans2d="tr3,tr8,tr12,tr19,tr22,tr25,tr27,tr29,tr31,tr34,tr35,tr38,tr39,tr41">
+                        <img data-src="/img/monitor/agyc/4.jpg">
+                    </li>
+                    <li data-delay="5" data-src="5" data-trans3d="tr6,tr17,tr22,tr23,tr26,tr27,tr29,tr32,tr34,tr35,tr53,tr54,tr62,tr63,tr4,tr13" data-trans2d="tr3,tr8,tr12,tr19,tr22,tr25,tr27,tr29,tr31,tr34,tr35,tr38,tr39,tr41">
+                        <img data-src="/img/monitor/agyc/5.jpg">
+                    </li>
+                    <li data-delay="5" data-src="5" data-trans3d="tr6,tr17,tr22,tr23,tr26,tr27,tr29,tr32,tr34,tr35,tr53,tr54,tr62,tr63,tr4,tr13" data-trans2d="tr3,tr8,tr12,tr19,tr22,tr25,tr27,tr29,tr31,tr34,tr35,tr38,tr39,tr41">
+                        <img data-src="/img/monitor/agyc/6.jpg">
+                    </li>
+                    <li data-delay="5" data-src="5" data-trans3d="tr6,tr17,tr22,tr23,tr26,tr27,tr29,tr32,tr34,tr35,tr53,tr54,tr62,tr63,tr4,tr13" data-trans2d="tr3,tr8,tr12,tr19,tr22,tr25,tr27,tr29,tr31,tr34,tr35,tr38,tr39,tr41">
+                        <img data-src="/img/monitor/agyc/7.jpg">
+                    </li>
+                    <li data-delay="5" data-src="5" data-trans3d="tr6,tr17,tr22,tr23,tr26,tr27,tr29,tr32,tr34,tr35,tr53,tr54,tr62,tr63,tr4,tr13" data-trans2d="tr3,tr8,tr12,tr19,tr22,tr25,tr27,tr29,tr31,tr34,tr35,tr38,tr39,tr41">
+                        <img data-src="/img/monitor/agyc/8.jpg">
+                    </li>
+                </ul>
+                <ul data-type="controls">
+                    <li data-type="captions"></li>
+                    <li data-type="link"></li>
+                    <li data-type="video"></li>
+                    <li data-type="slideinfo"></li>
+                </ul>
+            </div>
+        </div>
+            <script type="text/javascript">
+                var cuteslider3 = new Cute.Slider();
+                cuteslider3.setup("cuteslider_3", "cuteslider_3_wrapper", "/css/monitor/agyc/slider-style.css");
+                cuteslider3.api.addEventListener(Cute.SliderEvent.CHANGE_START, function(event) {});
+                cuteslider3.api.addEventListener(Cute.SliderEvent.CHANGE_END, function(event) {});
+                cuteslider3.api.addEventListener(Cute.SliderEvent.WATING, function(event) {});
+                cuteslider3.api.addEventListener(Cute.SliderEvent.CHANGE_NEXT_SLIDE, function(event) {});
+                cuteslider3.api.addEventListener(Cute.SliderEvent.WATING_FOR_NEXT, function(event) {});
+            </script>
+
+    </div>
+
+
+
+
+
+ /////////////////////////////////////////////////////////
+ 自己的css
+    /**
+     *  轮播效果图
+     */
+    .c-860 {
+        position: absolute;
+        z-index: 9999;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        /*background: url("../img/monitor/agyc/body.jpg");*/
+        /*background-repeat: no-repeat;*/
+        /*background-size:100% 100%;*/
+    }

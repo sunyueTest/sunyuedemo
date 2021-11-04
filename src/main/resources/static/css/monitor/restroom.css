@@ -1,0 +1,244 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    background: #ebebf1;
+    box-sizing: border-box;
+    overflow-y: hidden;
+}
+
+#header {
+    width: 99%;
+    margin: 0 auto;
+    height: 10vh;
+    margin-bottom: 2vh;
+    display: flex;
+    justify-content: center;
+}
+
+#header img {
+    width: 98%;
+    height: 100%;
+}
+
+#header div {
+
+    position: absolute;
+    font-size: 1.5rem;
+    color: white;
+    margin-top: 1rem;
+}
+
+.title {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 3.5%;
+    height: 1rem;
+}
+
+.title-l {
+    margin-right: 48%;
+    height: 2vh;
+}
+
+.title-l, .title-r {
+    display: block;
+    width: 20%;
+    float: left;
+}
+
+.title-l-icon, .title-r-icon {
+    float: left;
+    width: 8%;
+}
+
+.title-l-icon img, .title-r-icon img {
+    width: 100%;
+}
+
+.title-l p, .title-r p {
+    float: left;
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-left: 0.2rem;
+}
+
+.main {
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding: 1% 1vh;
+    height: 40vh;
+}
+
+.main img {
+    width: 95%;
+    height: 100%;
+}
+
+.main .ul-man {
+    position: absolute;
+    width: 28%;
+    left: 3.2%;
+    top: 27vh;
+}
+
+.main .ul-man li {
+    float: left;
+    width: 19.5%;
+    text-align: center;
+}
+
+.main .ul-man li img {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.main .ul-woman {
+    position: absolute;
+    width: 28%;
+    right: 3%;
+    top: 27vh;
+}
+
+.main .ul-woman li {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+
+.main .ul-woman li img {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.main .ul-womana {
+    position: absolute;
+    width: 28%;
+    right: 3%;
+    top: 5vh;
+}
+
+.main .ul-womana li {
+    float: right;
+    width: 20%;
+    text-align: center;
+}
+
+.main .ul-womana li img {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/*
+ * -------------------------- 男厕无障碍--------------------
+ */
+.main .ul-mana {
+    position: absolute;
+    width: 28%;
+    left: 3%;
+    top: 2.8vh;
+}
+
+.main .ul-mana li {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+
+.main .ul-mana li img {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/*
+ * -------------------------- 男厕无障碍end--------------------
+ */
+
+#main {
+    width: 93%;
+    margin: 0 auto;
+}
+
+.main-l {
+    width: 22%;
+    float: left;
+    height: 100px;
+}
+
+.main-m {
+    width: 56%;
+    float: left;
+    overflow: hidden;
+    height: 45vh;
+}
+
+.main-m img {
+    width: 93%;
+    height: 100%;
+}
+
+.main-r {
+    float: left;
+    width: 22%;
+}
+
+.main-l-top {
+    width: 100%;
+    height: 20.5vh;
+    background: rgba(188, 213, 241, .7);
+    margin-bottom: 1vh;
+    padding-top: 1vh;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+
+.main-l-bom {
+    width: 100%;
+    height: 23.5vh;
+    background: rgba(188, 213, 241, .7);
+    box-sizing: border-box;
+    padding-top: 1vh;
+    border-radius: 6px;
+}
+
+.main-icon {
+    float: left;
+    width: 50%;
+    padding: 3%;
+    padding-top: 1%;
+    box-sizing: border-box;
+}
+
+.main-icon-pic {
+    width: 34%;
+    float: left;
+}
+
+.main-icon-pic img {
+    width: 100%;
+}
+
+.main-icon p {
+    float: left;
+    font-size: 13px;
+    margin-left: 5px;
+    line-height: 45px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

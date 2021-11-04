@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+    <style>
+        body {
+            font-weight: normal;
+            height: 100%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .base-item {
+            display: flex;
+            text-align: center;
+            margin-top: 20px;
+            /*margin-left: 45px;*/
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            height: 100%;
+        }
+
+        .base-item span {
+            width: 125px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .base-item input {
+            width: 170px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            background-image: url(../../img/commend_btn.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 120px;
+            height: 35px;
+            border: 0px;
+            margin-left: 130px;
+            color: #5f4d6f;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <input type="text" style="display: none" id="appId" th:value="${data.appId}">
+    <input type="text" style="display: none" id="appType" th:value="${data.appType}">
+    <div style="width: 100%; height: 100%; border: 1px; float: left">
+        <div class="base-item">
+            <span id="cameraNameSpan">摄像头名称 : </span>
+            <input id="cameraName" lay-verify="required" style="width: 170px"
+                   class="layui-input" placeholder="请输入设备名称">
+        </div>
+        <div class="base-item">
+            <span id="cameraSpan">摄像头 : </span>
+            <select lay-filter="quiz" class="select" id="camera"
+                    lay-verify="type" name="quiz" style="width: 170px">
+                <option th:each="camera :${data.cameraBeans}" th:value="${camera.id}" th:text="${camera.name}"></option>
+            </select>
+        </div>
+        <div class="base-item">
+            <button class="btn-primary" lay-submit="" id="save" style="margin-left: 40%"
+                    lay-filter="submit">保&nbsp;存
+            </button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+</body>
+</html>
+<script>
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    let layer, form, position;
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        layer = parent.layui.layer;
+        form = layui.form;
+        form.on('submit(submit)', function (data) {
+            let appId = $("#appId").val(),
+                appType = $("#appType").val(),
+                cameraId = $("#camera").val(),
+                deviceName = $("#cameraName").val();
+
+            if (deviceName.length < 1) {
+                return layer.msg('名称不能为空');
+            }
+
+            if (cameraId == null || cameraId == undefined) {
+                return layer.msg('请选择摄像头');
+            }
+
+            $.post("../cameraApplication/saveCamera",
+                {
+                    "appId": appId,
+                    "appType": appType,
+                    "cameraId": cameraId,
+                    "cameraName": deviceName
+                },
+                function (res) {
+                    if (res.state == 'success') {
+                        parent.layer.msg($.i18n.prop(res.msg));
+                        parent.$('.layui-laypage-btn').click();
+                        parent.layer.close(myIframe);
+                    } else {
+                        layer.msg($.i18n.prop(res.msg), {icon: 2})
+                    }
+                });
+        });
+    });
+
+    function selectPoint() {
+
+        var content="../selectPoint"
+        var positionValue= $('#input_position').val();
+        if (positionValue != ''&&positionValue != null&&positionValue!="0.0,0.0") {
+            let location = positionValue.split(',');
+            content+="?longitude="+location[0]+"&latitude="+location[1];
+        }
+        layer = layui.layer;
+        let index = layer.open({
+            type: 2,
+            title: false,
+            closeBtn: false,
+            area: ['600px', '400px'],
+            shade: 0.2,
+            id: 'LAY_layuipro',
+            btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+            btnAlign: 'c',
+            moveType: 1,
+            content: content,
+            yes: function () {
+                let iframeWin = $("div.layui-layer-content > iframe")[0].contentWindow; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                position = iframeWin.getPoint(); //调用子页面的form_submit函数
+                $('#input_position').val(position);
+                layer.close(index);
+            }
+        });
+    }
+</script>

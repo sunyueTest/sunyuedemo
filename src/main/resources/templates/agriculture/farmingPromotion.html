@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>farmingPromotion-农技服务</title>
+    <link rel="stylesheet"  th:href="@{/static/css/agriculture/FarmingPromotion.css}">
+    <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=5u3R0Gc74WVv6T6sM8R6NQieZQaCK7Pr"></script>
+</head>
+<body style="background: #022c55;">
+<div id='container'>
+    <div id="mapContainer" style="width:100%;position:absolute">
+
+    </div>
+    <div class="left position" style="width: 26vw">
+        <div>
+            <div class="int-title">
+                <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a1.png" ></div>
+                <div class="title-text">农业信息<span class="title-text-top"></span><span class="title-text-bottom"></span></div>
+                <div class="title-icon"></div>
+            </div>
+            <div class="int" id="wrapper3">
+                <div class="int-new article1 scroll">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="int-title">
+                <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a2.png" alt=""></div>
+                <div class="title-text">农业知识<span class="title-text-top"></span><span class="title-text-bottom"></span></div>
+                <div class="title-icon"></div>
+            </div>
+            <div class="knowledge" id="wrapper4">
+                <div class="int-new article0 scroll">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right position">
+        <div style="height: 45vh;">
+            <div class="int-title">
+                <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a4.png" alt=""></div>
+                <div class="title-text">分布状态<span class="title-text-top"></span><span class="title-text-bottom"></span></div>
+                <div class="title-icon"></div>
+            </div>
+            <div class="status  test test-1" id="status">
+                <div class="status-l">
+                    <div class="status-naem"><div class="status-icon"><img src="/static/img/agriculture/house.png" alt=""></div>基层农业公共服务中心</div>
+                    <div class="status-num">23所</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="int-title">
+                <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a3.png" alt=""></div>
+                <div class="title-text">在线咨询<span class="title-text-top"></span><span class="title-text-bottom"></span></div>
+                <div class="title-icon"></div>
+            </div>
+            <div class="consult  test test-1" id="consultlist">
+                <!--<div class="teacher">-->
+                    <!--<div class="teacher-pic">-->
+                        <!--<img src="/static/img/agriculture/zhuanjia.png" alt="">-->
+                    <!--</div>-->
+                    <!--<div class="teacher-int">-->
+                        <!--<p class="teacher-int-name">木子教授</p>-->
+                        <!--<p class="teacher-int-jieshao">个人简介个人简介个人简介个人简介个人简介个人简介个人简介</p>-->
+                    <!--</div>-->
+                    <!--<div class="teacher-bnt">在线咨询</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+    <!--<div class="inform">-->
+        <!--<marquee>通知：农业知识培训将于2019年9月10日某某某地举办。报名截止于2019年9月8日，请将个人信息发送至155 5555 5555</marquee>-->
+    <!--</div>-->
+</div>
+<div id="tc" class="">
+    <h3 class="tc-title">
+        <div class="buddha-border">
+            <div class="buddha-pic">
+                <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+            </div>
+        </div>
+        <p id="p">详细信息</p>
+    </h3>
+    <div class="tc-int test test-1" id="tcint">
+        <h2>台风“杨柳”携风雨远去 南方“苦夏”熬到头</h2>
+        <div>
+            <p>2019-09-02 08：10：10 来源：张三三教授</p>
+        </div>
+        <div class="tc-int-txt">
+        </div>
+    </div>
+    <div id="dele"></div>
+</div>
+<div id="mess-tc"  class="">
+    <h3 class="mess-tc-title">
+        <p>在线聊天</p>
+    </h3>
+    <div class="mess-Records test test-1">
+        <div id="mess-Records">
+            <div class="mess-log-l">
+                <div class="mess-log-l-pic">
+                    <div class="mess-buddha-border">
+                        <div class="mess-buddha-pic">
+                            <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="mess-log-l-txt">
+                    <p class="mess-naem">张三教授</p>
+                    <p class="mess-txt">您好，请问有什么需要?</p>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="mess-log-r">-->
+            <!--<div class="mess-log-l-txt">-->
+                <!--<p class="mess-naem-r">用户安静</p>-->
+                <!--<p class="mess-txt">您好，请问有什么需要?您好，请问有什么需要?您好，请问有什么需要?您好，请问有什么需要?您好，请问有什么需要?您好，请问有什么需要?</p>-->
+            <!--</div>-->
+            <!--<div class="mess-log-l-pic"  style="margin-left: 1vw;">-->
+                <!--<div class="mess-buddha-border">-->
+                    <!--<div class="mess-buddha-pic">-->
+                        <!--<img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div>
+            <div class="import">
+                <textarea id="specialistreply" style="width:40vw; height:12vh; border:solid 1px #ccc; border-radius:20px; resize:none;box-sizing: border-box;padding: 1vh 1vw;" placeholder="请输入聊天信息"></textarea>
+                <div class="import-bnt" id="addmessage">
+                    <p>
+                        发送
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mess-dele"></div>
+</div>
+
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script src="/static/js/agriculture/farmingPromotion/farmingPromotion.js"></script>
+<script src="/static/js/agriculture/my_scrollbar.js"></script>
+</html>
+
+
+

@@ -1,0 +1,76 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>groupDevice</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../css/tree.css" type="text/css">
+    <link rel="stylesheet" href="../css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/groupDevice.css" media="all">
+    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/jquery.min.js?v=2.1.4"></script>
+    <script type="text/javascript" src="../js/zTreejs/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="../js/groupDevice.js?v=1.2.4"></script>
+    <script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
+    <script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+    <script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+</head>
+<body>
+<div class="content_wrap">
+    <div class="zTreeDemoBackground left">
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+    <div class="right">
+        <div class="flysand-container">
+            <div class="flysand-green-vertical-line">
+            </div>
+            <div class="flysand-div-inline1" id="deviceName">
+            </div>
+            <div class="flysand-div-inline2"
+                 id="deviceNumber">
+            </div>
+        </div>
+        <div class="flysand-container-horizontal">
+            <div class="flysand-table-cell-1">
+                <span id="detectionParameter">检测参数</span>
+            </div>
+            <div class="flysand-table-cell-2">
+                <span id="currentValue">当前值</span>
+            </div>
+            <div class="flysand-table-cell-3">
+                <span id="updateTime">更新时间</span>
+            </div>
+            <div class="flysand-table-cell-4">
+                <span id="historyQuery">历史查询</span>
+            </div>
+            <div class="flysand-table-cell-5">
+                <span id="more">更多</span>
+            </div>
+            <div class="flysand-table-cell-6">
+                <span id="update">修改</span>
+            </div>
+        </div>
+        <ul class="flysand-ul" id="senor_data_list">
+
+        </ul>
+        <table class="layui-hide" id="sensor" lay-filter="sensor"></table>
+    </div>
+</div>
+
+<script >
+    //设置语言
+    loadI18nProperties(function(){
+        $('#detectionParameter').text($.i18n.prop('detectionParameter'));
+        $('#currentValue').text($.i18n.prop('currentValue'));
+        $('#updateTime').text($.i18n.prop('updateTime'));
+        $('#historyQuery').text($.i18n.prop('historyQuery'));
+        $('#more').text($.i18n.prop('more'));
+        $('#update').text($.i18n.prop('modify'));
+
+    });
+
+
+</script>
+</body>
+</html>

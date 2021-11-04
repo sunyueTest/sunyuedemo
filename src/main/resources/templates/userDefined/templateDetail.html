@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html><html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>农业模版-添加</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/css/farmCommon.css">
+    <style>
+        /* 防止下拉框的下拉列表被隐藏---必须设置--- */
+        .layui-table-cell {
+            overflow: visible !important;
+        }
+        /* 设置下拉框的高度与表格单元相同 */
+        .layui-input, .layui-select, .layui-textarea{
+            height: 30px !important;
+        }
+        #save{
+            height:30px !important;
+            width: 55px;
+            color: #fff;
+            background: #1985ff;
+            border: none;
+            cursor: pointer;
+        }
+        .layui-form-item{
+            margin-top: 25px!important;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form-item">
+    <label id="label1" class="layui-form-label">模板名称</label>
+    <div class="layui-input-inline">
+        <input type="text" id="name" name="name" lay-verify="title"  autocomplete="off"  class="layui-input" th:value="*{data.name}">
+    </div>
+
+    <button class="btn-primary"  id="save" >保存</button>
+</div>
+<table class="layui-hide layui-form" id="tableDemo" lay-filter="tableDemo"></table>
+<input type="hidden" id="tempId" name="tempId" th:value="*{data.id}">
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<!--<script type="text/html" id="toolbar1">
+    <div class="layui-inline bg-transparent">
+        <button id="add" class="layui-btn layui-btn-primary layui-btn-radius"
+                lay-event="add"> 添加
+        </button>
+    </div>
+</script>-->
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script src="../static/jQuery/jquery-3.2.1.js"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:inline="javascript">
+
+    layui.use(['layer', 'table', 'element', 'form'], function () {
+        var layer = layui.layer //弹层
+            , table = layui.table //表格
+            , form = layui.form;
+        //监听地址选择操作
+        form.on('select(selectDemo)', function (obj) {
+            //this.value=obj.value;
+            //layer.tips(obj.elem.getAttribute('name') + '：'+obj.value + ' ' + obj.elem.getAttribute('dataId') , obj.othis);
+        });
+
+      /*  var tableData=new Array(); // 用于存放表格数据
+        $.ajax({
+            url: "../userDefined/field"
+            ,type:"get"
+            ,data:{
+                tempId:$('#tempId').val()
+            }
+            ,async:false
+            ,dataType:"json"
+            , success: function(result){
+                tableData=result.data;
+                console.log(result);
+            }
+        });*/
+        //执行一个 table 实例
+        var tableIns =table.render({
+            elem: '#tableDemo'
+            //, toolbar: '#toolbar1'
+            , height: 1000
+            //,data:tableData
+            ,url: "/userDefined/field?tempId="+$('#tempId').val()
+            , page: false //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                , {field: 'field', title: '自定义列', width: 120}
+                , {field: 'fieldName', title: '列名', edit: 'text',width: 200, sort: true}
+                , {field: 'type', title: '数据类型', width: 110, templet: '#selectTool', unresize: true}
+               /* , {fixed: '', title: '操作', width: 165, align: 'center', toolbar: '#barDemo'}*/
+            ]]
+        });
+        //监听单元格编辑
+        table.on('edit(tableDemo)', function(obj){
+            var value = obj.value //得到修改后的值
+                ,data = obj.data //得到所在行所有键值
+                ,field = obj.field; //得到字段
+            layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
+        });
+
+        /*table.on('toolbar(tableDemo)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'add':
+                    var oldData =  tableIns.config.data;
+                    var data1={"id":ull,"name":'',"type":"","field":"att1"};
+                    oldData.push(data1);
+                    console.log(oldData);
+                    tableIns=table.reload('tableDemo',{
+                        data : oldData
+                    });t
+            }
+        });*/
+        //监听工具条
+        table.on('tool(tableDemo)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                , layEvent = obj.event; //获得 lay-event 对应的值
+            if (layEvent === 'del') {
+                obj.del(); //删除对应行（tr）的DOM结构
+            }
+        });
+        document.getElementById("save").onclick=function(){
+            var trs =$("tbody").find("tr");
+            console.log(trs);
+            var arr = [];
+            for(var i=0;i<trs.length/2;i++){
+                var row = {};
+                var tds =trs[i].children;
+                var id=tds[0].firstChild.innerHTML;
+                var field=tds[1].firstChild.innerHTML;
+                var name=tds[2].firstChild.innerHTML;
+                var type='';
+                var dds=tds[3].firstChild.firstChild.nextSibling.nextSibling.firstChild.nextSibling.children;
+                for(var j=0;j<dds.length;j++){
+                    if(dds[j].className=='layui-this'){
+                        type=dds[j].innerHTML;
+                        break;
+                    }
+                }
+                console.log(type);
+                row.dataType=type;
+                row.id=id;
+                row.field=field;
+                row.fieldName=name;
+                arr.push(row);
+            }
+
+            //console.log(arr);
+            //console.log(JSON.stringify(arr));
+            $.ajax({
+                url: "../userDefined/saveTemplateDetail",
+                data: {
+                    tempId:$('#tempId').val(),
+                    name:$('#name').val(),
+                    json:JSON.stringify(arr)
+                },
+                dataType: "json",
+                type: "post",
+                timeout: 30000,
+                error: function (data, type, err) {
+                    console.log(err);
+                    layer.closeAll('loading');
+                    layer.msg($.i18n.prop('fail'), {
+                        offset: '6px', icon: 2
+                    });
+                },
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if ( data.success) {
+                        layer.msg($.i18n.prop("success"), {icon: 1});
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    } else {
+                        layer.msg($.i18n.prop("fail"), {icon: 2});
+                    }
+                }
+            });
+
+        }
+    });
+
+</script>
+
+<script type="text/javascript">
+    var dataType = ['text', 'date', 'number'];
+    /*var field=['att1','att2','att3','att4','att5','att6','att7','att8'];*/
+</script>
+<script type="text/html" id="selectTool" desc="下拉选择器" intro="用到了layui模板（不能设置lay-ignore,否则监听不到事件）">
+    <select name="city" dataId="{{d.id}}" lay-filter="selectDemo">
+        {{# layui.each(dataType, function(index, item){ }}
+        <option {{ (d.dataType==item)?'selected' : ''  }} >{{ item }}</option>
+        {{# }); }}
+    </select>
+</script>
+<!--<script type="text/html" id="selectTool2" desc="下拉选择器" intro="用到了layui模板（不能设置lay-ignore,否则监听不到事件）">
+    <select name="field" dataId="{{d.id}}" lay-filter="selectDemo">
+        {{# layui.each(field, function(index, item){ }}
+        <option {{ (d.field==item)?'selected' : '' }}  >{{ item }}</option>
+        {{# }); }}
+    </select>
+</script>-->
+<!--
+<script type="text/html" id="switchTpl" desc="切换开关" intro="layui表单空间">
+    <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch"
+           lay-text="女|男" lay-filter="sexDemo" {{ (d.id==10003)?'checked' : '' }}>
+</script>-->
+
+</body>
+<style>
+
+</style>
+</html>

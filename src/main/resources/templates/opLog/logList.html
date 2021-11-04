@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>操作日志</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" href="css/common.css">
+    <link href="/static/css/jquery.json-viewer.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+
+<table class="layui-hide" id="opLog" lay-filter="opLog"></table>
+<script type="text/html" id="toolbar1">
+    <div class="layui-inline abc">
+        <button class="layui-btn " lay-event="search">
+            <i class="layui-icon layui-icon-search "></i>
+        </button>
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="userName" id="userName" autocomplete="off"
+               style="width:182px;margin-right:10px;"
+               placeholder="操作人员">
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="opTime" id="opTime" autocomplete="off"
+               style="width:300px;margin-right:10px;"
+               placeholder="操作时间">
+    </div>
+    <div class="layui-inline abc">
+        <input type="text" class="layui-input" name="method" id="method" autocomplete="off"
+               style="width:300px;margin-right:10px;"
+               placeholder="操作接口，需精确匹配">
+    </div>
+</script>
+
+<script type="text/html" id="barDemo">
+    <div class="layui-btn-group">
+        <button class="layui-btn layui-btn-primary layui-btn-sm" title="参数详情" lay-event="more"><i
+                class="layui-icon layui-icon-log"></i></button>
+    </div>
+</script>
+
+<script type="text/html" id="paramsDemo">
+    <div class="container" style="margin-top: 1em;">
+        <div class="row">
+            <pre id="json-renderer" style="margin-left: 2em;"></pre>
+        </div>
+    </div>
+</script>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/jquery.json-viewer.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script>
+    let table, form, laydate;
+    layui.use(['table', 'laydate'], function () {
+        table = layui.table;
+        laydate = layui.laydate;
+
+        table.render({
+            elem: '#opLog'
+            , url: '/opLog/getOpLogList'
+            , toolbar: '#toolbar1'
+            , title: '操作日志'
+            , cols: [
+                [{
+                    field: 'id',
+                    title: 'ID',
+                    unresize: true,
+                    sort: true,
+                    width: 70,
+                    align: 'center'
+                }, {field: 'operation', title: '操作', align: 'center'}
+                    , {field: 'ip', title: 'ip地址', align: 'center'}
+                    , {field: 'method', title: '接口', align: 'center'}
+                    , {field: 'userName', title: '操作人员', align: 'center'}
+                    , {field: 'opTime', title: '操作时间', align: 'center'}
+                    , {
+                    field: 'right', title: $.i18n.prop('operation'),
+                    toolbar: '#barDemo', width: 160, align: 'center'
+                }
+                ]
+            ]
+            , page: true,
+            request: {limitName: 'size'},
+            response: {
+                statusCode: 'success'
+            },
+            parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                return {
+                    "code": res.state, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.datas,//解析数据列表
+                };
+            }
+        });
+
+        //头工具栏事件
+        table.on('toolbar(opLog)', function (obj) {
+            //var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'search':
+                    let userName = $('#userName').val();
+                    let period = $('#opTime').val();
+                    console.log("period");
+                    console.log(period);
+                    let opTime = {startDate: '', endDate: ''};
+                    if (period != '') {
+                        let periods = period.split('~');
+                        opTime = {startDate: periods[0], endDate: periods[1]};
+                    }
+                    let method = $("#method").val();
+                    reloadSmsList(userName, opTime, method);
+                    $('#userName').val(userName);
+                    $('#opTime').val(period);
+                    $("#method").val(method);
+                    break;
+            }
+        });
+
+        //监听行工具事件
+        table.on('tool(opLog)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'more') {
+                layer.open({
+                    type: 1,
+                    area: ['400px', '350px'],
+                    title: $.i18n.prop('params'),
+                    btnAlign: 'c',
+                    anim: 3,
+                    content: document.getElementById("paramsDemo").innerHTML,
+                    success: function () {
+                        $("#json-renderer").jsonViewer(JSON.parse(data.params));
+                    }
+                });
+            }
+        });
+
+        //日期时间范围选择
+        laydate.render({
+            elem: '#opTime'
+            , type: 'datetime'
+            , range: '~'
+        });
+    });
+
+    function reloadSmsList(userName, opTime, method) {
+        table.reload('opLog', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                name: userName,
+                startDate: opTime.startDate,
+                endDate: opTime.endDate,
+                method: method
+            }
+        });
+        laydate.render({
+            elem: '#opTime'
+            , type: 'datetime'
+            , range: '~'
+        });
+    }
+
+
+</script>
+<style>
+
+    .layui-table-view .layui-table {
+        width: 100%;
+
+    }
+
+    .layui-table tr {
+        width: 100%;
+    }
+
+    .layui-table thead tr, .layui-table-header thead {
+        width: 100%;
+    }
+
+    .abc {
+        float: right;
+        margin-bottom: 5px;
+    }
+</style>
+</body>
+</html>

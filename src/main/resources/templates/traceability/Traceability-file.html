@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>Traceability-file建立溯源档案</title>
+		<link rel="stylesheet" href="/static/css/traceability/public.css">
+		<link rel="stylesheet" href="/static/css/traceability/Traceabilityfile.css">
+		<link rel="stylesheet" href="/static/layui/css/layui.css">
+		<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+        <script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+		<script src="/static/layui/layui.js"></script>
+		<script src="/static/js/traceability/Traceabilityfile.js"></script>
+	</head>
+	<body>
+		<div id="conter">
+			<div class="con-title">
+				<h3>建立溯源档案</h3>
+			</div>
+			<div id="int">
+				<div class="int clearfix">
+					<div class="layui-form-item">
+						<label class="layui-form-label">产品名称</label>
+						<div class="layui-input-block">
+							<input type="text" id="name" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label">产品编号</label>
+							<div class="layui-input-block">
+								<input type="text" id="productCode" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">生产日期</label>
+							<div class="layui-input-block">
+								<input type="text" id="productDate" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">养殖企业</label>
+							<div class="layui-input-block">
+								<input type="text" id="enterprise" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label">规格</label>
+							<div class="layui-input-block">
+								<input type="text" id="specs" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">产地</label>
+							<div class="layui-input-block">
+								<input type="text" id="originPlace" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">饲料来源</label>
+							<div class="layui-input-block">
+								<input type="text" id="feedSource" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label">苗种来源</label>
+							<div class="layui-input-block">
+								<input type="text" id="seedSource" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">药品使用</label>
+							<div class="layui-input-block">
+								<input type="text" id="drugUse" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">检测服务</label>
+							<div class="layui-input-block">
+								<input type="text" id="testService" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label">加工服务</label>
+							<div class="layui-input-block">
+								<input type="text" id="processService" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">物流运输</label>
+							<div class="layui-input-block">
+								<input type="text" id="logistics" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+							</div>
+						</div>
+					</div>
+
+						<div class="layui-upload layui-col-xs2">
+							<button type="button" class="layui-btn" id="test1">上传图片</button>
+							<div class="layui-upload-list">
+								<img class="layui-upload-img" id="demo1">
+								<input type="hidden" id="imgSrc" >
+								<p id="demoText"></p>
+							</div>
+						</div>
+
+						<div class="layui-upload layui-col-xs2">
+							<button type="button" class="layui-btn" id="test2">上传图片</button>
+							<div class="layui-upload-list">
+								<img class="layui-upload-img" id="demo2">
+								<input type="hidden" id="imgSrc2" >
+								<p id="demoText2"></p>
+							</div>
+						</div>
+
+						<div class="layui-upload layui-col-xs2">
+							<button type="button" class="layui-btn" id="test3">上传图片</button>
+							<div class="layui-upload-list">
+								<img class="layui-upload-img" id="demo3">
+								<input type="hidden" id="imgSrc3" >
+								<p id="demoText3"></p>
+							</div>
+						</div>
+
+					<div style="position: absolute;bottom: -2vh;right: 17vw;">
+						<button class="layui-btn layui-btn-normal" id="file-bnt">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

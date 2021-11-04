@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>分配角色</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+
+</head>
+<body>
+<style>
+    .layui-form-select dl {
+        max-height: 200px; !important;
+    }
+</style>
+<div class="layui-form">
+    <div class="layui-inline">
+        <label id="label" class="layui-form-label" style="width: 150px;">选择角色：</label>
+        <div class="layui-input-inline">
+            <select lay-filter="quiz" class="select" id="roleId"
+                    lay-verify="type"
+                    name="quiz">
+                <option th:each="role :${data.roles}" th:value="${role.id}" th:text="${role.name}"
+                        th:selected="${role.id == data.curUserRole.roleId}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-inline" style="margin-top:20px;">
+        <label id="version" class="layui-form-label" style="width: 150px;">选择版本：</label>
+        <div class="layui-input-inline">
+            <select lay-filter="version" class="select" id="versionId"
+                    lay-verify="type"
+                    name="version">
+                <option th:each="version :${data.versions}" th:value="${version.id}" th:text="${version.versionName}"
+                        th:selected="${version.id == data.curUserRole.versionId}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-inline" style="margin-top:20px;">
+        <label id="typeIdLabel" class="layui-form-label" style="width: 150px;">默认大屏：</label>
+        <div class="layui-input-inline">
+            <select lay-filter="quiz" class="select" id="typeId"
+                    lay-verify="type"
+                    name="typeId">
+                <option th:each="monitor :${data.monitors}" th:value="${monitor.type}" th:text="${monitor.name}"
+                        th:selected="${monitor.type == data.curUserRole.typeId+''}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-inline" style="margin-top:20px;">
+        <label id="mainPage" class="layui-form-label" style="width: 150px;">默认主界面：</label>
+        <div class="layui-input-inline">
+            <select lay-filter="quiz" class="select" id="indexType"
+                    lay-verify="type"
+                    name="indexType">
+                <option value="0">管理界面</option>
+                <option value="2">大屏</option>
+            </select>
+        </div>
+    </div>
+    <div id="expiryTimeDiv" class="layui-inline" style="" th:style="'margin-top:20px;display:'+@{(${data.curUserRole.versionId==1} ? 'none':'inline-block')}+''">
+        <label id="expiryTimeLabel" class="layui-form-label" style="width: 150px;">使用截至时间：</label>
+        <div class="layui-input-inline">
+            <input id="expiryTime" type="text" name="expiryTime" lay-verify="title" placeholder="不填则维持当前过期时间"
+                   class="layui-input">
+        </div>
+    </div>
+    <div id="customizationFlagDiv" class="layui-inline" th:style="'margin-top:20px;display:'+@{(${data.userInfo} ? 'inline-block' : 'none')}+''">
+        <label id="customizationFlagLabel" class="layui-form-label" style="width: 150px;">中性管理到期时间：</label>
+        <div class="layui-input-inline">
+            <input id="customizationFlag" type="text" name="expiryTime" lay-verify="title" placeholder="不填则维持当前过期时间"
+                   class="layui-input">
+        </div>
+    </div>
+
+</div>
+
+<input type="hidden" id="customizationFlagTime" th:value="@{(${data.userInfo} ? ${data.userInfo.customizationFlag}: '')}">
+<input type="hidden" id="timeRes" th:value="${data.curUserRole.expiryTime}">
+<input type="hidden" id="indexTypeRes" th:value="${data.curUserRole.indexType}">
+<input type="hidden" id="id" name="id" th:value="*{data.curUserRole.id}">
+<input type="hidden" id="userId" name="userId" th:value="*{data.curUserRole.userId}">
+<input type="hidden" id="userName" name="userName" th:value="*{data.curUserRole.userName}">
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/static/js/tableSelect.js}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    $('#label1').text($.i18n.prop('selRole') + ':');
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        laydate = layui.laydate;
+        form = layui.form;
+        laydate.render({
+            elem: '#expiryTime',
+            trigger: 'click',
+            type: 'datetime',
+            position: 'fixed',
+            format: 'yyyy-MM-dd HH:mm:ss'
+        });
+        laydate.render({
+            elem: '#customizationFlag',
+            trigger: 'click',
+            type: 'datetime',
+            position: 'fixed',
+            format: 'yyyy-MM-dd HH:mm:ss'
+        });
+
+        form.on('select(version)', function (obj) {
+            let version = $("#versionId").val();
+            //如果是免费版，则不显示使用截止时间输入框
+            if (version==1){
+                $("#expiryTimeDiv").hide();
+            }else{
+                $("#expiryTimeDiv").show();
+            }
+        });
+    });
+    let timeRes = $("#timeRes").val();
+    $("#expiryTime").val(timeRes.substring(0, timeRes.length - 2));
+
+    let customizationFlagTime = $("#customizationFlagTime").val();
+    if(customizationFlagTime){
+        $("#customizationFlag").val(customizationFlagTime.substring(0, customizationFlagTime.length - 2));
+    }
+
+    let indexType = $("#indexTypeRes").val();
+    $("#indexType").val(indexType);
+
+</script>
+</html>

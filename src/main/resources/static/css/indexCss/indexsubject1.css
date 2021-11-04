@@ -1,0 +1,1209 @@
+/*第二套主题css*/
+/*列表显示*/
+/*#span_company{color: #fff}*/
+/*.ztree li a {color: #ffc78a!important;}*/
+/*body .flysand-container-horizontal{background-image: none;background: rgba(255,255,255,.5)}*/
+/*body .flysand-div-inline2{background: #ffd887;!important;border-radius: 15px;!important; box-sizing: border-box;border: 1px solid #a08162;*/
+    /*padding: 2px 5px;*/
+/*}*/
+/*.flysand-div-inline2{line-height: 27px!important;}*/
+/*.flysand-green-vertical-line{background: #ffc270!important;}*/
+/*.flysand-div-inline2-img{margin-top: 3px!important;}*/
+/*.input-device{margin-top: 2px!important;}*/
+/*!*图形化显示*!*/
+/*body .input-device{background: #ffd887!important;color: #fff!important;border: none!important;}*/
+/*!*历史数据*!*/
+/*body .layui-btn{background: #ffc270!important;}*/
+/*.ztree li a{background: #ffd887!important;color: #fff!important;}*/
+/*.layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even){*/
+    /*background: #a08162!important;*/
+/*}*/
+/*.layui-table tbody{background: #aa8e72!important;}*/
+/*.layui-laypage .layui-laypage-curr .layui-laypage-em{background-color: #ffc270!important}*/
+/*.layui-laypage a:hover{color: #ffc270!important;}*/
+/*!*设备中心*!*/
+/*.layui-btn-primary:hover{border-color: #a08162!important;}*/
+/*.layui-btn .layui-icon{color: #fff!important;}*/
+/*!*input:focus{border: 2px solid #ffc270!important;}*!*/
+/*!*摄像头管理*!*/
+/*.layui-btn{background: #ffc270!important;}*/
+/*!*组态应用*!*/
+/*.layui-form-onswitch{background: #ffc270!important;border-color:#ffc270!important; }*/
+/*.layui-table-cell{color: #ffff!important;}*/
+/*.layui-form-select dl dd.layui-this{background: #ffc270!important;}*/
+/*.layui-inline .layui-icon{*/
+    /*color: #ffc270!important;*/
+/*}*/
+/*!*触发器管理*!*/
+/*.btn-primary{background-image: none!important;background: #ffc270!important;color: #fff!important;border-radius: 10px;cursor: pointer}*/
+/*!*系统管理*!*/
+/*.layui-layer-btn .layui-layer-btn0{background: #ffc270!important;border-color: #ffc270!important;}*/
+/*button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active{*/
+    /*border-color: #ffc270!important;*/
+/*}*/
+/*.btn-primary{border-color: #ffc270!important;}*/
+/*___________红色主题_____________________________________________________________________________________________________________________________________________*/
+/*!*列表显示*!*/
+/*.flysand-container-horizontal{*/
+    /*background-image:none !important;*/
+    /*background: #ffc78a!important;*/
+    /*color: #d43726!important;*/
+    /*border: 1px solid #d43726;*/
+/*}*/
+/*.flysand-ul li{*/
+    /*background-image:none !important;*/
+    /*background: #ffc78a!important;*/
+    /*color: #d43726!important;*/
+    /*border: 1px solid #d43726;*/
+/*}*/
+/*ul.ztree{*/
+    /*background-image:none !important;*/
+    /*background: #ffc78a!important;*/
+    /*color: #d43726!important;*/
+    /*border: 1px solid #d43726;*/
+/*}*/
+/*.ztree li a{*/
+    /*color: #d43726!important;*/
+/*}*/
+/*.ztree li a.curSelectedNode{*/
+    /*background:url("/static/img/indexcss/list-bg2.jpg") no-repeat!important;*/
+    /*background-size: 100% 100%!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a:hover{*/
+    /*background:url("/static/img/indexcss/list-bg2.jpg") no-repeat!important;*/
+    /*background-size: 100% 100%!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示*!*/
+/*.flysand-container,.container{*/
+    /*background-image:none !important;*/
+    /*background: #ffc78a!important;*/
+    /*color: #d43726!important;*/
+    /*border: 1px solid #d43726;*/
+/*}*/
+/*.ztree li a{*/
+    /*background: none!important;*/
+/*}*/
+/*.layui-btn{*/
+    /*background: #d43726!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table thead{*/
+    /*background-image:none !important;*/
+    /*background: #ffc78a!important;*/
+    /*color: #d43726!important;*/
+    /*border: 1px solid #d43726;*/
+/*}*/
+/*.layui-form-label{*/
+    /*background: #ffc78a!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*设备管理*!*/
+/*.layui-btn-primary{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table-tool-self .layui-icon{*/
+    /*color: #e50000;*/
+/*}*/
+/*!*组态列表*!*/
+/*!*开关*!*/
+/*.layui-form-onswitch{*/
+    /*background: #d43726!important;*/
+    /*border-color:#ffc78a!important;*/
+/*}*/
+/*!*分页*!*/
+/*.layui-laypage .layui-laypage-curr .layui-laypage-em{*/
+    /*background: #d43726!important;*/
+/*}*/
+/*!*中型管理按钮颜色*!*/
+/*button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {*/
+    /*background: #d43726!important;*/
+    /*border-color: #ffc78a!important;*/
+/*}*/
+/*button.btn.btn-primary{*/
+    /*background: #d43726!important;*/
+    /*border-color: #ffc78a!important;*/
+/*}*/
+/*!*全选按钮*!*/
+/*.layui-form-checked[lay-skin=primary] i{*/
+    /*background: #d43726!important;*/
+    /*border-color: #ffc78a!important;*/
+/*}*/
+/*———index4蓝色主题具体细节css样式—————————————————————————————————————————————————————————————*/
+/*!*列表显示*!*/
+/*.flysand-container-horizontal{*/
+    /*background-image:none !important;*/
+    /*background: #0f78b5!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.flysand-ul li{*/
+    /*background-image:none !important;*/
+    /*background: #0f78b5!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #c0e8ff;*/
+/*}*/
+/*ul.ztree{*/
+    /*background-image:none !important;*/
+    /*background: #0f78b5!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.ztree li a{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a.curSelectedNode{*/
+    /*background:#5496bc!important;*/
+
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a:hover{*/
+    /*background:#5496bc!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示*!*/
+/*.flysand-container,.container{*/
+    /*background-image:none !important;*/
+    /*background: #0f78b5!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.ztree li a{*/
+    /*background: none!important;*/
+/*}*/
+/*.layui-btn{*/
+    /*background: #0f78b5!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table thead{*/
+    /*background-image:none !important;*/
+    /*background: #0f78b5!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.layui-form-label{*/
+    /*background: #0f78b5!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示————————搜索框*!*/
+/*.input-device{*/
+    /*background: url("/static/img/indexcss/index-4-ss-bg_05.jpg") no-repeat!important;*/
+    /*background-size: 100% 100%!important;*/
+    /*padding: 2px 4px;*/
+/*}*/
+/*.flysand-div-inline2{*/
+    /*background: none!important;*/
+/*}*/
+/*.flysand-div-inline2-img{display: none}*/
+/*.input-device-bnt{*/
+    /*display: block!important;*/
+    /*height: 24px;*/
+    /*width: 40px;*/
+    /*background: url("/static/img/indexcss/index-ss-bnt-bg_07.jpg") no-repeat;*/
+    /*background-size: 100% 100%;*/
+    /*margin-top: 5px;*/
+    /*margin-left: 10px;*/
+    /*cursor: pointer;*/
+    /*color: #fff;*/
+    /*line-height: 24px;*/
+    /*text-align: center;*/
+    /*font-size: 10px;*/
+/*}*/
+
+/*!*设备管理*!*/
+/*.layui-btn-primary{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table-tool-self .layui-icon{*/
+    /*color: #fff;*/
+/*}*/
+/*!*组态列表*!*/
+/*!*开关*!*/
+/*.layui-form-onswitch{*/
+    /*background: #0f78b5!important;*/
+    /*border-color:#56c1ff!important;*/
+/*}*/
+/*!*分页*!*/
+/*.layui-laypage .layui-laypage-curr .layui-laypage-em{*/
+    /*background: #0f78b5!important;*/
+/*}*/
+/*!*中型管理按钮颜色*!*/
+/*button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {*/
+    /*background: #0f78b5!important;*/
+    /*border-color: #c0e8ff!important;*/
+/*}*/
+/*button.btn.btn-primary{*/
+    /*background: #0f78b5!important;*/
+    /*border-color: #c0e8ff!important;*/
+/*}*/
+/*!*全选按钮*!*/
+/*.layui-form-checked[lay-skin=primary] i{*/
+    /*background: #0f78b5!important;*/
+    /*border-color: #c0e8ff!important;*/
+/*}*/
+/*———index5--14主题具体细节css样式————————————————————————————————————————————————————————*/
+/*!*列表显示*!*/
+/*.flysand-container-horizontal{*/
+    /*background-image:none !important;*/
+    /*background: #7ca887!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.flysand-ul li{*/
+    /*background-image:none !important;*/
+    /*background: #7ca887!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #c0e8ff;*/
+/*}*/
+/*ul.ztree{*/
+    /*background-image:none !important;*/
+    /*background: #7ca887!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.ztree li a{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a.curSelectedNode{*/
+    /*background:#215048!important;*/
+
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a:hover{*/
+    /*background:#215048!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示*!*/
+/*.flysand-container,.container{*/
+    /*background-image:none !important;*/
+    /*background: #7ca887!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.ztree li a{*/
+    /*background: none!important;*/
+/*}*/
+/*.layui-btn{*/
+    /*background: #7ca887!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table thead{*/
+    /*background-image:none !important;*/
+    /*background: #7ca887!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #7ca887;*/
+/*}*/
+/*.layui-form-label{*/
+    /*background: #7ca887!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示————————搜索框*!*/
+/*.input-device{*/
+    /*background: none!important;*/
+    /*padding: 2px 4px;*/
+    /*margin-top: 3px!important;*/
+/*}*/
+/*.flysand-div-inline2{*/
+    /*background: #dcdcdc!important;*/
+    /*padding: 2px;*/
+    /*border-radius: 20px;*/
+/*}*/
+
+/*.flysand-div-inline2-img{*/
+    /*display: block;*/
+    /*background: url("/static/img/indexcss/index5-ss-bnt.png")no-repeat!important;*/
+
+/*}*/
+
+/*.input-device-bnt{*/
+    /*display: none!important;*/
+    /*height: 24px;*/
+    /*width: 40px;*/
+    /*background-size: 100% 100%;*/
+    /*margin-top: 5px;*/
+    /*margin-left: 10px;*/
+    /*cursor: pointer;*/
+    /*color: #fff;*/
+    /*line-height: 24px;*/
+    /*text-align: center;*/
+    /*font-size: 10px;*/
+/*}*/
+
+/*!*设备管理*!*/
+/*.layui-btn-primary{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table-tool-self .layui-icon{*/
+    /*color: #7ca887;*/
+/*}*/
+/*!*分组管理*!*/
+/*#tips{*/
+    /*color: #0A0E11;*/
+/*}*/
+
+
+
+/*!*组态列表*!*/
+/*!*开关*!*/
+/*.layui-form-onswitch{*/
+    /*background: #7ca887!important;*/
+    /*border-color:#7ca887!important;*/
+/*}*/
+/*!*分页*!*/
+/*.layui-laypage .layui-laypage-curr .layui-laypage-em{*/
+    /*background: #7ca887!important;*/
+/*}*/
+/*!*中型管理按钮颜色*!*/
+/*button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {*/
+    /*background: #7ca887!important;*/
+    /*border-color: #7ca887!important;*/
+/*}*/
+/*button.btn.btn-primary{*/
+    /*background: #7ca887!important;*/
+    /*border-color: #7ca887!important;*/
+/*}*/
+/*!*全选按钮*!*/
+/*.layui-form-checked[lay-skin=primary] i{*/
+    /*background: #7ca887!important;*/
+    /*border-color: #7ca887!important;*/
+/*}*/
+/*———index6--森林主题具体细节css样式————————————————————————————————————————————————————————*/
+
+/*.flysand-container-horizontal{*/
+    /*background-image:none !important;*/
+    /*background: #c58a49!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #fff;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+/*.flysand-ul li{*/
+    /*background-image:none !important;*/
+    /*background: #c58a49!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #fff;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+/*ul.ztree{*/
+    /*background-image:none !important;*/
+    /*background: #c58a49!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #fff;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+/*.ztree li a{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a.curSelectedNode{*/
+    /*background:#954e10!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a:hover{*/
+    /*background:#954e10!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示*!*/
+/*.flysand-container,.container{*/
+    /*background-image:none !important;*/
+    /*background: #c58a49!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #fff;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+    /*height: auto;!important;*/
+/*}*/
+/*.ztree li a{*/
+    /*background: none!important;*/
+/*}*/
+/*.layui-btn{*/
+    /*background: #c58a49!important;*/
+    /*color: #fff!important;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+/*.layui-table thead{*/
+    /*background-image:none !important;*/
+    /*background: #c58a49!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #fff;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+/*.layui-form-label{*/
+    /*background: #c58a49!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示————————搜索框*!*/
+/*.input-device{*/
+    /*background: none!important;*/
+    /*padding: 2px 4px;*/
+    /*margin-top: 3px!important;*/
+/*}*/
+/*.flysand-div-inline2{*/
+    /*background: #c58a49!important;*/
+    /*padding:0 12px;*/
+    /*border-radius: 20px;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+
+/*}*/
+
+/*.flysand-div-inline2-img{*/
+    /*display: block;*/
+    /*background: url("/static/img/indexcss/index5-ss-bnt.png")no-repeat!important;*/
+
+/*}*/
+
+/*.input-device-bnt{*/
+    /*display: none!important;*/
+    /*height: 24px;*/
+    /*width: 40px;*/
+    /*background-size: 100% 100%;*/
+    /*margin-top: 5px;*/
+    /*margin-left: 10px;*/
+    /*cursor: pointer;*/
+    /*color: #fff;*/
+    /*line-height: 24px;*/
+    /*text-align: center;*/
+    /*font-size: 10px;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+
+/*!*设备管理*!*/
+/*.layui-btn-primary{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table-tool-self .layui-icon{*/
+    /*color: #954e10;*/
+/*}*/
+/*!*分组管理*!*/
+/*#tips{*/
+    /*color: #0A0E11;*/
+/*}*/
+
+
+
+/*!*组态列表*!*/
+/*!*开关*!*/
+/*.layui-form-onswitch{*/
+    /*background: #c58a49!important;*/
+    /*border-color:#fff!important;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+/*!*分页*!*/
+/*.layui-laypage .layui-laypage-curr .layui-laypage-em{*/
+    /*background: #c58a49!important;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+/*!*中型管理按钮颜色*!*/
+/*button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {*/
+    /*background: #c58a49!important;*/
+    /*border-color: #fff!important;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+/*button.btn.btn-primary{*/
+    /*background: #c58a49!important;*/
+    /*border-color: #fff!important;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+/*!*全选按钮*!*/
+/*.layui-form-checked[lay-skin=primary] i{*/
+    /*background: #c58a49!important;*/
+    /*border-color: #fff!important;*/
+    /*box-shadow:inset 0px 0px 5px 1px #6d310c;*/
+/*}*/
+/*.layui-btn-primary:hover{*/
+    /*border-color: #954e10!important;*/
+/*}*/
+/*__index7内页主题_________________________________________________________________________________________________________________________________________*/
+
+/*.flysand-container-horizontal{*/
+    /*background-image:none !important;*/
+    /*background: rgba(0,0,0,.2)!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #fff;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*.flysand-ul li{*/
+    /*background-image:none !important;*/
+    /*background: rgba(0,0,0,.2)!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*ul.ztree{*/
+    /*background-image:none !important;*/
+    /*background: rgba(0,0,0,.2)!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*.ztree li a{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a.curSelectedNode{*/
+    /*background:rgba(0,0,0,.2)!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a:hover{*/
+    /*background:rgba(0,0,0,.2)!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示*!*/
+/*.flysand-container,.container{*/
+    /*background-image:none !important;*/
+    /*background: rgba(0,0,0,.2)!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+    /*height: auto;!important;*/
+/*}*/
+/*.ztree li a{*/
+    /*background: none!important;*/
+/*}*/
+/*.layui-btn{*/
+    /*background: rgba(0,0,0,.2)!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*.layui-table thead{*/
+    /*background-image:none !important;*/
+    /*background: rgba(0,0,0,.2)!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*.layui-form-label{*/
+    /*background: rgba(0,0,0,.2)!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示————————搜索框*!*/
+/*.input-device{*/
+    /*background:transparent!important;*/
+    /*padding: 2px 4px;*/
+    /*margin-top: 3px!important;*/
+/*}*/
+/*.flysand-div-inline2{*/
+    /*background: rgba(0,0,0,.2)!important;*/
+    /*padding:0 12px;*/
+    /*border-radius: 20px;*/
+    /*border: 1px solid #5e91e2!important;*/
+
+/*}*/
+
+/*.flysand-div-inline2-img{*/
+    /*display: block;*/
+    /*background: url("/static/img/indexcss/index5-ss-bnt.png")no-repeat!important;*/
+
+/*}*/
+
+/*.input-device-bnt{*/
+    /*display: none!important;*/
+    /*height: 24px;*/
+    /*width: 40px;*/
+    /*background-size: 100% 100%;*/
+    /*margin-top: 5px;*/
+    /*margin-left: 10px;*/
+    /*cursor: pointer;*/
+    /*color: #fff;*/
+    /*line-height: 24px;*/
+    /*text-align: center;*/
+    /*font-size: 10px;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+
+/*!*设备管理*!*/
+/*.layui-btn-primary{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table-tool-self .layui-icon{*/
+    /*color: #3a5079;*/
+/*}*/
+/*!*分组管理*!*/
+/*#tips{*/
+    /*color: #0A0E11;*/
+/*}*/
+
+
+
+/*!*组态列表*!*/
+/*!*开关*!*/
+/*.layui-form-onswitch{*/
+    /*background: #3a5079!important;*/
+    /*border-color:#fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*!*分页*!*/
+/*.layui-laypage .layui-laypage-curr .layui-laypage-em{*/
+    /*background: #3a5079!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*!*中型管理按钮颜色*!*/
+/*button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {*/
+    /*background: #3a5079!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*button.btn.btn-primary{*/
+    /*background: #3a5079!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*!*全选按钮*!*/
+/*.layui-form-checked[lay-skin=primary] i{*/
+    /*background: #3a5079!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*.layui-btn-primary:hover{*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+
+/*.layui-table-header{*/
+    /*background-image: none!important;*/
+/*}*/
+
+/*______index8主题__________________________________________________________________________________________________________________________________*/
+
+/*.flysand-container-horizontal{*/
+    /*background-image:none !important;*/
+    /*background: #2f3b52!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #fff;*/
+    /*border: 1px solid #5e91e2!important;*/
+    /*box-shadow:inset 0px 0px 20px 5px #407fab;*/
+/*}*/
+/*.flysand-ul li{*/
+    /*background-image:none !important;*/
+    /*background: #2f3b52!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+    /*box-shadow:inset 0px 0px 20px 5px #407fab;*/
+/*}*/
+/*ul.ztree{*/
+    /*background-image:none !important;*/
+    /*background: #2f3b52!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+    /*box-shadow:inset 0px 0px 20px 5px #407fab;*/
+/*}*/
+/*.ztree li a{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a.curSelectedNode{*/
+    /*background:#2f3b52!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a:hover{*/
+    /*background:#2f3b52!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示*!*/
+/*.flysand-container,.container{*/
+    /*background-image:none !important;*/
+    /*background: #2f3b52!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+    /*height: auto;!important;*/
+    /*box-shadow:inset 0px 0px 20px 5px #407fab;*/
+/*}*/
+/*.ztree li a{*/
+    /*background: none!important;*/
+/*}*/
+/*.layui-btn{*/
+    /*background: #2f3b52!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*.layui-table thead{*/
+    /*background-image:none !important;*/
+    /*background: #2f3b52!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*.layui-form-label{*/
+    /*background: #2f3b52!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示————————搜索框*!*/
+/*.input-device{*/
+    /*background:transparent!important;*/
+    /*padding: 2px 4px;*/
+    /*margin-top: 3px!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.flysand-div-inline2{*/
+    /*background: #2f3b52!important;*/
+    /*padding:0 12px;*/
+    /*border-radius: 20px;*/
+    /*border: 1px solid #5e91e2!important;*/
+
+/*}*/
+
+/*.flysand-div-inline2-img{*/
+    /*display: block;*/
+    /*background: url("/static/img/indexcss/index7-ss-bnt.png")no-repeat!important;*/
+
+/*}*/
+
+/*.input-device-bnt{*/
+    /*display: none!important;*/
+    /*height: 24px;*/
+    /*width: 40px;*/
+    /*background-size: 100% 100%;*/
+    /*margin-top: 5px;*/
+    /*margin-left: 10px;*/
+    /*cursor: pointer;*/
+    /*color: #fff;*/
+    /*line-height: 24px;*/
+    /*text-align: center;*/
+    /*font-size: 10px;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+
+/*!*设备管理*!*/
+/*.layui-btn-primary{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table-tool-self .layui-icon{*/
+    /*color: #3a5079;*/
+/*}*/
+/*!*分组管理*!*/
+/*#tips{*/
+    /*color: #0A0E11;*/
+/*}*/
+
+
+
+/*!*组态列表*!*/
+/*!*开关*!*/
+/*.layui-form-onswitch{*/
+    /*background: #3a5079!important;*/
+    /*border-color:#fff!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*!*分页*!*/
+/*.layui-laypage .layui-laypage-curr .layui-laypage-em{*/
+    /*background: #3a5079!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*!*中型管理按钮颜色*!*/
+/*button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {*/
+    /*background: #3a5079!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*button.btn.btn-primary{*/
+    /*background: #3a5079!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*!*全选按钮*!*/
+/*.layui-form-checked[lay-skin=primary] i{*/
+    /*background: #3a5079!important;*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+/*.layui-btn-primary:hover{*/
+    /*border: 1px solid #5e91e2!important;*/
+/*}*/
+
+/*.layui-table-header{*/
+    /*background-image: none!important;*/
+/*}*/
+/*.layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even) {*/
+    /*box-shadow:inset 0px 0px 20px 5px #407fab;*/
+/*}*/
+/*__index9彩色主题____________________________________________________________________________________________________________________________________*/
+/*!*列表显示*!*/
+/*.flysand-container-horizontal{*/
+/*background-image:none !important;*/
+/*background: #0f78b5!important;*/
+/*color: #fff!important;*/
+/*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.flysand-ul li{*/
+/*background-image:none !important;*/
+/*background: #0f78b5!important;*/
+/*color: #fff!important;*/
+/*border: 1px solid #c0e8ff;*/
+/*}*/
+/*ul.ztree{*/
+/*background-image:none !important;*/
+/*background: #0f78b5!important;*/
+/*color: #fff!important;*/
+/*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.ztree li a{*/
+/*color: #fff!important;*/
+/*}*/
+/*.ztree li a.curSelectedNode{*/
+/*background:#5496bc!important;*/
+
+/*color: #fff!important;*/
+/*}*/
+/*.ztree li a:hover{*/
+/*background:#5496bc!important;*/
+/*color: #fff!important;*/
+/*}*/
+/*!*图形化显示*!*/
+/*.flysand-container,.container{*/
+/*background-image:none !important;*/
+/*background: #0f78b5!important;*/
+/*color: #fff!important;*/
+/*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.ztree li a{*/
+/*background: none!important;*/
+/*}*/
+/*.layui-btn{*/
+/*background: #0f78b5!important;*/
+/*color: #fff!important;*/
+/*}*/
+/*.layui-table thead{*/
+/*background-image:none !important;*/
+/*background: #0f78b5!important;*/
+/*color: #fff!important;*/
+/*border: 1px solid #c0e8ff;*/
+/*}*/
+/*.layui-form-label{*/
+/*background: #0f78b5!important;*/
+/*color: #fff!important;*/
+/*}*/
+/*!*图形化显示————————搜索框*!*/
+/*.input-device{*/
+/*background:transparent!important;*/
+/*padding: 2px 4px;*/
+/*margin-top: 3px!important;*/
+/*color: #fff!important;*/
+/*}*/
+/*.flysand-div-inline2{*/
+/*background: #2f3b52!important;*/
+/*padding:0 12px;*/
+/*border-radius: 20px;*/
+/*border: 1px solid #5e91e2!important;*/
+
+/*}*/
+
+/*.flysand-div-inline2-img{*/
+/*display: block;*/
+/*background: url("/static/img/indexcss/index7-ss-bnt.png")no-repeat!important;*/
+
+/*}*/
+
+/*.input-device-bnt{*/
+/*display: none!important;*/
+/*height: 24px;*/
+/*width: 40px;*/
+/*background-size: 100% 100%;*/
+/*margin-top: 5px;*/
+/*margin-left: 10px;*/
+/*cursor: pointer;*/
+/*color: #fff;*/
+/*line-height: 24px;*/
+/*text-align: center;*/
+/*font-size: 10px;*/
+/*border: 1px solid #5e91e2!important;*/
+/*}*/
+
+/*!*设备管理*!*/
+/*.layui-btn-primary{*/
+/*color: #fff!important;*/
+/*}*/
+/*.layui-table-tool-self .layui-icon{*/
+/*color: #fff;*/
+/*}*/
+/*!*组态列表*!*/
+/*!*开关*!*/
+/*.layui-form-onswitch{*/
+/*background: #0f78b5!important;*/
+/*border-color:#56c1ff!important;*/
+/*}*/
+/*!*分页*!*/
+/*.layui-laypage .layui-laypage-curr .layui-laypage-em{*/
+/*background: #0f78b5!important;*/
+/*}*/
+/*!*中型管理按钮颜色*!*/
+/*button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {*/
+/*background: #0f78b5!important;*/
+/*border-color: #c0e8ff!important;*/
+/*}*/
+/*button.btn.btn-primary{*/
+/*background: #0f78b5!important;*/
+/*border-color: #c0e8ff!important;*/
+/*}*/
+/*!*全选按钮*!*/
+/*.layui-form-checked[lay-skin=primary] i{*/
+/*background: #0f78b5!important;*/
+/*border-color: #c0e8ff!important;*/
+/*}*/
+/*______index10套主题___________________________________________________________________________________________________________________*/
+/*!*列表显示*!*/
+/*.flysand-container-horizontal{*/
+    /*background-image:none !important;*/
+    /*background: #f9cf68!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #ec6051;*/
+/*}*/
+/*.flysand-ul li{*/
+    /*background-image:none !important;*/
+    /*background: #f9cf68!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #ec6051;*/
+/*}*/
+/*ul.ztree{*/
+    /*background-image:none !important;*/
+    /*background: #f9cf68!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #ec6051;*/
+/*}*/
+/*.ztree li a{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a.curSelectedNode{*/
+    /*background:#f9cf68!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a:hover{*/
+    /*background:#f39f6a!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示*!*/
+/*.flysand-container,.container{*/
+    /*background-image:none !important;*/
+    /*background: #f9cf68!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #ec6051;*/
+/*}*/
+/*.ztree li a{*/
+    /*background: none!important;*/
+/*}*/
+/*.layui-btn{*/
+    /*background: #f9cf68!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table thead{*/
+    /*background-image:none !important;*/
+    /*background: #f9cf68!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #ec6051;*/
+/*}*/
+/*.layui-form-label{*/
+    /*background: #f9cf68!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示————————搜索框*!*/
+/*.input-device{*/
+    /*background:transparent!important;*/
+    /*padding: 2px 4px;*/
+    /*margin-top: 3px!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.flysand-div-inline2{*/
+    /*background: #f9cf68!important;*/
+    /*padding:0 12px;*/
+    /*border-radius: 20px;*/
+    /*border: 1px solid #ec6051!important;*/
+
+/*}*/
+
+/*.flysand-div-inline2-img{*/
+    /*display: block;*/
+    /*background: url("/static/img/indexcss/index7-ss-bnt.png")no-repeat!important;*/
+
+/*}*/
+
+/*.input-device-bnt{*/
+    /*display: none!important;*/
+    /*height: 24px;*/
+    /*width: 40px;*/
+    /*background-size: 100% 100%;*/
+    /*margin-top: 5px;*/
+    /*margin-left: 10px;*/
+    /*cursor: pointer;*/
+    /*color: #fff;*/
+    /*line-height: 24px;*/
+    /*text-align: center;*/
+    /*font-size: 10px;*/
+    /*border: 1px solid #ec6051!important;*/
+/*}*/
+
+/*!*设备管理*!*/
+/*.layui-btn-primary{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table-tool-self .layui-icon{*/
+    /*color: #f36758;*/
+/*}*/
+/*!*组态列表*!*/
+/*!*开关*!*/
+/*.layui-form-onswitch{*/
+    /*background: #f9cf68!important;*/
+    /*border-color:#ec6051!important;*/
+/*}*/
+/*!*分页*!*/
+/*.layui-laypage .layui-laypage-curr .layui-laypage-em{*/
+    /*background: #f9cf68!important;*/
+/*}*/
+/*!*中型管理按钮颜色*!*/
+/*button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {*/
+    /*background: #f9cf68!important;*/
+    /*border-color: #ec6051!important;*/
+/*}*/
+/*button.btn.btn-primary{*/
+    /*background: #f9cf68!important;*/
+    /*border-color: #ec6051!important;*/
+/*}*/
+/*!*全选按钮*!*/
+/*.layui-form-checked[lay-skin=primary] i{*/
+    /*background: #f9cf68!important;*/
+    /*border-color: #ec6051!important;*/
+/*}*/
+
+/*!*表单详情*!*/
+/*.layui-table tbody{*/
+    /*background: none!important;*/
+/*}*/
+/*__index11________________________________________________________________________________________________________________________*/
+/*!*列表显示*!*/
+/*.flysand-container-horizontal{*/
+    /*background-image:none !important;*/
+    /*background: #8b34b9!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #ec6051;*/
+/*}*/
+/*.flysand-ul li{*/
+    /*background-image:none !important;*/
+    /*background: #8b34b9!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #e5e5e5;*/
+/*}*/
+/*ul.ztree{*/
+    /*background-image:none !important;*/
+    /*background: #8b34b9!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #e5e5e5;*/
+/*}*/
+/*.ztree li a{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a.curSelectedNode{*/
+    /*background:#8b34b9!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.ztree li a:hover{*/
+    /*background:#8b34b9!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示*!*/
+/*.flysand-container,.container{*/
+    /*background-image:none !important;*/
+    /*background: #8b34b9!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #e5e5e5;*/
+/*}*/
+/*.ztree li a{*/
+    /*background: none!important;*/
+/*}*/
+/*.layui-btn{*/
+    /*background: #8b34b9!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table thead{*/
+    /*background-image:none !important;*/
+    /*background: #8b34b9!important;*/
+    /*color: #fff!important;*/
+    /*border: 1px solid #e5e5e5;*/
+/*}*/
+/*.layui-form-label{*/
+    /*background: #8b34b9!important;*/
+    /*color: #fff!important;*/
+/*}*/
+/*!*图形化显示————————搜索框*!*/
+/*.input-device{*/
+    /*background:transparent!important;*/
+    /*padding: 2px 4px;*/
+    /*margin-top: 3px!important;*/
+    /*color: #000!important;*/
+/*}*/
+/*.flysand-div-inline2{*/
+    /*background: #fff!important;*/
+    /*padding:0 12px;*/
+    /*border-radius: 20px;*/
+    /*border: 1px solid #e5e5e5!important;*/
+
+/*}*/
+
+/*.flysand-div-inline2-img{*/
+    /*display: block;*/
+    /*background: url("/static/img/indexcss/index11-ss-bnt.png")no-repeat!important;*/
+
+/*}*/
+
+/*.input-device-bnt{*/
+    /*display: none!important;*/
+    /*height: 24px;*/
+    /*width: 40px;*/
+    /*background-size: 100% 100%;*/
+    /*margin-top: 5px;*/
+    /*margin-left: 10px;*/
+    /*cursor: pointer;*/
+    /*color: #fff;*/
+    /*line-height: 24px;*/
+    /*text-align: center;*/
+    /*font-size: 10px;*/
+    /*border: 1px solid #e5e5e5!important;*/
+/*}*/
+
+/*!*设备管理*!*/
+/*.layui-btn-primary{*/
+    /*color: #fff!important;*/
+/*}*/
+/*.layui-table-tool-self .layui-icon{*/
+    /*color: #8b34b9;*/
+/*}*/
+/*!*组态列表*!*/
+/*!*开关*!*/
+/*.layui-form-onswitch{*/
+    /*background: #8b34b9!important;*/
+    /*border-color:#e5e5e5!important;*/
+/*}*/
+/*!*分页*!*/
+/*.layui-laypage .layui-laypage-curr .layui-laypage-em{*/
+    /*background: #8b34b9!important;*/
+/*}*/
+/*!*中型管理按钮颜色*!*/
+/*button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {*/
+    /*background: #8b34b9!important;*/
+    /*border-color: #e5e5e5!important;*/
+/*}*/
+/*button.btn.btn-primary{*/
+    /*background: #8b34b9!important;*/
+    /*border-color: #e5e5e5!important;*/
+/*}*/
+/*!*全选按钮*!*/
+/*.layui-form-checked[lay-skin=primary] i{*/
+    /*background: #8b34b9!important;*/
+    /*border-color: #e5e5e5!important;*/
+/*}*/
+
+/*!*表单详情*!*/
+/*.layui-table tbody{*/
+    /*background: none!important;*/
+/*}*/
+
+html body .layui-side-scroll .layui-nav-item dd a{
+    padding-left: 44px!important;
+}
+
+.layui-side-menu .layui-nav .layui-nav-item a {
+    padding-left: 25px;
+}
+
+.flysand-container {
+    height: 45px;
+    background-image: url(../../img/device_item_1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#deviceName{
+    line-height: 46px!important;
+}
+#deviceNumber{
+    line-height: 49px!important;
+}
+
+
+
+
+
+
+
+
+

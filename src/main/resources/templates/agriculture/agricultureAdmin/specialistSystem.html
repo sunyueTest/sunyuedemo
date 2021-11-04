@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>specialistSystem-专家系统</title>
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/specialistSystem.css}">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+</head>
+<body>
+<style>
+</style>
+<div class="main">
+    <div class="left-nav">
+        <div class="putin" id="xiugai" hidden="hidden">
+            <p>申请成为专家</p>
+        </div>
+        <ul class="test test-1 expertManageList">
+        </ul>
+    </div>
+    <div class="conter">
+        <!-- 当前专家 -->
+        <div class="specialis">
+            <div class="int-title">
+                <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a1.png"></div>
+                <div class="title-text">当前专家<span class="title-text-top"></span><span class="title-text-bottom"></span>
+                </div>
+                <div class="title-icon"></div>
+            </div>
+            <div class="teacher">
+                <div class="teacher-pic">
+                    <img onerror='this.src="/static/img/agriculture/FarmingPromotion/teacher_03.png"'
+                         src="/static/img/agriculture/FarmingPromotion/teacher_03.png" alt="">
+                </div>
+                <div class="teacher-int">
+                    <div style="display: flex;justify-content: space-between; width: 15.5vw;">
+                        <h4></h4>
+                        <div class="int-state" id="int-state">
+                            <div class="int-state-yse"></div>
+                        </div>
+                    </div>
+                    <div class="jieshao" style="height: 15vh;overflow-y: scroll;">
+                    <p>
+                        暂无介绍
+                        <!--汉族，吴越王钱镠第33世孙，生于上海，祖籍浙江省杭州市临安。世界著名科学家，空气动力学家，中国载人航天奠基人，中国科学院及中国工程院院士，中国两弹一星功勋奖章获得者，被誉为“中国航天之父”“中国导弹之父”“中国自动化控制之父”和“火箭之王”，由于钱学森回国效力，中国导弹、原子弹的发射向前推进了至少20年。-->
+                        <!--。1军委主席江泽民同志亲笔题写了馆名。2009年10月31日北京时间上午8时6分，钱学森在北京逝世，享年98岁。 [1] 2011年12月8日，纪念钱学森诞辰100周年座谈会在人民大会堂举行。-->
+                    </p>
+                    </div>
+                </div>
+            </div>
+            <div id="wrapper4" style="width: 30vw;height: 70vh;overflow: hidden"><!--overflow: hidden-->
+                <div class="teacher-new scroll">
+                </div>
+            </div>
+        </div>
+        <!-- 全部投稿 -->
+        <div class="new">
+            <div class="int-title">
+                <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a2.png"></div>
+                <div class="title-text">全部投稿<span class="title-text-top"></span><span class="title-text-bottom"></span>
+                </div>
+                <div class="title-icon"></div>
+            </div>
+            <div class='newlist' id="wrapper3"><!-- style="overflow-y: scroll"-->
+                <div id="newlist" class="scroll">
+
+                </div>
+            </div>
+        </div>
+        <!-- 信息发布、在线咨询 -->
+        <div class="int">
+            <div class="int-title" style="">
+                <div class="title-pic"><img src="/static/img/agriculture/FarmingPromotion/a3.png"></div>
+                <div class="title-text" id="title-text">在线咨询<span class="title-text-top"></span><span
+                        class="title-text-bottom"></span>
+                </div>
+                <div class="title-icon"></div>
+                <div onclick="findorderList()" class="int-title-bntTwo">预约记录</div>
+                <div onclick="findSeethemessage()" class="int-title-bnt">查看留言</div>
+            </div>
+            <div id="consultbg">
+                <div class="consult test test-1" id="consult">
+                    <!--<div>-->
+                    <!--<div class="consult-l">-->
+                    <!--<div class="consult-l-pic"><img src="/static/img/agriculture/zhuanjia.png" style="transform: scale(0.6)" alt=""></div>-->
+                    <!--<div class="consult-l-txt">-->
+                    <!--<p>老师您好，关于葡萄对的某个问题怎么解决么解决么解决么解决么解决么解决</p>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div>-->
+                    <!--<div class="consult-r">-->
+                    <!--<div class="consult-r-txt">老师您好，关于葡萄对的某个问题怎么解决</div>-->
+                    <!--<div class="consult-r-pic"><img src="/static/img/agriculture/yonghu.png" style="transform: scale(0.6)" alt=""></div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="import">
+                    <textarea id="specialistreply"
+                              style="width:18vw; height:6vh; border:solid 1px #ccc; border-radius:20px; resize:none;box-sizing: border-box;padding: 1vh 1vw;"
+                              placeholder="请输入聊天信息"></textarea>
+                    <div class="import-bnt" id="addmessage">
+                        <p>
+                            发送
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="tc">
+    <h3 class="tc-title">专家信息</h3>
+    <div class="tc-int" id="tc-int" style="display: flex">
+        <div class="tc-int-l">
+            <div class="message">
+                <p>姓名：</p>
+                <div class="informessage">
+                    <input type="text" id="name" value="" placeholder="请输入姓名"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>擅长病因：</p>
+                <div class="informessage">
+                    <input type="text" id="goodAtFish" value="" placeholder="请输入擅长病因"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>身份证号码：</p>
+                <div class="informessage">
+                    <input type="text" id="idCardNo" value="" placeholder="请输入身份证号码"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>擅长：</p>
+                <div class="informessage">
+                    <input type="text" id="goodAtDisease" value="" placeholder="请输入擅长"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>工作单位：</p>
+                <div class="informessage">
+                    <input type="text" id="workUnits" value="" placeholder="请输入工作单位"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>职务：</p>
+                <div class="informessage">
+                    <input type="text" id="position" value="" placeholder="请输入职务"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>手机号码：</p>
+                <div class="informessage">
+                    <input type="text" id="phoneNo" value="" placeholder="请输入手机号码"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>最高学历：</p>
+                <div class="informessage">
+                    <input type="text" id="educationalBackground" value="" placeholder="请输入最高学历"/>
+                </div>
+            </div>
+            <div class="message">
+                <p>个人简介：</p>
+                <div class="informessage">
+                    <textarea type="text" placeholder="请输入个人简介" id="personalInfo"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="tc-int-r">
+            <div class="buddha">
+                <div>上传头像：</div>
+                <div class="buddha-border" id="test1">
+                    <div class="buddha-pic">
+                        <img id="demo1" src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="papers">
+                <div style="margin-right: 2vw">上传证件照：</div>
+                <div class="papers-pic">
+                    <div class="papers-a" id="test2" style="position: relative;">
+                        身份证正面
+                        <img src="" alt="" id="demo2" style="position: absolute;top: 0;left: 0">
+                    </div>
+                    <div class="papers-a" id="test3" style="position: relative;">
+                        身份证反面
+                        <img src="" alt="" id="demo3" style="position: absolute;top: 0;left: 0">
+                    </div>
+                    <div class="papers-a" id="test4" style="position: relative;">
+                        资质证书
+                        <img src="" alt="" id="demo4" style="position: absolute;top: 0;left: 0">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dele"></div>
+    <div id="getteacher">
+        <p style="width: 7vw;height: 5vh;line-height: 5vh;text-align: center;">确定</p>
+    </div>
+</div>
+
+<div id="tc2" class="">
+    <h3 class="tc-title">
+        <div class="buddha-border">
+            <div class="buddha-pic">
+                <img src="/static/img/agriculture/specialistManagement/teacherpic.png" alt="">
+            </div>
+        </div>
+        <p>详细信息</p>
+    </h3>
+    <div style="height: 55vh;overflow: hidden" id="wrapper5">
+        <div class="tc-int scroll" id="tcint" style="box-sizing: border-box;padding: 2vh 2vw">
+            <h2>台风“杨柳”携风雨远去 南方“苦夏”熬到头</h2>
+            <div class="tc-int-txt">
+            </div>
+        </div>
+    </div>
+    <div id="dele2"></div>
+</div>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script src="/static/js/agriculture/specialistSystem/specialistSystem.js"></script>
+<script src="/static/js/agriculture/my_scrollbar.js"></script>
+</html>

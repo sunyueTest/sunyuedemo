@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+    <link rel="stylesheet" th:href="@{/static/css/versionLayer.css}" media="all">
+
+    <style>
+        body {
+            font-weight: normal;
+            height: 100%;
+        }
+        html{
+            height: 100%;
+        }
+
+        .base-item {
+            display: flex;
+            text-align: center;
+            margin-top: 20px;
+            /*margin-left: 45px;*/
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            height: 100%;
+        }
+
+        .base-item span {
+            width: 100px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .base-item input {
+            width: 170px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            background-image: url(../../img/commend_btn.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 120px;
+            height: 35px;
+            border: 0px;
+            margin-left: 130px;
+            color: #5f4d6f;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <input type="text" style="display: none" id="timeTaskId">
+    <div style="width: 40%; height: 100%; border: 1px; float: left">
+        <div class="base-item">
+            <span id="taskNameSpan">任务名称 : </span>
+            <input type="text" id="taskName" lay-verify="required" maxlength="16"
+                   class="layui-input" placeholder="请输入任务名称">
+        </div>
+        <div class="base-item">
+            <span id="taskTypeSpan">任务类型 : </span>
+
+            <select id="taskType" style="height: 35px; width: 170px">
+                <option value="1" id="oneTimeTask">一次性任务</option>
+                <option value="2" id="monthlyTask">每月任务</option>
+                <option value="3" id="theDailyTask">每天任务</option>
+            </select>
+        </div>
+        <div class="base-item" id="taskTime1Div">
+            <span class="taskTimeSpan">任务时间 : </span>
+            <input type="text" class="layui-input" id="taskTime1" lay-key="1" style="width: 170px; height: 35px">
+        </div>
+        <div class="base-item" id="taskTime2Div" style="display: none">
+            <span class="taskTimeSpan">任务时间 : </span>
+            <input type="text" class="layui-input" id="taskTime2" lay-key="2" style="width: 170px; height: 35px">
+        </div>
+        <div class="base-item" id="taskTime3Div" style="display: none">
+            <span class="taskTimeSpan">任务时间 : </span>
+            <input type="text" class="layui-input" id="taskTime3" lay-key="3" style="width: 170px; height: 35px">
+        </div>
+        <div class="base-item">
+            <button class="btn-primary" lay-submit="" id="save"
+                    lay-filter="submit">保&nbsp;存
+            </button>
+        </div>
+    </div>
+    <div style="width: 59%; height: 100%; border: 1px; float: left;">
+        <div class="base-item" style="margin-left: 0px;">
+            <span id="switchspan" style="text-align: left;">继电器开关</span>
+            <div>
+                <input style="width: 150px;float: left;margin-bottom: 11px;height: 38px;"
+                       type="text" name="deviceNumber" id="deviceNumber"
+                       class="layui-input" placeholder="输入联动设备号">
+                <button style="float: left;background-color: rgb(0,150,136);" class="layui-btn "
+                        id="search">
+                    <i class="layui-icon layui-icon-search "></i>
+                </button>
+            </div>
+        </div>
+        <table class="layui-hide" id="table" lay-filter="table"></table>
+    </div>
+</div>
+<script type="text/html" id="barDemo">
+    <button class="opbtn" lay-event="del"><i class="layui-icon iconfont icon-shanchu size22"></i></button>
+</script>
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" name="continuing" lay-skin="switch"
+           lay-filter="status" {{ d.state== 1 ?'checked' : '' }}>
+    <input type="hidden" value="{{d.state}}">
+</script>
+
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/versionLayer.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/aquaculture/timedTaskManage/timedTaskManageAdd.js?v=1.3}" charset="utf-8"></script>
+</body>
+</html>

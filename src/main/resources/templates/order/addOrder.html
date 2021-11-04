@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加预约</title>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <style>
+        body {
+            height: 100vh;
+            background-color: #04405D;
+        }
+
+        .body-div {
+            height: 100vh;
+            width: 50vw;
+            margin-left: 15vw;
+        }
+
+        .base-item span {
+            color: whitesmoke;
+            font-size: 16px;
+            margin-right: 2vw;
+        }
+        .base-item{
+            display: flex;
+            justify-content: center;
+            margin-top: 3vh;
+        }
+        .orderReason{
+            height: 38px;
+            line-height: 1.3;
+            width: 165px;
+            border-radius: 1px;
+        }
+        .orderDetails{
+            width: 169px;
+            height: 30vh;
+        }
+        #orderAdd{
+            margin-top: 3vh;
+            margin-left: 26vw!important;
+        }
+    </style>
+</head>
+<body>
+<input class="expertsId" hidden="hidden" th:value="${expertsId}">
+<div class="body-div">
+    <div style="height: 2vh"></div>
+    <div class="base-item">
+        <span>预约申请 :</span><input class="orderReason" type="text" placeholder="预约申请原因">
+    </div>
+    <div class="base-item">
+        <span>预约时间 :</span>
+        <input type="text" id="harvestDate" lay-verify="required" maxlength="16"
+               style="width: 170px" autocomplete="off"
+               class="layui-input" placeholder="预约时间">
+    </div>
+    <div class="base-item">
+        <span>预约详情 :</span>
+        <textarea class="orderDetails" placeholder="请填写问题的详细情况"></textarea>
+    </div>
+
+    <button id="orderAdd" class="layui-btn layui-btn-primary layui-btn-radius"
+            lay-event="lotAdd" style="margin-left: 45%;!important;" onclick="orderAdd()"> 预约
+    </button>
+</div>
+</body>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    let layer, form, position, laydate;
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        layer = parent.layui.layer;
+        form = layui.form;
+        laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#harvestDate' //指定元素
+            , trigger: 'click'
+            , type: 'datetime'
+            , position: 'fixed'
+            , format: 'yyyy-MM-dd HH:mm:ss'
+        });
+    })
+    orderAdd=function () {
+        var orderTitle=$(".orderReason").val();
+        var orderTime=$("#harvestDate").val();
+        var orderDetails=$(".orderDetails").val();
+        var expertsId=$(".expertsId").val();
+        if(orderTitle.replace(/[\s　]/g,"").length<1){
+            return layer.msg('预约请求不可以为空');
+        }
+        if (orderTime.length < 1) {
+            return layer.msg('预约时间不能为空');
+        }
+        if (new Date(orderTime) < new Date()) {
+            return layer.msg('预约时间不能早于当前时间');
+        }
+        if (orderDetails.length < 1) {
+            return layer.msg('预约详情不能为空');
+        }
+
+        $.post("/sysUserOrder/savaOrder",
+            {
+                    orderTitle: orderTitle,
+                    orderTime: orderTime,
+                    orderDetails: orderDetails,
+                    expertsId: expertsId,
+            },
+            function (res) {
+                if (res.state == 'success') {
+                    parent.layer.msg($.i18n.prop(res.msg));
+                    parent.layer.close(myIframe);
+                } else {
+                    layer.msg($.i18n.prop(res.msg), {icon: 2})
+                }
+            });
+
+    }
+</script>
+</html>

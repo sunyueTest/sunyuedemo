@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <style>
+        .layui-input, .layui-select, .layui-textarea{
+            width:100%;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<form class="layui-form">
+
+    <div class="layui-form-item">
+        <div class="layui-inline" style="margin-top: 10px">
+            <label id="label1" class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
+                <input id="userName" type="text" name="userName" autocomplete="off" placeholder="要求最低六位及以上"
+                       th:value="*{user.userName}"
+                       lay-verify="userName" class="layui-input">
+                <input type="hidden" name="id" autocomplete="off" th:value="*{user.id}">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label2" class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+                <input id="password" type="password" name="password" autocomplete="off" lay-verify="password"
+                       placeholder="要求最低六位及以上" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label3" class="layui-form-label">姓名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="realName" autocomplete="off"
+                       th:value="*{user.realName}" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label4" class="layui-form-label">邮箱</label>
+            <div class="layui-input-inline">
+                <input type="text" name="email" autocomplete="off" th:value="*{user.email}"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label id="label5" class="layui-form-label">手机号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="tel" autocomplete="off" th:value="*{user.tel}"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+</form>
+
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script>
+    $('#label1').text($.i18n.prop('userName'));
+    $('#label2').text($.i18n.prop('password'));
+    $('#label3').text($.i18n.prop('realName'));
+    $('#label4').text($.i18n.prop('email'));
+    $('#label5').text($.i18n.prop('telNo'));
+    $('#userName').attr('placeholder', $.i18n.prop('requirement'));
+    $('#password').attr('placeholder', $.i18n.prop('requirement'));
+    // layui.use('form', function () {
+    //     var form = layui.form;
+    //     // form.verify({
+    //     //     userName: function (value) {
+    //     //         var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
+    //     //         if (!uPattern.test(value)) {
+    //     //             return '用户名不符合规范';
+    //     //         }
+    //     //     }, password: [/(.+){4,12}$/, '密码必须4到12位']
+    //     // });
+    //     form.on('submit(demo1)', function (data) {
+    //         layer.alert(JSON.stringify(data.field), {
+    //             title: '最终的提交信息'
+    //         })
+    //         // upSubUserInfo
+    //         return false;
+    //     });
+    // });
+
+</script>
+</html>

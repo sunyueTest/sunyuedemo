@@ -1,0 +1,304 @@
+.ztree li span.button.icon01_ico_docu {
+    margin-right: 2px;
+    background: url(../../css/zTreeStyle/img/diy/open.png) no-repeat scroll 0 0 transparent;
+    vertical-align: top;
+    *vertical-align: middle
+}
+
+.ztree li span.button.button level0 switch root_open {
+    margin-right: 2px;
+    background: url(../../css/zTreeStyle/img/diy/open.png) no-repeat scroll 0 0 transparent;
+    vertical-align: top;
+    *vertical-align: middle
+}
+
+.ztree li span.button.icon02_ico_docu {
+    margin-right: 2px;
+    background: url(../../css/zTreeStyle/img/diy/5.png) no-repeat scroll 0 0 transparent;
+    vertical-align: top;
+    *vertical-align: middle
+}
+
+.layui-body {
+    overflow-y: hidden;
+}
+
+.flysand-div-inline1 {
+    height: 100%;
+    width: auto;
+    color: #fff;
+    font-size: 25px;
+    margin-left: 10px;
+    vertical-align: middle;
+    line-height: 30px;
+}
+
+.flysand-div-inline2 {
+    height: 100%;
+    width: auto;
+    color: #fff;
+    font-size: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 30px;
+}
+
+.flysand-container {
+    display: flex;
+}
+
+.flysand-container-horizontal {
+    height: 50px;
+    width: auto;
+    display: flex;
+    margin-top: 10px;
+    background-image: url(../../img/device_item_1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.flysand-green-vertical-line {
+    background: #0C9082;
+    height: 100%;
+    width: 4px;
+    float: left;
+}
+div.content_wrap div.right {
+    float: right;
+    width: 80%;
+    height: auto;
+    margin-left: 20px;
+}
+
+div.content_wrap {
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.flysand-table-cell-1,
+.flysand-table-cell-2,
+.flysand-table-cell-3,
+.flysand-table-cell-4,
+.flysand-table-cell-5,
+.flysand-table-cell-6{
+    height: 50px;
+    line-height: 50px;
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    /*font-weight: bold;*/
+}
+
+.flysand-table-cell-1{
+    width: 20%;
+    /*background: #eb7350;*/
+}
+.flysand-table-cell-3{
+    width: 25%;
+}
+.flysand-table-cell-2 {
+    width: 25%;
+    /*background: #01AAED;*/
+}
+
+.flysand-table-cell-4, .flysand-table-cell-5,.flysand-table-cell-6 {
+    width: 10%;
+    /*background: #5FB878;*/
+}
+
+.flysand-ul {
+    height: auto;
+    width: 100%;
+}
+
+.flysand-ul li {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    margin-top: 5px;
+    background-image: url(../../img/device_item_2.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.flysand-ul li div {
+    font-size: 12px
+}
+
+.flysand-table-cell-1t {
+    clear: both;
+    height: 50px;
+    width: auto;
+    margin-left: 70px;
+    /*background: #eb7350;*/
+    line-height: 2px;
+    text-align: left;
+    position: absolute;
+}
+
+.flysand-table-cell-1d {
+    font-size: 16px;
+    margin-top: 16px;
+    display: block;
+    color: #00B83F;
+}
+
+.flysand-table-cell-1e {
+    margin-top: 14px;
+    display: block;
+    line-height: 5px;
+    position: absolute;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.flysand-table-cell-2d {
+    font-size: 26px;
+}
+
+.flysand-table-cell-2e {
+    margin-left: 5px;
+}
+
+.flysand-table-cell-4t {
+    width: 41px;
+    height: 43px;
+    border: none;
+    background-size: auto;
+}
+
+.flysand-table-cell-5t {
+    width: 47px;
+    height: 17px;
+    line-height: 30px;
+    background-size: auto;
+}
+.flysand-table-cell-6t{
+    width: auto;
+    height: auto;
+    line-height: 30px;
+    background-size: auto;
+}
+body::-webkit-scrollbar {
+    width: 14px;
+    height: 54px;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /*overflow-y: hidden;*/
+}
+
+.layui-table td {
+    height: 60px;
+    line-height: 60px;
+    font-size: 38px;
+}
+
+ul.ztree {
+    margin-top: 10px ;
+    border: 0px solid #fff ;
+    background-color: transparent ;
+    width: 230px ;
+    height: 500px ;
+    overflow-y: scroll ;
+    overflow-x: auto ;
+    background-image: url(../../img/list_bg.png) ;
+    background-repeat: no-repeat ;
+    background-size: 100% 100% ;
+    -ms-overflow-style: none ;
+    overflow: -moz-scrollbars-none ;
+}
+
+ul.ztree::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+.ztree * {
+    font-size: 10pt;
+    font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial
+}
+
+.ztree li ul {
+    margin: 0;
+    padding: 0
+}
+
+.ztree li {
+    line-height: 30px;
+}
+
+.ztree li a {
+    width: 200px;
+    height: 30px;
+    padding-top: 0px;
+}
+
+.ztree li a:hover {
+    text-decoration: none;
+    background-color: #475e80;
+}
+
+.ztree li a span.button.switch {
+    visibility: hidden
+}
+
+.ztree.showIcon li a span.button.switch {
+    visibility: visible
+}
+
+.ztree li a.curSelectedNode {
+    background-color: #475e80;
+    border: 0;
+    height: 30px;
+}
+
+.ztree li span {
+    line-height: 30px;
+}
+
+.ztree li span.button {
+    margin-top: -7px;
+}
+
+.ztree li span.button.switch {
+    width: 16px;
+    height: 16px;
+}
+
+/*.ztree li a.level0 span {font-size: 150%;font-weight: bold;}*/
+/*node_name*/
+.ztree li span.button {
+    background-image: url("../../img/left_menuForOutLook.png");
+    *background-image: url("../../img/left_menuForOutLook.gif")
+}
+
+.ztree li span.button.switch.level0 {
+    width: 20px;
+    height: 20px
+}
+
+.ztree li span.button.switch.level1 {
+    width: 20px;
+    height: 20px
+}
+
+.ztree li span.button.noline_open {
+    background-position: 0 0;
+}
+
+.ztree li span.button.noline_close {
+    background-position: -18px 0;
+}
+
+.ztree li span.button.noline_open.level0 {
+    background-position: 0 -18px;
+}
+
+.ztree li span.button.noline_close.level0 {
+    background-position: -18px -18px;
+}

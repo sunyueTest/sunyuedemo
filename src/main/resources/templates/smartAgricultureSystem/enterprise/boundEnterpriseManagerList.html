@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../../../static/css/boundNewStyle.css?id=123">
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="formTitle">设置企业用户</div>
+    <input type="text" style="display: none" id="enterpriseName" th:value="${enterpriseName}">
+    <input type="text" style="display: none" id="enterpriseId" th:value="${enterpriseId}">
+    <table class="layui-hide" id="table" lay-filter="table"></table>
+    <script type="text/html" id="toolbar1">
+        <div class="layui-inline bg-transparent" id="addTaskDiv">
+            <button id="add" class="layui-btn layui-btn-primary layui-btn-radius"
+                    lay-event="add"> 添加企业管理员
+            </button>
+        </div>
+        <div class="layui-inline abc" style="float: right">
+            <button class="layui-btn " lay-event="search">
+                <i class="layui-icon layui-icon-search "></i>
+            </button>
+        </div>
+        <div class="layui-inline abc" style="float: right">
+            <input type="text" class="layui-input" name="userName" id="userName" autocomplete="off"
+                   style="width:182px;"
+                   placeholder="管理员姓名">
+        </div>
+    </script>
+
+    <script type="text/html" id="barDemo">
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+                class="layui-icon"></i></button>
+    </script>
+</div>
+
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+</body>
+</html>
+<script>
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    let layer, table, form;
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        layer = parent.layui.layer;
+        table = layui.table;
+        form = layui.form;
+        let tableData = [
+            {field: 'userName', title: "用户名", align: 'center'},
+
+            {field: 'tel', title: "手机号", align: 'center'},
+            {
+                field: '',
+                title: $.i18n.prop('operation'),
+                toolbar: '#barDemo',
+                width: 80,
+                align: 'center'
+            }
+        ];
+
+        table.render({
+            elem: '#table'
+            , url: '../projectBaseScene/listEnterpriseManagers?enterpriseName=' + $("#enterpriseName").val()
+            , toolbar: '#toolbar1'
+            , title: ''
+            , cols: [tableData]
+            , page: true,
+            request: {limitName: 'size'},
+            response: {
+                statusCode: 'success'
+            },
+            parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                return {
+                    "code": res.state, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.datas,//解析数据列表
+                };
+            }
+        });
+
+        //头工具栏事件
+        table.on('toolbar(table)', function (obj) {
+            switch (obj.event) {
+                case 'search':
+                    doLoginFilter();//登陆状态验证
+                    let userName = $('#userName').val();
+                    reloadTable(userName);
+                    break;
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        area: ['470px', '400px'],
+                        title: false,
+                        closeBtn: true,
+                        btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+                        btnAlign: 'c',
+                        yes: function (index, layero) {
+                            var body = layer.getChildFrame('body', index);
+                            var userName = body.find('input[name="userName"]').val();
+                            var password = body.find('input[name="password"]').val();
+                            var tel = body.find('input[name="tel"]').val();
+                            var company = body.find('input[name="company"]').val();
+                            var enterpriseId=$("#enterpriseId").val();
+                            // var email = body.find('input[name="email"]').val();
+                            // var realName = body.find('input[name="realName"]').val();
+                            var uPattern = /^[a-zA-Z0-9_-]{6,16}$/;
+                            if (!uPattern.test(userName)) {
+                                layer.msg($.i18n.prop('warn29'), {icon: 5});
+                                return false;
+                            }
+                            if (tel!="" && checkPhone(tel)) {
+                                layer.msg('手机号码有误，请重填！', {icon: 5});
+                                return false;
+                            }
+                            uPattern = /(.+){6,12}$/;
+                            if (!uPattern.test(password)) {
+                                layer.msg($.i18n.prop('warn30'), {icon: 5});
+                                return false;
+                            }
+                            $.ajax({
+                                type: "post",
+                                url: "../userManage/saveUserFromChildId",
+                                data: {
+                                    userName: userName,
+                                    password: password,
+                                    tel: tel,
+                                    // email: email,
+                                    // realName: realName
+                                },
+                                success: function (result) {
+                                    if (result.success) {
+                                        //继续修改改用户的企业信息
+                                        $.ajax({
+                                            type: "post",
+                                            url: "../userManage/updateUserCompany",
+                                            data: {
+                                                userName: userName,
+                                                company: company,
+                                                enterpriseId:enterpriseId
+                                            },
+                                            success: function (result) {
+                                                layer.msg($.i18n.prop('success'), {icon: 1});
+                                                layer.close(index);
+                                            },
+                                            error: function () {
+                                                layer.msg($.i18n.prop('fail'), {
+                                                    offset: '6px', icon: 2
+                                                });
+                                            }
+                                        });
+
+                                    } else {
+                                        layer.msg($.i18n.prop(result.msg));
+                                    }
+                                },
+                                error: function () {
+                                    layer.msg($.i18n.prop("fail"));
+                                }
+                            });
+                        },
+                        anim: 3,
+                        content: '../projectBaseScene/toAddEnterpriseManager?enterpriseName=' + $("#enterpriseName").val(),
+                        success: function (layero, index) {
+
+                        },
+                        end: function (index, layero) {
+                            reloadTable();
+                        }
+                    });
+            }
+        });
+
+        //监听行工具事件
+        table.on('tool(table)', function (obj) {
+            let data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm($.i18n.prop('confirmDelete'), {
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    title: $.i18n.prop('info')
+                }, function (index) {
+                    $.ajax({
+                        type: "post",
+                        url: '../userManage/deleteUser',
+                        data: {
+                            id: data.id
+                        },
+                        success: function (result) {
+                            if (result.success == true) {
+                                layer.msg($.i18n.prop('success'), {icon: 1});
+                                reloadTable();
+                            } else {
+                                layer.msg($.i18n.prop("fail"));
+                            }
+                        },
+                        error: function () {
+                            layer.msg($.i18n.prop('fail'));
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+
+    function reloadTable(userName) {
+        table.reload('table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                userName: userName
+            }
+        });
+        $('#userName').val(userName);
+    }
+    function checkPhone(tel){
+        if(!(/^1[3456789]\d{9}$/.test(tel))){
+            return true;
+        }
+    }
+</script>

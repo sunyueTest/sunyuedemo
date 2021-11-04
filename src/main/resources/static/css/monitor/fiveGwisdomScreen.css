@@ -1,0 +1,681 @@
+/*全局样式*/
+*{padding:0;margin:0;}
+div,dl,dt,dd,form,h1,h2,h3,h4,h5,h6,img,ol,ul,li,table,th,td,p,span,a{border:0;font-family:”微软雅黑”;color: #FFFFFF}
+img,input{border:none;vertical-align:middle;}
+img{width: 100%}
+body{font-family:Tahoma,Arial,Helvetica,"宋体";font-size:12px;text-align:center;background:#FFF;color:#000;}
+/*html{overflow-y:scroll;}*/
+ul,ol{list-style-type:none;}
+th,td,input{font-size:12px;}
+input{outline:none;border:none;box-shadow:none;}
+h3{font-size:14px;}
+button{border:none;cursor:pointer;font-size:12px;background-color:transparent;}
+select{border-width:1px;_zoom:1;border-style:solid;padding-top:2px;font-size:12px;}
+.clear{clear:both;font-size:1px;height:0;visibility:hidden;line-height:0;}
+.clearfix:after{content:"";display:block;clear:both;}
+.clearfix{zoom:1;}
+a:link,a:visited{text-decoration:none;color:#333;}
+a:hover,a:active{color:#f60;}
+.textoverflow{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: url("/static/img/monitor/fiveGwisdomScreen/bodybg.png") no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+.body-earth{
+    width: 100vw;
+    height: 100vh;
+    background: url("/static/img/monitor/fiveGwisdomScreen/bodyearth.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    bottom: -4vh;
+    left: 0;
+    z-index: 999;
+    animation: bodyearth 5.5s infinite;
+    /*animation-iteration-count:1;*/
+}
+@keyframes bodyearth
+{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-3vh);}
+    100%{transform:translateY(0);}
+}
+@-moz-keyframes bodyearth /* Firefox */
+{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-3vh);}
+    100%{transform:translateY(0);}
+}
+@-webkit-keyframes bodyearth /* Safari 和 Chrome */
+{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-3vh);}
+    100%{transform:translateY(0);}
+}
+@-o-keyframes bodyearth /* Opera */
+{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-3vh);}
+    100%{transform:translateY(0);}
+}
+.aureole{
+    width: 35vw;
+    height: 18vh;
+    background: url("/static/img/monitor/fiveGwisdomScreen/aureole.png") no-repeat;
+    background-size: 100% 100%;
+    animation: aureole 5.5s infinite;
+    position: fixed;
+    bottom: 20vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+@keyframes aureole
+{
+    0%{transform:scale(1) translateX(-50%);}
+    25%{transform:scale(1.05) translateX(-50%);}
+    50%{transform:scale(1.2) translateX(-50%);}
+    75%{transform:scale(1.1) translateX(-50%);}
+    100%{transform:scale(1) translateX(-50%);}
+}
+@-moz-keyframes aureole /* Firefox */
+{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+@-webkit-keyframes aureole /* Safari 和 Chrome */
+{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+@-o-keyframes aureole /* Opera */
+{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+.fontsize{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 100vh;
+    left: -10vw;
+    background-size: 100% 100%;
+    background: url("/static/img/monitor/fiveGwisdomScreen/fontsize.png") no-repeat;
+    animation: fontsize 4s infinite linear;
+    z-index: 99;
+}
+.fontsizea{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 100vh;
+    left: -10vw;
+    z-index: 99;
+    background-size: 100% 100%;
+    background: url("/static/img/monitor/fiveGwisdomScreen/fontsize.png") no-repeat;
+    animation: fontsizea 4s infinite linear;
+    animation-delay:1.4s;
+}
+@keyframes fontsizea
+{
+    0%{top: 100vh;}
+    100%{top: -100vh;}
+}
+
+@keyframes fontsize
+{
+    0%{top: 100vh;}
+    100%{top: -100vh;}
+}
+@-moz-keyframes fontsize /* Firefox */
+{
+    0%{top: 100vh;}
+    100%{top: -100vh;}
+}
+@-webkit-keyframes fontsize /* Safari 和 Chrome */
+{
+    0%{top: 100vh;}
+    100%{top: -100vh;}
+}
+@-o-keyframes fontsize /* Opera */
+{
+    0%{top: 100vh;}
+    100%{top: -100vh;}
+}
+.logo{
+    width: 20vw;
+    height: 35vh;
+    margin: 0 auto;
+    margin-top: 5vh;
+    position: relative;
+    z-index: 9999;
+}
+.logo-top{
+    width: 16vw;
+    height: 18vw;
+    margin:  0 auto;
+    background: url("/static/img/monitor/fiveGwisdomScreen/logobg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.logo-top img{
+    width: 70%;
+    margin-top: 2.8vw;
+    animation: logotop 1s infinite linear;
+}
+@keyframes logotop
+{
+    0%{margin-top: 2.8vw;}
+    50%{margin-top: 2vw;}
+    100%{margin-top: 2.8vw;}
+}
+@-moz-keyframes logotop /* Firefox */
+{
+    0%{margin-top: 2.8vw;}
+    50%{margin-top: 2vw;transform: scale(0.9)}
+    100%{margin-top: 2.8vw;}
+}
+@-webkit-keyframes logotop /* Safari 和 Chrome */
+{
+    0%{margin-top: 2.8vw;}
+    50%{margin-top: 2vw;transform: scale(0.9)}
+    100%{margin-top: 2.8vw;}
+}
+@-o-keyframes logotop /* Opera */
+{
+    0%{margin-top: 2.8vw;}
+    50%{margin-top: 2vw;transform: scale(0.9)}
+    100%{margin-top: 2.8vw;}
+}
+.logobottom{
+    transform: scale(1.5);
+    bottom: 6vh;
+    left: 0.5vw;
+    position: absolute;
+    animation: logobottom 1s infinite linear;
+}
+@keyframes logobottom
+{
+    0%{transform: scale(1.5);}
+    50%{transform: scale(1.6);}
+    100%{transform: scale(1.5);}
+}
+@-moz-keyframes logobottom /* Firefox */
+{
+    0%{transform: scale(1.5);}
+    50%{transform: scale(1.6);}
+    100%{transform: scale(1.5);}
+}
+@-webkit-keyframes logobottom /* Safari 和 Chrome */
+{
+    0%{transform: scale(1.5);}
+    50%{transform: scale(1.6);}
+    100%{transform: scale(1.5);}
+}
+@-o-keyframes logobottom /* Opera */
+{
+    0%{transform: scale(1.5);}
+    50%{transform: scale(1.6);}
+    100%{transform: scale(1.5);}
+}
+.title{
+    width: 40vw;
+    height: 8vh;
+    background: url("/static/img/monitor/fiveGwisdomScreen/titlebg.png") no-repeat;
+    background-size: 100% 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 3vw;
+}
+.title-pic{
+    width: 6.5vh;
+    height: 6.5vh;
+    margin-right: 2vw;
+}
+.title-p{
+    line-height: 6vh;
+    font-size: 2vw;
+}
+.int{
+    width: 28vw;
+    height: 40vh;
+    position: fixed;
+    left: 1vw;
+    top: 11vh;
+    z-index: 9999;
+    border-radius: 20px;
+}
+.intright{
+    width: 28vw;
+    height: 60vh;
+    position: fixed;
+    right: 1vw;
+    top: 11vh;
+    z-index: 9999;
+}
+
+
+
+.int-title{
+    text-align: left;
+    font-size:1.5vw;
+    height: 8vh;
+    line-height: 8vh;
+    color:#FFFFFF;
+    font-weight: bold;
+    font-style: oblique;
+    letter-spacing: 4px;
+    text-shadow:2px 2px 0.5em #0196e3,
+    -0 -0 0.5em #0196e3;
+}
+.int-main{
+    width: 28vw;
+    height: 33vh;
+    border-radius: 2vh;
+    background: url("/static/img/monitor/fiveGwisdomScreen/intmainbg.png") no-repeat;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+    padding: 1vh 0.8vw;
+
+}
+.int-main-right{
+    width: 28vw;
+    height: 53vh;
+    border-radius: 2vh;
+    background: url("/static/img/monitor/fiveGwisdomScreen/intmainbg.png") no-repeat;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+    padding: 1vh 0.8vw;
+}
+.intMain-pic{
+    width: 25vw;
+    height: 13vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.intMain-pic-l{
+    width: 13vw;
+    margin-top: 1vh;
+}
+.intMain-pic-r{
+    width: 6vw;
+    margin-top: 4vh;
+    animation: intMainpicr 1s infinite linear;
+}
+@keyframes intMainpicr
+{
+    0%{margin-top: 4vh;}
+    50%{margin-top: 2vh;}
+    100%{margin-top: 4vh;}
+}
+@-moz-keyframes intMainpicr /* Firefox */
+{
+    0%{margin-top: 4vh;}
+    50%{margin-top: 2vh;}
+    100%{margin-top: 4vh;}
+}
+@-webkit-keyframes intMainpicr /* Safari 和 Chrome */
+{
+    0%{margin-top: 4vh;}
+    50%{margin-top: 2vh;}
+    100%{margin-top: 4vh;}
+}
+@-o-keyframes intMainpicr /* Opera */
+{
+    0%{margin-top: 4vh;}
+    50%{margin-top: 2vh;}
+    100%{margin-top: 4vh;}
+}
+.intMain-text{
+    width: 25vw;
+    height: 18vh;
+    text-align: left;
+    text-indent: 2vw;
+    margin: 0 auto;
+    margin-top: 3vh;
+}
+.intMain-text p{
+    line-height: 3vh;
+    font-size: 0.8vw;
+    text-shadow:0px 0px 0.2em #0196e3,
+    -0 -0 0.2em #0196e3;
+}
+.chart{
+    width: 28vw;
+    height: 40vh;
+    position: fixed;
+    left: 1vw;
+    top: 55vh;
+    display: none;
+    z-index: 9999;
+}
+#time{
+    position: fixed;
+    right: 0;
+    top: 0;
+    font-size: 1.5vw;
+    letter-spacing: 3px;
+    text-shadow:0px 0px 0.2em #0196e3,
+    -0 -0 0.2em #0196e3;
+    background: url("/static/img/monitor/fiveGwisdomScreen/timebg.png") no-repeat;
+    background-size: 100% 100%;
+    padding: 0.5vh 1vw;
+}
+#bnt{
+    width: 10vw;
+    height: 2vw;
+    position: fixed;
+    right: 4vw;
+    top: 8vh;
+    border-radius: 6px;
+    padding: 0.5vh 0.8vw;
+    background: url("/static/img/monitor/fiveGwisdomScreen/iconulvg.png") no-repeat;
+    background-size: 100% 100%;
+    display: none;
+}
+#bnt ul{
+    display: flex;
+    justify-content: space-around;
+}
+#bnt ul li{
+    width: 2vw;
+    height: 2vw;
+    transform: scale(0.8);
+    cursor: pointer;
+}
+#bnt ul li img{
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+#gear{
+    width: 13vw;
+    height: 13vw;
+    position: fixed;
+    top: 15vh;
+    right: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.gear1{
+    width: 13vw;
+    height: 13vw;
+    background: url("/static/img/monitor/fiveGwisdomScreen/gear1.png") no-repeat;
+    background-size: 100% 100%;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    animation: clockwise 14.8s linear infinite;
+}
+.gear2{
+    width: 11vw;
+    height: 11vw;
+    background: url("/static/img/monitor/fiveGwisdomScreen/gear2.png") no-repeat;
+    background-size: 100% 100%;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    animation: anticlockwise 2.8s linear infinite;
+}
+.gear3{
+    width: 10vw;
+    height: 10vw;
+    background: url("/static/img/monitor/fiveGwisdomScreen/gear3.png") no-repeat;
+    background-size: 100% 100%;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    animation: clockwise 14.8s linear infinite;
+}
+.gear4{
+    width: 8vw;
+    height: 8vw;
+    background: url("/static/img/monitor/fiveGwisdomScreen/gear4.png") no-repeat;
+    background-size: 100% 100%;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    animation: anticlockwise 1.8s linear infinite;
+
+}
+.gear5{
+    width: 7vw;
+    height: 7vw;
+    background: url("/static/img/monitor/fiveGwisdomScreen/gear5.png") no-repeat;
+    background-size: 100% 100%;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    animation: clockwise 1.8s linear infinite;
+}
+.gearint{
+    width: 5vw;
+    height: 5vw;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+.gearintInt{
+    font-size: 0.8vw;
+    line-height: 1.8vw;
+    text-shadow:2px 2px 0.5em #0196e3,
+    -0 -0 0.5em #0196e3;
+}
+.gearintSun{
+    font-size: 2.2vw;
+    text-shadow:2px 2px 0.5em #0196e3,
+    -0 -0 0.5em #0196e3;
+}
+.gearintSun span{
+    font-size: 0.8vw;
+}
+
+@keyframes clockwise
+{
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(360deg);}
+}
+@-moz-keyframes clockwise /* Firefox */
+{
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(360deg);}
+
+}
+
+@-webkit-keyframes clockwise /* Safari 和 Chrome */
+{
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(360deg);}
+
+}
+@-o-keyframes clockwise /* Opera */
+{
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(360deg);}
+}
+
+
+@keyframes anticlockwise
+{
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(-360deg);}
+}
+@-moz-keyframes anticlockwise /* Firefox */
+{
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(-360deg);}
+
+}
+
+@-webkit-keyframes anticlockwise /* Safari 和 Chrome */
+{
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(-360deg);}
+
+}
+@-o-keyframes anticlockwise /* Opera */
+{
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(-360deg);}
+}
+#equipment{
+    width: 28vw;
+    height: 40vh;
+    position: fixed;
+    top: 35vh;
+    right: 1vw;
+    display: none;
+    z-index: 9999;
+}
+.equipmentInt{
+    width: 28vw;
+    height: 57vh;
+    border-radius: 2vh;
+    background: url("/static/img/monitor/fiveGwisdomScreen/intmainbg.png") no-repeat;
+    background-size: 100% 100%;
+    padding: 1vh 0;
+    box-sizing: border-box;
+    overflow-y: scroll;
+
+}
+#equipmentInt{
+    overflow-y: scroll;
+}
+.equipmentInt ul li{
+    width: 27vw;
+    height: 18vh;
+    background: url("/static/img/monitor/fiveGwisdomScreen/shebeiBG.png") no-repeat;
+    background-size: 100% 100%;
+    margin:0 auto;
+
+}
+.equipmentIntTitle{
+    width: 27vw;
+    height: 8vh;
+    display: flex;
+    justify-content: space-between;
+    line-height: 8vh;
+    box-sizing: border-box;
+    padding: 0.5vh 0;
+    padding-left: 2.5vw;
+    padding-right: 1vw;
+}
+.equipmentIntTitle p{
+    font-size: 1vw;
+}
+
+.equipmentIntTitleicon{
+    width: 2.2vw;
+    margin-top: -0.2vw;
+}
+.equipmentIntMain{
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 1vw;
+    margin-top: -1vh;
+}
+.equipmentIntMain p{
+    width: 60%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    line-height: 8vh;
+    font-size: 0.8vw;
+    text-shadow:2px 2px 0.5em #0196e3,
+    -0 -0 0.5em #0196e3;
+}
+.equipmentIntTitletint{
+    width: 45%;
+    height: 5vw;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: left;
+    box-sizing: border-box;
+    padding: 0 1vw;
+
+}
+.equipmentIntTitletint p{
+    font-size: 0.8vw;
+    line-height: 5vw;
+    text-align: left;
+    text-align: center;
+}
+.equipmentIntTitletint p:nth-child(1){
+    width: 2.9vw;
+}
+.equipmentIntTitletint p:nth-child(2){
+    width: 5vw;
+}
+.succeed{
+    background: url("/static/img/monitor/fiveGwisdomScreen/succeed.png") no-repeat;
+    background-size: 100% 100%;
+}
+.succeed p{
+    color: #0fcafa!important;
+    text-shadow:2px 2px 0.5em #0196e3,
+    -0 -0 0.5em #0196e3;
+}
+.wait{
+    background: url("/static/img/monitor/fiveGwisdomScreen/waitbg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.wait p{
+    color: #f9c801!important;
+    text-shadow:2px 2px 0.5em #fff,
+    -0 -0 0.5em #f9c801;
+}
+.ing{
+    background: url("/static/img/monitor/fiveGwisdomScreen/ingbg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.ing p{
+    color: #fff!important;
+    text-shadow:2px 2px 0.5em #fff,
+    -0 -0 0.5em #0196e3;
+}
+#GLogo{
+    width: 25vw;
+    height: 20vw;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40vh;
+    z-index: 9999;
+}
+
+.equipmentInt::-webkit-scrollbar {
+    display: none;
+}
+#equipmentInt::-webkit-scrollbar {
+    display: none;
+}
+#video{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+video{
+    width: 100%;
+    /*height: 100%;*/
+}
+.main-page-span{
+    z-index: 99999;
+}

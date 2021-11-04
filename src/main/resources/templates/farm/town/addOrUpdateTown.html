@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新增乡镇</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+    <style>
+        body {
+            font-weight: normal;
+            height: 100%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .base-item {
+            display: flex;
+            text-align: center;
+            margin-top: 20px;
+            /*margin-left: 45px;*/
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            height: 100%;
+        }
+
+        .base-item span {
+            width: 125px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .base-item input {
+            width: 170px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            background-image: url(../../img/commend_btn.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 120px;
+            height: 35px;
+            border: 0px;
+            margin-left: 130px;
+            color: #5f4d6f;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <input type="text" style="display: none" id="id" th:value="${lot.getId()}">
+    <input type="text" style="display: none" id="coordinateX" th:value="${lot.getCoordinateX()}">
+    <input type="text" style="display: none" id="coordinateY" th:value="${lot.getCoordinateY()}">
+    <div style="width: 100%; height: 100%; border: 1px; float: left">
+        <div class="base-item">
+            <span id="lotNameSpan">乡镇名 : </span>
+            <input type="text" id="lotName" lay-verify="required" maxlength="16" style="width: 170px"
+                   class="layui-input" placeholder="请输入乡镇名称" th:value="${lot.getLotName()}">
+        </div>
+        <div class="base-item">
+            <span id="input_positionSpan">经纬度 : </span>
+            <input type="text" lay-verify="required"
+                   autocomplete="off"
+                   disabled="disabled" id="input_position"
+                   class="layui-input" placeholder="点击右侧按钮选取地址">
+            <img src="../img/location_icon.png" onclick="selectPoint()" style="height: 33px">
+        </div>
+        <div class="layui-inline bg-transparent" style="margin-left: 20%;!important;">
+            <button id="lotAdd" class="layui-btn layui-btn-primary layui-btn-radius"
+                    lay-event="lotAdd" style="margin-left: 45%;!important;"> 添加
+            </button>
+            <button id="lotUpdate" class="layui-btn layui-btn-primary layui-btn-radius"
+                    lay-event="lotUpdate" style="margin-left: 45%;!important;"> 修改
+            </button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+</body>
+</html>
+<script>
+    let layer, position;
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        layer = layui.layer;
+        form = layui.form;
+    });
+
+    /**
+     * 如果是修改，隐藏新增按钮，打开修改按钮
+     */
+    if($("#coordinateX").val()!=""){
+        $("#lotAdd").hide();
+        $("#lotUpdate").show();
+    }else{
+        $("#lotAdd").show();
+        $("#lotUpdate").hide();
+    }
+
+    /**
+     * 点击地图按钮，打开新地图，进行画线
+     */
+    function selectPoint() {
+        layer.open({
+            type: 2,
+            title: false,
+            closeBtn: false,
+            area: ['600px', '400px'],
+            shade: 0.2,
+            id: 'LAY_layuipro',
+            btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+            btnAlign: 'c',
+            moveType: 1,
+            content: "/lot/lotPoint?coordinateX="+$("#coordinateX").val()+"&coordinateY="+$("#coordinateY").val(),
+            yes: function () {
+                var iframeWin = $("div.layui-layer-content > iframe")[0].contentWindow; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                position = iframeWin.getPoint(); //调用子页面的form_submit函数
+                $('#input_position').val(position);
+                layer.closeAll();
+            }
+        });
+    }
+
+    /**
+     * 保存
+     */
+    $("#lotAdd").click(function () {
+        var lotName = $("#lotName").val();
+        var position = $("#input_position").val();
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        if (re.test(lotName)||lotName.length < 1) {
+            return layer.msg('地段名不可以为空');
+        }
+        if (position.length < 1) {
+            return layer.msg('地址不能为空');
+        }
+        $.ajax({
+            type: "post",
+            url: "/lot/add_Lot",
+            data: {
+                lotName: $("#lotName").val(),
+                position: $("#input_position").val()
+            },
+            success(res) {
+                if (res.state == 'success') {
+                    parent.$('.layui-icon-search').click();
+                    parent.layer.close(myIframe);
+                    // layer.msg($.i18n.prop(res.msg));
+                    parent.layer.msg($.i18n.prop(res.msg));
+                } else {
+                    layer.msg($.i18n.prop(res.msg), {icon: 2})
+                }
+            }
+        })
+    })
+    /**
+     * 修改
+     */
+    $("#lotUpdate").click(function () {
+        var lotName = $("#lotName").val();
+        var position = $("#input_position").val();
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        if (re.test(lotName)) {
+            return layer.msg('地段名不可以为空');
+        }
+        $.ajax({
+            type: "post",
+            url: "/lot/update_Lot",
+            data: {
+                id: $("#id").val(),
+                lotName: $("#lotName").val(),
+                position: $("#input_position").val()
+            },
+            success(res) {
+                if (res.state == 'success') {
+                    parent.layer.msg($.i18n.prop(res.msg));
+                    parent.$('.layui-icon-search').click();
+                    parent.layer.close(myIframe);
+                } else {
+                    layer.msg($.i18n.prop(res.msg), {icon: 2})
+                }
+            }
+        })
+    })
+
+
+</script>

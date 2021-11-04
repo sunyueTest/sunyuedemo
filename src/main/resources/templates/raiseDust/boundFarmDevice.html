@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+    <style>
+        body {
+            font-weight: normal;
+            height: 100%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .base-item {
+            display: flex;
+            text-align: center;
+            margin-top: 20px;
+            /*margin-left: 45px;*/
+        }
+
+        .container {
+            width: 93%;
+            margin: 0 auto;
+            background: white;
+            height: 100%;
+        }
+
+        .base-item span {
+            width: 125px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .base-item input {
+            width: 170px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            background-image: url(../../img/commend_btn.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 120px;
+            height: 35px;
+            border: 0px;
+            margin-left: 130px;
+            color: #5f4d6f;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <input type="text" style="display: none" id="farmId" th:value="${bean.userName}">
+    <div style="width: 100%; height: 100%; border: 1px; float: left">
+        <div class="base-item">
+            <span id="deviceNameSpan">名称 : </span>
+            <input id="deviceName" lay-verify="required" style="width: 170px"
+                   class="layui-input" placeholder="请输入设备名称">
+        </div>
+        <div class="base-item">
+            <span id="deviceNumberSpan">设备编号 : </span>
+            <input id="deviceNumber" lay-verify="required" style="width: 170px"
+                   class="layui-input" placeholder="请输入设备编号">
+        </div>
+        <div class="base-item">
+            <span id="passwordspan">初始密码 :</span>
+            <input type="text" id="devicePassword" lay-verify="required"
+                   autocomplete="off" maxlength="12"
+                   class="layui-input" placeholder="任意字符没有可不填">
+        </div>
+        <div class="base-item">
+            <span id="input_positionSpan">设备地址 : </span>
+            <input type="text" lay-verify="required"
+                   autocomplete="off"
+                   disabled="disabled" id="input_position"
+                   class="layui-input" placeholder="点击右侧按钮选取地址">
+            <img src="../img/location_icon.png" onclick="selectPoint()" style="height: 33px">
+        </div>
+        <div class="base-item">
+            <button class="btn-primary" lay-submit="" id="save" style="margin-left: 40%"
+                    lay-filter="submit">保&nbsp;存
+            </button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<!--<script th:src="@{/static/js/jQuery/jquery-3.2.1.js}"></script>-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+
+</body>
+</html>
+<script>
+    $('#deviceNameSpan').text($.i18n.prop('deviceName')+":");
+    $("#deviceName").attr("placeholder", $.i18n.prop('warn6'));
+    $('#deviceNumberSpan').text($.i18n.prop('deviceNo')+":");
+    $("#deviceNumber").attr("placeholder", $.i18n.prop('12deviceNo'));
+    $('#passwordspan').text($.i18n.prop('initPassword')+":");
+    $("#devicePassword").attr("placeholder", $.i18n.prop('devicePasswordDescription'))
+    $('#input_positionSpan').text($.i18n.prop('input_positionspan')+":");
+    $("#input_position").attr("placeholder", $.i18n.prop('input_positionDescription'))
+    $('#save').text($.i18n.prop('save'));
+
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    let layer, form, position;
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        layer = parent.layui.layer;
+        form = layui.form;
+        form.on('submit(submit)', function (data) {
+            let userName = $("#farmId").val(),
+                deviceNumber = $("#deviceNumber").val(),
+                deviceName = $("#deviceName").val();
+                var devicePassword = $("#devicePassword").val();
+
+            if (deviceName.length < 1) {
+                return layer.msg('名称不能为空');
+            }
+
+            if (deviceNumber.length < 1) {
+                return layer.msg('设备号不能为空');
+            }
+
+            if (position == null) {
+                let inputPosition = $('#input_position').val();
+                let location = inputPosition.split(',');
+                if (location[0] == 0 || location[1] == 0) {
+                    console.log("?????");
+                    return layer.msg($.i18n.prop('warn10'));
+                } else {
+                    position = {lat: location[1], lng: location[0]}
+                }
+            }
+            // $.ajax({
+            //     url: "../raise/saveDeviceByOther",
+            //     data: {
+            //         "userName": userName,
+            //         "deviceName": deviceName,
+            //         "deviceNumber": deviceNumber,
+            //         "devicePassword":devicePassword,
+            //         "longitude": position.lng,
+            //         "latitude": position.lat
+            //         },
+            //     dataType: "json",
+            //     type: "post",
+            //     timeout: 30000,
+            //
+            // });
+            $.post("../raise/saveDeviceByOther",
+                {
+                    "userName": userName,
+                    "deviceName": deviceName,
+                    "deviceNumber": deviceNumber,
+                    "devicePassword":devicePassword,
+                    "longitude": position.lng,
+                    "latitude": position.lat
+                },
+                function (res) {
+                    if (res.state === 'success') {
+                        parent.layer.msg($.i18n.prop(res.msg));
+                        parent.$('.layui-laypage-btn').click();
+                        parent.layer.close(myIframe);
+                    } else {
+                        layer.msg($.i18n.prop(res.msg), {icon: 2})
+                    }
+                });
+        });
+    });
+    function getPoint() {
+        if (position == "") {
+            layer.msg("请规划好地段");
+        }else{
+            return position;
+        }
+    }
+
+    function selectPoint() {
+        var content = "../selectPoint"
+        var positionValue = $('#input_position').val();
+        if (positionValue != ''&&positionValue != null && positionValue != "0.0,0.0") {
+            let location = positionValue.split(',');
+            content += "?longitude=" + location[0] + "&latitude=" + location[1];
+        }
+        layer = layui.layer;
+        let index = layer.open({
+            type: 2,
+            title: false,
+            closeBtn: false,
+            area: ['600px', '400px'],
+            shade: 0.2,
+            id: 'LAY_layuipro',
+            btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+            btnAlign: 'c',
+            moveType: 1,
+            content: content,
+            yes: function () {
+                let iframeWin = $("div.layui-layer-content > iframe")[0].contentWindow; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                position = iframeWin.getPoint(); //调用子页面的form_submit函数
+                $('#input_position').val(position);
+                layer.close(index);
+            }
+        });
+    }
+</script>

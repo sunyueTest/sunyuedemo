@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link>
+</head>
+<body>
+<form class="layui-form" action="../versionManage/addOrUpdateVersionConfig" style="margin-right: 45px;">
+    <input type="hidden" name="id" th:value="*{configBean.id}">
+    <input type="hidden" name="versionId" th:value="*{configBean.versionId}">
+    <div class="layui-form-item">
+        <label id="nameLabel" class="layui-form-label">版本名称</label>
+        <div class="layui-input-inline">
+            <input  type="text" name="versionName" lay-verify="title"
+                    th:value="*{configBean.versionName}" autocomplete="off" class="layui-input input-item">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="usefulLife" class="layui-form-label">版本有效期（天）</label>
+        <div class="layui-input-inline">
+            <input  type="text" name="usefulLife" lay-verify="title"
+                    th:value="*{configBean.usefulLife}" autocomplete="off" class="layui-input input-item">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="device" class="layui-form-label">设备数量</label>
+        <div class="layui-input-inline">
+            <input  type="text" name="deviceNum" lay-verify="title"
+                   th:value="*{configBean.deviceNum}" autocomplete="off" class="layui-input input-item">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="monitor" class="layui-form-label">监控数量</label>
+        <div class="layui-input-inline">
+            <input  type="text" name="monitorNum" lay-verify="title" th:value="*{configBean.monitorNum}"
+                   autocomplete="off" class="layui-input input-item">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="user" class="layui-form-label">二级用户数量</label>
+        <div class="layui-input-inline">
+            <input  type="text" name="level2UserNum" lay-verify="title" th:value="*{configBean.level2UserNum}"
+                   autocomplete="off" class="layui-input input-item">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="configuration" class="layui-form-label">组态数量</label>
+        <div class="layui-input-inline">
+            <input  type="text" name="configurationNum" lay-verify="title"
+                   th:value="*{configBean.configurationNum}" autocomplete="off" class="input-item layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="trigger" class="layui-form-label">触发器数量</label>
+        <div class="layui-input-inline">
+            <input  type="text" name="triggerNum" lay-verify="title" th:value="*{configBean.triggerNum}"
+                   autocomplete="off" class="layui-input input-item">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="timer" class="layui-form-label" style="width:100px">定时器数量</label>
+        <div class="layui-input-inline">
+            <input  type="text" name="timerNum" lay-verify="title" th:value="*{configBean.timerNum}"
+                   autocomplete="off" class="layui-input input-item">
+        </div>
+    </div>
+</form>
+</body>
+
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    $('#usefulLife').text($.i18n.prop('usefulLife'));
+    $('#device').text($.i18n.prop('deviceNum'));
+    $('#monitor').text($.i18n.prop('monitorNum'));
+    $('#user').text($.i18n.prop('level2UserNum'));
+    $('#configuration').text($.i18n.prop('configurationNum'));
+    $('#trigger').text($.i18n.prop('triggerNum'));
+    $('#timer').text($.i18n.prop('timerNum'));
+</script>
+<style>
+    .layui-form-item .layui-form-label {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100px;
+    }
+
+    .input-item {
+        border-color: #d8caca;
+        width: 160px;
+        margin-left: 20px;
+    }
+
+
+</style>
+</html>

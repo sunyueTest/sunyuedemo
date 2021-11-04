@@ -1,0 +1,40 @@
+.layui-table-tool-self {
+    display: none;
+}
+
+.layui-table-tool-temp {
+    padding-right: 20px !important;
+}
+
+.layui-table-tool {
+    padding: 7px 0px 10px 0px !important;
+}
+
+.layui-input-block {
+    margin-left: 0px;
+}
+
+
+.abc {
+    float: right;
+}
+
+body::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+.layui-table-tool .layui-inline {
+    /*background-color: #eaeaea;*/
+}
+
+.online {
+    color: #458B74;
+}
+
+.offline {
+    color: #8B7500;
+}
+.layui-layer{
+    border-radius: 20px!important;
+}

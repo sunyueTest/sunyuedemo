@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>remotediagnosis-远程诊断</title>
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/specialistcoze.css}">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+</head>
+<body>
+<style>
+    .acblock{display: block!important;}
+    .liaotian{display: none}
+    .consult-l-pic,.consult-r-pic{
+        background: #6a5acd !important;
+    }
+    .liaotian {
+        width: 80vw;
+        height: 80vh;
+        overflow: auto;
+    }
+</style>
+<div class="main">
+    <div class="left-nav">
+        <ul class="test test-1" id="teacher"></ul>
+    </div>
+    <div class="conter">
+        <div id="chitchat">
+            <!--<div class="clearfix">-->
+                <!--<div class="consult-r">-->
+                    <!--<div class="consult-r-txt">老师您好，关于葡萄对的某个问题怎么解决</div>-->
+                    <!--<div class="consult-r-pic"><img src="" alt=""></div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="import" style="margin-bottom: 2vh">
+            <textarea id="species" style="padding: 1vh 1vw;width:70vw; height:12vh; margin-right: 1vw;border:solid 1px #ccc; border-radius:10px; resize:none;" placeholder="请输入聊天信息"></textarea>
+
+            <div class="import-bnt" style="width: 8vw;height: 12vh;color: #fff; border-radius:10px;text-align: center;line-height: 12vh;font-size: 1vw;cursor: pointer;" id="import">
+                <div>
+                    发送
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    let layer;
+    layui.use(['form', 'layer', 'layedit', 'laydate'], function () {
+        layer = layui.layer;
+    });
+    /**
+     * 获取cookie值  
+     */
+    var getCookie=getCookie('chattinglist');
+    var list=getCookie;
+    if(getCookie){
+        getCookie=JSON.parse(getCookie);
+        list=getCookie;
+        getusername(list);
+        getuserlist(list);
+    }
+    console.log(getCookie);
+    var id='';
+    var userbnt='';//点击获取用户名称
+    $(document).on('click','.userbnt',function() {
+        userbnt=$(this).text();
+        console.log(userbnt)
+    })
+    /**
+     * 点击发送消息
+     */
+    $(document).on('click','#import',function(){
+        console.log(id)
+        var species=$('#species').val()
+        let islist=$('#teacher').text();
+        console.log(islist.length)
+        if(!islist.length){
+            layer.msg('当前没有用户和您咨询！')
+            return;
+        }else {
+             userbnt=$('.userbnt').eq(0).text()
+        }
+        if(!species){
+            layer.msg('请输入聊天信息！')
+            return;
+        }
+        console.log(species)
+        send(userbnt,species)
+        var html='';
+        html='            <div class="clearfix">\n' +
+            '                <div class="consult-r">\n' +
+            '                    <div class="consult-r-txt">'+species+'</div>\n' +
+            '                    <div class="consult-r-pic"><img style="transform: scale(0.7)" src="/static/img/agriculture/zhuanjia.png" alt=""></div>\n' +
+            '                </div>\n' +
+            '            </div>'
+        $('.acblock').append(html);
+        $('#species').val('')
+        var val={
+            type:0,
+            val: species
+        }
+        for(var i=0;i<list.length;i++){
+            if(list[i].username==userbnt){
+                // var teacherintTwo=new Array;
+                var valTwo=list[i].teacherint;
+                valTwo.push(val);
+                // teacherintTwo.push(valTwo);
+                list[i].teacherint=valTwo;
+            }
+        }
+    })
+    /**
+     * 接受消息
+     */
+    var username=new Array;
+    function onReceive(type, data) {
+        console.log(type);
+        if ('topic' == type) {
+            console.log(data)
+            let arry=data.split('#::');
+            // console.log(arry);
+            let user=arry[0]
+            let teacher=arry[1]
+            username.push(user)
+            username=removeDuplicates(username)
+            console.log(username);
+            var teacherint=new Array;
+            var val={
+                type:1,
+                val: teacher
+            }
+            teacherint.push(val)
+            // console.log(teacherint);
+            var isTrue=false;
+            var valTwo=new Array();
+            for(var i=0;i<list.length;i++){
+                if(list[i].username==user){
+                    // var teacherintTwo=new Array;
+                    valTwo=list[i].teacherint;
+                    valTwo.push(val);
+                    // teacherintTwo.push(valTwo);
+                    list[i].teacherint=valTwo;
+                    isTrue=true;
+                }
+            }
+            if(!isTrue){
+                valTwo.push(val)
+                var liaotian = {
+                    username:user,
+                    teacherint: valTwo
+                };
+                list = new Array;
+                list.push(liaotian)
+            }
+            console.log(list[0].username)
+            console.log(list)
+            var str = JSON.stringify(list);
+            setCookie("chattinglist",str);
+            getusername(list);
+            getuserlist(list);
+            userbnt=list[0].username
+        }
+    }
+    function getusername(usera){
+        let html='';
+        let liaotian='';
+        $.each(usera, function (i, item) {
+            html+='<li  class="userbnt"><P>'+item.username+'</P></li>'
+            liaotian+='            <div class="liaotian"></div>\n'
+        });
+        $('#teacher').html(html)
+        $('#chitchat').html(liaotian)
+    }
+    /**
+     * 发送消息
+     */
+    function getuserlist(usera){
+        let html='';
+        $.each(usera, function (i, item) {
+            // console.log(item.teacherint)
+            html+='      <div class="liaotian text test-1">\n'
+                $.each(item.teacherint, function (i, item) {
+                    if(item.type==1){
+                        html+='<div class="clearfix">\n' +
+                            '                <div class="consult-l">\n' +
+                            '                    <div class="consult-l-pic"><img style="transform: scale(0.7)" src="/static/img/agriculture/yonghu.png" alt=""></div>\n'+
+                            '                    <div class="consult-l-txt">' +item.val+ '</div>\n'+
+                            '                </div>\n' +
+                            '            </div>\n'
+                    }else {
+                        html+='<div class="clearfix">\n' +
+                            '                <div class="consult-r">\n' +
+                            '                    <div class="consult-r-txt">' +item.val+ '</div>\n'+
+                            '                    <div class="consult-r-pic"><img style="transform: scale(0.7)" src="/static/img/agriculture/zhuanjia.png" alt=""></div>\n'+
+                            '                </div>\n' +
+                            '            </div>\n'
+                    }
+
+                })
+            html+='        </div>'
+            // console.log(html)
+
+        });
+        $('#chitchat').html(html);
+        $('.liaotian').removeClass('acblock');
+        $('.liaotian').eq(0).addClass('acblock');
+        $('.userbnt').eq(0).addClass('ac');
+    }
+
+    $(document).on('click','.userbnt',function() {
+        $('.userbnt').removeClass('ac')
+        $(this).addClass('ac');
+        $('.liaotian').removeClass('acblock');
+        console.log($(this).index())
+        $('.liaotian').eq($(this).index()).addClass('acblock');
+
+    })
+        //删除数组中重复元素
+    function removeDuplicates(arr) {
+        var temp = {};
+        for (var i = 0; i < arr.length; i++)
+            temp[arr[i]] = true;
+        var r = [];
+        for (var k in temp)
+            r.push(k);
+        return r;
+    }
+    function send(user, data) {
+        parent.send(user, data);
+    }
+
+
+
+</script>
+

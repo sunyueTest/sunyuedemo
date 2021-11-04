@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="/static/js/zTreejs/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="/static/layui/layui.all.js"></script>
+    <script type="text/javascript">
+        function getFatherId(a){
+            $("#cang").val(a);
+            $.ajax({
+                type: "post",
+                data: "id="+a,
+                url: "/rights/getRightToId",
+                success: function(dataFather){
+                    $("#name").val(dataFather.name);
+                    $("#url").val(dataFather.url);
+                    $("#enName").val(dataFather.enName);
+                    $("#icon").val(dataFather.icon);
+                    var numbers = $("#cate").find("option");
+                    var cateFather = dataFather.cate;
+                    if(cateFather == "menu"){cateFather = 0}else{cateFather = 1}
+                    for(var j = 0; j < numbers.length; j++) {
+                        if($(numbers[j]).attr("id") == cateFather) {
+                            $(numbers[j]).attr("selected", "selected");
+                        }
+                    }
+                    if(dataFather.level == 1){
+                        $.ajax({
+                            type: "post",
+                            data: "level=1",
+                            url: "/rights/getRightsListToFather",
+                            success: function(dataSon){
+                                if(dataSon.data != null){
+                                    for(var i=0; i<dataSon.data.length; i++) {
+                                        $("#caidanxialakuang").append("<option id='"+dataSon.data[i].id+"'>"+dataSon.data[i].name+"</option>");
+                                    }
+                                }
+                                var number = $("#caidanxialakuang").find("option");
+                                var id = dataFather.id;
+                                for(var j = 0; j < number.length; j++) {
+                                    if($(number[j]).attr("id") == id) {
+                                        $(number[j]).attr("selected", "selected");
+                                    }
+                                }
+                            }
+                        });
+                    }else{
+                        $.ajax({
+                            type: "post",
+                            data: "id="+dataFather.parentId,
+                            url: "/rights/fatherIdGetSonList",
+                            success: function(dataSon){
+                                if(dataSon.data != null){
+                                    for(var i=0; i<dataSon.data.length; i++) {
+                                        $("#caidanxialakuang").append("<option id='"+dataSon.data[i].id+"'>"+dataSon.data[i].name+"</option>");
+                                    }
+                                }
+                                var number = $("#caidanxialakuang").find("option");
+                                var id = dataFather.id;
+                                for(var j = 0; j < number.length; j++) {
+                                    if($(number[j]).attr("id") == id) {
+                                        $(number[j]).attr("selected", "selected");
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        function submitt(){
+            var id = $("#cang").val();
+            var name = $("#name").val();
+            var url = $("#url").val();
+            if(url == undefined){url = null}
+            var enName = $("#enName").val();
+            var icon = $("#icon").val();
+            if(icon == undefined){icon = null}
+            var cate = $("#cate").find("option:checked").attr("id");
+            if(cate == 0){cate = "menu"}else{cate = "page"}
+            var thisId = $("#caidanxialakuang").find("option:checked").attr("id");
+            var upOrDown = $("#upOrDown").find("option:checked").attr("id");
+            $.ajax({
+                type: "post",
+                async: false,
+                data: {
+                    id:id,
+                    name:name,
+                    url:url,
+                    enName:enName,
+                    icon:icon,
+                    cate:cate,
+                    thisId:thisId,
+                    upOrDown:upOrDown
+                },
+                url: "/rights/newSaveRights",
+                success: function(){
+                    var success = 1;
+                    parent.getValues(success);
+                    parent.layer.close(parent.layer.getFrameIndex(window.name));
+                }
+            });
+        }
+        function downLoad(){
+            parent.layer.close(parent.layer.getFrameIndex(window.name));
+        }
+    </script>
+</head>
+
+<body>
+<input id="cang" value="" type="hidden" />
+<div style="text-align: left; margin-left: 70px">
+    <form>
+        <div>
+            <div>菜单名称：<input type="text" id="name" placeholder="*" autocomplete="off" /></div><br/>
+            <div style="margin-left: 45px">url：<input type="text" id="url" autocomplete="off" /></div><br/>
+            <div>英文名称：<input type="text" id="enName" placeholder="*" autocomplete="off" /></div><br/>
+            <div style="margin-left: 32px">图标：<input type="text" id="icon" autocomplete="off" /></div><br/>
+            <div>菜单类别：<select id="cate" style="width: 173px"><option id="0">菜单</option><option id="1">链接</option></select></div><br/>
+            <div><span>目标菜单：</span><select id="caidanxialakuang" style="width: 173px"></select></div><br/>
+            <div><span>目标位置：</span><select id="upOrDown" style="width: 173px"><option id="0">修改为在此菜单的上方</option><option id="1">修改为在此菜单的下方</option></select></div>
+            <div style="margin-top: 20px">
+                <div style="text-align: center;margin-left: 80px; margin-right: 70px; float: left;">
+                    <input onclick="submitt()" type="button" value="保存" title="保存" />
+                </div>
+                <div><input onclick="downLoad()" type="button" value="取消" title="取消" /></div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

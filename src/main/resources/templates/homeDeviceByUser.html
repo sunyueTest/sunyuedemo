@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>地图显示设备</title>
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet"
+          href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+
+        .input-card {
+            width: 25rem;
+        }
+
+        .input-card .btn {
+            width: 7rem;
+            margin-right: .7rem;
+        }
+
+        .input-card .btn:last-child {
+            margin-right: 0;
+        }
+
+        .layui-layer-content {
+            height: 100%;
+        }
+
+        .layui-layer-iframe iframe {
+            height: 100% !important;
+        }
+    </style>
+</head>
+<body>
+<div id="container" class="map" tabindex="0"></div>
+<script th:src="@{static/jQuery/jquery-3.2.1.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script src="//a.amap.com/jsapi_demos/static/china.js"></script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.10&key=96a943dab4656930f33276727a084933&plugin=AMap.MarkerClusterer"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script type="text/javascript">
+    var cluster, markers = [];
+    var language = getCookie('jxct_lang');
+    if (language != 'en') {
+        language = 'zh_cn';
+    }
+    var map = new AMap.Map("container", {
+        resizeEnable: true,
+        center: [105, 34],
+        zoom: 4, mapStyle: "amap://styles/blue",
+        lang: language
+    });
+    var datas = new Array();
+    var count = markers.length;
+    var _renderCluserMarker = function (context) {
+        var factor = Math.pow(context.count / count, 1 / 18);
+        var div = document.createElement('div');
+        var Hue = 180 - factor * 180;
+        var bgColor = 'hsla(' + Hue + ',100%,50%,0.7)';
+        var fontColor = 'hsla(' + Hue + ',100%,20%,1)';
+        var borderColor = 'hsla(' + Hue + ',100%,40%,1)';
+        var shadowColor = 'hsla(' + Hue + ',100%,50%,1)';
+        div.style.backgroundColor = bgColor;
+        var size = Math.round(30 + Math.pow(context.count / count, 1 / 5) * 20);
+        div.style.width = div.style.height = size + 'px';
+        div.style.border = 'solid 1px ' + borderColor;
+        div.style.borderRadius = size / 2 + 'px';
+        div.style.boxShadow = '0 0 1px ' + shadowColor;
+        div.innerHTML = context.count;
+        div.style.lineHeight = size + 'px';
+        div.style.color = fontColor;
+        div.style.fontSize = '14px';
+        div.style.textAlign = 'center';
+        context.marker.setOffset(new AMap.Pixel(-size / 2, -size / 2));
+        context.marker.setContent(div)
+    };
+    map.on('complete', function () {
+        addData();
+    });
+    var page = 1;
+
+    function addData() {
+        $.ajax({
+            url: "../device/selDeviceListByUser",
+            data: {size: '500', page: page},
+            dataType: "json",
+            type: "get",
+            timeout: 30000,
+            error: function (data, type, err) {
+                console.log(err);
+                // layer.closeAll('loading');
+                // layer.msg('添加失败', {
+                //     offset: '6px'
+                // });
+            },
+            success: function (data) {
+                // layer.closeAll('loading');
+                if (data.state == 'success') {
+                    for (var i = 0; i < data.datas.length; i++) {
+                        var datai = data.datas[i];
+                        datas.push(datai);
+                        var marker = new AMap.Marker({
+                            extData: datai,
+                            position: [datai.longitude, datai.latitude],
+                            content: '<div style="background-color: hsla(0, 100%, 50%, 0.5); height: 24px; width: 24px; border: 1px solid hsl(180, 100%, 40%); border-radius: 12px; box-shadow: hsl(180, 100%, 50%) 0px 0px 1px;"  ></div>',
+                            offset: new AMap.Pixel(-15, -15),
+                            title: datai.deviceName
+                        });
+                        marker.on('click', markerClick);
+                        markers.push(marker);
+                    }
+                    addCluster(1);
+                    if (data.isLast == false) {
+                        page += 1;
+                        addData();
+                    }
+                } else {
+                    // layer.alert(data.msg)
+                }
+            }
+        });
+    }
+
+    var data;
+
+    function markerClick(e) {
+        data = e.target.getExtData();
+        var infoWindow = new AMap.InfoWindow({
+            position: e.target.getPosition(),
+            offset: new AMap.Pixel(0, -25),
+            content: '<div className="custom-infowindow input-card">' +
+            '<label style="color:#25A5F7">' + data.deviceName + '</label>' +
+            '<div class="input-item">' +
+            '<div class="input-item-prepend">' +
+            '<span class="input-item-text" >' + $.i18n.prop('devicehao') + '</span>' +
+            '</div>' +
+            '<input id="lnglat" type="text" disabled="disabled" value=' + data.deviceNumber + '>' +
+            '</div>' +
+            // 为 infowindow 添加自定义事件
+            '<input id="lnglat2container" type="button" class="btn" value=' + $.i18n.prop('showDeviceInfo') + ' onclick="showDeviceInfo()"/>' +
+            '</div>'
+        });
+        infoWindow.open(map);
+    }
+
+    function showDeviceInfo() {
+        layui.use('layer', function () {
+            var win = layer.open({
+                type: 2,
+                //area: ['800px', '500px'],
+                title: $.i18n.prop('deviceDetail'),
+                anim: 3,
+                content: '../deviceManage/deviceDetail?deviceNumber=' + data.deviceNumber,
+                success: function (layero, index) {
+                    var body = layer.getChildFrame('body', index);
+                    var position = body.find('input[id="input_position"]');
+                    position.val(data.longitude + ',' + data.latitude);
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                    iframeWin.devciedata = {deviceNumber: data.deviceNumber};
+                    var deviceNumber = body.find('input[id="deviceNumber"]');
+                    var deviceName = body.find('input[id="deviceName"]');
+                    deviceNumber.val(data.deviceNumber);
+                    deviceName.val(data.deviceName);
+                    iframeWin.initData();
+                }
+            });
+            layer.full(win);
+        });
+    }
+    function onReceive(type, data) {
+        if ("upDeviceInfoSuccess" == type) {
+            map.clean();
+            // addData();
+        }
+    }
+
+    function addCluster(tag) {
+        if (cluster) {
+            cluster.setMap(null);
+        }
+        if (tag == 2) {//完全自定义
+            cluster = new AMap.MarkerClusterer(map, markers, {
+                gridSize: 10,
+                renderCluserMarker: _renderCluserMarker
+            });
+        } else if (tag == 1) {//自定义图标
+            var sts = [{
+                url: "https://a.amap.com/jsapi_demos/static/images/blue.png",
+                size: new AMap.Size(32, 32),
+                offset: new AMap.Pixel(-16, -16)
+            }, {
+                url: "https://a.amap.com/jsapi_demos/static/images/green.png",
+                size: new AMap.Size(32, 32),
+                offset: new AMap.Pixel(-16, -16)
+            }, {
+                url: "https://a.amap.com/jsapi_demos/static/images/orange.png",
+                size: new AMap.Size(36, 36),
+                offset: new AMap.Pixel(-18, -18)
+            }, {
+                url: "https://a.amap.com/jsapi_demos/static/images/red.png",
+                size: new AMap.Size(48, 48),
+                offset: new AMap.Pixel(-24, -24)
+            }, {
+                url: "https://a.amap.com/jsapi_demos/static/images/darkRed.png",
+                size: new AMap.Size(48, 48),
+                offset: new AMap.Pixel(-24, -24)
+            }];
+            cluster = new AMap.MarkerClusterer(map, markers, {
+                styles: sts,
+                gridSize: 80
+            });
+        } else {//默认样式
+            cluster = new AMap.MarkerClusterer(map, markers, {gridSize: 30});
+        }
+
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/layui/myicon/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/static/css/farmCommon.css}">
+    <style>
+        body {
+            font-weight: normal;
+            height: 100%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .base-item {
+            display: flex;
+            text-align: center;
+            margin-top: 20px;
+            /*margin-left: 45px;*/
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            height: 100%;
+        }
+
+        .base-item span {
+            width: 125px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .base-item input {
+            width: 170px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            background-image: url(../../img/commend_btn.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 120px;
+            height: 35px;
+            border: 0px;
+            margin-left: 130px;
+            color: #5f4d6f;
+            margin-top: 10px;
+        }
+
+        .layui-form {
+            margin: 0;
+        }
+
+        .layui-table, .layui-table-view {
+            margin: 0px;
+        }
+        .laytable-cell-1-0-5 {
+            width: 130px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+   <input type="text" style="display: none" id="farmId" th:value="${bean.userName}">
+    <table class="layui-hide" id="table" lay-filter="table"></table>
+    <script type="text/html" id="toolbar1">
+        <div class="layui-inline bg-transparent" id="addTaskDiv">
+            <button id="add" class="layui-btn layui-btn-primary layui-btn-radius"
+                    lay-event="add"> 添加子用户
+            </button>
+<!--           <span class="layui-btn layui-btn-primary layui-btn-radius">创建该设备的用户 : <span th:text="${map[beanName].userName}" ></span></span>-->
+        </div>
+        <div class="layui-inline abc" style="float: right">
+            <button class="layui-btn " lay-event="search">
+                <i class="layui-icon layui-icon-search "></i>
+            </button>
+        </div>
+        <div class="layui-inline abc" style="float: right">
+            <input type="text" class="layui-input" name="searchName" id="searchName" autocomplete="off"
+                   style="width:182px;"
+                   placeholder="用户名">
+        </div>
+    </script>
+
+    <script type="text/html" id="barDemo">
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit"><i
+                class="layui-icon"></i></button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+                class="layui-icon"></i></button>
+
+    </script>
+</div>
+
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--jquery需要引入的文件-->
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+</body>
+</html>
+<script>
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    let layer, table, form;
+    layui.use(['form', 'table', 'layedit', 'laydate'], function () {
+        layer = parent.layui.layer;
+        table = layui.table;
+        form = layui.form;
+        let tableData = [
+            {field: 'userName', title: "用户名",width: 150, align: 'center'},
+            // {
+            //     field: '',
+            //     title: $.i18n.prop('onlineStatus'),
+            //     align: 'center',
+            //     templet: function (d) {
+            //         if (d.onLineState == 1) {
+            //             return $.i18n.prop('online');
+            //         }
+            //         return $.i18n.prop('offline');
+            //     },
+            //     width: 100
+            // },
+             {field: 'realName', title: $.i18n.prop('realName'), width: 150, align: 'center'}
+            , {field: 'tel', title: $.i18n.prop('telNo'), width: 140, align: 'center'}
+            , {field: 'email', title: $.i18n.prop('email'), width: 160, align: 'center'}
+            , {field: 'lastLoginTime', title: $.i18n.prop('lastLoginTime'), width: 210, align: 'center'},
+
+            {
+                field: '',
+                title: $.i18n.prop('operation'),
+                toolbar: '#barDemo',
+                width: 130,
+                align: 'center'
+            }
+        ];
+
+
+        table.render({
+            elem: '#table'
+            , url: '../raise/toGetSonUserList?userName=' + $("#farmId").val()
+            , toolbar: '#toolbar1'
+            , title: ''
+            , cols: [tableData]
+            , page: true,
+            request: {limitName: 'size'},
+            response: {
+                statusCode: 'success'
+            },
+            parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                return {
+                    "code": res.state, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.datas,//解析数据列表
+                };
+            }
+        });
+
+        //头工具栏事件
+        table.on('toolbar(table)', function (obj) {
+            switch (obj.event) {
+                case 'search':
+                    doLoginFilter();//登陆状态验证
+                    var searchName = $('#searchName').val();
+                    reloadTable(searchName);
+                    break;
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        area: ['470px', '400px'],
+                        title: $.i18n.prop('addUser'),
+                        btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+                        btnAlign: 'c',
+                        yes: function (index, layero) {
+
+                            var body = layer.getChildFrame('body', index);
+                            var parentUser = $("#farmId").val();
+                            var userName = body.find('input[name="userName"]').val();
+                            var password = body.find('input[name="password"]').val();
+                            var tel = body.find('input[name="tel"]').val();
+                            var email = body.find('input[name="email"]').val();
+                            var realName = body.find('input[name="realName"]').val();
+                            var uPattern = /^[a-zA-Z0-9_-]{6,16}$/;
+                            if (!uPattern.test(userName)) {
+                                layer.msg($.i18n.prop('warn29'), {icon: 5});
+                                return false;
+                            }
+                            uPattern = /(.+){6,12}$/;
+                            if (!uPattern.test(password)) {
+                                layer.msg($.i18n.prop('warn30'), {icon: 5});
+                                return false;
+                            }
+                            //邮箱验证
+                            if (email != "") {
+                                uPattern = /.*@.*/;
+                                if (!uPattern.test(email)) {
+                                    layer.msg($.i18n.prop('warn47'), {icon: 5});
+                                    return false;
+                                }
+                            }
+                            //手机号格式验证
+                            if (tel != "") {
+                                uPattern = /^1\d{10}$/;
+                                if (!uPattern.test(tel)) {
+                                    layer.msg($.i18n.prop('warn48'), {icon: 5});
+                                    return false;
+                                }
+                            }
+                            $.ajax({
+                                type: "post",
+                                url: "../raise/saveUser",
+                                data: {
+                                     parentUser: parentUser,
+                                    userName: userName,
+                                    password: password,
+                                    tel: tel,
+                                    email: email,
+                                    realName: realName
+
+                                },
+                                success: function (result) {
+                                    if (result.state == 'success') {
+                                        layer.msg($.i18n.prop('success'), {icon: 1});
+                                        layer.close(index);
+                                        var searchName = $('#searchName').val();
+                                        reloadTable(searchName);
+
+                                    } else {
+                                       return layer.msg(result.msg);
+                                    }
+                                }
+                            });
+
+                        },
+                        anim: 3,
+                        content:
+                            'userManage/getUserDetail',
+                        success:
+
+                            function (layero, index) {
+
+                            }
+                    });
+                    break;
+            }
+        });
+
+        //监听行工具事件
+        table.on('tool(table)', function (obj) {
+            let data = obj.data;
+            var fristName = $("#fristName").val();
+            if (obj.event === 'del') {
+                layer.confirm($.i18n.prop('confirmDelete'), {
+                    btn: [$.i18n.prop('yes'), $.i18n.prop('no')],
+                    title: $.i18n.prop('info')
+                }, function (index) {
+
+                    $.ajax({
+                        type: "post",
+                        url: '../userManage/deleteUser',
+                        data: {
+                            id: data.id
+                        },
+                        success: function (result) {
+                            var searchName = $('#searchName').val();
+                            reloadTable(searchName);
+                        }
+                    });
+                    layer.close(index);
+
+                });
+            }
+            else if (obj.event === 'edit') {
+                layer.open({
+                    type: 2,
+                    area: ['470px', '400px'],
+                    title: $.i18n.prop('editUser'),
+                    btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+                    btnAlign: 'c',
+                    yes: function (index, layero) {
+                        var body = layer.getChildFrame('body', index);
+                        var userName = body.find('input[name="userName"]').val();
+                        var password = body.find('input[name="password"]').val();
+                        var tel = body.find('input[name="tel"]').val();
+                        var email = body.find('input[name="email"]').val();
+                        var realName = body.find('input[name="realName"]').val();
+                        var uPattern="";
+                        //邮箱验证
+                        if (email != "") {
+                            uPattern = /.*@.*/;
+                            if (!uPattern.test(email)) {
+                                layer.msg($.i18n.prop('warn47'), {icon: 5});
+                                return false;
+                            }
+                        }
+                        //手机号格式验证
+                        if (tel != "") {
+                            uPattern = /^1\d{10}$/;
+                            if (!uPattern.test(tel)) {
+                                layer.msg($.i18n.prop('warn48'), {icon: 5});
+                                return false;
+                            }
+                        }
+                        layer.load(2);
+                        $.ajax({
+                            type: "post",
+                            url: "../user/updateUserInfo",
+                            timeout: 10000,
+                            data: {
+                                userName: userName,
+                                newPassword: password,
+                                tel: tel,
+                                email: email,
+                                realName: realName
+                            }, error: function (data, type, err) {
+                                console.log(err);
+                                layer.closeAll('loading');
+                                layer.msg($.i18n.prop('fail'), {
+                                    offset: '6px'
+                                });
+                            },
+                            success: function (result) {
+                                layer.closeAll('loading');
+                                if (result.state == 'success') {
+                                    layer.msg($.i18n.prop('success'), {icon: 1});
+                                    $('.layui-laypage-btn').click();
+                                    layer.close(index);
+                                } else {
+                                    layer.msg($.i18n.prop(result.msg), {icon: 5});
+                                }
+                            }
+                        });
+
+                    },
+                    anim: 3,
+                    content: '../userManage/getUserDetail?id=' + data.id,
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);
+                        var userNameInput = body.find('input[name="userName"]');
+                        userNameInput.attr("disabled", "disabled");
+                    }
+                });
+            }
+        });
+    });
+
+    function reloadTable(searchName) {
+        table.reload('table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                searchName: searchName
+            }
+        });
+        $('#searchName').val(searchName);
+    }
+</script>

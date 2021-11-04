@@ -1,0 +1,146 @@
+*{margin: 0;padding: 0;}
+img{width: 100%;float: left;}
+li{list-style: none;}
+#body{
+    width: 100vw;
+    height: 100vh;
+    background: url(/static/img/monitor/industrialPark/body-bg.jpg) no-repeat;
+    background-size:100% 100%;
+}
+#header{width: 100vw;height: 9vh;}
+#header h2{font-size: 2.5vw;color: #12eff8;text-align: center;line-height: 9vh;}
+#main{
+    width: 95vw;
+    height: 50vh;
+    margin: 0 auto;
+    margin-top: 3vh;
+    display: flex;
+}
+.main-title{width: 15vw;height: 50vh;background: rgba(5,39,66,.7);color: #fff;font-size: 1vw;box-sizing: border-box;padding: 1vh 0.8vw;}
+.main-title h4{font-weight: normal;color: #4a8bcb;width: 6vw;height: 4vh;background: url(/static/img/monitor/industrialPark/h4-bg.png) no-repeat;background-size: 100% 100%;text-align: center;line-height: 4vh;margin: 2vh auto;}
+.main-title-pic{
+    width: 13vw;
+    height: 18vh;
+    box-sizing: border-box;
+    padding: 2vh 1.5vw;
+    background: url(/static/img/monitor/industrialPark/pic-bg.png)no-repeat;
+    background-size: 100% 100%;
+    margin-bottom: 4vh;
+}
+.main-title p{line-height: 4vh;}
+.main-vied{width: 40vw;height: 50vh;background: red;}
+.main-map{width: 40vw;height: 50vh;background: green;}
+#footer{
+    width: 95vw;
+    height: 31vh;
+    margin: 0 auto;
+    margin-top: 3vh;
+    display: flex;
+}
+.footer-title{font-size: 1vw;color: #FFFFFF;line-height: 6vh;}
+.footer-monitor,.footer-state,.footer-int{
+    width: 24vw;
+    height: 31vh;
+}
+.footer-curve{
+    width: 30vw;
+    height: 31vh;
+}
+.footer-monitor-main{
+    display: flex;
+    flex-wrap: wrap;
+    color: #FFFFFF;
+    width: 24vw;
+    height: 25vh;
+    overflow: hidden;
+    overflow-y: inherit;
+}
+.cm-m-l{
+    width: 10vw;
+    height: 4vh;
+    margin: 0.5vh 0.5vw;
+    text-align: center;
+    line-height: 4vh;
+    font-size: 0.6vw;
+    border-radius: 5px;
+    background: rgba(5,39,66,.3);
+}
+.footer-state-main{
+    box-sizing: border-box;
+    padding-right: 2vw;
+    width: 20vw;
+    height: 25vh;
+    overflow: hidden;
+    overflow-y: inherit;
+}
+
+.footer-state-main ul li{
+    display: flex;
+    font-size: .8vw;
+    color: #fff;
+    justify-content: space-between;
+    line-height: 6vh;
+}
+.footer-state-main ul li h5{
+    color: #4bedfc;
+    font-weight: normal;
+}
+.ac{color: red!important;}
+.footer-int{
+    box-sizing: border-box;
+    padding-left: 3vw;
+}
+.footer-title span{margin: 0 0.5vw;color: #44ecf5;}
+.footer-curve-main{width: 25vw;padding: 0 1vw;
+    height: 25vh;}
+
+
+
+
+
+
+
+
+
+
+
+
+.test{
+    overflow: auto;
+    float: left;
+    border: none;
+}
+.scrollbar{
+    width: 30px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.test-1::-webkit-scrollbar {/*滚动条整体样式*/
+
+    width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+
+    height: 1px;
+
+}
+
+.test-1::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+
+    border-radius: 10px;
+
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+
+    background: #535353;
+
+}
+
+.test-1::-webkit-scrollbar-track {/*滚动条里面轨道*/
+
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+
+    border-radius: 10px;
+
+    background: #EDEDED;
+
+}
+

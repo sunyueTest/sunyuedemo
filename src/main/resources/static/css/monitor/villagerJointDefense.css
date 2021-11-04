@@ -1,0 +1,821 @@
+*{margin: 0;padding: 0}
+#all{width: 100vw;height: 100vh;background: url("/static/img/monitor/wisdomFarmingMonitor/bodybgvlii.png") center;background-size: auto 100%;position: relative;z-index: 9999}
+body{width: 100vw!important;height:100vh!important;overflow: hidden;background:#00215a!important;}
+/*#canvasBox{width: 100vw;height: 100vh;position: fixed;*/
+    /*top: 0;left: 0;z-index: 9999}*/
+.test{
+    overflow: auto;
+    float: left;
+    border: none;
+}
+.scrollbar{
+    width: 5px;
+    height: 300px;
+    margin: 0 auto;
+}
+.test-1::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 5px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+.test-1::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #35aadc;
+}
+.test-1::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    background: #065681;
+
+}
+
+#title{
+    width: 60vw;
+    height: 35vh;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/villtitle.png") no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    animation: title 1.5s infinite;
+    animation-iteration-count:1;
+    position: relative;
+}
+@keyframes title
+{
+    0% {transform:translateY(-250px);}
+    100%{transform:translateY(0px);}
+}
+
+@-moz-keyframes title /* Firefox */
+{
+    0% {transform:translateY(-250px);}
+    100%{transform:translateY(0px);}
+}
+
+@-webkit-keyframes title /* Safari 和 Chrome */
+{
+    0% {transform:translateY(-250px);}
+    100%{transform:translateY(0px);}
+}
+
+@-o-keyframes title /* Opera */
+{
+    0% {transform:translateY(-250px);}
+    100%{transform:translateY(0px);}
+}
+
+
+.equipment{
+    width: 32vw;
+    height: 32vh;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/equipment.png") no-repeat;
+    background-size: 100% 100%;
+    position: fixed;
+    top: 12vh;
+    left: 1vw;
+    z-index: 9999;
+    perspective: 1000px;
+    animation: equipment 1.5s infinite;
+    animation-iteration-count:1;
+}
+@keyframes equipment
+{
+    0% {transform:translateX(-60vw);}
+    100%{transform:translateX(0px);}
+}
+
+@-moz-keyframes equipment /* Firefox */
+{
+    0% {transform:translateX(-60vw);}
+    100%{transform:translateX(0px);}
+}
+
+@-webkit-keyframes equipment /* Safari 和 Chrome */
+{
+    0% {transform:translateX(-60vw);}
+    100%{transform:translateX(0px);}
+}
+
+@-o-keyframes equipment /* Opera */
+{
+    0% {transform:translateX(-60vw);}
+    100%{transform:translateX(0px);}
+}
+
+
+
+
+.equipment .title{
+    color: #fff;
+    font-size: 0.8vw;
+    width: 12vw;
+    height: 4.2vh;
+    line-height: 4.2vh;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/titlebg.png") no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 3.5vh;
+    transform: rotate(6.5deg);
+
+}
+.equipment .title p{
+    transform: rotate(-2.5deg);
+}
+#equipmentchart{
+    width: 19vw;
+    height: 25vh;
+    margin-left: 1vw;
+    margin-top: -3vh;
+}
+.equipmentchartint{
+    width: 15vw;
+    height: 20vh;
+    transform-style: preserve-3d;
+    perspective-origin: 100% 100%;
+    transform: rotateY(20deg) rotateZ(1deg);
+    margin-top: 4vh;
+}
+.equipmentchartint .currenttimeIntList{
+    margin: 1vh auto;
+}
+.equipmentchartint .currenttimeIntList{
+    width: 10vw;
+    height: 3.5vh;
+    line-height: 3.5vh;
+    color: #03eaf4;
+    border: 1px solid #00faf0;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 0.8vw;
+    position: relative;
+    box-shadow:rgba(11, 234, 235,0.5) 0px 0px 10px inset;
+}
+.currenttime{
+    width: 32vw;
+    height: 64vh;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/currenttimeIntvill.png") no-repeat;
+    background-size: 100% 100%;
+    position: fixed;
+    top: 12vh;
+    right: 1vw;
+    z-index: 9999;
+    perspective: 1000px;
+    animation: currenttime 1.5s infinite;
+    animation-iteration-count:1;
+    color: #07dce0;
+}
+@keyframes currenttime
+{
+    0% {transform:translateX(60vw);}
+    100%{transform:translateX(0px);}
+}
+
+@-moz-keyframes currenttime /* Firefox */
+{
+    0% {transform:translateX(60vw);}
+    100%{transform:translateX(0px);}
+}
+
+@-webkit-keyframes currenttime /* Safari 和 Chrome */
+{
+    0% {transform:translateX(60vw);}
+    100%{transform:translateX(0px);}
+}
+
+@-o-keyframes currenttime /* Opera */
+{
+    0% {transform:translateX(60vw);}
+    100%{transform:translateX(0px);}
+}
+.currenttime .title{
+    color: #fff;
+    font-size: 0.8vw;
+    width: 12vw;
+    height: 4.2vh;
+    line-height: 4.2vh;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/titlebg.png") no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 2.5vh;
+}
+.currenttime .title p{
+    transform: rotate(-2.5deg);
+}
+.currenttimeInt{
+    width: 29vw;
+    height: 45vh;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 2vh;
+    margin-left: 1vw;
+    transform-style: preserve-3d;
+    perspective-origin: 100% 100%;
+    transform: rotateY(-8deg) rotateZ(-1deg);
+    overflow-y: scroll;
+}
+.currenttimeInt ul li i:nth-child(1){
+    color: #07dce0!important;
+}
+.dtree-icon-dian{
+    display: none!important;
+}
+.currenttimeInt ul li{
+    list-style: none;
+    font-size: 1vw;
+}
+.currenttimeInt ul li i:nth-child(2){
+    display: none;
+}
+.currenttimeInt ul li:hover{
+}
+.dtree-nav-div:hover{
+}
+.currenttimeIntList{
+    width: 13vw;
+    height: 3.5vh;
+    line-height: 3.5vh;
+    color: #03eaf4;
+    border: 1px solid #00faf0;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 0.8vw;
+    position: relative;
+    box-shadow:rgba(11, 234, 235,0.5) 0px 0px 10px inset;
+    transition: all 0.5s;
+}
+.currenttimeIntList:hover{
+    box-shadow:rgba(11, 234, 235,0.5) 2px 2px 20px inset;
+    cursor: pointer;
+    color: #fff;
+}
+.currenttimeInt ul li ul:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+.currenttimeInt ul li ul{zoom:1}
+.currenttimeInt ul li ul li{
+    float: left;
+    padding:0.5vw 1vw;
+}
+.currenttimeIntList .across{
+    display: block;
+    position: absolute;
+    width: 6px;
+    height: 2px;
+    background: #00faf0;
+}
+.currenttimeIntList .vertical{
+    display: block;
+    position: absolute;
+    width: 2px;
+    height: 6px;
+    background: #00faf0;
+}
+.ListTopLeft{
+    top: -2px;
+    left: -2px;
+    z-index: 99999;
+}
+.ListTopLeftTop{
+    top: -2px;
+    left: -2px;
+    z-index: 99999;
+}
+.ListTopRight{
+    top: -2px;
+    right: -2px;
+    z-index: 99999;
+}
+.ListTopRightTop{
+    top: -2px;
+    right: -2px;
+    z-index: 99999;
+}
+.ListBottomLeft,.ListBottomLeftBottom{
+    bottom: -2px;
+    left: -2px;
+    z-index: 99999;
+}
+.ListBottomRight,.ListBottomRightBottom{
+    bottom: -2px;
+    right: -2px;
+    z-index: 99999;
+}
+.earlyWarning{
+    width: 32vw;
+    height: 32vh;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/earlyWarning.png") no-repeat;
+    background-size: 100% 100%;
+    position: fixed;
+    top: 45vh;
+    right: 1vw;
+    z-index: 9999;
+    perspective: 1000px;
+    animation: currenttime 1.5s infinite;
+    animation-iteration-count:1;
+}
+.equipment ul{
+    display: flex;
+    width: 25vw;
+    justify-content: space-between;
+    transform-style: preserve-3d;
+    perspective-origin: 100% 100%;
+    transform: rotateY(-12deg) rotateZ(3deg);
+    margin-left: 3vw;
+}
+.equipment ul li{
+    list-style: none;
+    color: #03eaf4;
+    font-size: 0.6vw;
+    transition: all 0.5s;
+}
+.equipment ul li:hover{
+    cursor: pointer;
+    color: #fff;
+}
+
+#earlyWarningchart{
+    width: 29vw;
+    height: 18vh;
+    transform-style: preserve-3d;
+    perspective-origin: 100% 100%;
+    transform: rotateY(-5deg) rotateZ(0deg);
+    margin-left: 1vw;
+}
+.earlyWarning .title{
+    color: #fff;
+    font-size: 0.8vw;
+    width: 12vw;
+    height: 4.2vh;
+    line-height: 4.2vh;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/titlebg.png") no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 1.9vh;
+    transform: rotate(4.5deg);
+}
+.earlyWarning .title p{
+    transform: rotate(-2.5deg);
+}
+.WarningInt{
+    width: 37vw;
+    height: 15vh;
+    position: fixed;
+    bottom: 4vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/WarningInt.png") no-repeat;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+    padding: 0 2vw;
+    animation: WarningInt 1.5s infinite;
+    animation-iteration-count:1;
+}
+@keyframes WarningInt
+{
+    0% {transform:translateY(60vw) translateX(-50%);}
+    100%{transform:translateY(0px) translateX(-50%);}
+}
+@-moz-keyframes WarningInt /* Firefox */
+{
+    0% {transform:translateY(60vw);}
+    100%{transform:translateY(0px);}
+}
+@-webkit-keyframes WarningInt /* Safari 和 Chrome */
+{
+    0% {transform:translateY(60vw);}
+    100%{transform:translateY(0px);}
+}
+@-o-keyframes WarningInt /* Opera */
+{
+    0% {transform:translateY(60vw);}
+    100%{transform:translateY(0px);}
+}
+.WarningInt .title{
+    color: #fff;
+    font-size: 0.8vw;
+    width: 10vw;
+    height: 3vh;
+    line-height: 3vh;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/titlebg1.png") no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 1vh;
+}
+.WarningInt .title p{
+    height: 3vh;
+    line-height: 3vh;
+}
+.WarningInt ul li{
+    display: flex;
+    width: 33vw;
+    justify-content: space-between;
+    height: 3vh;
+    line-height: 3vh;
+}
+.WarningInt ul li p{
+    font-size: 0.8vw;
+    color: #09cede;
+}
+.WarningInt ul li .pred{
+    color: red;
+}
+.viodea{
+    width: 12vw;
+    height: 18vh;
+    /*background: #58a; background: linear-gradient(135deg, transparent 15px, #58a 0) top left, linear-gradient(-135deg, transparent 15px, #655 0) top right, linear-gradient(-45deg, transparent 15px, #58a 0) bottom right, linear-gradient(45deg, transparent 15px, #655 0) bottom left; background-size: 50% 50%; background-repeat: no-repeat;*/
+    position: fixed;
+    bottom:2vh;
+    left: 1vw;
+    perspective: 1000px;
+}
+.viode3Da{
+    width: 100%;
+    height: 100%;
+    border: solid 2px #0eafcc;
+    transform-style: preserve-3d;
+    perspective-origin: 100% 100%;
+    transform: rotateY(-14deg) rotateZ(-3deg);
+}
+.viodeb{
+    width: 14vw;
+    height: 20vh;
+    /*background: #58a; background: linear-gradient(135deg, transparent 15px, #58a 0) top left, linear-gradient(-135deg, transparent 15px, #655 0) top right, linear-gradient(-45deg, transparent 15px, #58a 0) bottom right, linear-gradient(45deg, transparent 15px, #655 0) bottom left; background-size: 50% 50%; background-repeat: no-repeat;*/
+    position: fixed;
+    bottom:3vh;
+    left: 15vw;
+    perspective: 1000px;
+}
+.viode3Db{
+    width: 100%;
+    height: 100%;
+    border: solid 2px #0eafcc;
+    transform-style: preserve-3d;
+    perspective-origin: 100% 100%;
+    transform: rotateY(-14deg) rotateZ(-3deg);
+}
+.viodec{
+    width: 12vw;
+    height: 18vh;
+    /*background: #58a; background: linear-gradient(135deg, transparent 15px, #58a 0) top left, linear-gradient(-135deg, transparent 15px, #655 0) top right, linear-gradient(-45deg, transparent 15px, #58a 0) bottom right, linear-gradient(45deg, transparent 15px, #655 0) bottom left; background-size: 50% 50%; background-repeat: no-repeat;*/
+    position: fixed;
+    bottom:2vh;
+    right: 1vw;
+    perspective: 1000px;
+}
+.viode3Dc{
+    width: 100%;
+    height: 100%;
+    border: solid 2px #0eafcc;
+    transform-style: preserve-3d;
+    perspective-origin: 100% 100%;
+    transform: rotateY(14deg) rotateZ(3deg);
+}
+.vioded{
+    width: 14vw;
+    height: 20vh;
+    /*background: #58a; background: linear-gradient(135deg, transparent 15px, #58a 0) top left, linear-gradient(-135deg, transparent 15px, #655 0) top right, linear-gradient(-45deg, transparent 15px, #58a 0) bottom right, linear-gradient(45deg, transparent 15px, #655 0) bottom left; background-size: 50% 50%; background-repeat: no-repeat;*/
+    position: fixed;
+    bottom:3vh;
+    right: 15vw;
+    perspective: 1000px;
+}
+.viode3Dd{
+    width: 100%;
+    height: 100%;
+    border: solid 2px #0eafcc;
+    transform-style: preserve-3d;
+    perspective-origin: 100% 100%;
+    transform: rotateY(14deg) rotateZ(3.5deg);
+}
+.map3d{
+    width: 32vw;
+    height: 32vh;
+    position: fixed;
+    top: 44vh;
+    left: 1vw;
+    z-index: 9999;
+    perspective: 1000px;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/villleftbg.png") no-repeat;
+    background-size: 100% 100%;
+    animation: map3d 1.5s infinite;
+    animation-iteration-count:1;
+}
+@keyframes map3d
+{
+    0% {transform:translateX(-60vw);}
+    100%{transform:translateX(0px);}
+}
+@-moz-keyframes map3d /* Firefox */
+{
+    0% {transform:translateX(-60vw);}
+    100%{transform:translateX(0px);}
+}
+
+@-webkit-keyframes map3d /* Safari 和 Chrome */
+{
+    0% {transform:translateX(-60vw);}
+    100%{transform:translateX(0px);}
+}
+@-o-keyframes map3d /* Opera */
+{
+    0% {transform:translateX(-60vw);}
+    100%{transform:translateX(0px);}
+}
+.map{
+    width: 32vw;
+    height: 27.5vh;
+    transform-style: preserve-3d;
+    perspective-origin: 100% 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between ;
+    padding: 1vw 5vh;
+    transform: rotateY(5deg) rotateZ(-3deg);
+    padding-top: 6vh;
+}
+.map .map-pic{
+    width: 14vw;
+    height: 18vh;
+    margin-right: 1vw;
+}
+.map .map-pic img{
+    width: 100%;
+    height: 100%;
+}
+.map .map-int{
+    width: 12vw;
+    color: #00c1ca;
+    font-size: 1vw;
+    margin-top: 1vh;
+}
+.map .map-int p{
+    line-height: 4vh;
+}
+#container{
+    width: 31.7vw;
+    height: 27vh;
+    z-index: -9;
+    background: transparent;
+}
+.map img{
+    width: 100%;
+    float: left;
+}
+.mapIconTop{
+    width: 5.5vw;
+    position: absolute;
+    top: -0.2vh;
+    right: 4vw;
+    z-index: 999;
+}
+.mapIconLeft{
+    width: 0.7vw;
+    position: absolute;
+    top: 6vh;
+    left: -0.2vw;
+    z-index: 999;
+
+}
+.mapIconRight{
+    width: 0.7vw;
+    position: absolute;
+    top: 6vh;
+    right:-0.2vw;
+    z-index: 999;
+
+}
+.mapIconBottom{
+    width: 5.5vw;
+    position: absolute;
+    bottom: -0.2vh;
+    right: 4vw;
+    z-index: 999;
+
+}
+.amap-copyright{
+    display: none!important;
+}
+.amap-logo{
+    display: none!important;
+}
+.bottombg{
+    width: 100vw;
+    height: 60vh;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/bottomimg.png") no-repeat;
+    background-size: 100% 100%;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+img{width: 100%}
+.vioda,.viodb,.viodc,.viodd{
+    width: 13vw;
+    height: 18vh;
+    animation: vioda 3.5s infinite;
+    animation-iteration-count:1;
+    border: 1px solid #07dce0;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/villpicdz.jpg") no-repeat;
+    background-size: 100% 100%;
+    z-index: 999999;
+}
+.vioda{
+    position: fixed;
+    bottom:4vh;
+    left: 1vw;
+    cursor: pointer;
+    transform: rotate(-5deg);
+}
+@keyframes vioda
+{
+    0% {opacity: 0}
+    100%{opacity: 1}
+}
+
+@-moz-keyframes WarningInt /* Firefox */
+{
+    0% {opacity: 0}
+    100%{opacity: 1}
+}
+
+@-webkit-keyframes WarningInt /* Safari 和 Chrome */
+{
+    0% {opacity: 0}
+    100%{opacity: 1}
+}
+@-o-keyframes WarningInt /* Opera */
+{
+    0% {opacity: 0}
+    100%{opacity: 1}
+}
+.viodb{
+    position: fixed;
+    bottom:7vh;
+    left: 17vw;
+    cursor: pointer;
+    transform: rotate(-5deg);
+}
+.viodc{
+    position: fixed;
+    bottom:4vh;
+    right:1vw;
+    cursor: pointer;
+    transform: rotate(5deg);
+
+}
+.viodd{
+    position: fixed;
+    bottom:7vh;
+    right:17vw;
+    cursor: pointer;
+    transform: rotate(5deg);
+
+}
+#echar{
+    width: 49vw;
+    height: 49vw;
+    position: fixed;
+    top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.echarInt{
+    width: 30vw;
+    height: 30vw;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 8.4vw auto;
+    position: relative;
+}
+#echar:after{
+    content:"";
+    width: 47vw;
+    height: 47vw;
+    position: fixed;
+    top: 0vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -999;
+    background: url("/static/img/monitor/wisdomFarmingMonitor/villecharbg.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+
+#echar iframe{
+    width: 100%;
+    height: 110%;
+    border: none;
+}
+#echar iframe #dataAttribution{
+    display: none!important;
+}
+.sjyes{
+    width: 0;
+    height: 0;
+    border: 0.5vw solid transparent;
+    border-top-color: #07dce0 ;
+    display: block;
+    margin-top: 1.5vh;
+    margin-right: 0.5vw;
+
+}
+.sjno{
+    width: 0;
+    height: 0;
+    border: 0.5vw solid transparent;
+    border-left-color: #07dce0 ;
+    display: block;
+    margin-top: 1.3vh;
+}
+.treebnt{
+    font-size: 1.2vw;
+    line-height: 4.5vh;
+    display: flex;
+    cursor: pointer;
+}
+.treelist{
+    padding-left: 2vw;
+    box-sizing: border-box;
+}
+.Hamletbnt{
+    margin: 0.5vw;
+    cursor: pointer;
+}
+.Hamletbntac{
+    background: url("/static/img/monitor/wisdomFarmingMonitor/rightnavbg.png") no-repeat;
+    background-size: 100% 100%;
+}
+#dataAttribution{
+    display: none!important;
+}
+.echarIntBox{
+    width: 30vw;
+    height: 30vw;
+    position:absolute;
+    top: 0;
+    left: 0;
+}
+
+#reminder{
+    width: 20vw;
+    height: 22vh;
+    background: rgba(0,0,0,0.4);
+    position: fixed;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    color: #fff;
+}
+.reminder-title{
+    display: flex;
+    justify-content: start;
+    padding-left: 1vw;
+}
+.reminder-title span{
+    display: inline-block;
+    width: 0.5vw;
+    height: 2vh;
+    background: #ff9600;
+    margin-top: 1vh;
+}
+.reminder-title p{
+    font-size: 1vw;
+    line-height: 4vh;
+    margin-left: 1vw;
+}
+.reminder-int{
+    display: flex;
+    justify-content: space-between;
+}
+.reminder-int-img{
+    width: 6vw;
+}
+.reminder-int-p{
+    text-align: left;
+    font-size: 0.8vw;
+    width: 13vw;
+}
+.reminder-int-p p{
+    margin-top: 2vh;
+}
+.reminder-title-ac{
+    background: red!important;
+}
+#reminder-dele{
+    cursor: pointer;
+    font-size: 1.5vw;
+    position: absolute;
+    right: 8px;
+    top: 0px;
+    transition: all 0.5s;
+}
+#reminder-dele:hover{
+    color: red;
+}
+.earlyWarningUlbntac{
+    color: #fff!important;
+}

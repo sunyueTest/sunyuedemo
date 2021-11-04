@@ -1,0 +1,325 @@
+#span_company{color: palegreen}
+/*下拉导航栏*/
+.layui-side-menu .layui-side-scroll{
+    /*background-image: url("/static/img/indexcss/index6-list-bg.png")!important;*/
+    background-size: 92% 100%!important;
+    border-top: none!important;
+    box-sizing: border-box;
+
+}
+.layui-card-header{background: #c48948!important;color: #fff!important}
+.layui-layout-admin .layui-side{
+    background: url("/static/img/indexcss/index6-list-bg.png")!important;
+    background-size: 100% 100%!important;
+}
+.layui-nav-itemed>.layui-nav-child{
+    background-color: transparent!important;
+}
+.layui-layout-admin .layui-logo {
+    background: transparent!important;
+    border: none!important;
+    border-bottom: none!important;
+}
+.layui-nav-tree .layui-nav-bar{
+    background: #954e10!important;
+}
+    /*导航背景*/
+.layui-layout-admin .layui-header{background: url("/static/img/indexcss/index6-nav-bg.png")!important;}
+
+.layui-layout-admin .layui-side a{color: #fff}
+a cite{color: #fff}
+.layui-side-menu .layui-nav .layui-nav-item .layui-icon{color: #fff}
+body .layui-layout-admin .layui-body{background-image: none;background: #7ca887}
+/*body .layui-card{background: #7ca887;color: #fff}*/
+body .layui-card a{color: #fff}
+.layui-layout-admin .layui-header a:hover{color: #fff}
+.layui-layout-admin .layui-header a, .layui-layout-admin .layui-header a cite {color: #fff!important;}
+.layui-layout-admin .layui-header .layui-nav .layui-nav-more{
+    border-top-color: #954e10!important;
+}
+/*下拉导航条颜色背景*/
+.layui-nav-child dd {
+    background: transparent!important;
+}
+.layui-nav-child dd:hover{
+    background: transparent!important;
+}
+.layui-layout-admin .layui-header .layui-layout-right .layui-nav-child{
+    background:#954e10!important;
+}
+/*背景图片*/
+body .layui-layout-admin .layui-body{
+    background-image:url("/static/img/indexcss/index6-body-bg.png")!important;
+    background-size: 101% 100%;
+    background-repeat: no-repeat;
+    background-position:-15px;
+
+}
+/*列表导航背景图片*/
+.layui-nav-child dd:hover{
+    background: #954e10!important;
+    background-size: 100% 100%;
+}
+body .layui-this a{
+    background: transparent!important;
+    background-position: center!important;
+    background-size: 100% 100%!important;
+    background-color:#7ca887!important;
+}
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
+    background: #954e10!important;
+}
+.layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this{
+    background: #954e10!important;
+}
+/*导航背景、导航字体颜色*/
+.layui-tab-title{
+    background: #c48948!important;
+    color: #fff!important;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    width: 94%;
+    margin: 0 auto;
+    padding: 5px 20px;
+    cursor: pointer;
+    box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+/*内容导航背景*/
+body .layui-this{
+    background: #954e10;
+    border: none;
+    color: #fff!important;
+    border-radius: 10px;
+}
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after{
+    border-bottom: none!important;
+}
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after{
+    border-bottom: none!important;
+}
+.flysand-green-vertical-line{
+    background: #954e10!important;
+}
+/*语言选择、管理员三角号*/
+.layui-layout-admin .layui-header .layui-nav .layui-nav-more{
+    border-top-color: #fff!important;
+}
+.layui-layout-admin .layui-header .layui-layout-right .layui-nav-child{
+    background:#c48948!important;
+}
+.layui-header .layui-nav-child a{
+    color: #000!important;
+    background: #c48948;!important
+}
+.layui-header .layui-nav-child a:hover{
+    color: #fff!important;
+    background: #c48948;!important
+}
+/*———index6--森林主题具体细节css样式————————————————————————————————————————————————————————*/
+.flysand-container-horizontal{
+background-image:none !important;
+background: #c58a49!important;
+color: #fff!important;
+border: 1px solid #fff;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+.flysand-ul li{
+background-image:none !important;
+background: #c58a49!important;
+color: #fff!important;
+border: 1px solid #fff;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+ul.ztree{
+background-image:none !important;
+background: #c58a49!important;
+color: #fff!important;
+border: 1px solid #fff;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+.ztree li a{
+color: #fff!important;
+}
+.ztree li a.curSelectedNode{
+background:#954e10!important;
+color: #fff!important;
+}
+.ztree li a:hover{
+background:#954e10!important;
+color: #fff!important;
+}
+/*图形化显示*/
+.flysand-container,.container{
+background-image:none !important;
+background: #c58a49!important;
+color: #fff!important;
+border: 1px solid #fff;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+height: auto;!important;
+}
+.ztree li a{
+background: none!important;
+}
+.layui-btn{
+background: #c58a49!important;
+color: #fff!important;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+.layui-table thead{
+background-image:none !important;
+background: #c58a49!important;
+color: #fff!important;
+border: 1px solid #fff;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+    width: 100%;
+}
+.layui-form-label{
+background: #c58a49!important;
+color: #fff!important;
+}
+/*图形化显示————————搜索框*/
+.input-device{
+background: none!important;
+padding: 2px 4px;
+margin-top: 3px!important;
+}
+.flysand-div-inline2{
+background: #c58a49!important;
+padding:0 12px;
+border-radius: 20px;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+
+}
+
+.flysand-div-inline2-img{
+display: block;
+background: url("/static/img/indexcss/index5-ss-bnt.png")no-repeat!important;
+
+}
+
+.input-device-bnt{
+display: none!important;
+height: 24px;
+width: 40px;
+background-size: 100% 100%;
+margin-top: 5px;
+margin-left: 10px;
+cursor: pointer;
+color: #fff;
+line-height: 24px;
+text-align: center;
+font-size: 10px;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+
+/*设备管理*/
+.layui-btn-primary{
+color: #fff!important;
+}
+.layui-table-tool-self .layui-icon{
+color: #954e10;
+}
+/*分组管理*/
+#tips{
+color: #0A0E11;
+}
+
+
+
+/*组态列表*/
+/*开关*/
+.layui-form-onswitch{
+background: #c58a49!important;
+border-color:#fff!important;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+/*分页*/
+.layui-laypage .layui-laypage-curr .layui-laypage-em{
+background: #c58a49!important;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+/*中型管理按钮颜色*/
+button.btn.btn-primary:hover, button.btn.btn-primary:focus, button.btn.btn-primary.focus, button.btn.btn-primary:active, button.btn.btn-primary.active {
+background: #c58a49!important;
+border-color: #fff!important;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+button.btn.btn-primary{
+background: #c58a49!important;
+border-color: #fff!important;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+/*全选按钮*/
+.layui-form-checked[lay-skin=primary] i{
+background: #c58a49!important;
+border-color: #fff!important;
+box-shadow:inset 0px 0px 5px 1px #6d310c;
+}
+.layui-btn-primary:hover{
+border-color: #954e10!important;
+}
+/*历史数据*/
+tbody tr{
+    background-image: none !important;
+    background: #c58a49!important;
+    color: #fff!important;
+    border: 1px solid #fff;
+    box-shadow: inset 0px 0px 5px 1px #6d310c;
+}
+
+.fa {
+    color: #fff!important;
+}
+/*首页css修改*/
+
+.layui-card-header span{
+    color: #fff!important;
+}
+.iconfont {
+    color: #fff!important;
+}
+html body .layui-side-scroll .layui-nav-item dd a{
+    padding-left: 44px!important;
+}
+
+.layui-side-menu .layui-nav .layui-nav-item a {
+    padding-left: 25px;
+}
+
+.flysand-container{
+    height: 45px;
+}
+/*首页背景颜色修改，字体颜色修改*/
+#help{
+    background: rgba(255,255,255,.3)!important;
+    color: #000!important;
+}
+.layui-col-md4 .layui-card-body{
+    background: rgba(255,255,255,.3)!important;
+    color: #000!important;
+}
+.layui-col-md4 .layui-table td{
+    color: #000!important;
+}
+.layui-table tr{
+    width: 100%!important;
+}
+.layui-table-view .layui-table{
+    width: 100%!important;
+}
+.layui-table-box .layui-table-header {
+    margin-right: 0!important;
+}
+/*列表显示*/
+#deviceName{
+    line-height: 46px!important;
+    color: #fff!important;
+}
+#deviceNumber{
+    line-height: 49px!important;
+    background: transparent!important;
+    color: #fff!important;
+    border: none!important;
+}
+
+

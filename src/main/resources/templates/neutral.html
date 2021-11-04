@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+        neutral
+    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/neutral.css">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<style type="text/css">
+    .dialog-bg {
+        width: 100%;
+        height: 100vh;
+        background: rgba(9, 9, 9, .6);
+        position: absolute;
+        z-index: 10000;
+    }
+
+    .dialog-body {
+        width: 30rem;
+        background: #FFF;
+        border-radius: 0.5rem;
+        margin: 0 auto;
+        margin-top: 10%;
+    }
+
+    .dialog-content {
+        padding: 1rem;
+        line-height: 1.5rem;
+        overflow: auto;
+        height: 10rem;
+    }
+
+    .dialog-title {
+        text-align: center;
+        font-weight: revert;
+        font-size: 1.5rem;
+        color: black;
+        padding: 1rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .dialog-bottom {
+        height: 4rem;
+        border-radius: 0 0 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px solid #ddd;
+    }
+
+    .dialog-vertical-line {
+        height: 100%;
+        background: #ddd;
+        width: 2px;
+    }
+
+    .dialog-btn-text, .dialog-agree-text {
+        width: 100%;
+        display: block;
+        text-align: center;
+        cursor: pointer;
+        font-size: 1rem;
+        font-family: '黑体';
+    }
+
+    .dialog-text-point, .dialog-text-point:hover, .dialog-agree-text {
+        color: #00b5ff;
+    }
+</style>
+<input style="width: 0px;height:0px" id="file" type="file" accept="image/*"
+       onchange="javascript:setImagePreview();" />
+<div class="panel animated profile_mes" style="position: absolute; width: 100%">
+    <div class="panel-body profile-page page_distance">
+        <div class="form-group row clearfix profile_input">
+            <label class="col-xs-3 col-sm-3 control-label">
+                <em style="color: red">
+                    *
+                </em>
+                <span id="sysName">系统名称 ：</span>
+            </label>
+            <div class="col-xs-9 col-sm-6">
+                <input type="text"
+                       class="form-control ng-pristine ng-untouched ng-valid ng-not-empty"
+                       ng-model="projectName" id="systematic" placeholder="" value=""
+                       style="">
+            </div>
+        </div>
+        <div class="form-group row clearfix profile_input">
+            <label for="company" class="col-xs-3 col-sm-3 control-label">
+                <em style="color: red">
+                    *
+                </em>
+                <span id="companyName">公司名称 ：</span>
+            </label>
+            <div class="col-xs-9 col-sm-6">
+                <input type="text"
+                       class="form-control ng-pristine ng-untouched ng-valid ng-not-empty"
+                       id="company" placeholder="" value="" style="">
+            </div>
+        </div>
+        <div class="form-group row clearfix profile_input">
+            <label id="suffix" for="company" class="col-xs-3 col-sm-3 control-label">
+                登录页后缀 ：
+            </label>
+            <div class="col-xs-9 col-sm-6">
+                <div class="form-control ng-pristine ng-untouched">
+                    <span id="address"></span>
+                    <input type="text" id="loginPath" placeholder="" value=""
+                           style="border: none;width: 12vw">
+                    <span id="copy" onclick="copyAddress()" style="color: #0066cc;cursor: copy">复制</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row clearfix profile_input">
+            <label class="col-xs-3 col-sm-3 control-label"> <em style="color: red">
+                *
+            </em>
+                logo：
+            </label>
+            <div class="col-xs-9 col-sm-6">
+                <div class="form-group row clearfix">
+                    <div class="col-xs-8 col-sm-12">
+                        <div class="userpic">
+                            <div class="userpic-wrapper">
+                                <img
+                                    id="img_view"
+                                    click="uploadImg()"
+                                    src="img/jxct_logo.png">
+                            </div>
+                            <a id="demo1" href="javascript:;" class="change-userpic" onclick="uploadImg()">
+                                更改
+                            </a>
+                            <input type="file" ng-show="false" id="neutralUploadFile"
+                                  ng-file-select="onFileSelect($files)"
+                                   file-model="file" class="ng-hide">
+                        </div>
+                        <em id="em"
+                            style="font-size:10px;vertical-align: bottom;color:#fff;margin-left:15px;">
+                            仅支持jpg、gif、png格式；大小为1M以内
+                        </em>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row clearfixprofile_input ng-scope" ng-if="ums_setting_edit">
+            <label class="col-xs-2 col-sm-3 col-md-2  control-label">
+            </label>
+            <div class="col-xs-8 col-sm-6  col-md-offset-2">
+                <button type="button"
+                        class="btn btn-primary btn-with-icon save-profile ng-binding"
+                        onclick="confirm()">
+                    <!--<i class="ion-android-checkmark-circle">-->
+                    <!--</i>-->
+
+                    <span id="span1">修改
+							</span>
+                </button>
+                <a id="open" target="_blank"
+                   style="background: #f60;color:#fff;padding:6px 10px;border-radius: 5px;margin-left: 30px;display: none">
+                    申请开通
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dialog-bg" id="customizationFlagDialog" style="display: none; position: absolute">
+    <div class="dialog-body">
+        <div class="dialog-title">温馨提示</div>
+        <div class="dialog-content">
+            <pre>该功能为定制化收费模块, 您的系统试用期已结束, 如需开通请联系我们.
+            </pre>
+        </div>
+        <div class="dialog-bottom">
+            <div class="dialog-btn-text" onclick="onMyCancel()"><span>关闭</span></div>
+            <span class="dialog-vertical-line"></span>
+            <div class="dialog-agree-text">
+                <a href="http://p.qiao.baidu.com/cps/chat?siteId=13221390&userId=20515774&cp=&cr=&cw=%E4%BA%91%E5%B9%B3%E5%8F%B0"
+                   target="_blank">
+                    <i class="layui-icon iconfont icon-zaixiankefu1"></i> 售后服务
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    let customizationFlag = false;
+    $('#sysName').text($.i18n.prop('sysName')+':');
+    $('#companyName').text($.i18n.prop('companyName')+':');
+    $('#suffix').text($.i18n.prop('loginSuffix'));
+    $('#demo1').text($.i18n.prop('update'));
+    $('#em').text($.i18n.prop('imgDesc'));
+    $('#span1').text($.i18n.prop('update'));
+    $('#open').text($.i18n.prop('applyOpen'));
+    $('#copy').text($.i18n.prop('copy'));
+
+
+
+    layui.use('layer', function () {
+        var address = document.getElementById('address');
+        address.innerHTML = window.location.origin + "/doLogin/";
+        $.ajax({
+            url: "user/selUserDetails",
+            data: {},
+            dataType: "json",
+            type: "post",
+            timeout: 30000,
+            error: function (data, type, err) {
+                console.log(err);
+                layer.closeAll('loading');
+                layer.msg($.i18n.prop('fail'), {
+                    offset: '6px'
+                });
+            },
+            success: function (data) {
+                layer.closeAll('loading');
+                if ('success' == data.state) {
+                    if (data.data.info != null) {
+                        let now = new Date().getTime();
+                        let customizationTime = new Date(data.data.info.customizationFlag).getTime();
+                        if(now > customizationTime){
+                            $("#customizationFlagDialog").show();
+                        }else{
+                            customizationFlag = true;
+                        }
+                        changeText(data.data.info.systematic, data.data.info.company, data.data.info.logo);
+                        $('#loginPath').val(data.data.info.loginPath);
+                    }else{
+                        $("#customizationFlagDialog").show();
+                    }
+                }
+            }
+        });
+    });
+
+
+    //日期方法
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+
+    function onMyCancel(){
+        $("#customizationFlagDialog").hide();
+    }
+
+    function uploadImg() {
+        if(!customizationFlag){
+            $("#customizationFlagDialog").show();
+            return;
+        }
+        var docObj = document.getElementById("file");
+        docObj.click();
+    }
+
+    function copyAddress() {
+        if(!customizationFlag){
+            $("#customizationFlagDialog").show();
+            return;
+        }
+        var loginPath = $('#loginPath').val();
+        var address = document.getElementById("address").innerHTML;
+        var oInput = document.createElement('input');
+        oInput.value = address + loginPath;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display = 'none';
+        layui.use('layer', function () {
+            layer.msg($.i18n.prop('copySuccess'));
+        });
+    }
+
+    function confirm() {
+        if(!customizationFlag){
+            $("#customizationFlagDialog").show();
+            return;
+        }
+        var systematic = $('#systematic').val();
+        var company = $('#company').val();
+        var loginPath = $('#loginPath').val();
+        if (systematic == '') {
+            layer.msg($.i18n.prop('validSystem'))
+            return
+        }
+        if (company == '') {
+            layer.msg($.i18n.prop('validCompany'))
+            return
+        }
+        var data = new FormData();
+        data.append('systematic', systematic);
+        data.append('company', company);
+        data.append('loginPath', loginPath);
+        var files = $('#file').prop('files');
+        if (files[0] != null) {
+            data.append('file', files[0]);
+            if (files[0].size > 1048000) {
+                layer.msg($.i18n.prop("validFileSize"));
+                return
+            }
+        }
+        layer.load(2);
+        $.ajax({
+            type: 'POST',
+            url: "user/upUserDetails",
+            data: data,
+            dataType: "json",
+            timeout: 30000,
+            cache: false,
+            processData: false,
+            contentType: false,
+            error: function (data, type, err) {
+                console.log(err);
+                layer.closeAll('loading');
+                layer.msg($.i18n.prop('fail'), {
+                    offset: '6px'
+                });
+            },
+            success: function (data) {
+                layer.closeAll('loading');
+                if ('success' == data.state) {
+                    parent.getUserInfo();
+                    parent.sendBroadcast('changeSystematic',data.data)
+                }
+                layer.msg($.i18n.prop(data.msg));
+            }
+        });
+    }
+
+    //下面用于图片上传预览功能
+    function setImagePreview() {
+        var docObj = document.getElementById("file");
+        var imgObjPreview = document.getElementById("img_view");
+        //files属性：返回一个 Files 集合，由指定文件夹中包含的所有 File 对象组成，包括设置了隐藏和系统文件属性的文件。
+        if (docObj.files && docObj.files[0]) {
+            //火狐下，直接设img属性
+            imgObjPreview.style.display = 'block';
+            // imgObjPreview.style.width = '150px';
+            // imgObjPreview.style.height = '180px';
+            //imgObjPreview.src = docObj.files[0].getAsDataURL();
+            //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+            imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+        } else {
+            //IE下，使用滤镜
+            docObj.select();
+            var imgSrc = document.selection.createRange().text;
+            var localImagId = document.getElementById("localImag");
+            //必须设置初始大小
+            // localImagId.style.width = "150px";
+            // localImagId.style.height = "180px";
+            //图片异常的捕捉，防止用户修改后缀来伪造图片
+            try {
+                localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+            } catch (e) {
+                alert($.i18n.prop('validFileFormat'));
+                return false;
+            }
+            imgObjPreview.style.display = 'none';
+            document.selection.empty();
+        }
+        return true;
+    }
+
+    function changeText(systematic, company, logo) {
+        $('#systematic').val(systematic);
+        $('#company').val(company);
+        $('#img_view').attr("src", logo);
+    }
+
+</script>
+</html>

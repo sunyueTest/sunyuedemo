@@ -1,0 +1,79 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="/static/js/zTreejs/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="/static/layui/layui.all.js"></script>
+    <script type="text/javascript">
+        function getFatherId(a) {
+            $("#cang").val(a);
+            $.ajax({
+                type: "post",
+                data: "id="+a,
+                url: "/rights/fatherIdGetSonList",
+                success: function(data){
+                    if(data.data != null){
+                        for(var i=0; i<data.data.length; i++) {
+                            $("#caidanxialakuang").append("<option id='"+data.data[i].id+"'>"+data.data[i].name+"</option>");
+                        }
+                    }
+                }
+            });
+        }
+        function submitt(){
+            if($("#name").val() == '' || $("#enName").val() == ''){
+                alert("带 * 号的为必填项");
+            }else{
+                var name = $("#name").val();
+                var url = $("#url").val();
+                if(url == undefined){url = null}
+                var enName = $("#enName").val();
+                var icon = $("#icon").val();
+                if(icon == null){icon = null}
+                var cate = $("#cate").find("option:checked").attr("id");
+                if(cate == 0){cate = "menu"}else{cate = "page"}
+                var selectId = $("#caidanxialakuang").find("option:checked").attr("id");
+                if(selectId == undefined){selectId = -1}
+                var upOrDown = $("#upOrDown").find("option:checked").attr("id");
+                var parentId = $("#cang").val();
+                $.ajax({
+                    type: "post",
+                    data: "url="+url+"&cate="+cate+"&name="+name+"&parentId="+parentId+"&icon="+icon+"&level=2&sort=0&enName="+enName+"&thisId="+selectId+"&upOrDown="+upOrDown,
+                    url: "/rights/insertRightForSonList",
+                    success: function(){
+                        var success = 1;
+                        parent.getValues(success);
+                        parent.layer.close(parent.layer.getFrameIndex(window.name));
+                    }
+                });
+            }
+        }
+        function downLoad(){
+            parent.layer.close(parent.layer.getFrameIndex(window.name));
+        }
+    </script>
+</head>
+
+<body>
+<input id="cang" value="" type="hidden" />
+<div style="margin-left: 70px">
+    <form>
+        <div>
+            <div>菜单名称：<input type="text" id="name" placeholder="*" autocomplete="off" /></div><br/>
+            <div style="margin-left: 45px">url：<input type="text" id="url" autocomplete="off" /></div><br/>
+            <div>英文名称：<input type="text" id="enName" placeholder="*" autocomplete="off" /></div><br/>
+            <div style="margin-left: 32px">图标：<input type="text" id="icon" autocomplete="off" /></div><br/>
+            <div>菜单类别：<select id="cate" style="width: 173px"><option id="0">菜单</option><option id="1">链接</option></select></div><br/>
+            <div><span>目标菜单：</span><select id="caidanxialakuang" style="width: 173px"></select></div><br/>
+            <div><span>目标位置：</span><select id="upOrDown" style="width: 173px"><option id="0">创建在此菜单的上方</option><option id="1">创建在此菜单的下方</option></select></div>
+            <div style="margin-top: 20px">
+                <div style="text-align: center;margin-left: 80px; margin-right: 70px; float: left;">
+                    <input onclick="submitt()" type="button" value="保存" title="保存" />
+                </div>
+                <div><input onclick="downLoad()" type="button" value="取消" title="取消" /></div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

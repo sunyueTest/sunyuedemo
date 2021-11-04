@@ -1,0 +1,43 @@
+<config>
+    <input>
+        <jar in="cloudplatform-1.0.0.jar" out="cloudplatform-1.0.0-obfuscated.jar"/>
+    </input>
+
+    <keep-names>
+        <class access="protected+" ignore="false">
+            <field access="protected+"/>
+            <!-- 重要！！配置方法的参数不进行混淆，否则接口访问的参数会出现不匹配的问题-->
+            <!--设置所有方法的参数名不进行混淆-->
+            <method access="private+" parameters="keep"/>
+        </class>
+
+    </keep-names>
+
+    <ignore-classes>
+        <class template="class *springframework*"/>
+        <class template="class *apache*"/>
+        <class template="class *jni*"/>
+        <class template="class *alibaba*"/>
+        <class template="class *servlet*"/>
+        <class template="class *persistence*"/>
+        <class template="class *dao*"/>
+        <class template="class *apache*"/>
+        <class template="class org.nutz.dao.*"/>
+
+        <!-- 排除如下包的类 -->
+        <class template="class com.jxctdzkj.cloudplatform.bean.*"/>
+        <class template="class com.jxctdzkj.cloudplatform.CloudplatformApplication"/>
+        <class template="class com.jxctdzkj.cloudplatform.interceptor.*"/>
+        <class template="class com.jxctdzkj.cloudplatform.utils.*"/>
+        <class template="class com.jxctdzkj.cloudplatform.exception.*"/>
+        <class template="class com.jxctdzkj.cloudplatform.config.*"/>
+        <class template="class com.jxctdzkj.cloudplatform.shiro.*"/>
+        <class template="class com.jxctdzkj.cloudplatform.dahuaUtil.*"/>
+        <class template="class com.jxctdzkj.cloudplatform.mode.*"/>
+        <class template="class com.jxctdzkj.cloudplatform.service.impl.ProjectBaseSceneServiceImpl.Enterprise"/>
+        <class template="class com.jxctdzkj.cloudplatform.service.impl.ProjectBaseSceneServiceImpl.InnerBase"/>
+
+    </ignore-classes>
+
+    <property name="log-file" value="log.xml"/>
+</config>

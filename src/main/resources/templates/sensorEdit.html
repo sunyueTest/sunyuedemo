@@ -1,0 +1,67 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+</head>
+<body>
+<form class="layui-form"  >
+    <div class="layui-form-item">
+        <label id="label3" class="layui-form-label">数据点ID</label>
+        <div class="layui-input-inline">
+            <input  class="layui-input"  type="text"  name = "sensorCode"  th:value="*{sensor.sensorCode}" readonly="readonly" >
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="label4" class="layui-form-label">节点名称</label>
+        <div class="layui-input-inline">
+            <input  class="layui-input"  type="text"  name="sensorName"  th:value="*{sensor.sensorName}" >
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label id="label1" class="layui-form-label">系数</label>
+        <div class="layui-input-inline">
+            <input type="text" onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')" name="sensorValueone" lay-verify="title" th:value="*{sensor.sensorValueone}" autocomplete="off"  class="layui-input" >
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label id="label2" class="layui-form-label">差值</label>
+        <div class="layui-input-inline">
+            <input type="text" onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')" name="sensorValuetwo" lay-verify="title" th:value="*{sensor.sensorValuetwo}" autocomplete="off"  class="layui-input" >
+
+        </div>
+    </div>
+</form>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}"  charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+<script>
+    $('#label1').text($.i18n.prop('coefficient'));
+    $('#label2').text($.i18n.prop('difference'));
+    $('#label3').text($.i18n.prop('templateId'));
+    $('#label4').text($.i18n.prop('节点名称'));
+
+
+
+/*
+    function upperCase(obj){//用户只能输入正负数与小数
+        if(isNaN(obj.value) && !/^-$/.test(obj.value)){
+            obj.value="";
+        }
+        if(!/^[+-]?\d*\.{0,1}\d{0,1}$/.test(obj.value)){
+            obj.value=obj.value.replace(/\.\d{2,}$/,obj.value.substr(obj.value.indexOf('.'),3));
+        }
+    }*/
+
+</script>
+</html>

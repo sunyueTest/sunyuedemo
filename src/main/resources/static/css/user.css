@@ -1,0 +1,53 @@
+body {
+    font-family: 黑体;
+}
+
+.u-item {
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 135px;
+}
+
+.m50 {
+    margin-top: 30px;
+}
+
+.u-item span {
+    width: 120px;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 40px;
+}
+
+.u-item img {
+    width: 16px;
+    height: 16px;
+    margin: 12px;
+}
+
+.u-item input {
+    width: 200px;
+    height: 40px;
+    font-size: 14px;
+}
+
+.u-item a {
+    color: #d3ac10;
+    text-decoration: underline;
+    /*margin-top: 20px;*/
+    margin-left: 200px;
+}
+
+.btn-primary {
+    background-color: transparent;
+    background-image: url(../../img/commend_btn.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 120px;
+    height: 35px;
+    border: 0px;
+    margin-left: 140px;
+    color: #5f4d6f;
+
+}

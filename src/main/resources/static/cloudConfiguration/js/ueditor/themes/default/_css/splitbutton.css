@@ -1,0 +1,74 @@
+/*splitbutton*/
+.edui-default .edui-toolbar .edui-splitbutton-body .edui-arrow,
+.edui-default .edui-toolbar .edui-menubutton-body .edui-arrow {
+    background: url(../images/icons.png) -741px 0;
+    _background: url(../images/icons.gif) -741px 0;
+    height: 20px;
+    width: 9px;
+}
+
+.edui-default .edui-toolbar .edui-splitbutton .edui-splitbutton-body,
+.edui-default .edui-toolbar .edui-menubutton .edui-menubutton-body {
+    padding: 1px;
+}
+
+.edui-default .edui-toolbar .edui-splitborder {
+    display:none;
+}
+
+.edui-default .edui-toolbar .edui-state-hover .edui-splitborder {
+  
+}
+
+.edui-default .edui-toolbar .edui-state-active .edui-splitborder {
+    width: 0;
+    border-left:0px solid gray;
+}
+
+.edui-default .edui-toolbar .edui-state-opened .edui-splitborder {
+    width: 0;
+    border: 0;
+}
+
+.edui-default .edui-toolbar .edui-splitbutton .edui-state-hover .edui-splitbutton-body,
+.edui-default .edui-toolbar .edui-menubutton .edui-state-hover .edui-menubutton-body {
+    background-color:  #dfe2e9;
+}
+
+.edui-default .edui-toolbar .edui-splitbutton .edui-state-checked .edui-splitbutton-body,
+.edui-default .edui-toolbar .edui-menubutton .edui-state-checked .edui-menubutton-body {
+}
+
+.edui-default .edui-toolbar .edui-splitbutton .edui-state-active .edui-splitbutton-body,
+.edui-default .edui-toolbar .edui-menubutton .edui-state-active .edui-menubutton-body {
+    background-color: #ffffff;
+    border: 0;
+}
+
+.edui-default .edui-state-disabled .edui-arrow {
+    opacity: 0.3;
+    _filter: alpha(opacity = 30);
+}
+
+.edui-default .edui-toolbar .edui-splitbutton .edui-state-opened .edui-splitbutton-body,
+.edui-default .edui-toolbar .edui-menubutton .edui-state-opened .edui-menubutton-body {
+
+}
+
+.edui-default .edui-for-insertorderedlist .edui-bordereraser,
+.edui-default .edui-for-lineheight .edui-bordereraser,
+.edui-default .edui-for-rowspacingtop .edui-bordereraser,
+.edui-default .edui-for-rowspacingbottom .edui-bordereraser,
+.edui-default .edui-for-insertunorderedlist .edui-bordereraser {
+    background-color: white;
+}
+
+/* 解决嵌套导致的图标问题 */
+.edui-default .edui-for-insertorderedlist .edui-popup-body .edui-icon,
+.edui-default .edui-for-lineheight .edui-popup-body .edui-icon,
+.edui-default .edui-for-rowspacingtop .edui-popup-body .edui-icon,
+.edui-default .edui-for-rowspacingbottom .edui-popup-body .edui-icon,
+.edui-default .edui-for-insertunorderedlist .edui-popup-body .edui-icon {
+    /*background-position: 0 -40px;*/
+    background-image: none  ;
+}

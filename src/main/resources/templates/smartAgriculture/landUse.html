@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>土地面积</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+
+</head>
+<body>
+
+<div class="formDiv" style="margin-top: 20px;">
+    <form class="layui-form">
+        <input type="hidden" name="farmId" th:value="*{data.farmId}" id="farmId">
+        <!-- 人员结构id-->
+        <input type="hidden" name="id" th:value="*{data.bean.id}" id="id">
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="yearLabel" class="layui-form-label">年份</label>
+                <div class="layui-input-inline">
+                    <select name="year" class="select" id="yearsSelect" lay-filter="cate">
+                        <option th:each="year:${data.years}" th:value="${year}" th:text="${year}" th:selected="${year}==${data.bean.year}?'selected'" ></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="cultivatedAreaLabel" class="layui-form-label">耕地面积</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="name" id="cultivatedArea" autocomplete="off" style="width: 200px;"
+                           th:value="*{data.bean.cultivatedArea}" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="plantedAreaLabel" class="layui-form-label">种植地面积</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="name" id="plantedArea" autocomplete="off" style="width: 200px;"
+                           th:value="*{data.bean.plantedArea}" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="button" class="layui-btn layui-btn-radius" id="save" value="保存">
+            </div>
+        </div>
+
+    </form>
+</div>
+
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.all.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/static/js/tableSelect.js}"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script language='javascript' th:inline="javascript">
+    let myIframe = parent.layer.getFrameIndex(window.name);
+    var table = layui.table, id;
+    var form = layui.form;
+    id = [[${data.bean.id}]];
+
+    //设置语言
+    $('#yearLabel').text($.i18n.prop('year'));
+    $('#cultivatedAreaLabel').text($.i18n.prop('cultivatedArea'));
+    $('#plantedAreaLabel').text($.i18n.prop('plantedArea'));
+    $('#save').val($.i18n.prop('save'));
+
+    //监控下拉框改变,向服务器获取该年份数据
+    layui.use(['layer', 'laydate', 'form', 'element'], function () {
+        form.on('select(cate)', function (obj) {
+            console.log("change");
+            $.ajax({
+                type: "post",
+                url: "../smartAgriculture/getLandUseByYear",
+                data: {
+                    year: $("#yearsSelect").val(),
+                    farmId: $("#farmId").val()
+                },
+                async: false,
+                success: function (result) {
+                    if (result.state == "success") {
+                        $('#id').val(result.data.id);
+                        $("#cultivatedArea").val(result.data.cultivatedArea);
+                        $("#plantedArea").val(result.data.plantedArea);
+                    } else {
+                        layer.msg($.i18n.prop(result.msg), {icon: 2});
+                    }
+                }
+            });
+        });
+    });
+
+
+    //提交数据
+    $("#save").click(function () {
+        var cultivatedArea = $("#cultivatedArea").val();
+        var plantedArea = $("#plantedArea").val();
+        if (!verify(cultivatedArea) || !verify(plantedArea)) {
+            layer.msg($.i18n.prop('warn56'), {icon: 5});
+            return false;
+        }
+        var param = {
+            farmId: $("#farmId").val(),
+            id: $("#id").val(),
+            cultivatedArea: cultivatedArea,
+            plantedArea: plantedArea,
+            year:$("#yearsSelect").val()
+        };
+
+        $.ajax({
+            type: "post",
+            url: "../smartAgriculture/saveLandUse",
+            data: param,
+            async: false,
+            success: function (result) {
+                console.log($("#id").val());
+                if (result.state == "success") {
+                    layer.msg($.i18n.prop('success'), {icon: 1});
+                    id = result.data.id;
+                    $("#id").val(id);
+                    $("#demo").val(result.data.cameraName);
+                    parent.$('.layui-laypage-btn').click();
+                    parent.layer.close(myIframe);
+                } else {
+                    layer.msg($.i18n.prop(result.msg), {icon: 2});
+                }
+            }
+        });
+    });
+
+    //判断是否为正整数
+    function verify(num) {
+        let r = /^\+?[1-9][0-9]*$/;
+        return r.test(num);
+    }
+</script>
+
+</html>

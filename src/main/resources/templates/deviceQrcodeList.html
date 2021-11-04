@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>deviceList</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link class="styles" rel="stylesheet" href="/static/css/indexCss/indexsubject1.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+
+<button type="button" class="layui-btn" id="test3"
+        style="margin-top: 10px;position: absolute;z-index: 9999999;"><i class="layui-icon"></i>上传文件
+</button>
+
+<table class="layui-hide" id="qrcode" lay-filter="qrcode"></table>
+
+
+<script type="text/html" id="toolbar1">
+    <button type="button" class="layui-btn" id="download" lay-event="download"
+            style="margin-left: 130px;">下载二维码
+    </button>
+    <div class="layui-inline " style="float:right;">
+        <button class="layui-btn " lay-event="search" id="searchButton"><i
+            class="layui-icon layui-icon-search "></i></button>
+    </div>
+    <div class="layui-inline " style="float:right;">
+        <input type="text" class="layui-input" name="deviceNumber" id="deviceNumber"
+               autocomplete="off"
+               placeholder="设备编码">
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del"><i
+        class="layui-icon"></i></button>
+</script>
+</body>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}" charset="utf-8"></script>
+<script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+<script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+
+<script>
+    layui.use(['upload', 'table', 'layer'], function () {
+        var table = layui.table, upload = layui.upload, layer = layui.layer;
+        upload.render({
+            elem: '#test3'
+            , url: 'deviceQrcode/uploadFile'
+            , accept: 'file' //普通文件
+            , before: function (obj) { //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+                layer.load(); //上传loading
+            }
+            , done: function (res) {
+                layer.closeAll();
+                console.log(res.data);
+                if (res.success) {
+                    window.location.href = 'deviceQrcode/downloadQrcode?fileName=' + res.data;
+                    layer.msg($.i18n.prop('success'));
+                    table.reload("qrcode", {});
+                } else {
+                    if (res.msg.indexOf('duplicate') != -1) {
+                        layer.msg($.i18n.prop('warn24'));
+                        console.log(res.msg);
+                    } else {
+                        layer.msg($.i18n.prop(res.msg));
+                    }
+                }
+            },error:function(){
+                layer.closeAll();
+            }
+        });
+        table.render({
+            elem: '#qrcode'
+            , url: '/deviceQrcode/getDeviceQrcodeList'
+            , toolbar: '#toolbar1'
+            , title: '角色列表'
+            , cols: [
+                [
+                    {
+                        type: 'checkbox'//, fixed: 'left'
+                    }
+                    , {
+                    field: 'id',
+                    title: 'ID',
+                    width: 80,
+                    unresize: true,
+                    sort: true,
+                    align: 'center'
+                }
+                    , {field: 'code', title: $.i18n.prop('qrcode'), width: 300, align: 'center'}
+                    , {field: 'deviceNumber', title:$.i18n.prop('deviceNo'), width: 250, align: 'center'}
+                    , {
+                    title: $.i18n.prop('operation'),
+                    toolbar: '#barDemo',
+                    width: 'auto',
+                    align: 'center'
+                }
+
+                ]
+            ]
+            , page: true
+            , height: 600
+        });
+        /*function downloadClick (code) {
+            var qrcode = document.getElementById('qrcode');
+            //var img = qrcode.getElementsByTagName('img')[0];
+            var link = document.createElement("a");
+            var url = $('#erweima').find('img')[0].src;
+            link.setAttribute("href",url);
+            link.setAttribute("download",code+'.png');
+            link.click();
+
+        }*/
+
+        //设置语言
+        $('#deviceNumber').attr('placeholder',$.i18n.prop('deviceNo'));
+        document.getElementById('test3').innerHTML='<i class="layui-icon"></i>'+$.i18n.prop('uploadFile');
+        $('#download').text($.i18n.prop('downloadQrcode'));
+
+        //头工具栏事件
+        table.on('toolbar(qrcode)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id), data = checkStatus.data;
+            console.log(checkStatus);
+            switch (obj.event) {
+                case 'download':
+                    var str = '';
+                    if (data.length == 0) {
+                        layer.msg($.i18n.prop('warn25'));
+                        return;
+                    }
+                    for (i = 0; i < data.length; i++) {
+                        if (i == data.length - 1) {
+                            str += data[i].id;
+                        } else {
+                            str += data[i].id + ",";
+                        }
+
+                    }
+                    window.location.href = 'deviceQrcode/makeCode?data=' + str;
+                    /*  $.ajax({
+                          type: "post",
+                          url: 'deviceQrcode/makeCode',
+                          data: {
+                              data: data
+                          },
+                          success: function (result) {
+                          }
+                      });*/
+                    break;
+                case 'search':
+                    doLoginFilter(); //登陆验证
+                    var deviceNumber = $('#deviceNumber').val();
+                    console.log('deviceNumber:' + deviceNumber)
+                    table.reload('qrcode', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        , where: {
+                            deviceNumber: deviceNumber
+                        }
+                    });
+                    $('#deviceNumber').val(deviceNumber);
+                    //设置语言
+                    $('#deviceNumber').attr('placeholder',$.i18n.prop('deviceNo'));
+                    document.getElementById('test3').innerHTML='<i class="layui-icon"></i>'+$.i18n.prop('uploadFile');
+                    $('#download').text($.i18n.prop('downloadQrcode'));
+                    break;
+            }
+
+        });
+
+        //监听行工具事件
+        table.on('tool(qrcode)', function (obj) {
+            var data = obj.data;
+            console.log(data.id);
+            if (obj.event === 'del') {
+                layer.confirm($.i18n.prop('confirmDelete'),{ btn:[$.i18n.prop('yes'),$.i18n.prop('no')],title:$.i18n.prop('info')}, function (index) {
+                    $.ajax({
+                        type: "post",
+                        url: '../deviceQrcode/deleteQrcode',
+                        data: {
+                            id: data.id
+                        },
+                        timeout: 30000,
+                        error: function (data, type, err) {
+                            console.log(err);
+                            layer.closeAll('loading');
+                            layer.msg($.i18n.prop('fail'), {
+                                offset: '6px'
+                            });
+                        },
+                        success: function (result) {
+                            if (result.success ) {
+                                $('.layui-laypage-btn').click();
+                                layer.close(index);
+                            }
+                            layer.msg($.i18n.prop(result.msg))
+
+                        }
+                    });
+                });
+            }
+        });
+
+
+    });
+
+
+</script>
+<style>
+    body {
+        overflow-y: hidden;
+    }
+    .layui-table-view .layui-table{
+        width: 100%;
+        overflow-x: hidden;
+    }
+    .layui-table tr{
+        width: 100%;
+    }
+    .layui-table thead tr,.layui-table-header thead{
+        width: 100%;
+    }
+</style>
+</html>

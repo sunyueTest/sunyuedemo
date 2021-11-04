@@ -1,0 +1,755 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>groupDevice</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../css/tree.css" type="text/css">
+    <link rel="stylesheet" href="../css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../static/layui/myicon/iconfont.css">
+    <link rel="stylesheet" href="../static/css/farmCommon.css">
+    <script src="../static/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+    <script type="text/javascript" th:src="@{/static/js/zTreejs/jquery.ztree.core.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/jquery.nicescroll.min.js}"></script>
+    <script th:src="@{/static/i18n/jquery.i18n.properties.js}"></script>
+    <script th:src="@{/static/js/common.js}" charset="utf-8"></script>
+</head>
+<style>
+    .ztree li span.button.icon01_ico_docu {
+        margin-right: 2px;
+        background: url(../static/css/zTreeStyle/img/diy/open.png) no-repeat scroll 0 0 transparent;
+        vertical-align: top;
+        *vertical-align: middle
+    }
+
+    .ztree li span.button.button level0 switch root_open {
+        margin-right: 2px;
+        background: url(../static/css/zTreeStyle/img/diy/open.png) no-repeat scroll 0 0 transparent;
+        vertical-align: top;
+        *vertical-align: middle
+    }
+
+    .ztree li span.button.icon02_ico_docu {
+        margin-right: 2px;
+        background: url(../static/css/zTreeStyle/img/diy/5.png) no-repeat scroll 0 0 transparent;
+        vertical-align: top;
+        *vertical-align: middle
+    }
+
+    .layui-body {
+        overflow-y: hidden;
+    }
+
+    .flysand-div-inline1 {
+        height: 100%;
+        width: auto;
+        color: black;
+        font-size: 25px;
+        margin: 15px;
+        vertical-align: middle;
+        line-height: 30px;
+    }
+
+    .flysand-div-inline2 {
+        height: 100%;
+        width: auto;
+        color: black;
+        font-size: 20px;
+        margin: 15px;
+        vertical-align: middle;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    .flysand-container {
+        height: 40px;
+        display: flex;
+    }
+
+    .flysand-container-horizontal {
+        height: 50px;
+        width: auto;
+        display: flex;
+        margin: 20px;
+        background-color: #eeeeee;
+        /*background-image: url(../static/img/device_item_1.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;*/
+    }
+
+  /*  .flysand-green-vertical-line {
+        background: #eeeeee;
+        height: 100%;
+        width: 4px;
+        float: left;
+    }*/
+    div.content_wrap div.right {
+        float: right;
+        width: 80%;
+        height: auto;
+        margin-left: 20px;
+        background-color: white;
+    }
+
+    div.content_wrap div.left{
+        background-color: white;
+    }
+    div.content_wrap {
+        width: 100%;
+        height: auto;
+        display: flex;
+        margin-top: 20px;
+    }
+
+    .flysand-table-cell-1,
+    .flysand-table-cell-2,
+    .flysand-table-cell-3,
+    .flysand-table-cell-4,
+    .flysand-table-cell-5,
+    .flysand-table-cell-6{
+        height: 50px;
+        line-height: 50px;
+        color: black;
+        text-align: center;
+        font-size: 16px;
+        /*font-weight: bold;*/
+    }
+
+    .flysand-table-cell-1{
+        width: 20%;
+        /*background: #eb7350;*/
+    }
+    .flysand-table-cell-3{
+        width: 25%;
+    }
+    .flysand-table-cell-2 {
+        width: 25%;
+        /*background: #01AAED;*/
+    }
+
+    .flysand-table-cell-4, .flysand-table-cell-5,.flysand-table-cell-6 {
+        width: 10%;
+        /*background: #5FB878;*/
+    }
+
+    .mytable{
+        border-width: 1px ;
+        border-style: solid none none solid;
+        border-color:#eeeeee ;
+        margin-left: 10px;
+        margin-top: 10px;
+        height: 100%;
+    }
+    .flysand-ul {
+        height: auto;
+        width: 100%;
+    }
+
+    .flysand-ul li {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        margin-top: 5px;
+        border-width: 1px;
+        border-style: none none solid;
+        border-color: #eeeeee;
+    }
+
+    .flysand-ul li div {
+        font-size: 8px
+    }
+
+    .flysand-table-cell-1t {
+        clear: both;
+        height: 50px;
+        width: auto;
+        margin-left: 70px;
+        /*background: #eb7350;*/
+        line-height: 2px;
+        text-align: left;
+        position: absolute;
+    }
+
+    .flysand-table-cell-1d {
+        font-size: 16px;
+        margin-top: 16px;
+        display: block;
+        color: #00B83F;
+    }
+
+    .flysand-table-cell-1e {
+        margin-top: 14px;
+        display: block;
+        line-height: 5px;
+        position: absolute;
+        vertical-align: baseline;
+        white-space: nowrap;
+    }
+
+    .flysand-table-cell-2d {
+        font-size: 26px;
+    }
+
+    .flysand-table-cell-2e {
+        margin-left: 5px;
+    }
+
+    .flysand-table-cell-4t {
+        width: 41px;
+        height: 43px;
+        border: none;
+        background-size: auto;
+    }
+
+    .flysand-table-cell-5t {
+        width: 47px;
+        height: 17px;
+        line-height: 30px;
+        background-size: auto;
+    }
+    .flysand-table-cell-6t{
+        width: auto;
+        height: auto;
+        line-height: 30px;
+        background-size: auto;
+    }
+    body::-webkit-scrollbar {
+        width: 14px;
+        height: 54px;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        /*overflow-y: hidden;*/
+    }
+
+    .layui-table td {
+        height: 60px;
+        line-height: 60px;
+        font-size: 38px;
+    }
+
+    ul.ztree {
+        margin-top: 10px !important;
+        border: 0px solid #fff !important;
+        background-color: transparent !important;
+        width: 230px !important;
+        height: 500px !important;
+        overflow-y: auto !important;
+        overflow-x: auto !important;
+        -ms-overflow-style: none !important;
+        overflow: -moz-scrollbars-none !important;
+    }
+
+    ul.ztree::-webkit-scrollbar {
+        width: 0 !important;
+    }
+
+    .ztree * {
+        font-size: 10pt;
+        font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial
+    }
+
+    .ztree li ul {
+        margin: 0;
+        padding: 0
+    }
+
+    .ztree li {
+        line-height: 30px;
+    }
+
+    .ztree li a {
+        width: 200px;
+        height: 30px;
+        padding-top: 0px;
+    }
+
+    .ztree li a:hover {
+        text-decoration: none;
+        background-color: #eeeeee;
+    }
+
+    .ztree li a span.button.switch {
+        visibility: hidden
+    }
+
+    .ztree.showIcon li a span.button.switch {
+        visibility: visible
+    }
+
+    .ztree li a.curSelectedNode {
+        background-color: #eeeeee;
+        border: 0;
+        height: 30px;
+    }
+
+    .ztree li span {
+        line-height: 30px;
+    }
+
+    .ztree li span.button {
+        margin-top: -7px;
+    }
+
+    .ztree li span.button.switch {
+        width: 16px;
+        height: 16px;
+    }
+
+    /*.ztree li a.level0 span {font-size: 150%;font-weight: bold;}*/
+    /*node_name*/
+    .ztree li span.button {
+        background-image: url("../static/img/left_menuForOutLook.png");
+    }
+
+    .ztree li span.button.switch.level0 {
+        width: 20px;
+        height: 20px
+    }
+
+    .ztree li span.button.switch.level1 {
+        width: 20px;
+        height: 20px
+    }
+
+    .ztree li span.button.noline_open {
+        background-position: 0 0;
+    }
+
+    .ztree li span.button.noline_close {
+        background-position: -18px 0;
+    }
+
+    .ztree li span.button.noline_open.level0 {
+        background-position: 0 -18px;
+    }
+
+    .ztree li span.button.noline_close.level0 {
+        background-position: -18px -18px;
+    }
+</style>
+<body style="background-color: #eeeeee">
+<div class="content_wrap">
+    <div class="zTreeDemoBackground left">
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+    <div class="right">
+        <div class="flysand-container">
+            <div class="flysand-green-vertical-line">
+            </div>
+            <div class="flysand-div-inline1" id="deviceName">
+            </div>
+            <div class="flysand-div-inline2"
+                 id="deviceNumber">
+            </div>
+        </div>
+        <div class="mytable">
+            <div class="flysand-container-horizontal">
+                <div class="flysand-table-cell-1">
+                    <span id="detectionParameter">检测参数</span>
+                </div>
+                <div class="flysand-table-cell-2">
+                    <span id="currentValue">当前值</span>
+                </div>
+                <div class="flysand-table-cell-3">
+                    <span id="updateTime">更新时间</span>
+                </div>
+                <div class="flysand-table-cell-4">
+                    <span id="historyQuery">历史查询</span>
+                </div>
+                <div class="flysand-table-cell-5">
+                    <span id="more">更多</span>
+                </div>
+                <div class="flysand-table-cell-6">
+                    <span id="update">修改</span>
+                </div>
+            </div>
+            <ul class="flysand-ul" id="senor_data_list">
+            </ul>
+            <table class="layui-hide" id="sensor" lay-filter="sensor"></table>
+        </div>
+
+    </div>
+</div>
+
+<script >
+    //设置语言
+    loadI18nProperties(function(){
+        $('#detectionParameter').text($.i18n.prop('detectionParameter'));
+        $('#currentValue').text($.i18n.prop('currentValue'));
+        $('#updateTime').text($.i18n.prop('updateTime'));
+        $('#historyQuery').text($.i18n.prop('historyQuery'));
+        $('#more').text($.i18n.prop('more'));
+        $('#update').text($.i18n.prop('modify'));
+
+    });
+
+    function init() {
+        layui.use("layer", function () {
+            layer.config({
+                extend: 'layer-skin-diy1.css' //加载新皮肤
+
+            });
+            var defautHtml = '<li>' +
+                '<div class="flysand-table-cell-1"><span>- -</span></div>' +
+                '<div class="flysand-table-cell-2"><span>- -</span></div>' +
+                '<div class="flysand-table-cell-3"><span>- -</span></div>' +
+                '<div class="flysand-table-cell-4"></div>' +
+                '<div class="flysand-table-cell-5"></div>' +
+                '</li>';
+            var senorDataList = document.getElementById("senor_data_list");
+            senorDataList.innerHTML = defautHtml;
+            var zNodes = [], requestCount = 0, deviceNumber = "";
+            var setting = {
+                view: {
+                    showLine: false,
+                    // dblClickExpand: dblClickExpand
+                    // selectedMulti: false
+                    fontCss: getFont,
+                    showIcon: false,
+                    selectedMulti: false,
+                    dblClickExpand: false,
+                    addDiyDom: addDiyDom,
+                },
+                data: {
+                    key: {
+                        title: "groupName",
+                        name: "groupName"
+                    },
+                    simpleData: {
+                        enable: true
+                    }
+                },
+                callback: {
+                    onClick: onClick
+                }
+            };
+
+            function getFont(treeId, node) {
+                // return {'color': '#000'};
+                return node.font ? node.font : {};
+            }
+
+            function addDiyDom(treeId, treeNode) {
+                var spaceWidth = 5;
+                var switchObj = $("#" + treeNode.tId + "_switch"),
+                    icoObj = $("#" + treeNode.tId + "_ico");
+                switchObj.remove();
+                icoObj.before(switchObj);
+                if (treeNode.level > 1) {
+                    var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level) + "px'></span>";
+                    switchObj.before(spaceStr);
+                }
+            }
+
+            function onClick(event, treeId, treeNode, clickFlag) {
+                // showLog("[ " + getTime() + " onClick ]&nbsp;&nbsp;clickFlag = " + clickFlag + " (" + (clickFlag === 1 ? "普通选中" : (clickFlag === 0 ? "<b>取消选中</b>" : "<b>追加选中</b>")) + ")");
+                if (treeNode.isGroup == null || treeNode.isGroup == true) {
+                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                    zTree.expandNode(treeNode);
+                } else {
+                    deviceNumber = treeNode.deviceNumber;
+                    mReload(treeNode.deviceName, true);
+                }
+            }
+
+            $.ajax({
+                url: "../group/selGroupList",
+                data: {},
+                dataType: "json",
+                type: "get",
+                timeout: 30000,
+                error: function (data, type, err) {
+                    console.log(err);
+                    layer.msg($.i18n.prop('fail'));
+                },
+                success: function (data) {
+                    // layer.closeAll('loading');
+                    if (data.state == 'success') {
+                        for (var i = 0; i < data.datas.length; i++) {
+                            zNodes.push(data.datas[i])
+                        }
+                        menuInit(-1);
+                        requestCount = data.datas.length + 1;
+                        getNodeData(0, 0);
+                        for (var i = 0; i < data.datas.length; i++) {
+                            data.datas[i].font = {'color': 'black'};
+                            data.datas[i].isGroup = true;
+                            getNodeData(data.datas[i].id, 0);
+                        }
+
+                    } else {
+                        layer.msg($.i18n.prop(data.msg))
+                    }
+                }
+            });
+
+            function getNodeData(id, len) {
+                $.ajax({
+                    url: "../group/selDeviceForGroup",
+                    data: {id: id},
+                    dataType: "json",
+                    type: "get",
+                    timeout: 30000,
+                    error: function (data, type, err) {
+                        console.log(err);
+                        layer.msg($.i18n.prop('fail'));
+                    },
+                    success: function (data) {
+                        // layer.closeAll('loading');
+                        if (data.state == 'success') {
+                            len = data.datas.length;
+                            for (var i = 0; i < len; i++) {
+                                var datai = data.datas[i];
+                                datai.isGroup = false;
+                                datai.id = datai.id + 100000;
+                                datai.pId = datai.groupId;
+                                datai.groupName = datai.deviceName;
+                                datai.iconSkin = "icon02";
+                                datai.font = {'color': 'black'};
+                                zNodes.push(datai);
+                            }
+                            if (data.isLast) {
+                                if (requestCount == 1) {
+                                    menuInit(openExp(0, 0));
+                                }
+                                requestCount -= 1;
+                            } else {
+                                getNodeData(data.datas[i].id, len);
+                            }
+                        } else {
+                            layer.msg($.i18n.prop(data.msg))
+                        }
+                    }
+                });
+            }
+
+            function openExp(index, oId) {
+                for (var i = index; i < zNodes.length; i++) {
+                    if (zNodes[i].pId == oId && zNodes[i].isGroup == true) {
+                        zNodes[i].open = true;
+                        console.log('openExp')
+                        console.log(zNodes[i])
+                        return openExp(0, zNodes[i].id)
+                    }
+                }
+                for (var i = index; i < zNodes.length; i++) {
+                    if (zNodes[i].pId == oId) {
+                        return zNodes[i].id;
+                    }
+                }
+            }
+
+            function getWind(val) {
+                switch (val) {
+                    case 0:
+                        return $.i18n.prop('north-northeast');
+                    case 1:
+                        return $.i18n.prop('northeast');
+                    case 2:
+                        return $.i18n.prop('east-northeast');
+                    case 3:
+                        return $.i18n.prop('east');
+                    case 4:
+                        return $.i18n.prop('east-southeast');
+                    case 5:
+                        return $.i18n.prop('southeast');
+                    case 6:
+                        return $.i18n.prop("south-southeast");
+                    case 7:
+                        return $.i18n.prop("south");
+                    case 8:
+                        return $.i18n.prop("south-southwest");
+                    case 9:
+                        return $.i18n.prop("southwest");
+                    case 10:
+                        return $.i18n.prop("west-southwest");
+                    case 11:
+                        return $.i18n.prop("west");
+                    case 12:
+                        return $.i18n.prop("west-northwest");
+                    case 13:
+                        return $.i18n.prop("west-northwest");
+                    case 14:
+                        return $.i18n.prop("north-northwest");
+                    case 15:
+                        return $.i18n.prop("north");
+                    default:
+                        // return $.i18n.prop("noWind");
+                        return $.i18n.prop('north-northeast');
+                }
+            }
+
+            function mReload(name, tip) {
+                var deviceName = document.getElementById("deviceName");
+                var number = document.getElementById("deviceNumber");
+                deviceName.innerHTML = name;
+                number.innerHTML = deviceNumber;
+                senorDataList.innerHTML = defautHtml;
+                layer.load(1);
+                $.ajax({
+                    url: "../device/selDeviceSensorData",
+                    data: {deviceNumber: deviceNumber},
+                    dataType: "json",
+                    type: "post",
+                    timeout: 30000,
+                    error: function (data, type, err) {
+                        // console.log(err);
+                        layer.closeAll('loading')
+                        layer.msg($.i18n.prop('fail'));
+                        if (err.indexOf('JSON') !== -1) {
+                            parent.checkLoginState();
+                        }
+                    },
+                    success: function (data) {
+                        layer.closeAll('loading');
+                        if (data.state == 'success') {
+                            var innerHTML = '';
+                            for (var i = 0; i < data.datas.length; i++) {
+                                var datai = data.datas[i];
+                                innerHTML += '<li>' +
+                                    '<div class="flysand-table-cell-1">' +
+                                    '<div class="flysand-table-cell-1t">' +
+                                    '<span class="flysand-table-cell-1d">' + $.i18n.prop(datai.name) + '</span><br/>' +
+                                    '<span class="flysand-table-cell-1e">' +$.i18n.prop('templateId')+":"+ datai.templateId + '</span></div></div>' +
+                                    '<div class="flysand-table-cell-2">' +
+                                    '<div class="flysand-table-cell-2t">' +
+                                    '<span class="flysand-table-cell-2d">';
+                                if ('风向' == datai.name) {
+                                    innerHTML += getWind(datai.value);
+                                } else {
+                                    innerHTML += datai.value;
+                                }
+                                innerHTML +=
+                                    '</span><span class="flysand-table-cell-2e">' + datai.unit + '</span>' +
+                                    '</div></div><div class="flysand-table-cell-3">' +
+                                    '<span>' + datai.dataTime + '</span></div>' +
+                                    '<div class="flysand-table-cell-4">' +
+                                     '<button class="opbtn" onclick="historyClick(\'' + deviceNumber + '\')" ><i class="layui-icon iconfont icon-chaxun size25"></i></button>'+
+                                    '</div>' +
+                                    '<div class="flysand-table-cell-5">' +
+                                    '<button class="opbtn" onclick="moreClick(\'' + deviceNumber + '\')" ><i class="layui-icon iconfont icon-gengduo size25"></i></button>'+
+                                    '</div>' +
+                                    '<div class="flysand-table-cell-6">' +
+                                    '<button class="opbtn" onclick="sensorEdit(\'' + datai.templateId + '\')" ><i class="layui-icon iconfont icon-iconfontedit size25"></i></button>'+
+                                    '</div>' +
+                                    '</li>';
+                            }
+                            senorDataList.innerHTML = innerHTML;
+                        } else if (tip) {
+                            layer.msg($.i18n.prop(data.msg))
+                        }
+                    }
+                });
+
+            }
+
+            function menuInit(id) {
+                var treeObj = $("#treeDemo");
+                // zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
+                // curMenu = zTree_Menu.getNodes()[0].children[0].children[0];
+                // zTree_Menu.selectNode(curMenu);
+                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                treeObj.hover(function () {
+                    if (!treeObj.hasClass("showIcon")) {
+                        treeObj.addClass("showIcon");
+                    }
+                }, function () {
+                    treeObj.removeClass("showIcon");
+                });
+                if (id != -1) {
+                    var tree = $.fn.zTree.getZTreeObj("treeDemo");
+                    var sel = tree.getNodeByParam('id', id);
+                    if (sel != null) {
+                        $("#" + sel.tId + "_a").click(); // 点击节点
+                    }
+                }
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        init();
+    });
+
+    function historyClick(deviceNumber) {
+        //console.log('deviceNumber:' + deviceNumber);
+        //layer.msg('程序员玩命开发中')
+        document.cookie = "deviceNumber=" + deviceNumber;
+        //parent.deviceNumber=deviceNumber;
+        parent.changeState('farmHistory');
+
+
+    }
+
+    function moreClick(deviceNumber) {
+        console.log('deviceNumber:' + deviceNumber);
+        // layer.msg('程序员玩命开发中')
+        parent.jumpDashboard(deviceNumber);
+    }
+
+
+    /**
+     * 修改传感器系数和差值
+     * @param sensorCode
+     */
+    function sensorEdit(sensorCode){
+
+        layer.open({
+            type: 2,
+            skin:'layer-skin-diy1',
+            area: ['400px', '300px'],
+            title: $.i18n.prop('edit'),
+            btn: [$.i18n.prop('save'), $.i18n.prop('cancel')],
+            btnAlign: 'c',
+            yes: function (index, layero) {
+                var body = layer.getChildFrame('body', index);
+                var sensorCode=body.find('input[name="sensorCode"]').val();
+                var sensorValueone=body.find('input[name="sensorValueone"]').val();
+                var sensorValuetwo=body.find('input[name="sensorValuetwo"]').val();
+                $.ajax({
+                    url: "../sensor/updateSensorValue",
+                    data: {
+                        sensorCode:sensorCode,
+                        sensorValueone:sensorValueone,
+                        sensorValuetwo:sensorValuetwo
+                    },
+                    dataType: "json",
+                    type: "get",
+                    timeout: 30000,
+                    error: function (data, type, err) {
+                        console.log(err);
+                        layer.msg($.i18n.prop('fail'));
+                    },
+                    success: function (data) {
+                        // layer.closeAll('loading');
+                        if (data.success ) {
+                            layer.msg($.i18n.prop('success'));
+
+                        } else {
+                            layer.msg($.i18n.prop('fail'));
+                        }
+                    }
+                });
+                layer.close(index);
+            },
+            anim: 3,
+            content: '../sensor/getSensorDetail?sensorCode=' + sensorCode,
+            success: function (layero, index) {
+
+            }
+        });
+    }
+    function onReceive(type, data) {
+        if (type == 'bundDeviceSuccess' || "upDeviceInfoSuccess" == type) {
+            setTimeout(function () {
+                init();
+            }, 1000);
+        }
+    }
+</script>
+</body>
+</html>

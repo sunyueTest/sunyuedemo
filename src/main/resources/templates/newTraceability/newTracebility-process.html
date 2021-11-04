@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加产品相关图片TAB</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <style type="text/css">
+        ::-webkit-scrollbar {display:none}
+    </style>
+</head>
+
+<body>
+<input id="nn" th:value="${data}" type="hidden"/>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>添加图片信息</legend>
+</fieldset>
+<div class="layui-tab" lay-filter="docDemoTabBrief">
+    <ul class="layui-tab-title">
+        <li class="layui-this">轮播图片</li>
+        <li>产品标签</li>
+        <li>检测证书</li>
+        <li>企业信息</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <iframe src="/templates/newTraceability/addBannerImg.html" width="1000" height="450" id="iframeToaddBannerImg" frameborder="0"></iframe>
+        </div>
+
+        <div class="layui-tab-item">
+            <iframe src="/templates/newTraceability/addQualifiedLabel.html" width="1000" height="450" id="iframe2" frameborder="0"></iframe>
+        </div>
+
+        <div class="layui-tab-item">
+            <iframe src="/templates/newTraceability/addCertificate.html" width="1000" height="450" id="iframe3" frameborder="0"></iframe>
+        </div>
+
+        <div class="layui-tab-item">
+            <iframe src="/templates/newTraceability/addEnterpriseInfo.html" width="1000" height="450" id="iframe4" frameborder="0"></iframe>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script src="/static/layui/layui.js" charset="UTF-8"></script>
+<script src="/static/layui/layui.all.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    function getId(){
+        return $("#nn").val();
+    }
+</script>
+</html>

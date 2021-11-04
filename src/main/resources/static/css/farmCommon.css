@@ -1,0 +1,106 @@
+.addBtn{
+    background-color: #1985ff;
+    color: white;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+.layui-table-view .layui-table{
+    width: 100%!important;
+}
+.layui-table-header thead{
+    width: 100%!important;
+}
+.layui-table-view .layui-table td, .layui-table-view .layui-table th{
+    text-align: center!important;
+}
+.layui-form-onswitch{
+    border-color:#1985ff;
+    background-color:#1985ff;
+}
+.layui-table-tool{
+    background-color:#FFFFFF;
+}
+.layui-laypage .layui-laypage-curr .layui-laypage-em{
+    background-color:#1985ff;
+}
+.searchInput{
+    background-color: #EEEEEE!important;
+    border-color: #B2B2B2;
+}
+.searchBtn{
+    border-width: 1px;
+    border-style: solid;
+    border-color: #1985ff;
+    background-color: #1985ff;
+    border-radius: 2px;
+    color: #ffffff;
+}
+.opbtn{
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    background-color: transparent;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+.toolbtn{
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    background-color: transparent;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+.size25{
+    font-size: 25px;!important;
+}
+.size22{
+    font-size: 22px;!important;
+}
+.inline{
+    display: inline-block;
+}
+.scrollbar{
+    width:30px;
+    height:auto;
+    margin: 0 auto;
+}
+#echertimejk::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: auto;
+}
+#echertimejk::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #535353;
+}
+#echertimejk::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #EDEDED;
+}
+
+.layui-form-select dl::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 5px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+
+.layui-form-select dl::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.layui-form-select dl::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+/*!*控制下拉框样式*!*/
+/*.layui-form-select .layui-edge{*/
+    /*right: 45px;*/
+/*}*/
