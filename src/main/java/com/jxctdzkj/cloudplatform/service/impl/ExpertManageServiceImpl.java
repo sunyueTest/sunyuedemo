@@ -433,10 +433,9 @@ public class ExpertManageServiceImpl implements ExpertManageService {
 
         String account = env.getProperty("yun.zuotoujing.net.account");
         String password = env.getProperty("yun.zuotoujing.net.password");
-        System.out.println(account+password );
         //添加分类详情列表
         List<AquacultureDiseasesBean> contentList = new ArrayList<AquacultureDiseasesBean>();
-        for (int i = 0; i < 160; i++) {
+        for (int i = 0; i < 50; i++) {
             AquacultureDiseasesBean bean = new AquacultureDiseasesBean();
             bean.setId(21L);
             bean.setSpeciesId(0);
