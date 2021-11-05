@@ -448,7 +448,7 @@ public class AquacultureController extends BaseController {
             Object time = ret.get("time");
             String deviceReportList = ret.get("deviceReportList")+"";
             List<Object> list11 =JSON.parseArray(deviceReportList);
-            a += "日期："+time +"  地址：" +  locname +"  温度："+list11.get(6) + "℃    湿度："+list11.get(10)+"%RH <br>";
+            a += "日期："+time +"  地址：" +  locname +"  温度："+list11.get(6) + "℃    湿度："+list11.get(10)+"%RH <br><br>";
             i+=1;
             if(i==10){
                 break;
