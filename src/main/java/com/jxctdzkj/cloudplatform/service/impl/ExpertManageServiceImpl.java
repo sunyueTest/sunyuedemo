@@ -1,10 +1,12 @@
 package com.jxctdzkj.cloudplatform.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.jxctdzkj.cloudplatform.bean.*;
 import com.jxctdzkj.cloudplatform.config.Constant;
 import com.jxctdzkj.cloudplatform.service.ExpertManageService;
 import com.jxctdzkj.cloudplatform.service.UserService;
 import com.jxctdzkj.cloudplatform.utils.ControllerHelper;
+import com.jxctdzkj.cloudplatform.utils.HttpUtilsNew;
 import com.jxctdzkj.cloudplatform.utils.ResultObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -431,18 +433,39 @@ public class ExpertManageServiceImpl implements ExpertManageService {
         beanList.add(bean2);
         map.put("beanList", beanList);
 
+        //登录验证接口
         String account = env.getProperty("yun.zuotoujing.net.account");
         String password = env.getProperty("yun.zuotoujing.net.password");
+        HashMap<String, String> map22 = new HashMap<String,String>();
+        map22.put("account", account);
+        map22.put("passwd", password);
+        String s3 = HttpUtilsNew.doPost("http://yun.zuotoujing.net:8088/service-api-v3/wlx/user/03/login", map22);
+        String data = JSON.parseObject(s3, HashMap.class).get("data").toString();
+        String at = JSON.parseObject(data, HashMap.class).get("at").toString();
+        String guid = JSON.parseObject(data, HashMap.class).get("guid").toString();
+        String id = JSON.parseObject(data, HashMap.class).get("id").toString();
+
+        //获取设备列表
+        HashMap<String, String> map1 = new HashMap<String,String>();
+        map1.put("uid", id);
+        map1.put("at", at);
+        map1.put("guid", guid);
+        map1.put("resultFields", "{id,devAlias,id,termType,devAlias}");
+        String s1 = HttpUtilsNew.doPost("http://yun.zuotoujing.net:8088/service-api-v3/wlx/data/03/devList", map1);
+        String datas = JSON.parseObject(s1, HashMap.class).get("data").toString();
+        List<Object> list =JSON.parseArray(datas);
+
         //添加分类详情列表
         List<AquacultureDiseasesBean> contentList = new ArrayList<AquacultureDiseasesBean>();
-        for (int i = 0; i < 50; i++) {
+        for (Object object : list){
             AquacultureDiseasesBean bean = new AquacultureDiseasesBean();
-            bean.setId(21L);
+            Map <String,Object> ret = (Map<String, Object>) object;//取出list里面的值转为map
+            Object devAlias = ret.get("id");
+            bean.setId(Long.parseLong(ret.get("id").toString()));
             bean.setSpeciesId(0);
-            bean.setDiseasesName("测试" + i);
+            bean.setDiseasesName(ret.get("devAlias").toString());
             contentList.add(bean);
         }
-
         return ResultObject.okList(contentList, page, size, contentList.size()).data(map);
     }
 
