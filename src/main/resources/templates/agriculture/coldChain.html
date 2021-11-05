@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>diagnoseResource-诊断资源库</title>
+    <title>diagnoseResource-冷链管理系统</title>
     <link rel="stylesheet"  th:href="@{/static/css/agriculture/diagnoseResource.css}">
     <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
     <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
@@ -76,15 +76,15 @@
 <div class="conter" >
     <div style="display: flex;justify-content:space-between;margin-top: 3vh" id="title">
         <div class="title">
-            <div class="title-pic"><img src="/static/img/agriculture/ioTRegulate/a1.png" alt=""></div>
+            <div class="title-pic"></div>
             <div class="title-p">
-                寄生虫病
+
             </div>
         </div>
         <div class="title">
-            <div class="title-pic"><img src="/static/img/agriculture/ioTRegulate/a1.png" alt=""></div>
+            <div class="title-pic"></div>
             <div class="title-p">
-                病毒病
+
             </div>
         </div>
     </div>
@@ -92,10 +92,10 @@
         <div class="teacher-l">
             <div class="bz">
                 <div class="bz-list">
-                    <div class="bz-txt" style="width: 9vw">淀粉卵涡鞭虫病</div>
+                    <div class="bz-txt" style="width: 9vw"></div>
                     <div style="width: 6vw">
-                        <div class="bz-dele"><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>
-                        <div class="bz-chaxun"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>
+                       <!-- <div class="bz-dele"><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>
+                        <div class="bz-chaxun"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>-->
                     </div>
                 </div>
             </div>
@@ -107,15 +107,15 @@
 </div>
 <div id="tc"  class="">
     <h3 class="tc-title">
-        <p id="tctitle">设备</p>
+        <p id="tctitle">设备采集信息记录</p>
     </h3>
     <div style="display: flex;width: 50vw;margin: 0 auto;border-bottom: 1px solid #027187;padding-bottom: 3vh;">
-        <div style="width: 17vw;line-height: 12vh;">
-            <p >病种：<span id="tclb" style="width: 6vw;height: 6vh;">病虫害</span></p>
+        <div style="width: 25vw;line-height: 12vh;">
+            <p >设备编号：<span id="tclb" style="width: 6vw;height: 6vh;">00001</span></p>
         </div>
-        <div style="width: 17vw;line-height: 12vh;">
-            <p >病情：<span id="tcbingzhong">白粉病</span></p>
-        </div>
+       <!-- <div style="width: 25vw;line-height: 12vh;">
+            <p >设备名称：<span id="tcbingzhong">测试探头001</span></p>
+        </div>-->
     </div>
     <div style="display: flex;width: 50vw;margin: 0 auto;border-bottom: 1px solid #027187;padding-bottom: 3vh;">
         <div class="tc-int test test-1">
@@ -232,7 +232,7 @@
                     console.log(item)
                     bz +='            <div class="bz">\n' +
                         '                <div class="bz-list">\n' +
-                        '                    <div class="bz-txt" style="width: 9vw;overflow:hidden; text-overflow:ellipsis;white-space:nowrap">'+item.diseasesName+'</div>\n' +
+                        '                    <div class="bz-txt" style="width: 15vw;overflow:hidden; text-overflow:ellipsis;white-space:nowrap">'+item.diseasesName+'</div>\n' +
                         '                    <div style="width: 6vw;display: flex">\n' ;
 
                     bz +='                        <div class="bz-chaxun" data-id="'+item.ids+'"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>\n' +
@@ -324,14 +324,9 @@
             },
             success: function (res) {
                 console.log(res)
-               /* var tclb=res.data.diseasesTypes
-                var tcbingzhong=res.data.diseasesName
-                var tcbint=res.data.diseasesContent*/
-                var tclb='几十块的积分卡1111111111111111111'
-                var tcbingzhong='几十块的积分卡322222222222222'
-                var tcbint='几十块的积分卡333333333333'
+                var tclb=res.data.diseasesTypes
+                var tcbint=res.data.diseasesContent
                 $('#tclb').html(tclb)
-                $('#tcbingzhong').html(tcbingzhong)
                 $('#tcbint').html(tcbint)
 
 
@@ -339,6 +334,8 @@
         })
     })
     dele.onclick=function(){
+        $('#tclb').html("")
+        $('#tcbint').html("")
         tc.style.display='none'
     }
     $(document).on('click','#addentry',function(){

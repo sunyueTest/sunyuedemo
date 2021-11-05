@@ -1,5 +1,6 @@
 package com.jxctdzkj.cloudplatform.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +9,7 @@ import com.jxctdzkj.cloudplatform.service.ConditionService;
 import com.jxctdzkj.cloudplatform.service.ProductionManageService;
 import com.jxctdzkj.cloudplatform.service.UserService;
 import com.jxctdzkj.cloudplatform.utils.ControllerHelper;
+import com.jxctdzkj.cloudplatform.utils.HttpUtilsNew;
 import com.jxctdzkj.cloudplatform.utils.ResultObject;
 import com.jxctdzkj.cloudplatform.utils.ReturnObject;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,7 @@ import org.nutz.dao.pager.Pager;
 import org.nutz.dao.sql.Sql;
 import org.nutz.dao.util.Daos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,10 +41,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -51,6 +51,9 @@ public class AquacultureController extends BaseController {
 
     @Autowired
     Dao dao;
+
+    @Autowired
+    protected Environment env;
 
     @Autowired
     ProductionManageService productionManageService;
@@ -414,8 +417,45 @@ public class AquacultureController extends BaseController {
     @ResponseBody
     public Object getDiseasesContentById(
             @RequestParam(value = "id") String id) {
+        //登录验证接口
+        String account = env.getProperty("yun.zuotoujing.net.account");
+        String password = env.getProperty("yun.zuotoujing.net.password");
+        HashMap<String, String> map22 = new HashMap<String,String>();
+        map22.put("account", account);
+        map22.put("passwd", password);
+        String s3 = HttpUtilsNew.doPost("http://yun.zuotoujing.net:8088/service-api-v3/wlx/user/03/login", map22);
+        String data = JSON.parseObject(s3, HashMap.class).get("data").toString();
+        String at = JSON.parseObject(data, HashMap.class).get("at").toString();
+        String guid = JSON.parseObject(data, HashMap.class).get("guid").toString();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//格式化对象
+        Date date1 = new Date() ;
+        Date date = new Date(date1.getTime() - 240*30*1000) ;
+        String dateaa = format.format(date).toString();
+
+        String s4 = HttpUtilsNew.doGet("http://yun.zuotoujing.net:8088/service-api-v3/wlx/gatewayDev/03/viewHisCommon?guid="+guid+"&at="+at+"&devId="+id+"&startTime="+dateaa+"%2000%3A00%3A00");
         Map<String, Object> map = new HashMap<>();
-        AquacultureDiseasesBean bean = dao.fetch(AquacultureDiseasesBean.class, Cnd.where("id", "=", id));
+        AquacultureDiseasesBean bean = new AquacultureDiseasesBean();
+        bean.setDiseasesTypes(id);
+
+        String datas = JSON.parseObject(s4, HashMap.class).get("data").toString();
+        String datas1 = JSON.parseObject(datas, HashMap.class).get("reportData").toString();
+        List<Object> list =JSON.parseArray(datas1);
+        int i = 1 ;
+        String a = "";
+        for (Object object : list){
+            Map<String,Object> ret = (Map<String, Object>) object;//取出list里面的值转为map
+            Object locname = ret.get("locname");
+            Object time = ret.get("time");
+            String deviceReportList = ret.get("deviceReportList")+"";
+            List<Object> list11 =JSON.parseArray(deviceReportList);
+            a += "日期："+time +"  地址：" +  locname +"  温度："+list11.get(6) + "℃    湿度："+list11.get(10)+"%RH <br>";
+            i+=1;
+            if(i==10){
+                break;
+            }
+        }
+
+        bean.setDiseasesContent(a);
         map.put("data", bean);
         return ResultObject.ok(map);
     }
