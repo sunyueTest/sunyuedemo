@@ -229,16 +229,13 @@
                 $('.title-int').eq(index).addClass('titleac')
                 var bz = ""; //标题
                 $.each(res.datas, function (i,item) {
+                    console.log(item)
                     bz +='            <div class="bz">\n' +
                         '                <div class="bz-list">\n' +
                         '                    <div class="bz-txt" style="width: 9vw;overflow:hidden; text-overflow:ellipsis;white-space:nowrap">'+item.diseasesName+'</div>\n' +
                         '                    <div style="width: 6vw;display: flex">\n' ;
-              /*      if(level==0){
-                        bz +='<div class="bz-dele" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>\n';
-                    }else if(level==2&&userName==item.userName){
-                        bz +='<div class="bz-dele" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>\n';
-                    }*/
-                    bz +='                        <div class="bz-chaxun" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>\n' +
+
+                    bz +='                        <div class="bz-chaxun" data-id="'+item.ids+'"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>\n' +
                         '                    </div>\n' +
                         '                </div>\n' +
                         '            </div>'
@@ -300,7 +297,7 @@
 
 
     $(document).on('click','.title-int',function(){
-        var id=$(this).data("id")
+        var id=$(this).data("ids")
         console.log(id)
         // $('.title-int').removeClass('titleac')
         // $(this).addClass('titleac')
@@ -327,9 +324,12 @@
             },
             success: function (res) {
                 console.log(res)
-                var tclb=res.data.diseasesTypes
+               /* var tclb=res.data.diseasesTypes
                 var tcbingzhong=res.data.diseasesName
-                var tcbint=res.data.diseasesContent
+                var tcbint=res.data.diseasesContent*/
+                var tclb='几十块的积分卡1111111111111111111'
+                var tcbingzhong='几十块的积分卡322222222222222'
+                var tcbint='几十块的积分卡333333333333'
                 $('#tclb').html(tclb)
                 $('#tcbingzhong').html(tcbingzhong)
                 $('#tcbint').html(tcbint)
@@ -354,7 +354,7 @@
     var bingzhongid
 
     $(document).on('click','.bz-dele',function(){
-        bingzhongid=$(this).data("id")
+        bingzhongid=$(this).data("ids")
         $('#deletc').show()
         $('#motai').show()
 

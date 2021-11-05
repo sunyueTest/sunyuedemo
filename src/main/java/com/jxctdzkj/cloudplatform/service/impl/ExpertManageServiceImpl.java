@@ -461,7 +461,7 @@ public class ExpertManageServiceImpl implements ExpertManageService {
             AquacultureDiseasesBean bean = new AquacultureDiseasesBean();
             Map <String,Object> ret = (Map<String, Object>) object;//取出list里面的值转为map
             Object devAlias = ret.get("id");
-            bean.setId(Long.parseLong(ret.get("id").toString()));
+            bean.setIds(ret.get("id").toString());
             bean.setSpeciesId(0);
             bean.setDiseasesName(ret.get("devAlias").toString());
             contentList.add(bean);

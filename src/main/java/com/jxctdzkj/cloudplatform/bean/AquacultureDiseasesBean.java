@@ -13,6 +13,8 @@ public class AquacultureDiseasesBean extends DBVO{
     @Column("species_id")
     private int speciesId;
 
+    private String ids;
+
     // 物种
     @Column("species")
     private String species;
@@ -139,5 +141,14 @@ public class AquacultureDiseasesBean extends DBVO{
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+
+    public String getIds() {
+        return ids;
+    }
+
+    public void setIds(String ids) {
+        this.ids = ids;
     }
 }
