@@ -353,17 +353,7 @@ public class ExpertManageController {
                 .addObject("article", article);
     }
 
-//    /**
-//     * 诊断资源库管理页面跳转
-//     *
-//     * @param
-//     * @User 李英豪
-//     */
-//    @RequestMapping(value = "findDisease")
-//    public ModelAndView findDisease() {
-//        return new ModelAndView(
-//                "expertManage/disease/findDiseaseList");
-//    }
+
 
     /**
      * 查询疾病菜单信息

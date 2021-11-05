@@ -14,6 +14,7 @@ import org.nutz.dao.FieldFilter;
 import org.nutz.dao.pager.Pager;
 import org.nutz.dao.util.Daos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -31,6 +32,9 @@ public class ExpertManageServiceImpl implements ExpertManageService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    protected Environment env;
 
     /**
      * 申请成为专家
@@ -410,28 +414,37 @@ public class ExpertManageServiceImpl implements ExpertManageService {
         if (StringUtils.isBlank(userBean.getUserName())) {
             return ResultObject.error("用户未登录");
         }
+        //添加分类列表
         Map<String, Object> map = new HashMap<>();
-        // 白名单过滤器
-        FieldFilter ff1 = FieldFilter.create(AquacultureDiseasesBean.class, "^speciesId|species|diseasesTypesId|diseasesTypes$");
-        List<AquacultureDiseasesBean> beanList = Daos.ext(dao, ff1).query(AquacultureDiseasesBean.class,
-                Cnd.where("industry_type", "=", industryType).and("is_delete", "=", "0")
-                        .groupBy("speciesId", "species", "diseasesTypesId", "diseasesTypes"));
+        List<AquacultureDiseasesBean> beanList = new ArrayList<AquacultureDiseasesBean>();
+        AquacultureDiseasesBean bean1 = new AquacultureDiseasesBean();
+        AquacultureDiseasesBean bean2 = new AquacultureDiseasesBean();
+        bean1.setSpeciesId(21);
+        bean1.setSpecies("设备");
+        bean1.setDiseasesTypesId("1");
+        bean1.setDiseasesTypes("网关设备");
+        beanList.add(bean1);
+        bean2.setSpeciesId(21);
+        bean2.setSpecies("设备");
+        bean2.setDiseasesTypesId("2");
+        bean2.setDiseasesTypes("终端设备");
+        beanList.add(bean2);
         map.put("beanList", beanList);
-        FieldFilter ff2 = FieldFilter.create(AquacultureDiseasesBean.class, "^id|diseasesName|userName$");
-        Pager pager = new Pager(page, size);
-        if (beanList.size() > 0 && diseasesTypesId == 0) {
-            diseasesTypesId = Integer.parseInt(beanList.get(0).getDiseasesTypesId());
-        }
-        Cnd cnd = Cnd.where("diseases_types_id", "=", diseasesTypesId).and("is_delete", "=", "0");
-        if (diseasesName != null && !"".equals(diseasesName)) {
-            cnd.and("diseases_name", "like", "%" + diseasesName + "%");
+
+        String account = env.getProperty("yun.zuotoujing.net.account");
+        String password = env.getProperty("yun.zuotoujing.net.password");
+        System.out.println(account+password );
+        //添加分类详情列表
+        List<AquacultureDiseasesBean> contentList = new ArrayList<AquacultureDiseasesBean>();
+        for (int i = 0; i < 160; i++) {
+            AquacultureDiseasesBean bean = new AquacultureDiseasesBean();
+            bean.setId(21L);
+            bean.setSpeciesId(0);
+            bean.setDiseasesName("测试" + i);
+            contentList.add(bean);
         }
 
-        List<AquacultureDiseasesBean> contentList = Daos.ext(dao, ff2).query(AquacultureDiseasesBean.class,
-                cnd, pager);
-        int count = dao.count(AquacultureDiseasesBean.class,
-                cnd);
-        return ResultObject.okList(contentList, page, size, count).data(map);
+        return ResultObject.okList(contentList, page, size, contentList.size()).data(map);
     }
 
     /**

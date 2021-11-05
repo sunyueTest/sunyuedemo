@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>diagnoseResource-诊断资源库</title>
+    <link rel="stylesheet"  th:href="@{/static/css/agriculture/diagnoseResource.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/css/agriculture/public.css}">
+</head>
+<style>
+    #addentry{
+        background: -webkit-linear-gradient(top,#054b7f,#027288);
+        background: -o-linear-gradient(top,#054b7f,#027288);
+        background: -moz-linear-gradient(top,#054b7f,#027288);
+        background: -mos-linear-gradient(top,#054b7f,#027288);
+        background: linear-gradient(top,#054b7f,#027288);
+        text-align: center;
+        position: fixed;
+        top: 2vh;
+        right: 3vw;
+        cursor: pointer;
+        color: #fff;
+        border-radius: 5px;
+        transition: all 0.5s;
+    }
+    #addentry:hover{
+        background: #0a325c;
+    }
+    .layui-form-selected dl{
+        background: transparent!important;
+    }
+    .layui-form-select dl dd:hover{
+        background: #0a325c!important;
+    }
+    #tcbingzhongadd{
+        width: 10vw;
+        height: 4vh;
+        line-height: 4vh;
+        border: 1px solid #fff;
+        border-color: #fff;
+        color: #fff;
+        background: transparent;
+        padding: 0 0.5vw;
+        box-sizing: border-box;
+    }
+    #tcbintadd{
+        width:48vw;
+        height: 25vh;
+        background:transparent;
+        box-sizing: border-box;
+        padding: 1vh 1vw;
+    }
+    #addbnt{
+        width: 5vw;
+        height: 4vh;
+        line-height: 4vh;
+        background: #0d5bb0;
+        transition: all 0.5s;
+        text-align: center;
+        cursor: pointer;
+        position: absolute;
+        bottom: 5vh;
+        right: 5vw;
+    }
+    #addbnt:hover{
+        background: #0a325c;
+    }
+
+</style>
+<body>
+
+
+
+
+<div class="conter" >
+    <div style="display: flex;justify-content:space-between;margin-top: 3vh" id="title">
+        <div class="title">
+            <div class="title-pic"><img src="/static/img/agriculture/ioTRegulate/a1.png" alt=""></div>
+            <div class="title-p">
+                寄生虫病
+            </div>
+        </div>
+        <div class="title">
+            <div class="title-pic"><img src="/static/img/agriculture/ioTRegulate/a1.png" alt=""></div>
+            <div class="title-p">
+                病毒病
+            </div>
+        </div>
+    </div>
+    <div class="teacher" style="" id="app">
+        <div class="teacher-l">
+            <div class="bz">
+                <div class="bz-list">
+                    <div class="bz-txt" style="width: 9vw">淀粉卵涡鞭虫病</div>
+                    <div style="width: 6vw">
+                        <div class="bz-dele"><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>
+                        <div class="bz-chaxun"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page">
+    <div id="page"></div>
+</div>
+<div id="tc"  class="">
+    <h3 class="tc-title">
+        <p id="tctitle">设备</p>
+    </h3>
+    <div style="display: flex;width: 50vw;margin: 0 auto;border-bottom: 1px solid #027187;padding-bottom: 3vh;">
+        <div style="width: 17vw;line-height: 12vh;">
+            <p >病种：<span id="tclb" style="width: 6vw;height: 6vh;">病虫害</span></p>
+        </div>
+        <div style="width: 17vw;line-height: 12vh;">
+            <p >病情：<span id="tcbingzhong">白粉病</span></p>
+        </div>
+    </div>
+    <div style="display: flex;width: 50vw;margin: 0 auto;border-bottom: 1px solid #027187;padding-bottom: 3vh;">
+        <div class="tc-int test test-1">
+            <div style="text-align: left;" id="tcbint">
+            </div>
+        </div>
+    </div>
+    <div id="dele"></div>
+</div>
+
+<div id="motai"></div>
+</body>
+</html>
+<script src="/static/js/vue.js"></script>
+<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/static/layui/layui.js}"></script>
+<script th:src="@{/static/js/agriculture/xlPaging.js}"></script>
+<script>
+
+    var nameid=["蔬菜类病虫","211"]
+    var sum=1//当前页面
+    var buttonNum=''//要展示的页码
+    var diseasesTypesId=''//病种查询id
+    var index=0
+    var speciesId=21 //物种id
+    var species='农业' //物种
+    var diseasesTypesId=nameid[1] //疾病类型id
+    var diseasesTypes=nameid[0] //疾病类型
+    var diseasesName='' //疾病名称
+    var diseasesContent=''//疾病详情及预防措施
+    var industryType=0 //行业类型 1-水产  0：农业
+    var level=parent.userData.user.level;
+    var userName=parent.userData.user.userName;
+    if(level>1){
+        $("#addentry").hide();
+    }
+    $.ajax({
+        url: "../expertManage/findExpertExamineVal_Two",
+        type: "POST",
+        data: {},
+        success: function (res) {
+            console.log('是否是专家');
+            console.log(level);
+            console.log(res);
+            if (res.data != null) {
+                if (level == 1||level <1) {
+                    $('#addentry').hide();
+                }
+            }
+            if(res.data != null&&level>1){
+                $('#addentry').show();
+            }
+        }
+    })
+    var diseases_Name='';
+    $(document).on('click','#diseasesNamebnt',function(){
+        diseases_Name=$('#diseasesName').val()
+        console.log(diseases_Name)
+        getlist(0,0,0,diseases_Name)
+    })
+    function getlist(page,diseasesTypesId,index,diseasesName){
+        $.ajax({
+            type: "POST",
+            url: "/expertManage/findDiseaseList",//a连接接口
+            dataType: "json",
+            data:{
+                page:page,
+                diseasesTypesId:diseasesTypesId,
+                diseases_name:diseases_Name,
+            },
+            success: function (res) {
+                console.log(res.data.beanList)
+                //diseasesTypes：名称
+                //diseasesTypesId：id
+                var page=res.count/50;
+                if(!page%1 === 0){
+                    if(Math.round(page)<page){
+                        page=Math.round(page)+1;
+                    }else{
+                        page=Math.round(page);
+                    }
+                }
+                $("#page").paging({
+                    nowPage: sum, // 当前页码
+                    pageNum: page, // 总页码
+                    buttonNum: buttonNum, //要展示的页码数量
+                    canJump: 0,// 是否能跳转。0=不显示（默认），1=显示
+                    showOne: 1,//只有一页时，是否显示。0=不显示,1=显示（默认）
+                    callback: function (num) { //回调函数
+                        console.log(num);
+                        getlist(num,diseasesTypesId,index,diseasesName)
+                        sum=num;
+                    }
+                });
+                console.log(res)
+                var trs = ""; //标题
+                var quzi = ""; //选择
+                    $.each(res.data.beanList, function (i,item) {
+                    trs +='<div style="display: flex;margin:0 auto;" class="title-int" data-id="'+item.diseasesTypesId+'">'
+                        +'<div  style="border: none;">'
+                        +'<div class="title-pic">'
+                        +'<img src="/static/img/agriculture/ioTRegulate/a1.png" alt="" height="24" width="2" >'
+                        +'</div>'
+                        +'</div>'
+                        +'<p style="font-size: 0.8vw;" class="title-p">'+item.diseasesTypes+'</p>'
+                        +'</div>'
+                    quzi+='<option value="'+item.diseasesTypes+'|'+item.diseasesTypesId+'" name="'+item.diseasesTypesId+'">'+item.diseasesTypes+'</option>'
+                });
+                $('#title').html(trs);
+                $('#quiz').html(quzi);
+                $('.title-int').eq(index).addClass('titleac')
+                var bz = ""; //标题
+                $.each(res.datas, function (i,item) {
+                    bz +='            <div class="bz">\n' +
+                        '                <div class="bz-list">\n' +
+                        '                    <div class="bz-txt" style="width: 9vw;overflow:hidden; text-overflow:ellipsis;white-space:nowrap">'+item.diseasesName+'</div>\n' +
+                        '                    <div style="width: 6vw;display: flex">\n' ;
+              /*      if(level==0){
+                        bz +='<div class="bz-dele" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>\n';
+                    }else if(level==2&&userName==item.userName){
+                        bz +='<div class="bz-dele" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/dele.png" alt=""></div>\n';
+                    }*/
+                    bz +='                        <div class="bz-chaxun" data-id="'+item.id+'"><img src="/static/img/agriculture/specialistManagement/chaxun.png" alt=""></div>\n' +
+                        '                    </div>\n' +
+                        '                </div>\n' +
+                        '            </div>'
+                });
+                $('#app').html(bz);
+
+
+
+
+                layui.use(['form', 'layedit', 'laydate'], function(){
+                    var form = layui.form
+                        ,layer = layui.layer
+                        ,layedit = layui.layedit
+                        ,laydate = layui.laydate;
+                    //常规用法
+                    laydate.render({
+                        elem: '#test1'
+                    });
+                    $('#layerDemo .layui-btn').on('click', function(){
+                        var othis = $(this), method = othis.data('method');
+                        active[method] ? active[method].call(this, othis) : '';
+                    });
+
+                    form.on('select(demo)', function(data) {
+                        console.log(data.value.split('|'))
+                        nameid=data.value.split('|')
+                        diseasesTypesId=nameid[1]
+                        console.log(diseasesTypesId);
+                        diseasesTypes=nameid[0]
+                    })
+                });
+
+            }
+        })
+    }
+    getlist(0,0,0,diseases_Name);
+
+    $(document).on('click','#addbnt',function(){
+        diseasesName=$('#tcbingzhongadd').val();
+        diseasesContent=$('#tcbintadd').val();
+        diseasesTypesId=$('#quiz').val().split('|')[1];
+        console.log(diseasesTypesId)
+        console.log(diseasesTypes)
+        if(!diseasesName){
+            layer.msg('请输入名称');
+            return
+        }else if(!diseasesContent){
+            layer.msg('请输入详情');
+
+            return
+
+        }
+
+
+    })
+
+
+
+
+
+    $(document).on('click','.title-int',function(){
+        var id=$(this).data("id")
+        console.log(id)
+        // $('.title-int').removeClass('titleac')
+        // $(this).addClass('titleac')
+        diseasesTypesId=id
+        sum=1
+        index=$(this).index()
+        getlist(1,id,index,diseases_Name)
+
+    })
+    var xiugai=document.getElementsByClassName('xiugai');
+    var chaxun=document.getElementsByClassName('bz-chaxun');
+    var tc=document.getElementById('tc');
+    var dele=document.getElementById('dele');
+    $(document).on('click','.bz-chaxun',function(){
+        var id=$(this).data("id")
+        console.log(id)
+        tc.style.display='block'
+        $.ajax({
+            type: "POST",
+            url: "/aquaculture/getDiseasesContentById",
+            dataType: "json",
+            data:{
+                id:id
+            },
+            success: function (res) {
+                console.log(res)
+                var tclb=res.data.diseasesTypes
+                var tcbingzhong=res.data.diseasesName
+                var tcbint=res.data.diseasesContent
+                $('#tclb').html(tclb)
+                $('#tcbingzhong').html(tcbingzhong)
+                $('#tcbint').html(tcbint)
+
+
+            }
+        })
+    })
+    dele.onclick=function(){
+        tc.style.display='none'
+    }
+    $(document).on('click','#addentry',function(){
+        $('#tcadd').show()
+    })
+    $(document).on('click','#deleadd',function(){
+        $('#tcadd').hide()
+    })
+    $(document).on('click','#dele',function(){
+        $('#tc').hide()
+    })
+    // var userLevel=parent.userData.user.level; //管理员0、专家1 、用户2
+    var bingzhongid
+
+    $(document).on('click','.bz-dele',function(){
+        bingzhongid=$(this).data("id")
+        $('#deletc').show()
+        $('#motai').show()
+
+
+    })
+    $(document).on('click','#motai',function(){
+        $('#deletc').hide()
+        $('#motai').hide()
+    })
+    $(document).on('click','#deleno',function(){
+        $('#deletc').hide()
+        $('#motai').hide()
+    })
+
+    $(document).on('click','#deleyes',function(){
+        $('#deletc').hide()
+        $('#motai').hide()
+        delebz()
+    })
+</script>
+
+
+
+
+
+
+

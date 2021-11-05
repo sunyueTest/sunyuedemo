@@ -48,6 +48,14 @@ public class AgricultureController {
     }
 
     /**
+     * 冷链系统管理系统
+     */
+    @RequestMapping("coldChain")
+    public Object coldChain() {
+        return "agriculture/coldChain";
+    }
+
+    /**
      * 专家系统
      */
     @RequestMapping("specialistSystem")
