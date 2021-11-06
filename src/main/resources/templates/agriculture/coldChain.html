@@ -214,13 +214,13 @@
                 var trs = ""; //标题
                 var quzi = ""; //选择
                     $.each(res.data.beanList, function (i,item) {
-                    trs +='<div style="display: flex;margin:0 auto;" class="title-int" data-id="'+item.diseasesTypesId+'">'
-                        +'<div  style="border: none;">'
+                    trs +='<div >'
+                     /*   +'<div  style="border: none;">'
                         +'<div class="title-pic">'
                         +'<img src="/static/img/agriculture/ioTRegulate/a1.png" alt="" height="40" width="2" >'
                         +'</div>'
-                        +'</div>'
-                        +'<p style="font-size: 0.8vw;" class="title-p">'+item.diseasesTypes+'</p>'
+                        +'</div>'*/
+                        +'<p style="font-size: 1.0vw;margin-left: 3vh" class="title-p">设备列表信息</p>'
                         +'</div>'
                     quzi+='<option value="'+item.diseasesTypes+'|'+item.diseasesTypesId+'" name="'+item.diseasesTypesId+'">'+item.diseasesTypes+'</option>'
                 });

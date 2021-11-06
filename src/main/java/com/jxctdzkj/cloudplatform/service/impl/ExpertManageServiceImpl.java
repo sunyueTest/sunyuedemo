@@ -420,17 +420,11 @@ public class ExpertManageServiceImpl implements ExpertManageService {
         Map<String, Object> map = new HashMap<>();
         List<AquacultureDiseasesBean> beanList = new ArrayList<AquacultureDiseasesBean>();
         AquacultureDiseasesBean bean1 = new AquacultureDiseasesBean();
-        //AquacultureDiseasesBean bean2 = new AquacultureDiseasesBean();
         bean1.setSpeciesId(21);
         bean1.setSpecies("设备");
         bean1.setDiseasesTypesId("1");
         bean1.setDiseasesTypes("设备列表");
         beanList.add(bean1);
-    /*    bean2.setSpeciesId(21);
-        bean2.setSpecies("设备");
-        bean2.setDiseasesTypesId("2");
-        bean2.setDiseasesTypes("终端设备");
-        beanList.add(bean2);*/
         map.put("beanList", beanList);
 
         //登录验证接口
