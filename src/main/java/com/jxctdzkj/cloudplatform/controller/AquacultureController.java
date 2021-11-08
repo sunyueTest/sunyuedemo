@@ -429,10 +429,14 @@ public class AquacultureController extends BaseController {
         String guid = JSON.parseObject(data, HashMap.class).get("guid").toString();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//格式化对象
         Date date1 = new Date() ;
-        Date date = new Date(date1.getTime() - 240*30*1000) ;
+        Date date = new Date(date1.getTime() - 2400*30*1000) ;
         String dateaa = format.format(date).toString();
 
-        String s4 = HttpUtilsNew.doGet("http://yun.zuotoujing.net:8088/service-api-v3/wlx/gatewayDev/03/viewHisCommon?guid="+guid+"&at="+at+"&devId="+id+"&startTime="+dateaa+"%2000%3A00%3A00");
+        //加日期查询
+       // String s4 = HttpUtilsNew.doGet("http://yun.zuotoujing.net:8088/service-api-v3/wlx/gatewayDev/03/viewHisCommon?guid="+guid+"&at="+at+"&devId="+id+"&startTime="+dateaa+"%2000%3A00%3A00");
+
+        //不加日期查询
+        String s4 = HttpUtilsNew.doGet("http://yun.zuotoujing.net:8088/service-api-v3/wlx/gatewayDev/03/viewHisCommon?guid="+guid+"&at="+at+"&devId="+id);
         Map<String, Object> map = new HashMap<>();
         AquacultureDiseasesBean bean = new AquacultureDiseasesBean();
         bean.setDiseasesTypes(id);
@@ -450,7 +454,7 @@ public class AquacultureController extends BaseController {
             List<Object> list11 =JSON.parseArray(deviceReportList);
             a += "  地址：" +  locname +"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp日期："+time +"  <br>温度："+list11.get(6) + "℃&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp湿度："+list11.get(10)+"%RH <br><br>";
             i+=1;
-            if(i==10){
+            if(i==100){
                 break;
             }
         }
