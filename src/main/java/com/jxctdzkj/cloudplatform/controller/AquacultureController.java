@@ -435,7 +435,7 @@ public class AquacultureController extends BaseController {
         //加日期查询
        // String s4 = HttpUtilsNew.doGet("http://yun.zuotoujing.net:8088/service-api-v3/wlx/gatewayDev/03/viewHisCommon?guid="+guid+"&at="+at+"&devId="+id+"&startTime="+dateaa+"%2000%3A00%3A00");
 
-        //不加日期查询
+        // 不加日期查询
         String s4 = HttpUtilsNew.doGet("http://yun.zuotoujing.net:8088/service-api-v3/wlx/gatewayDev/03/viewHisCommon?guid="+guid+"&at="+at+"&devId="+id);
         Map<String, Object> map = new HashMap<>();
         AquacultureDiseasesBean bean = new AquacultureDiseasesBean();
