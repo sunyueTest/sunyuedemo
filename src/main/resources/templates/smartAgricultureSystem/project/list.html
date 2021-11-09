@@ -126,12 +126,14 @@
     let table, form;
     layui.use('table', function () {
         let tableData = [
-            {
+           /* {
                 field: 'id', title: 'ID', width: 80, //fixed: 'left', unresize: true,
                 sort: true
-            },
+            },*/
             {field: 'name', title: "项目名称", align: 'center'},
-            {field: 'createUser', title: "创建者", align: 'center'},
+            {field: 'supportingCompany', title: "描述", align: 'center'},
+            {field: 'website', title: "设备编号", align: 'center'},
+            {field: 'constructionCompany', title: "目的地", width: 160, align: 'center'},
             {field: 'createTime', title: "创建时间", width: 160, align: 'center'},
             {
                 field: '',

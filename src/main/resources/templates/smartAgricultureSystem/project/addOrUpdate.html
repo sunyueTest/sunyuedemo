@@ -58,9 +58,7 @@
                 <div class="layui-input-inline">
                     <select lay-filter="quiz" class="select" id="type" lay-verify="type" th:value="*{data.bean.type}"
                             name="type">
-                        <option th:selected="${data.bean.type==1}" value="1">市级项目</option>
                         <option th:selected="${data.bean.type==2}" value="2">县级项目</option>
-                        <option th:selected="${data.bean.type==3}" value="3">乡级项目</option>
                     </select>
                 </div>
             </div>
