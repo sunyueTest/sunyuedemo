@@ -90,18 +90,19 @@
                 </div>
             </div>
 
+
         </div>
 
-        <!--logo的上传，暂时隐藏，因为没有地方展示-->
-        <!--<div class="layui-form-item">-->
-            <!--<div class="layui-inline">-->
-                <!--<label id="imgUrlSpan" class="layui-form-label">logo上传</label>-->
-                <!--<div class="add-uploading" id="imgUrl">-->
-                    <!--<img src="../../../static/img/agriculture/addImg.png" alt="" id="imgUrl_img"-->
-                         <!--style="width:100px;height:100px;">-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label  class="layui-form-label">联系方式</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="logo1" id="logo1" autocomplete="off" style="width: 200px;"
+                           th:value="*{data.bean.logo}" class="layui-input">
+                </div>
+            </div>
+        </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
@@ -132,8 +133,8 @@
     $('#label3').text($.i18n.prop('constructionCompany'));
     $('#label4').text($.i18n.prop('supportingCompany'));
     $('#label5').text($.i18n.prop('website'));
+    $('#label6').text($.i18n.prop('logo'));
     $('#save').val($.i18n.prop('save'));
-    $('#imgUrlSpan').text($.i18n.prop('logoUpload'));
 
     //提交数据
     $("#save").click(function () {
@@ -144,7 +145,8 @@
         let enterpriseId = $("#enterpriseId").val();
         let website = $("#website").val();
         let logo = $("#logo").val();
-        console.log(enterpriseId);
+        let logo1 = $("#logo1").val();
+
         if (name == '' || name.length == 0) {
             layer.msg($.i18n.prop('warn11'), {icon: 5});
             return false;
@@ -166,7 +168,7 @@
             constructionCompany: constructionCompany,
             supportingCompany: supportingCompany,
             website: website,
-            logo: logo,
+            logo: logo1,
             enterpriseId: enterpriseId,
             createUser: $("#createUser").val(),
             createTime: $("#createTime").val()
@@ -197,22 +199,7 @@
         });
     });
 
-    layui.use('upload', function () {
-        let upload = layui.upload;
-        //执行实例
-        let uploadInst = upload.render({
-            elem: '#imgUrl'
-            , url: uploadUrl
-            , done: function (res) {
-                if (res.state == 'success') {
-                    $("#logo").val(res.msg);
-                    $('#imgUrl_img').attr('src', res.msg);
-                } else {
-                    layer.msg('上传失败');
-                }
-            }
-        });
-    });
+
 
     let imgStr = $("#logo").val();
     if (imgStr != null && imgStr.length > 0) {
