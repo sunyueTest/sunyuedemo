@@ -91,7 +91,7 @@ public class Constant extends com.jxctdzkj.support.config.Constant implements Co
         //        专家实时会话（在线诊断）
         public static String SOCKET_TOPIC = "ws://localhost:8198";
         //        二维码
-        public static final String QRCODE = "http://localhost:8083/file/a9335e0e8e964046a5cfeba55a0cca28.jpeg";
+        public static final String QRCODE = "http://localhost:8180/img/jxct_logo11.png";
         //        帮助文档地址
         public static final String HELP_DOCS = "http://docs.sennor.net";
         //一键报警 和 智慧公厕

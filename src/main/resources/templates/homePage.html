@@ -212,12 +212,12 @@
                 <div class="layui-card-header"><span id="miniProgram" style="color:#fff;"></span>
                 </div>
                 <div class="layui-card-body" style="display: flex;" th:if="${data.wechat_show}">
-                    <img id="appImg" style="width:300px;height:300px;" th:src="${data.appPath}">
+                    <img id="appImg" style="width:450px;height:300px;" th:src="${data.appPath}">
                     <div id="app_qrcode_text_div"
                          style="width:130px;height:130px;position: absolute;margin-left: 84px;margin-top: 84px;display: flex;justify-content: center">
-                        <img id="app_qrcode_bg"
+                       <!-- <img id="app_qrcode_bg"
                              style="width:130px;height:130px;border-radius: 80px;"
-                             src="../static/img/app_qrcode_bg.jpg">
+                             src="../static/img/app_qrcode_bg.jpg">-->
                         <span id="app_qrcode_text"
                               style="color: #ccc;position: absolute;font-size: 20px;margin-top:
                                50px;letter-spacing: 5px;font-family: '新宋体';font-weight: bold;"
