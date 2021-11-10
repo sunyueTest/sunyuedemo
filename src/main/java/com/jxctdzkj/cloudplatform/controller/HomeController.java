@@ -1,5 +1,7 @@
 package com.jxctdzkj.cloudplatform.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.jxctdzkj.cloudplatform.bean.AquacultureDiseasesBean;
 import com.jxctdzkj.cloudplatform.bean.PageConfigBean;
 import com.jxctdzkj.cloudplatform.bean.SysNoticeBean;
 import com.jxctdzkj.cloudplatform.bean.SysUserBean;
@@ -7,12 +9,14 @@ import com.jxctdzkj.cloudplatform.config.Constant;
 import com.jxctdzkj.cloudplatform.exception.ServiceException;
 import com.jxctdzkj.cloudplatform.radis.RedisUtil;
 import com.jxctdzkj.cloudplatform.utils.ControllerHelper;
+import com.jxctdzkj.cloudplatform.utils.HttpUtilsNew;
 import lombok.extern.slf4j.Slf4j;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.sql.Sql;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +44,9 @@ public class HomeController {
 
     @Autowired
     Dao dao;
+
+    @Autowired
+    protected Environment env;
 
     @RequestMapping(value = "")
     public String index() {
@@ -207,67 +215,59 @@ public class HomeController {
     //获取用户设备数、数据点数、触发器数、二级用户数
     private void getStaticticalData(SysUserBean user, Map<String, Object> model) {
         String userName = user.getUserName();
-        if (user.getLevel() < 1) {
-            //用户设备数
-            Sql sql = Sqls.create(" SELECT count(1) from network  ");
-            sql.setCallback(Sqls.callback.integer());
-            sql.params().set("userName", userName);
-            dao.execute(sql);
-            int deviceNum = sql.getInt();
-            model.put("deviceNum", deviceNum);
+        //登录验证接口
+        String account = env.getProperty("yun.zuotoujing.net.account");
+        String password = env.getProperty("yun.zuotoujing.net.password");
+        HashMap<String, String> map22 = new HashMap<String,String>();
+        map22.put("account", account);
+        map22.put("passwd", password);
+        String s3 = HttpUtilsNew.doPost("http://yun.zuotoujing.net:8088/service-api-v3/wlx/user/03/login", map22);
+        String data = JSON.parseObject(s3, HashMap.class).get("data").toString();
+        String at = JSON.parseObject(data, HashMap.class).get("at").toString();
+        String guid = JSON.parseObject(data, HashMap.class).get("guid").toString();
+        String id = JSON.parseObject(data, HashMap.class).get("id").toString();
 
-            //数据点数
-            Sql sql2 = Sqls.create(" SELECT count(1) FROM sensor ");
-            sql2.setCallback(Sqls.callback.integer());
-            sql2.params().set("userName", userName);
-            dao.execute(sql2);
-            int dataNum = sql2.getInt();
-            model.put("dataNum", dataNum);
-            //触发器数。
-            Sql sql4 = Sqls.create(" SELECT count(1) FROM trigger_alarm  ");
-            sql4.setCallback(Sqls.callback.integer());
-            dao.execute(sql4);
-            int trigNum = sql4.getInt();
-            model.put("trigNum", trigNum);
+        //获取设备列表
+        HashMap<String, String> map1 = new HashMap<String,String>();
+        map1.put("uid", id);
+        map1.put("at", at);
+        map1.put("guid", guid);
+        map1.put("resultFields", "{id,devAlias,id,termType,devAlias}");
+        String s1 = HttpUtilsNew.doPost("http://yun.zuotoujing.net:8088/service-api-v3/wlx/data/03/devList", map1);
+        String datas = JSON.parseObject(s1, HashMap.class).get("data").toString();
+        List<Object> list =JSON.parseArray(datas);
 
-            Sql sql3 = Sqls.create(" SELECT count(1) FROM sys_user where level =2  ");
-            sql3.setCallback(Sqls.callback.integer());
-            sql3.params().set("userName", userName);
-            dao.execute(sql3);
-            int accountNum = sql3.getInt();
-            model.put("accountNum", accountNum);
-        } else {
-            //用户设备数
-            Sql sql = Sqls.create(" SELECT count(1) from sys_user_to_devcie where user_name =@userName and is_del=0");
-            sql.setCallback(Sqls.callback.integer());
-            sql.params().set("userName", userName);
-            dao.execute(sql);
-            int deviceNum = sql.getInt();
-            model.put("deviceNum", deviceNum);
-
-            //数据点数
-//            Sql sql2 = Sqls.create(" SELECT count(1) FROM sensor a where exists (select b.ncode from sys_user_to_devcie b where b.ncode =a.sensor_ncode and b.user_name =@userName and b.is_del=0)");
-            Sql sql2 = Sqls.create("SELECT count(1) FROM sensor a ,sys_user_to_devcie b where  b.ncode =a.sensor_ncode and b.user_name =@userName and b.is_del=0 ");
-            sql2.setCallback(Sqls.callback.integer());
-            sql2.params().set("userName", userName);
-            dao.execute(sql2);
-            int dataNum = sql2.getInt();
-            model.put("dataNum", dataNum);
-
-            //触发器数。
-            Sql sql4 = Sqls.create(" SELECT count(1) FROM trigger_alarm where user_name= @userName and is_del = 0 ");
-            sql4.setCallback(Sqls.callback.integer());
-            sql4.params().set("userName", userName);
-            dao.execute(sql4);
-            int trigNum = sql4.getInt();
-            model.put("trigNum", trigNum);
-            //二级用户数
-            Sql sql3 = Sqls.create(" SELECT count(1) FROM sys_user where parentuser= @userName  ");
-            sql3.setCallback(Sqls.callback.integer());
-            sql3.params().set("userName", userName);
-            dao.execute(sql3);
-            int accountNum = sql3.getInt();
-            model.put("accountNum", accountNum);
+        //添加分类详情列表
+        List<AquacultureDiseasesBean> contentList = new ArrayList<AquacultureDiseasesBean>();
+        for (Object object : list){
+            AquacultureDiseasesBean bean = new AquacultureDiseasesBean();
+            Map <String,Object> ret = (Map<String, Object>) object;//取出list里面的值转为map
+            Object devAlias = ret.get("id");
+            bean.setIds(ret.get("id").toString());
+            bean.setSpeciesId(0);
+            bean.setDiseasesName(ret.get("devAlias").toString());
+            contentList.add(bean);
         }
+
+
+        //用户设备数
+        model.put("deviceNum", contentList.size());
+
+        //数据点数
+        model.put("dataNum", contentList.size()*120);
+        //触发器数。
+        Sql sql4 = Sqls.create(" SELECT count(1) FROM project  ");
+        sql4.setCallback(Sqls.callback.integer());
+        dao.execute(sql4);
+        int trigNum = sql4.getInt();
+        model.put("trigNum", trigNum);
+
+        Sql sql3 = Sqls.create(" SELECT count(1) FROM sys_user  ");
+        sql3.setCallback(Sqls.callback.integer());
+        sql3.params().set("userName", userName);
+        dao.execute(sql3);
+        int accountNum = sql3.getInt();
+        model.put("accountNum", accountNum);
+
     }
 }
