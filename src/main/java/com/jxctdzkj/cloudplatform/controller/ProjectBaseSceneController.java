@@ -61,6 +61,13 @@ public class ProjectBaseSceneController {
         return "smartAgricultureSystem/enterprise/list";
     }
 
+    //根据项目名称获取项目对象数据
+    @RequestMapping(value = "/findProjectByName")
+    @ResponseBody
+    public ResultObject findProjectByName(String name) {
+        return projectBaseSceneService.findProjectByName(name);
+    }
+
     // 跳转项目列表
     @RequestMapping(value = "/projectList")
     public ModelAndView projectList() {

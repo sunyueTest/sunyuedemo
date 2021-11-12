@@ -791,6 +791,6 @@ delAll = function () {
  * 报警初始化
  *
  */
-initSocket(function (data) {
-    // console.log(data);
-});
+// initSocket(function (data) {
+//     // console.log(data);
+// });

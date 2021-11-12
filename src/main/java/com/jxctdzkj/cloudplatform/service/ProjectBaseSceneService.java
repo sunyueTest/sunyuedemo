@@ -245,4 +245,6 @@ public interface ProjectBaseSceneService {
     List<ProjectBaseSceneServiceImpl.Enterprise> listAllEnterprisesForExport();
 
     List<ProjectBaseSceneServiceImpl.InnerBase> listAllBasesForExport();
+
+    ResultObject findProjectByName(String name);
 }

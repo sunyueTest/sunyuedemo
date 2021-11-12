@@ -389,63 +389,63 @@
         }
     }
     //报警
-    initSocket(function (data) {
-        console.log(data);
-    });
+    // initSocket(function (data) {
+    //     console.log(data);
+    // });
     //专家即时聊天
     var username = new Array;
     var list = [];
     var id = '';
     var userbnt = '';//点击获取用户名称
-    initTopicSocket(function (msg) {
-        if ('用户在其他地方登陆，已下线' == msg) {
-            layer.msg('重复登陆，专家在线咨询功能禁用');
-        } else {
-            layer.msg(msg);
-        }
-    }, function (msg) {
-        console.log('接收:' + msg);
-        sendBroadcast('topic', msg);
-        layer.msg('您收到了新的咨询消息！')
-        onlinehintsum += 1;
-        onlinehint();
-        let arry = msg.split('#::');
-        let user = arry[0];
-        let teacher = arry[1];
-        username.push(user);
-        username = removeDuplicates(username)
-        console.log(username);
-        var teacherint = new Array;
-        var val = {
-            type: 1,
-            val: teacher
-        }
-        teacherint.push(val);
-        var isTrue = false;
-        var valTwo = new Array();
-        for (var i = 0; i < list.length; i++) {
-            if (list[i].username == user) {
-                // var teacherintTwo=new Array;
-                valTwo = list[i].teacherint;
-                valTwo.push(val);
-                // teacherintTwo.push(valTwo);
-                list[i].teacherint = valTwo;
-                isTrue = true;
-            }
-        }
-        if (!isTrue) {
-            valTwo.push(val);
-            var liaotian = {
-                username: user,
-                teacherint: valTwo
-            };
-            list.push(liaotian);
-        }
-        console.log(list[0].username);
-        console.log(list);
-        var str = JSON.stringify(list);
-        setCookie("chattinglist", str);
-    });
+    // initTopicSocket(function (msg) {
+    //     if ('用户在其他地方登陆，已下线' == msg) {
+    //         layer.msg('重复登陆，专家在线咨询功能禁用');
+    //     } else {
+    //         layer.msg(msg);
+    //     }
+    // }, function (msg) {
+    //     console.log('接收:' + msg);
+    //     sendBroadcast('topic', msg);
+    //     layer.msg('您收到了新的咨询消息！')
+    //     onlinehintsum += 1;
+    //     onlinehint();
+    //     let arry = msg.split('#::');
+    //     let user = arry[0];
+    //     let teacher = arry[1];
+    //     username.push(user);
+    //     username = removeDuplicates(username)
+    //     console.log(username);
+    //     var teacherint = new Array;
+    //     var val = {
+    //         type: 1,
+    //         val: teacher
+    //     }
+    //     teacherint.push(val);
+    //     var isTrue = false;
+    //     var valTwo = new Array();
+    //     for (var i = 0; i < list.length; i++) {
+    //         if (list[i].username == user) {
+    //             // var teacherintTwo=new Array;
+    //             valTwo = list[i].teacherint;
+    //             valTwo.push(val);
+    //             // teacherintTwo.push(valTwo);
+    //             list[i].teacherint = valTwo;
+    //             isTrue = true;
+    //         }
+    //     }
+    //     if (!isTrue) {
+    //         valTwo.push(val);
+    //         var liaotian = {
+    //             username: user,
+    //             teacherint: valTwo
+    //         };
+    //         list.push(liaotian);
+    //     }
+    //     console.log(list[0].username);
+    //     console.log(list);
+    //     var str = JSON.stringify(list);
+    //     setCookie("chattinglist", str);
+    // });
     /**
      * 删除数组中重复元素
      */

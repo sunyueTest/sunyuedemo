@@ -131,9 +131,9 @@ $(function(){
 
 
     //添加报警信息
-    initSocket(function (data) {
-        getDangerMsg(data)
-    });
+    // initSocket(function (data) {
+    //     getDangerMsg(data)
+    // });
 //动态添加banner名称
     $.post("../user/selUserDetails", {}, function (res) {
         if (res.state == 'success') {

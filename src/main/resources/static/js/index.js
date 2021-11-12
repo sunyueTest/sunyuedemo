@@ -499,9 +499,9 @@ function setLanguage(local) {
  <script type="text/javascript" src="../tost/src/jquery.toast.js"></script>
  <script th:src="@{/static/js/socket.js?v=1}" charset="utf-8"></script>
  */
-initSocket(function (data) {
-    // console.log(data);
-});
+// initSocket(function (data) {
+//     // console.log(data);
+// });
 var warbntflge=true;
 function warbnt(){
     if(warbntflge){

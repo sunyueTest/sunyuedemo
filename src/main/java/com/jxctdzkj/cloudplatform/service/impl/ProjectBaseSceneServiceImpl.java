@@ -833,6 +833,12 @@ public class ProjectBaseSceneServiceImpl implements ProjectBaseSceneService {
 
     }
 
+    @Override
+    public ResultObject findProjectByName(String name) {
+        List<ProjectBean> list = dao.query(ProjectBean.class, Cnd.where("name", "=", name));
+        return ResultObject.okList(list);
+    }
+
     @Data
     public class InnerBase {
         @Excel(name = "基地名称", width = 50)

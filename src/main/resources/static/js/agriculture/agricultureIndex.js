@@ -202,13 +202,11 @@ layui.use(['form', 'layer', 'layedit', 'laydate'], function () {
         }
     });
 });
-
 var indicator = [];
 var deviceNum = 0;
 var onLineDevice = 0;
 var offLineDevice = 0;
 $(function () {
-
 
     /**
      * 一级公司名称列表渲染插入
@@ -235,19 +233,15 @@ $(function () {
                 });
                 $('#nav-left').append(html);
                 getlistxm();
-                // allinitialize();
-
             }
         });
     }
-
     getlistnav();
     /**
      * 二级项目名称列表渲染插入
      * 渲染二级列表时会同时初始化页面
      */
     var navxm = new Array;
-
     function getlistxm() {
         for (var i = 0; i < navsum.length; i++) {
             let id = navsum[i];
@@ -261,12 +255,11 @@ $(function () {
                     page: 1,
                 },
                 success: function (res) {
-                    // console.log(res);
                     let html = '';
                     $.each(res.datas, function (i, item) {
                         navxm.push(item.id);
-                        html += '                      <div class="layui-nav-item nav-jd" data-id="' + item.id + '" id="' + item.id + '">\n' +
-                            '                            <a href="javascript:;" class="xmbg">' + item.name + '</a>\n' +
+                        html += '                      <div class="layui-nav-item nav-jd" data-id="' + item.id + '" id="' + item.id + '" onclick="eventBindClick(this);">\n' +
+                            '                            <a href="javascript:;" class="xmbg" id="xiangmumingcheng" >' + item.name + '</a>\n' +
                             '                        </div>'
                     });
                     $('.nav-xm').eq(index).append(html);
@@ -278,7 +271,6 @@ $(function () {
             }
         }
     }
-
     /**
      * 三级基地名称
      */
@@ -384,7 +376,6 @@ $(function () {
                             getScene(id);
                             addMarker(lon, lat, name);
                             fige = true;
-                            console.log(fige);
                         }
                     }
                 });
@@ -415,7 +406,7 @@ $(function () {
         var wHeight = $(window).height();
         $(".contentBox").height(wHeight - 10);
         $("#mapContainer").height(wHeight);
-        $("#mapContainer").backgroundColor("red");
+        // $("#mapContainer").backgroundColor("red");
         $(".itemBox").height($(".leftBox").height() - $(".searchBox").height() - 15 - 30);
         $(".cameraBox").height($(".rightOneBox").height() - $(".rightOneBoxTop").height() - 40);
         $(".dangerMsgItem").height($("#dangerCharts").height() - 32 - 10);
@@ -510,9 +501,6 @@ function addMarker(lon, lat, name, index) {
     var myIcon = new BMap.Icon('/static/img/agriculture/marker.png',new BMap.Size(43,68));
     var marker = new BMap.Marker(point,{icon:myIcon});
     map.addOverlay(marker);
-
-
-
     map.addOverlay(marker);
     addClickHandler(name, marker);
 }
@@ -710,7 +698,6 @@ function initDevicePie() {
             yAxis: []
         };
         for (let i = 0; i < data.length; i++) {
-            // console.log([70 - i * 15 + '%', 67 - i * 15 + '%']);
             res.series.push({
                 name: '',
                 type: 'pie',
@@ -1354,7 +1341,7 @@ function showInfo(thisMaker,point){
 
         +'</ul>';
     var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
-    console.log(infoWindow)
+    // console.log(infoWindow)
     thisMaker.openInfoWindow(infoWindow);   //图片加载完毕重绘infowindow
 }
 
