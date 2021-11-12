@@ -52,9 +52,6 @@
     }
     .nav-jd{margin: 0.5vh 0;}
     .base{margin: 0.5vh 0;}
-    /*.gs{font-size: 1.1vw;max-font-size: 12px}*/
-    /*.xmbg{font-size: 0.9vw;max-font-size: 12px}*/
-    /*.item{font-size: 0.7vw;max-font-size: 12px}*/
     #mapContainer{background: #0a325c!important;
         font-size: 60px !important;
     }
@@ -251,8 +248,8 @@
 </body>
 <!--左侧点击菜单列表展示-->
 <script>
-    var ids;
     function eventBindClick(obj) {
+        var ids=[];
         let val = obj.innerText;
         $.ajax({
             url: "/projectBaseScene/findProjectByName",
@@ -269,7 +266,24 @@
             success: function (result) {
                 var shebei = result.datas[0].website;
                 ids = shebei.split(",");
-                console.log(ids)
+                for (var i=0;i<ids.length;i++){
+                    $.ajax({
+                        url: "/aquaculture/getDiseasesContentById",
+                        dataType: "json",
+                        type: "post",
+                        data: {id:ids[i]},
+                        timeout: 30000,
+                        error: function (data, type, err) {
+                            layer.closeAll('loading');
+                            layer.msg($.i18n.prop('fail'), {
+                                offset: '6px'
+                            });
+                        },
+                        success: function (result) {
+                            console.log(result.data);
+                        }
+                    });
+                }
             }
         });
     }
@@ -956,7 +970,7 @@
             dataIndex: len,
         });
         len++;
-    }, 1000);
+    }, 3000);
     environmentBar.setOption(wdsd);
 </script>
 </html>

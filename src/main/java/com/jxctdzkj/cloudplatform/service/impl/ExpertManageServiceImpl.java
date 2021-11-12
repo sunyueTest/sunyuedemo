@@ -412,10 +412,6 @@ public class ExpertManageServiceImpl implements ExpertManageService {
      */
     @Override
     public ResultObject findDiseaseList(String industryType, int diseasesTypesId, int page, int size, String diseasesName) throws RuntimeException {
-        SysUserBean userBean = ControllerHelper.getInstance(dao).getLoginUser();
-        if (StringUtils.isBlank(userBean.getUserName())) {
-            return ResultObject.error("用户未登录");
-        }
         //添加分类列表
         Map<String, Object> map = new HashMap<>();
         List<AquacultureDiseasesBean> beanList = new ArrayList<AquacultureDiseasesBean>();
@@ -426,7 +422,6 @@ public class ExpertManageServiceImpl implements ExpertManageService {
         bean1.setDiseasesTypes("设备列表");
         beanList.add(bean1);
         map.put("beanList", beanList);
-
         //登录验证接口
         String account = env.getProperty("yun.zuotoujing.net.account");
         String password = env.getProperty("yun.zuotoujing.net.password");
@@ -438,7 +433,6 @@ public class ExpertManageServiceImpl implements ExpertManageService {
         String at = JSON.parseObject(data, HashMap.class).get("at").toString();
         String guid = JSON.parseObject(data, HashMap.class).get("guid").toString();
         String id = JSON.parseObject(data, HashMap.class).get("id").toString();
-
         //获取设备列表
         HashMap<String, String> map1 = new HashMap<String,String>();
         map1.put("uid", id);
@@ -448,7 +442,6 @@ public class ExpertManageServiceImpl implements ExpertManageService {
         String s1 = HttpUtilsNew.doPost("http://yun.zuotoujing.net:8088/service-api-v3/wlx/data/03/devList", map1);
         String datas = JSON.parseObject(s1, HashMap.class).get("data").toString();
         List<Object> list =JSON.parseArray(datas);
-
         //添加分类详情列表
         List<AquacultureDiseasesBean> contentList = new ArrayList<AquacultureDiseasesBean>();
         for (Object object : list){

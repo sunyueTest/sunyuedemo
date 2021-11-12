@@ -3,7 +3,7 @@
 .clearfix:after { clear: both; }
 
 body {
-	background-image: url('../img/demo-1-bg.jpg');
+	background-image: url('../img/demo-1-bg.png');
 	/*color: #383a3c;*/
 	font-weight: 400;
 	font-size: 1em;

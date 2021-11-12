@@ -1337,24 +1337,15 @@ function showInfo(thisMaker,point){
     if(point){
         sContent+= '<li style="line-height: 26px;font-size: 12px;"><span style="display: inline-block;"></span>' + point +'</li>'
     }
-
-
         +'</ul>';
     var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
-    // console.log(infoWindow)
     thisMaker.openInfoWindow(infoWindow);   //图片加载完毕重绘infowindow
 }
-
-
-
-
-
 //添加左侧菜单
 function addLeftItem(msg) {
     //获取基地预警信息
     dangerMsgList = "";
     getDangerMsg();
-
     var $itemBox = $(".itemBox");
     $itemBox.empty()
     for (var i = 0; i < msg.length; i++) {
@@ -1366,13 +1357,8 @@ function addLeftItem(msg) {
         $item.attr("lon", msg[i].longitude);
         $item.attr("lat", msg[i].latitude);
         $item.appendTo($itemBox);
-
     }
-
-
 }
-
-
 //通过基地获取场景信息
 function getScene(baseId) {
     $.ajax({
@@ -1384,7 +1370,6 @@ function getScene(baseId) {
         },
         dataType: "json",
         success: function (res) {
-
             var baseCameraLength = 0;
             var resData = res.datas;
             if (resData.length > 0) {
@@ -1411,47 +1396,32 @@ function getScene(baseId) {
                     });
                 }
                 $(".p3").text("监控摄像头：" + baseCameraLength + '台');
-
-
                 getCamera(resData[0].id);
                 //初始化预警雷达图
                 initDangerCharts();
                 //加载基地预警信息
                 addBaseDangerMsg(resData);
-
-
                 //获取基地下所有设备总和
                 for (var x = 0; x < resData.length; x++) {
                     getDeviceNum(resData[x].id);
                 }
                 initDevicePie();
-
-
                 getWeatherMsg(resData[0].id)
-
             } else {
-
-
                 $(".camera").empty();
                 $(".cameraNoMsg").css("display", "none");
                 setTimeout(function () {
                     $(".cameraNoMsg").css("display", "block");
                 }, 200);
-
-
                 $(".p3").text("监控摄像头：" + resData.length + '台');
-
                 //初始化预警雷达图
                 initDangerCharts();
-
                 $(".dangerMsgItem").empty();
                 setTimeout(function () {
                     $(".dangerMsgItem").html("<span class='noDangerMsg'>暂无数据</span>");
                     $(".noDangerMsg").height($(".dangerMsgItem").height()).css("line-height", $(".dangerMsgItem").height() + "px").css("text-align", "center").css("display", "block");
                     $(".dangerTime").css("visibility", "hidden");
                 }, 200);
-
-
                 initDevicePie();
                 if (environmentBar) {
                     environmentBar.clear();
@@ -1459,8 +1429,6 @@ function getScene(baseId) {
                 if (landBar) {
                     landBar.clear();
                 }
-
-
                 $(".environmentBarNoMsg").css("display", "none");
                 $(".landBarNoMsg").css("display", "none");
                 setTimeout(function () {
@@ -1468,17 +1436,13 @@ function getScene(baseId) {
                     $(".landBarNoMsg").css("display", "block");
 
                 }, 200)
-
             }
-
-
         },
         error: function (e) {
             console.log(e);
         }
     });
 }
-
 
 //获取基地下第一个采集设备
 function getWeatherMsg(farmId) {
@@ -1504,8 +1468,6 @@ function getWeatherMsg(farmId) {
                         break;
                     }
                 }
-
-
             } else {
                 if (environmentBar) {
                     environmentBar.clear();
@@ -1513,8 +1475,6 @@ function getWeatherMsg(farmId) {
                 if (landBar) {
                     landBar.clear();
                 }
-
-
                 $(".environmentBarNoMsg").css("display", "none");
                 $(".landBarNoMsg").css("display", "none");
                 setTimeout(function () {
@@ -1522,14 +1482,12 @@ function getWeatherMsg(farmId) {
                     $(".landBarNoMsg").css("display", "block");
                 }, 200)
             }
-
         },
         error: function (e) {
             console.log(e);
         }
     });
 }
-
 
 //获取场景下摄像头信息
 function getCamera(sceneId) {
@@ -1542,12 +1500,10 @@ function getCamera(sceneId) {
             size: 100,
             appId: sceneId,
             appType: 1
-
         },
         dataType: "json",
         success: function (res) {
             var resData = res.datas;
-
             if (resData.length > 0) {
                 $(".cameraNoMsg").css("display", "none");
                 var resData = res.datas;
@@ -1561,18 +1517,13 @@ function getCamera(sceneId) {
                 setTimeout(function () {
                     $(".cameraNoMsg").css("display", "block");
                 }, 200);
-
             }
-
-
         },
         error: function (e) {
             console.log(e);
         }
     });
 }
-
-
 // 获取视频监控url
 function getCamareUrl(id, m) {
     var $playerBox = $(".camera").eq(m);
@@ -1623,9 +1574,7 @@ function getCamareUrl(id, m) {
     });
 }
 
-
 //获取预警信息
-
 function getDangerMsg() {
     $.ajax({
         type: "get",
@@ -1640,7 +1589,6 @@ function getDangerMsg() {
             } else {
                 $(".dangerTime").css("visibility", "hidden");
             }
-
         },
         error: function (e) {
             console.log(e);
@@ -1648,13 +1596,10 @@ function getDangerMsg() {
     });
 }
 
-
 //加载基地预警信息
 function addBaseDangerMsg(msg) {
     var $dangerMsgItem = $(".dangerMsgItem");
     $dangerMsgItem.empty()
-
-
     for (var i = 0; i < msg.length; i++) {
         for (var j = 0; j < dangerMsgList.length; j++) {
             if (msg[i].farmName == dangerMsgList[j].farmName) {
@@ -1665,13 +1610,11 @@ function addBaseDangerMsg(msg) {
                 $dangerIcon.appendTo($p);
                 $dangerText.appendTo($p);
                 $p.appendTo($dangerMsgItem);
-
             }
         }
     }
     if ($(".dangerText").length > 0) {
         $(".dangerTime").css("visibility", "inherit");
-
         var pointVal = [100, 100, 100, 100, 100, 100, 100, 100];
         for (var v = 0; v < $(".dangerText").length; v++) {
             for (var x = 0; x < indicator.length; x++) {
@@ -1779,8 +1722,6 @@ function addBaseDangerMsg(msg) {
             }]
         };
         dangerCharts.setOption(option);
-
-
     } else {
         setTimeout(function () {
             $(".dangerMsgItem").html("<span class='noDangerMsg'>暂无数据</span>");
@@ -1788,11 +1729,7 @@ function addBaseDangerMsg(msg) {
             $(".dangerTime").css("visibility", "hidden");
         }, 200);
     }
-
-
 }
-
-
 //获取基地下所有场景设备总和
 function getDeviceNum(farmId) {
     $.ajax({
@@ -1816,20 +1753,15 @@ function getDeviceNum(farmId) {
                         offLineDevice = offLineDevice + 1
                     }
                 }
-
             }
-
-
-
         },
         error: function (e) {
             console.log(e);
         }
     });
 }
-
-
-var styleJson = [{
+var styleJson = [
+    {
     "featureType": "land",
     "elementType": "geometry",
     "stylers": {
@@ -2942,12 +2874,9 @@ var styleJson = [{
         "curZoomRegion": "9-9"
     }
 }];
-
-
 Array.prototype.remove = function (val) {
     var index = this.indexOf(val);
     if (index > -1) {
         this.splice(index, 1);
     }
 };
-
