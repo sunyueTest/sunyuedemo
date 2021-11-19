@@ -25,22 +25,24 @@
     <div id="large-header" class="large-header">
         <canvas id="demo-canvas" style="cursor:-webkit-grab"></canvas>
         <div class="logo_box">
-            <h3><span id="titles"></span></h3>
+            <h2><span id="titles" style="color: #000000"></span></h2>
+            <br>
+            <br>
             <form action="/index" name="f" id="loginForm" method="post">
                 <div class="input_outer">
                     <span class="u_user"></span>
                     <input name="userName" class="text" id="userName"
-                           style="color:#FFFFFF !important;background-color:transparent !important;"
+                           style="color:#000000 !important;background-color:transparent !important;"
                            type="text" placeholder="请输入账户" autocomplete="off">
                 </div>
                 <div class="input_outer">
                     <span class="us_uer"></span>
                     <input name="password" class="text" id="password"
-                           style="color: #FFFFFF !important; position:absolute; z-index:100;"
+                           style="color: #000000 !important; position:absolute; z-index:100;"
                            value="" type="password" placeholder="请输入密码" autocomplete="off">
                 </div>
                 <div class="mb2"><a id="login" class="act-but submit" href="javascript:;"
-                                    style="color: #FFFFFF">登录</a></div>
+                                    style="color: #000000">登录</a></div>
                 <!--<div class="mb2"
                      th:style="'display:'+@{(${data.registeredFunction} ? 'block' : 'none')}+''"><a
                         id="register" class="act-but submit" href="/register"
