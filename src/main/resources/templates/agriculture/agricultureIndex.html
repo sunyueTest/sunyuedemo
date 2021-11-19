@@ -115,32 +115,30 @@
         </div>
     </div>
     <div class="rightBox isMap">
-        <a href="http://www.macromedia.com/go/getflashplayer" target="_blank">请点击此处下载安装最新的flash插件</a>
-        <div class="rightOneBoxMb"></div>
-        <div class="rightOneBox">
+        <div class="rightOneBoxMb" style="width:480px;height:250px;"></div>
+        <div class="rightOneBox"  >
                 <div class="rightBoxTitleBox">
                     <img class="rightTitleBoxIcon" src="../../static/img/agriculture/camera.png" />
                     <div class="rightTitleTextBox">
                         <p class="RightTitleTextTop"></p>
-                        <p class="RightTitleText">监控设备</p>
+                        <p class="RightTitleText">项目信息</p>
                         <p class="RightTitleTextBottom"></p>
                     </div>
                     <img class="rightTitleTurnOn" src="../../static/img/agriculture/pointRight.png" />
                 </div>
             <div class="rightOneRightBox">
                 <div class="rightOneBoxTop">
-                    <img style="width:200px;height:100px;display:none;z-index: 5" src="../../static/img/agriculture/lengku.jpg" />
+                    <img style="width:200px;height:100px;z-index: 5" src="../../static/img/agriculture/lengku.jpg" />
+                    <img style="width:200px;height:100px;z-index: 5" src="../../static/img/agriculture/img.png" />
                     <div class="rightOneBoxTopMsg">
-                        <p class="p1"></p>
-                        <p class="p2"></p>
-                        <p class="p3"></p>
+                        <p id="p1"></p>
+                        <p id="p2"></p>
+                        <p id="p3"></p>
+                        <p id="p4"></p>
+                        <p id="p5"></p>
                     </div>
                 </div>
-                <div class="cameraBox" style="height: 34vh;">
-                    <div class="cameraOne camera">
-                    </div>
-                    <img class='cameraNoMsg' src="../../static/img/agriculture/noMsg.png" />
-                </div>
+
             </div>
         </div>
         <div class="rightTwoBoxMb">
@@ -540,6 +538,12 @@
     let temperature = [];  //温度
     let humidity = [];     //湿度
     function eventBindClick(obj) {
+        $("#p1").text("");
+        $("#p2").text("");
+        $("#p3").text("");
+        $("#p4").text("");
+        $("#p5").text("");
+
         let val = obj.innerText;
         //根据项目名称查询该项目的设备信息
         $.ajax({
@@ -556,7 +560,6 @@
                     data: {"id":resultsss.datas[0].website},
                     timeout: 30000,
                     success: function (resultsss) {
-                        console.log(resultsss.datas);
                         for (var i=0;i<resultsss.datas.length;i++){
                             addMarker(resultsss.datas[i].lat,resultsss.datas[i].lng,resultsss.datas[i].address);
                         }
@@ -577,6 +580,16 @@
                 });
             },
             success: function (result) {
+                console.log(result.datas[0]);
+                $("#p1").text("项目名称："+result.datas[0].name);
+                $("#p2").text("项目详情："+result.datas[0].supportingCompany);
+                $("#p3").text("联系方式："+result.datas[0].logo);
+                $("#p4").text("创建时间："+result.datas[0].createTime);
+                if (result.datas[0].constructionCompany !=null && result.datas[0].constructionCompany!=""){
+                    $("#p5").text("目的地："+result.datas[0].constructionCompany);
+                }
+
+
                 for (var i=0;i<result.datas[0].website.split(/,|，|\s+/).length;i++){
                     $.ajax({
                         url: "/expertManage/findDeviceListById",
@@ -923,7 +936,7 @@
                     }
                     data1 = [
                         {
-                            name: "在线设备",
+                            name: "网关设备",
                             value: temp
                         },
                         {

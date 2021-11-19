@@ -206,6 +206,21 @@ var indicator = [];
 var deviceNum = 0;
 var onLineDevice = 0;
 var offLineDevice = 0;
+function addMarker(lon, lat, name, index) {
+    var point = new BMap.Point(lon, lat);
+    // var myIcon = new BMap.Icon(mapimgsrc, new BMap.Size(80, 80), {
+    //     anchor: new BMap.Size(10, 25),
+    //     imageOffset: new BMap.Size(0, 0 - index * 25)   // 设置图片偏移
+    // });
+
+    var myIcon = new BMap.Icon('/static/img/agriculture/marker.png',new BMap.Size(43,68));
+    var marker = new BMap.Marker(point,{icon:myIcon});
+    map.addOverlay(marker);
+    map.addOverlay(marker);
+    addClickHandler(name, marker);
+}
+
+
 $(function () {
 
     /**
@@ -431,13 +446,12 @@ $(function () {
         return false;
     });
 });
-
-
 // 地图加载
+
 function initMap() {
 
     map = new BMap.Map('mapContainer');
-    var point = new BMap.Point(120.305456, 31.570037);
+    var point = new BMap.Point(116.241018,40.200087 );
     map.centerAndZoom(point,13);
 
 /*     var myIcon = new BMap.Icon('/static/img/agriculture/marker.png',new BMap.Size(43,68));
@@ -490,20 +504,6 @@ function initMap() {
  * 实例化点标记
  */
 var mapimgsrc = 'http://demo.sennor.net:885/file/3bc22d3a156e4209a19830a86177d825.png';
-
-function addMarker(lon, lat, name, index) {
-    var point = new BMap.Point(lon, lat);
-    // var myIcon = new BMap.Icon(mapimgsrc, new BMap.Size(80, 80), {
-    //     anchor: new BMap.Size(10, 25),
-    //     imageOffset: new BMap.Size(0, 0 - index * 25)   // 设置图片偏移
-    // });
-
-    var myIcon = new BMap.Icon('/static/img/agriculture/marker.png',new BMap.Size(43,68));
-    var marker = new BMap.Marker(point,{icon:myIcon});
-    map.addOverlay(marker);
-    map.addOverlay(marker);
-    addClickHandler(name, marker);
-}
 
 //初始化预警雷达图
 function initDangerCharts() {
@@ -1332,7 +1332,7 @@ function showInfo(thisMaker,point){
     var sContent =
         '<ul style="margin:0 0 5px 0;">'
 
-        sContent+='<li style="line-height: 26px;font-size: 12px;"><span style="display: inline-block;">基地名称：</span>'+'</li>'
+        sContent+='<li style="line-height: 26px;font-size: 12px;"><span style="display: inline-block;">位置信息：</span>'+'</li>'
 
     if(point){
         sContent+= '<li style="line-height: 26px;font-size: 12px;"><span style="display: inline-block;"></span>' + point +'</li>'
