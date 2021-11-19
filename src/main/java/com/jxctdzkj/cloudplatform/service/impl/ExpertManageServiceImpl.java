@@ -20,6 +20,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -454,6 +455,146 @@ public class ExpertManageServiceImpl implements ExpertManageService {
             contentList.add(bean);
         }
         return ResultObject.okList(contentList, page, size, contentList.size()).data(map);
+    }
+
+
+    /**
+     * 根据设备的id获取设备的6条信息对象
+     */
+    public ResultObject findDeviceListById(String id) throws RuntimeException {
+        //添加分类列表
+        Map<String, Object> map = new HashMap<>();
+        List<AquacultureDiseasesBean> beanList = new ArrayList<AquacultureDiseasesBean>();
+        AquacultureDiseasesBean bean1 = new AquacultureDiseasesBean();
+        bean1.setSpeciesId(21);
+        bean1.setSpecies("设备");
+        bean1.setDiseasesTypesId("1");
+        bean1.setDiseasesTypes("设备列表");
+        beanList.add(bean1);
+        map.put("beanList", beanList);
+        //登录验证接口
+        String account = env.getProperty("yun.zuotoujing.net.account");
+        String password = env.getProperty("yun.zuotoujing.net.password");
+        HashMap<String, String> map22 = new HashMap<String,String>();
+        map22.put("account", account);
+        map22.put("passwd", password);
+        String s3 = HttpUtilsNew.doPost("http://yun.zuotoujing.net:8088/service-api-v3/wlx/user/03/login", map22);
+        String data = JSON.parseObject(s3, HashMap.class).get("data").toString();
+        String at = JSON.parseObject(data, HashMap.class).get("at").toString();
+        String guid = JSON.parseObject(data, HashMap.class).get("guid").toString();
+        String s1 = HttpUtilsNew.doGet("http://yun.zuotoujing.net:8088/service-api-v3/wlx/gatewayDev/03/viewHisCommon?guid="+guid+"&at="+at+"&devId="+id);
+        String datas = JSON.parseObject(s1, HashMap.class).get("data").toString();
+        String datelist = JSON.parseObject(datas, HashMap.class).get("reportData").toString();
+        List<Object> list =JSON.parseArray(datelist);
+        List newList = new ArrayList();
+        for (int i=0;i<6;i++){
+            ADeviceInfo aDeviceInfo = new ADeviceInfo();
+            Map<String,Object> ret = (Map<String, Object>) list.get(i);
+            String deviceReportList = ret.get("deviceReportList")+"";
+            List<Object> list11 =JSON.parseArray(deviceReportList);
+            aDeviceInfo.setName(ret.get("devId").toString());
+            aDeviceInfo.setAddress(ret.get("locname").toString());
+            aDeviceInfo.setLat(ret.get("locx").toString());
+            aDeviceInfo.setLng(ret.get("locy").toString());
+            aDeviceInfo.setTemperature(list11.get(6)+"");
+            aDeviceInfo.setHumidity(list11.get(10)+"");
+            aDeviceInfo.setTime(ret.get("time").toString());
+            newList.add(aDeviceInfo);
+        }
+        return ResultObject.okList(newList).data(map);
+    }
+
+    /**
+     * 根据设备的id获取设备的6条信息对象
+     */
+    public ResultObject findDeviceListByIdOne(String id) throws RuntimeException {
+        //添加分类列表
+        Map<String, Object> map = new HashMap<>();
+        List<AquacultureDiseasesBean> beanList = new ArrayList<AquacultureDiseasesBean>();
+        AquacultureDiseasesBean bean1 = new AquacultureDiseasesBean();
+        bean1.setSpeciesId(21);
+        bean1.setSpecies("设备");
+        bean1.setDiseasesTypesId("1");
+        bean1.setDiseasesTypes("设备列表");
+        beanList.add(bean1);
+        map.put("beanList", beanList);
+        //登录验证接口
+        String account = env.getProperty("yun.zuotoujing.net.account");
+        String password = env.getProperty("yun.zuotoujing.net.password");
+        HashMap<String, String> map22 = new HashMap<String,String>();
+        map22.put("account", account);
+        map22.put("passwd", password);
+        String s3 = HttpUtilsNew.doPost("http://yun.zuotoujing.net:8088/service-api-v3/wlx/user/03/login", map22);
+        String data = JSON.parseObject(s3, HashMap.class).get("data").toString();
+        String at = JSON.parseObject(data, HashMap.class).get("at").toString();
+        String guid = JSON.parseObject(data, HashMap.class).get("guid").toString();
+        String s1 = HttpUtilsNew.doGet("http://yun.zuotoujing.net:8088/service-api-v3/wlx/gatewayDev/03/viewHisCommon?guid="+guid+"&at="+at+"&devId="+id);
+        String datas = JSON.parseObject(s1, HashMap.class).get("data").toString();
+        String datelist = JSON.parseObject(datas, HashMap.class).get("reportData").toString();
+        List<Object> list =JSON.parseArray(datelist);
+        List newList = new ArrayList();
+        for (int i=0;i<1;i++){
+            ADeviceInfo aDeviceInfo = new ADeviceInfo();
+            Map<String,Object> ret = (Map<String, Object>) list.get(i);
+            String deviceReportList = ret.get("deviceReportList")+"";
+            List<Object> list11 =JSON.parseArray(deviceReportList);
+            aDeviceInfo.setName(ret.get("devId").toString());
+            aDeviceInfo.setAddress(ret.get("locname").toString());
+            aDeviceInfo.setLat(ret.get("locx").toString());
+            aDeviceInfo.setLng(ret.get("locy").toString());
+            aDeviceInfo.setTemperature(list11.get(6)+"");
+            aDeviceInfo.setHumidity(list11.get(10)+"");
+            aDeviceInfo.setTime(ret.get("time").toString());
+            newList.add(aDeviceInfo);
+        }
+        return ResultObject.okList(newList).data(map);
+    }
+
+    @Override
+    public ResultObject findDeviceByProjectWebsite(String id) {
+        List newList = new ArrayList();
+        String[] ids = id.split("/,|，|\\s+/");
+        //添加分类列表
+        Map<String, Object> map = new HashMap<>();
+        List<AquacultureDiseasesBean> beanList = new ArrayList<AquacultureDiseasesBean>();
+        AquacultureDiseasesBean bean1 = new AquacultureDiseasesBean();
+        bean1.setSpeciesId(21);
+        bean1.setSpecies("设备");
+        bean1.setDiseasesTypesId("1");
+        bean1.setDiseasesTypes("设备列表");
+        beanList.add(bean1);
+        map.put("beanList", beanList);
+        //登录验证接口
+        String account = env.getProperty("yun.zuotoujing.net.account");
+        String password = env.getProperty("yun.zuotoujing.net.password");
+        HashMap<String, String> map22 = new HashMap<String,String>();
+        map22.put("account", account);
+        map22.put("passwd", password);
+        String s3 = HttpUtilsNew.doPost("http://yun.zuotoujing.net:8088/service-api-v3/wlx/user/03/login", map22);
+        String data = JSON.parseObject(s3, HashMap.class).get("data").toString();
+        String at = JSON.parseObject(data, HashMap.class).get("at").toString();
+        String guid = JSON.parseObject(data, HashMap.class).get("guid").toString();
+        for (int i = 0;i<ids.length;i++){
+            String s1 = HttpUtilsNew.doGet("http://yun.zuotoujing.net:8088/service-api-v3/wlx/gatewayDev/03/viewHisCommon?guid="+guid+"&at="+at+"&devId="+ids[i]);
+            String datas = JSON.parseObject(s1, HashMap.class).get("data").toString();
+            String datelist = JSON.parseObject(datas, HashMap.class).get("reportData").toString();
+            List<Object> list =JSON.parseArray(datelist);
+            for (int j=0;j<1;j++){
+                ADeviceInfo aDeviceInfo = new ADeviceInfo();
+                Map<String,Object> ret = (Map<String, Object>) list.get(i);
+                String deviceReportList = ret.get("deviceReportList")+"";
+                List<Object> list11 =JSON.parseArray(deviceReportList);
+                aDeviceInfo.setName(ret.get("devId").toString());
+                aDeviceInfo.setAddress(ret.get("locname").toString());
+                aDeviceInfo.setLat(ret.get("locx").toString());
+                aDeviceInfo.setLng(ret.get("locy").toString());
+                aDeviceInfo.setTemperature(list11.get(6)+"");
+                aDeviceInfo.setHumidity(list11.get(10)+"");
+                aDeviceInfo.setTime(ret.get("time").toString());
+                newList.add(aDeviceInfo);
+            }
+        }
+        return ResultObject.okList(newList).data(map);
     }
 
     /**

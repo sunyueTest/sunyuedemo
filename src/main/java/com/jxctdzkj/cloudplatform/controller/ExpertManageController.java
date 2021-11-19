@@ -8,11 +8,10 @@ import com.jxctdzkj.cloudplatform.utils.ResultObject;
 import org.nutz.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 /**
  * 专家管理系统
@@ -373,6 +372,52 @@ public class ExpertManageController {
         ResultObject result;
         try {
             result = expertManageService.findDiseaseList(industryType,diseasesTypesId,page,size,diseases_name);
+        } catch (Exception e) {
+            return ResultObject.apiError("fail");
+        }
+        return result;
+    }
+
+    /**根据设备的id获取设备的六条信息对象
+     *
+     */
+    @RequestMapping(value = "findDeviceListById")
+    @ResponseBody
+    public ResultObject findDeviceListById(@RequestParam("id") String id) {
+        ResultObject result;
+        try {
+            result = expertManageService.findDeviceListById(id);
+        } catch (Exception e) {
+            return ResultObject.apiError("fail");
+        }
+        return result;
+    }
+
+    /**根据设备的id获取设备的一条信息对象
+     *
+     */
+    @RequestMapping(value = "findDeviceListByIdOne")
+    @ResponseBody
+    public ResultObject findDeviceListByIdOne(@RequestParam("id") String id) {
+        ResultObject result;
+        try {
+            result = expertManageService.findDeviceListByIdOne(id);
+        } catch (Exception e) {
+            return ResultObject.apiError("fail");
+        }
+        return result;
+    }
+
+
+    /**根据设备的id获取设备的一条信息对象
+     *
+     */
+    @RequestMapping(value = "findDeviceByProjectWebsite")
+    @ResponseBody
+    public ResultObject findDeviceByProjectWebsite(@RequestParam("id") String id) {
+        ResultObject result;
+        try {
+            result = expertManageService.findDeviceByProjectWebsite(id);
         } catch (Exception e) {
             return ResultObject.apiError("fail");
         }

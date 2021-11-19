@@ -839,6 +839,18 @@ public class ProjectBaseSceneServiceImpl implements ProjectBaseSceneService {
         return ResultObject.okList(list);
     }
 
+    @Override
+    public ResultObject findEntperpriseDeviceListCount(String name) {
+        List<ProjectBean> list = dao.query(ProjectBean.class, Cnd.where("name","=", name));
+        return ResultObject.okList(list);
+    }
+
+    @Override
+    public ResultObject findProjectByEntperpriseId(String id) {
+        List<ProjectBean> list = dao.query(ProjectBean.class, Cnd.where("enterprise_id","=", id));
+        return  ResultObject.okList(list);
+    }
+
     @Data
     public class InnerBase {
         @Excel(name = "基地名称", width = 50)

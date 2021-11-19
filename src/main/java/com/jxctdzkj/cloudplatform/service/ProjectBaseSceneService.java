@@ -247,4 +247,8 @@ public interface ProjectBaseSceneService {
     List<ProjectBaseSceneServiceImpl.InnerBase> listAllBasesForExport();
 
     ResultObject findProjectByName(String name);
+
+    ResultObject findEntperpriseDeviceListCount(String name);
+
+    ResultObject findProjectByEntperpriseId(String id);
 }

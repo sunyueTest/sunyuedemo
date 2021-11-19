@@ -369,984 +369,257 @@
 2021-11-19 09:25:00,075 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 404  path: /error
 2021-11-19 09:25:00,077 INFO (MyInterceptor.java:88)- [BasicErrorController.error] 执行耗时 : 2ms
 2021-11-19 09:27:35,876 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/farmerPhoto.jpg
-2021-11-19 09:30:36,474 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:30:36,474 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:36,474 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:30:36,474 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:30:36,561 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@e107385
-2021-11-19 09:30:36,570 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 500  path: /error
-2021-11-19 09:30:36,575 INFO (MyInterceptor.java:88)- [BasicErrorController.errorHtml] 执行耗时 : 5ms
-2021-11-19 09:30:36,599 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /favicon.ico
-2021-11-19 09:30:37,162 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:30:37,162 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,162 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:30:37,162 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:30:37,266 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@e1d5fa9
-2021-11-19 09:30:37,312 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /agriculture/agricultureIndex
-2021-11-19 09:30:37,313 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.AgricultureController
-2021-11-19 09:30:37,313 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,314 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/agriculture/agricultureIndex?
-2021-11-19 09:30:37,314 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@544fb0bb
-2021-11-19 09:30:37,315 INFO (MyInterceptor.java:88)- [AgricultureController.agricultureIndex] 执行耗时 : 3ms
-2021-11-19 09:30:37,341 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:30:37,380 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /user/selUserDetails
-2021-11-19 09:30:37,381 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.UserController
-2021-11-19 09:30:37,382 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,382 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/user/selUserDetails?
-2021-11-19 09:30:37,383 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:30:37,402 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@37a1aa43
-2021-11-19 09:30:37,403 INFO (MyInterceptor.java:88)- [UserController.selSubUserList] 执行耗时 : 23ms
-2021-11-19 09:30:37,457 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/lengku.jpg
-2021-11-19 09:30:37,471 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:30:37,488 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:30:37,489 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,489 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,490 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:30:37,490 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /expertManage/findDiseaseList
-2021-11-19 09:30:37,490 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,490 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ExpertManageController
-2021-11-19 09:30:37,491 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,491 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/expertManage/findDiseaseList?2&0&0&50&&
-2021-11-19 09:30:37,517 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@68178890
-2021-11-19 09:30:37,518 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 30ms
-2021-11-19 09:30:37,525 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:30:37,526 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,526 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,526 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:30:37,526 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,553 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6af1b88c
-2021-11-19 09:30:37,553 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/listBases
-2021-11-19 09:30:37,554 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 29ms
-2021-11-19 09:30:37,554 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,554 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,554 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/listBases?1&100&
-2021-11-19 09:30:37,554 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,572 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@452bca90
-2021-11-19 09:30:37,573 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.listBases] 执行耗时 : 20ms
-2021-11-19 09:30:37,627 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectByEntperpriseId
-2021-11-19 09:30:37,628 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,628 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,628 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectByEntperpriseId?62&
-2021-11-19 09:30:37,635 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@79c9d014
-2021-11-19 09:30:37,636 INFO (MyInterceptor.java:88)- [ExpertManageController.findDiseaseList] 执行耗时 : 146ms
-2021-11-19 09:30:37,638 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6c7d3272
-2021-11-19 09:30:37,638 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectList
-2021-11-19 09:30:37,638 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectByEntperpriseId] 执行耗时 : 11ms
-2021-11-19 09:30:37,639 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,639 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,639 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectList?1&200&62&0&
-2021-11-19 09:30:37,639 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,657 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@316c83af
-2021-11-19 09:30:37,658 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectList] 执行耗时 : 20ms
-2021-11-19 09:30:37,663 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:30:37,663 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:30:37,663 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:30:37,663 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,663 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,663 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,663 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,663 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,664 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:30:37,664 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:30:37,664 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:30:37,664 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,664 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,664 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:30:37,664 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,664 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,664 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,665 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,665 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:30:37,665 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:30:37,666 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,667 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,667 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,667 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:30:37,668 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,760 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@8bfcaba
-2021-11-19 09:30:37,760 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@2faa7a2a
-2021-11-19 09:30:37,761 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 98ms
-2021-11-19 09:30:37,761 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 98ms
-2021-11-19 09:30:37,769 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@78b90211
-2021-11-19 09:30:37,770 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 107ms
-2021-11-19 09:30:37,839 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@539b7ecb
-2021-11-19 09:30:37,839 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@7c77611d
-2021-11-19 09:30:37,840 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 175ms
-2021-11-19 09:30:37,840 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 176ms
-2021-11-19 09:30:37,843 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:30:37,843 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,844 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,844 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:30:37,844 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,861 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@2cc35bb3
-2021-11-19 09:30:37,862 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:30:37,866 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:30:37,867 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,867 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,867 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:30:37,867 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,883 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@69e86370
-2021-11-19 09:30:37,884 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
-2021-11-19 09:30:37,887 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:30:37,888 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:30:37,888 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:37,888 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:30:37,888 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:37,905 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@4ac0da90
-2021-11-19 09:30:37,906 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:30:38,068 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /sysUserOrder/findNotAcceptedOrderList
-2021-11-19 09:30:38,069 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.SysUserOrderController
-2021-11-19 09:30:38,069 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:30:38,069 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/sysUserOrder/findNotAcceptedOrderList?
-2021-11-19 09:30:38,069 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:30:38,086 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@208ed42d
-2021-11-19 09:30:38,088 INFO (MyInterceptor.java:88)- [SysUserOrderController.findNotAcceptedOrderList] 执行耗时 : 20ms
-2021-11-19 09:31:56,674 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/agriculture/swiper.min.js.map
-2021-11-19 09:31:56,675 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 404  path: /error
-2021-11-19 09:31:56,676 INFO (MyInterceptor.java:88)- [BasicErrorController.error] 执行耗时 : 1ms
-2021-11-19 09:34:44,625 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:34:44,625 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:44,625 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:34:44,626 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:44,693 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@166eff35
-2021-11-19 09:34:44,696 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 500  path: /error
-2021-11-19 09:34:44,699 INFO (MyInterceptor.java:88)- [BasicErrorController.errorHtml] 执行耗时 : 3ms
-2021-11-19 09:34:44,728 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /favicon.ico
-2021-11-19 09:34:44,730 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 404  path: /error
-2021-11-19 09:34:44,733 INFO (MyInterceptor.java:88)- [BasicErrorController.error] 执行耗时 : 3ms
-2021-11-19 09:34:45,185 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:34:45,185 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:45,186 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:34:45,186 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:45,255 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@c1f20e1
-2021-11-19 09:34:45,257 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 500  path: /error
-2021-11-19 09:34:45,258 INFO (MyInterceptor.java:88)- [BasicErrorController.errorHtml] 执行耗时 : 1ms
-2021-11-19 09:34:45,882 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:34:45,882 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:45,882 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:34:45,883 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:45,952 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@5eb470a2
-2021-11-19 09:34:45,954 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 500  path: /error
-2021-11-19 09:34:45,955 INFO (MyInterceptor.java:88)- [BasicErrorController.errorHtml] 执行耗时 : 1ms
-2021-11-19 09:34:46,450 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:34:46,451 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:46,451 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:34:46,451 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:46,521 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@2a1a0c7d
-2021-11-19 09:34:46,567 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/layui.css
-2021-11-19 09:34:46,569 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/admin.css
-2021-11-19 09:34:46,570 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/myicon/iconfont.css
-2021-11-19 09:34:46,571 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/modules/layer/default/layer.css
-2021-11-19 09:34:46,574 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/agriculture/swiper.min.css
-2021-11-19 09:34:46,577 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/tost/src/jquery.toast.css
-2021-11-19 09:34:46,584 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /agriculture/agricultureIndex
-2021-11-19 09:34:46,584 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.AgricultureController
-2021-11-19 09:34:46,585 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:46,585 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/agriculture/agricultureIndex?
-2021-11-19 09:34:46,586 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@663d22fa
-2021-11-19 09:34:46,586 INFO (MyInterceptor.java:88)- [AgricultureController.agricultureIndex] 执行耗时 : 2ms
-2021-11-19 09:34:46,593 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/jquery.min.js
-2021-11-19 09:34:46,594 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/jquery.i18n.properties.js
-2021-11-19 09:34:46,618 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/layui.js
-2021-11-19 09:34:46,618 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/topic.js
-2021-11-19 09:34:46,632 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/common.js
-2021-11-19 09:34:46,636 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/socket.js
-2021-11-19 09:34:46,647 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/jquery.nicescroll.js
-2021-11-19 09:34:46,648 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/agriculture/swiper.min.js
-2021-11-19 09:34:46,669 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /tost/src/jquery.toast.js
-2021-11-19 09:34:46,674 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/prev.png
-2021-11-19 09:34:46,710 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/next.png
-2021-11-19 09:34:46,714 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /sound/alarm.mp3
-2021-11-19 09:34:46,776 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:34:46,807 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/layui.css
-2021-11-19 09:34:46,821 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/agriculture/agricultureIndex.css
-2021-11-19 09:34:46,823 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/common.css
-2021-11-19 09:34:46,825 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/jquery.min.js
-2021-11-19 09:34:46,826 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/chart/echarts.min.js
-2021-11-19 09:34:46,836 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/china.js
-2021-11-19 09:34:46,854 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/layui.js
-2021-11-19 09:34:46,876 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/ezuikit.js
-2021-11-19 09:34:46,881 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/jquery.i18n.properties.js
-2021-11-19 09:34:46,887 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/common.js
-2021-11-19 09:34:46,890 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /user/selUserDetails
-2021-11-19 09:34:46,890 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.UserController
-2021-11-19 09:34:46,890 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:46,891 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/user/selUserDetails?
-2021-11-19 09:34:46,891 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:46,891 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/fullScreen.js
-2021-11-19 09:34:46,896 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/agriculture/agricultureIndex.js
-2021-11-19 09:34:46,914 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@2be65051
-2021-11-19 09:34:46,916 INFO (MyInterceptor.java:88)- [UserController.selSubUserList] 执行耗时 : 26ms
-2021-11-19 09:34:46,929 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/agriculture/swiper.min.js.map
-2021-11-19 09:34:46,931 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 404  path: /error
-2021-11-19 09:34:46,932 INFO (MyInterceptor.java:88)- [BasicErrorController.error] 执行耗时 : 1ms
-2021-11-19 09:34:46,937 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/element.js
-2021-11-19 09:34:47,019 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/camera.png
-2021-11-19 09:34:47,036 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/layer.js
-2021-11-19 09:34:47,041 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/pointRight.png
-2021-11-19 09:34:47,080 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/lengku.jpg
-2021-11-19 09:34:47,091 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/modules/layer/default/layer.css
-2021-11-19 09:34:47,109 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/noMsg.png
-2021-11-19 09:34:47,126 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/dangerMsg.png
-2021-11-19 09:34:47,140 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/allSee.png
-2021-11-19 09:34:47,154 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/device.png
-2021-11-19 09:34:47,181 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/pointLeft.png
-2021-11-19 09:34:47,192 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/data.png
-2021-11-19 09:34:47,206 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/placeMsg.png
-2021-11-19 09:34:47,346 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:34:47,370 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/form.js
-2021-11-19 09:34:47,384 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:34:47,385 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,386 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,386 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:34:47,386 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,387 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /expertManage/findDiseaseList
-2021-11-19 09:34:47,387 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ExpertManageController
-2021-11-19 09:34:47,388 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,388 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/expertManage/findDiseaseList?2&0&0&50&&
-2021-11-19 09:34:47,413 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3805130a
-2021-11-19 09:34:47,414 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 30ms
-2021-11-19 09:34:47,438 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:34:47,439 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,439 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,439 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:34:47,440 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,451 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/allMap.jpg
-2021-11-19 09:34:47,466 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@636d35
-2021-11-19 09:34:47,467 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 29ms
-2021-11-19 09:34:47,468 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/listBases
-2021-11-19 09:34:47,469 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,470 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,470 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/listBases?1&100&
-2021-11-19 09:34:47,470 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,489 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6223d447
-2021-11-19 09:34:47,490 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.listBases] 执行耗时 : 22ms
-2021-11-19 09:34:47,542 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@5802f5a7
-2021-11-19 09:34:47,543 INFO (MyInterceptor.java:88)- [ExpertManageController.findDiseaseList] 执行耗时 : 156ms
-2021-11-19 09:34:47,607 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /img/device_item_2.png
-2021-11-19 09:34:47,627 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectByEntperpriseId
-2021-11-19 09:34:47,627 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,628 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,628 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectByEntperpriseId?62&
-2021-11-19 09:34:47,631 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectList
-2021-11-19 09:34:47,632 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,633 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,633 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectList?1&200&62&0&
-2021-11-19 09:34:47,633 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,638 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@415e662d
-2021-11-19 09:34:47,639 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectByEntperpriseId] 执行耗时 : 12ms
-2021-11-19 09:34:47,651 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6826af42
-2021-11-19 09:34:47,653 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectList] 执行耗时 : 22ms
-2021-11-19 09:34:47,658 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:47,659 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,659 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,659 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:47,659 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:34:47,660 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,661 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,662 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,662 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:34:47,662 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,663 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:47,663 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,664 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,664 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:34:47,664 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,666 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:47,667 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,667 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,667 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:34:47,667 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,669 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:47,669 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,669 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,670 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:34:47,670 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,691 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@5a1d6e14
-2021-11-19 09:34:47,692 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 34ms
-2021-11-19 09:34:47,698 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@59faf5da
-2021-11-19 09:34:47,698 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@65f8b23f
-2021-11-19 09:34:47,698 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@5ff69f92
-2021-11-19 09:34:47,699 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 33ms
-2021-11-19 09:34:47,699 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 36ms
-2021-11-19 09:34:47,699 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 30ms
-2021-11-19 09:34:47,700 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@16d0c13
-2021-11-19 09:34:47,701 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 42ms
-2021-11-19 09:34:47,706 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:47,707 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,707 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,708 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:34:47,708 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,740 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@69fb3ac2
-2021-11-19 09:34:47,741 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 35ms
-2021-11-19 09:34:47,746 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:47,746 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,747 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,747 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:34:47,747 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,764 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1ac787f3
-2021-11-19 09:34:47,765 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:47,769 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:47,770 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:47,770 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:47,770 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:34:47,771 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:47,788 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@683eb4
-2021-11-19 09:34:47,788 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:47,820 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/layer.js
-2021-11-19 09:34:47,892 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/element.js
-2021-11-19 09:34:47,921 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/layedit.js
-2021-11-19 09:34:47,923 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/modules/layer/default/layer.css
-2021-11-19 09:34:48,058 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/laydate.js
-2021-11-19 09:34:48,108 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /sysUserOrder/findNotAcceptedOrderList
-2021-11-19 09:34:48,109 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.SysUserOrderController
-2021-11-19 09:34:48,109 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:48,109 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/sysUserOrder/findNotAcceptedOrderList?
-2021-11-19 09:34:48,109 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:48,127 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@422108f9
-2021-11-19 09:34:48,128 INFO (MyInterceptor.java:88)- [SysUserOrderController.findNotAcceptedOrderList] 执行耗时 : 20ms
-2021-11-19 09:34:48,138 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/modules/laydate/default/laydate.css
-2021-11-19 09:34:48,274 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/favicon.png
-2021-11-19 09:34:55,052 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:34:55,052 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,053 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:34:55,053 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:55,124 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@5508ddd1
-2021-11-19 09:34:55,148 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /agriculture/agricultureIndex
-2021-11-19 09:34:55,148 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.AgricultureController
-2021-11-19 09:34:55,148 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,148 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/agriculture/agricultureIndex?
-2021-11-19 09:34:55,148 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@48a5b075
-2021-11-19 09:34:55,148 INFO (MyInterceptor.java:88)- [AgricultureController.agricultureIndex] 执行耗时 : 0ms
-2021-11-19 09:34:55,166 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:34:55,193 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /user/selUserDetails
-2021-11-19 09:34:55,193 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.UserController
-2021-11-19 09:34:55,193 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,194 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/user/selUserDetails?
-2021-11-19 09:34:55,194 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:55,211 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@2c78af99
-2021-11-19 09:34:55,211 INFO (MyInterceptor.java:88)- [UserController.selSubUserList] 执行耗时 : 18ms
-2021-11-19 09:34:55,273 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:34:55,287 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:34:55,287 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,287 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /expertManage/findDiseaseList
-2021-11-19 09:34:55,288 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,288 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:34:55,288 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ExpertManageController
-2021-11-19 09:34:55,288 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,288 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,288 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/expertManage/findDiseaseList?2&0&0&50&&
-2021-11-19 09:34:55,311 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:34:55,312 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,312 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,312 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:34:55,312 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,313 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@24999144
-2021-11-19 09:34:55,313 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 26ms
-2021-11-19 09:34:55,329 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/listBases
-2021-11-19 09:34:55,330 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,330 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,330 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/listBases?1&100&
-2021-11-19 09:34:55,331 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,338 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1bc80084
-2021-11-19 09:34:55,338 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 27ms
-2021-11-19 09:34:55,347 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3e8ef4a0
-2021-11-19 09:34:55,348 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.listBases] 执行耗时 : 19ms
-2021-11-19 09:34:55,384 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectByEntperpriseId
-2021-11-19 09:34:55,385 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,385 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,385 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectByEntperpriseId?62&
-2021-11-19 09:34:55,388 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectList
-2021-11-19 09:34:55,388 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,388 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,388 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectList?1&200&62&0&
-2021-11-19 09:34:55,388 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,394 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@440cb658
-2021-11-19 09:34:55,395 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectByEntperpriseId] 执行耗时 : 11ms
-2021-11-19 09:34:55,408 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1c1d5e93
-2021-11-19 09:34:55,408 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectList] 执行耗时 : 20ms
-2021-11-19 09:34:55,411 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:55,411 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:55,412 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,412 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:34:55,412 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,412 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,412 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,413 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,413 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:55,413 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:34:55,413 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,413 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,413 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,413 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:34:55,413 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,430 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@74e1050b
-2021-11-19 09:34:55,430 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6b649f5b
-2021-11-19 09:34:55,430 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6f62db97
-2021-11-19 09:34:55,430 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@539ab31
-2021-11-19 09:34:55,430 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
-2021-11-19 09:34:55,430 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
-2021-11-19 09:34:55,430 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:55,430 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:55,433 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3437f9fb
-2021-11-19 09:34:55,434 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@380da648
-2021-11-19 09:34:55,434 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 21ms
-2021-11-19 09:34:55,435 INFO (MyInterceptor.java:88)- [ExpertManageController.findDiseaseList] 执行耗时 : 148ms
-2021-11-19 09:34:55,436 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:55,437 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,437 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,437 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:34:55,437 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,455 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@232d333b
-2021-11-19 09:34:55,455 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:55,457 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:55,458 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,458 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,458 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:34:55,458 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,475 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@2041a565
-2021-11-19 09:34:55,475 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
-2021-11-19 09:34:55,477 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:55,478 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:55,478 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,478 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:34:55,478 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,495 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@7a523196
-2021-11-19 09:34:55,495 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
-2021-11-19 09:34:55,617 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /sysUserOrder/findNotAcceptedOrderList
-2021-11-19 09:34:55,618 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.SysUserOrderController
-2021-11-19 09:34:55,618 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:55,618 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/sysUserOrder/findNotAcceptedOrderList?
-2021-11-19 09:34:55,618 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:55,636 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@283eb172
-2021-11-19 09:34:55,637 INFO (MyInterceptor.java:88)- [SysUserOrderController.findNotAcceptedOrderList] 执行耗时 : 20ms
-2021-11-19 09:34:57,230 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:34:57,230 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,231 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:34:57,231 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:57,301 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@73f1ad95
-2021-11-19 09:34:57,332 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /agriculture/agricultureIndex
-2021-11-19 09:34:57,332 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.AgricultureController
-2021-11-19 09:34:57,332 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,332 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/agriculture/agricultureIndex?
-2021-11-19 09:34:57,333 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@56932050
-2021-11-19 09:34:57,333 INFO (MyInterceptor.java:88)- [AgricultureController.agricultureIndex] 执行耗时 : 1ms
-2021-11-19 09:34:57,344 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:34:57,358 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /user/selUserDetails
-2021-11-19 09:34:57,358 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.UserController
-2021-11-19 09:34:57,359 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,359 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/user/selUserDetails?
-2021-11-19 09:34:57,359 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:57,376 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@26a2e254
-2021-11-19 09:34:57,377 INFO (MyInterceptor.java:88)- [UserController.selSubUserList] 执行耗时 : 19ms
-2021-11-19 09:34:57,409 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:34:57,421 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:34:57,421 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /expertManage/findDiseaseList
-2021-11-19 09:34:57,421 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,421 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,422 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:34:57,422 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ExpertManageController
-2021-11-19 09:34:57,422 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,422 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,422 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/expertManage/findDiseaseList?2&0&0&50&&
-2021-11-19 09:34:57,431 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:34:57,432 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,432 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,432 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:34:57,432 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,447 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/listBases
-2021-11-19 09:34:57,448 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@136c3c53
-2021-11-19 09:34:57,448 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,448 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,448 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/listBases?1&100&
-2021-11-19 09:34:57,448 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,448 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 27ms
-2021-11-19 09:34:57,458 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@59c21e50
-2021-11-19 09:34:57,459 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 28ms
-2021-11-19 09:34:57,465 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@252da173
-2021-11-19 09:34:57,466 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.listBases] 执行耗时 : 19ms
-2021-11-19 09:34:57,492 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectByEntperpriseId
-2021-11-19 09:34:57,492 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,492 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,492 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectByEntperpriseId?62&
-2021-11-19 09:34:57,496 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectList
-2021-11-19 09:34:57,496 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,496 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,497 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectList?1&200&62&0&
-2021-11-19 09:34:57,497 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,501 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@ce89abd
-2021-11-19 09:34:57,502 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectByEntperpriseId] 执行耗时 : 10ms
-2021-11-19 09:34:57,515 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@178085b7
-2021-11-19 09:34:57,515 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectList] 执行耗时 : 19ms
-2021-11-19 09:34:57,519 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:57,519 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:57,520 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,520 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,520 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,520 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:34:57,520 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,520 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,520 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:57,520 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:57,520 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:34:57,520 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,520 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,521 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,521 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,521 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,521 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:34:57,521 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:34:57,521 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:57,521 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,521 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,522 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,522 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,522 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:34:57,522 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,537 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@613eb1c3
-2021-11-19 09:34:57,538 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:57,538 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@37d7ce91
-2021-11-19 09:34:57,538 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@70491d63
-2021-11-19 09:34:57,539 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:57,539 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 20ms
-2021-11-19 09:34:57,539 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@584f13c8
-2021-11-19 09:34:57,539 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@e0ea545
-2021-11-19 09:34:57,539 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:57,540 INFO (MyInterceptor.java:88)- [ExpertManageController.findDiseaseList] 执行耗时 : 119ms
-2021-11-19 09:34:57,540 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@37e35252
-2021-11-19 09:34:57,541 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 20ms
-2021-11-19 09:34:57,544 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:57,544 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,544 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,545 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:34:57,545 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,563 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@4a7ecb37
-2021-11-19 09:34:57,563 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:57,565 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:57,565 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,566 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,566 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:34:57,566 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,583 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@4e0d6df4
-2021-11-19 09:34:57,584 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:57,586 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:34:57,586 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:57,587 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,587 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:34:57,587 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,604 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@59812efe
-2021-11-19 09:34:57,605 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:34:57,700 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /sysUserOrder/findNotAcceptedOrderList
-2021-11-19 09:34:57,701 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.SysUserOrderController
-2021-11-19 09:34:57,701 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:57,701 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/sysUserOrder/findNotAcceptedOrderList?
-2021-11-19 09:34:57,701 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:57,718 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@4af17bd7
-2021-11-19 09:34:57,719 INFO (MyInterceptor.java:88)- [SysUserOrderController.findNotAcceptedOrderList] 执行耗时 : 19ms
-2021-11-19 09:34:59,741 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:34:59,742 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:59,742 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:34:59,743 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:59,816 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3c709174
-2021-11-19 09:34:59,849 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /agriculture/agricultureIndex
-2021-11-19 09:34:59,849 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.AgricultureController
-2021-11-19 09:34:59,850 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:59,850 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/agriculture/agricultureIndex?
-2021-11-19 09:34:59,850 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@45961499
-2021-11-19 09:34:59,850 INFO (MyInterceptor.java:88)- [AgricultureController.agricultureIndex] 执行耗时 : 1ms
-2021-11-19 09:34:59,861 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:34:59,874 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /user/selUserDetails
-2021-11-19 09:34:59,875 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.UserController
-2021-11-19 09:34:59,875 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:59,875 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/user/selUserDetails?
-2021-11-19 09:34:59,875 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:34:59,891 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1d3ea134
-2021-11-19 09:34:59,892 INFO (MyInterceptor.java:88)- [UserController.selSubUserList] 执行耗时 : 18ms
-2021-11-19 09:34:59,912 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:34:59,923 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /expertManage/findDiseaseList
-2021-11-19 09:34:59,923 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:34:59,923 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ExpertManageController
-2021-11-19 09:34:59,923 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:59,923 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:59,923 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:59,923 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:34:59,923 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/expertManage/findDiseaseList?2&0&0&50&&
-2021-11-19 09:34:59,924 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:59,934 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:34:59,934 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:59,934 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:59,934 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:34:59,935 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:59,947 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/listBases
-2021-11-19 09:34:59,947 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:59,947 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:59,947 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/listBases?1&100&
-2021-11-19 09:34:59,947 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:34:59,949 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@794712dd
-2021-11-19 09:34:59,950 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 27ms
-2021-11-19 09:34:59,961 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@197072db
-2021-11-19 09:34:59,962 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 28ms
-2021-11-19 09:34:59,965 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@294f3536
-2021-11-19 09:34:59,966 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.listBases] 执行耗时 : 19ms
-2021-11-19 09:34:59,984 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectList
-2021-11-19 09:34:59,984 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:34:59,984 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:34:59,984 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectList?1&200&62&0&
-2021-11-19 09:34:59,985 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:00,001 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1e182250
-2021-11-19 09:35:00,001 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectList] 执行耗时 : 17ms
-2021-11-19 09:35:00,005 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:00,005 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:00,005 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:00,005 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:00,005 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:00,005 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:00,005 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:00,005 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:00,005 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:35:00,005 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:00,006 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:00,006 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:35:00,006 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:00,006 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:35:00,006 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:00,006 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:00,006 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:00,006 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:00,006 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:00,006 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:35:00,006 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:00,006 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:00,006 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:00,006 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:35:00,007 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:00,023 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6cef92d8
-2021-11-19 09:35:00,023 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@2edd4956
-2021-11-19 09:35:00,024 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@7eb55ede
-2021-11-19 09:35:00,024 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@590f288b
-2021-11-19 09:35:00,024 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:35:00,024 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:35:00,024 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:35:00,024 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
-2021-11-19 09:35:00,024 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@124dcf72
-2021-11-19 09:35:00,025 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 20ms
-2021-11-19 09:35:00,028 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:00,028 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:00,028 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:00,028 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:35:00,028 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:00,045 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@608c2073
-2021-11-19 09:35:00,046 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
-2021-11-19 09:35:00,048 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:00,048 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:00,048 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:00,048 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:35:00,048 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:00,066 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3d5f7bd4
-2021-11-19 09:35:00,066 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
-2021-11-19 09:35:00,069 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:00,069 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:00,069 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:00,069 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:35:00,069 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:00,080 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@45a18261
-2021-11-19 09:35:00,080 INFO (MyInterceptor.java:88)- [ExpertManageController.findDiseaseList] 执行耗时 : 157ms
-2021-11-19 09:35:00,088 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1874840a
-2021-11-19 09:35:00,088 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:35:00,094 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectByEntperpriseId
-2021-11-19 09:35:00,095 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:00,095 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:00,095 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectByEntperpriseId?62&
-2021-11-19 09:35:00,105 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@7e0ef05
-2021-11-19 09:35:00,105 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectByEntperpriseId] 执行耗时 : 11ms
-2021-11-19 09:35:00,183 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /sysUserOrder/findNotAcceptedOrderList
-2021-11-19 09:35:00,183 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.SysUserOrderController
-2021-11-19 09:35:00,183 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:00,183 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/sysUserOrder/findNotAcceptedOrderList?
-2021-11-19 09:35:00,183 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:00,203 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@59003699
-2021-11-19 09:35:00,204 INFO (MyInterceptor.java:88)- [SysUserOrderController.findNotAcceptedOrderList] 执行耗时 : 21ms
-2021-11-19 09:35:01,963 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:35:01,964 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:01,964 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:35:01,964 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:35:02,035 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@778ae7e5
-2021-11-19 09:35:02,051 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /agriculture/agricultureIndex
-2021-11-19 09:35:02,051 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.AgricultureController
-2021-11-19 09:35:02,052 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,052 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/agriculture/agricultureIndex?
-2021-11-19 09:35:02,052 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3493c2b8
-2021-11-19 09:35:02,052 INFO (MyInterceptor.java:88)- [AgricultureController.agricultureIndex] 执行耗时 : 1ms
-2021-11-19 09:35:02,064 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:35:02,078 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /user/selUserDetails
-2021-11-19 09:35:02,078 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.UserController
-2021-11-19 09:35:02,078 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,079 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/user/selUserDetails?
-2021-11-19 09:35:02,079 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:35:02,096 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@5898e5d9
-2021-11-19 09:35:02,097 INFO (MyInterceptor.java:88)- [UserController.selSubUserList] 执行耗时 : 19ms
-2021-11-19 09:35:02,119 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:35:02,129 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:35:02,129 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /expertManage/findDiseaseList
-2021-11-19 09:35:02,129 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,129 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ExpertManageController
-2021-11-19 09:35:02,129 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,129 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,129 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:35:02,129 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/expertManage/findDiseaseList?2&0&0&50&&
-2021-11-19 09:35:02,130 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,139 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:35:02,140 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,140 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,140 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:35:02,141 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,153 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/listBases
-2021-11-19 09:35:02,154 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,154 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,154 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/listBases?1&100&
-2021-11-19 09:35:02,154 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,154 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@778c29a4
-2021-11-19 09:35:02,155 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 26ms
-2021-11-19 09:35:02,167 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1702750d
-2021-11-19 09:35:02,169 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 30ms
-2021-11-19 09:35:02,171 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@4f25c58c
-2021-11-19 09:35:02,172 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.listBases] 执行耗时 : 19ms
-2021-11-19 09:35:02,185 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectList
-2021-11-19 09:35:02,186 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,186 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,187 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectList?1&200&62&0&
-2021-11-19 09:35:02,187 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,204 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@54ee662a
-2021-11-19 09:35:02,205 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectList] 执行耗时 : 20ms
-2021-11-19 09:35:02,208 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:02,208 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:02,208 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,208 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,208 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,208 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:02,208 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:02,208 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:35:02,208 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,209 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:35:02,209 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,209 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,209 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,209 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:02,209 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,209 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,209 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,209 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:35:02,209 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:35:02,209 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,209 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,209 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,209 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,209 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:35:02,210 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,226 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@4c5e7b8d
-2021-11-19 09:35:02,226 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@7db0fd08
-2021-11-19 09:35:02,226 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@55108117
-2021-11-19 09:35:02,226 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 17ms
-2021-11-19 09:35:02,226 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
-2021-11-19 09:35:02,226 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
-2021-11-19 09:35:02,227 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3bb653f5
-2021-11-19 09:35:02,227 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@2cbf738
-2021-11-19 09:35:02,228 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 20ms
-2021-11-19 09:35:02,228 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 20ms
-2021-11-19 09:35:02,229 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:02,230 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,230 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,230 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:35:02,230 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,233 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@a9fbbf5
-2021-11-19 09:35:02,234 INFO (MyInterceptor.java:88)- [ExpertManageController.findDiseaseList] 执行耗时 : 105ms
-2021-11-19 09:35:02,248 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@2666760c
-2021-11-19 09:35:02,249 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 20ms
-2021-11-19 09:35:02,251 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:02,251 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,251 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,251 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:35:02,251 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,270 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@5f6b889b
-2021-11-19 09:35:02,270 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:35:02,272 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:02,273 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,273 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,273 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:35:02,273 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,292 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3e4d25d7
-2021-11-19 09:35:02,293 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 21ms
-2021-11-19 09:35:02,300 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectByEntperpriseId
-2021-11-19 09:35:02,300 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:02,300 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,300 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectByEntperpriseId?62&
-2021-11-19 09:35:02,310 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@41ede245
-2021-11-19 09:35:02,310 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectByEntperpriseId] 执行耗时 : 10ms
-2021-11-19 09:35:02,400 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /sysUserOrder/findNotAcceptedOrderList
-2021-11-19 09:35:02,400 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.SysUserOrderController
-2021-11-19 09:35:02,400 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:02,400 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/sysUserOrder/findNotAcceptedOrderList?
-2021-11-19 09:35:02,401 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:02,419 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6ef2234a
-2021-11-19 09:35:02,420 INFO (MyInterceptor.java:88)- [SysUserOrderController.findNotAcceptedOrderList] 执行耗时 : 20ms
-2021-11-19 09:35:10,529 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:35:10,529 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:10,530 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:35:10,530 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:35:10,612 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@65df6c2e
-2021-11-19 09:35:10,614 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 500  path: /error
-2021-11-19 09:35:10,616 INFO (MyInterceptor.java:88)- [BasicErrorController.errorHtml] 执行耗时 : 2ms
-2021-11-19 09:35:11,267 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:35:11,268 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:11,268 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:35:11,268 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:35:11,337 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@4317b8ec
-2021-11-19 09:35:11,339 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 500  path: /error
-2021-11-19 09:35:11,340 INFO (MyInterceptor.java:88)- [BasicErrorController.errorHtml] 执行耗时 : 1ms
-2021-11-19 09:35:11,778 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:35:11,778 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:11,778 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:35:11,779 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:35:11,848 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@2fe011bc
-2021-11-19 09:35:11,850 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 500  path: /error
-2021-11-19 09:35:11,851 INFO (MyInterceptor.java:88)- [BasicErrorController.errorHtml] 执行耗时 : 1ms
-2021-11-19 09:35:12,192 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:35:12,192 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,192 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:35:12,193 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:35:12,265 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@35ef6e6f
-2021-11-19 09:35:12,267 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 500  path: /error
-2021-11-19 09:35:12,268 INFO (MyInterceptor.java:88)- [BasicErrorController.errorHtml] 执行耗时 : 1ms
-2021-11-19 09:35:12,640 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
-2021-11-19 09:35:12,641 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,641 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
-2021-11-19 09:35:12,641 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:35:12,718 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@d75173e
-2021-11-19 09:35:12,743 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /agriculture/agricultureIndex
-2021-11-19 09:35:12,744 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.AgricultureController
-2021-11-19 09:35:12,744 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,744 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/agriculture/agricultureIndex?
-2021-11-19 09:35:12,744 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3e09cecc
-2021-11-19 09:35:12,744 INFO (MyInterceptor.java:88)- [AgricultureController.agricultureIndex] 执行耗时 : 1ms
-2021-11-19 09:35:12,757 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:35:12,776 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /user/selUserDetails
-2021-11-19 09:35:12,777 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.UserController
-2021-11-19 09:35:12,777 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,777 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/user/selUserDetails?
-2021-11-19 09:35:12,777 INFO (ControllerHelper.java:74)- userName =adminfish
-2021-11-19 09:35:12,798 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@68bdd8dd
-2021-11-19 09:35:12,798 INFO (MyInterceptor.java:88)- [UserController.selSubUserList] 执行耗时 : 22ms
-2021-11-19 09:35:12,826 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
-2021-11-19 09:35:12,838 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:35:12,839 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:12,840 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,840 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /expertManage/findDiseaseList
-2021-11-19 09:35:12,840 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:35:12,840 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:12,841 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ExpertManageController
-2021-11-19 09:35:12,841 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,841 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/expertManage/findDiseaseList?2&0&0&50&&
-2021-11-19 09:35:12,859 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
-2021-11-19 09:35:12,860 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:12,860 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,861 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
-2021-11-19 09:35:12,861 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:12,869 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@290ba8b8
-2021-11-19 09:35:12,870 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 32ms
-2021-11-19 09:35:12,887 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/listBases
-2021-11-19 09:35:12,887 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:12,887 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,887 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/listBases?1&100&
-2021-11-19 09:35:12,888 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:12,889 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@244c5523
-2021-11-19 09:35:12,889 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 30ms
-2021-11-19 09:35:12,922 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@102f7dd5
-2021-11-19 09:35:12,923 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.listBases] 执行耗时 : 36ms
-2021-11-19 09:35:12,953 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectByEntperpriseId
-2021-11-19 09:35:12,953 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:12,954 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,954 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectByEntperpriseId?62&
-2021-11-19 09:35:12,958 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectList
-2021-11-19 09:35:12,958 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:12,958 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,959 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectList?1&200&62&0&
-2021-11-19 09:35:12,959 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:12,967 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1381104f
-2021-11-19 09:35:12,967 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectByEntperpriseId] 执行耗时 : 14ms
-2021-11-19 09:35:12,988 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@384ad043
-2021-11-19 09:35:12,989 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectList] 执行耗时 : 31ms
-2021-11-19 09:35:12,994 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6b1e13d8
-2021-11-19 09:35:12,994 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:12,994 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:12,994 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:12,995 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:12,995 INFO (MyInterceptor.java:88)- [ExpertManageController.findDiseaseList] 执行耗时 : 155ms
-2021-11-19 09:35:12,995 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,995 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,995 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:35:12,995 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:35:12,995 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:12,995 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:12,996 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:12,996 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:12,997 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,997 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:35:12,997 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:12,997 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:12,997 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:12,998 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:12,998 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:12,998 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,998 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:12,998 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:35:12,998 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
-2021-11-19 09:35:12,998 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:12,998 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:13,022 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@36a1e50f
-2021-11-19 09:35:13,022 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@184eaa31
-2021-11-19 09:35:13,022 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@44ebf823
-2021-11-19 09:35:13,022 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3cf6631f
-2021-11-19 09:35:13,022 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@25e832b4
-2021-11-19 09:35:13,023 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 29ms
-2021-11-19 09:35:13,023 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 26ms
-2021-11-19 09:35:13,023 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 26ms
-2021-11-19 09:35:13,023 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 29ms
-2021-11-19 09:35:13,023 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 27ms
-2021-11-19 09:35:13,027 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:13,028 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:13,028 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:13,029 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
-2021-11-19 09:35:13,029 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:13,052 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6981498d
-2021-11-19 09:35:13,052 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 25ms
-2021-11-19 09:35:13,056 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:13,056 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:13,057 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:13,057 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
-2021-11-19 09:35:13,057 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:13,078 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@78746272
-2021-11-19 09:35:13,079 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 23ms
-2021-11-19 09:35:13,082 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
-2021-11-19 09:35:13,082 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
-2021-11-19 09:35:13,082 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:13,082 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
-2021-11-19 09:35:13,082 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:13,100 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@5c670e
-2021-11-19 09:35:13,101 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
-2021-11-19 09:35:13,209 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /sysUserOrder/findNotAcceptedOrderList
-2021-11-19 09:35:13,209 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.SysUserOrderController
-2021-11-19 09:35:13,210 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
-2021-11-19 09:35:13,210 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/sysUserOrder/findNotAcceptedOrderList?
-2021-11-19 09:35:13,210 INFO (ControllerHelper.java:55)- userName =adminfish
-2021-11-19 09:35:13,229 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@622128a
-2021-11-19 09:35:13,230 INFO (MyInterceptor.java:88)- [SysUserOrderController.findNotAcceptedOrderList] 执行耗时 : 21ms
+2021-11-19 09:43:02,335 INFO (StartupInfoLogger.java:50)- Starting CloudplatformApplication on LAPTOP-024QQD7A with PID 2436 (D:\workspacefour\wlwpro\CloudPlatform_ZF\target\classes started by sunyue in D:\workspacefour\wlwpro\CloudPlatform_ZF)
+2021-11-19 09:43:02,337 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2021-11-19 09:43:02,338 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2021-11-19 09:43:03,315 INFO (ShiroConfiguration.java:57)- lifecycleBeanPostProcessor
+2021-11-19 09:43:03,339 INFO (ShiroConfiguration.java:150)- ShiroConfigration.getShiroFilterFactoryBean()
+2021-11-19 09:43:03,631 INFO (ShiroConfiguration.java:99)- lifecycleBeanPostProcessor  ShiroRealm
+2021-11-19 09:43:09,396 INFO (MyWebMvcConfigurerAdapter.java:53)- addInterceptors  添加拦截规则
+2021-11-19 09:43:09,506 INFO (MyWebMvcConfigurerAdapter.java:41)- addViewControllers
+2021-11-19 09:43:09,520 INFO (MyWebMvcConfigurerAdapter.java:28)- addResourceHandlers
+2021-11-19 09:43:10,150 INFO (StartupInfoLogger.java:59)- Started CloudplatformApplication in 8.103 seconds (JVM running for 9.391)
+2021-11-19 09:43:13,462 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
+2021-11-19 09:43:13,463 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:13,464 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
+2021-11-19 09:43:13,474 INFO (ControllerHelper.java:74)- userName =
+2021-11-19 09:43:13,476 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1d23b309
+2021-11-19 09:43:14,106 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/demo.css
+2021-11-19 09:43:14,106 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/normalize.css
+2021-11-19 09:43:14,106 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/indexCss/indexsubject1.css
+2021-11-19 09:43:14,106 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/component.css
+2021-11-19 09:43:14,106 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/layui.css
+2021-11-19 09:43:14,106 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/input.css
+2021-11-19 09:43:14,130 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/html5.js
+2021-11-19 09:43:14,131 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/layui.js
+2021-11-19 09:43:14,132 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/jquery.min.js
+2021-11-19 09:43:14,132 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/EasePack.min.js
+2021-11-19 09:43:14,140 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/TweenLite.min.js
+2021-11-19 09:43:14,147 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/rAF.js
+2021-11-19 09:43:14,151 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/demo-1.js
+2021-11-19 09:43:14,152 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/jquery.i18n.properties.js
+2021-11-19 09:43:14,164 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/common.js
+2021-11-19 09:43:14,168 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/login.js
+2021-11-19 09:43:14,183 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/login_ico.png
+2021-11-19 09:43:14,183 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/demo-1-bg.png
+2021-11-19 09:43:14,270 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
+2021-11-19 09:43:14,310 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/layer.js
+2021-11-19 09:43:14,314 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/favicon.png
+2021-11-19 09:43:14,361 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/modules/layer/default/layer.css
+2021-11-19 09:43:14,365 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/form.js
+2021-11-19 09:43:14,372 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/demo-1-bg.png
+2021-11-19 09:43:18,020 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/modules/layer/default/loading-2.gif
+2021-11-19 09:43:18,024 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /index/login
+2021-11-19 09:43:18,032 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.IndexController
+2021-11-19 09:43:18,033 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:18,033 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index/login?adminfish&123456&
+2021-11-19 09:43:18,035 INFO (LoginServiceImpl.java:72)- token =org.apache.shiro.authc.UsernamePasswordToken - adminfish, rememberMe=false
+2021-11-19 09:43:18,035 INFO (ShiroRealm.java:78)- 验证 doGetAuthenticationInfo AuthenticationToken =org.apache.shiro.authc.UsernamePasswordToken - adminfish, rememberMe=false
+2021-11-19 09:43:18,066 INFO (ShiroRealm.java:85)- loginUser = SysUser{id='2391', userName='adminfish', email='null', lastLoginTime=2021-11-19 09:40:46.0, creatTime=2021-02-01 20:53:45.0, password='e10adc3949ba59abbe56e057f20f883e', realName='null', level=1, tel='15726663207', role='12', areaCode='371000XPTYH', channel='null', userCode='371000XPTYH', parentUser='a00002', faceCode='1001'}
+2021-11-19 09:43:18,081 INFO (LoginServiceImpl.java:124)- 设置用户session
+2021-11-19 09:43:18,082 INFO (ControllerHelper.java:74)- userName =adminfish
+2021-11-19 09:43:18,082 INFO (LoginServiceImpl.java:125)- 用户session ：adminfish
+2021-11-19 09:43:18,120 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@20bdb88c
+2021-11-19 09:43:18,165 INFO (MyInterceptor.java:88)- [IndexController.login] 执行耗时 : 141ms
+2021-11-19 09:43:18,171 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.IndexController
+2021-11-19 09:43:18,171 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:18,171 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/index?null
+2021-11-19 09:43:18,172 INFO (ControllerHelper.java:74)- userName =adminfish
+2021-11-19 09:43:18,270 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@515ac0f2
+2021-11-19 09:43:18,334 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/layui.css
+2021-11-19 09:43:18,337 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/admin.css
+2021-11-19 09:43:18,337 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/myicon/iconfont.css
+2021-11-19 09:43:18,338 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/tost/src/jquery.toast.css
+2021-11-19 09:43:18,338 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/modules/layer/default/layer.css
+2021-11-19 09:43:18,340 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/agriculture/swiper.min.css
+2021-11-19 09:43:18,353 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/common.js
+2021-11-19 09:43:18,353 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /agriculture/agricultureIndex
+2021-11-19 09:43:18,354 INFO (LogRecordAspect.java:75)- 请求=======类型:GET com.jxctdzkj.cloudplatform.controller.AgricultureController
+2021-11-19 09:43:18,354 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:18,354 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/jquery.i18n.properties.js
+2021-11-19 09:43:18,354 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/jquery.min.js
+2021-11-19 09:43:18,354 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/agriculture/agricultureIndex?
+2021-11-19 09:43:18,358 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@17dcd4f3
+2021-11-19 09:43:18,358 INFO (MyInterceptor.java:88)- [AgricultureController.agricultureIndex] 执行耗时 : 5ms
+2021-11-19 09:43:18,360 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/topic.js
+2021-11-19 09:43:18,360 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/layui.js
+2021-11-19 09:43:18,370 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/jquery.nicescroll.js
+2021-11-19 09:43:18,370 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/socket.js
+2021-11-19 09:43:18,384 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/agriculture/swiper.min.js
+2021-11-19 09:43:18,393 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /tost/src/jquery.toast.js
+2021-11-19 09:43:18,394 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/next.png
+2021-11-19 09:43:18,406 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/prev.png
+2021-11-19 09:43:18,421 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /sound/alarm.mp3
+2021-11-19 09:43:18,440 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
+2021-11-19 09:43:18,497 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /user/selUserDetails
+2021-11-19 09:43:18,498 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.UserController
+2021-11-19 09:43:18,498 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:18,499 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/user/selUserDetails?
+2021-11-19 09:43:18,501 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/agriculture/swiper.min.js.map
+2021-11-19 09:43:18,503 INFO (ControllerHelper.java:74)- userName =adminfish
+2021-11-19 09:43:18,506 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/element.js
+2021-11-19 09:43:18,510 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/layui.css
+2021-11-19 09:43:18,510 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/common.css
+2021-11-19 09:43:18,512 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 404  path: /error
+2021-11-19 09:43:18,521 INFO (MyInterceptor.java:88)- [BasicErrorController.error] 执行耗时 : 9ms
+2021-11-19 09:43:18,522 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/css/agriculture/agricultureIndex.css
+2021-11-19 09:43:18,526 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/jquery.min.js
+2021-11-19 09:43:18,530 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/chart/echarts.min.js
+2021-11-19 09:43:18,534 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/china.js
+2021-11-19 09:43:18,539 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/ezuikit.js
+2021-11-19 09:43:18,542 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/layui.js
+2021-11-19 09:43:18,554 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/jquery.i18n.properties.js
+2021-11-19 09:43:18,570 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1caa49d3
+2021-11-19 09:43:18,571 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/common.js
+2021-11-19 09:43:18,573 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/agriculture/agricultureIndex.js
+2021-11-19 09:43:18,575 INFO (MyInterceptor.java:88)- [UserController.selSubUserList] 执行耗时 : 78ms
+2021-11-19 09:43:18,585 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/js/fullScreen.js
+2021-11-19 09:43:18,586 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/layer.js
+2021-11-19 09:43:18,607 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/modules/layer/default/layer.css
+2021-11-19 09:43:18,619 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/camera.png
+2021-11-19 09:43:18,629 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/pointRight.png
+2021-11-19 09:43:18,640 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/lengku.jpg
+2021-11-19 09:43:18,653 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/noMsg.png
+2021-11-19 09:43:18,664 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/dangerMsg.png
+2021-11-19 09:43:18,673 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/allSee.png
+2021-11-19 09:43:18,684 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/device.png
+2021-11-19 09:43:18,693 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/pointLeft.png
+2021-11-19 09:43:18,703 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/data.png
+2021-11-19 09:43:18,712 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/placeMsg.png
+2021-11-19 09:43:18,914 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/i18n/zh-CN/zh.properties
+2021-11-19 09:43:18,937 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/form.js
+2021-11-19 09:43:18,941 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
+2021-11-19 09:43:18,942 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /expertManage/findDiseaseList
+2021-11-19 09:43:18,946 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:18,947 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:18,947 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
+2021-11-19 09:43:18,952 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ExpertManageController
+2021-11-19 09:43:18,953 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:18,953 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/expertManage/findDiseaseList?2&0&0&50&&
+2021-11-19 09:43:18,964 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:18,985 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findEntperpriseList
+2021-11-19 09:43:18,985 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:18,986 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:18,986 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findEntperpriseList?1&200&
+2021-11-19 09:43:18,986 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:18,995 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/img/agriculture/allMap.jpg
+2021-11-19 09:43:19,016 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6bf11071
+2021-11-19 09:43:19,016 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@171ba507
+2021-11-19 09:43:19,018 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/listBases
+2021-11-19 09:43:19,020 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,020 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,020 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/listBases?1&100&
+2021-11-19 09:43:19,021 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 80ms
+2021-11-19 09:43:19,021 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,022 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findEntperpriseList] 执行耗时 : 37ms
+2021-11-19 09:43:19,042 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@e48dcd4
+2021-11-19 09:43:19,044 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.listBases] 执行耗时 : 26ms
+2021-11-19 09:43:19,117 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectByEntperpriseId
+2021-11-19 09:43:19,118 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,118 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,118 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectByEntperpriseId?62&
+2021-11-19 09:43:19,120 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectList
+2021-11-19 09:43:19,121 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,122 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,122 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectList?1&200&62&0&
+2021-11-19 09:43:19,122 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,139 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@7324f519
+2021-11-19 09:43:19,142 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectByEntperpriseId] 执行耗时 : 25ms
+2021-11-19 09:43:19,148 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@1908f699
+2021-11-19 09:43:19,150 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectList] 执行耗时 : 30ms
+2021-11-19 09:43:19,155 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
+2021-11-19 09:43:19,156 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
+2021-11-19 09:43:19,157 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
+2021-11-19 09:43:19,157 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,158 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,158 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
+2021-11-19 09:43:19,158 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,158 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
+2021-11-19 09:43:19,158 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,159 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,159 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,158 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,159 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
+2021-11-19 09:43:19,159 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
+2021-11-19 09:43:19,159 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,159 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,160 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,160 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
+2021-11-19 09:43:19,160 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,160 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
+2021-11-19 09:43:19,161 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,161 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,162 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,162 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&84&0&
+2021-11-19 09:43:19,162 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,190 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@7ab941f9
+2021-11-19 09:43:19,194 INFO (MyInterceptor.java:88)- [ExpertManageController.findDiseaseList] 执行耗时 : 252ms
+2021-11-19 09:43:19,256 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3c6c21d9
+2021-11-19 09:43:19,257 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 101ms
+2021-11-19 09:43:19,258 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@3aca5ff4
+2021-11-19 09:43:19,259 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 102ms
+2021-11-19 09:43:19,261 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6ba78cbf
+2021-11-19 09:43:19,262 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 107ms
+2021-11-19 09:43:19,336 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@4c5be88a
+2021-11-19 09:43:19,336 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@6689aedd
+2021-11-19 09:43:19,336 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 176ms
+2021-11-19 09:43:19,336 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 178ms
+2021-11-19 09:43:19,340 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
+2021-11-19 09:43:19,341 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,341 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,341 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&85&0&
+2021-11-19 09:43:19,341 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,357 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@511fdd70
+2021-11-19 09:43:19,358 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 18ms
+2021-11-19 09:43:19,361 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
+2021-11-19 09:43:19,362 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,362 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,363 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&86&0&
+2021-11-19 09:43:19,363 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,379 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@176fe283
+2021-11-19 09:43:19,380 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 19ms
+2021-11-19 09:43:19,383 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findBaseList
+2021-11-19 09:43:19,384 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:19,384 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,384 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findBaseList?1&200&87&0&
+2021-11-19 09:43:19,384 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,405 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@27129b23
+2021-11-19 09:43:19,406 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findBaseList] 执行耗时 : 23ms
+2021-11-19 09:43:19,424 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/layer.js
+2021-11-19 09:43:19,442 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /img/device_item_2.png
+2021-11-19 09:43:19,488 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/element.js
+2021-11-19 09:43:19,510 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/modules/layer/default/layer.css
+2021-11-19 09:43:19,515 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/layedit.js
+2021-11-19 09:43:19,547 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/lay/modules/laydate.js
+2021-11-19 09:43:19,581 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /sysUserOrder/findNotAcceptedOrderList
+2021-11-19 09:43:19,582 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.SysUserOrderController
+2021-11-19 09:43:19,582 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:19,582 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/sysUserOrder/findNotAcceptedOrderList?
+2021-11-19 09:43:19,586 INFO (ControllerHelper.java:55)- userName =adminfish
+2021-11-19 09:43:19,591 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /static/layui/css/modules/laydate/default/laydate.css
+2021-11-19 09:43:19,605 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@4f0b84ed
+2021-11-19 09:43:19,606 INFO (MyInterceptor.java:88)- [SysUserOrderController.findNotAcceptedOrderList] 执行耗时 : 25ms
+2021-11-19 09:43:23,108 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectByName
+2021-11-19 09:43:23,108 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /projectBaseScene/findProjectByName
+2021-11-19 09:43:23,109 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:23,109 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ProjectBaseSceneController
+2021-11-19 09:43:23,109 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:23,109 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:23,109 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectByName?冷库111&
+2021-11-19 09:43:23,109 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/projectBaseScene/findProjectByName?冷库111&
+2021-11-19 09:43:23,120 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@48648b9
+2021-11-19 09:43:23,120 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@712cf10e
+2021-11-19 09:43:23,121 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectByName] 执行耗时 : 13ms
+2021-11-19 09:43:23,122 INFO (MyInterceptor.java:88)- [ProjectBaseSceneController.findProjectByName] 执行耗时 : 14ms
+2021-11-19 09:43:23,125 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /expertManage/findDeviceListById
+2021-11-19 09:43:23,125 INFO (MyInterceptor.java:36)- 0:0:0:0:0:0:0:1   status: 200  path: /expertManage/findDeviceByProjectWebsite
+2021-11-19 09:43:23,125 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ExpertManageController
+2021-11-19 09:43:23,126 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:23,126 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/expertManage/findDeviceListById?0300202100001478&
+2021-11-19 09:43:23,126 INFO (LogRecordAspect.java:75)- 请求=======类型:POST com.jxctdzkj.cloudplatform.controller.ExpertManageController
+2021-11-19 09:43:23,126 INFO (LogRecordAspect.java:76)- 客户端=====地址:0:0:0:0:0:0:0:1
+2021-11-19 09:43:23,126 INFO (LogRecordAspect.java:77)- 请求开始===地址:http://localhost:8180/expertManage/findDeviceByProjectWebsite?0300202100001478，0300202100001502，0300202100001513&
+2021-11-19 09:43:25,662 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@4e12f6dc
+2021-11-19 09:43:25,663 INFO (MyInterceptor.java:85)- [com.jxctdzkj.cloudplatform.controller.ExpertManageController.findDeviceListById] 执行耗时 : 2538ms
+2021-11-19 09:43:27,962 INFO (LogRecordAspect.java:84)- 请求结束===返回值:org.apache.shiro.web.servlet.ShiroHttpServletRequest@7b1825bc
+2021-11-19 09:43:27,963 INFO (MyInterceptor.java:85)- [com.jxctdzkj.cloudplatform.controller.ExpertManageController.findDeviceByProjectWebsite] 执行耗时 : 4838ms

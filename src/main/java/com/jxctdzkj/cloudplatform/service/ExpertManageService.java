@@ -174,4 +174,9 @@ public interface ExpertManageService {
     ResultObject getExpertsDiagnosisList(int page, int size) throws RuntimeException;
 
 
+    ResultObject findDeviceListById(String id);
+
+    ResultObject findDeviceListByIdOne(String id);
+
+    ResultObject findDeviceByProjectWebsite(String id);
 }

@@ -516,4 +516,45 @@ public class ProjectBaseSceneController {
         Workbook excel = ExcelExportUtil.exportExcel(new ExportParams("基地数据信息表", "基地数据"), ProjectBaseSceneServiceImpl.InnerBase.class, projectBaseSceneService.listAllBasesForExport());
         excel.write(response.getOutputStream());
     }
+
+
+    /**
+     * 获取当前企业的所有设备数
+     *
+     * @return
+     * @User 李英豪
+     */
+    @RequestMapping(value = "findEntperpriseDeviceListCount")
+    @ResponseBody
+    public ResultObject findEntperpriseDeviceListCount(String name) {
+        ResultObject resultObject = null;
+        try {
+            resultObject = projectBaseSceneService.findEntperpriseDeviceListCount(name);
+        } catch (RuntimeException e) {
+            log.error(e.toString());
+            resultObject.apiError("fail");
+        }
+        return resultObject;
+    }
+
+
+    /**
+     * 获取id为当前企业的所有项目对象
+     *
+     * @return
+     * @User 李英豪
+     */
+    @RequestMapping(value = "findProjectByEntperpriseId")
+    @ResponseBody
+    public ResultObject findProjectByEntperpriseId(String id) {
+        ResultObject resultObject = null;
+        try {
+            resultObject = projectBaseSceneService.findProjectByEntperpriseId(id);
+        } catch (RuntimeException e) {
+            log.error(e.toString());
+            resultObject.apiError("fail");
+        }
+        return resultObject;
+    }
+
 }
