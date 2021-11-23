@@ -79,13 +79,7 @@
                style="width:182px;"
                placeholder="项目名称">
     </div>
-    <div class="layui-inline bg-transparent abc" id="enterpriseDiv">
-        <select id="enterpriseId" lay-filter="enterpriseFilter">
-            <option value="0" selected>请选择企业</option>
-            <option th:each="enterprise:*{enterprises}" th:value="*{enterprise.id}"
-                    th:text="*{enterprise.name}"></option>
-        </select>
-    </div>
+
 
 </script>
 

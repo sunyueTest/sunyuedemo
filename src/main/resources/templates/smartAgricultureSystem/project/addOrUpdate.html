@@ -37,17 +37,10 @@
             </div>
 
             <div class="layui-inline">
-                <label id="enterpriseBelongedTo" class="layui-form-label">所属企业</label>
+                <label  class="layui-form-label">联系方式</label>
                 <div class="layui-input-inline">
-                    <div class="layui-input-inline">
-                        <select lay-filter="quiz" class="select" id="enterpriseId" lay-verify="type"
-                                th:value="*{data.bean.enterpriseId}"
-                                name="enterpriseId">
-                            <option th:each="enterprise:*{data.enterprises}" th:value="*{enterprise.id}"
-                                    th:text="*{enterprise.name}"
-                                    th:selected="${enterprise.id == data.bean.enterpriseId}"></option>
-                        </select>
-                    </div>
+                    <input type="text" name="logo1" id="logo1" autocomplete="off" style="width: 200px;"
+                           th:value="*{data.bean.logo}" class="layui-input">
                 </div>
             </div>
         </div>
@@ -93,16 +86,6 @@
 
         </div>
 
-        <div class="layui-form-item">
-
-            <div class="layui-inline">
-                <label  class="layui-form-label">联系方式</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="logo1" id="logo1" autocomplete="off" style="width: 200px;"
-                           th:value="*{data.bean.logo}" class="layui-input">
-                </div>
-            </div>
-        </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
